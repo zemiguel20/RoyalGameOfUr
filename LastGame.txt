@@ -1,0 +1,1 @@
+{"player1Data":{"age":21,"gender":1},"player2Data":null,"allMoves":[{"PlayerId":1,"PieceId":1,"TileId":1},{"PlayerId":2,"PieceId":6,"TileId":3},{"PlayerId":1,"PieceId":7,"TileId":1},{"PlayerId":2,"PieceId":4,"TileId":2}]}

@@ -6,10 +6,16 @@
 /// </summary>
 public static class GameDataManager 
 {
+    private static Temp_PlayerData player1Data;
+    private static Temp_PlayerData? player2Data;
+
     private static List<TestMoveData> moves;
 
-    public static void OnGameStart()
+    public static void OnGameStart(Temp_PlayerData playerData1, Temp_PlayerData playerData2 = null)
     {
+        player1Data = playerData1;
+        player2Data = playerData2;
+
         moves = new List<TestMoveData>();
     }
 
@@ -21,6 +27,7 @@ public static class GameDataManager
     // This will likely become a callback on an event from the GameManager.
     public static void OnGameEnd()
     {
-        SaveSystem.Save(moves, true);
+        GameData gameData = new GameData(player1Data, player2Data, moves);
+        SaveSystem.Save(gameData, true);
     }
 }
