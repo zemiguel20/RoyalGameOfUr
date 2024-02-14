@@ -28,14 +28,13 @@ public partial class Temp_SaveTester : Node
     /// </summary>
     private static void SaveGameDataExample()
 	{
-		List<TestMoveData> data = new List<TestMoveData>()
-		{
-			new TestMoveData(1, 1, 1),
-			new TestMoveData(2, 1, 3),
-			new TestMoveData(1, 1, 4),
-			new TestMoveData(2, 1, 5),
-		};
+		GameDataManager.OnGameStart();
 
-		SaveSystem.Save(data, true);
+        GameDataManager.AddMove(new TestMoveData(1, 1, 1));
+        GameDataManager.AddMove(new TestMoveData(2, 6, 3));
+        GameDataManager.AddMove(new TestMoveData(1, 7, 1));
+        GameDataManager.AddMove(new TestMoveData(2, 4, 2));
+
+		GameDataManager.OnGameEnd();
 	}
 }
