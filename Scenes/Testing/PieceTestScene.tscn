@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2624smcv0td8"]
+
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://Scenes/BoardGameProps/Piece.tscn" id="1_qu78l"]
+
+[node name="PieceTestScene" type="Node3D"]
+
+[node name="Piece" parent="." instance=ExtResource("1_qu78l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.79679)
+
+[node name="Piece2" parent="." instance=ExtResource("1_qu78l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07852, 0, 1.17061)
+
+[node name="Piece3" parent="." instance=ExtResource("1_qu78l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68426, 1.19209e-07, 0.00582361)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.114608, 0.993411, 0, -0.993411, 0.114608, 0, 5.19501, -0.255685)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
