@@ -1,3 +1,12 @@
-[gd_scene format=3 uid="uid://bpjhj8eufi6sp"]
+[gd_scene load_steps=3 format=3 uid="uid://bpjhj8eufi6sp"]
+
+[ext_resource type="Script" path="res://gamemode/gamemode.gd" id="1_driev"]
+[ext_resource type="Script" path="res://dice/dice.gd" id="2_nikhn"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_driev")
+
+[node name="Dice" type="Node" parent="."]
+script = ExtResource("2_nikhn")
+
+[connection signal="diceClicked" from="Dice" to="." method="rollDice"]
