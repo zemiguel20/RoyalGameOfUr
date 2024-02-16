@@ -7,9 +7,6 @@ var starting_material : Material
 
 func _ready():
 	starting_material = mesh_to_highlight.material_override
-	_highlight()
-	await get_tree().create_timer(2.0).timeout
-	_dehighlight()
 
 # Override Methods
 func _highlight():

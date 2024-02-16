@@ -1,5 +1,4 @@
 class_name MovingUtility
-
 extends Node3D
 
 @export var defaultTimeInSeconds : float; 
