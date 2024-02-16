@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3rplnb2n1336"]
+[gd_scene load_steps=5 format=3 uid="uid://c3rplnb2n1336"]
 
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://Scenes/BoardGameProps/DiceController.tscn" id="1_veyc0"]
+[ext_resource type="Material" uid="uid://dtjsro41ih73d" path="res://Materials/plane.tres" id="2_332kw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ba61"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vs1jm"]
 
 [node name="DiceTestScene" type="Node3D"]
 
@@ -10,3 +15,20 @@
 transform = Transform3D(1, 0, 0, 0, 0.114608, 0.993411, 0, -0.993411, 0.114608, 0, 5.19501, -0.255685)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+light_energy = 8.784
+
+[node name="Plane" type="Node3D" parent="."]
+transform = Transform3D(93.977, 0, 0, 0, 1, 0, 0, 0, 93.977, 0, -1.31016, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
+transform = Transform3D(-1.96955, 0, 0, 0, 0.0346178, 0, 0, 0, -1.96955, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_5ba61")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plane"]
+material_override = ExtResource("2_332kw")
+mesh = SubResource("PlaneMesh_vs1jm")
+
+[connection signal="visibility_changed" from="Plane" to="DiceController" method="_on_plane_visibility_changed"]
