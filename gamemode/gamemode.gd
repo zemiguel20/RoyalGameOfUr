@@ -14,19 +14,19 @@ func _ready():
 	_phase = RollPhase.new(self)
 
 
-func changeState(phase: Phase):
+func rollDice():
+	_phase.roll()
+
+
+func _changeState(phase: Phase):
 	_phase.end()
 	_phase = phase
 	_phase.start()
 
 
-func rollDice():
-	_phase.roll()
-
-
-func switch_player():
+func _switch_player():
 	current_player = Player.TWO if current_player == Player.ONE else Player.ONE
 
 
-func calculate_legal_moves() -> Array:
+func _calculate_legal_moves() -> Array:
 	return []

@@ -7,7 +7,7 @@ func roll() -> void:
 	print("Player %d rolled %d" % [_gamemode.current_player, value])
 	if value == 0:
 		print("Rolled 0. Skipping turn...")
-		_gamemode.switch_player()
-		_gamemode.changeState(RollPhase.new(_gamemode))
+		_gamemode._switch_player()
+		_gamemode._changeState(RollPhase.new(_gamemode))
 	else:
-		_gamemode.changeState(MovePhase.new(_gamemode))
+		_gamemode._changeState(MovePhase.new(_gamemode))
