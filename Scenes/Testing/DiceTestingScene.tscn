@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3rplnb2n1336"]
+[gd_scene load_steps=6 format=3 uid="uid://c3rplnb2n1336"]
 
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://Scenes/BoardGameProps/DiceController.tscn" id="1_veyc0"]
 [ext_resource type="Material" uid="uid://dtjsro41ih73d" path="res://Materials/plane.tres" id="2_332kw"]
@@ -7,12 +7,14 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vs1jm"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_22chh"]
+
 [node name="DiceTestScene" type="Node3D"]
 
 [node name="DiceController" parent="." instance=ExtResource("1_veyc0")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.114608, 0.993411, 0, -0.993411, 0.114608, 0, 5.19501, -0.255685)
+transform = Transform3D(1, 0, 0, 0, 0.114608, 0.993411, 0, -0.993411, 0.114608, 0, 8.86351, -0.255685)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 light_energy = 8.784
@@ -24,11 +26,28 @@ transform = Transform3D(93.977, 0, 0, 0, 1, 0, 0, 0, 93.977, 0, -1.31016, 0)
 transform = Transform3D(-1.96955, 0, 0, 0, 0.0346178, 0, 0, 0, -1.96955, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_5ba61")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Plane"]
 material_override = ExtResource("2_332kw")
 mesh = SubResource("PlaneMesh_vs1jm")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 50.3501, 0, 0, 0, 135.972, -7.44222, 19.4684, 0)
+shape = SubResource("BoxShape3D_22chh")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 50.3501, 0, 0, 0, 135.972, 5.24406, 19.4684, 0)
+shape = SubResource("BoxShape3D_22chh")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(-4.37114e-08, 0, 135.972, 0, 50.3501, 0, -1, 0, -5.94352e-06, 3.02062, 19.4684, 4.05783)
+shape = SubResource("BoxShape3D_22chh")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(-4.37114e-08, 0, 135.972, 0, 50.3501, 0, -1, 0, -5.94352e-06, 2.09377, 19.4684, -4.71048)
+shape = SubResource("BoxShape3D_22chh")
 
 [connection signal="visibility_changed" from="Plane" to="DiceController" method="_on_plane_visibility_changed"]
