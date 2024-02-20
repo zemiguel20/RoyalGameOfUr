@@ -23,9 +23,12 @@ light_energy = 8.784
 transform = Transform3D(93.977, 0, 0, 0, 1, 0, 0, 0, 93.977, 0, -1.31016, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
-transform = Transform3D(-1.96955, 0, 0, 0, 0.0346178, 0, 0, 0, -1.96955, 0, 0, 0)
+transform = Transform3D(-1.97, 0, -1.72223e-07, 0, 1.97, 0, 1.72223e-07, 0, -1.97, 0, 0, 0)
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.178, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_5ba61")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Plane"]
@@ -33,6 +36,7 @@ material_override = ExtResource("2_332kw")
 mesh = SubResource("PlaneMesh_vs1jm")
 
 [node name="Area3D" type="Area3D" parent="."]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 50.3501, 0, 0, 0, 135.972, -7.44222, 19.4684, 0)

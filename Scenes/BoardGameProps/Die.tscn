@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dky735wij7dvq"]
+[gd_scene load_steps=5 format=3 uid="uid://dky735wij7dvq"]
 
-[ext_resource type="Script" path="res://Scenes/BoardGameProps/Die.gd" id="1_ym3d4"]
+[ext_resource type="Script" path="res://Scripts/BoardGame/Die.gd" id="1_pbiei"]
 [ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://Models/UrProps.glb" id="2_88bur"]
+[ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://Scenes/BoardGameProps/DiceRaycast.tscn" id="3_s8wv8"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ll53v"]
 points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.499182, -0.000168562, 0.242005, -0.00390851)
 
-[node name="RigidBody3D_Die" type="RigidBody3D"]
-script = ExtResource("1_ym3d4")
+[node name="RigidBody3D_Die" type="RigidBody3D" node_paths=PackedStringArray("raycasts_parent_node")]
+collision_layer = 5
+collision_mask = 5
+collision_priority = 0.5
+script = ExtResource("1_pbiei")
+raycasts_parent_node = NodePath("Raycasts")
 throwing_force_magnitude = 6
 throwing_angular_velocity = 5
 
@@ -17,5 +22,22 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 [node name="Finalized" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_ll53v")
+
+[node name="Raycasts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.447843, 0)
+
+[node name="RayCast3D" parent="Raycasts" instance=ExtResource("3_s8wv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24982, 0)
+
+[node name="RayCast3D2" parent="Raycasts" instance=ExtResource("3_s8wv8")]
+transform = Transform3D(1, 0, 0, 0, -0.33305, 0.942909, 0, -0.942909, -0.33305, 0.00477806, 0.0927517, 0.240806)
+
+[node name="RayCast3D3" parent="Raycasts" instance=ExtResource("3_s8wv8")]
+transform = Transform3D(-0.709085, -0.637997, -0.300262, -0.11809, -0.312367, 0.942593, -0.695164, 0.703837, 0.146153, 0.192842, 0.0683943, -0.100888)
+opposite_side_value = 1
+
+[node name="RayCast3D4" parent="Raycasts" instance=ExtResource("3_s8wv8")]
+transform = Transform3D(-0.31076, 0.928579, 0.202901, -0.150084, -0.258731, 0.954219, 0.938564, 0.266081, 0.219769, -0.20056, 0.107065, -0.0708823)
+opposite_side_value = 1
 
 [connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]
