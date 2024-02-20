@@ -2,12 +2,18 @@ class_name RollPhase
 extends Phase
 
 
-func roll() -> void:
+func start():
+	_gamemode.dice.enable_highlight()
+
+
+func end():
+	_gamemode.dice.disable_highlight()
+
+
+func roll():
 	var value = await _gamemode.dice.roll()
-	print("Player %d rolled %d" % [_gamemode.current_player, value])
-	if value == 0:
-		print("Rolled 0. Skipping turn...")
-		_gamemode._switch_player()
-		_gamemode._changeState(RollPhase.new(_gamemode))
+	if value > 0:
+		_gamemode.changeState(MovePhase.new(_gamemode))
 	else:
-		_gamemode._changeState(MovePhase.new(_gamemode))
+		_gamemode.switch_player()
+		_gamemode.changeState(RollPhase.new(_gamemode))

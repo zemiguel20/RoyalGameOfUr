@@ -21,3 +21,7 @@ func end():
 
 func roll():
 	pass
+
+
+func move(piece: Piece):
+	pass
