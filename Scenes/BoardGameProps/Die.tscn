@@ -8,23 +8,21 @@
 points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.499182, -0.000168562, 0.242005, -0.00390851)
 
 [node name="RigidBody3D_Die" type="RigidBody3D" node_paths=PackedStringArray("raycasts_parent_node")]
-collision_layer = 5
-collision_mask = 5
 collision_priority = 0.5
 script = ExtResource("1_pbiei")
 raycasts_parent_node = NodePath("Raycasts")
-throwing_force_magnitude = 6
-throwing_angular_velocity = 5
+throwing_force_magnitude = 4.5
+throwing_angular_velocity = 2.5
 
 [node name="UrProps" parent="." instance=ExtResource("2_88bur")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.361596, 0)
 
 [node name="Finalized" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.361596, 0)
 shape = SubResource("ConvexPolygonShape3D_ll53v")
 
 [node name="Raycasts" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.447843, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0862475, 0)
 
 [node name="RayCast3D" parent="Raycasts" instance=ExtResource("3_s8wv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24982, 0)
