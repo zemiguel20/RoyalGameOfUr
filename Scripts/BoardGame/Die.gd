@@ -3,8 +3,8 @@ extends RigidBody3D
 
 @export var raycasts_parent_node : Node
 
-@export var throwing_force_magnitude = 1
-@export var throwing_angular_velocity = 1
+@export var throwing_force_magnitude = 1.0
+@export var throwing_angular_velocity = 1.0
 
 var is_rolling = false
 var raycast_list
