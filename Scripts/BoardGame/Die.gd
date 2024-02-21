@@ -2,22 +2,17 @@ class_name Die
 extends RigidBody3D
 
 #region Export Variables
-@export_category("References")
+@export_group("References")
 ## Reference to the parent node containing all raycasts.
 ## These raycasts are used to check the value of the dice throw.
 @export var raycasts_parent_node : Node
 @export var audio_player : AudioStreamPlayer3D
 
-@export_category("Throwing Physics")
+@export_group("Throwing Physics")
 ## Magnitude of the throwing force applied to this die when starting a roll.
 @export var throwing_force_magnitude : float = 1.0
 ## Angular velocity applied to this die when starting a roll.
 @export var throwing_angular_velocity : float = 1.0
-
-## X is min, Y is max
-@export var throwing_force_direction_range_x = Vector2(-1, 1)
-## X is min, Y is max
-@export var throwing_force_direction_range_z = Vector2(-1, 1)
 
 ## Height (y-value) of the die when it is released
 @export var throwing_height : float = 2.0
@@ -27,6 +22,17 @@ extends RigidBody3D
 ## The dice have a random offset from eachother equal to:
 ## Vector3(randf_range(-temp_random_offset_on_throw, temp_random_offset_on_throw), 0, randf_range(-temp_random_offset_on_throw, temp_random_offset_on_throw))
 @export var temp_random_offset_on_throw = 1.0
+
+@export_subgroup("Throwing Direction")
+## X is min, Y is max
+@export var throwing_force_direction_range_x = Vector2(-1, 1)
+## X is min, Y is max
+@export var throwing_force_direction_range_z = Vector2(-1, 1)
+
+@export_group("Measurements When Stuck")
+## When true, the dice will roll again when it is stuck.
+## When false, a dice that is stuck will count as a 0 and the game continues.
+@export var roll_again_on_stuck : bool = false
 #endregion
 
 #region Private Variables
@@ -83,8 +89,13 @@ func _on_sleeping_state_changed():
 	if roll_value == -1:
 		# TODO: Make sure this scenario can never happen.
 		# For example by rolling and 
-		push_warning("No value detected ;(")
-		roll_value = 0
+		if (roll_again_on_stuck):
+			is_rolling = false
+			start_rolling()
+			return
+		else:
+			push_warning("No value detected ;(")
+			roll_value = 0
 		
 	emit_signal("roll_finished", roll_value)
 	is_rolling = false

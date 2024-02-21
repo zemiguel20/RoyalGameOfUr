@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://b317cbv15hkol"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://PhysicsMaterials/dice_border.tres" id="1_bm8q1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_41ig0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3thmm"]
+
+[node name="DiceBorders" type="Node3D"]
+
+[node name="Wall" type="Node3D" parent="."]
+transform = Transform3D(39.4261, 0, 0, 0, 11.8555, 0, 0, 0, 1, 0, 0, 3.01283)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+physics_material_override = ExtResource("1_bm8q1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
+shape = SubResource("BoxShape3D_41ig0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+visible = false
+mesh = SubResource("BoxMesh_3thmm")
+
+[node name="Wall2" type="Node3D" parent="."]
+transform = Transform3D(39.4261, 0, 0, 0, 11.8555, 0, 0, 0, 1, 0, 0, -4.12402)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall2"]
+physics_material_override = ExtResource("1_bm8q1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2/StaticBody3D"]
+shape = SubResource("BoxShape3D_41ig0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2"]
+visible = false
+mesh = SubResource("BoxMesh_3thmm")
+
+[node name="Wall3" type="Node3D" parent="."]
+transform = Transform3D(-1.72337e-06, 0, -1, 0, 11.8555, 0, 39.4261, 0, -4.37114e-08, -3.63593, 0, -3.28089)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall3"]
+physics_material_override = ExtResource("1_bm8q1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3/StaticBody3D"]
+shape = SubResource("BoxShape3D_41ig0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3"]
+visible = false
+mesh = SubResource("BoxMesh_3thmm")
+
+[node name="Wall4" type="Node3D" parent="."]
+transform = Transform3D(-1.72337e-06, 0, -1, 0, 11.8555, 0, 39.4261, 0, -4.37114e-08, 3.79912, 0, -3.31998)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall4"]
+physics_material_override = ExtResource("1_bm8q1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4/StaticBody3D"]
+shape = SubResource("BoxShape3D_41ig0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall4"]
+visible = false
+mesh = SubResource("BoxMesh_3thmm")
