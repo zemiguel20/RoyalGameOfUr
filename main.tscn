@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bpjhj8eufi6sp"]
 
-[ext_resource type="Script" path="res://gamemode/gamemode.gd" id="1_driev"]
+[ext_resource type="Script" path="res://scripts/gamemode/gamemode.gd" id="1_driev"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_driev")
