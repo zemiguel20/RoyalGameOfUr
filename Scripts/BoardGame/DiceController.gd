@@ -1,9 +1,9 @@
 extends Node
 
-@export var numOfDice = 4;
 @export var scene : PackedScene
+@export var numOfDice : int = 4;
+@export var audio_player : AudioStreamPlayer
 
-var random
 var dice_list : Array
 
 var num_of_finished_dice = 0
@@ -36,6 +36,9 @@ func initialize_dice():
 func start_roll():
 	total_roll_value = 0
 	num_of_finished_dice = 0
+	
+	if (audio_player != null and not audio_player.playing):
+		audio_player.play()
 	
 	# Do this through the rolling state
 	for die : Die in dice_list:

@@ -1,17 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://dky735wij7dvq"]
+[gd_scene load_steps=6 format=3 uid="uid://dky735wij7dvq"]
 
 [ext_resource type="Script" path="res://Scripts/BoardGame/Die.gd" id="1_xsl11"]
 [ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://Models/UrProps.glb" id="2_lympo"]
 [ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://Scenes/BoardGameProps/DiceRaycast.tscn" id="3_ysaby"]
+[ext_resource type="AudioStream" uid="uid://dv5nxtgrtwn6q" path="res://Audio/test_dice_roll.mp3" id="4_etogs"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ll53v"]
 points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.499182, -0.000168562, 0.242005, -0.00390851)
 
-[node name="RigidBody3D_Die" type="RigidBody3D" node_paths=PackedStringArray("raycasts_parent_node")]
+[node name="RigidBody3D_Die" type="RigidBody3D" node_paths=PackedStringArray("raycasts_parent_node", "audio_player")]
 collision_priority = 0.5
 gravity_scale = 3.0
+max_contacts_reported = 10
+contact_monitor = true
 script = ExtResource("1_xsl11")
 raycasts_parent_node = NodePath("Raycasts")
+audio_player = NodePath("AudioStreamPlayer3D")
 throwing_force_magnitude = 6.0
 throwing_angular_velocity = 4.0
 throwing_force_direction_range_x = Vector2(-0.5, 0.5)
@@ -41,4 +45,8 @@ opposite_side_value = 1
 transform = Transform3D(-0.31076, 0.928579, 0.202901, -0.150084, -0.258731, 0.954219, 0.938564, 0.266081, 0.219769, -0.20056, 0.107065, -0.0708823)
 opposite_side_value = 1
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_etogs")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
 [connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]

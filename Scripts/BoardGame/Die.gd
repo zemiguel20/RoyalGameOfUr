@@ -1,10 +1,12 @@
 class_name Die
 extends RigidBody3D
 
+#region Export Variables
 @export_category("References")
 ## Reference to the parent node containing all raycasts.
 ## These raycasts are used to check the value of the dice throw.
 @export var raycasts_parent_node : Node
+@export var audio_player : AudioStreamPlayer3D
 
 @export_category("Throwing Physics")
 ## Magnitude of the throwing force applied to this die when starting a roll.
@@ -25,10 +27,13 @@ extends RigidBody3D
 ## The dice have a random offset from eachother equal to:
 ## Vector3(randf_range(-temp_random_offset_on_throw, temp_random_offset_on_throw), 0, randf_range(-temp_random_offset_on_throw, temp_random_offset_on_throw))
 @export var temp_random_offset_on_throw = 1.0
+#endregion
 
+#region Private Variables
 var is_rolling = false
 var raycast_list	
 var temp_original_position
+#endregion
 
 signal roll_finished(roll_value : int)
 
