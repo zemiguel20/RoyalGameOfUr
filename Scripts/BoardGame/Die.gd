@@ -87,8 +87,6 @@ func _on_sleeping_state_changed():
 			break
 	
 	if roll_value == -1:
-		# TODO: Make sure this scenario can never happen.
-		# For example by rolling and 
 		if (roll_again_on_stuck):
 			is_rolling = false
 			start_rolling()

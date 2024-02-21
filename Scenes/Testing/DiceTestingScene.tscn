@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3rplnb2n1336"]
+[gd_scene load_steps=9 format=3 uid="uid://c3rplnb2n1336"]
 
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://Scenes/BoardGameProps/DiceController.tscn" id="1_veyc0"]
 [ext_resource type="Material" uid="uid://dtjsro41ih73d" path="res://Materials/plane.tres" id="2_332kw"]
 [ext_resource type="PackedScene" uid="uid://b317cbv15hkol" path="res://Scenes/BoardGameProps/DiceBorders.tscn" id="3_wfv8y"]
 [ext_resource type="Script" path="res://Scenes/Testing/DiceResultLabel.gd" id="4_atcdw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_unjpf"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vs1jm"]
 
@@ -14,8 +16,16 @@ font_size = 100
 
 [node name="DiceTestScene" type="Node3D"]
 
-[node name="DiceController" parent="." instance=ExtResource("1_veyc0")]
+[node name="DiceController" parent="." node_paths=PackedStringArray("click_hitbox") instance=ExtResource("1_veyc0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.44615)
+use_hitbox_instead_of_dice_colliders = true
+click_hitbox = NodePath("../Area3D_DiceClickHitbox")
+
+[node name="Area3D_DiceClickHitbox" type="Area3D" parent="."]
+transform = Transform3D(6.33001, 0, 0, 0, 1, 0, 0, 0, 6.03997, -0.248091, 0, 0.868325)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D_DiceClickHitbox"]
+shape = SubResource("BoxShape3D_unjpf")
 
 [node name="DiceBorders" parent="." instance=ExtResource("3_wfv8y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372225, -1.13483, 1.36109)
