@@ -2,13 +2,13 @@ class_name Die
 extends RigidBody3D
 
 #region Export Variables
-@export_group("References")
+@export_category("References")
 ## Reference to the parent node containing all raycasts.
 ## These raycasts are used to check the value of the dice throw.
 @export var raycasts_parent_node : Node
 @export var audio_player : AudioStreamPlayer3D
 
-@export_group("Throwing Physics")
+@export_category("Throwing Physics")
 ## Magnitude of the throwing force applied to this die when starting a roll.
 @export var throwing_force_magnitude : float = 1.0
 ## Angular velocity applied to this die when starting a roll.
@@ -29,7 +29,7 @@ extends RigidBody3D
 ## X is min, Y is max
 @export var throwing_force_direction_range_z = Vector2(-1, 1)
 
-@export_group("Measurements When Stuck")
+@export_category("Measures When Stuck")
 ## When true, the dice will roll again when it is stuck.
 ## When false, a dice that is stuck will count as a 0 and the game continues.
 @export var roll_again_on_stuck : bool = false

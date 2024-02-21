@@ -1,17 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3rplnb2n1336"]
+[gd_scene load_steps=8 format=3 uid="uid://c3rplnb2n1336"]
 
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://Scenes/BoardGameProps/DiceController.tscn" id="1_veyc0"]
 [ext_resource type="Material" uid="uid://dtjsro41ih73d" path="res://Materials/plane.tres" id="2_332kw"]
 [ext_resource type="PackedScene" uid="uid://b317cbv15hkol" path="res://Scenes/BoardGameProps/DiceBorders.tscn" id="3_wfv8y"]
+[ext_resource type="Script" path="res://Scenes/Testing/DiceResultLabel.gd" id="4_atcdw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vs1jm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ba61"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_m30x0"]
+font_size = 100
+
 [node name="DiceTestScene" type="Node3D"]
 
 [node name="DiceController" parent="." instance=ExtResource("1_veyc0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.44615)
+
+[node name="DiceBorders" parent="." instance=ExtResource("3_wfv8y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372225, -1.13483, 1.36109)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.395241, 0.918577, 0, -0.918577, 0.395241, 0, 8.59322, 2.43944)
@@ -35,7 +42,26 @@ collision_mask = 3
 transform = Transform3D(1, 0, 0, 0, 0.178, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_5ba61")
 
-[node name="DiceBorders" parent="." instance=ExtResource("3_wfv8y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372225, -1.13483, 1.36109)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -238.0
+offset_right = 79.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "..."
+label_settings = SubResource("LabelSettings_m30x0")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_atcdw")
+
+[connection signal="roll_finished" from="DiceController" to="CanvasLayer/Label" method="_on_dice_controller_roll_finished"]
+[connection signal="roll_started" from="DiceController" to="CanvasLayer/Label" method="_on_dice_controller_roll_started"]
 [connection signal="visibility_changed" from="Plane" to="DiceController" method="_on_plane_visibility_changed"]
