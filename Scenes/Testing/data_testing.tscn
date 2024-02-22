@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwfljrmet4jgp"]
+
+[ext_resource type="Script" path="res://scripts/data_storage/Temp_SaveTester.cs" id="1_2wlla"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_2wlla")
