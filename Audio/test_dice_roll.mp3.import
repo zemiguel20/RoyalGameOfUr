@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://dv5nxtgrtwn6q"
-path="res://.godot/imported/test_dice_roll.mp3-bf11b3fa2f8c8876034f7146e86f8fb0.mp3str"
+path="res://.godot/imported/test_dice_roll.mp3-2777aa824d9f23635266e4fb1739a890.mp3str"
 
 [deps]
 
-source_file="res://Audio/test_dice_roll.mp3"
-dest_files=["res://.godot/imported/test_dice_roll.mp3-bf11b3fa2f8c8876034f7146e86f8fb0.mp3str"]
+source_file="res://audio/test_dice_roll.mp3"
+dest_files=["res://.godot/imported/test_dice_roll.mp3-2777aa824d9f23635266e4fb1739a890.mp3str"]
 
 [params]
 

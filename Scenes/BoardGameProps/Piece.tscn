@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dk03upbyn04nu"]
 
-[ext_resource type="Script" path="res://Scripts/BoardGame/Piece.gd" id="1_u7nn1"]
-[ext_resource type="Script" path="res://Scripts/Utility/MaterialChangerUtility.gd" id="2_dm3xd"]
-[ext_resource type="Material" uid="uid://cfjbmqrrcl4xo" path="res://Materials/test.tres" id="3_h1j7q"]
+[ext_resource type="Script" path="res://scripts/boardGame/piece.gd" id="1_u7nn1"]
+[ext_resource type="Script" path="res://scripts/utility/material_changer_utility.gd" id="2_dm3xd"]
+[ext_resource type="Material" uid="uid://cfjbmqrrcl4xo" path="res://materials/test.tres" id="3_h1j7q"]
 
 [sub_resource type="Curve" id="Curve_xdywu"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

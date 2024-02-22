@@ -1,6 +1,9 @@
 extends Node
 
-@export var highlightUtility : HighlightUtility
+@export var material_changer : MaterialChangerUtility
 
-func toggle_hightlighting(toggle: bool):
-	highlightUtility.toggle_highlighting(toggle)
+func enable_highlighting():
+	material_changer.highlight()
+
+func disable_highlighting():
+	material_changer.dehighlight()

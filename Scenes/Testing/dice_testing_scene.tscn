@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://c3rplnb2n1336"]
 
-[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://Scenes/BoardGameProps/DiceController.tscn" id="1_veyc0"]
-[ext_resource type="Material" uid="uid://dtjsro41ih73d" path="res://Materials/plane.tres" id="2_332kw"]
-[ext_resource type="PackedScene" uid="uid://b317cbv15hkol" path="res://Scenes/BoardGameProps/DiceBorders.tscn" id="3_wfv8y"]
-[ext_resource type="Script" path="res://Scenes/Testing/DiceResultLabel.gd" id="4_atcdw"]
+[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/BoardGameProps/dice_controller.tscn" id="1_lluch"]
+[ext_resource type="PackedScene" uid="uid://b317cbv15hkol" path="res://scenes/BoardGameProps/dice_borders.tscn" id="2_hbrk3"]
+[ext_resource type="Material" uid="uid://dtjsro41ih73d" path="res://materials/plane.tres" id="3_2g57k"]
+[ext_resource type="Script" path="res://scripts/boardGame/dice_result_label.gd" id="4_8dnnx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_unjpf"]
 size = Vector3(6.33001, 1, 6.03997)
@@ -18,7 +18,7 @@ font_size = 100
 
 [node name="DiceTestScene" type="Node3D"]
 
-[node name="DiceController" parent="." node_paths=PackedStringArray("click_hitbox") instance=ExtResource("1_veyc0")]
+[node name="DiceController" parent="." node_paths=PackedStringArray("click_hitbox") instance=ExtResource("1_lluch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.44615)
 use_hitbox_instead_of_dice_colliders = true
 click_hitbox = NodePath("../Area3D_DiceClickHitbox")
@@ -29,7 +29,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248091, 0, 0.868325)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D_DiceClickHitbox"]
 shape = SubResource("BoxShape3D_unjpf")
 
-[node name="DiceBorders" parent="." instance=ExtResource("3_wfv8y")]
+[node name="DiceBorders" parent="." instance=ExtResource("2_hbrk3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372225, -1.13483, 1.36109)
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -42,7 +42,7 @@ transform = Transform3D(1, 0, 0, 0, 0.63815, 0.769912, 0, -0.769912, 0.63815, 0,
 transform = Transform3D(93.977, 0, 0, 0, 1, 0, 0, 0, 93.977, 0, -1.31016, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Plane"]
-material_override = ExtResource("2_332kw")
+material_override = ExtResource("3_2g57k")
 mesh = SubResource("PlaneMesh_vs1jm")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
@@ -71,7 +71,7 @@ text = "..."
 label_settings = SubResource("LabelSettings_m30x0")
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("4_atcdw")
+script = ExtResource("4_8dnnx")
 
 [connection signal="roll_finished" from="DiceController" to="CanvasLayer/Label" method="_on_dice_controller_roll_finished"]
 [connection signal="roll_started" from="DiceController" to="CanvasLayer/Label" method="_on_dice_controller_roll_started"]

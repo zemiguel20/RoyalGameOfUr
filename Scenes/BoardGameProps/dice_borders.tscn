@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b317cbv15hkol"]
 
-[ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://PhysicsMaterials/dice_border.tres" id="1_bm8q1"]
+[ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/dice_border.tres" id="1_bm8q1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_41ig0"]
 

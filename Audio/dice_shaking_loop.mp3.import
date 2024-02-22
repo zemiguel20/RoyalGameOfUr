@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://bdsbgnjpv7ic2"
-path="res://.godot/imported/dice_shaking_loop.mp3-d1ca51c38207b9a589c63c74aa5b50ff.mp3str"
+path="res://.godot/imported/dice_shaking_loop.mp3-bfe1a7501ce2ad03add88d98f72782f0.mp3str"
 
 [deps]
 
-source_file="res://Audio/dice_shaking_loop.mp3"
-dest_files=["res://.godot/imported/dice_shaking_loop.mp3-d1ca51c38207b9a589c63c74aa5b50ff.mp3str"]
+source_file="res://audio/dice_shaking_loop.mp3"
+dest_files=["res://.godot/imported/dice_shaking_loop.mp3-bfe1a7501ce2ad03add88d98f72782f0.mp3str"]
 
 [params]
 

@@ -1,17 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://jnduatu551to"]
 
-[ext_resource type="Script" path="res://Scripts/BoardGame/Tile.gd" id="1_8216c"]
-[ext_resource type="Script" path="res://Scripts/Utility/MaterialChangerUtility.gd" id="2_d4rrq"]
-[ext_resource type="Material" uid="uid://cfjbmqrrcl4xo" path="res://Materials/test.tres" id="3_2ple7"]
+[ext_resource type="Script" path="res://scripts/boardGame/tile.gd" id="1_5oy7b"]
+[ext_resource type="Script" path="res://scripts/utility/material_changer_utility.gd" id="2_ok04s"]
+[ext_resource type="Material" uid="uid://cfjbmqrrcl4xo" path="res://materials/test.tres" id="3_400gf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_i8cgb"]
 
-[node name="Tile" type="MeshInstance3D" node_paths=PackedStringArray("highlightUtility")]
+[node name="Tile" type="MeshInstance3D"]
 mesh = SubResource("BoxMesh_i8cgb")
-script = ExtResource("1_8216c")
-highlightUtility = NodePath("MaterialChangerUtility")
+script = ExtResource("1_5oy7b")
 
 [node name="MaterialChangerUtility" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
-script = ExtResource("2_d4rrq")
-highlight_material = ExtResource("3_2ple7")
+script = ExtResource("2_ok04s")
+highlight_material = ExtResource("3_400gf")
 mesh_to_highlight = NodePath("..")

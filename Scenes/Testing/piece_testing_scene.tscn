@@ -1,18 +1,18 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2624smcv0td8"]
 
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://Scenes/BoardGameProps/Piece.tscn" id="1_qu78l"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/BoardGameProps/piece.tscn" id="1_7r4fv"]
 
 [node name="PieceTestScene" type="Node3D"]
 
-[node name="Piece" parent="." instance=ExtResource("1_qu78l")]
+[node name="Piece" parent="." instance=ExtResource("1_7r4fv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.93835)
 moving_duration = 0.5
 
-[node name="Piece2" parent="." instance=ExtResource("1_qu78l")]
+[node name="Piece2" parent="." instance=ExtResource("1_7r4fv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07852, 0, -0.970955)
 moving_duration = 0.5
 
-[node name="Piece3" parent="." instance=ExtResource("1_qu78l")]
+[node name="Piece3" parent="." instance=ExtResource("1_7r4fv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68426, 1.19209e-07, -2.13574)
 moving_duration = 0.5
 

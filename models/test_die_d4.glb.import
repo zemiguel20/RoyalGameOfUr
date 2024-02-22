@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c2mjvc4x0vfuu"
-path="res://.godot/imported/UrProps.glb-a94d8b2f60734335454a63ff39cb33d9.scn"
+path="res://.godot/imported/test_die_d4.glb-869657846637f90dbbd59b5c403e36fe.scn"
 
 [deps]
 
-source_file="res://Models/UrProps.glb"
-dest_files=["res://.godot/imported/UrProps.glb-a94d8b2f60734335454a63ff39cb33d9.scn"]
+source_file="res://models/test_die_d4.glb"
+dest_files=["res://.godot/imported/test_die_d4.glb-869657846637f90dbbd59b5c403e36fe.scn"]
 
 [params]
 
