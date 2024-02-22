@@ -6,10 +6,12 @@
 [ext_resource type="Script" path="res://Scenes/Testing/DiceResultLabel.gd" id="4_atcdw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_unjpf"]
+size = Vector3(6.33001, 1, 6.03997)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vs1jm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ba61"]
+size = Vector3(1, 0.178, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_m30x0"]
 font_size = 100
@@ -22,7 +24,7 @@ use_hitbox_instead_of_dice_colliders = true
 click_hitbox = NodePath("../Area3D_DiceClickHitbox")
 
 [node name="Area3D_DiceClickHitbox" type="Area3D" parent="."]
-transform = Transform3D(6.33001, 0, 0, 0, 1, 0, 0, 0, 6.03997, -0.248091, 0, 0.868325)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248091, 0, 0.868325)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D_DiceClickHitbox"]
 shape = SubResource("BoxShape3D_unjpf")
@@ -44,12 +46,11 @@ material_override = ExtResource("2_332kw")
 mesh = SubResource("PlaneMesh_vs1jm")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
-transform = Transform3D(-1.97, 0, -1.72223e-07, 0, 1.97, 0, 1.72223e-07, 0, -1.97, 0, 0, 0)
+transform = Transform3D(-1.97, 0, -2.97462e-07, 0, 1.97, 0, 2.97462e-07, 0, -1.97, 0, 0, 0)
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.178, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_5ba61")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
