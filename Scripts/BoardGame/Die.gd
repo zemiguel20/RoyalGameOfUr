@@ -82,7 +82,6 @@ func _on_sleeping_state_changed():
 	var roll_value = -1
 	for raycast : DiceRaycast in raycast_list:
 		if raycast.is_colliding():
-			print((raycast.get_collider() as Node).name)
 			roll_value = raycast.opposite_side_value
 			break
 	

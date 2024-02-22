@@ -15,18 +15,18 @@ extends Node
 @export var use_hitbox_instead_of_dice_colliders : bool
 @export var click_hitbox : CollisionObject3D
 
-var dice_list : Array
-
-var num_of_finished_dice = 0
 var total_roll_value = -1;
 
-var temp_is_rolling = false
-var is_shaking_roll = false
+var _dice_list : Array
+var _num_of_finished_dice = 0
 
-signal roll_finished(value : int)
-## Signal used by DiceResultLabel, this will be replaced by a direct call on the DiceResultLabel script 
-## when the rolling phase is entered
+var _is_rolling = false
+var _is_shaking_roll = false
+
+## Triggered when
 signal roll_started
+## Triggered when all dice finished rolling and a final value has been calculated.
+signal roll_finished(value : int)
 
 func _ready():
 	_initialize_dice()
@@ -34,31 +34,21 @@ func _ready():
 		click_hitbox.input_event.connect(_on_die_input_event)
 	
 func _input(event):
-	if (is_shaking_roll and 
+	if (_is_shaking_roll and 
 		event is InputEventMouseButton and 
 		event.is_released()):
-		start_roll()
-		is_shaking_roll = false
-
-func start_roll():
-	total_roll_value = 0
-	num_of_finished_dice = 0
-	
-	if (audio_player != null):
-		audio_player.stream = SFX_dice_roll
-		audio_player.play()
-	
-	# Do this through the rolling state
-	for die : Die in dice_list:
-		die.visible = true
-		die.start_rolling()
-	
-	emit_signal("roll_started")
-	temp_is_rolling = true
-	var total_roll_value = await roll_finished
-	temp_is_rolling = false		
+		_is_shaking_roll = false
+		roll_started.emit()
+		# TODO: Remove when integrated
+		roll()		
 		
-	print("Result: %s" % total_roll_value)
+func roll():
+	_start_roll()
+	
+	_is_rolling = true
+	var total_roll_value = await roll_finished
+	_is_rolling = false		
+		
 	return total_roll_value
 	
 func _initialize_dice():
@@ -72,31 +62,48 @@ func _initialize_dice():
 		var locationX = randf_range(-2.5, 2.5)
 		var locationZ = randf_range(-2.5, 2.5)
 		instance.global_position = Vector3(locationX, 0, locationZ)
-		dice_list.append(instance)
+		_dice_list.append(instance)
 		
 		instance.roll_finished.connect(_on_die_roll_finished)
 		if (not use_hitbox_instead_of_dice_colliders):
 			instance.input_event.connect(_on_die_input_event)
+			
+func _start_shake():
+	for die in _dice_list:
+		die.visible = false
+			
+		_is_shaking_roll = true
+		if (audio_player != null):
+			audio_player.stream = SFX_dice_shaking
+			audio_player.play()
+			
+func _start_roll():
+	total_roll_value = 0
+	_num_of_finished_dice = 0
+	
+	if (audio_player != null):
+		audio_player.stream = SFX_dice_roll
+		audio_player.play()
+	
+	for die : Die in _dice_list:
+		die.visible = true
+		die.start_rolling()
 	
 func _on_die_roll_finished(roll_value):
-	num_of_finished_dice += 1
+	_num_of_finished_dice += 1
 	total_roll_value += roll_value
 	
-	if (num_of_finished_dice >= numOfDice):
-		emit_signal("roll_finished", total_roll_value)
+	if (_num_of_finished_dice >= numOfDice):
+		roll_finished.emit(total_roll_value)
 
-func _on_die_input_event(camera, event : InputEvent, position, normal, shape_idx):
-	if (temp_is_rolling):
+func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):
+	if (_is_rolling):
 		return
 	
 	if event is InputEventMouseButton and event.is_pressed():
 		if (not enable_roll_shaking):
-			start_roll()
+			roll_started.emit()
+			# TODO: Remove when integrated
+			roll()		
 		else:
-			for die in dice_list:
-				die.visible = false
-			
-			is_shaking_roll = true
-			if (audio_player != null):
-				audio_player.stream = SFX_dice_shaking
-				audio_player.play()
+			_start_shake()
