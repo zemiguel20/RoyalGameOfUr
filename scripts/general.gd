@@ -3,6 +3,7 @@ extends Object
 ## Contains constants and general utility functions
 
 enum PlayerID {ONE = 1, TWO = 2}
+enum Result {NOTHING = 0, EXTRA_ROLL = 1, WON = 2}
 
 static func get_other_player_id(id: PlayerID) -> PlayerID:
 	return PlayerID.TWO if id == PlayerID.ONE else PlayerID.ONE

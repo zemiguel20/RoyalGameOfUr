@@ -29,7 +29,7 @@ func legal_moves(player_id: int, roll: int) -> Array[Piece]:
 
 ## Moves [param piece] a number of steps equal to [param roll]. Returns a feedback code depending on the result on the move.
 ## [br]
-## 0 - Normal/Nothing [br]
+## 0 - Nothing [br]
 ## 1 - Gets extra roll [br]
 ## 2 - Won the game [br]
 func move(piece: Piece, roll: int) -> int:
@@ -40,11 +40,11 @@ func move(piece: Piece, roll: int) -> int:
 	
 	var player_id = _get_player_id(piece)
 	if _player_won(player_id):
-		return 2
+		return General.Result.WON
 	elif _has_extra_roll(landing_spot):
-		return 1
+		return General.Result.EXTRA_ROLL
 	else:
-		return 0
+		return General.Result.NOTHING
 
 
 func _get_player_pieces(player_id: int) -> Array[Piece]:
