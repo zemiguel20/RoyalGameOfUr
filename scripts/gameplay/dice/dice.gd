@@ -9,12 +9,12 @@ signal clicked
 @export var _roll_shaking_enabled: bool = false
 @export var _use_hitbox_instead_of_dice_colliders : bool
 
-
 var value: int = 0 ## Current rolled value.
 
 var _die_scene: PackedScene = preload("res://scenes/gameplay/dice/d4.tscn")
 var _dice : Array[Die]
 var _is_shaking: bool = false
+var _die_finish_count = 0
 @onready var _roll_sfx: AudioStreamPlayer = $RollSFX
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
 @onready var _click_hitbox : Area3D = $ClickHitbox
@@ -40,21 +40,22 @@ func disable_selection() -> void:
 func roll() -> int:
 	disable_selection()
 	_roll_sfx.play()
+	value = 0
+	_die_finish_count = 0
 	for die in _dice:
 		die.roll()
-	value = 0
-	# FIXME: NOT RECEIVING ROLL_FINISHED SOMETIMES AND ONLY FINISHES IF ROLLED AGAIN
-	for die in _dice:
-		value += await die.roll_finished
+	while _die_finish_count < _num_of_dice:
+		await get_tree().create_timer(0.5).timeout
 	enable_selection()
 	return value
 
 
 func _initialize_dice() -> void:
-	for a in _num_of_dice:
+	for _i in _num_of_dice:
 		var instance = _die_scene.instantiate() as Die
 		add_child(instance)
 		_dice.append(instance)
+		instance.roll_finished.connect(_on_die_finished_rolling)
 		# TODO: Make this editable as well, but this should be handled by a Placer script.
 		# This script will then also make sure that the dice do not overlapped.
 		var locationX = randf_range(-2.5, 2.5)
@@ -83,3 +84,8 @@ func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape
 		for die in _dice:
 				die.visible = true
 		clicked.emit()
+
+
+func _on_die_finished_rolling(die_value: int):
+	value += die_value
+	_die_finish_count += 1

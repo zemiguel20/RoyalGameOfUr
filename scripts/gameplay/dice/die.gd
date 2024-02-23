@@ -57,7 +57,6 @@ func roll() -> void:
 	# Wait until the movement stops. Stuck timer prevents infinite waiting for small movements
 	await get_tree().create_timer(5.0).timeout
 	
-	
 	# Retrieve roll value
 	var roll_value = -1
 	for raycast in _raycast_list:

@@ -86,4 +86,3 @@ vertical_alignment = 1
 script = SubResource("GDScript_l6841")
 
 [connection signal="clicked" from="Dice" to="." method="_on_dice_clicked"]
-[connection signal="visibility_changed" from="Plane" to="Dice" method="_on_plane_visibility_changed"]
