@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7x3ka2rwdola"]
 
-[ext_resource type="Script" path="res://scripts/boardGame/dice_raycast.gd" id="1_r7suq"]
+[ext_resource type="Script" path="res://scripts/gameplay/dice/dice_raycast.gd" id="1_gsccs"]
 
 [node name="RayCast3D" type="RayCast3D"]
 target_position = Vector3(0, -0.2, 0)
 collision_mask = 2
 hit_from_inside = true
-script = ExtResource("1_r7suq")
+script = ExtResource("1_gsccs")
