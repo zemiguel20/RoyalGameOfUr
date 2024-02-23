@@ -49,5 +49,4 @@ func end_game():
 
 
 func _choose_starting_player():
-	# TODO: implement
-	pass
+	current_player = randi_range(General.PlayerID.ONE, General.PlayerID.TWO)

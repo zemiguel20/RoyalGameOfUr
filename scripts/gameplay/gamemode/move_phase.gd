@@ -32,9 +32,9 @@ func end():
 ## Otherwise, changes to the next player's [RollPhase].
 func move(piece: Piece):
 	var result = await _gamemode.board.move(piece, _gamemode.dice.value)
-	if result == 1:
+	if result == General.Result.EXTRA_ROLL:
 		_gamemode.changeState(RollPhase.new(_gamemode))
-	elif result == 2:
+	elif result == General.Result.WON:
 		_gamemode.end_game()
 	else:
 		_gamemode.switch_player()

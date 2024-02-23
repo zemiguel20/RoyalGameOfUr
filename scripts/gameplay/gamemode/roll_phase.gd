@@ -5,12 +5,12 @@ extends Phase
 
 ## Turns on dice selection highlight effects.
 func start():
-	_gamemode.dice.enable_highlight()
+	_gamemode.dice.enable_selection()
 
 
 ## Turns off dice selection highlight effects.
 func end():
-	_gamemode.dice.disable_highlight()
+	_gamemode.dice.disable_selection()
 
 
 ## Rolls the dice, and then changes to the [MovePhase]. If the player rolls 0, then skip to the other player's [RollPhase] instead.

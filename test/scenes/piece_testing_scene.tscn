@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2624smcv0td8"]
 
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/BoardGameProps/piece.tscn" id="1_7r4fv"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/gameplay/Piece.tscn" id="1_7r4fv"]
 
 [node name="PieceTestScene" type="Node3D"]
 
