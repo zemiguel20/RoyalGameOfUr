@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk03upbyn04nu"]
+
+[ext_resource type="Script" path="res://scripts/piece.gd" id="1_u7nn1"]
+
+[sub_resource type="Curve" id="Curve_6tle5"]
+_data = [Vector2(0, 0), 0.0, 5.30008, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.04579, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lftn1"]
+
+[sub_resource type="GDScript" id="GDScript_hob2t"]
+script/source = "extends Node
+
+
+@export var highlight_material : Material
+@export var mesh_to_highlight : GeometryInstance3D
+var starting_material : Material
+
+
+func _ready():
+	starting_material = mesh_to_highlight.material_override
+
+
+func highlight():
+	mesh_to_highlight.material_override = highlight_material
+
+
+func dehighlight():
+	mesh_to_highlight.material_override = starting_material
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enimc"]
+albedo_color = Color(0.231373, 1, 0.211765, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_o4a7m"]
+height = 0.232235
+
+[node name="Piece" type="StaticBody3D"]
+script = ExtResource("1_u7nn1")
+move_animation_curve = SubResource("Curve_6tle5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.00352, 0, 0, 0, 0.104571, 0, 0, 0, 1.00352, 0, 0, 0)
+mesh = SubResource("CylinderMesh_lftn1")
+
+[node name="MaterialChanger" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
+script = SubResource("GDScript_hob2t")
+highlight_material = SubResource("StandardMaterial3D_enimc")
+mesh_to_highlight = NodePath("../MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_o4a7m")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
