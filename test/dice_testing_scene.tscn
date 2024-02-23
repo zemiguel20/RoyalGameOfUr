@@ -5,6 +5,16 @@
 
 [sub_resource type="GDScript" id="GDScript_0kq4i"]
 script/source = "extends Node3D
+
+@onready var dice = $Dice as Dice
+
+func _ready():
+	pass
+
+func _on_dice_clicked():
+	var value = await dice.roll()
+	print(value)
+	$CanvasLayer/Label. _on_dice_controller_roll_finished(value)
 "
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vs1jm"]
@@ -32,6 +42,7 @@ script = SubResource("GDScript_0kq4i")
 
 [node name="Dice" parent="." instance=ExtResource("1_qmmkb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.44615)
+_use_hitbox_instead_of_dice_colliders = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.395241, 0.918577, 0, -0.918577, 0.395241, 0, 8.59322, 2.43944)
@@ -74,4 +85,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = SubResource("GDScript_l6841")
 
+[connection signal="clicked" from="Dice" to="." method="_on_dice_clicked"]
 [connection signal="visibility_changed" from="Plane" to="Dice" method="_on_plane_visibility_changed"]

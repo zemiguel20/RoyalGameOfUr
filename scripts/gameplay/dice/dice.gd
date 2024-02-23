@@ -8,15 +8,16 @@ signal clicked
 @export_range(0, 8) var _num_of_dice: int = 4
 @export var _roll_shaking_enabled: bool = false
 @export var _use_hitbox_instead_of_dice_colliders : bool
-@export var _click_hitbox : CollisionObject3D
+
 
 var value: int = 0 ## Current rolled value.
 
-var _die_scene: PackedScene = preload("res://scenes/gameplay/test_die_d4.tscn")
+var _die_scene: PackedScene = preload("res://scenes/gameplay/dice/d4.tscn")
 var _dice : Array[Die]
 var _is_shaking: bool = false
 @onready var _roll_sfx: AudioStreamPlayer = $RollSFX
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
+@onready var _click_hitbox : Area3D = $ClickHitbox
 
 
 func _ready() -> void:
@@ -42,6 +43,7 @@ func roll() -> int:
 	for die in _dice:
 		die.roll()
 	value = 0
+	# FIXME: NOT RECEIVING ROLL_FINISHED SOMETIMES AND ONLY FINISHES IF ROLLED AGAIN
 	for die in _dice:
 		value += await die.roll_finished
 	enable_selection()
@@ -78,4 +80,6 @@ func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape
 	
 	if _is_shaking and event is InputEventMouseButton and event.is_released():
 		_is_shaking = false
+		for die in _dice:
+				die.visible = true
 		clicked.emit()
