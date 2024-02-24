@@ -37,7 +37,7 @@ script = SubResource("GDScript_7jrdc")
 
 [node name="Piece" parent="." instance=ExtResource("1_w8nnh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120266, -3.93835)
-move_duration = 0.4
+move_duration = 0.5
 
 [node name="Piece2" parent="." instance=ExtResource("1_w8nnh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07852, 0.116728, -0.970955)

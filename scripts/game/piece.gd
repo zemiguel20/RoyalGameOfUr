@@ -5,12 +5,11 @@ extends StaticBody3D
 
 signal clicked(sender: Piece)
 
-@export var move_animation_curve: Curve
-@export var move_arc_height: float = 2.0
-@export var move_duration: float = 1.5
+@export var move_arc_height: float = 1.0
+@export var move_duration: float = 1.0
 
-var _animation_framerate = 60
 @onready var material_changer = $MaterialChanger
+
 
 ## Enables selection and highlighting effects
 func enable_selection():
@@ -30,26 +29,23 @@ func move(movement_path: Array[Vector3]):
 		await _move_arc(pos)
 
 
-func _on_input_event(camera, event: InputEvent, position, normal, shape_idx):
+func _on_input_event(_camera, event: InputEvent, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
 		clicked.emit(self)
 
 
 func _move_arc(target_pos : Vector3):
-	# FIXME: piece stays on the same plane, even if the target_pos is higher. This is because the curve is fixed.
-	# Possible solutions:
-	# - Adjust the curve dinamically
-	# - Calculate circle with center between the two points and perpendicular normal, rotate around circle until it reaches the destination point
-	# - Use Tween with circular transition and Ease In or Out, try which one
-	var old_pos = global_position
-	var global_arc_heigth = move_arc_height + old_pos.y
-	var t = 0
-	var frame_duration = 1.0 / _animation_framerate
-	while (t < move_duration):
-		var progress = t / move_duration
-		global_position.x = lerpf(old_pos.x, target_pos.x, progress)
-		global_position.z = lerpf(old_pos.z, target_pos.z, progress)
-		# Handle the y-axis independentely
-		global_position.y = lerpf(old_pos.y, move_arc_height, move_animation_curve.sample(progress))
-		t += frame_duration
-		await get_tree().create_timer(frame_duration).timeout
+	# Linear translation of X and Z
+	var tween_xz = create_tween()
+	tween_xz.bind_node(self).set_parallel(true)
+	tween_xz.tween_property(self, "global_position:x", target_pos.x, move_duration)
+	tween_xz.tween_property(self, "global_position:z", target_pos.z, move_duration)
+	
+	# Arc translation of Y
+	var high_point = maxf(global_position.y, target_pos.y) + move_arc_height
+	var tween_y = create_tween().set_trans(Tween.TRANS_CUBIC)
+	tween_y.tween_property(self, "global_position:y", high_point, move_duration * 0.5).set_ease(Tween.EASE_OUT)
+	tween_y.tween_property(self, "global_position:y", target_pos.y, move_duration * 0.5).set_ease(Tween.EASE_IN)
+	
+	# Tweens run at same time, so only wait for one of them
+	await tween_xz.finished
