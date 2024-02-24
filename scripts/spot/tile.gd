@@ -1,10 +1,10 @@
 class_name Tile
 extends Spot
 
-var piece : Piece 
+
+var piece: Piece = null
+@onready var _piece_place: Node3D = $PiecePlace
 
 
-func _sample_position():
-	# Alternatively we can also have a Node3D export var, so we can specify a different position.
-	# But I think it makes sense so far to use the position of the Node with this script.
-	return global_position
+func sample_position() -> Vector3:
+	return _piece_place.global_position

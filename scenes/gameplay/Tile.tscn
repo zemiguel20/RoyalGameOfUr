@@ -1,16 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://jnduatu551to"]
+[gd_scene load_steps=4 format=3 uid="uid://cyj2hsx8jciw1"]
 
-[ext_resource type="Script" path="res://scripts/boardGame/tile.gd" id="1_5oy7b"]
-[ext_resource type="Script" path="res://scripts/utility/material_changer_utility.gd" id="2_ok04s"]
-[ext_resource type="Material" uid="uid://cfjbmqrrcl4xo" path="res://materials/test.tres" id="3_400gf"]
+[ext_resource type="Script" path="res://scripts/spot/tile.gd" id="1_kpsmx"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_i8cgb"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4hdf"]
+albedo_color = Color(0.494118, 0.494118, 0.494118, 1)
 
-[node name="Tile" type="MeshInstance3D"]
-mesh = SubResource("BoxMesh_i8cgb")
-script = ExtResource("1_5oy7b")
+[sub_resource type="BoxMesh" id="BoxMesh_jv7eu"]
+material = SubResource("StandardMaterial3D_m4hdf")
 
-[node name="MaterialChangerUtility" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
-script = ExtResource("2_ok04s")
-highlight_material = ExtResource("3_400gf")
-mesh_to_highlight = NodePath("..")
+[node name="Tile" type="Node3D"]
+script = ExtResource("1_kpsmx")
+
+[node name="PiecePlace" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.616682, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_jv7eu")
