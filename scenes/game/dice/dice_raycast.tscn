@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7x3ka2rwdola"]
 
-[ext_resource type="Script" path="res://scripts/gameplay/dice/dice_raycast.gd" id="1_gsccs"]
+[ext_resource type="Script" path="res://scripts/game/dice/dice_raycast.gd" id="1_gsccs"]
 
 [node name="DiceRaycast" type="RayCast3D"]
 target_position = Vector3(0, -0.2, 0)

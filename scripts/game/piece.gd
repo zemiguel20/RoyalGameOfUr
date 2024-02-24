@@ -24,9 +24,8 @@ func disable_selection():
 	material_changer.dehighlight()
 
 
-## Coroutine that moves the piece physically along the given [param movement_path].
+## Coroutine that moves the piece physically along the given [param movement_path].  [param movement_path] contains global positions.
 func move(movement_path: Array[Vector3]):
-	# TODO: implement
 	for pos in movement_path:
 		await _move_arc(pos)
 
@@ -37,15 +36,20 @@ func _on_input_event(camera, event: InputEvent, position, normal, shape_idx):
 
 
 func _move_arc(target_pos : Vector3):
-	var old_pos = position
+	# FIXME: piece stays on the same plane, even if the target_pos is higher. This is because the curve is fixed.
+	# Possible solutions:
+	# - Adjust the curve dinamically
+	# - Calculate circle with center between the two points and perpendicular normal, rotate around circle until it reaches the destination point
+	# - Use Tween with circular transition and Ease In or Out, try which one
+	var old_pos = global_position
 	var global_arc_heigth = move_arc_height + old_pos.y
 	var t = 0
 	var frame_duration = 1.0 / _animation_framerate
 	while (t < move_duration):
 		var progress = t / move_duration
-		position.x = lerpf(old_pos.x, target_pos.x, progress)
-		position.z = lerpf(old_pos.z, target_pos.z, progress)
+		global_position.x = lerpf(old_pos.x, target_pos.x, progress)
+		global_position.z = lerpf(old_pos.z, target_pos.z, progress)
 		# Handle the y-axis independentely
-		position.y = lerpf(old_pos.y, move_arc_height, move_animation_curve.sample(progress))
+		global_position.y = lerpf(old_pos.y, move_arc_height, move_animation_curve.sample(progress))
 		t += frame_duration
 		await get_tree().create_timer(frame_duration).timeout

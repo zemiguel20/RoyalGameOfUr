@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyj2hsx8jciw1"]
 
-[ext_resource type="Script" path="res://scripts/spot/tile.gd" id="1_kpsmx"]
+[ext_resource type="Script" path="res://scripts/game/spot/tile.gd" id="1_kpsmx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4hdf"]
 albedo_color = Color(0.494118, 0.494118, 0.494118, 1)

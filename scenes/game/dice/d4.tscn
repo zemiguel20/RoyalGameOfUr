@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxfww4cuco8ex"]
 
-[ext_resource type="Script" path="res://scripts/gameplay/dice/die.gd" id="1_spk2b"]
+[ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="1_spk2b"]
 [ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://models/test_die_d4.glb" id="1_y0dub"]
-[ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/gameplay/dice/dice_raycast.tscn" id="3_nd3gk"]
+[ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_raycast.tscn" id="3_nd3gk"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xnfvc"]
 points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.499182, -0.000168562, 0.242005, -0.00390851)

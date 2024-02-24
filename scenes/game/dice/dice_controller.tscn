@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c3bq04omjlr2e"]
 
-[ext_resource type="Script" path="res://scripts/gameplay/dice/dice.gd" id="1_ka5gv"]
+[ext_resource type="Script" path="res://scripts/game/dice/dice.gd" id="1_ka5gv"]
 [ext_resource type="AudioStream" uid="uid://dv5nxtgrtwn6q" path="res://audio/test_dice_roll.mp3" id="3_hlajg"]
 [ext_resource type="AudioStream" uid="uid://bdsbgnjpv7ic2" path="res://audio/dice_shaking_loop.mp3" id="3_wfoj5"]
 [ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/dice_border.tres" id="5_hdthg"]

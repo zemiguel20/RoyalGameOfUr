@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c2624smcv0td8"]
 
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/gameplay/piece.tscn" id="1_w8nnh"]
-[ext_resource type="PackedScene" uid="uid://cyj2hsx8jciw1" path="res://scenes/gameplay/tile.tscn" id="2_stamt"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece.tscn" id="1_w8nnh"]
+[ext_resource type="PackedScene" uid="uid://cyj2hsx8jciw1" path="res://scenes/game/tile.tscn" id="2_stamt"]
 
 [sub_resource type="GDScript" id="GDScript_7jrdc"]
 script/source = "extends Node

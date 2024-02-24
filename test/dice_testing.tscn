@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c3rplnb2n1336"]
 
-[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/gameplay/dice/dice_controller.tscn" id="1_qmmkb"]
+[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="1_qmmkb"]
 [ext_resource type="Material" uid="uid://dtjsro41ih73d" path="res://materials/plane.tres" id="2_oqni5"]
 
 [sub_resource type="GDScript" id="GDScript_0kq4i"]
