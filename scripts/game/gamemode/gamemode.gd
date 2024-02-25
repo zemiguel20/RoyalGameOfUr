@@ -3,8 +3,8 @@ extends Node
 ## Controls flow of the game. It provides callback actions, and their behaviour is set by the current [Phase].
 
 
-var board: Board
-var dice: Dice
+@export var board: Board
+@export var dice: Dice
 var current_player: int
 var _phase: Phase
 
@@ -15,8 +15,8 @@ func _ready():
 
 ## Initializes the game state and context
 func start_game():
-	board.setup()
 	_choose_starting_player()
+	board.setup()
 	_phase = RollPhase.new(self)
 
 
@@ -39,13 +39,12 @@ func move(piece: Piece):
 
 ## Switches current player
 func switch_player():
-	# TODO: implement
-	pass
+	current_player = General.PlayerID.ONE if current_player == General.PlayerID.TWO else General.PlayerID.TWO
 
 
 ## Closes the game
 func end_game():
-	pass
+	print("Player %d won" % current_player)
 
 
 func _choose_starting_player():

@@ -11,7 +11,7 @@ signal clicked
 
 var value: int = 0 ## Current rolled value.
 
-var _die_scene: PackedScene = preload("res://scenes/gameplay/dice/d4.tscn")
+var _die_scene: PackedScene = preload("res://scenes/game/dice/d4.tscn")
 var _dice : Array[Die]
 var _is_shaking: bool = false
 var _die_finish_count = 0
