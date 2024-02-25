@@ -8,8 +8,9 @@ albedo_color = Color(0.494118, 0.494118, 0.494118, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_jv7eu"]
 material = SubResource("StandardMaterial3D_m4hdf")
 
-[node name="Tile" type="Node3D"]
+[node name="Tile" type="Node3D" node_paths=PackedStringArray("_piece_place")]
 script = ExtResource("1_l4jlu")
+_piece_place = NodePath("PiecePlace")
 
 [node name="PiecePlace" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.616682, 0)

@@ -84,7 +84,7 @@ func _get_movement_path(piece: Piece, landing_spot: Spot) -> Array[Vector3]:
 
 
 func _get_start_area(player_id: int) -> PieceGroup:
-	return (_p_track[player_id] as Array)[0]
+	return _p_track[player_id][0]
 
 
 func _get_track(player_id: int) -> Array[Spot]:

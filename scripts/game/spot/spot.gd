@@ -5,8 +5,9 @@ extends Node3D
 
 @export var is_rosette: bool = false
 @export var give_extra_roll: bool = false
+@export var _piece_place: Node3D
 var piece: Piece = null
-@onready var _piece_place: Node3D = $PiecePlace
+
 
 
 ## Returns a position inside the spot where the piece can move to.

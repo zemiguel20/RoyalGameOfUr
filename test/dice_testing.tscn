@@ -41,7 +41,7 @@ func _on_dice_controller_roll_finished(value):
 script = SubResource("GDScript_0kq4i")
 
 [node name="Dice" parent="." instance=ExtResource("1_qmmkb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.44615)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.50013, 0, 1.44615)
 _use_hitbox_instead_of_dice_colliders = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
