@@ -1,8 +1,16 @@
 class_name PieceGroup
 extends Node3D
 
-# NOTE: PLACEHOLDER
-@export var _spots: Array[Spot]
+
+var _spots: Array[Spot] = []
+
+
+func setup(size: int) -> void:
+	_spots.resize(size)
+	for i in size:
+		_spots[i] = Spot.new()
+		add_child(_spots[i])
+		_spots[i].global_position = global_position + i * Vector3.RIGHT * 1.5 # TODO: implement actual offset
 
 
 func get_available_spot() -> Spot:
@@ -15,7 +23,7 @@ func get_all_spots() -> Array[Spot]:
 
 
 func get_all_pieces() -> Array[Piece]:
-	var pieces = []
+	var pieces = [] as Array[Piece]
 	for spot in _spots:
 		if spot.piece != null:
 			pieces.append(spot.piece)

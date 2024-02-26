@@ -8,8 +8,7 @@ signal clicked(sender: Piece)
 @export var move_arc_height: float = 1.0
 @export var move_duration: float = 1.0
 @export var player: General.PlayerID = General.PlayerID.ONE
-
-@onready var material_changer = $MaterialChanger
+@export var material_changer: Node
 
 
 ## Enables selection and highlighting effects

@@ -20,9 +20,18 @@ func setup():
 	_p_track[General.PlayerID.ONE] = [_p1_start_area, _p1_track, _p1_end_area]
 	_p_track[General.PlayerID.TWO] = [_p2_start_area, _p2_track, _p2_end_area]
 	
+	# Init start and end zones
+	for player in _p_track:
+		var	zone_size = get_pieces(player).size()
+		_get_start_area(player).setup(zone_size)
+		_get_end_area(player).setup(zone_size)
+	
+	# Init pieces
 	for piece in _pieces:
 		var start_spot = _get_start_area(piece.player).get_available_spot()
-		move(piece, start_spot)
+		piece.global_position = start_spot.sample_position()
+		start_spot.piece = piece
+		piece.disable_selection()
 
 
 ## Moves [param piece] to [param landing_spot]. Moves opponent piece to starting area if it gets knocked out.
@@ -32,18 +41,22 @@ func move(piece: Piece, landing_spot: Spot) -> void:
 	
 	var opponent_id = General.get_other_player_id(piece.player)
 	if is_occupied_by_player(landing_spot, opponent_id):
-		# Move to start
-		var start_area = _p1_start_area if landing_spot.piece.player == 1 else _p2_start_area
-		var start_spot = start_area.get_available_spot()
+		# Move opponent to start
+		var start_spot = _get_start_area(opponent_id).get_available_spot()
 		await move(landing_spot.piece, start_spot)
 	
+	# Update spot info
+	get_current_spot(piece).piece = null
 	landing_spot.piece = piece
 
 
-func get_pieces(player_id: int) -> Array[Piece]:
-	return _pieces.filter(func(piece: Piece): return piece.player == player_id)
+## Returns the list of all pieces of the given [param player].
+func get_pieces(player: int) -> Array[Piece]:
+	return _pieces.filter(func(piece: Piece): return piece.player == player)
 
 
+## Returns the spot the [param piece] will land on with the given [param roll].
+## Returns [code]null[/code] if landing outside board bounds, that is, past the last spot of the track.
 func  get_landing_spot(piece: Piece, roll: int) -> Spot:
 	var start_area = _get_start_area(piece.player)
 	var end_area = _get_end_area(piece.player)
@@ -51,7 +64,8 @@ func  get_landing_spot(piece: Piece, roll: int) -> Spot:
 	
 	# If in start area, return spot in track equal to roll
 	if start_area.get_all_pieces().has(piece):
-		return track[roll - 1]
+		if roll <= track.size():
+			return track[roll - 1]
 	
 	# If in middle of the track, check which spot to move to
 	for spot in track:
@@ -68,15 +82,41 @@ func  get_landing_spot(piece: Piece, roll: int) -> Spot:
 	return null
 
 
-func is_occupied_by_player(spot: Spot, player_id: int) -> bool:
-	return spot.piece != null and spot.piece.player == player_id
+## Returns [code]true[/code] if the [param spot] is occupied by a piece of the given [param player].
+## Otherwise return  [code]false[/code].
+func is_occupied_by_player(spot: Spot, player: int) -> bool:
+	return spot.piece != null and spot.piece.player == player
 
 
-func is_winner(player_id: int) -> bool:
-	var finished_pieces = (_p_track[player_id][2] as PieceGroup).get_all_pieces()
-	var player_pieces = get_pieces(player_id)
+## Returns [code]true[/code] if the [param player] has all of its pieces in the end area.
+## Otherwise return  [code]false[/code].
+func is_winner(player: int) -> bool:
+	var finished_pieces = (_p_track[player][2] as PieceGroup).get_all_pieces()
+	var player_pieces = get_pieces(player)
 	return finished_pieces.size() == player_pieces.size()
 
+
+## Returns [code]true[/code] if the [param piece] is in the corresponding player's starting zone.
+## Otherwise return  [code]false[/code].
+func is_in_start_zone(piece: Piece) -> bool:
+	return _get_start_area(piece.player).get_all_pieces().has(piece)
+
+
+## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
+func get_current_spot(piece: Piece) -> Spot:
+	for spot in _get_start_area(piece.player).get_all_spots():
+		if spot.piece == piece:
+			return spot
+	
+	for spot in _get_track(piece.player):
+		if spot.piece == piece:
+			return spot
+	
+	for spot in _get_end_area(piece.player).get_all_spots():
+		if spot.piece == piece:
+			return spot
+	
+	return null # If piece is not placed return null
 
 func _get_movement_path(piece: Piece, landing_spot: Spot) -> Array[Vector3]:
 	# TODO: implement
