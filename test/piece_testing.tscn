@@ -9,8 +9,8 @@ script/source = "extends Node
 
 @onready var piece_1 = $Piece as Piece
 @onready var piece_2 = $Piece2 as Piece
-@onready var tile_1 = $Tile as Tile
-@onready var tile_2 = $Tile2 as Tile
+@onready var tile_1 = $Tile as Spot
+@onready var tile_2 = $Tile2 as Spot
 
 
 func _ready():
@@ -53,9 +53,9 @@ shadow_enabled = true
 mesh = SubResource("PlaneMesh_3xjdh")
 
 [node name="Tile" parent="." instance=ExtResource("2_stamt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530848, 0, -7.47886)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530848, 0.776058, -7.47886)
 
 [node name="Tile2" parent="." instance=ExtResource("2_stamt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530848, 0, -10.7176)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530848, 0.700493, -10.7176)
 
 [connection signal="clicked" from="Piece" to="." method="_on_piece_clicked"]
