@@ -18,6 +18,9 @@ func start():
 	
 	_link_highlighting()
 	_enable_piece_selection()
+		
+	if (_gamemode.current_player == General.PlayerID.TWO):
+		_gamemode.ai_player.evaluate_moves(_legal_moves)
 
 
 ## Disables highlighting of the movable pieces calculated in [method start] 

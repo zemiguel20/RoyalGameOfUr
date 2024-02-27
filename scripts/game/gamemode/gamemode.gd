@@ -11,6 +11,8 @@ signal game_finished
 @export var board: Board
 @export var dice: Dice
 @export_range(0, 10) var num_pieces_per_player: int = 7
+## This value is optional, when not assigned there is hotseat.
+@export var ai_player: AIPlayer
 var current_player: int
 var _phase: Phase = Phase.new(self)
 
@@ -25,7 +27,10 @@ func start_game():
 	for piece in board.get_pieces(General.PlayerID.TWO):
 		piece.clicked.connect(move)
 		piece.disable_selection()
-	
+
+	if (ai_player != null):
+		ai_player.setup(self)
+
 	changeState(RollPhase.new(self))
 
 

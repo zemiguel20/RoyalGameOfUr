@@ -29,6 +29,11 @@ func move(movement_path: Array[Vector3]):
 		await _move_arc(pos)
 
 
+# Function that can be called from AI to simulate click.
+func on_ai_click():
+	clicked.emit(self)
+
+
 func _on_input_event(_camera, event: InputEvent, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
 		clicked.emit(self)
