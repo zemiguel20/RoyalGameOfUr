@@ -6,6 +6,10 @@ extends Phase
 ## Turns on dice selection highlight effects.
 func start():
 	_gamemode.dice.enable_selection()
+	
+	# If its an ai's turn, let the ai know it can 'click' on the dice.
+	if (_gamemode.is_ai_turn()):
+		_gamemode.ai_player.roll()
 
 
 ## Turns off dice selection highlight effects.

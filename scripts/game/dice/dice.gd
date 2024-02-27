@@ -94,6 +94,8 @@ func _initialize_dice() -> void:
 		for die in _dice:
 			die.input_event.connect(_on_die_input_event)
 
+func start_roll():
+	clicked.emit()
 
 func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():

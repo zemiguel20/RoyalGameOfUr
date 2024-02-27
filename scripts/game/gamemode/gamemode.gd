@@ -15,6 +15,11 @@ signal game_finished
 @export var ai_player: AIPlayer
 var current_player: int
 var _phase: Phase = Phase.new(self)
+var _has_ai_opponent: bool
+
+
+func _ready():
+	start_game()
 
 
 ## Initializes the game state and context
@@ -28,7 +33,8 @@ func start_game():
 		piece.clicked.connect(move)
 		piece.disable_selection()
 
-	if (ai_player != null):
+	_has_ai_opponent = ai_player != null
+	if (_has_ai_opponent):
 		ai_player.setup(self)
 
 	changeState(RollPhase.new(self))
@@ -64,6 +70,11 @@ func end_game():
 	_phase.end()
 	game_finished.emit()
 	print("Player %d won" % current_player)
+	
+
+## Quick helper method returning whether it is the turn of an ai or not 
+func is_ai_turn():
+	return _has_ai_opponent && current_player == General.PlayerID.TWO
 
 
 func _choose_starting_player():
