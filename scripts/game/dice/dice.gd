@@ -93,11 +93,18 @@ func _initialize_dice() -> void:
 	else:
 		for die in _dice:
 			die.input_event.connect(_on_die_input_event)
+			
+	print("Connections ", _click_hitbox.input_event.get_connections())
 
+
+## Function that emits a signal that the dice have been clicked. 
+## Triggers the [RollPhase] to start the rolling of the dice.
 func start_roll():
+	print("ROLL")
 	clicked.emit()
 
 func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):
+	print("Something!")
 	if event is InputEventMouseButton and event.is_pressed():
 		if _roll_shaking_enabled and not _is_shaking:
 			_is_shaking = true
