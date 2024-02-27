@@ -7,7 +7,7 @@ var _dice : Dice
 
 ## Virtual method that picks a move through an algorithm.
 ## Instead of the moves being a piece, we should have information about the move, so that it can be taking in with the evaluation.
-func _evaluate_moves(moves : Array[Piece]):
+func _evaluate_moves(moves : Array[Move]):
 	pass
 
 
@@ -23,7 +23,7 @@ func roll():
 	_dice.start_roll()
 	
 	
-func make_move(moves : Array[Piece]):
+func make_move(moves : Array[Move]):
 	var piece_to_move = _evaluate_moves(moves)
 	move_piece(piece_to_move)
 
