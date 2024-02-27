@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://cikphqebc8wy7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_758yh"]
+size = Vector2(250, 500)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h4rfc"]
+size = Vector3(5, 11, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t8h4v"]
+size = Vector3(6, 3, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_abg11"]
+albedo_color = Color(1, 1, 0.607843, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xe443"]
+material = SubResource("StandardMaterial3D_abg11")
+size = Vector3(2, 5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wvj2l"]
+size = Vector3(9, 10, 3.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_25moy"]
+top_radius = 2.5
+bottom_radius = 2.5
+height = 3.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_0lf1s"]
+size = Vector3(5, 3.5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oocno"]
+size = Vector3(50, 10, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4bni"]
+albedo_color = Color(1, 0.419608, 0.34902, 1)
+
+[node name="Palace" type="Node"]
+
+[node name="Gate" type="Node" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Gate"]
+mesh = SubResource("PlaneMesh_758yh")
+
+[node name="GateTower_L" type="CSGMesh3D" parent="Gate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 5.5, 0)
+mesh = SubResource("BoxMesh_h4rfc")
+
+[node name="GateTower_L_Top" type="CSGMesh3D" parent="Gate/GateTower_L"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+mesh = SubResource("BoxMesh_t8h4v")
+
+[node name="Lamassu_L" type="CSGMesh3D" parent="Gate/GateTower_L"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, -3, 0)
+mesh = SubResource("BoxMesh_xe443")
+
+[node name="GateTower_R" type="CSGMesh3D" parent="Gate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5.5, 0)
+mesh = SubResource("BoxMesh_h4rfc")
+
+[node name="GateTower_R_Top" type="CSGMesh3D" parent="Gate/GateTower_R"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+mesh = SubResource("BoxMesh_t8h4v")
+
+[node name="Lamassu_R" type="CSGMesh3D" parent="Gate/GateTower_R"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -3, 0)
+mesh = SubResource("BoxMesh_xe443")
+
+[node name="Tunnel" type="CSGMesh3D" parent="Gate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_wvj2l")
+
+[node name="Subtraction_Cylinder" type="CSGMesh3D" parent="Gate/Tunnel"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+operation = 2
+mesh = SubResource("CylinderMesh_25moy")
+
+[node name="Subtraction_Cube" type="CSGMesh3D" parent="Gate/Tunnel"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, -2.5, 0)
+operation = 2
+mesh = SubResource("BoxMesh_0lf1s")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Gate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.5, 3.425, 0)
+mesh = SubResource("BoxMesh_oocno")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="Gate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 3.425, 0)
+mesh = SubResource("BoxMesh_oocno")
+
+[node name="GuardL" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.85, 3)
+radius = 0.4
+height = 1.7
+material = SubResource("StandardMaterial3D_s4bni")
+
+[node name="GuardR" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.85, 3)
+radius = 0.4
+height = 1.7
+material = SubResource("StandardMaterial3D_s4bni")
