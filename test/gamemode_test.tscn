@@ -23,7 +23,7 @@ board = NodePath("../Board")
 dice = NodePath("../Dice")
 
 [node name="Dice" parent="." instance=ExtResource("2_qrr1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.71434, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.71434, 7.59645)
 _use_hitbox_instead_of_dice_colliders = true
 
 [node name="Board" type="Node3D" parent="." node_paths=PackedStringArray("_pieces", "_p1_start_area", "_p1_end_area", "_p1_track", "_p2_start_area", "_p2_end_area", "_p2_track")]
@@ -36,10 +36,9 @@ _p2_start_area = NodePath("P2StartZone")
 _p2_end_area = NodePath("P2EndZone")
 _p2_track = [NodePath("Tiles/Tile"), NodePath("Tiles/Tile2"), NodePath("Tiles/Tile4"), NodePath("Tiles/Tile5")]
 
-[node name="P1StartZone" type="Node3D" parent="Board" node_paths=PackedStringArray("_spots")]
+[node name="P1StartZone" type="Node3D" parent="Board"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09339, 0, -2.25477)
 script = ExtResource("3_sd0hl")
-_spots = [NodePath("Tile"), NodePath("Tile2")]
 
 [node name="Tile" parent="Board/P1StartZone" instance=ExtResource("4_1qobe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.59545)
@@ -47,10 +46,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.59545)
 [node name="Tile2" parent="Board/P1StartZone" instance=ExtResource("4_1qobe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.611407)
 
-[node name="P2StartZone" type="Node3D" parent="Board" node_paths=PackedStringArray("_spots")]
+[node name="P2StartZone" type="Node3D" parent="Board"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47772, 0, -2.25477)
 script = ExtResource("3_sd0hl")
-_spots = [NodePath("Tile"), NodePath("Tile2")]
 
 [node name="Tile" parent="Board/P2StartZone" instance=ExtResource("4_1qobe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.59545)
@@ -58,10 +56,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.59545)
 [node name="Tile2" parent="Board/P2StartZone" instance=ExtResource("4_1qobe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.611407)
 
-[node name="P1EndZone" type="Node3D" parent="Board" node_paths=PackedStringArray("_spots")]
+[node name="P1EndZone" type="Node3D" parent="Board"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48291, 0, -8.73161)
 script = ExtResource("3_sd0hl")
-_spots = [NodePath("Tile"), NodePath("Tile2")]
 
 [node name="Tile" parent="Board/P1EndZone" instance=ExtResource("4_1qobe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.59545)
@@ -69,10 +66,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.59545)
 [node name="Tile2" parent="Board/P1EndZone" instance=ExtResource("4_1qobe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.611407)
 
-[node name="P2EndZone" type="Node3D" parent="Board" node_paths=PackedStringArray("_spots")]
+[node name="P2EndZone" type="Node3D" parent="Board"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.60909, 0, -8.61606)
 script = ExtResource("3_sd0hl")
-_spots = [NodePath("Tile"), NodePath("Tile2")]
 
 [node name="Tile" parent="Board/P2EndZone" instance=ExtResource("4_1qobe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.59545)
@@ -114,9 +110,6 @@ player = 1
 [node name="MeshInstance3D" parent="Board/Pieces/Piece3" index="0"]
 material_override = ExtResource("6_tn44t")
 
-[node name="MaterialChanger" parent="Board/Pieces/Piece3" index="1" node_paths=PackedStringArray("mesh_to_highlight")]
-mesh_to_highlight = NodePath("../../Piece/MeshInstance3D")
-
 [node name="Piece4" parent="Board/Pieces" instance=ExtResource("5_7e0x7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.41447, 0, 2.37729)
 player = 1
@@ -124,14 +117,13 @@ player = 1
 [node name="MeshInstance3D" parent="Board/Pieces/Piece4" index="0"]
 material_override = ExtResource("6_tn44t")
 
-[node name="MaterialChanger" parent="Board/Pieces/Piece4" index="1" node_paths=PackedStringArray("mesh_to_highlight")]
-mesh_to_highlight = NodePath("../../Piece/MeshInstance3D")
-
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="Plane" type="CSGMesh3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.51382, 0)
 use_collision = true
+collision_layer = 3
+collision_mask = 3
 mesh = SubResource("PlaneMesh_0esbx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
@@ -141,6 +133,10 @@ transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0,
 transform = Transform3D(-0.00258235, -0.847623, 0.530593, 0, 0.530594, 0.847626, -0.999997, 0.00218887, -0.00137018, 7.29912, 14.9179, -8.50356)
 
 [connection signal="clicked" from="Dice" to="Gamemode" method="roll"]
+[connection signal="clicked" from="Board/Pieces/Piece" to="Gamemode" method="move"]
+[connection signal="clicked" from="Board/Pieces/Piece2" to="Gamemode" method="move"]
+[connection signal="clicked" from="Board/Pieces/Piece3" to="Gamemode" method="move"]
+[connection signal="clicked" from="Board/Pieces/Piece4" to="Gamemode" method="move"]
 
 [editable path="Board/Pieces/Piece3"]
 [editable path="Board/Pieces/Piece4"]

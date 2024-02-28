@@ -40,12 +40,15 @@ func move(piece: Piece):
 ## Switches current player
 func switch_player():
 	current_player = General.PlayerID.ONE if current_player == General.PlayerID.TWO else General.PlayerID.TWO
+	print("Switching to player %d" % current_player)
 
 
 ## Closes the game
 func end_game():
+	_phase.end()
 	print("Player %d won" % current_player)
 
 
 func _choose_starting_player():
 	current_player = randi_range(General.PlayerID.ONE, General.PlayerID.TWO)
+	print("Player %d starting" % current_player)

@@ -26,15 +26,14 @@ func _ready() -> void:
 
 ## Enables selection and highlight effects
 func enable_selection() -> void:
-	# TODO: implement
-	pass
+	_click_hitbox.input_ray_pickable = true
+	# TODO highlight effects
 
 
 ## Disables selection and highlight effects
 func disable_selection() -> void:
-	# TODO: implement
-	pass
-
+	_click_hitbox.input_ray_pickable = false
+	# TODO highlight effects
 
 ## Plays the dice rolling animation and updates the value. Returns the rolled value.
 func roll() -> int:
