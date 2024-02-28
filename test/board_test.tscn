@@ -3,14 +3,16 @@
 [ext_resource type="Script" path="res://scripts/game/board.gd" id="1_03n77"]
 [ext_resource type="PackedScene" uid="uid://bewh043hbu713" path="res://scenes/game/start_area.tscn" id="2_vphyr"]
 [ext_resource type="PackedScene" uid="uid://ccnlb2yds0s8s" path="res://scenes/game/end_area.tscn" id="3_4h3vr"]
+[ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/black_piece.tscn" id="3_lreb1"]
 [ext_resource type="Script" path="res://scripts/game/spot/spot.gd" id="3_weinb"]
 [ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece.tscn" id="4_ewbo6"]
-[ext_resource type="Material" uid="uid://caumk6qg3daim" path="res://materials/black.tres" id="5_4airh"]
 
 [sub_resource type="GDScript" id="GDScript_qu5mb"]
 script/source = "extends Node
 
 @onready var board = $Board as Board
+
+const SIZE = 5
 
 func _ready():
 	await _test_board_setup()
@@ -20,24 +22,17 @@ func _ready():
 
 func _test_board_setup():
 	# TEST BOARD SETUP
-	board.setup()
+	board.setup(SIZE)
 	
 	# TEST get pieces
 	var pieces = board.get_pieces(General.PlayerID.ONE)
-	assert(pieces.size() == 2)
-	assert(pieces.has($Board/Piece))
-	assert(pieces.has($Board/Piece2))
-	
+	assert(pieces.size() == SIZE)
 	pieces = board.get_pieces(General.PlayerID.TWO)
-	assert(pieces.size() == 2)
-	assert(pieces.has($Board/Piece3))
-	assert(pieces.has($Board/Piece4))
+	assert(pieces.size() == SIZE)
 	
 	# TEST Pieces being in starting zone
-	assert(board.is_in_start_zone($Board/Piece))
-	assert(board.is_in_start_zone($Board/Piece2))
-	assert(board.is_in_start_zone($Board/Piece3))
-	assert(board.is_in_start_zone($Board/Piece4))
+	for piece in pieces:
+		assert(board.is_in_start_zone(piece))
 
 
 func _test_movement():
@@ -83,9 +78,10 @@ material = SubResource("StandardMaterial3D_2hrb8")
 [node name="BoardTest" type="Node"]
 script = SubResource("GDScript_qu5mb")
 
-[node name="Board" type="Node" parent="." node_paths=PackedStringArray("_pieces", "_p1_start_area", "_p1_end_area", "_p1_track", "_p2_start_area", "_p2_end_area", "_p2_track")]
+[node name="Board" type="Node" parent="." node_paths=PackedStringArray("_p1_start_area", "_p1_end_area", "_p1_track", "_p2_start_area", "_p2_end_area", "_p2_track")]
 script = ExtResource("1_03n77")
-_pieces = [NodePath("Piece"), NodePath("Piece2"), NodePath("Piece3"), NodePath("Piece4")]
+_p1_piece = ExtResource("4_ewbo6")
+_p2_piece = ExtResource("3_lreb1")
 _p1_start_area = NodePath("P1StartArea")
 _p1_end_area = NodePath("P1EndArea")
 _p1_track = [NodePath("Spot"), NodePath("Spot2"), NodePath("Spot3"), NodePath("Spot4")]
@@ -100,10 +96,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.71593, 0, -4.45534)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.04998, 0, 6.478)
 
 [node name="P1EndArea" parent="Board" instance=ExtResource("3_4h3vr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9569, 0, 5.50149)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9569, 0, -7.49816)
 
 [node name="P2EndArea" parent="Board" instance=ExtResource("3_4h3vr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4381, 0, -3.19558)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0075, 0, 8.79491)
 
 [node name="Spot" type="Node3D" parent="Board"]
 script = ExtResource("3_weinb")
@@ -137,40 +133,8 @@ script = ExtResource("3_weinb")
 mesh = SubResource("PlaneMesh_eqcx1")
 skeleton = NodePath("../../Spot")
 
-[node name="Piece" parent="Board" instance=ExtResource("4_ewbo6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.90695, 0, -2.67097)
-
-[node name="Piece2" parent="Board" node_paths=PackedStringArray("material_changer") instance=ExtResource("4_ewbo6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.90695, 0, -0.821838)
-material_changer = NodePath("../Piece/MaterialChanger")
-
-[node name="Piece3" parent="Board" node_paths=PackedStringArray("material_changer") instance=ExtResource("4_ewbo6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.90695, 0, 0.924565)
-player = 1
-material_changer = NodePath("../Piece/MaterialChanger")
-
-[node name="MeshInstance3D" parent="Board/Piece3" index="0"]
-material_override = ExtResource("5_4airh")
-
-[node name="MaterialChanger" parent="Board/Piece3" index="1" node_paths=PackedStringArray("mesh_to_highlight")]
-mesh_to_highlight = NodePath("../../Piece/MeshInstance3D")
-
-[node name="Piece4" parent="Board" node_paths=PackedStringArray("material_changer") instance=ExtResource("4_ewbo6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.90695, 0, 3.08189)
-player = 1
-material_changer = NodePath("../Piece/MaterialChanger")
-
-[node name="MeshInstance3D" parent="Board/Piece4" index="0"]
-material_override = ExtResource("5_4airh")
-
-[node name="MaterialChanger" parent="Board/Piece4" index="1" node_paths=PackedStringArray("mesh_to_highlight")]
-mesh_to_highlight = NodePath("../../Piece/MeshInstance3D")
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999962, 0.00765079, -0.00419737, 0, 0.480989, 0.876727, 0.00872654, -0.876693, 0.48097, 2.76681, 13.3698, 7.91143)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.999962, 0.00765079, -0.00419737, 0, 0.480989, 0.876727, 0.00872654, -0.876693, 0.48097, 2.76682, 13.3676, 2.5028)
-
-[editable path="Board/Piece3"]
-[editable path="Board/Piece4"]

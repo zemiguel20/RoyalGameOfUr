@@ -3,8 +3,8 @@ extends Node
 ## Manages the state of the board. It stores in which spot the pieces of each player are.
 ## It allows queries to the state of the board, and also moves the pieces.
 
-
-@export var _pieces: Array[Piece]
+@export var _p1_piece: PackedScene
+@export var _p2_piece: PackedScene
 @export var _p1_start_area: PieceGroup
 @export var _p1_end_area: PieceGroup
 @export var _p1_track: Array[Spot]
@@ -12,26 +12,27 @@ extends Node
 @export var _p2_end_area: PieceGroup
 @export var _p2_track: Array[Spot]
 
-# Key = player id, Value = [start_area, track, end_area]
+# Key = player id, Value = [start_area, track, end_area, piece_prefab, piece_list]
 var _p_track: Dictionary = {}
 
-## Initialize the board
-func setup():
-	_p_track[General.PlayerID.ONE] = [_p1_start_area, _p1_track, _p1_end_area]
-	_p_track[General.PlayerID.TWO] = [_p2_start_area, _p2_track, _p2_end_area]
+## Initialize the board. [param num_pieces] is the number of spawned pieces per player
+func setup(num_pieces: int):
+	_p_track[General.PlayerID.ONE] = [_p1_start_area, _p1_track, _p1_end_area, _p1_piece, [] ]
+	_p_track[General.PlayerID.TWO] = [_p2_start_area, _p2_track, _p2_end_area, _p2_piece, [] ]
 	
-	# Init start and end zones
+	# Init start and end zones, and instantiate pieces
 	for player in _p_track:
-		var	zone_size = get_pieces(player).size()
-		_get_start_area(player).setup(zone_size)
-		_get_end_area(player).setup(zone_size)
+		_get_start_area(player).setup(num_pieces)
+		_get_end_area(player).setup(num_pieces)
 	
-	# Init pieces
-	for piece in _pieces:
-		var start_spot = _get_start_area(piece.player).get_available_spot()
-		piece.global_position = start_spot.sample_position()
-		start_spot.piece = piece
-		piece.disable_selection()
+		for i in num_pieces:
+			var piece = _p_track[player][3].instantiate() as Piece
+			add_child(piece)
+			_p_track[player][4].append(piece)
+			var start_spot = _get_start_area(player).get_available_spot()
+			piece.global_position = start_spot.sample_position()
+			start_spot.piece = piece
+			piece.disable_selection()
 
 
 ## Moves [param piece] to [param landing_spot]. Moves opponent piece to starting area if it gets knocked out.
@@ -52,7 +53,9 @@ func move(piece: Piece, landing_spot: Spot) -> void:
 
 ## Returns the list of all pieces of the given [param player].
 func get_pieces(player: int) -> Array[Piece]:
-	return _pieces.filter(func(piece: Piece): return piece.player == player)
+	var pieces: Array[Piece] = []
+	pieces.append_array(_p_track[player][4])
+	return pieces
 
 
 ## Returns the spot the [param piece] will land on with the given [param roll].
