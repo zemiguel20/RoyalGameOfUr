@@ -1,11 +1,7 @@
 class_name AIPlayerAdvanced
 extends AIPlayerBase
 
-## Dictionary with key: Move and value: float
-## When evaluating every move, the dictionary will reset and add the final scores to each .
-#var _move_scores : Dictionary
-
-## Note: This function is currently a sort of mockup/pseudocode for how it should be.
+# Note: This function will be the same for many of the AI, the only exception is the random ai.
 func _evaluate_moves(moves : Array[Move]) -> Piece:
 	var best_move = null
 	var best_move_score = 0		# Lowest score by default
@@ -13,9 +9,10 @@ func _evaluate_moves(moves : Array[Move]) -> Piece:
 	for move in moves:
 		var score = _evaluate_move(move)
 		if (score > best_move_score):
+			best_move_score = score
 			best_move = move
-	
-	return best_move
+			
+	return best_move.piece
 
 
 # Very temporary, or perhaps for a very medium AI

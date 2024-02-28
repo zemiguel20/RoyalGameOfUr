@@ -23,11 +23,12 @@ func roll():
 	_dice.start_roll()
 	
 	
+## Decides which piece to move, then make that piece move.
 func make_move(moves : Array[Move]):
 	var piece_to_move = _evaluate_moves(moves)
-	move_piece(piece_to_move)
+	_move_piece(piece_to_move)
 
 	
 ## Function to signal a piece to move, mocking the 'clicking' behaviour of the player.
-func move_piece(piece : Piece):
+func _move_piece(piece : Piece):
 	piece.on_ai_click()

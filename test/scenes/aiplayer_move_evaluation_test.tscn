@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://e5fhwdw682hq"]
+
+[ext_resource type="Script" path="res://test/scripts/ai/ai_player_advanced_evaluation_test.gd" id="1_ghxrv"]
+[ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="2_qljqm"]
+
+[node name="AiplayerMoveEvaluationTest" type="Node2D"]
+script = ExtResource("1_ghxrv")
+
+[node name="AIPlayerAdvanced" type="Node" parent="."]
+script = ExtResource("2_qljqm")
