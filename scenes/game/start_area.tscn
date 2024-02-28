@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bewh043hbu713"]
+
+[ext_resource type="Script" path="res://scripts/game/spot/piece_group.gd" id="1_apspf"]
+
+[node name="StartArea" type="Node3D"]
+script = ExtResource("1_apspf")
+_spawn_offset = 1.5
