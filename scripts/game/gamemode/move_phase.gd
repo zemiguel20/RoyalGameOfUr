@@ -3,6 +3,7 @@ extends Phase
 ## Rolling phase of the [Gamemode]. Implements behaviour for the piece move action.
 
 
+
 var _legal_pieces: Array[Piece]
 var _legal_moves: Array[Move]
 
