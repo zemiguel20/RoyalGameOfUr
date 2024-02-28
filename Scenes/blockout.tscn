@@ -1,7 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cikphqebc8wy7"]
+[gd_scene load_steps=18 format=3 uid="uid://cikphqebc8wy7"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_758yh"]
 size = Vector2(250, 500)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xukbs"]
+size = Vector3(120, 6, 50)
 
 [sub_resource type="BoxMesh" id="BoxMesh_h4rfc"]
 size = Vector3(5, 11, 5)
@@ -48,15 +51,22 @@ size = Vector3(40, 2, 40)
 [sub_resource type="BoxMesh" id="BoxMesh_vucxe"]
 size = Vector3(11.75, 8, 2.5)
 
+[sub_resource type="PrismMesh" id="PrismMesh_kc3l8"]
+size = Vector3(40, 6, 9)
+
 [node name="Palace" type="Node"]
 
 [node name="Gate" type="Node" parent="."]
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Gate"]
+[node name="Floor" type="CSGMesh3D" parent="Gate"]
 mesh = SubResource("PlaneMesh_758yh")
 
+[node name="Elevation" type="CSGMesh3D" parent="Gate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -21.1078)
+mesh = SubResource("BoxMesh_xukbs")
+
 [node name="GateTower_L" type="CSGMesh3D" parent="Gate"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 5.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 11.5511, 0)
 mesh = SubResource("BoxMesh_h4rfc")
 
 [node name="GateTower_L_Top" type="CSGMesh3D" parent="Gate/GateTower_L"]
@@ -64,7 +74,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 mesh = SubResource("BoxMesh_t8h4v")
 
 [node name="GateTower_R" type="CSGMesh3D" parent="Gate"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 11.5511, 0)
 mesh = SubResource("BoxMesh_h4rfc")
 
 [node name="GateTower_R_Top" type="CSGMesh3D" parent="Gate/GateTower_R"]
@@ -72,7 +82,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 mesh = SubResource("BoxMesh_t8h4v")
 
 [node name="Entrance" type="CSGMesh3D" parent="Gate"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.0511, 0)
 mesh = SubResource("BoxMesh_wvj2l")
 
 [node name="Subtraction_Cylinder" type="CSGMesh3D" parent="Gate/Entrance"]
@@ -106,23 +116,23 @@ height = 1.7
 material = SubResource("StandardMaterial3D_s4bni")
 
 [node name="LongWall_L" type="CSGMesh3D" parent="Gate"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.5, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.5, 11.0511, 0)
 mesh = SubResource("BoxMesh_oocno")
 
 [node name="LongWall_R" type="CSGMesh3D" parent="Gate"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 3.425, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 11.051, 0)
 mesh = SubResource("BoxMesh_oocno")
 
 [node name="Inside" type="Node" parent="."]
 
 [node name="Eunuch" type="CSGCylinder3D" parent="Inside"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1906, 0.85, -18.9154)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1906, 6.9011, -18.9154)
 radius = 0.3
 height = 1.7
 material = SubResource("StandardMaterial3D_s4bni")
 
 [node name="SideWall_L" type="CSGMesh3D" parent="Inside"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.335, 4, -20.7615)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.335, 10.0511, -20.7615)
 mesh = SubResource("BoxMesh_78v81")
 
 [node name="Opening" type="CSGMesh3D" parent="Inside/SideWall_L"]
@@ -136,11 +146,11 @@ operation = 2
 mesh = SubResource("BoxMesh_0dcse")
 
 [node name="SideWall_L2" type="CSGMesh3D" parent="Inside"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.0129, 4, -20.6121)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.0129, 10.0511, -20.6121)
 mesh = SubResource("BoxMesh_78v81")
 
 [node name="BackWall" type="CSGMesh3D" parent="Inside"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.02948, 4.06178, -37.5561)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.02948, 10.1129, -37.5561)
 mesh = SubResource("BoxMesh_i48aj")
 
 [node name="Ceiling" type="CSGMesh3D" parent="Inside"]
@@ -151,7 +161,7 @@ mesh = SubResource("BoxMesh_bftas")
 [node name="Room 29" type="Node" parent="Inside"]
 
 [node name="Entrance" type="CSGMesh3D" parent="Inside/Room 29"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -12.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.0511, -12.5)
 mesh = SubResource("BoxMesh_wvj2l")
 
 [node name="Subtraction_Cylinder" type="CSGMesh3D" parent="Inside/Room 29/Entrance"]
@@ -173,17 +183,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, -2.5, 0)
 mesh = SubResource("BoxMesh_xe443")
 
 [node name="InsideWall_L" type="CSGMesh3D" parent="Inside/Room 29"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.336, 4, -12.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.336, 10.0511, -12.5)
 mesh = SubResource("BoxMesh_vucxe")
 
 [node name="InsideWall_R" type="CSGMesh3D" parent="Inside/Room 29"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.336, 4, -12.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.336, 10.0511, -12.5)
 mesh = SubResource("BoxMesh_vucxe")
 
 [node name="Room 34" type="Node" parent="Inside"]
 
 [node name="Entrance" type="CSGMesh3D" parent="Inside/Room 34"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.0511, -25)
 mesh = SubResource("BoxMesh_wvj2l")
 
 [node name="Subtraction_Cylinder" type="CSGMesh3D" parent="Inside/Room 34/Entrance"]
@@ -205,9 +215,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, -2.5, 0)
 mesh = SubResource("BoxMesh_xe443")
 
 [node name="InsideWall_L" type="CSGMesh3D" parent="Inside/Room 34"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.336, 4, -25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.336, 10.0511, -25)
 mesh = SubResource("BoxMesh_vucxe")
 
 [node name="InsideWall_R" type="CSGMesh3D" parent="Inside/Room 34"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.336, 4, -25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.336, 10.0511, -25)
 mesh = SubResource("BoxMesh_vucxe")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.98694, 3.89071)
+mesh = SubResource("PrismMesh_kc3l8")
