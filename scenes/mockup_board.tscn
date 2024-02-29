@@ -77,15 +77,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
 
 [node name="Rosette1P2" parent="." instance=ExtResource("8_0yje8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+give_extra_roll = true
 
 [node name="Rosette1P1" parent="." instance=ExtResource("8_0yje8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+give_extra_roll = true
 
 [node name="RosetteM" parent="." instance=ExtResource("8_0yje8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="Rosette2P2" parent="." instance=ExtResource("8_0yje8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+give_extra_roll = true
 
 [node name="Rosette2P1" parent="." instance=ExtResource("8_0yje8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+give_extra_roll = true
