@@ -16,7 +16,13 @@ func _ready():
 ## Initializes the game state and context
 func start_game():
 	_choose_starting_player()
-	board.setup()
+	board.setup(7)
+	for piece in board.get_pieces(General.PlayerID.ONE):
+		piece.clicked.connect(move)
+		piece.disable_selection()
+	for piece in board.get_pieces(General.PlayerID.TWO):
+		piece.clicked.connect(move)
+		piece.disable_selection()
 	_phase = RollPhase.new(self)
 
 

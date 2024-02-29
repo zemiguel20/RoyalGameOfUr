@@ -32,7 +32,6 @@ func setup(num_pieces: int):
 			var start_spot = _get_start_area(player).get_available_spot()
 			piece.global_position = start_spot.sample_position()
 			start_spot.piece = piece
-			piece.disable_selection()
 
 
 ## Moves [param piece] to [param landing_spot]. Moves opponent piece to starting area if it gets knocked out.

@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk03upbyn04nu"]
+[gd_scene load_steps=8 format=3 uid="uid://dk03upbyn04nu"]
 
 [ext_resource type="Script" path="res://scripts/game/piece.gd" id="1_u7nn1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlg37"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lftn1"]
 
@@ -10,11 +12,7 @@ script/source = "extends Node
 
 @export var highlight_material : Material
 @export var mesh_to_highlight : GeometryInstance3D
-var starting_material : Material
-
-
-func _ready():
-	starting_material = mesh_to_highlight.material_override
+@export var starting_material : Material
 
 
 func highlight():
@@ -28,6 +26,8 @@ func dehighlight():
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enimc"]
 albedo_color = Color(0.231373, 1, 0.211765, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_63y40"]
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o4a7m"]
 height = 0.232235
 
@@ -37,12 +37,14 @@ material_changer = NodePath("MaterialChanger")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.00352, 0, 0, 0, 0.104571, 0, 0, 0, 1.00352, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_tlg37")
 mesh = SubResource("CylinderMesh_lftn1")
 
 [node name="MaterialChanger" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
 script = SubResource("GDScript_hob2t")
 highlight_material = SubResource("StandardMaterial3D_enimc")
 mesh_to_highlight = NodePath("../MeshInstance3D")
+starting_material = SubResource("StandardMaterial3D_63y40")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_o4a7m")

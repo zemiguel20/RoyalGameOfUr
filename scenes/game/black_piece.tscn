@@ -8,3 +8,6 @@ player = 1
 
 [node name="MeshInstance3D" parent="." index="0"]
 material_override = ExtResource("2_f1csa")
+
+[node name="MaterialChanger" parent="." index="1"]
+starting_material = ExtResource("2_f1csa")
