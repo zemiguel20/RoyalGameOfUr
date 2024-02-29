@@ -4,6 +4,8 @@ extends Node
 
 
 signal clicked
+signal die_stopped(value: int) # Emitted when a single die stops, with its value
+signal roll_finished(value: int) # Emitted when all dice finished, with final value
 
 @export_range(0, 8) var _num_of_dice: int = 4
 @export var _roll_shaking_enabled: bool = false
@@ -46,6 +48,7 @@ func roll() -> int:
 	while _die_finish_count < _num_of_dice:
 		await get_tree().create_timer(0.5).timeout
 	enable_selection()
+	roll_finished.emit(value)
 	return value
 
 
@@ -88,3 +91,5 @@ func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape
 func _on_die_finished_rolling(die_value: int):
 	value += die_value
 	_die_finish_count += 1
+	die_stopped.emit(die_value)
+	print("a")

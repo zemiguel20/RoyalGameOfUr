@@ -38,7 +38,9 @@ func move(piece: Piece):
 		_gamemode.end_game()
 		return
 	
-	if not landing_spot.give_extra_roll:
+	if landing_spot.give_extra_roll:
+		_gamemode.got_extra_roll.emit()
+	else:
 		_gamemode.switch_player()
 	
 	_gamemode.changeState(RollPhase.new(_gamemode))

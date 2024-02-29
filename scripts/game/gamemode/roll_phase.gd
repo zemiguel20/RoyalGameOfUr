@@ -19,5 +19,6 @@ func roll():
 	if value > 0:
 		_gamemode.changeState(MovePhase.new(_gamemode))
 	else:
+		_gamemode.rolled_zero.emit()
 		_gamemode.switch_player()
 		_gamemode.changeState(RollPhase.new(_gamemode))
