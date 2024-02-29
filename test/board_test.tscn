@@ -11,8 +11,16 @@
 script/source = "extends Node
 
 @onready var board = $Board as Board
+@onready var p1_start_zone = $Board/P1StartArea as PieceGroup
+@onready var p2_start_zone = $Board/P2StartArea as PieceGroup
+@onready var p1_end_zone = $Board/P1EndArea as PieceGroup
+@onready var p2_end_zone = $Board/P2EndArea as PieceGroup
+@onready var spot1 = $Board/Spot as Spot
+@onready var spot2 = $Board/Spot2 as Spot
+@onready var spot3 = $Board/Spot3 as Spot
+@onready var spot4 = $Board/Spot4 as Spot
 
-const SIZE = 5
+const SIZE = 2
 
 func _ready():
 	await _test_board_setup()
@@ -42,7 +50,8 @@ func _test_movement():
 	assert(current_spot.piece == piece)
 	# TEST Get landing spot
 	var landing_spot = board.get_landing_spot(piece, 2)
-	assert(landing_spot == $Board/Spot2)
+	assert(landing_spot == spot2)
+	assert(landing_spot.piece == null)
 	# TEST move
 	await board.move(piece, landing_spot)
 	assert(current_spot.piece == null)
@@ -56,10 +65,11 @@ func _test_movement():
 
 func _test_winner():
 	for piece in board.get_pieces(General.PlayerID.ONE):
-		var landing_spot = board.get_landing_spot(piece, 4)
+		var landing_spot = board.get_landing_spot(piece, 5)
+		assert(landing_spot.piece == null)
+		assert(p1_end_zone.get_all_spots().has(landing_spot))
 		await board.move(piece, landing_spot)
-		landing_spot = board.get_landing_spot(piece, 1)
-		await board.move(piece, landing_spot)
+		assert(p1_end_zone.get_all_pieces().has(piece))
 	
 	assert(board.is_winner(General.PlayerID.ONE))
 "

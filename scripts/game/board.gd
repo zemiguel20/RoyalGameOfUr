@@ -62,26 +62,32 @@ func get_pieces(player: int) -> Array[Piece]:
 func  get_landing_spot(piece: Piece, roll: int) -> Spot:
 	var start_area = _get_start_area(piece.player)
 	var end_area = _get_end_area(piece.player)
-	var track = _get_track(piece.player)
 	
-	# If in start area, return spot in track equal to roll
-	if start_area.get_all_pieces().has(piece):
-		if roll <= track.size():
-			return track[roll - 1]
+	# NOTE Get track with added start and end spot for simplicity since we will work with indexes
 	
-	# If in middle of the track, check which spot to move to
-	for spot in track:
-		if spot.piece == piece:
-			var index = track.find(spot)
-			var target_index = index + roll
-			if target_index < track.size():
-				return track[target_index]
-			elif target_index == track.size():
-				return end_area.get_available_spot()
-			else:
-				return null # Out of bounds, needs precise roll
-	# If in end area, return null as piece cannot move
-	return null
+	var track  = _get_track(piece.player).duplicate()
+	var current_spot = get_current_spot(piece)
+	
+	# If the current spot is either a start spot or an end spot, insert it in the track
+	# Otherwise insert just an available spot
+	if start_area.get_all_spots().has(current_spot):
+		track.insert(0, current_spot)
+	else:
+		var empty_spot = start_area.get_available_spot()
+		track.insert(0, empty_spot)
+	if end_area.get_all_spots().has(current_spot):
+		track.append(current_spot)
+	else:
+		var empty_spot = end_area.get_available_spot()
+		track.append(empty_spot)
+	
+	# Sample landing_spot from track using current index + roll
+	var current_index = track.find(current_spot)
+	var target_index = current_index + roll
+	if target_index < track.size():
+		return track[target_index]
+	else:
+		return null # Out of bounds
 
 
 ## Returns [code]true[/code] if the [param spot] is occupied by a piece of the given [param player].
@@ -104,6 +110,12 @@ func is_in_start_zone(piece: Piece) -> bool:
 	return _get_start_area(piece.player).get_all_pieces().has(piece)
 
 
+## Returns [code]true[/code] if the [param piece] is in the corresponding player's ending zone.
+## Otherwise return  [code]false[/code].
+func is_in_end_zone(piece: Piece) -> bool:
+	return _get_end_area(piece.player).get_all_pieces().has(piece)
+
+
 ## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
 func get_current_spot(piece: Piece) -> Spot:
 	for spot in _get_start_area(piece.player).get_all_spots():
@@ -120,9 +132,40 @@ func get_current_spot(piece: Piece) -> Spot:
 	
 	return null # If piece is not placed return null
 
+
 func _get_movement_path(piece: Piece, landing_spot: Spot) -> Array[Vector3]:
-	# TODO: implement
-	return [landing_spot.sample_position()]
+	# if going back to start zone, go directly
+	if _get_start_area(piece.player).get_all_spots().has(landing_spot):
+		return [landing_spot.sample_position()]
+	
+	# NOTE Get sequence of spots using slice. Slice start and end indexed are [inclusive, exclusive[ respectively.
+	
+	# Get track with appended end spot for simplicity since were working with indexes and slice.
+	# If landing spot is end zone, add it, else add a sampled empty spot
+	var temp_track = _get_track(piece.player).duplicate()
+	if _get_end_area(piece.player).get_all_spots().has(landing_spot):
+		temp_track.append(landing_spot)
+	else:
+		var empty_spot = _get_end_area(piece.player).get_available_spot()
+		temp_track.append(empty_spot)
+	
+	# For the start index, we want one index after the current spot, so use find index of current spot on track and add 1.
+	# If find returns -1, means piece is in start zone, so start index will be 0 (the first tile).
+	var current_spot = get_current_spot(piece)
+	var start_index = temp_track.find(current_spot) + 1
+	
+	# Find index of landing spot. Add 1 because slice is exclusive
+	var end_index = temp_track.find(landing_spot) + 1
+	
+	# Slice the track
+	var spot_path = temp_track.slice(start_index, end_index)
+	
+	# Transform into array of positions
+	var positions: Array[Vector3] =[]
+	for spot: Spot in spot_path:
+		positions.append(spot.sample_position())
+	
+	return positions
 
 
 func _get_start_area(player_id: int) -> PieceGroup:

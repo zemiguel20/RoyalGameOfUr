@@ -15,6 +15,7 @@ height = 0.232235
 
 [node name="Piece" type="StaticBody3D" node_paths=PackedStringArray("material_changer")]
 script = ExtResource("1_u7nn1")
+move_duration = 0.3
 material_changer = NodePath("MaterialChanger")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
