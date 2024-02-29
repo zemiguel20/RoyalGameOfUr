@@ -2,8 +2,12 @@ class_name AIPlayerBase
 extends Node
 ## General component that imitates player actions and decides their move through a specific algorithm. 
 
-var _gamemode : Gamemode
-var _dice : Dice
+
+var _gamemode: Gamemode
+var _board: Board
+var _dice: Dice
+var _player_id: General.PlayerID
+
 
 ## Virtual method that picks a move through an algorithm.
 ## Instead of the moves being a piece, we should have information about the move, so that it can be taking in with the evaluation.
@@ -12,10 +16,11 @@ func _evaluate_moves(moves : Array[Move]):
 
 
 # Note: It is more of an injection than a setup, so might rename
-func setup(gamemode : Gamemode):
+func setup(gamemode : Gamemode, player_id: General.PlayerID):
 	_gamemode = gamemode
+	_board = gamemode.board
 	_dice = gamemode.dice
-	
+	_player_id = player_id
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
 func roll():

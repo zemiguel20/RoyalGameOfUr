@@ -27,6 +27,7 @@ func start():
 		for piece in _legal_pieces:
 			piece.enable_selection()
 
+
 ## Disables highlighting of the movable pieces calculated in [method start] 
 func end():
 	_unlink_highlighting()
@@ -57,10 +58,11 @@ func _calculate_legal_moves():
 	_legal_moves = {}
 	var pieces = _gamemode.board.get_pieces(_gamemode.current_player)
 	for piece in pieces:
+		var current_spot = _gamemode.board.get_current_spot(piece)
 		var landing_spot = _gamemode.board.get_landing_spot(piece, _gamemode.dice.value)
 		if landing_spot != null and (not _has_player_piece(landing_spot) or not _is_protecting_opponent(landing_spot)):
 			_legal_pieces.append(piece)
-			var legal_move = Move.new(piece, landing_spot, landing_spot.is_rosette, _is_capturable(landing_spot))
+			var legal_move = Move.new(piece, current_spot, landing_spot, landing_spot.is_rosette, true, false)
 			_legal_moves.append(legal_move)
 
 

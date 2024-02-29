@@ -59,9 +59,71 @@ func get_pieces(player: int) -> Array[Piece]:
 	return pieces
 
 
+## Returns [code]true[/code] if the [param spot] is occupied by a piece of the given [param player].
+## Otherwise return  [code]false[/code].
+func is_occupied_by_player(spot: Spot, player: int) -> bool:
+	return spot.piece != null and spot.piece.player == player
+
+
+## Returns [code]true[/code] if the [param player] has all of its pieces in the end area.
+## Otherwise return  [code]false[/code].
+func is_winner(player: int) -> bool:
+	var finished_pieces = (_p_track[player][2] as PieceGroup).get_all_pieces()
+	var player_pieces = get_pieces(player)
+	return finished_pieces.size() == player_pieces.size()
+
+
+## Returns [code]true[/code] if the [param piece] is in the corresponding player's starting zone.
+## Otherwise return  [code]false[/code].
+func is_in_start_zone(piece: Piece) -> bool:
+	return _get_start_area(piece.player).get_all_pieces().has(piece)
+	
+	
+## Returns [code]true[/code] if the [param spot] is a spot in any of the end zones.
+## Otherwise return  [code]false[/code].
+func is_in_end_zone(spot: Spot) -> bool:
+	return (_p1_end_area.get_all_spots().has(spot) or
+		_p2_end_area.get_all_spots().has(spot))
+	
+	
+func is_player_exclusive(spot: Spot) -> bool:
+	return (_p1_track.has(spot) and not _p2_track.has(spot) or
+		not _p1_track.has(spot) and _p2_track.has(spot))
+		
+		
+## Used by AI, will refactor later.
+func is_capturable(spot: Spot, opponent_id: General.PlayerID) -> bool:
+	return is_occupied_by_player(spot, opponent_id) and not spot.is_rosette
+	
+	
+func get_spot(index: int, opponent: General.PlayerID):
+	return _get_track(opponent)[index]
+	
+	
+func get_spot_index(spot: Spot, player: General.PlayerID) -> int:
+	return _get_track(player).find(spot)
+	
+	
+## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
+func get_current_spot(piece: Piece) -> Spot:
+	for spot in _get_start_area(piece.player).get_all_spots():
+		if spot.piece == piece:
+			return spot
+	
+	for spot in _get_track(piece.player):
+		if spot.piece == piece:
+			return spot
+	
+	for spot in _get_end_area(piece.player).get_all_spots():
+		if spot.piece == piece:
+			return spot
+	
+	return null # If piece is not placed return null
+	
+
 ## Returns the spot the [param piece] will land on with the given [param roll].
 ## Returns [code]null[/code] if landing outside board bounds, that is, past the last spot of the track.
-func  get_landing_spot(piece: Piece, roll: int) -> Spot:
+func get_landing_spot(piece: Piece, roll: int) -> Spot:
 	var start_area = _get_start_area(piece.player)
 	var end_area = _get_end_area(piece.player)
 	
@@ -124,15 +186,6 @@ func get_current_spot(piece: Piece) -> Spot:
 		if spot.piece == piece:
 			return spot
 	
-	for spot in _get_track(piece.player):
-		if spot.piece == piece:
-			return spot
-	
-	for spot in _get_end_area(piece.player).get_all_spots():
-		if spot.piece == piece:
-			return spot
-	
-	return null # If piece is not placed return null
 
 
 func _get_movement_path(piece: Piece, landing_spot: Spot) -> Array[Vector3]:
