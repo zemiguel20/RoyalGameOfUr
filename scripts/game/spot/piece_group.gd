@@ -14,7 +14,7 @@ func setup(size: int) -> void:
 	for i in size:
 		_spots[i] = Spot.new()
 		add_child(_spots[i])
-		_spots[i].global_position = global_position + i * dir * _spawn_offset
+		_spots[i].position = i * dir * _spawn_offset
 
 
 func get_available_spot() -> Spot:
