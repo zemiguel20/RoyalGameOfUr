@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bewh043hbu713" path="res://scenes/game/start_area.tscn" id="4_buxrt"]
 [ext_resource type="PackedScene" uid="uid://ccnlb2yds0s8s" path="res://scenes/game/end_area.tscn" id="5_ex5db"]
 [ext_resource type="PackedScene" uid="uid://cyj2hsx8jciw1" path="res://scenes/game/tile.tscn" id="5_n7bh8"]
-[ext_resource type="Material" uid="uid://pyr8trc2qd4t" path="res://materials/rosette.tres" id="7_v3e8x"]
+[ext_resource type="PackedScene" uid="uid://cl2in1pyxem77" path="res://scenes/game/rosette_tile.tscn" id="8_0yje8"]
 
 [node name="Board" type="Node3D" node_paths=PackedStringArray("_p1_start_area", "_p1_end_area", "_p1_track", "_p2_start_area", "_p2_end_area", "_p2_track")]
 script = ExtResource("1_wmqj2")
@@ -40,24 +40,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 [node name="Tile3P2" parent="." instance=ExtResource("5_n7bh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="Rosette1P2" parent="." instance=ExtResource("5_n7bh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
-is_rosette = true
-give_extra_roll = true
-
-[node name="MeshInstance3D" parent="Rosette1P2" index="0"]
-material_override = ExtResource("7_v3e8x")
-
 [node name="Tile1M" parent="." instance=ExtResource("5_n7bh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
-
-[node name="Rosette1P1" parent="." instance=ExtResource("5_n7bh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
-is_rosette = true
-give_extra_roll = true
-
-[node name="MeshInstance3D" parent="Rosette1P1" index="0"]
-material_override = ExtResource("7_v3e8x")
 
 [node name="Tile3P1" parent="." instance=ExtResource("5_n7bh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
@@ -67,13 +51,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
 [node name="Tile1P1" parent="." instance=ExtResource("5_n7bh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
-
-[node name="RosetteM" parent="." instance=ExtResource("5_n7bh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-is_rosette = true
-
-[node name="MeshInstance3D" parent="RosetteM" index="0"]
-material_override = ExtResource("7_v3e8x")
 
 [node name="Tile3M" parent="." instance=ExtResource("5_n7bh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
@@ -95,27 +72,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 [node name="Tile8P1" parent="." instance=ExtResource("5_n7bh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
 
-[node name="Rosette2P1" parent="." instance=ExtResource("5_n7bh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
-is_rosette = true
-give_extra_roll = true
-
-[node name="MeshInstance3D" parent="Rosette2P1" index="0"]
-material_override = ExtResource("7_v3e8x")
-
-[node name="Rosette2P2" parent="." instance=ExtResource("5_n7bh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
-is_rosette = true
-give_extra_roll = true
-
-[node name="MeshInstance3D" parent="Rosette2P2" index="0"]
-material_override = ExtResource("7_v3e8x")
-
 [node name="Tile8P2" parent="." instance=ExtResource("5_n7bh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
 
-[editable path="Rosette1P2"]
-[editable path="Rosette1P1"]
-[editable path="RosetteM"]
-[editable path="Rosette2P1"]
-[editable path="Rosette2P2"]
+[node name="Rosette1P2" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+
+[node name="Rosette1P1" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="RosetteM" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Rosette2P2" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+
+[node name="Rosette2P1" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)

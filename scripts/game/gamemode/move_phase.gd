@@ -3,7 +3,7 @@ extends Phase
 ## Rolling phase of the [Gamemode]. Implements behaviour for the piece move action.
 
 
-var _legal_moves: Array[Piece]
+var _legal_moves: Dictionary # {Piece: landing Spot}
 
 
 ## Checks the possible moves for the current player and highlights those pieces.
@@ -16,19 +16,20 @@ func start():
 		_gamemode.changeState(RollPhase.new(_gamemode))
 		return
 	
-	for piece in _legal_moves:
-		piece.enable_selection()
+	_link_highlighting()
+	_enable_piece_selection()
 
 
 ## Disables highlighting of the movable pieces calculated in [method start] 
 func end():
-	for piece in _legal_moves:
-		piece.disable_selection()
+	_unlink_highlighting()
 
 
 ## Moves the [param piece]. If player gets an extra roll, then move to the [RollPhase] again. If player wins, then end the game.
 ## Otherwise, changes to the next player's [RollPhase].
 func move(piece: Piece):
+	_disable_piece_selection()
+	
 	var landing_spot = _gamemode.board.get_landing_spot(piece, _gamemode.dice.value)
 	if landing_spot != null:
 		await _gamemode.board.move(piece, landing_spot)
@@ -44,12 +45,12 @@ func move(piece: Piece):
 
 
 func _calculate_legal_moves():
-	_legal_moves = []
+	_legal_moves = {}
 	var pieces = _gamemode.board.get_pieces(_gamemode.current_player)
 	for piece in pieces:
 		var landing_spot = _gamemode.board.get_landing_spot(piece, _gamemode.dice.value)
 		if landing_spot != null and not _has_player_piece(landing_spot) and not _is_protecting_opponent(landing_spot):
-			_legal_moves.append(piece)
+			_legal_moves[piece] = landing_spot
 
 
 func _has_player_piece(spot: Spot) -> bool:
@@ -59,3 +60,27 @@ func _has_player_piece(spot: Spot) -> bool:
 func _is_protecting_opponent(spot: Spot) -> bool:
 	var other_player_id = General.get_other_player_id(_gamemode.current_player)
 	return _gamemode.board.is_occupied_by_player(spot, other_player_id) and spot.is_rosette
+
+
+func _enable_piece_selection() -> void:
+	for piece in _legal_moves:
+		piece.enable_selection()
+
+
+func _disable_piece_selection() -> void:
+	for piece: Piece in _legal_moves:
+		piece.disable_selection()
+
+
+func _link_highlighting() -> void:
+	for piece in _legal_moves:
+		var spot = _legal_moves[piece] as Spot
+		piece.mouse_entered.connect(spot.highlight)
+		piece.mouse_exited.connect(spot.dehighlight)
+
+
+func _unlink_highlighting() -> void:
+	for piece in _legal_moves:
+		var spot = _legal_moves[piece] as Spot
+		piece.mouse_entered.disconnect(spot.highlight)
+		piece.mouse_exited.disconnect(spot.dehighlight)
