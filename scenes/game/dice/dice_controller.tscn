@@ -28,6 +28,9 @@ size = Vector3(6, 6, 6)
 script = ExtResource("1_ka5gv")
 _die_scene = ExtResource("2_apa1r")
 
+[node name="Node3D_ThrowingPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2.64357)
+
 [node name="RollSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_hlajg")
 
@@ -37,7 +40,7 @@ stream = ExtResource("3_wfoj5")
 [node name="DiceBorders" type="Node3D" parent="."]
 
 [node name="Wall" type="StaticBody3D" parent="DiceBorders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97928, 3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.979, 5)
 input_ray_pickable = false
 physics_material_override = ExtResource("5_hdthg")
 
@@ -49,7 +52,7 @@ visible = false
 mesh = SubResource("BoxMesh_hlaw2")
 
 [node name="Wall2" type="StaticBody3D" parent="DiceBorders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97928, -3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.979, -5)
 input_ray_pickable = false
 physics_material_override = ExtResource("5_hdthg")
 
@@ -61,7 +64,7 @@ visible = false
 mesh = SubResource("BoxMesh_hlaw2")
 
 [node name="Wall3" type="StaticBody3D" parent="DiceBorders"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.5, 2.97928, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 2.979, 0)
 input_ray_pickable = false
 physics_material_override = ExtResource("5_hdthg")
 
@@ -73,7 +76,7 @@ visible = false
 mesh = SubResource("BoxMesh_hlaw2")
 
 [node name="Wall4" type="StaticBody3D" parent="DiceBorders"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.5, 2.97928, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 2.979, 0)
 input_ray_pickable = false
 physics_material_override = ExtResource("5_hdthg")
 
@@ -85,6 +88,8 @@ visible = false
 mesh = SubResource("BoxMesh_hlaw2")
 
 [node name="ClickHitbox" type="Area3D" parent="."]
+transform = Transform3D(1.49869, 0, 0, 0, 1, 0, 0, 0, 1.49869, 0, 0, 0)
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ClickHitbox"]
 shape = SubResource("BoxShape3D_0n13x")

@@ -9,8 +9,10 @@ signal roll_finished(value: int) # Emitted when all dice finished, with final va
 
 @export_range(0, 8) var _num_of_dice: int = 4
 @export var _roll_shaking_enabled: bool = false
-@export var _use_hitbox_instead_of_dice_colliders : bool
 @export var _die_scene: PackedScene
+@export var _spawning_range := Vector2(-3, 3)
+@export var _use_hitbox_instead_of_dice_colliders: bool
+
 
 var value: int = 0 ## Current rolled value.
 
@@ -20,7 +22,8 @@ var _die_finish_count = 0
 
 @onready var _roll_sfx: AudioStreamPlayer = $RollSFX
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
-@onready var _click_hitbox : Area3D = $ClickHitbox
+@onready var _throwing_position: Node3D = $Node3D_ThrowingPosition
+@onready var _click_hitbox: Area3D = $ClickHitbox
 
 
 func _ready() -> void:
@@ -29,22 +32,18 @@ func _ready() -> void:
 
 ## Enables selection and highlight effects
 func enable_selection() -> void:
-	if _use_hitbox_instead_of_dice_colliders:
-		_click_hitbox.input_ray_pickable = true
-	else:
-		for die in _dice:
-			die.input_ray_pickable = true
-	# TODO highlight effects
-
+	_click_hitbox.input_ray_pickable = _use_hitbox_instead_of_dice_colliders
+	for die in _dice:
+		die.highlight()
+		die.input_ray_pickable = true
 
 ## Disables selection and highlight effects
 func disable_selection() -> void:
-	if _use_hitbox_instead_of_dice_colliders:
-		_click_hitbox.input_ray_pickable = false
-	else:
-		for die in _dice:
-			die.input_ray_pickable = false
-	# TODO highlight effects
+	_click_hitbox.input_ray_pickable = false
+	for die in _dice:
+		die.dehighlight()
+		die.input_ray_pickable = false
+
 
 ## Plays the dice rolling animation and updates the value. Returns the rolled value.
 func roll() -> int:
@@ -65,16 +64,18 @@ func _initialize_dice() -> void:
 	for _i in _num_of_dice:
 		var instance = _die_scene.instantiate() as Die
 		add_child(instance)
+		instance.setup(_throwing_position.global_position)
 		_dice.append(instance)
 		instance.roll_finished.connect(_on_die_finished_rolling)
 		# TODO: Make this editable as well, but this should be handled by a Placer script.
 		# This script will then also make sure that the dice do not overlapped.
-		var locationX = randf_range(-2.5, 2.5)
-		var locationZ = randf_range(-2.5, 2.5)
+		var locationX = randf_range(_spawning_range.x, _spawning_range.y)
+		var locationZ = randf_range(_spawning_range.x, _spawning_range.y)
 		instance.global_position = self.global_position + Vector3(locationX, 0, locationZ)
 	
 	if (_use_hitbox_instead_of_dice_colliders):
 		_click_hitbox.input_event.connect(_on_die_input_event)
+		_click_hitbox.input_ray_pickable = true
 	else:
 		for die in _dice:
 			die.input_event.connect(_on_die_input_event)
