@@ -54,17 +54,15 @@ func roll() -> void:
 	global_position = _throwing_position + random_offset
 	
 	# Give the dice a random rotation (Basis) when they exit the 'hand'
-	var random_rotation_x = randf_range(0, 2 * PI)
-	var random_rotation_y = randf_range(0, 2 * PI)
-	var random_rotation_z = randf_range(0, 2 * PI)
+	var random_rotation_x = randf_range(-180, 180)
+	var random_rotation_y = randf_range(-180, 180)
+	var random_rotation_z = randf_range(-180, 180)
 	basis = Basis.from_euler(Vector3(random_rotation_x, random_rotation_y, random_rotation_z))	
 	
 	# Apply force in a random direction
 	var random_direction_x = randf_range(throwing_force_direction_range_x.x, throwing_force_direction_range_x.y)
 	var random_direction_z = randf_range(throwing_force_direction_range_z.x, throwing_force_direction_range_z.y)
 	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
-	print("Throw_X", throw_direction.x)
-	print("Throw_Z", throw_direction.z)
 	var throw_force = throw_direction * throwing_force_magnitude
 	apply_impulse(throw_force)
 	#apply_torque_impulse(throw_direction * throwing_angular_velocity)
