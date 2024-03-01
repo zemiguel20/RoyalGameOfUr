@@ -28,6 +28,7 @@ var _die_finish_count = 0
 
 func _ready() -> void:
 	_initialize_dice()
+	disable_selection()
 
 
 ## Enables selection and highlight effects
@@ -36,6 +37,7 @@ func enable_selection() -> void:
 	for die in _dice:
 		die.highlight()
 		die.input_ray_pickable = true
+		
 
 ## Disables selection and highlight effects
 func disable_selection() -> void:
@@ -93,6 +95,7 @@ func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape
 	
 	if _is_shaking and event is InputEventMouseButton and event.is_released():
 		_is_shaking = false
+		_shake_sfx.stop()
 		for die in _dice:
 			die.visible = true
 		clicked.emit()
@@ -102,4 +105,3 @@ func _on_die_finished_rolling(die_value: int):
 	value += die_value
 	_die_finish_count += 1
 	die_stopped.emit(die_value)
-	print("Die stopped: ", die_value)

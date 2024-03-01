@@ -9,11 +9,11 @@ signal roll_finished(value: int)
 ## Angular velocity applied to this die when starting a roll.
 @export var throwing_angular_velocity : float = 1.0
 
-## Not sure how to name this variable yet...
+## Not sure if this is the best name for this variable.
 ## Makes sure that when throwing the dice from a hand, the dice spawn in apart from each other.
 ## The dice have a random offset from eachother equal to:
-## Vector3(randf_range(-temp_random_offset_on_throw, temp_random_offset_on_throw), 0, randf_range(-temp_random_offset_on_throw, temp_random_offset_on_throw))
-@export var temp_random_offset_on_throw = 1.0
+## [code] Vector3(randf_range(-_random_dice_offset, _random_dice_offset), 0, randf_range(-_random_dice_offset, _random_dice_offset)) [/code]
+@export var _random_dice_offset = 1.0
 
 @export_subgroup("Throwing Direction")
 ## X is min, Y is max
@@ -48,8 +48,8 @@ func dehighlight() -> void:
 
 func roll() -> void:
 	# Position the dice as if they just came out of a 'hand'
-	var random_x = randf_range(-temp_random_offset_on_throw, temp_random_offset_on_throw)
-	var random_z = randf_range(-temp_random_offset_on_throw, temp_random_offset_on_throw)
+	var random_x = randf_range(-_random_dice_offset, _random_dice_offset)
+	var random_z = randf_range(-_random_dice_offset, _random_dice_offset)
 	var random_offset = Vector3(random_x, 0, random_z)
 	global_position = _throwing_position + random_offset
 	
@@ -80,14 +80,10 @@ func roll() -> void:
 		
 		
 func _on_timer_timeout():
-	print("Timer!")
 	_on_movement_stopped()
 		
 		
 func _on_movement_stopped():
-	print("is_rolling: ", _is_rolling)
-	print("sleeping: ", sleeping)
-	
 	#TODO: Take another look!
 	
 	# Prevents 
@@ -99,9 +95,6 @@ func _on_movement_stopped():
 	
 	_rolling_timer.timeout.disconnect(_on_timer_timeout)
 	
-	print("Result")
-	
-	
 	# Retrieve roll value
 	var roll_value = -1
 	for raycast in _raycast_list:
@@ -111,7 +104,6 @@ func _on_movement_stopped():
 	
 	# If stuck, roll again
 	if roll_value == -1:
-		print("Value ", roll_value)
 		roll()
 	else:
 		_is_rolling = false
