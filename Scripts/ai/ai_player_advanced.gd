@@ -89,6 +89,9 @@ func _calculate_central_rosette_modifier(move: Move):
 	
 	
 func _calculate_spot_danger(spot: Spot) -> int:
+	# TODO give score of 0 when landing_spot is 100% safe, so we don't do the whole check. 
+	
+	
 	var index = _board.get_spot_index(spot)
 	var total_capture_chance
 	

@@ -13,6 +13,7 @@ signal game_finished
 @export_range(0, 10) var num_pieces_per_player: int = 7
 ## This value is optional, when not assigned there is hotseat.
 @export var ai_player: AIPlayerBase
+
 var current_player: int
 var _phase: Phase = Phase.new(self)
 var _has_ai_opponent: bool
@@ -35,7 +36,7 @@ func start_game():
 
 	_has_ai_opponent = ai_player != null
 	if (_has_ai_opponent):
-		ai_player.setup(self)
+		ai_player.setup(self, General.PlayerID.TWO)
 
 	changeState(RollPhase.new(self))
 
