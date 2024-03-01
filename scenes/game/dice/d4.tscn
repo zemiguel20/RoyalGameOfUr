@@ -11,14 +11,13 @@ points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.
 
 [node name="D4" type="RigidBody3D"]
 mass = 2.0
-gravity_scale = 0.01
+gravity_scale = 3.0
 script = ExtResource("1_spk2b")
 throwing_force_magnitude = 12.0
 throwing_angular_velocity = 4.0
-temp_random_offset_on_throw = 2.0
 throwing_force_direction_range_x = Vector2(0, -1)
 throwing_force_direction_range_z = Vector2(-0.5, 0.5)
-_max_roll_duration = 1.0
+_max_roll_duration = 3.5
 
 [node name="test_die_d4" parent="." instance=ExtResource("1_y0dub")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48822, 0)
