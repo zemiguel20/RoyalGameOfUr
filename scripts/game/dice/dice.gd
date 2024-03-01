@@ -17,6 +17,7 @@ var value: int = 0 ## Current rolled value.
 var _dice : Array[Die]
 var _is_shaking: bool = false
 var _die_finish_count = 0
+
 @onready var _roll_sfx: AudioStreamPlayer = $RollSFX
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
 @onready var _click_hitbox : Area3D = $ClickHitbox
@@ -28,13 +29,21 @@ func _ready() -> void:
 
 ## Enables selection and highlight effects
 func enable_selection() -> void:
-	_click_hitbox.input_ray_pickable = true
+	if _use_hitbox_instead_of_dice_colliders:
+		_click_hitbox.input_ray_pickable = true
+	else:
+		for die in _dice:
+			die.input_ray_pickable = true
 	# TODO highlight effects
 
 
 ## Disables selection and highlight effects
 func disable_selection() -> void:
-	_click_hitbox.input_ray_pickable = false
+	if _use_hitbox_instead_of_dice_colliders:
+		_click_hitbox.input_ray_pickable = false
+	else:
+		for die in _dice:
+			die.input_ray_pickable = false
 	# TODO highlight effects
 
 ## Plays the dice rolling animation and updates the value. Returns the rolled value.
@@ -62,7 +71,7 @@ func _initialize_dice() -> void:
 		# This script will then also make sure that the dice do not overlapped.
 		var locationX = randf_range(-2.5, 2.5)
 		var locationZ = randf_range(-2.5, 2.5)
-		instance.global_position = Vector3(locationX, 0, locationZ)
+		instance.global_position = self.global_position + Vector3(locationX, 0, locationZ)
 	
 	if (_use_hitbox_instead_of_dice_colliders):
 		_click_hitbox.input_event.connect(_on_die_input_event)
@@ -84,7 +93,7 @@ func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape
 	if _is_shaking and event is InputEventMouseButton and event.is_released():
 		_is_shaking = false
 		for die in _dice:
-				die.visible = true
+			die.visible = true
 		clicked.emit()
 
 
