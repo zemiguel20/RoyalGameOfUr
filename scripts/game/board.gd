@@ -3,11 +3,13 @@ extends Node
 ## Manages the state of the board. It stores in which spot the pieces of each player are.
 ## It allows queries to the state of the board, and also moves the pieces.
 
+@export_subgroup("Player 1 Data")
 @export var _p1_piece: PackedScene
-@export var _p2_piece: PackedScene
 @export var _p1_start_area: PieceGroup
 @export var _p1_end_area: PieceGroup
 @export var _p1_track: Array[Spot]
+@export_subgroup("Player 2 Data")
+@export var _p2_piece: PackedScene
 @export var _p2_start_area: PieceGroup
 @export var _p2_end_area: PieceGroup
 @export var _p2_track: Array[Spot]

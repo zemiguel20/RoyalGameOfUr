@@ -11,10 +11,10 @@
 [node name="Board" type="Node3D" node_paths=PackedStringArray("_p1_start_area", "_p1_end_area", "_p1_track", "_p2_start_area", "_p2_end_area", "_p2_track")]
 script = ExtResource("1_wmqj2")
 _p1_piece = ExtResource("2_jkmov")
-_p2_piece = ExtResource("3_toiyu")
 _p1_start_area = NodePath("StartAreaP1")
 _p1_end_area = NodePath("EndAreaP1")
 _p1_track = [NodePath("Tile1P1"), NodePath("Tile2P1"), NodePath("Tile3P1"), NodePath("Rosette1P1"), NodePath("Tile1M"), NodePath("Tile2M"), NodePath("Tile3M"), NodePath("RosetteM"), NodePath("Tile4M"), NodePath("Tile5M"), NodePath("Tile6M"), NodePath("Tile7M"), NodePath("Tile8P1"), NodePath("Rosette2P1")]
+_p2_piece = ExtResource("3_toiyu")
 _p2_start_area = NodePath("StartAreaP2")
 _p2_end_area = NodePath("EndAreaP2")
 _p2_track = [NodePath("Tile1P2"), NodePath("Tile2P2"), NodePath("Tile3P2"), NodePath("Rosette1P2"), NodePath("Tile1M"), NodePath("Tile2M"), NodePath("Tile3M"), NodePath("RosetteM"), NodePath("Tile4M"), NodePath("Tile5M"), NodePath("Tile6M"), NodePath("Tile7M"), NodePath("Tile8P2"), NodePath("Rosette2P2")]
