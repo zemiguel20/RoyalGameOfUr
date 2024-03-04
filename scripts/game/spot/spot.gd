@@ -3,7 +3,7 @@ extends Node3D
 ## Base class for board spots
 
 
-@export var is_rosette: bool = false
+@export var is_safe: bool = false
 @export var give_extra_roll: bool = false
 @export var _highlighter: MaterialHighlighter
 var piece: Piece = null

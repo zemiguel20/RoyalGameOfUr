@@ -85,6 +85,7 @@ give_extra_roll = true
 
 [node name="RosetteM" parent="." instance=ExtResource("8_0yje8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+is_safe = true
 
 [node name="Rosette2P2" parent="." instance=ExtResource("8_0yje8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)

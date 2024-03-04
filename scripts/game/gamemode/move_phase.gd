@@ -61,7 +61,7 @@ func _has_player_piece(spot: Spot) -> bool:
 
 func _is_protecting_opponent(spot: Spot) -> bool:
 	var other_player_id = General.get_other_player_id(_gamemode.current_player)
-	return _gamemode.board.is_occupied_by_player(spot, other_player_id) and spot.is_rosette
+	return _gamemode.board.is_occupied_by_player(spot, other_player_id) and spot.is_safe
 
 
 func _enable_piece_selection() -> void:

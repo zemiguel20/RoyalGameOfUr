@@ -120,7 +120,7 @@ mesh = SubResource("PlaneMesh_eqcx1")
 [node name="Spot2" type="Node3D" parent="Board"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.06656, 0, 0)
 script = ExtResource("3_weinb")
-is_rosette = true
+is_safe = true
 give_extra_roll = true
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Board/Spot2"]
