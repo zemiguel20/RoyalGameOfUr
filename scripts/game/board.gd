@@ -103,9 +103,19 @@ func get_spot(index: int, opponent: General.PlayerID):
 func get_spot_index(spot: Spot, player: General.PlayerID) -> int:
 	return _get_track(player).find(spot)
 	
-# TODO: Implement function
+	
 func get_num_pieces_past_spot(spot: Spot, player: General.PlayerID) -> int:
-	return 5
+	# Num of pieces still at the end
+	var spot_index = get_spot_index(spot, player)
+	
+	var num_passed_pieces = 0
+	## TODO: Player 1 pieces
+	for piece: Piece in _pieces:
+		if (is_in_end_zone(get_current_spot(piece)) or
+			get_spot_index(get_current_spot(piece), player) > spot_index):
+			num_passed_pieces += 1
+	
+	return num_passed_pieces
 	
 	
 ## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
