@@ -8,7 +8,3 @@ script = ExtResource("1_ghxrv")
 
 [node name="AIPlayerAdvanced" type="Node" parent="."]
 script = ExtResource("2_qljqm")
-capture_base_score = null
-grants_roll_base_score = null
-end_move_base_score = null
-regular_base_score = null
