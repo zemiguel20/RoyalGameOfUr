@@ -10,10 +10,10 @@ signal roll_finished(value: int) # Emitted when all dice finished, with final va
 @export_range(0, 8) var _num_of_dice: int = 4
 @export var _roll_shaking_enabled: bool = false
 @export var _use_hitbox_instead_of_dice_colliders : bool
+@export var _die_scene: PackedScene
 
 var value: int = 0 ## Current rolled value.
 
-var _die_scene: PackedScene = preload("res://scenes/game/dice/d4.tscn")
 var _dice : Array[Die]
 var _is_shaking: bool = false
 var _die_finish_count = 0
