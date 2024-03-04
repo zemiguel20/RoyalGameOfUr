@@ -36,6 +36,7 @@ func setup(_position: Vector3):
 	_rolling_timer.wait_time = _max_roll_duration
 	_rolling_timer.start()
 
+
 func highlight() -> void:
 	if _highlighter != null:
 		_highlighter.highlight()
@@ -47,11 +48,14 @@ func dehighlight() -> void:
 		
 
 func roll() -> void:
+	randomize()
+	
 	# Position the dice as if they just came out of a 'hand'
 	var random_x = randf_range(-_random_dice_offset, _random_dice_offset)
 	var random_z = randf_range(-_random_dice_offset, _random_dice_offset)
 	var random_offset = Vector3(random_x, 0, random_z)
-	global_position = _throwing_position + random_offset
+	self.global_position = _throwing_position + random_offset
+	print("Throwing Point: ", global_position)
 	
 	# Give the dice a random rotation (Basis) when they exit the 'hand'
 	var random_rotation_x = randf_range(-180, 180)
@@ -65,8 +69,12 @@ func roll() -> void:
 	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
 	var throw_force = throw_direction * throwing_force_magnitude
 	apply_impulse(throw_force)
-	#apply_torque_impulse(throw_direction * throwing_angular_velocity)
+	apply_torque_impulse(throw_direction * throwing_angular_velocity)
 	
+	# Wait a short while before setting _is_rolling to true.
+	# Immediately setting will trigger _on_movement_stopped with sleeping = false,
+	# but since we set _is_rolling the same frame, the function will not return.
+	await get_tree().create_timer(0.1).timeout
 	_is_rolling = true
 	
 	# A timer specifying a maximum rolling duration.
@@ -81,16 +89,11 @@ func _on_timer_timeout():
 	_on_movement_stopped()
 		
 		
+# Triggers when the sleeping state of the rigidbody is changed
 func _on_movement_stopped():
-	#TODO: Take another look!
-	
-	# Prevents 
 	if (not _is_rolling):
 		return
-		
-	if (not _is_rolling and not sleeping):
-		return
-	
+
 	_rolling_timer.timeout.disconnect(_on_timer_timeout)
 	
 	# Retrieve roll value

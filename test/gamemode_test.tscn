@@ -9,6 +9,7 @@ script/source = "extends Node
 
 var started: bool = false
 
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_SPACE and not started:
 		started = true

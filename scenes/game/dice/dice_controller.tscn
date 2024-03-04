@@ -27,7 +27,7 @@ size = Vector3(6, 6, 6)
 script = ExtResource("1_ka5gv")
 
 [node name="Node3D_ThrowingPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2.64357)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2.644)
 
 [node name="RollSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_hlajg")
@@ -86,7 +86,7 @@ visible = false
 mesh = SubResource("BoxMesh_hlaw2")
 
 [node name="ClickHitbox" type="Area3D" parent="."]
-transform = Transform3D(1.49869, 0, 0, 0, 1, 0, 0, 0, 1.49869, 0, 0, 0)
+transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0, 0)
 input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ClickHitbox"]
