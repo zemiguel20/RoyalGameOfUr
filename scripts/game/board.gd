@@ -103,6 +103,10 @@ func get_spot(index: int, opponent: General.PlayerID):
 func get_spot_index(spot: Spot, player: General.PlayerID) -> int:
 	return _get_track(player).find(spot)
 	
+# TODO: Implement function
+func get_num_pieces_past_spot(spot: Spot, player: General.PlayerID) -> int:
+	return 5
+	
 	
 ## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
 func get_current_spot(piece: Piece) -> Spot:

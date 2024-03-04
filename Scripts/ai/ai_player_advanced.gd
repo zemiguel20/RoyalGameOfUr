@@ -57,6 +57,7 @@ func _calculate_base_score(move: Move):
 	else:
 		return regular_base_score
 
+
 func _calculate_safety_modifier(move: Move):
 	if (move.grants_extra_roll):
 		return 0
@@ -69,7 +70,7 @@ func _calculate_safety_modifier(move: Move):
 	
 	
 func _calculate_progress_modifier(move: Move):
-	var current_tile_index = _board.get_spot_index(move.old_spot)
+	var current_tile_index = _board.get_spot_index(move.old_spot, _player_id)
 	var track_count = _board.get_track_count()
 	var progression = current_tile_index/track_count	# Value between 0 and 1
 	
@@ -83,19 +84,29 @@ func _calculate_central_rosette_modifier(move: Move):
 	if (not is_central_rosette):
 		return 0
 		
+	# FIXME TODO
+	var opponent_id = General.get_other_player_id(_player_id)
+	var num_of_passed_pieces = _board.get_num_pieces_past_spot(move.new_spot, opponent_id)
+	# TODO: Replace with num_of_pieces in gamemode/gamerules.
+	var num_of_total_pieces = 7
+	
 	# I made the assumption that occupying the central rosettes is better, the more opponent pieces are still at the start.
-	var passed_pieces_rate = (num_of_passed_pieces / num_of_total_pieces) 
-	return central_rosette_score_weight *  passed_pieces_rate
+	var score = 1
+	if (num_of_passed_pieces != 0):	
+		var passed_pieces_rate = (num_of_passed_pieces / num_of_total_pieces)	# Value between 0 and 1
+		score = 1 - passed_pieces_rate											# Value between 0 and 1
+	return central_rosette_score_weight * score
 	
 	
 func _calculate_spot_danger(spot: Spot) -> int:
-	# TODO give score of 0 when landing_spot is 100% safe, so we don't do the whole check. 
+	# Give score of 0 when landing_spot is 100% safe. 
+	if (spot.is_rosette || _board.is_player_exclusive(spot)):
+		return 0
 	
-	
-	var index = _board.get_spot_index(spot)
+	var index = _board.get_spot_index(spot, _player_id)
 	var total_capture_chance
 	
-	# Check the 4 tiles before for opponent pieces
+	# Check the 4 tiles before this spot for opponent pieces
 	for _i in range(1, 5):
 		var temp_spot = _board.get_spot(index - _i, _player_id)
 		var contains_opponent = _board.is_occupied_by_player(temp_spot, _player_id) 
