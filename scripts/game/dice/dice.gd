@@ -7,6 +7,7 @@ signal clicked
 signal die_stopped(value: int) # Emitted when a single die stops, with its value
 signal roll_finished(value: int) # Emitted when all dice finished, with final value
 
+
 @export_range(0, 8) var _num_of_dice: int = 4
 @export var _roll_shaking_enabled: bool = false
 @export var _die_scene: PackedScene
@@ -14,11 +15,14 @@ signal roll_finished(value: int) # Emitted when all dice finished, with final va
 @export var _use_hitbox_instead_of_dice_colliders: bool
 
 
-var value: int = 0 ## Current rolled value.
+
+## Current rolled value.
+var value: int = 0 
 
 var _dice : Array[Die]
 var _is_shaking: bool = false
 var _die_finish_count = 0
+
 
 @onready var _roll_sfx: AudioStreamPlayer = $RollSFX
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
@@ -29,6 +33,17 @@ var _die_finish_count = 0
 func _ready() -> void:
 	_initialize_dice()
 	disable_selection()
+	
+	
+func _input(event: InputEvent) -> void:
+	# This function should not be in _on_die_input_event, 
+	# since releasing the mouse can be done outside of the click hitboxes.
+	if _is_shaking and event is InputEventMouseButton and event.is_released():
+		_is_shaking = false
+		_shake_sfx.stop()
+		for die in _dice:
+			die.visible = true
+		clicked.emit()
 
 
 ## Enables selection and highlight effects
@@ -92,13 +107,6 @@ func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape
 			_shake_sfx.play()
 		else:
 			clicked.emit()
-	
-	if _is_shaking and event is InputEventMouseButton and event.is_released():
-		_is_shaking = false
-		_shake_sfx.stop()
-		for die in _dice:
-			die.visible = true
-		clicked.emit()
 
 
 func _on_die_finished_rolling(die_value: int):
