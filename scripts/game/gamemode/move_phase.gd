@@ -62,7 +62,7 @@ func _calculate_legal_moves():
 		var landing_spot = _gamemode.board.get_landing_spot(piece, _gamemode.dice.value)
 		if landing_spot != null and (not _has_player_piece(landing_spot) or not _is_protecting_opponent(landing_spot)):
 			_legal_pieces.append(piece)
-			var legal_move = Move.new(piece, current_spot, landing_spot, landing_spot.is_rosette, true, false)
+			var legal_move = Move.new(piece, current_spot, landing_spot)
 			_legal_moves.append(legal_move)
 
 

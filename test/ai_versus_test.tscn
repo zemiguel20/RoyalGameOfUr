@@ -121,12 +121,6 @@ material_override = ExtResource("7_ifj0c")
 [node name="AIPlayerAdvanced" type="Node" parent="."]
 script = ExtResource("8_bgcgg")
 capture_base_score = 0.5
-grants_roll_base_score = null
-end_move_base_score = null
-regular_base_score = null
-safety_score_multiplier = null
-piece_progress_score_multiplier = null
-central_rosette_score_multiplier = null
 
 [node name="Environment" type="Node3D" parent="."]
 

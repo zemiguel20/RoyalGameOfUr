@@ -12,6 +12,3 @@ capture_base_score = null
 grants_roll_base_score = null
 end_move_base_score = null
 regular_base_score = null
-safety_score_multiplier = null
-piece_progress_score_multiplier = null
-central_rosette_score_multiplier = null

@@ -16,13 +16,13 @@ func test_move_1():
 	var piece2 = Piece.new()
 	var piece3 = Piece.new()
 	
-	var move1 = Move.new(piece1, null, true, true)
+	var move1 = Move.new(piece1, null, true)
 	moves.append(move1)
 	
-	var move2 = Move.new(piece2, null, false, false)
+	var move2 = Move.new(piece2, null, false)
 	moves.append(move2)
 	
-	var move3 = Move.new(piece3, null, true, true)
+	var move3 = Move.new(piece3, null, true)
 	moves.append(move3)
 	
 	var expected = move1.piece
@@ -35,7 +35,7 @@ func test_one_move():
 	var moves : Array[Move]
 	
 	var piece1 = Piece.new()	
-	var move1 = Move.new(piece1, null, true, true)
+	var move1 = Move.new(piece1, null, true)
 	moves.append(move1)
 	
 	var expected = move1.piece

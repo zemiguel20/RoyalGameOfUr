@@ -11,16 +11,15 @@ extends AIPlayerBase
 @export_range(0, 1) var safety_score_weight: float
 ## A central rosette is defined as a rosette that is on both the p1 and p2 track.
 @export_range(0, 1) var piece_progress_score_weight: float
-## Float that decids
+## Float that decides how much the AI cares about occupying a central rosette.
 ## A central rosette is defined as a rosette that is on both the p1 and p2 track. 
 @export_range(0, 1) var central_rosette_score_weight: float
 
 
-# Note: This function will be the same for many of the AI, the only exception is the random ai.
+# NOTE: This function will be the same for many of the AI, the only exception is the random ai.
 func _evaluate_moves(moves : Array[Move]) -> Piece:
 	var best_move = null
 	var best_move_score = 0		# Lowest score by default
-
 	
 	for move in moves:
 		# move = move2
@@ -32,10 +31,7 @@ func _evaluate_moves(moves : Array[Move]) -> Piece:
 	return best_move.piece
 
 
-# Very temporary, or perhaps for a very medium AI
 func _evaluate_move(move: Move) -> float:
-	# Exception: If move is move to end_area, we should skip most of the modifiers.
-	
 	var score = _calculate_base_score(move)
 	score += _calculate_safety_modifier(move)
 	score += _calculate_progress_modifier(move)
@@ -74,7 +70,7 @@ func _calculate_progress_modifier(move: Move):
 	var track_count = _board.get_track_count()
 	var progression = current_tile_index/track_count	# Value between 0 and 1
 	
-	return progression * piece_progress_score_weight
+	return piece_progress_score_weight * progression 
 	
 	
 func _calculate_central_rosette_modifier(move: Move):
@@ -111,7 +107,7 @@ func _calculate_spot_danger(spot: Spot) -> int:
 		var temp_spot = _board.get_spot(index - _i, _player_id)
 		var contains_opponent = _board.is_occupied_by_player(temp_spot, _player_id) 
 		if (contains_opponent):
-			var capture_chance = 0.5	# TODO: Replace with actual chances
+			var capture_chance = DiceProbabilities.get_probability_of_value(_i, DiceProbabilities.DiceType.Binary, 4)
 			total_capture_chance += capture_chance
 	
 	return total_capture_chance
