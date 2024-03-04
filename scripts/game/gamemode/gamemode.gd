@@ -10,6 +10,7 @@ signal game_finished
 
 @export var board: Board
 @export var dice: Dice
+@export_range(0, 10) var num_pieces_per_player: int = 7
 var current_player: int
 var _phase: Phase = Phase.new(self)
 
@@ -17,7 +18,7 @@ var _phase: Phase = Phase.new(self)
 ## Initializes the game state and context
 func start_game():
 	_choose_starting_player()
-	board.setup(7)
+	board.setup(num_pieces_per_player)
 	for piece in board.get_pieces(General.PlayerID.ONE):
 		piece.clicked.connect(move)
 		piece.disable_selection()
