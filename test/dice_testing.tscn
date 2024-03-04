@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3rplnb2n1336"]
+
+[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="1_qmmkb"]
+[ext_resource type="Material" uid="uid://dtjsro41ih73d" path="res://materials/plane.tres" id="2_oqni5"]
+
+[sub_resource type="GDScript" id="GDScript_0kq4i"]
+script/source = "extends Node3D
+
+@onready var dice = $Dice as Dice
+
+func _ready():
+	pass
+
+func _on_dice_clicked():
+	var value = await dice.roll()
+	print(value)
+	$CanvasLayer/Label. _on_dice_controller_roll_finished(value)
+"
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vs1jm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ba61"]
+size = Vector3(1, 0.178, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_m30x0"]
+font_size = 100
+
+[sub_resource type="GDScript" id="GDScript_l6841"]
+script/source = "extends Label
+
+
+func _on_dice_controller_roll_started():
+	text = \"...\"
+
+
+func _on_dice_controller_roll_finished(value):
+	text = \"%s\" % value
+"
+
+[node name="DiceTestScene" type="Node3D"]
+script = SubResource("GDScript_0kq4i")
+
+[node name="Dice" parent="." instance=ExtResource("1_qmmkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.50013, 0, 1.44615)
+_use_hitbox_instead_of_dice_colliders = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.395241, 0.918577, 0, -0.918577, 0.395241, 0, 8.59322, 2.43944)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.63815, 0.769912, 0, -0.769912, 0.63815, 0, 0, 0)
+
+[node name="Plane" type="Node3D" parent="."]
+transform = Transform3D(93.977, 0, 0, 0, 1, 0, 0, 0, 93.977, 0, -1.31016, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plane"]
+material_override = ExtResource("2_oqni5")
+mesh = SubResource("PlaneMesh_vs1jm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
+transform = Transform3D(-1.97, 0, -2.97462e-07, 0, 1.97, 0, 2.97462e-07, 0, -1.97, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
+shape = SubResource("BoxShape3D_5ba61")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -238.0
+offset_right = 79.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "..."
+label_settings = SubResource("LabelSettings_m30x0")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_l6841")
+
+[connection signal="clicked" from="Dice" to="." method="_on_dice_clicked"]

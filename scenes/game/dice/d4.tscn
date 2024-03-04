@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxfww4cuco8ex"]
+
+[ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="1_spk2b"]
+[ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://models/test_die_d4.glb" id="1_y0dub"]
+[ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_raycast.tscn" id="3_nd3gk"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xnfvc"]
+points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.499182, -0.000168562, 0.242005, -0.00390851)
+
+[node name="D4" type="RigidBody3D"]
+script = ExtResource("1_spk2b")
+throwing_force_magnitude = 6.0
+throwing_angular_velocity = 4.0
+temp_random_offset_on_throw = 2.0
+throwing_force_direction_range_x = Vector2(-0.5, -0.5)
+throwing_force_direction_range_z = Vector2(-1, -0.8)
+
+[node name="test_die_d4" parent="." instance=ExtResource("1_y0dub")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_xnfvc")
+
+[node name="DiceRaycast1" parent="." instance=ExtResource("3_nd3gk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.970951, 0)
+opposite_side_value = 1
+
+[node name="DiceRaycast2" parent="." instance=ExtResource("3_nd3gk")]
+transform = Transform3D(-0.241594, 0.809894, 0.534513, -0.0234063, -0.555533, 0.831165, 0.970095, 0.188293, 0.15317, -0.250743, -0.489513, -0.117775)
+
+[node name="DiceRaycast3" parent="." instance=ExtResource("3_nd3gk")]
+transform = Transform3D(-0.3665, -0.830193, -0.420069, -2.98023e-08, -0.451485, 0.892279, -0.930418, 0.327021, 0.165469, 0.259253, -0.440118, -0.0798577)
+
+[node name="DiceRaycast4" parent="." instance=ExtResource("3_nd3gk")]
+transform = Transform3D(0.995737, 0.0099192, 0.0917003, -0.079273, -0.416195, 0.905813, 0.0471502, -0.909221, -0.413635, 0.0143663, -0.507117, 0.254404)
+opposite_side_value = 1

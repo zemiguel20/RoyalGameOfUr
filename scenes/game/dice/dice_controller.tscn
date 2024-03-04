@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://c3bq04omjlr2e"]
+
+[ext_resource type="Script" path="res://scripts/game/dice/dice.gd" id="1_ka5gv"]
+[ext_resource type="PackedScene" uid="uid://cxfww4cuco8ex" path="res://scenes/game/dice/d4.tscn" id="2_apa1r"]
+[ext_resource type="AudioStream" uid="uid://dv5nxtgrtwn6q" path="res://audio/test_dice_roll.mp3" id="3_hlajg"]
+[ext_resource type="AudioStream" uid="uid://bdsbgnjpv7ic2" path="res://audio/dice_shaking_loop.mp3" id="3_wfoj5"]
+[ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/dice_border.tres" id="5_hdthg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rs5kh"]
+size = Vector3(10, 12, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tsocn"]
+size = Vector3(10, 12, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_feblq"]
+size = Vector3(10, 12, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_41ig0"]
+size = Vector3(10, 12, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0n13x"]
+size = Vector3(6, 6, 6)
+
+[node name="Dice" type="Node3D"]
+script = ExtResource("1_ka5gv")
+_die_scene = ExtResource("2_apa1r")
+
+[node name="RollSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hlajg")
+
+[node name="ShakeSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wfoj5")
+
+[node name="DiceBorders" type="Node3D" parent="."]
+
+[node name="Wall" type="StaticBody3D" parent="DiceBorders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5)
+physics_material_override = ExtResource("5_hdthg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceBorders/Wall"]
+shape = SubResource("BoxShape3D_rs5kh")
+
+[node name="Wall2" type="StaticBody3D" parent="DiceBorders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
+physics_material_override = ExtResource("5_hdthg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceBorders/Wall2"]
+shape = SubResource("BoxShape3D_tsocn")
+
+[node name="Wall3" type="StaticBody3D" parent="DiceBorders"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.5, 0, 0)
+physics_material_override = ExtResource("5_hdthg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceBorders/Wall3"]
+shape = SubResource("BoxShape3D_feblq")
+
+[node name="Wall4" type="StaticBody3D" parent="DiceBorders"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.5, 0, 0)
+physics_material_override = ExtResource("5_hdthg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceBorders/Wall4"]
+shape = SubResource("BoxShape3D_41ig0")
+
+[node name="ClickHitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickHitbox"]
+shape = SubResource("BoxShape3D_0n13x")
