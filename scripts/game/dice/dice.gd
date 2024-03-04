@@ -38,12 +38,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	# This function should not be in _on_die_input_event, 
 	# since releasing the mouse can be done outside of the click hitboxes.
-	if _is_shaking and event is InputEventMouseButton and event.is_released():
-		_is_shaking = false
-		_shake_sfx.stop()
-		for die in _dice:
-			die.visible = true
-		clicked.emit()
+	_check_dice_shake_release(event)
 
 
 ## Enables selection and highlight effects
@@ -77,13 +72,16 @@ func roll() -> int:
 	return value
 
 
+## Spawns the dice in a random position and connects signals
 func _initialize_dice() -> void:
 	for _i in _num_of_dice:
 		var instance = _die_scene.instantiate() as Die
 		add_child(instance)
-		instance.setup(_throwing_position.global_position)
 		_dice.append(instance)
+		
+		instance.setup(_throwing_position.global_position)
 		instance.roll_finished.connect(_on_die_finished_rolling)
+		
 		# TODO: Make this editable as well, but this should be handled by a Placer script.
 		# This script will then also make sure that the dice do not overlapped.
 		var locationX = randf_range(_spawning_range.x, _spawning_range.y)
@@ -92,7 +90,6 @@ func _initialize_dice() -> void:
 	
 	if (_use_hitbox_instead_of_dice_colliders):
 		_click_hitbox.input_event.connect(_on_die_input_event)
-		_click_hitbox.input_ray_pickable = true
 	else:
 		for die in _dice:
 			die.input_event.connect(_on_die_input_event)
@@ -113,3 +110,12 @@ func _on_die_finished_rolling(die_value: int):
 	value += die_value
 	_die_finish_count += 1
 	die_stopped.emit(die_value)
+	
+	
+func _check_dice_shake_release(event: InputEvent):
+	if _is_shaking and event is InputEventMouseButton and event.is_released():
+		_is_shaking = false
+		_shake_sfx.stop()
+		for die in _dice:
+			die.visible = true
+		clicked.emit()
