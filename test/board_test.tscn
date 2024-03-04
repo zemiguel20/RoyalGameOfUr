@@ -91,10 +91,10 @@ script = SubResource("GDScript_qu5mb")
 [node name="Board" type="Node" parent="." node_paths=PackedStringArray("_p1_start_area", "_p1_end_area", "_p1_track", "_p2_start_area", "_p2_end_area", "_p2_track")]
 script = ExtResource("1_03n77")
 _p1_piece = ExtResource("4_ewbo6")
-_p2_piece = ExtResource("3_lreb1")
 _p1_start_area = NodePath("P1StartArea")
 _p1_end_area = NodePath("P1EndArea")
 _p1_track = [NodePath("Spot"), NodePath("Spot2"), NodePath("Spot3"), NodePath("Spot4")]
+_p2_piece = ExtResource("3_lreb1")
 _p2_start_area = NodePath("P2StartArea")
 _p2_end_area = NodePath("P2EndArea")
 _p2_track = [NodePath("Spot"), NodePath("Spot2"), NodePath("Spot3"), NodePath("Spot4")]
