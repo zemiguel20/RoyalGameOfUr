@@ -1,6 +1,7 @@
 class_name Die
 extends RigidBody3D
 
+
 signal roll_finished(value: int)
 
 @export_category("Throwing Physics")
@@ -23,18 +24,13 @@ signal roll_finished(value: int)
 
 @onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
 @onready var _raycast_list: Array[DiceRaycast] = [$DiceRaycast1, $DiceRaycast2, $DiceRaycast3, $DiceRaycast4]
-
-@export_category("Misc")
-@export var _max_roll_duration: float
-
-@onready var _rolling_timer: Timer = $Timer
+@onready var _rolling_timer: Timer = $RollTimeoutTimer
 var _throwing_position
 var _is_rolling
 
+
 func setup(_position: Vector3):
 	_throwing_position = _position
-	_rolling_timer.wait_time = _max_roll_duration
-	_rolling_timer.start()
 
 
 func highlight() -> void:
@@ -80,21 +76,15 @@ func roll() -> void:
 	# A timer specifying a maximum rolling duration.
 	# If the 'rolling' did not stop already, it will stop after the timer and roll again.
 	# Stuck timer prevents infinite waiting for small movements
-	_rolling_timer.wait_time = _max_roll_duration
 	_rolling_timer.start()
-	_rolling_timer.timeout.connect(_on_timer_timeout)
-		
-		
-func _on_timer_timeout():
-	_on_movement_stopped()
-		
-		
+
+
 # Triggers when the sleeping state of the rigidbody is changed
 func _on_movement_stopped():
 	if (not _is_rolling):
 		return
 
-	_rolling_timer.timeout.disconnect(_on_timer_timeout)
+	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep
 	
 	# Retrieve roll value
 	var roll_value = -1

@@ -18,7 +18,6 @@ throwing_angular_velocity = 0.0
 _random_dice_offset = 1.7
 throwing_force_direction_range_x = Vector2(0, -1)
 throwing_force_direction_range_z = Vector2(-0.5, 0.5)
-_max_roll_duration = 3.5
 
 [node name="test_die_d4" parent="." instance=ExtResource("1_y0dub")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48822, 0)
@@ -50,8 +49,11 @@ script = ExtResource("4_7sy51")
 highlight_material = ExtResource("5_d72al")
 mesh_to_highlight = NodePath("../test_die_d4/Dice_001")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="RollTimeoutTimer" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
 
 [connection signal="sleeping_state_changed" from="." to="." method="_on_movement_stopped"]
+[connection signal="timeout" from="RollTimeoutTimer" to="." method="_on_movement_stopped"]
 
 [editable path="test_die_d4"]
