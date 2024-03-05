@@ -19,10 +19,6 @@ var _phase: Phase = Phase.new(self)
 var _has_ai_opponent: bool
 
 
-func _ready():
-	start_game()
-
-
 ## Initializes the game state and context
 func start_game():
 	_choose_starting_player()

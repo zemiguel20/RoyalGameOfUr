@@ -3,7 +3,6 @@ extends Phase
 ## Rolling phase of the [Gamemode]. Implements behaviour for the piece move action.
 
 
-
 var _legal_pieces: Array[Piece]
 var _legal_moves: Array[Move]
 
@@ -55,7 +54,7 @@ func move(piece: Piece):
 
 
 func _calculate_legal_moves():
-	_legal_moves = {}
+	_legal_moves = []
 	var pieces = _gamemode.board.get_pieces(_gamemode.current_player)
 	for piece in pieces:
 		var current_spot = _gamemode.board.get_current_spot(piece)
@@ -76,25 +75,27 @@ func _is_protecting_opponent(spot: Spot) -> bool:
 
 
 func _enable_piece_selection() -> void:
-	for piece in _legal_moves:
+	for piece in _legal_pieces:
 		piece.enable_selection()
 
 
 func _disable_piece_selection() -> void:
-	for piece: Piece in _legal_moves:
+	for piece: Piece in _legal_pieces:
 		piece.disable_selection()
 
 
 func _link_highlighting() -> void:
-	for piece in _legal_moves:
-		var spot = _legal_moves[piece] as Spot
+	for move in _legal_moves:
+		var piece = move.piece
+		var spot = move.new_spot
 		piece.mouse_entered.connect(spot.highlight)
 		piece.mouse_exited.connect(spot.dehighlight)
 
 
 func _unlink_highlighting() -> void:
-	for piece in _legal_moves:
-		var spot = _legal_moves[piece] as Spot
+	for move in _legal_moves:
+		var piece = move.piece
+		var spot = move.new_spot
 		piece.mouse_entered.disconnect(spot.highlight)
 		piece.mouse_exited.disconnect(spot.dehighlight)
 		

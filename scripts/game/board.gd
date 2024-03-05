@@ -109,8 +109,7 @@ func get_num_pieces_past_spot(spot: Spot, player: General.PlayerID) -> int:
 	var spot_index = get_spot_index(spot, player)
 	
 	var num_passed_pieces = 0
-	## TODO: Player 1 pieces
-	for piece: Piece in _pieces:
+	for piece: Piece in get_pieces(player):
 		if (is_in_end_zone(get_current_spot(piece)) or
 			get_spot_index(get_current_spot(piece), player) > spot_index):
 			num_passed_pieces += 1
@@ -166,40 +165,6 @@ func get_landing_spot(piece: Piece, roll: int) -> Spot:
 		return track[target_index]
 	else:
 		return null # Out of bounds
-
-
-## Returns [code]true[/code] if the [param spot] is occupied by a piece of the given [param player].
-## Otherwise return  [code]false[/code].
-func is_occupied_by_player(spot: Spot, player: int) -> bool:
-	return spot.piece != null and spot.piece.player == player
-
-
-## Returns [code]true[/code] if the [param player] has all of its pieces in the end area.
-## Otherwise return  [code]false[/code].
-func is_winner(player: int) -> bool:
-	var finished_pieces = (_p_track[player][2] as PieceGroup).get_all_pieces()
-	var player_pieces = get_pieces(player)
-	return finished_pieces.size() == player_pieces.size()
-
-
-## Returns [code]true[/code] if the [param piece] is in the corresponding player's starting zone.
-## Otherwise return  [code]false[/code].
-func is_in_start_zone(piece: Piece) -> bool:
-	return _get_start_area(piece.player).get_all_pieces().has(piece)
-
-
-## Returns [code]true[/code] if the [param piece] is in the corresponding player's ending zone.
-## Otherwise return  [code]false[/code].
-func is_in_end_zone(piece: Piece) -> bool:
-	return _get_end_area(piece.player).get_all_pieces().has(piece)
-
-
-## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
-func get_current_spot(piece: Piece) -> Spot:
-	for spot in _get_start_area(piece.player).get_all_spots():
-		if spot.piece == piece:
-			return spot
-	
 
 
 func _get_movement_path(piece: Piece, landing_spot: Spot) -> Array[Vector3]:
