@@ -44,6 +44,9 @@ func dehighlight() -> void:
 		
 
 func roll() -> void:
+	# Make 100% sure that the die is active, since there was a rare bug that the position was not applied correctly. 
+	visible = true
+	
 	# Position the dice as if they just came out of a 'hand'
 	var random_x = randf_range(-_random_dice_offset, _random_dice_offset)
 	var random_z = randf_range(-_random_dice_offset, _random_dice_offset)
