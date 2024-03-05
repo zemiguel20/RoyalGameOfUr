@@ -93,8 +93,6 @@ func _on_movement_stopped():
 			roll_value = raycast.opposite_side_value
 			break
 	
-	print("Roll Value: ", roll_value)
-	
 	# If stuck, roll again
 	if roll_value == -1:
 		roll()

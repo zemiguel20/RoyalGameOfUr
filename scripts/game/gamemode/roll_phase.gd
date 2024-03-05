@@ -20,7 +20,7 @@ func end():
 ## Rolls the dice, and then changes to the [MovePhase]. If the player rolls 0, then skip to the other player's [RollPhase] instead.
 func roll():
 	var value = await _gamemode.dice.roll()
-	print("Done rolling", value)
+	print("Done rolling: ", value)
 	if value > 0:
 		_gamemode.changeState(MovePhase.new(_gamemode))
 	else:
