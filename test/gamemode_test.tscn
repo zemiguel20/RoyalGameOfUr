@@ -9,10 +9,12 @@ script/source = "extends Node
 
 var started: bool = false
 
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_SPACE and not started:
 		started = true
 		($Gamemode as Gamemode).start_game()
+	
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmve1"]
@@ -82,7 +84,8 @@ dice = NodePath("../Dice")
 transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0.188376, -2.46309, 0.0962036)
 
 [node name="Dice" parent="." instance=ExtResource("2_qrr1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.495599, -3.71434, 9.18184)
+transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
+_roll_shaking_enabled = true
 _use_hitbox_instead_of_dice_colliders = true
 
 [node name="Environment" type="Node3D" parent="."]
