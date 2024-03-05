@@ -44,14 +44,11 @@ func dehighlight() -> void:
 		
 
 func roll() -> void:
-	randomize()
-	
 	# Position the dice as if they just came out of a 'hand'
 	var random_x = randf_range(-_random_dice_offset, _random_dice_offset)
 	var random_z = randf_range(-_random_dice_offset, _random_dice_offset)
 	var random_offset = Vector3(random_x, 0, random_z)
 	self.global_position = _throwing_position + random_offset
-	print("Throwing Point: ", global_position)
 	
 	# Give the dice a random rotation (Basis) when they exit the 'hand'
 	var random_rotation_x = randf_range(-180, 180)
