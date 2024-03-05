@@ -93,7 +93,7 @@ func is_player_exclusive(spot: Spot) -> bool:
 		
 ## Used by AI, will refactor later.
 func is_capturable(spot: Spot, opponent_id: General.PlayerID) -> bool:
-	return is_occupied_by_player(spot, opponent_id) and not spot.is_rosette
+	return is_occupied_by_player(spot, opponent_id) and not spot.is_safe
 	
 	
 func get_spot(index: int, opponent: General.PlayerID):
@@ -115,6 +115,10 @@ func get_num_pieces_past_spot(spot: Spot, player: General.PlayerID) -> int:
 			num_passed_pieces += 1
 	
 	return num_passed_pieces
+	
+	
+func get_track_size(player: General.PlayerID):
+	_get_track(player).size()
 	
 	
 ## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.

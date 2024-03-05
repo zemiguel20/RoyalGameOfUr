@@ -11,7 +11,7 @@ var _player_id: General.PlayerID
 
 ## Virtual method that picks a move through an algorithm.
 ## Instead of the moves being a piece, we should have information about the move, so that it can be taking in with the evaluation.
-func _evaluate_moves(moves : Array[Move]):
+func _evaluate_moves(_moves : Array[Move]):
 	pass
 
 

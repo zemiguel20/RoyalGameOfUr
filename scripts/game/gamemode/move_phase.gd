@@ -6,6 +6,11 @@ extends Phase
 var _legal_pieces: Array[Piece]
 var _legal_moves: Array[Move]
 
+# When a turn has ended, we will need to unlink the visual effect for spots if the player was not ai.
+# However, when movephase.end() is called, the player has already been switched.
+# Therefore, doing a check _gamemode.is_ai_turn would not work anymore.
+# This is the reason that we cache this bool locally every turn.
+var _is_ai_turn: bool
 
 ## Checks the possible moves for the current player and highlights those pieces.
 ## If there are no possible moves, then changes directly to the next player's [RollPhase]
@@ -17,19 +22,18 @@ func start():
 		_gamemode.changeState(RollPhase.new(_gamemode))
 		return
 	
-	_link_highlighting()
-	_enable_piece_selection()
-		
-	if (_gamemode.is_ai_turn()):
+	_is_ai_turn = _gamemode.is_ai_turn()
+	if (_is_ai_turn):
 		_gamemode.ai_player.make_move(_legal_moves)
 	else:
-		for piece in _legal_pieces:
-			piece.enable_selection()
+		_link_highlighting()
+		_enable_piece_selection()
 
 
 ## Disables highlighting of the movable pieces calculated in [method start] 
 func end():
-	_unlink_highlighting()
+	if (not _is_ai_turn):
+		_unlink_highlighting()
 
 
 ## Moves the [param piece]. If player gets an extra roll, then move to the [RollPhase] again. If player wins, then end the game.
@@ -59,7 +63,7 @@ func _calculate_legal_moves():
 	for piece in pieces:
 		var current_spot = _gamemode.board.get_current_spot(piece)
 		var landing_spot = _gamemode.board.get_landing_spot(piece, _gamemode.dice.value)
-		if landing_spot != null and (not _has_player_piece(landing_spot) or not _is_protecting_opponent(landing_spot)):
+		if landing_spot != null and not _has_player_piece(landing_spot) and not _is_protecting_opponent(landing_spot):
 			_legal_pieces.append(piece)
 			var legal_move = Move.new(piece, current_spot, landing_spot)
 			_legal_moves.append(legal_move)

@@ -19,13 +19,13 @@ static func get_probability_of_value(value_to_throw: int, type: DiceType, num_of
 	return base_chance * num_of_combinations
 	
 
-static func get_probability_of_four_d4(value: int):
-	var num_of_outcomes = 2		# Binary: 0 or 1
-	var base_chance_for_outcome = 1 / num_of_outcomes
-	var base_chance = pow(base_chance_for_outcome, 4)
-	var num_of_combinations = _get_combinations(4, 2)
-	print("Com: ", num_of_combinations)
-	return base_chance * num_of_combinations
+#static func get_probability_of_four_d4(value: int):
+	#var num_of_outcomes = 2		# Binary: 0 or 1
+	#var base_chance_for_outcome = 1 / num_of_outcomes
+	#var base_chance = pow(base_chance_for_outcome, 4)
+	#var num_of_combinations = _get_combinations(4, 2)
+	#print("Com: ", num_of_combinations)
+	#return base_chance * num_of_combinations
 	
 	
 static func _get_num_of_outcomes(type: DiceType):
