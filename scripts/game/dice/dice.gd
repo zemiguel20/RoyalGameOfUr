@@ -67,7 +67,6 @@ func roll() -> int:
 		die.roll()
 	while _die_finish_count < _num_of_dice:
 		await get_tree().create_timer(0.5).timeout
-	enable_selection()
 	roll_finished.emit(value)
 	return value
 
@@ -108,7 +107,7 @@ func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape
 				die.visible = false
 			_shake_sfx.play()
 		else:
-			clicked.emit()
+			start_roll()
 
 
 func _on_die_finished_rolling(die_value: int):
@@ -123,4 +122,4 @@ func _check_dice_shake_release(event: InputEvent):
 		_shake_sfx.stop()
 		for die in _dice:
 			die.visible = true
-		clicked.emit()
+		start_roll()

@@ -44,13 +44,11 @@ func _evaluate_move(move: Move) -> float:
 	
 		
 func _calculate_base_score(move: Move):
-	var landing_spot = move.new_spot
+	var landing_spot := move.new_spot
 	
-	if _board.is_capturable(landing_spot, General.PlayerID.TWO):
+	if _board.is_capturable(landing_spot, General.get_other_player_id(_player_id)):
 		return capture_base_score
 	elif (landing_spot.give_extra_roll):
-		# TODO: When adding more rulesets, the is_rosette should be seperated in is_safe and grants_extra_roll,
-		# since in some rulesets rosettes are not safe.
 		return grants_roll_base_score
 	elif (_board.is_in_end_zone(landing_spot)):
 		return end_move_base_score
@@ -80,30 +78,34 @@ func _calculate_progress_modifier(move: Move):
 	
 	
 func _calculate_central_rosette_modifier(move: Move):
-	var landing_spot = move.new_spot
-	var is_central_rosette = landing_spot.is_safe and not _board.is_player_exclusive(landing_spot)
+	var current_spot = move.old_spot as Spot
+	var landing_spot = move.new_spot as Spot
+	var is_current_spot_central_rosette = _is_central_rosette(current_spot)
+	var is_landing_spot_central_rosette = _is_central_rosette(landing_spot)
 	
-	if (not is_central_rosette):
+	if (not is_current_spot_central_rosette and not is_landing_spot_central_rosette):
 		return 0
 		
 	var opponent_id = General.get_other_player_id(_player_id)
 	var num_of_passed_pieces = _board.get_num_pieces_past_spot(move.new_spot, opponent_id)
-	# TODO: Replace with num_of_pieces in gamemode/gamerules.
-	var num_of_total_pieces = 7
+	var num_of_total_pieces = _gamemode.num_pieces_per_player
 	
 	# I made the assumption that occupying the central rosettes is better, the more opponent pieces are still at the start.
 	var score = 1
 	if (num_of_passed_pieces != 0):	
 		var passed_pieces_rate: float = (num_of_passed_pieces / num_of_total_pieces)	# Value between 0 and 1
-		score = 1 - passed_pieces_rate											# Value between 0 and 1
+		score = 1 - passed_pieces_rate													# Value between 0 and 1
+	
+	var final_score = 0
+	if (is_current_spot_central_rosette):
+		final_score -= score
+	if (is_landing_spot_central_rosette):
+		final_score += score
+	
 	return central_rosette_score_weight * score
 	
 	
 func _calculate_spot_danger(spot: Spot) -> float:
-	if (spot == null):
-		push_error("Spot should not be null!!")
-		return 0
-	
 	# Give score of 0 when landing_spot is 100% safe. 
 	if (spot.is_safe or _board.is_player_exclusive(spot)):
 		return 0
@@ -122,3 +124,6 @@ func _calculate_spot_danger(spot: Spot) -> float:
 	
 	return base_spot_danger + total_capture_chance
 	
+# Could also move this to board maybe?
+func _is_central_rosette(spot: Spot) -> bool:
+	return spot.is_safe and not _board.is_player_exclusive(spot)
