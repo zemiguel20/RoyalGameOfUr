@@ -1,10 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cix4stkjswrso"]
+[gd_scene load_steps=5 format=3 uid="uid://cix4stkjswrso"]
 
 [ext_resource type="Script" path="res://test/scripts/ai/ai_player_advanced_evaluation_test.gd" id="1_ghxrv"]
 [ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="2_qljqm"]
+[ext_resource type="PackedScene" uid="uid://w80iov7yarwa" path="res://scenes/mockup_board.tscn" id="3_dl5i8"]
+[ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="4_luep3"]
 
 [node name="AiplayerMoveEvaluationTest" type="Node2D"]
 script = ExtResource("1_ghxrv")
 
 [node name="AIPlayerAdvanced" type="Node" parent="."]
 script = ExtResource("2_qljqm")
+
+[node name="Board" parent="." instance=ExtResource("3_dl5i8")]
+
+[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "ai_player")]
+script = ExtResource("4_luep3")
+board = NodePath("../Board")
+ai_player = NodePath("../AIPlayerAdvanced")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999962, 0.00765079, -0.00419737, 0, 0.480989, 0.876727, 0.00872654, -0.876693, 0.48097, 2.76681, 13.3698, 7.91143)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.999962, 0.00765079, -0.00419737, 0, 0.480989, 0.876727, 0.00872654, -0.876693, 0.48097, 2.76682, 13.3676, 2.5028)

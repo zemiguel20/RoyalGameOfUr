@@ -23,7 +23,7 @@ extends AIPlayerBase
 # NOTE: This function will be the same for many of the AI, the only exception is the random ai.
 func _evaluate_moves(moves : Array[Move]) -> Piece:
 	var best_move = null
-	var best_move_score = 0		# Lowest score by default
+	var best_move_score = -1
 	
 	for move in moves:
 		# move = move2
@@ -57,9 +57,6 @@ func _calculate_base_score(move: Move):
 
 
 func _calculate_safety_modifier(move: Move):
-	if (move.new_spot.give_extra_roll):
-		return 0
-		
 	var old_spot_danger = _calculate_spot_danger(move.old_spot)
 	var new_spot_danger = _calculate_spot_danger(move.new_spot)
 	var spot_safety_difference = old_spot_danger - new_spot_danger 	# Value between -1 and 1
@@ -105,22 +102,24 @@ func _calculate_central_rosette_modifier(move: Move):
 	
 func _calculate_spot_danger(spot: Spot) -> float:
 	# Give score of 0 when landing_spot is 100% safe. 
-	if (spot.is_safe or _board.is_player_exclusive(spot)):
+	if (spot.is_safe or spot.give_extra_roll or _board.is_player_exclusive(spot) ):
 		return 0
 	
 	# When a spot is not player exclusive, there is always a bit of danger.
 	var total_capture_chance = 0.0
 	var index = _board.get_spot_index(spot, _player_id)
+	var opponent_id = General.get_other_player_id(_player_id)
 	
 	# Check the 4 tiles before this spot for opponent pieces
 	for _i in range(1, 5):
-		var temp_spot = _board.get_spot(index - _i, _player_id)
-		var contains_opponent = _board.is_occupied_by_player(temp_spot, _player_id) 
+		var temp_spot = _board.get_spot(index - _i, opponent_id)
+		var contains_opponent = _board.is_occupied_by_player(temp_spot, opponent_id) 
 		if (contains_opponent):
 			var capture_chance = DiceProbabilities.get_probability_of_value(_i, DiceProbabilities.DiceType.Binary, 4)
 			total_capture_chance += capture_chance
 	
 	return base_spot_danger + total_capture_chance
+	
 	
 # Could also move this to board maybe?
 func _is_central_rosette(spot: Spot) -> bool:
