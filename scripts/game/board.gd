@@ -118,7 +118,7 @@ func get_num_pieces_past_spot(spot: Spot, player: General.PlayerID) -> int:
 	
 	
 func get_track_size(player: General.PlayerID):
-	_get_track(player).size()
+	return _get_track(player).size()
 	
 	
 ## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
