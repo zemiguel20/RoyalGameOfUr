@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://w80iov7yarwa"]
+
+[ext_resource type="Script" path="res://scripts/game/board.gd" id="1_wmqj2"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece.tscn" id="2_jkmov"]
+[ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/black_piece.tscn" id="3_toiyu"]
+[ext_resource type="PackedScene" uid="uid://bewh043hbu713" path="res://scenes/game/start_area.tscn" id="4_buxrt"]
+[ext_resource type="PackedScene" uid="uid://ccnlb2yds0s8s" path="res://scenes/game/end_area.tscn" id="5_ex5db"]
+[ext_resource type="PackedScene" uid="uid://cyj2hsx8jciw1" path="res://scenes/game/tile.tscn" id="5_n7bh8"]
+[ext_resource type="PackedScene" uid="uid://cl2in1pyxem77" path="res://scenes/game/rosette_tile.tscn" id="8_0yje8"]
+
+[node name="Board" type="Node3D" node_paths=PackedStringArray("_p1_start_area", "_p1_end_area", "_p1_track", "_p2_start_area", "_p2_end_area", "_p2_track")]
+script = ExtResource("1_wmqj2")
+_p1_piece = ExtResource("2_jkmov")
+_p1_start_area = NodePath("StartAreaP1")
+_p1_end_area = NodePath("EndAreaP1")
+_p1_track = [NodePath("Tile1P1"), NodePath("Tile2P1"), NodePath("Tile3P1"), NodePath("Rosette1P1"), NodePath("Tile1M"), NodePath("Tile2M"), NodePath("Tile3M"), NodePath("RosetteM"), NodePath("Tile4M"), NodePath("Tile5M"), NodePath("Tile6M"), NodePath("Tile7M"), NodePath("Tile8P1"), NodePath("Rosette2P1")]
+_p2_piece = ExtResource("3_toiyu")
+_p2_start_area = NodePath("StartAreaP2")
+_p2_end_area = NodePath("EndAreaP2")
+_p2_track = [NodePath("Tile1P2"), NodePath("Tile2P2"), NodePath("Tile3P2"), NodePath("Rosette1P2"), NodePath("Tile1M"), NodePath("Tile2M"), NodePath("Tile3M"), NodePath("RosetteM"), NodePath("Tile4M"), NodePath("Tile5M"), NodePath("Tile6M"), NodePath("Tile7M"), NodePath("Tile8P2"), NodePath("Rosette2P2")]
+
+[node name="StartAreaP1" parent="." instance=ExtResource("4_buxrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.19459, 0, 3.80477)
+
+[node name="StartAreaP2" parent="." instance=ExtResource("4_buxrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70769, 0, -4.46571)
+
+[node name="EndAreaP1" parent="." instance=ExtResource("5_ex5db")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.67385, 0, 4.82824)
+
+[node name="EndAreaP2" parent="." instance=ExtResource("5_ex5db")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.99214, 0, -2.94967)
+
+[node name="Tile1P2" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+
+[node name="Tile2P2" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+
+[node name="Tile3P2" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Tile1M" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Tile3P1" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Tile2P1" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="Tile1P1" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+
+[node name="Tile3M" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Tile2M" parent="." instance=ExtResource("5_n7bh8")]
+
+[node name="Tile4M" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="Tile5M" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Tile6M" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="Tile7M" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Tile8P1" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
+
+[node name="Tile8P2" parent="." instance=ExtResource("5_n7bh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
+
+[node name="Rosette1P2" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+give_extra_roll = true
+
+[node name="Rosette1P1" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+give_extra_roll = true
+
+[node name="RosetteM" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+is_safe = true
+
+[node name="Rosette2P2" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+give_extra_roll = true
+
+[node name="Rosette2P1" parent="." instance=ExtResource("8_0yje8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+give_extra_roll = true

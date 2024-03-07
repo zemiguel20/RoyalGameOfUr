@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxfww4cuco8ex"]
+
+[ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="1_spk2b"]
+[ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://models/test_die_d4.glb" id="1_y0dub"]
+[ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_raycast.tscn" id="3_nd3gk"]
+[ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="4_7sy51"]
+[ext_resource type="Material" uid="uid://cfjbmqrrcl4xo" path="res://materials/test.tres" id="5_d72al"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xnfvc"]
+points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.499182, -0.000168562, 0.242005, -0.00390851)
+
+[node name="D4" type="RigidBody3D"]
+mass = 2.0
+gravity_scale = 3.0
+script = ExtResource("1_spk2b")
+throwing_force_magnitude = 12.0
+throwing_angular_velocity = 0.0
+_random_dice_offset = 1.7
+throwing_force_direction_range_x = Vector2(0, -1)
+throwing_force_direction_range_z = Vector2(-0.5, 0.5)
+
+[node name="test_die_d4" parent="." instance=ExtResource("1_y0dub")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48822, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48822, 0)
+shape = SubResource("ConvexPolygonShape3D_xnfvc")
+
+[node name="DiceRaycast1" parent="." instance=ExtResource("3_nd3gk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.482731, 0)
+target_position = Vector3(0, -0.3, 0)
+opposite_side_value = 1
+
+[node name="DiceRaycast2" parent="." instance=ExtResource("3_nd3gk")]
+transform = Transform3D(-0.241594, 0.809894, 0.534513, -0.0234063, -0.555533, 0.831165, 0.970095, 0.188293, 0.15317, -0.250743, -0.00129297, -0.117775)
+target_position = Vector3(0, -0.3, 0)
+
+[node name="DiceRaycast3" parent="." instance=ExtResource("3_nd3gk")]
+transform = Transform3D(-0.3665, -0.830193, -0.420069, -2.98023e-08, -0.451485, 0.892279, -0.930418, 0.327021, 0.165469, 0.259253, 0.048102, -0.0798577)
+target_position = Vector3(0, -0.3, 0)
+
+[node name="DiceRaycast4" parent="." instance=ExtResource("3_nd3gk")]
+transform = Transform3D(0.995737, 0.0099192, 0.0917003, -0.079273, -0.416195, 0.905813, 0.0471502, -0.909221, -0.413635, 0.0143663, -0.0188969, 0.254404)
+target_position = Vector3(0, -0.3, 0)
+opposite_side_value = 1
+
+[node name="MaterialHighlighter" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
+script = ExtResource("4_7sy51")
+highlight_material = ExtResource("5_d72al")
+mesh_to_highlight = NodePath("../test_die_d4/Dice_001")
+
+[node name="RollTimeoutTimer" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
+
+[connection signal="sleeping_state_changed" from="." to="." method="_on_movement_stopped"]
+[connection signal="timeout" from="RollTimeoutTimer" to="." method="_on_movement_stopped"]
+
+[editable path="test_die_d4"]

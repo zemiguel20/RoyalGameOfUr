@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2624smcv0td8"]
+
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece.tscn" id="1_w8nnh"]
+[ext_resource type="PackedScene" uid="uid://cyj2hsx8jciw1" path="res://scenes/game/tile.tscn" id="2_stamt"]
+
+[sub_resource type="GDScript" id="GDScript_7jrdc"]
+script/source = "extends Node
+
+
+@onready var piece_1 = $Piece as Piece
+@onready var piece_2 = $Piece2 as Piece
+@onready var tile_1 = $Tile as Spot
+@onready var tile_2 = $Tile2 as Spot
+
+
+func _ready():
+	piece_1.enable_selection()
+	piece_2.disable_selection()
+
+
+func _on_piece_clicked(sender: Piece):
+	var path: Array[Vector3] = []
+	path.append(tile_1.sample_position())
+	path.append(tile_2.sample_position())
+	sender.move(path)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7kgfi"]
+albedo_color = Color(1, 0.564706, 0.176471, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3xjdh"]
+material = SubResource("StandardMaterial3D_7kgfi")
+size = Vector2(100, 100)
+
+[node name="PieceTileTest" type="Node"]
+script = SubResource("GDScript_7jrdc")
+
+[node name="Piece" parent="." instance=ExtResource("1_w8nnh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120266, -3.93835)
+move_duration = 0.5
+
+[node name="Piece2" parent="." instance=ExtResource("1_w8nnh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07852, 0.116728, -0.970955)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0366763, -0.528051, 0.84842, 0, 0.848991, 0.528407, -0.999327, -0.01938, 0.0311379, 5.27847, 4.40151, -6.74797)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.606682, 0.794944, 0, -0.794944, 0.606682, 0, 4.13003, 0)
+shadow_enabled = true
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_3xjdh")
+
+[node name="Tile" parent="." instance=ExtResource("2_stamt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530848, 0.776058, -7.47886)
+
+[node name="Tile2" parent="." instance=ExtResource("2_stamt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530848, 0.700493, -10.7176)
+
+[connection signal="clicked" from="Piece" to="." method="_on_piece_clicked"]
