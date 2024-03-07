@@ -9,22 +9,24 @@ var _dice: Dice
 var _player_id: General.PlayerID
 
 
-## Virtual method that picks a move through an algorithm.
-## Instead of the moves being a piece, we should have information about the move, so that it can be taking in with the evaluation.
+## Virtual method that contains an algorithm for picking a move.
 func _evaluate_moves(_moves : Array[Move]):
 	pass
 
 
-# Note: It is more of an injection than a setup, so might rename
 func setup(gamemode : Gamemode, player_id: General.PlayerID):
 	_gamemode = gamemode
 	_board = gamemode.board
 	_dice = gamemode.dice
 	_player_id = player_id
+	
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
 func roll():
 	# TODO: optional shaking behaviour for AI
+	
+	# Wait for a moment, Ai should not have inhumane reaction speed.
+	await _gamemode.get_tree().create_timer(0.5).timeout
 	_dice.start_roll()
 	
 	

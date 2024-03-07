@@ -11,13 +11,16 @@ extends AIPlayerBase
 
 @export_category("Score modifiers")
 @export_range(0, 1) var safety_score_weight: float = 0.4
-## A central rosette is defined as a rosette that is on both the p1 and p2 track.
-@export_range(0, 1) var piece_progress_score_weight: float = 0.2
-## Float that decides how much the AI cares about occupying a central rosette.
-## A central rosette is defined as a rosette that is on both the p1 and p2 track. 
-@export_range(0, 1) var central_rosette_score_weight: float = 0.2
 ## Base danger value for tiles that are not 100% safe, so spots that are on the path of both players.
 @export_range(0, 1) var base_spot_danger: float = 0.1
+## Pieces that are further across the board get more priority
+@export_range(0, 1) var piece_progress_score_weight: float = 0.2
+## Float that decides priority of occupying a central rosette.
+## A central rosette is defined as a rosette that is on both the p1 and p2 track. 
+@export_range(0, 1) var central_rosette_score_weight: float = 0.2
+## I made the assumption that occupying the central rosettes is better, the more opponent pieces are still at the start.
+## Turning this bool off, will only check deduct points when ALL of the opponents pieces are past the central rosette.
+@export var decrease_per_passed_opponent_piece: bool = true
 
 
 # NOTE: This function will be the same for many of the AI, the only exception is the random ai.
@@ -26,7 +29,6 @@ func _evaluate_moves(moves : Array[Move]) -> Piece:
 	var best_move_score = -1
 	
 	for move in moves:
-		# move = move2
 		var score = _evaluate_move(move)
 		if (score > best_move_score):
 			best_move_score = score
@@ -85,9 +87,8 @@ func _calculate_central_rosette_modifier(move: Move):
 	var num_of_passed_pieces = _board.get_num_pieces_past_spot(move.new_spot, opponent_id)
 	var num_of_total_pieces = _gamemode.num_pieces_per_player
 	
-	# I made the assumption that occupying the central rosettes is better, the more opponent pieces are still at the start.
 	var score = 1
-	if (num_of_passed_pieces != 0):	
+	if (num_of_passed_pieces != 0 and decrease_per_passed_opponent_piece):	
 		var passed_pieces_rate: float = (num_of_passed_pieces as float / num_of_total_pieces)	# Value between 0 and 1
 		score = 1 - passed_pieces_rate													# Value between 0 and 1
 	

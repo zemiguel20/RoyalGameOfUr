@@ -7,6 +7,8 @@ extends Node
 
 func _ready():
 	_setup()
+	
+	# Check all rules individually
 	await _test_base_score()
 	await _reset_pieces_to_start()
 	await _test_safety_modifier()
@@ -14,6 +16,9 @@ func _ready():
 	await _test_progress_modifier()
 	await _test_central_rosette_modifier()
 	await _reset_pieces_to_start()	
+	
+	# Test overall AI behaviour
+	# TODO: 
 	print("All tests successfull!")
 	
 	
@@ -64,8 +69,6 @@ func _test_base_score():
 	var rosette_move := Move.new(ai_piece, mock_current_spot, mock_landing_spot2)
 	
 	var expected3 = ai_player.grants_roll_base_score
-	print("Extra Roll: ", mock_landing_spot2.give_extra_roll)
-	print("Safe: ", mock_landing_spot2.is_safe)
 	var result3 = ai_player._calculate_base_score(rosette_move)
 	assert(expected3 == result3, "Base score result: %d" % result3)
 	
@@ -259,6 +262,13 @@ func _test_central_rosette_modifier():
 	move = Move.new(ai_piece, mock_current_spot, mock_landing_spot)
 	
 	expected = (1.0 - 5.0/7.0) * ai_player.central_rosette_score_weight
+	result = ai_player._calculate_central_rosette_modifier(move)
+	assert(expected == result, "Result %s" % result)
+	
+	# TEST: Test turning the decreasing score rule off.
+	ai_player.decrease_per_passed_opponent_piece = false
+	
+	expected = 1.0 * ai_player.central_rosette_score_weight
 	result = ai_player._calculate_central_rosette_modifier(move)
 	assert(expected == result, "Result %s" % result)
 	

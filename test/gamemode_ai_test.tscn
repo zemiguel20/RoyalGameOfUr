@@ -10,7 +10,6 @@ script/source = "extends Node
 
 var started: bool = false
 
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_SPACE and not started:
 		started = true
@@ -80,7 +79,7 @@ script = SubResource("GDScript_b8xbw")
 script = ExtResource("1_xplbu")
 board = NodePath("../Board")
 dice = NodePath("../Dice")
-ai_player = NodePath("../AIPlayerAdvanced")
+ai_player = NodePath("../AIPlayerHard")
 
 [node name="Board" parent="." instance=ExtResource("2_gfyn5")]
 transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0.188376, -2.46309, 0.0962036)
@@ -90,7 +89,7 @@ transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-1
 _roll_shaking_enabled = true
 _use_hitbox_instead_of_dice_colliders = true
 
-[node name="AIPlayerAdvanced" type="Node" parent="."]
+[node name="AIPlayerHard" type="Node" parent="."]
 script = ExtResource("4_ancfe")
 
 [node name="Environment" type="Node3D" parent="."]
