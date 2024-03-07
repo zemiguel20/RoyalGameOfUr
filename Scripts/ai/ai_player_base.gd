@@ -24,10 +24,17 @@ func setup(gamemode : Gamemode, player_id: General.PlayerID):
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
 func roll():
 	# TODO: optional shaking behaviour for AI
-	
+	if (_dice._roll_shaking_enabled):
+		var clickEvent = InputEventMouseButton.new()
+		clickEvent.pressed = true
+		_dice._on_die_input_event(null, clickEvent, null, null, null)
+		clickEvent.pressed = false
+		await get_tree().create_timer(1.0).timeout
+		_dice._input(clickEvent)
+	else:
 	# Wait for a moment, Ai should not have inhumane reaction speed.
-	await _gamemode.get_tree().create_timer(0.5).timeout
-	_dice.start_roll()
+		await _gamemode.get_tree().create_timer(0.5).timeout
+		_dice.start_roll()
 	
 	
 ## Decides which piece to move, then make that piece move.
