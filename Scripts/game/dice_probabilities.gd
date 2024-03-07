@@ -6,7 +6,6 @@ class_name DiceProbabilities
 
 enum DiceType {
 	Binary = 0,
-	D6
 }
 
 # This function currently only works for binary! Might as well have a seperate function for different dice types.
@@ -23,7 +22,5 @@ static func get_probability_of_value(value_to_throw: int, num_of_dice: int = 4, 
 static func _get_num_of_outcomes(type: DiceType):
 	if (type == DiceType.Binary):
 		return 2
-	elif (type == DiceType.D6):
-		return 6
 	else:
 		push_error("Not Implemented: No number of outcomes implemented for DiceType = ", type)

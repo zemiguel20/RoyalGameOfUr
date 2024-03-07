@@ -18,7 +18,7 @@ func _ready():
 	await _reset_pieces_to_start()	
 	
 	# Test overall AI behaviour
-	# TODO: 
+	await _test_best_move()
 	print("All tests successfull!")
 	
 	
@@ -41,6 +41,45 @@ func _reset_pieces_to_start():
 			var spot = board._p2_start_area.get_available_spot()
 			await board.move(piece, spot)
 
+
+# This function tests the _evaluate_moves and _evaluate_move function
+func _test_best_move():
+	# Construct 3 moves
+	var ai_piece = board.get_pieces(General.PlayerID.TWO)[0] as Piece
+	var ai_piece2 = board.get_pieces(General.PlayerID.TWO)[1] as Piece
+	var moves = [] as Array[Move]
+	
+	# TEST: Check score of rosette move with piece progression
+	var mock_current_spot = board.get_spot(0, General.PlayerID.TWO)
+	var mock_landing_spot = board.get_spot(3, General.PlayerID.TWO) as Spot
+	var move1 := Move.new(ai_piece, mock_current_spot, mock_landing_spot)
+	moves.append(move1)
+	
+	# Approximately 0.715
+	var expected = ai_player.grants_roll_base_score + 1.0/14.0 * ai_player.piece_progress_score_weight
+	var result = ai_player._evaluate_move(move1)
+	assert(expected == result, "Result %s" % result)
+	
+	# TEST: Check score of a capture move
+	var opponent_piece = board.get_pieces(General.PlayerID.ONE).front()
+	var opponent_landing_spot = board.get_spot(4, General.PlayerID.ONE) 
+	await board.move(opponent_piece, opponent_landing_spot)
+
+	var starting_spot = board.get_current_spot(ai_piece2)
+	mock_landing_spot = board.get_spot(4, General.PlayerID.TWO)
+	var move2 := Move.new(ai_piece2, starting_spot, mock_landing_spot)
+	moves.append(move2)
+	
+	expected = ai_player.capture_base_score
+	result = ai_player._evaluate_move(move2)
+	assert(expected == result, "Result %s" % result)
+	
+	# TEST: Capture move should be the best move.
+	# NOTE: This final test depends on the values.
+	expected = ai_piece2
+	result = ai_player._evaluate_moves(moves) as Piece
+	assert(expected == result, "Result %s" % result)
+	
 
 #region Base score tests
 func _test_base_score():

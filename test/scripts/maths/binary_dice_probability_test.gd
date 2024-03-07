@@ -2,6 +2,7 @@ extends Node
 
 func _ready():
 	four_binary_tests()
+	print("All tests successfull!")
 	
 func four_binary_tests():
 	# TEST: Chance to throw 0
@@ -32,11 +33,11 @@ func four_binary_tests():
 	
 #func one_d6_six_test():
 	#var expected = 1.0/6.0
-	#var result = DiceProbabilities.get_probability_of_value(6, DiceProbabilities.DiceType.D6, 1) 
+	#var result = DiceProbabilities.get_probability_of_value(6, 1, DiceProbabilities.DiceType.D6) 
 	#assert(expected == result, "Result: %d" % result)
 #
 #
 #func two_d6_six_test():
 	#var expected = 5.0/36.0
-	#var result = DiceProbabilities.get_probability_of_value(6, DiceProbabilities.DiceType.D6, 2) 
+	#var result = DiceProbabilities.get_probability_of_value(6, 2, DiceProbabilities.DiceType.D6) 
 	#assert(expected == result, "Result: %d" % result)

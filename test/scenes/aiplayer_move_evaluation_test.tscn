@@ -11,6 +11,8 @@ script = ExtResource("1_ghxrv")
 
 [node name="AIPlayerAdvanced" type="Node" parent="."]
 script = ExtResource("2_qljqm")
+capture_base_score = 0.95
+piece_progress_score_weight = 0.15
 
 [node name="Board" parent="." instance=ExtResource("3_dl5i8")]
 
