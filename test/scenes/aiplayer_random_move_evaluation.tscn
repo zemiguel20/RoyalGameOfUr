@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk6ytoau4ote5"]
+
+[ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="2_8yfwd"]
+[ext_resource type="PackedScene" uid="uid://w80iov7yarwa" path="res://scenes/mockup_board.tscn" id="3_huyy2"]
+[ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="4_eunpj"]
+
+[sub_resource type="GDScript" id="GDScript_11y5b"]
+resource_name = "ai_random_test"
+script/source = "extends Node
+
+## NOTE I will write some basic tests for the random AI if we ever decide to use it.
+
+
+#region To Move! Random AI
+## From here we test the random ai	
+	
+#func test_move_1():
+	#var moves : Array[Move]
+	#
+	#
+	#var move1 = Move.new(piece1, null, true)
+	#moves.append(move1)
+	#
+	#var move2 = Move.new(piece2, null, false)
+	#moves.append(move2)
+	#
+	#var move3 = Move.new(piece3, null, true)
+	#moves.append(move3)
+	#
+	#var expected = move1.piece
+	#var result = ai_player._evaluate_moves(moves)
+	#
+	#assert(expected == result)
+#
+	#
+#func test_one_move():
+	#var moves : Array[Move]
+	#
+	#var piece1 = Piece.new()	
+	#var move1 = Move.new(piece1, null, true)
+	#moves.append(move1)
+	#
+	#var expected = move1.piece
+	#var result = ai_player._evaluate_moves(moves)
+	#
+	#assert(expected == result)
+	
+#endregion
+"
+
+[node name="AiplayerRandomTest" type="Node2D"]
+script = SubResource("GDScript_11y5b")
+
+[node name="AIPlayerAdvanced" type="Node" parent="."]
+script = ExtResource("2_8yfwd")
+
+[node name="Board" parent="." instance=ExtResource("3_huyy2")]
+
+[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "ai_player")]
+script = ExtResource("4_eunpj")
+board = NodePath("../Board")
+ai_player = NodePath("../AIPlayerAdvanced")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999962, 0.00765079, -0.00419737, 0, 0.480989, 0.876727, 0.00872654, -0.876693, 0.48097, 2.76681, 13.3698, 7.91143)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.999962, 0.00765079, -0.00419737, 0, 0.480989, 0.876727, 0.00872654, -0.876693, 0.48097, 2.76682, 13.3676, 2.5028)

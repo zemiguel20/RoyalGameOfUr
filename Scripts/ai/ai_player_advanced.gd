@@ -88,7 +88,7 @@ func _calculate_central_rosette_modifier(move: Move):
 	# I made the assumption that occupying the central rosettes is better, the more opponent pieces are still at the start.
 	var score = 1
 	if (num_of_passed_pieces != 0):	
-		var passed_pieces_rate: float = (num_of_passed_pieces / num_of_total_pieces)	# Value between 0 and 1
+		var passed_pieces_rate: float = (num_of_passed_pieces as float / num_of_total_pieces)	# Value between 0 and 1
 		score = 1 - passed_pieces_rate													# Value between 0 and 1
 	
 	var final_score = 0
@@ -97,7 +97,7 @@ func _calculate_central_rosette_modifier(move: Move):
 	if (is_landing_spot_central_rosette):
 		final_score += score
 	
-	return central_rosette_score_weight * score
+	return central_rosette_score_weight * final_score
 	
 	
 func _calculate_spot_danger(spot: Spot) -> float:

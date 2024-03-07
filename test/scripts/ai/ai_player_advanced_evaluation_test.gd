@@ -12,6 +12,8 @@ func _ready():
 	await _test_safety_modifier()
 	await _reset_pieces_to_start()
 	await _test_progress_modifier()
+	await _test_central_rosette_modifier()
+	await _reset_pieces_to_start()	
 	print("All tests successfull!")
 	
 	
@@ -74,7 +76,7 @@ func _test_base_score():
 	var expected4 = ai_player.end_move_base_score
 	var result4 = ai_player._calculate_base_score(end_move)
 	assert(expected4 == result4, "Base score result: %d" % result4)
-	print("Base score tests successfull!")	
+	print("Base score tests completed!")	
 	
 #endregion
 	
@@ -119,7 +121,7 @@ func _test_safety_modifier_to_danger():
 	var expected3 = -(ai_player.base_spot_danger + 15.0/16.0)
 	var result3 = ai_player._calculate_safety_modifier(move)
 	assert(expected3 == result3, "Result: %d" % result3)
-	print("Danger safety tests completed")
+	print("Danger safety tests completed!")
 	
 	
 func _test_safety_modifier_to_safety():
@@ -195,45 +197,70 @@ func _test_progress_modifier():
 	result = ai_player._calculate_progress_modifier(move)
 	assert(expected == result, "Result %s" % result)
 	
-	print("Progress Modifier Tests Complete!")
+	print("Progress Modifier Tests Completed!")
 #endregion	
 	
 #region Central Rosette Tests
-
+func _test_central_rosette_modifier():
+	# TEST: Move to a regular spot, no score
+	var ai_piece = board.get_pieces(General.PlayerID.TWO).front()
+	
+	var mock_current_spot = board.get_spot(0, General.PlayerID.TWO) as Spot
+	var mock_landing_spot = board.get_spot(2, General.PlayerID.TWO) as Spot
+	var move := Move.new(ai_piece, mock_current_spot, mock_landing_spot)
+	
+	var expected = 0.0 * ai_player.central_rosette_score_weight
+	var result = ai_player._calculate_central_rosette_modifier(move)
+	assert(expected == result, "Result %s" % result)
+	
+	# TEST: Move to a player exclusive rosette
+	mock_current_spot = board.get_spot(0, General.PlayerID.TWO) as Spot
+	mock_landing_spot = board.get_spot(3, General.PlayerID.TWO) as Spot
+	move = Move.new(ai_piece, mock_current_spot, mock_landing_spot)
+	
+	expected = 0.0 * ai_player.central_rosette_score_weight
+	result = ai_player._calculate_central_rosette_modifier(move)
+	assert(expected == result, "Result %s" % result)
+	
+	# TEST: Move towards a central rosette with many pieces still at the start.
+	mock_current_spot = board.get_spot(1, General.PlayerID.TWO) as Spot
+	mock_landing_spot = board.get_spot(7, General.PlayerID.TWO) as Spot
+	move = Move.new(ai_piece, mock_current_spot, mock_landing_spot)
+	
+	expected = 1.0 * ai_player.central_rosette_score_weight
+	result = ai_player._calculate_central_rosette_modifier(move)
+	assert(expected == result, "Result %s" % result)
+	
+	# TEST: Negative score when moving away from central rosette. 
+	mock_current_spot = board.get_spot(7, General.PlayerID.TWO) as Spot
+	mock_landing_spot = board.get_spot(10, General.PlayerID.TWO) as Spot
+	move = Move.new(ai_piece, mock_current_spot, mock_landing_spot)
+	
+	expected = -1.0 * ai_player.central_rosette_score_weight
+	result = ai_player._calculate_central_rosette_modifier(move)
+	assert(expected == result, "Result %s" % result)
+	
+	# TEST: Move towards a central rosette when half of the players pieces have passed this spot.
+	# TODO: Change this test according to the changes in this rule
+	# Move 3 opponent pieces past the rosette
+	for _i in range(0, 3):
+		var piece: Piece = board.get_pieces(General.PlayerID.ONE)[_i]
+		var landing_spot = board.get_spot(8 + _i, General.PlayerID.ONE)
+		await board.move(piece, landing_spot)
+		
+	# Move 2 opponent piece to the end zone
+	for _i in range(3, 5):
+		var piece: Piece = board.get_pieces(General.PlayerID.ONE)[_i]
+		var landing_spot = board._p1_end_area.get_available_spot()
+		await board.move(piece, landing_spot)
+		
+	mock_current_spot = board.get_spot(1, General.PlayerID.TWO) as Spot
+	mock_landing_spot = board.get_spot(7, General.PlayerID.TWO) as Spot
+	move = Move.new(ai_piece, mock_current_spot, mock_landing_spot)
+	
+	expected = (1.0 - 5.0/7.0) * ai_player.central_rosette_score_weight
+	result = ai_player._calculate_central_rosette_modifier(move)
+	assert(expected == result, "Result %s" % result)
+	
+	print("Central Rosette Modifiers Tests Completed!")
 #endregion	
-	
-#region To Move! Random AI
-## From here we test the random ai	
-	
-#func test_move_1():
-	#var moves : Array[Move]
-	#
-	#
-	#var move1 = Move.new(piece1, null, true)
-	#moves.append(move1)
-	#
-	#var move2 = Move.new(piece2, null, false)
-	#moves.append(move2)
-	#
-	#var move3 = Move.new(piece3, null, true)
-	#moves.append(move3)
-	#
-	#var expected = move1.piece
-	#var result = ai_player._evaluate_moves(moves)
-	#
-	#assert(expected == result)
-#
-	#
-#func test_one_move():
-	#var moves : Array[Move]
-	#
-	#var piece1 = Piece.new()	
-	#var move1 = Move.new(piece1, null, true)
-	#moves.append(move1)
-	#
-	#var expected = move1.piece
-	#var result = ai_player._evaluate_moves(moves)
-	#
-	#assert(expected == result)
-	
-#endregion
