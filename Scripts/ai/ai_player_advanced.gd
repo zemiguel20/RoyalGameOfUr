@@ -67,7 +67,7 @@ func _calculate_safety_modifier(move: Move):
 func _calculate_progress_modifier(move: Move):
 	var current_tile_index = _board.get_spot_index(move.old_spot, _player_id)
 	var track_size = _board.get_track_size(_player_id)
-	var progression: float = current_tile_index/track_size		# Value between 0 and 1
+	var progression: float = (current_tile_index + 1.0)/track_size		# Value between 0 and 1
 	
 	return piece_progress_score_weight * progression 
 	

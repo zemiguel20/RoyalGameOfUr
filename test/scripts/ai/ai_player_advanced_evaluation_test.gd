@@ -10,15 +10,31 @@ func _ready():
 	await _test_base_score()
 	await _reset_pieces_to_start()
 	await _test_safety_modifier()
+	await _reset_pieces_to_start()
+	await _test_progress_modifier()
 	print("All tests successfull!")
 	
 	
 func _setup():
 	# Manual setup for ai_player lol
+	Engine.time_scale = 4.0
 	board.setup(7)
 	ai_player.setup(gamemode, General.PlayerID.TWO)
 	
 	
+func _reset_pieces_to_start():
+	# Move player_one pieces to starts
+	for piece: Piece in board.get_pieces(General.PlayerID.ONE):
+		if (not board.is_in_start_zone(piece)):
+			var spot = board._p1_start_area.get_available_spot()
+			await board.move(piece, spot)
+			
+	for piece: Piece in board.get_pieces(General.PlayerID.TWO):
+		if (not board.is_in_start_zone(piece)):
+			var spot = board._p2_start_area.get_available_spot()
+			await board.move(piece, spot)
+
+
 #region Base score tests
 func _test_base_score():
 	# TEST: Normal base score, by moving to an empty normal square
@@ -67,19 +83,6 @@ func _test_base_score():
 func _test_safety_modifier():
 	await _test_safety_modifier_to_danger()
 	await _test_safety_modifier_to_safety()
-
-
-func _reset_pieces_to_start():
-	# Move player_one pieces to starts
-	for piece: Piece in board.get_pieces(General.PlayerID.ONE):
-		if (not board.is_in_start_zone(piece)):
-			var spot = board._p1_start_area.get_available_spot()
-			await board.move(piece, spot)
-			
-	for piece: Piece in board.get_pieces(General.PlayerID.TWO):
-		if (not board.is_in_start_zone(piece)):
-			var spot = board._p2_start_area.get_available_spot()
-			await board.move(piece, spot)
 
 
 func _test_safety_modifier_to_danger():
@@ -137,8 +140,9 @@ func _test_safety_modifier_to_safety():
 	var mock_landing_spot2 = board.get_spot(5, General.PlayerID.TWO) as Spot
 	var move2 := Move.new(ai_piece, mock_current_spot, mock_landing_spot2)
 	
-	# TODO: Correct expected!!
-	var expected2 = ai_player.base_spot_danger
+	# Danger on new spot is 11/16 + base_danger_score, since opponent can throw 2, 3 or 4
+	# I put the whole calculation here due to float precision
+	var expected2 = (0.1 + 15.0/16.0 - 0.1 - 11.0/16.0)
 	var result2 = ai_player._calculate_safety_modifier(move2)	
 	assert(expected2 == result2, "Result: %d" % result2)
 	
@@ -148,7 +152,54 @@ func _test_safety_modifier_to_safety():
 	var expected3 = ai_player.base_spot_danger
 	var result3 = ai_player._calculate_safety_modifier(move)	
 	assert(expected3 == result3, "Result: %d" % result3)
+#endregion	
 	
+#region Progress Score Modifier Tests
+func _test_progress_modifier():
+	# Get a piece that is in the starting area
+	var ai_piece = board.get_pieces(General.PlayerID.TWO).front()
+	
+	# TEST: Progress modifier of spot in starting zone
+	var mock_current_spot = board.get_current_spot(ai_piece)
+	var mock_landing_spot = board.get_spot(1, General.PlayerID.TWO) as Spot
+	var move := Move.new(ai_piece, mock_current_spot, mock_landing_spot)
+	
+	var expected = 0.0 * ai_player.piece_progress_score_weight
+	var result = ai_player._calculate_progress_modifier(move)
+	assert(expected == result, "Result %s" % result)
+	
+	# TEST: Progress modifier of first tile should be higher than the starting zone!
+	mock_current_spot = board.get_spot(0, General.PlayerID.TWO)
+	mock_landing_spot = board.get_spot(2, General.PlayerID.TWO) as Spot
+	move = Move.new(ai_piece, mock_current_spot, mock_landing_spot)	
+	
+	expected = 1.0/board.get_track_size(General.PlayerID.TWO) * ai_player.piece_progress_score_weight
+	result = ai_player._calculate_progress_modifier(move)
+	assert(expected == result, "Result %s" % result)	
+	
+	# TEST: Progress modifier of spot on player exclusive part
+	mock_current_spot = board.get_spot(2, General.PlayerID.TWO)
+	mock_landing_spot = board.get_spot(4, General.PlayerID.TWO) as Spot
+	move = Move.new(ai_piece, mock_current_spot, mock_landing_spot)		
+	
+	expected = 3.0/board.get_track_size(General.PlayerID.TWO) * ai_player.piece_progress_score_weight
+	result = ai_player._calculate_progress_modifier(move)
+	assert(expected == result, "Result %s" % result)	
+	
+	# TEST: Progress modifier of spot in shared path 
+	mock_current_spot = board.get_spot(9, General.PlayerID.TWO)
+	mock_landing_spot = board.get_spot(11, General.PlayerID.TWO) as Spot
+	move = Move.new(ai_piece, mock_current_spot, mock_landing_spot)		
+	
+	expected = 10.0/board.get_track_size(General.PlayerID.TWO) * ai_player.piece_progress_score_weight
+	result = ai_player._calculate_progress_modifier(move)
+	assert(expected == result, "Result %s" % result)
+	
+	print("Progress Modifier Tests Complete!")
+#endregion	
+	
+#region Central Rosette Tests
+
 #endregion	
 	
 #region To Move! Random AI
