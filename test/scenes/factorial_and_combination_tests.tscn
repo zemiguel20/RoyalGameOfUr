@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://yo6mvombk1bb"]
+
+[sub_resource type="GDScript" id="GDScript_jh4se"]
+resource_name = "factorial_combination_tests"
+script/source = "extends Node
+
+func _ready():
+	_factorial_tests()
+	_combination_tests()
+	
+
+func _factorial_tests():
+	# TEST 10
+	var expected = 3628800
+	var result = General.factorial(10)
+	assert(expected == result, \"Result %s\" % result)
+	
+	# TEST 0	
+	expected = 1
+	result = General.factorial(0)
+	assert(expected == result, \"Result %s\" % result)
+
+	# TEST 1
+	expected = 1
+	result = General.factorial(1)
+	assert(expected == result, \"Result %s\" % result)
+	
+	# TEST -1
+	expected = -1	# Error Code
+	result = General.factorial(-1)
+	assert(expected == result, \"Result %s\" % result)	
+
+	# TEST -5
+	expected = -1	# Error Code
+	result = General.factorial(-5)
+	assert(expected == result, \"Result %s\" % result)	
+	
+	print(\"We expect to get two errors in this test.\")
+	print(\"Factorial tests completed successfully!\")
+
+func _combination_tests():
+	# TODO: At the moment this is not necassary, since the probability tests for dice already work.
+	# TEST normal example
+	var expected = 43758
+	var result = General.get_combinations(18, 8)
+	assert(expected == result, \"Result %s\" % result)
+	
+	# TEST n = r
+	expected = 1
+	result = General.get_combinations(8, 8)
+	assert(expected == result, \"Result %s\" % result)
+	
+	# TEST r = 0
+	expected = 1
+	result = General.get_combinations(8, 0)
+	assert(expected == result, \"Result %s\" % result)
+	
+	# TEST r > n
+	expected = -1
+	# Should push an error
+	result = General.get_combinations(8, 9)
+	assert(expected == result, \"Result %s\" % result)
+	
+	# TEST r < 0
+	expected = -1
+	# Should push an error
+	result = General.get_combinations(8, -1)
+	assert(expected == result, \"Result %s\" % result)
+	print(\"We expect to get two more errors in this test.\")
+	print(\"Combination tests completed successfully!\")
+"
+
+[node name="FactorialAndCombinationTests" type="Node"]
+script = SubResource("GDScript_jh4se")

@@ -115,7 +115,7 @@ func _calculate_spot_danger(spot: Spot) -> float:
 		var temp_spot = _board.get_spot(index - _i, opponent_id)
 		var contains_opponent = _board.is_occupied_by_player(temp_spot, opponent_id) 
 		if (contains_opponent):
-			var capture_chance = DiceProbabilities.get_probability_of_value(_i, DiceProbabilities.DiceType.Binary, 4)
+			var capture_chance = DiceProbabilities.get_probability_of_value(_i, _dice._num_of_dice)
 			total_capture_chance += capture_chance
 	
 	return base_spot_danger + total_capture_chance
