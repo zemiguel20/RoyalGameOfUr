@@ -2,6 +2,7 @@ class_name AIPlayerAdvanced
 extends AIPlayerBase
 
 ## Keep in mind that the default values are just an estimate of what a difficult AI would have.
+## Changing these values can greatly impact the behaviour of the AI
 
 @export_category("Base Scores")
 @export_range(0, 1) var capture_base_score: float = 0.9
