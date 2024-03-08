@@ -23,9 +23,9 @@ func _ready():
 	
 	
 func _setup():
-	# Manual setup for ai_player lol
 	Engine.time_scale = 4.0
-	board.setup(7)
+	# Manually setup board and player without starting the game.
+	board.setup(gamemode.num_pieces_per_player)
 	ai_player.setup(gamemode, General.PlayerID.TWO)
 	
 	

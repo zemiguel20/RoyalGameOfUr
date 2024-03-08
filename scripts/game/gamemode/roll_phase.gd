@@ -7,7 +7,7 @@ extends Phase
 func start():
 	# If its an ai's turn, let the ai know it can 'click' on the dice.
 	if (_gamemode.is_ai_turn()):
-		_gamemode.ai_player.roll()
+		_gamemode.get_current_ai().roll()
 	else:
 		_gamemode.dice.enable_selection()
 		

@@ -12,11 +12,12 @@ signal game_finished
 @export var dice: Dice
 @export_range(0, 10) var num_pieces_per_player: int = 7
 ## This value is optional, when not assigned there is hotseat.
-@export var ai_player: AIPlayerBase
+@export var ai_player_one: AIPlayerBase
+@export var ai_player_two: AIPlayerBase
 
 var current_player: int
 var _phase: Phase = Phase.new(self)
-var _has_ai_opponent: bool
+#var _has_ai_opponent: bool
 
 
 ## Initializes the game state and context
@@ -30,9 +31,12 @@ func start_game():
 		piece.clicked.connect(move)
 		piece.disable_selection()
 
-	_has_ai_opponent = ai_player != null
-	if (_has_ai_opponent):
-		ai_player.setup(self, General.PlayerID.TWO)
+	if (ai_player_one != null):
+		ai_player_one.setup(self, General.PlayerID.ONE)
+		print_debug("Setup AI One")
+	if (ai_player_two != null):
+		ai_player_two.setup(self, General.PlayerID.TWO)
+		print_debug("Setup AI Two")		
 
 	changeState(RollPhase.new(self))
 
@@ -71,8 +75,15 @@ func end_game():
 
 ## Quick helper method returning whether it is the turn of an ai or not 
 func is_ai_turn():
-	return _has_ai_opponent && current_player == General.PlayerID.TWO
+	return ((ai_player_one != null and current_player == General.PlayerID.ONE) or
+		(ai_player_two != null and current_player == General.PlayerID.TWO))
 
+
+func get_current_ai():
+	if (current_player == General.PlayerID.ONE):
+		return ai_player_one
+	elif (current_player == General.PlayerID.TWO):
+		return ai_player_two
 
 func _choose_starting_player():
 	current_player = randi_range(General.PlayerID.ONE, General.PlayerID.TWO)

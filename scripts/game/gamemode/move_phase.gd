@@ -24,7 +24,7 @@ func start():
 	
 	_is_ai_turn = _gamemode.is_ai_turn()
 	if (_is_ai_turn):
-		_gamemode.ai_player.make_move(_legal_moves)
+		_gamemode.get_current_ai().make_move(_legal_moves)
 	else:
 		_link_highlighting()
 		_enable_piece_selection()

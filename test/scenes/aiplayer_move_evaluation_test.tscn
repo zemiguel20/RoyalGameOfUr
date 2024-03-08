@@ -9,6 +9,12 @@
 [node name="AiplayerMoveEvaluationTest" type="Node2D"]
 script = ExtResource("1_ghxrv")
 
+[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice", "ai_player_two")]
+script = ExtResource("4_luep3")
+board = NodePath("../Board")
+dice = NodePath("../Dice")
+ai_player_two = NodePath("../AIPlayerAdvanced")
+
 [node name="AIPlayerAdvanced" type="Node" parent="."]
 script = ExtResource("2_qljqm")
 capture_base_score = 0.95
@@ -20,12 +26,6 @@ piece_progress_score_weight = 0.15
 transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
 _roll_shaking_enabled = true
 _use_hitbox_instead_of_dice_colliders = true
-
-[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice", "ai_player")]
-script = ExtResource("4_luep3")
-board = NodePath("../Board")
-dice = NodePath("../Dice")
-ai_player = NodePath("../AIPlayerAdvanced")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999962, 0.00765079, -0.00419737, 0, 0.480989, 0.876727, 0.00872654, -0.876693, 0.48097, 2.76681, 13.3698, 7.91143)
