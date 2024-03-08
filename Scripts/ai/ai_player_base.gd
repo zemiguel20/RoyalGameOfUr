@@ -13,6 +13,15 @@ extends Node
 ## Maximum duration the AI will shake the dice. 
 @export_range(0.1,3.0) var max_shaking_duration: float = 2.0 
 
+@export_category("Moving Behaviour")
+## Minimum duration the AI will take to choose a move. 
+## We simulate thinking time so that the AI feels more humane.
+@export_range(0.1,3.0) var min_moving_duration: float = 0.3
+## Maximum duration the AI will take to choose a move. 
+## We simulate thinking time so that the AI feels more humane.
+@export_range(0.1,3.0) var max_moving_duration: float = 2.0 
+
+
 var _gamemode: Gamemode
 var _board: Board
 var _dice: Dice
@@ -39,17 +48,13 @@ func roll():
 	var random = randf()
 	var shake_this_turn = random <= shaking_probability
 	
+	var shaking_duration = 0
 	if (_dice._roll_shaking_enabled and shake_this_turn):
-		var shaking_duration = randf_range(min_shaking_duration, max_shaking_duration)
-		var clickEvent = InputEventMouseButton.new()
-		clickEvent.pressed = true
-		_dice._on_die_input_event(null, clickEvent, null, null, null)
+		shaking_duration = randf_range(min_shaking_duration, max_shaking_duration)
 		
-		clickEvent.pressed = false
-		await get_tree().create_timer(shaking_duration).timeout
-		_dice._input(clickEvent)
-	else:
-		_dice.start_roll()
+	_dice.on_dice_click()
+	await get_tree().create_timer(shaking_duration).timeout
+	_dice.on_dice_release()
 	
 	
 ## Decides which piece to move, then make that piece move.
@@ -60,4 +65,6 @@ func make_move(moves : Array[Move]):
 	
 ## Function to signal a piece to move, mocking the 'clicking' behaviour of the player.
 func _move_piece(piece : Piece):
-	piece.on_ai_click()
+	var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
+	await get_tree().create_timer(thinking_duration).timeout	
+	piece.on_click()
