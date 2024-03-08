@@ -2,8 +2,9 @@ class_name MovePhase
 extends Phase
 ## Rolling phase of the [Gamemode]. Implements behaviour for the piece move action.
 
-var _legal_pieces: Array[Piece]
 var _legal_moves: Array[Move]
+# This array is extra so we can still access the pieces quickly when enabling selection
+var _legal_pieces: Array[Piece]
 
 # When a turn has ended, we will need to unlink the visual effect for spots if the player was not ai.
 # However, when movephase.end() is called, the player has already been switched.
@@ -101,9 +102,3 @@ func _unlink_highlighting() -> void:
 		var spot = move.new_spot
 		piece.mouse_entered.disconnect(spot.highlight)
 		piece.mouse_exited.disconnect(spot.dehighlight)
-		
-## Used by AI, will refactor later. It makes more sense to have an "is_occupied" in general as well.
-func _is_capturable(spot: Spot) -> bool:
-	var other_player_id = General.get_other_player_id(_gamemode.current_player)
-	return _gamemode.board.is_occupied_by_player(spot, other_player_id) and not spot.is_rosette
-	

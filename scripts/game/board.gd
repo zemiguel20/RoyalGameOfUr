@@ -57,6 +57,56 @@ func get_pieces(player: int) -> Array[Piece]:
 	var pieces: Array[Piece] = []
 	pieces.append_array(_p_track[player][4])
 	return pieces
+	
+	
+## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
+func get_current_spot(piece: Piece) -> Spot:
+	for spot in _get_start_area(piece.player).get_all_spots():
+		if spot.piece == piece:
+			return spot
+	
+	for spot in _get_track(piece.player):
+		if spot.piece == piece:
+			return spot
+	
+	for spot in _get_end_area(piece.player).get_all_spots():
+		if spot.piece == piece:
+			return spot
+	
+	return null # If piece is not placed return null
+	
+
+## Returns the spot the [param piece] will land on with the given [param roll].
+## Returns [code]null[/code] if landing outside board bounds, that is, past the last spot of the track.
+func get_landing_spot(piece: Piece, roll: int) -> Spot:
+	var start_area = _get_start_area(piece.player)
+	var end_area = _get_end_area(piece.player)
+	
+	# NOTE Get track with added start and end spot for simplicity since we will work with indexes
+	
+	var track  = _get_track(piece.player).duplicate()
+	var current_spot = get_current_spot(piece)
+	
+	# If the current spot is either a start spot or an end spot, insert it in the track
+	# Otherwise insert just an available spot
+	if start_area.get_all_spots().has(current_spot):
+		track.insert(0, current_spot)
+	else:
+		var empty_spot = start_area.get_available_spot()
+		track.insert(0, empty_spot)
+	if end_area.get_all_spots().has(current_spot):
+		track.append(current_spot)
+	else:
+		var empty_spot = end_area.get_available_spot()
+		track.append(empty_spot)
+	
+	# Sample landing_spot from track using current index + roll
+	var current_index = track.find(current_spot)
+	var target_index = current_index + roll
+	if target_index < track.size():
+		return track[target_index]
+	else:
+		return null # Out of bounds
 
 
 ## Returns [code]true[/code] if the [param spot] is occupied by a piece of the given [param player].
@@ -120,56 +170,6 @@ func get_num_pieces_past_spot(spot: Spot, player: General.PlayerID) -> int:
 func get_track_size(player: General.PlayerID):
 	return _get_track(player).size()
 	
-	
-## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
-func get_current_spot(piece: Piece) -> Spot:
-	for spot in _get_start_area(piece.player).get_all_spots():
-		if spot.piece == piece:
-			return spot
-	
-	for spot in _get_track(piece.player):
-		if spot.piece == piece:
-			return spot
-	
-	for spot in _get_end_area(piece.player).get_all_spots():
-		if spot.piece == piece:
-			return spot
-	
-	return null # If piece is not placed return null
-	
-
-## Returns the spot the [param piece] will land on with the given [param roll].
-## Returns [code]null[/code] if landing outside board bounds, that is, past the last spot of the track.
-func get_landing_spot(piece: Piece, roll: int) -> Spot:
-	var start_area = _get_start_area(piece.player)
-	var end_area = _get_end_area(piece.player)
-	
-	# NOTE Get track with added start and end spot for simplicity since we will work with indexes
-	
-	var track  = _get_track(piece.player).duplicate()
-	var current_spot = get_current_spot(piece)
-	
-	# If the current spot is either a start spot or an end spot, insert it in the track
-	# Otherwise insert just an available spot
-	if start_area.get_all_spots().has(current_spot):
-		track.insert(0, current_spot)
-	else:
-		var empty_spot = start_area.get_available_spot()
-		track.insert(0, empty_spot)
-	if end_area.get_all_spots().has(current_spot):
-		track.append(current_spot)
-	else:
-		var empty_spot = end_area.get_available_spot()
-		track.append(empty_spot)
-	
-	# Sample landing_spot from track using current index + roll
-	var current_index = track.find(current_spot)
-	var target_index = current_index + roll
-	if target_index < track.size():
-		return track[target_index]
-	else:
-		return null # Out of bounds
-
 
 func _get_movement_path(piece: Piece, landing_spot: Spot) -> Array[Vector3]:
 	# if going back to start zone, go directly
