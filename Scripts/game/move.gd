@@ -1,7 +1,7 @@
 class_name Move
 
 ## Data structure for a Move.
-## For now, this is most of the data needed by the AI to evaluate moves.
+## From this data, AI is able to get more specific information about the move from the Board.gd class.
 var piece: Piece
 var old_spot: Spot
 var new_spot: Spot

@@ -15,7 +15,6 @@ signal roll_finished(value: int) # Emitted when all dice finished, with final va
 @export var _use_hitbox_instead_of_dice_colliders: bool
 
 
-
 ## Current rolled value.
 var value: int = 0 
 
@@ -76,7 +75,10 @@ func roll() -> int:
 
 
 func on_dice_click():
-	if _roll_shaking_enabled and not _is_shaking:
+	if (_is_shaking):
+		return
+	
+	if _roll_shaking_enabled:
 		start_dice_shake()
 	else:
 		_start_roll()

@@ -23,6 +23,7 @@ static func get_random_position_in_boxshape_3D(shape : BoxShape3D) -> Vector3:
 ## Calculates the combinations:	
 ## The number of ways to choose a sample of r elements from a set of n distinct objects 
 ## where order does not matter and replacements are not allowed.
+## @tutorial: https://www.onlinemathlearning.com/permutations-math.html
 static func get_combinations(n: int, r: int):
 	if (n < r or n < 0 or r < 0):
 		push_error("Invalid Argument: Please enter values where n >= r >= 0")

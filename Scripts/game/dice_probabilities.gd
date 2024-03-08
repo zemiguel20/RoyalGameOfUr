@@ -1,14 +1,13 @@
 class_name DiceProbabilities
 
 ## This class contians static functions for calculating probabilities for a variaty of dice.
-##
-## @tutorial: https://www.onlinemathlearning.com/permutations-math.html
 
-enum DiceType {
+enum DiceType 
+{
 	Binary = 0,
 }
 
-# This function currently only works for binary! Might as well have a seperate function for different dice types.
+## This function currently only works for binary! Might as well have a seperate function for different dice types.
 static func get_probability_of_value(value_to_throw: int, num_of_dice: int = 4, type: DiceType = DiceType.Binary):
 	# Chance for one die:
 	var num_of_outcomes = _get_num_of_outcomes(type)
@@ -18,7 +17,8 @@ static func get_probability_of_value(value_to_throw: int, num_of_dice: int = 4, 
 	var num_of_combinations = General.get_combinations(num_of_dice, value_to_throw)    # TODO: This is only true for binary tho
 	return base_chance * num_of_combinations
 	
-	
+## Get the total number of outcomes a dicetype has. 
+## Example: Binary has 2, and D6 has 6.
 static func _get_num_of_outcomes(type: DiceType):
 	if (type == DiceType.Binary):
 		return 2

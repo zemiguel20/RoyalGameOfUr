@@ -28,7 +28,7 @@ func move(movement_path: Array[Vector3]):
 		await _move_arc(pos)
 
 
-## Function that can be called from AI to simulate click.
+## AI calls this function directly
 func on_click():
 	clicked.emit(self)
 
