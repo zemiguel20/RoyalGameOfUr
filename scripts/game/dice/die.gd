@@ -81,7 +81,7 @@ func roll() -> void:
 
 # Triggers when the sleeping state of the rigidbody is changed
 func _on_movement_stopped():
-	if (not _is_rolling):
+	if not _is_rolling:
 		return
 
 	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep

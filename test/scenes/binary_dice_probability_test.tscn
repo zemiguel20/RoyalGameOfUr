@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b584tmjsrc7py"]
+
+[ext_resource type="Script" path="res://test/scripts/maths/binary_dice_probability_test.gd" id="1_mphqb"]
+
+[node name="DiceProbabilityTest" type="Node"]
+script = ExtResource("1_mphqb")

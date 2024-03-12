@@ -74,16 +74,16 @@ func _test_winner():
 	assert(board.is_winner(General.PlayerID.ONE))
 "
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xgm56"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u3dtb"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_eqcx1"]
-material = SubResource("StandardMaterial3D_xgm56")
+material = SubResource("StandardMaterial3D_u3dtb")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hrb8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3bqas"]
 albedo_color = Color(0.474758, 0.800837, 1, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_t1xng"]
-material = SubResource("StandardMaterial3D_2hrb8")
+material = SubResource("StandardMaterial3D_3bqas")
 
 [node name="BoardTest" type="Node"]
 script = SubResource("GDScript_qu5mb")

@@ -2,7 +2,6 @@ class_name Piece
 extends StaticBody3D
 ## Piece of the game. Has selection and highlighting functionality. Also can be physically moved.
 
-
 signal clicked(sender: Piece)
 
 @export var move_arc_height: float = 1.0
@@ -29,9 +28,14 @@ func move(movement_path: Array[Vector3]):
 		await _move_arc(pos)
 
 
+## AI calls this function directly
+func on_click():
+	clicked.emit(self)
+
+
 func _on_input_event(_camera, event: InputEvent, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
-		clicked.emit(self)
+		on_click()
 
 
 func _move_arc(target_pos : Vector3):
