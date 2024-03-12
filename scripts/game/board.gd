@@ -57,11 +57,28 @@ func get_pieces(player: int) -> Array[Piece]:
 	var pieces: Array[Piece] = []
 	pieces.append_array(_p_track[player][4])
 	return pieces
-
+	
+	
+## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
+func get_current_spot(piece: Piece) -> Spot:
+	for spot in _get_start_area(piece.player).get_all_spots():
+		if spot.piece == piece:
+			return spot
+	
+	for spot in _get_track(piece.player):
+		if spot.piece == piece:
+			return spot
+	
+	for spot in _get_end_area(piece.player).get_all_spots():
+		if spot.piece == piece:
+			return spot
+	
+	return null # If piece is not placed return null
+	
 
 ## Returns the spot the [param piece] will land on with the given [param roll].
 ## Returns [code]null[/code] if landing outside board bounds, that is, past the last spot of the track.
-func  get_landing_spot(piece: Piece, roll: int) -> Spot:
+func get_landing_spot(piece: Piece, roll: int) -> Spot:
 	var start_area = _get_start_area(piece.player)
 	var end_area = _get_end_area(piece.player)
 	
@@ -110,30 +127,49 @@ func is_winner(player: int) -> bool:
 ## Otherwise return  [code]false[/code].
 func is_in_start_zone(piece: Piece) -> bool:
 	return _get_start_area(piece.player).get_all_pieces().has(piece)
-
-
-## Returns [code]true[/code] if the [param piece] is in the corresponding player's ending zone.
+	
+	
+## Returns [code]true[/code] if the [param spot] is a spot in any of the end zones.
 ## Otherwise return  [code]false[/code].
-func is_in_end_zone(piece: Piece) -> bool:
-	return _get_end_area(piece.player).get_all_pieces().has(piece)
-
-
-## Returns the current [Spot] the [param piece] is on. Returns [code]null[/code] if the piece is in none.
-func get_current_spot(piece: Piece) -> Spot:
-	for spot in _get_start_area(piece.player).get_all_spots():
-		if spot.piece == piece:
-			return spot
+func is_in_end_zone(spot: Spot) -> bool:
+	return (_p1_end_area.get_all_spots().has(spot) or
+		_p2_end_area.get_all_spots().has(spot))
 	
-	for spot in _get_track(piece.player):
-		if spot.piece == piece:
-			return spot
 	
-	for spot in _get_end_area(piece.player).get_all_spots():
-		if spot.piece == piece:
-			return spot
+func is_player_exclusive(spot: Spot) -> bool:
+	return (_p1_track.has(spot) and not _p2_track.has(spot) or
+		not _p1_track.has(spot) and _p2_track.has(spot))
+		
+		
+## Used by AI, will refactor later.
+func is_capturable(spot: Spot, opponent_id: General.PlayerID) -> bool:
+	return is_occupied_by_player(spot, opponent_id) and not spot.is_safe
 	
-	return null # If piece is not placed return null
-
+	
+func get_spot(index: int, opponent: General.PlayerID):
+	return _get_track(opponent)[index]
+	
+	
+func get_spot_index(spot: Spot, player: General.PlayerID) -> int:
+	return _get_track(player).find(spot)
+	
+	
+func get_num_pieces_past_spot(spot: Spot, player: General.PlayerID) -> int:
+	# Num of pieces still at the end
+	var spot_index = get_spot_index(spot, player)
+	
+	var num_passed_pieces = 0
+	for piece: Piece in get_pieces(player):
+		if (is_in_end_zone(get_current_spot(piece)) or
+			get_spot_index(get_current_spot(piece), player) > spot_index):
+			num_passed_pieces += 1
+	
+	return num_passed_pieces
+	
+	
+func get_track_size(player: General.PlayerID):
+	return _get_track(player).size()
+	
 
 func _get_movement_path(piece: Piece, landing_spot: Spot) -> Array[Vector3]:
 	# if going back to start zone, go directly

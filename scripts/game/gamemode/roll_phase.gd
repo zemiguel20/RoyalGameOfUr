@@ -5,13 +5,17 @@ extends Phase
 
 ## Turns on dice selection highlight effects.
 func start():
-	_gamemode.dice.enable_selection()
-
+	# If its an ai's turn, let the ai know it can 'click' on the dice.
+	if _gamemode.is_ai_turn():
+		_gamemode.get_current_ai().roll()
+	else:
+		_gamemode.dice.enable_selection()
+		
 
 ## Turns off dice selection highlight effects.
 func end():
+	# Dice selection should already be disabled after rolling dice, but just in case.
 	_gamemode.dice.disable_selection()
-
 
 ## Rolls the dice, and then changes to the [MovePhase]. If the player rolls 0, then skip to the other player's [RollPhase] instead.
 func roll():

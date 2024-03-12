@@ -28,5 +28,5 @@ func roll():
 
 
 ## Move [param piece] action
-func move(piece: Piece):
+func move(_piece: Piece):
 	pass

@@ -15,7 +15,6 @@ signal roll_finished(value: int) # Emitted when all dice finished, with final va
 @export var _use_hitbox_instead_of_dice_colliders: bool
 
 
-
 ## Current rolled value.
 var value: int = 0 
 
@@ -36,9 +35,13 @@ func _ready() -> void:
 	
 	
 func _input(event: InputEvent) -> void:
+	if not _roll_shaking_enabled:
+		return
+	
 	# This function should not be in _on_die_input_event, 
 	# since releasing the mouse can be done outside of the click hitboxes.
-	_check_dice_shake_release(event)
+	if event is InputEventMouseButton and event.is_released():
+		on_dice_release()
 
 
 ## Enables selection and highlight effects
@@ -67,10 +70,43 @@ func roll() -> int:
 		die.roll()
 	while _die_finish_count < _num_of_dice:
 		await get_tree().create_timer(0.5).timeout
-	enable_selection()
 	roll_finished.emit(value)
 	return value
 
+
+func on_dice_click():
+	if _is_shaking:
+		return
+	
+	if _roll_shaking_enabled:
+		start_dice_shake()
+	else:
+		_start_roll()
+	
+	
+func on_dice_release():
+	if not _is_shaking:
+		return
+
+	_is_shaking = false
+	_shake_sfx.stop()
+	for die in _dice:
+		die.visible = true
+	_start_roll()
+
+
+## Function that emits a signal that the dice have been clicked. 
+## Triggers the [RollPhase] to start the rolling of the dice.
+func _start_roll():
+	clicked.emit()
+	
+	
+func start_dice_shake():
+	_is_shaking = true
+	for die in _dice:
+		die.visible = false
+	_shake_sfx.play()
+	
 
 ## Spawns the dice in a random position and connects signals
 func _initialize_dice() -> void:
@@ -88,7 +124,7 @@ func _initialize_dice() -> void:
 		var locationZ = randf_range(_spawning_range.x, _spawning_range.y)
 		instance.global_position = self.global_position + Vector3(locationX, 0, locationZ)
 	
-	if (_use_hitbox_instead_of_dice_colliders):
+	if _use_hitbox_instead_of_dice_colliders:
 		_click_hitbox.input_event.connect(_on_die_input_event)
 	else:
 		for die in _dice:
@@ -97,25 +133,10 @@ func _initialize_dice() -> void:
 
 func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
-		if _roll_shaking_enabled and not _is_shaking:
-			_is_shaking = true
-			for die in _dice:
-				die.visible = false
-			_shake_sfx.play()
-		else:
-			clicked.emit()
+		on_dice_click()
 
 
 func _on_die_finished_rolling(die_value: int):
 	value += die_value
 	_die_finish_count += 1
 	die_stopped.emit(die_value)
-	
-	
-func _check_dice_shake_release(event: InputEvent):
-	if _is_shaking and event is InputEventMouseButton and event.is_released():
-		_is_shaking = false
-		_shake_sfx.stop()
-		for die in _dice:
-			die.visible = true
-		clicked.emit()
