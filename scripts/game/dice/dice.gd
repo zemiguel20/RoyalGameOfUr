@@ -35,12 +35,12 @@ func _ready() -> void:
 	
 	
 func _input(event: InputEvent) -> void:
-	if (not _roll_shaking_enabled):
+	if not _roll_shaking_enabled:
 		return
 	
 	# This function should not be in _on_die_input_event, 
 	# since releasing the mouse can be done outside of the click hitboxes.
-	if (event is InputEventMouseButton and event.is_released()):
+	if event is InputEventMouseButton and event.is_released():
 		on_dice_release()
 
 
@@ -75,7 +75,7 @@ func roll() -> int:
 
 
 func on_dice_click():
-	if (_is_shaking):
+	if _is_shaking:
 		return
 	
 	if _roll_shaking_enabled:
@@ -85,7 +85,7 @@ func on_dice_click():
 	
 	
 func on_dice_release():
-	if (not _is_shaking):
+	if not _is_shaking:
 		return
 
 	_is_shaking = false
@@ -124,7 +124,7 @@ func _initialize_dice() -> void:
 		var locationZ = randf_range(_spawning_range.x, _spawning_range.y)
 		instance.global_position = self.global_position + Vector3(locationX, 0, locationZ)
 	
-	if (_use_hitbox_instead_of_dice_colliders):
+	if _use_hitbox_instead_of_dice_colliders:
 		_click_hitbox.input_event.connect(_on_die_input_event)
 	else:
 		for die in _dice:

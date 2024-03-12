@@ -23,7 +23,7 @@ func start():
 		return
 	
 	_is_ai_turn = _gamemode.is_ai_turn()
-	if (_is_ai_turn):
+	if _is_ai_turn:
 		_gamemode.get_current_ai().make_move(_legal_moves)
 	else:
 		_link_highlighting()
@@ -32,7 +32,7 @@ func start():
 
 ## Disables highlighting of the movable pieces calculated in [method start] 
 func end():
-	if (not _is_ai_turn):
+	if not _is_ai_turn:
 		_unlink_highlighting()
 
 

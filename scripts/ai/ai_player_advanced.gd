@@ -31,7 +31,7 @@ func _evaluate_moves(moves : Array[Move]) -> Piece:
 	
 	for move in moves:
 		var score = _evaluate_move(move)
-		if (score > best_move_score):
+		if score > best_move_score:
 			best_move_score = score
 			best_move = move
 			
@@ -51,9 +51,9 @@ func _calculate_base_score(move: Move):
 	
 	if _board.is_capturable(landing_spot, General.get_other_player_id(_player_id)):
 		return capture_base_score
-	elif (landing_spot.give_extra_roll):
+	elif landing_spot.give_extra_roll:
 		return grants_roll_base_score
-	elif (_board.is_in_end_zone(landing_spot)):
+	elif _board.is_in_end_zone(landing_spot):
 		return end_move_base_score
 	else:
 		return regular_base_score
@@ -94,9 +94,9 @@ func _calculate_central_rosette_modifier(move: Move):
 		score = 1 - passed_pieces_rate													# Value between 0 and 1
 	
 	var final_score = 0
-	if (is_current_spot_central_rosette):
+	if is_current_spot_central_rosette:
 		final_score -= score
-	if (is_landing_spot_central_rosette):
+	if is_landing_spot_central_rosette:
 		final_score += score
 	
 	return central_rosette_score_weight * final_score
@@ -116,7 +116,7 @@ func _calculate_spot_danger(spot: Spot) -> float:
 	for _i in range(1, 5):
 		var temp_spot = _board.get_spot(index - _i, opponent_id)
 		var contains_opponent = _board.is_occupied_by_player(temp_spot, opponent_id) 
-		if (contains_opponent):
+		if contains_opponent:
 			var capture_chance = DiceProbabilities.get_probability_of_value(_i, _dice._num_of_dice)
 			total_capture_chance += capture_chance
 	

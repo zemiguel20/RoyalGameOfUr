@@ -20,7 +20,7 @@ static func get_probability_of_value(value_to_throw: int, num_of_dice: int = 4, 
 ## Get the total number of outcomes a dicetype has. 
 ## Example: Binary has 2, and D6 has 6.
 static func _get_num_of_outcomes(type: DiceType):
-	if (type == DiceType.Binary):
+	if type == DiceType.Binary:
 		return 2
 	else:
 		push_error("Not Implemented: No number of outcomes implemented for DiceType = ", type)

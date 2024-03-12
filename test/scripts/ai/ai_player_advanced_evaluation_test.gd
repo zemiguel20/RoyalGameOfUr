@@ -32,12 +32,12 @@ func _setup():
 func _reset_pieces_to_start():
 	# Move player_one pieces to starts
 	for piece: Piece in board.get_pieces(General.PlayerID.ONE):
-		if (not board.is_in_start_zone(piece)):
+		if not board.is_in_start_zone(piece):
 			var spot = board._p1_start_area.get_available_spot()
 			await board.move(piece, spot)
 			
 	for piece: Piece in board.get_pieces(General.PlayerID.TWO):
-		if (not board.is_in_start_zone(piece)):
+		if not board.is_in_start_zone(piece):
 			var spot = board._p2_start_area.get_available_spot()
 			await board.move(piece, spot)
 

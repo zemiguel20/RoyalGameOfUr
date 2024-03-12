@@ -25,7 +25,7 @@ static func get_random_position_in_boxshape_3D(shape : BoxShape3D) -> Vector3:
 ## where order does not matter and replacements are not allowed.
 ## @tutorial: https://www.onlinemathlearning.com/permutations-math.html
 static func get_combinations(n: int, r: int):
-	if (n < r or n < 0 or r < 0):
+	if n < r or n < 0 or r < 0:
 		push_error("Invalid Argument: Please enter values where n >= r >= 0")
 		return -1
 	
@@ -36,10 +36,10 @@ static func get_combinations(n: int, r: int):
 ## Get the factorial of n.
 ## Example for n = 6: n! = 6 * 5 * 4 * 3 * 2 * 1 = 720
 static func factorial(n: int):
-	if (n < 0):
+	if n < 0:
 		push_error("Invalid Argument: Can not get the factorial for n = ", n)
 		return -1
-	elif (n == 1 or n == 0):
+	elif n == 1 or n == 0:
 		return 1
 		
 	return n * factorial(n - 1)

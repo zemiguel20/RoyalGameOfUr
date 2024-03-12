@@ -31,10 +31,10 @@ func start_game():
 		piece.clicked.connect(move)
 		piece.disable_selection()
 
-	if (ai_player_one != null):
+	if ai_player_one != null:
 		ai_player_one.setup(self, General.PlayerID.ONE)
 		print_debug("Setup AI One")
-	if (ai_player_two != null):
+	if ai_player_two != null:
 		ai_player_two.setup(self, General.PlayerID.TWO)
 		print_debug("Setup AI Two")		
 
@@ -80,9 +80,9 @@ func is_ai_turn():
 
 
 func get_current_ai():
-	if (current_player == General.PlayerID.ONE):
+	if current_player == General.PlayerID.ONE:
 		return ai_player_one
-	elif (current_player == General.PlayerID.TWO):
+	elif current_player == General.PlayerID.TWO:
 		return ai_player_two
 
 func _choose_starting_player():
