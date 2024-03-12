@@ -10,6 +10,9 @@
 points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.499182, -0.000168562, 0.242005, -0.00390851)
 
 [node name="D4" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 mass = 2.0
 gravity_scale = 3.0
 script = ExtResource("1_spk2b")
