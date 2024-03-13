@@ -41,7 +41,7 @@ contact_monitor = true
 script = ExtResource("1_spk2b")
 _throwing_force_magnitude = 12.0
 _random_dice_offset = 1.7
-_gravity_on_ground_multiplier = 3
+_gravity_on_ground_multiplier = 1
 
 [node name="test_die_d4" parent="." instance=ExtResource("1_y0dub")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44494, 0)

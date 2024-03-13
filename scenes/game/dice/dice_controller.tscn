@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3bq04omjlr2e"]
+[gd_scene load_steps=12 format=3 uid="uid://c3bq04omjlr2e"]
 
 [ext_resource type="Script" path="res://scripts/game/dice/dice.gd" id="1_ka5gv"]
 [ext_resource type="PackedScene" uid="uid://cxfww4cuco8ex" path="res://scenes/game/dice/d4.tscn" id="2_apa1r"]
@@ -28,8 +28,11 @@ size = Vector3(6, 6, 6)
 script = ExtResource("1_ka5gv")
 _die_scene = ExtResource("2_apa1r")
 
-[node name="Node3D_ThrowingPosition" type="Node3D" parent="."]
+[node name="ThrowingPosition_P1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2.644)
+
+[node name="ThrowingPosition2_P2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2.644)
 
 [node name="RollSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_hlajg")

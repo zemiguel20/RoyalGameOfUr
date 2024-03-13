@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwduqe4anqd18"]
+[gd_scene load_steps=8 format=3 uid="uid://cwduqe4anqd18"]
 
 [ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="1_rqs4x"]
 [ext_resource type="PackedScene" uid="uid://w80iov7yarwa" path="res://scenes/mockup_board.tscn" id="2_eig1d"]
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="3_tonn8"]
-[ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="4_bug2u"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
@@ -91,7 +90,7 @@ func _on_dice_die_stopped(value):
 	individual_rate_label.text = \"Individual Dice 1 Rate: %s\" % ((num_of_black as float/(num_of_black + num_of_white) as float) * 100.0)
 "
 
-[node name="GamemodeTest" type="Node"]
+[node name="DistributionTest" type="Node"]
 script = SubResource("GDScript_b8xbw")
 
 [node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice")]
@@ -106,16 +105,6 @@ transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.003909
 transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
 _roll_shaking_enabled = true
 _use_hitbox_instead_of_dice_colliders = true
-
-[node name="AIPlayerHard" type="Node" parent="."]
-script = ExtResource("4_bug2u")
-central_rosette_score_weight = 0.3
-max_moving_duration = 1.0
-
-[node name="AIPlayerHard2" type="Node" parent="."]
-script = ExtResource("4_bug2u")
-central_rosette_score_weight = 0.3
-max_moving_duration = 1.0
 
 [node name="Environment" type="Node3D" parent="."]
 

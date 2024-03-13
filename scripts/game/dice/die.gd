@@ -37,6 +37,8 @@ var _throwing_position
 var _is_rolling
 var _is_grounded
 
+var _current_player
+
 func setup(_position: Vector3):
 	_throwing_position = _position
 	_default_gravity = mass
@@ -53,32 +55,28 @@ func dehighlight() -> void:
 		_highlighter.dehighlight()
 		
 		
-func roll() -> void:
+func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void:
 	# Make sure the body is sleeping, so we are allowed to teleport and rotate it.
-	_collider.disabled = true
-	
-	var random_x = randf_range(-_random_dice_offset, _random_dice_offset)
-	var random_z = randf_range(-_random_dice_offset, _random_dice_offset)
-	var random_offset = Vector3(random_x, 0, random_z)
-	global_position = _throwing_position + random_offset
+	#_collider.disabled = true
+	_throwing_position = random_throwing_position
+	_current_player = playerID
+	global_position = random_throwing_position
 	
 	# Euler angles still use degrees.
 	var random_rotation_x = randf_range(-180, 180)
 	var random_rotation_y = randf_range(-180, 180)
 	var random_rotation_z = randf_range(-180, 180)
 	basis = Basis.from_euler(Vector3(random_rotation_x, random_rotation_y, random_rotation_z))	
-	print("RotX: %sPI" % (basis.get_euler().x/PI))
-	print("RotY: %sPI" % (basis.get_euler().y/PI))
-	print("RotZ: %sPI" % (basis.get_euler().z/PI))
 	
 	freeze = false
 	mass = _default_gravity
-	print("Mass set to ", mass)
+	#print("Mass set to ", mass)
 	
 	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
 	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
 	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
-	var throw_force = throw_direction * _throwing_force_magnitude
+	var inverse_direction = 1 if playerID == General.PlayerID.TWO else 1 
+	var throw_force = throw_direction * _throwing_force_magnitude * inverse_direction
 	apply_impulse(throw_force)
 	
 	await get_tree().create_timer(0.05).timeout
@@ -114,7 +112,7 @@ func _on_movement_stopped():
 	
 	# If stuck, roll again
 	if roll_value == -1:
-		roll()
+		roll(_throwing_position, _current_player)
 	else:
 		_is_rolling = false
 		roll_finished.emit(roll_value)
@@ -126,4 +124,4 @@ func _on_body_entered(body):
 	
 	if body.is_in_group(_floor_group):
 		mass = _mass_on_ground
-		print("Mass set to ", mass)		
+		#print("Mass set to ", mass)		

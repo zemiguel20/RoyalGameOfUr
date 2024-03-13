@@ -2,7 +2,6 @@ class_name Gamemode
 extends Node
 ## Controls flow of the game. It provides callback actions, and their behaviour is set by the current [Phase].
 
-
 signal phase_changed(phase: String, current_player: int)
 signal rolled_zero
 signal got_extra_roll
@@ -11,7 +10,7 @@ signal game_finished
 @export var board: Board
 @export var dice: Dice
 @export_range(0, 10) var num_pieces_per_player: int = 7
-## This value is optional, when not assigned there is hotseat.
+## These values are optional, when not assigned there is hotseat.
 @export var ai_player_one: AIPlayerBase
 @export var ai_player_two: AIPlayerBase
 
@@ -82,6 +81,7 @@ func get_current_ai():
 		return ai_player_one
 	elif current_player == General.PlayerID.TWO:
 		return ai_player_two
+
 
 func _choose_starting_player():
 	current_player = randi_range(General.PlayerID.ONE, General.PlayerID.TWO)
