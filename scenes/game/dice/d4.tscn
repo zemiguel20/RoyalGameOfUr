@@ -12,15 +12,15 @@ points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.
 [sub_resource type="GDScript" id="GDScript_6f1sx"]
 resource_name = "distance_verifyer"
 script/source = "extends CollisionShape3D
+## This script should be deleted when dice are fixed.
 
 var A := Vector3(0, -1, -1)
 var B := Vector3(-0.864, -1, 0.499)
 var C := Vector3(0.865, -1, 0.499)
-var D := Vector3(0, 0.242, -0.004)
+var D := Vector3(0, 0.412, -0.004)
+
 
 func _ready():
-	D.y = 0.412
-	
 	print(\"AB: \", A.distance_to(B))
 	print(\"AC: \", A.distance_to(C))
 	print(\"AD: \", A.distance_to(D))
@@ -34,6 +34,8 @@ func _ready():
 [node name="D4" type="RigidBody3D"]
 mass = 2.0
 gravity_scale = 3.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.26, 0)
 max_contacts_reported = 10
 contact_monitor = true
 script = ExtResource("1_spk2b")
@@ -42,10 +44,10 @@ _random_dice_offset = 1.7
 _gravity_on_ground_multiplier = 3
 
 [node name="test_die_d4" parent="." instance=ExtResource("1_y0dub")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48822, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44494, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, -2.23517e-08, 1.49012e-08, 1, 0, -2.23517e-08, 0, 1, -7.45058e-09, 0.48822, -1.49012e-08)
+transform = Transform3D(1, -1.49012e-08, 2.23517e-08, 1.49012e-08, 1, 0, -2.23517e-08, 3.33067e-16, 1, -7.45058e-09, 0.44494, -1.49012e-08)
 shape = SubResource("ConvexPolygonShape3D_xnfvc")
 script = SubResource("GDScript_6f1sx")
 

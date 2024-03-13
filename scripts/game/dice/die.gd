@@ -22,7 +22,7 @@ signal roll_finished(value: int)
 @export var _throwing_force_direction_range_z = Vector2(-1, 1)
 
 @export_category("Gravity")
-@export var _gravity_on_ground_multiplier = 6
+@export var _gravity_on_ground_multiplier = 2
 @export var _floor_group = "Ground"
 
 @onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
@@ -62,13 +62,14 @@ func roll() -> void:
 	var random_offset = Vector3(random_x, 0, random_z)
 	global_position = _throwing_position + random_offset
 	
-	var random_rotation_x = randf_range(-PI, PI)
-	var random_rotation_y = randf_range(-PI, PI)
-	var random_rotation_z = randf_range(-PI, PI)
+	# Euler angles still use degrees.
+	var random_rotation_x = randf_range(-180, 180)
+	var random_rotation_y = randf_range(-180, 180)
+	var random_rotation_z = randf_range(-180, 180)
 	basis = Basis.from_euler(Vector3(random_rotation_x, random_rotation_y, random_rotation_z))	
-	basis = Basis.FLIP_X * basis
-	basis = Basis.FLIP_Z * basis
-	basis = Basis.FLIP_Y * basis
+	print("RotX: %sPI" % (basis.get_euler().x/PI))
+	print("RotY: %sPI" % (basis.get_euler().y/PI))
+	print("RotZ: %sPI" % (basis.get_euler().z/PI))
 	
 	freeze = false
 	mass = _default_gravity

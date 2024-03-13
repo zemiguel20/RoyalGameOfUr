@@ -17,8 +17,6 @@ signal game_finished
 
 var current_player: int
 var _phase: Phase = Phase.new(self)
-#var _has_ai_opponent: bool
-
 
 ## Initializes the game state and context
 func start_game():
