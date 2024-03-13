@@ -25,6 +25,9 @@ signal roll_finished(value: int)
 @export var _gravity_on_ground_multiplier = 2
 @export var _floor_group = "Ground"
 
+@export_category("Effects")
+@export var outline_effect_wait: float = 0.3
+
 @onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
 @onready var _raycast_list: Array[DiceRaycast] = [$DiceRaycast1, $DiceRaycast2, $DiceRaycast3, $DiceRaycast4]
 @onready var _rolling_timer: Timer = $RollTimeoutTimer
@@ -32,6 +35,7 @@ signal roll_finished(value: int)
 
 var _default_gravity
 var _mass_on_ground
+var _roll_value
 
 var _throwing_position
 var _is_rolling
@@ -55,6 +59,12 @@ func dehighlight() -> void:
 		_highlighter.dehighlight()
 		
 		
+func outline_if_one() -> void:
+	if _roll_value == 1:
+		await get_tree().create_timer(outline_effect_wait).timeout
+		print("Highlight!")
+		
+		
 func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void:
 	# Make sure the body is sleeping, so we are allowed to teleport and rotate it.
 	#_collider.disabled = true
@@ -75,7 +85,7 @@ func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void
 	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
 	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
 	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
-	var inverse_direction = 1 if playerID == General.PlayerID.TWO else 1 
+	var inverse_direction = -1 if playerID == General.PlayerID.TWO else 1 
 	var throw_force = throw_direction * _throwing_force_magnitude * inverse_direction
 	apply_impulse(throw_force)
 	
@@ -104,18 +114,18 @@ func _on_movement_stopped():
 	mass = _default_gravity
 	
 	# Retrieve roll value
-	var roll_value = -1
+	_roll_value = -1
 	for raycast in _raycast_list:
 		if raycast.is_colliding():
-			roll_value = raycast.opposite_side_value
+			_roll_value = raycast.opposite_side_value
 			break
 	
 	# If stuck, roll again
-	if roll_value == -1:
+	if _roll_value == -1:
 		roll(_throwing_position, _current_player)
 	else:
 		_is_rolling = false
-		roll_finished.emit(roll_value)
+		roll_finished.emit(_roll_value)
 
 
 func _on_body_entered(body):

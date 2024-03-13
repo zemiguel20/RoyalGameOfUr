@@ -49,6 +49,7 @@ func _ready() -> void:
 		_dice_throwing_spots[General.PlayerID.ONE] = _throwing_position
 		_dice_throwing_spots[General.PlayerID.TWO] = _throwing_position2
 	
+	
 func _input(event: InputEvent) -> void:
 	if not _roll_shaking_enabled:
 		return
@@ -86,6 +87,8 @@ func roll(playerID: General.PlayerID = 0) -> int:
 	for i in _dice.size():
 		_dice[i].roll(die_positions[i], playerID)
 	await roll_finished
+	for die in _dice:
+		die.outline_if_one()
 	return value
 
 
@@ -154,7 +157,7 @@ func _get_die_throwing_positions(playerID: General.PlayerID = 0) -> Array[Vector
 	# Failsafe for if no combination is possible, then just try again
 	var num_of_fails = 0
 	
-	#var current_throwing_spots = _dice_throwing_spots[playerID]
+	var current_throwing_spots = _throwing_position if not _use_multiple_throwing_spots else _dice_throwing_spots[playerID]
 	
 	while result.size() < _num_of_dice:
 		if (num_of_fails >= 100):
@@ -166,7 +169,7 @@ func _get_die_throwing_positions(playerID: General.PlayerID = 0) -> Array[Vector
 		var random_x = randf_range(-_throwing_range, _throwing_range)
 		var random_z = randf_range(-_throwing_range, _throwing_range)
 		var random_offset = Vector3(random_x, 0, random_z)
-		var new_sample_position = _throwing_position.global_position + random_offset
+		var new_sample_position = current_throwing_spots.global_position + random_offset
 		
 		# Check if random position meets the requirements.
 		var does_overlap = false

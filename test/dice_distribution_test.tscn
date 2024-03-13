@@ -14,10 +14,8 @@ var complete
 var time: float = 0.0
 
 func _ready():
-	phase = RollPhase.new(gamemode)
-	
 	for i in 100:
-		await phase.roll()
+		await $Dice.roll()
 		
 	complete = true
 

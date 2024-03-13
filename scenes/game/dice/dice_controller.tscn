@@ -31,7 +31,7 @@ _die_scene = ExtResource("2_apa1r")
 [node name="ThrowingPosition_P1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2.644)
 
-[node name="ThrowingPosition2_P2" type="Node3D" parent="."]
+[node name="ThrowingPosition_P2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2.644)
 
 [node name="RollSFX" type="AudioStreamPlayer" parent="."]
