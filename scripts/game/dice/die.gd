@@ -1,14 +1,13 @@
 class_name Die
 extends RigidBody3D
 
-
 signal roll_finished(value: int)
 
 @export_category("Throwing Physics")
 ## Magnitude of the throwing force applied to this die when starting a roll.
-@export var throwing_force_magnitude : float = 1.0
+@export var _throwing_force_magnitude : float = 1.0
 ## Angular velocity applied to this die when starting a roll.
-@export var throwing_angular_velocity : float = 1.0
+@export var _throwing_angular_velocity : float = 1.0
 
 ## Not sure if this is the best name for this variable.
 ## Makes sure that when throwing the dice from a hand, the dice spawn in apart from each other.
@@ -18,21 +17,32 @@ signal roll_finished(value: int)
 
 @export_subgroup("Throwing Direction")
 ## X is min, Y is max
-@export var throwing_force_direction_range_x = Vector2(-1, 1)
+@export var _throwing_force_direction_range_x = Vector2(-1, 1)
 ## X is min, Y is max
-@export var throwing_force_direction_range_z = Vector2(-1, 1)
+@export var _throwing_force_direction_range_z = Vector2(-1, 1)
+
+@export_category("Gravity")
+@export var _gravity_on_ground_multiplier = 6
+@export var _floor_group = "Ground"
 
 @onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
 @onready var _raycast_list: Array[DiceRaycast] = [$DiceRaycast1, $DiceRaycast2, $DiceRaycast3, $DiceRaycast4]
 @onready var _rolling_timer: Timer = $RollTimeoutTimer
+@onready var _collider: CollisionShape3D = $CollisionShape3D
+
+var _default_gravity
+var _mass_on_ground
+
 var _throwing_position
 var _is_rolling
-
+var _is_grounded
 
 func setup(_position: Vector3):
 	_throwing_position = _position
-
-
+	_default_gravity = mass
+	_mass_on_ground = mass * _gravity_on_ground_multiplier
+	
+	
 func highlight() -> void:
 	if _highlighter != null:
 		_highlighter.highlight()
@@ -42,60 +52,47 @@ func dehighlight() -> void:
 	if _highlighter != null:
 		_highlighter.dehighlight()
 		
-
+		
 func roll() -> void:
-	# Make 100% sure that the die is active, since there was a rare bug that the position was not applied correctly. 
-	visible = true
-	
 	# Make sure the body is sleeping, so we are allowed to teleport and rotate it.
-	sleeping = true
-	print("Sleeping1: ", sleeping)
+	_collider.disabled = true
 	
-	 #Position the dice as if they just came out of a 'hand'
 	var random_x = randf_range(-_random_dice_offset, _random_dice_offset)
 	var random_z = randf_range(-_random_dice_offset, _random_dice_offset)
 	var random_offset = Vector3(random_x, 0, random_z)
-	self.global_position = _throwing_position + Vector3.UP * 2
-	print("Sleeping2: ", sleeping)
+	global_position = _throwing_position + random_offset
 	
-	
-	# Give the dice a random rotation (Basis) when they exit the 'hand'
-	print("Die: ")
 	var random_rotation_x = randf_range(-PI, PI)
 	var random_rotation_y = randf_range(-PI, PI)
 	var random_rotation_z = randf_range(-PI, PI)
-	global_basis = Basis.from_euler(Vector3(random_rotation_x, random_rotation_y, random_rotation_z))	
-	print("Sleeping2: ", sleeping)	
-	#rotate_x(randf_range(-PI, PI))
-	#rotate_y(randf_range(-PI, PI))
-	#rotate_z(randf_range(-PI, PI))
+	basis = Basis.from_euler(Vector3(random_rotation_x, random_rotation_y, random_rotation_z))	
+	basis = Basis.FLIP_X * basis
+	basis = Basis.FLIP_Z * basis
+	basis = Basis.FLIP_Y * basis
 	
-	#print("Rot: X %s " % (basis.get_euler().x))
-	#print("Rot: Y %s " % (basis.get_euler().y))
-	#print("Rot: Z %s " % (basis.get_euler().z))
+	freeze = false
+	mass = _default_gravity
+	print("Mass set to ", mass)
 	
-	print("Sleeping3: ", sleeping)	
-	await get_tree().create_timer(2.0).timeout
-	roll_finished.emit(1)	
+	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
+	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
+	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
+	var throw_force = throw_direction * _throwing_force_magnitude
+	apply_impulse(throw_force)
 	
-	# Apply force in a random direction
-	#var random_direction_x = randf_range(throwing_force_direction_range_x.x, throwing_force_direction_range_x.y)
-	#var random_direction_z = randf_range(throwing_force_direction_range_z.x, throwing_force_direction_range_z.y)
-	#var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
-	#var throw_force = throw_direction * throwing_force_magnitude
-	#apply_impulse(throw_force)
-	#apply_torque_impulse(throw_direction * throwing_angular_velocity)
+	await get_tree().create_timer(0.05).timeout
+	_collider.disabled = false
 	
 	# Wait a short while before setting _is_rolling to true.
 	# Immediately setting will trigger _on_movement_stopped with sleeping = false,
 	# but since we set _is_rolling the same frame, the function will not return.
-	#await get_tree().create_timer(0.1).timeout
-	#_is_rolling = true
+	await get_tree().create_timer(0.1).timeout
+	_is_rolling = true
 	
 	## A timer specifying a maximum rolling duration.
 	## If the 'rolling' did not stop already, it will stop after the timer and roll again.
 	## Stuck timer prevents infinite waiting for small movements
-	#_rolling_timer.start()
+	_rolling_timer.start()
 
 
 # Triggers when the sleeping state of the rigidbody is changed
@@ -104,6 +101,8 @@ func _on_movement_stopped():
 		return
 
 	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep
+	freeze = true	
+	mass = _default_gravity
 	
 	# Retrieve roll value
 	var roll_value = -1
@@ -118,3 +117,12 @@ func _on_movement_stopped():
 	else:
 		_is_rolling = false
 		roll_finished.emit(roll_value)
+
+
+func _on_body_entered(body):
+	if not _is_rolling:
+		return
+	
+	if body.is_in_group(_floor_group):
+		mass = _mass_on_ground
+		print("Mass set to ", mass)		
