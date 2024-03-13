@@ -35,7 +35,7 @@ func _ready():
 mass = 2.0
 gravity_scale = 3.0
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, -0.26, 0)
+center_of_mass = Vector3(0, -0.15, 0)
 max_contacts_reported = 10
 contact_monitor = true
 script = ExtResource("1_spk2b")
