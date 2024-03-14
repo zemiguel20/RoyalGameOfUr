@@ -30,14 +30,19 @@ signal roll_finished(value: int) ## Emitted when all dice finished, with the fin
 #endregion
 
 #region Onready Variables
-## Sound effect played w
+## Sound effect played when the roll starts.
 @onready var _roll_sfx: AudioStreamPlayer = $RollSFX
+## Looping sound played while the dice are shaking.
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
-## Reference 
+## Reference point for the randomly generated 
 @onready var _throwing_position: Node3D = $ThrowingPosition_P1
+## Throwing Position for Player 2. This one is only used when 
+## [code] _use_multiple_throwing_spots = true [/code]
 @onready var _throwing_position_p2: Node3D = $ThrowingPosition_P2
+## Hitbox that makes it easier to click the dice.
 @onready var _click_hitbox: Area3D = $ClickHitbox
-@onready var _outcome_label: Label3D = $Label3D_Outcome
+## 3D Label displaying the outcome of the dice. Contains its own script with special effects.
+@onready var _outcome_label: DiceOutcomeLabel = $Label3D_Outcome
 #endregion
 
 #region Regular Variables
@@ -201,8 +206,6 @@ func _get_die_throwing_positions(playerID: General.PlayerID = 0) -> Array[Vector
 		else:		
 			num_of_fails += 1
 		
-	print("Found %s positions!" % result.size())
-	print("Fails: ", num_of_fails)
 	return result
 
 

@@ -40,6 +40,7 @@ var _is_grounded
 
 var _current_player
 
+# TODO: Check if this is needed.
 func setup(_position: Vector3):
 	_throwing_position = _position
 	_default_gravity = mass
@@ -55,35 +56,30 @@ func dehighlight() -> void:
 	if _highlighter != null:
 		_highlighter.dehighlight()
 		
-		
+
+## Adds a highlight effect on the dice if it was a 1.		
 func outline_if_one() -> void:
 	if _roll_value == 1:
 		print("Highlight")
 		
 		
 func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void:
-	# Make sure the body is sleeping, so we are allowed to teleport and rotate it.
-	#_collider.disabled = true
+	_collider.disabled = true
+	
+	# Set some local variables
 	_throwing_position = random_throwing_position
 	_current_player = playerID
+	
+	# Set position and rotation
 	global_position = random_throwing_position
+	basis = get_random_rotation()
 	
-	# Euler angles still use degrees.
-	var random_rotation_x = randf_range(-180, 180)
-	var random_rotation_y = randf_range(-180, 180)
-	var random_rotation_z = randf_range(-180, 180)
-	basis = Basis.from_euler(Vector3(random_rotation_x, random_rotation_y, random_rotation_z))	
-	
+	# Unfreeze the body to apply the throwing force.
 	freeze = false
 	mass = _default_gravity
+	apply_throwing_force(playerID)
 	
-	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
-	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
-	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
-	var inverse_direction = -1 if playerID == General.PlayerID.TWO else 1 
-	var throw_force = throw_direction * _throwing_force_magnitude * inverse_direction
-	apply_impulse(throw_force)
-	
+	# Disable the collider after a bit.
 	await get_tree().create_timer(0.05).timeout
 	_collider.disabled = false
 	
@@ -99,27 +95,29 @@ func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void
 	_rolling_timer.start()
 
 
-# Triggers when the sleeping state of the rigidbody is changed
+## Triggers when the sleeping state of the rigidbody is changed.
+## Checks the rolled value, and decides to either reroll or freeze and emit their value.
 func _on_movement_stopped():
 	if not _is_rolling:
 		return
 
-	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep
-	freeze = true	
-	mass = _default_gravity
+	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep.
 	
-	# Retrieve roll value
+	# Retrieve roll value,
 	_roll_value = -1
 	for raycast in _raycast_list:
 		if raycast.is_colliding():
 			_roll_value = raycast.opposite_side_value
 			break
 	
-	# If stuck, roll again
+	# If stuck, roll again.
 	if _roll_value == -1:
 		roll(_throwing_position, _current_player)
+	# Else, reset some values and emit a signal.
 	else:
 		_is_rolling = false
+		freeze = true	
+		mass = _default_gravity
 		roll_finished.emit(_roll_value)
 
 
@@ -129,3 +127,23 @@ func _on_body_entered(body):
 	
 	if body.is_in_group(_floor_group):
 		mass = _mass_on_ground
+	
+		
+## Generates a random euler rotation, and return a Basis using this rotation.
+## NOTE: Move to General if other scripts will use this too.
+func get_random_rotation() -> Basis:
+	# Euler angles still use degrees.
+	var random_rotation_x = randf_range(-180, 180)
+	var random_rotation_y = randf_range(-180, 180)
+	var random_rotation_z = randf_range(-180, 180)
+	return Basis.from_euler(Vector3(random_rotation_x, random_rotation_y, random_rotation_z))	
+
+
+## Throws the dice, by calculating a direction and applying an impulse force.
+func apply_throwing_force(playerID):
+	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
+	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
+	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
+	var inverse_direction = -1 if playerID == General.PlayerID.TWO else 1 
+	var throw_force = throw_direction * _throwing_force_magnitude * inverse_direction
+	apply_impulse(throw_force)

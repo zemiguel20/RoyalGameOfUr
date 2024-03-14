@@ -1,3 +1,4 @@
+class_name DiceOutcomeLabel
 extends Label3D
 
 @export_color_no_alpha var color_moves: Color

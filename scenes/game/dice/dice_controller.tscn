@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://dv5nxtgrtwn6q" path="res://audio/test_dice_roll.mp3" id="3_hlajg"]
 [ext_resource type="AudioStream" uid="uid://bdsbgnjpv7ic2" path="res://audio/dice_shaking_loop.mp3" id="3_wfoj5"]
 [ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/dice_border.tres" id="5_hdthg"]
-[ext_resource type="Script" path="res://scenes/game/dice/dice_label.gd" id="6_tcsx6"]
+[ext_resource type="Script" path="res://scripts/game/dice/dice_label.gd" id="6_wittj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rs5kh"]
 size = Vector3(10, 12, 1)
@@ -110,7 +110,7 @@ outline_modulate = Color(1, 1, 1, 0)
 text = "2
 "
 font_size = 100
-script = ExtResource("6_tcsx6")
+script = ExtResource("6_wittj")
 color_moves = Color(1, 1, 1, 1)
 color_no_moves = Color(1, 0.0392157, 0.0235294, 1)
 effect_duration = 1.4
