@@ -1,42 +1,60 @@
+## Dice controller. Controls the dice rolling animation and stores its value.
 class_name Dice
 extends Node
-## Dice controller. Controls the dice rolling animation and stores its value.
 
-
+#region Signals
 signal clicked
-signal die_stopped(value: int) # Emitted when a single die stops, with its value
-signal roll_finished(value: int) # Emitted when all dice finished, with final value
+signal die_stopped(value: int) ## Emitted when a single die stops, with its value
+signal roll_finished(value: int) ## Emitted when all dice finished, with the final value
+#endregion
 
-
+#region Export Variables
+## The number of dice that will be used in the board game.
 @export_range(0, 8) var _num_of_dice: int = 4
-@export var _roll_shaking_enabled: bool = false
+## The die that will be used in the board game.
 @export var _die_scene: PackedScene
-## TODO: rename vars.
-@export var _spawning_range := Vector2(-3, 3)
-@export var _throwing_range := 1.7
+## When die are spawned in, they will have an offset from this object calculated as: 
+## [code] randf_range(0, _max_spawning_position_offset) [/code]
+@export var _max_spawning_position_offset := Vector2(-3, 3)
+## When die are spawned in, they will have an offset from the selected throwing_position calculated as: 
+## [code] randf_range(0, _max_throwing_position_offset) [/code]
+@export var _max_throwing_position_offset := 1.7
 ## Minimum offset that dice should have with each other when the dice are thrown.
 @export var _minimal_dice_offset := 0.5
+## When enabled, Players and AI can hold the dice to shake them, delaying the throw and adding suspense.
+@export var _roll_shaking_enabled: bool = false
+## When [code] true [/code], player's can now click a hitbox (a Area3D which is a child of the dice_controller)
 @export var _use_hitbox_instead_of_dice_colliders: bool
 ## If set to true, player 2 will throw the dice from the other side.
-@export var _use_multiple_throwing_spots = true
-@export var _temp = false
+@export var _use_multiple_throwing_spots: bool = true
+#endregion
 
+#region Onready Variables
+## Sound effect played w
 @onready var _roll_sfx: AudioStreamPlayer = $RollSFX
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
+## Reference 
 @onready var _throwing_position: Node3D = $ThrowingPosition_P1
-@onready var _throwing_position2: Node3D = $ThrowingPosition_P2
+@onready var _throwing_position_p2: Node3D = $ThrowingPosition_P2
 @onready var _click_hitbox: Area3D = $ClickHitbox
 @onready var _outcome_label: Label3D = $Label3D_Outcome
+#endregion
 
+#region Regular Variables
 ## Current rolled value.
 var value: int = 0 
 
+## Array containing every die.
 var _dice : Array[Die]
+## Dictionary that maps _throwing_position and _throwing_position_p2 to a PlayerId.
 var _dice_throwing_spots: Dictionary
+## Array that holds randomly generated positions that the dice will be thrown from.
 var _positions: Array[Vector3]
+## Boolean indicating if the dice are currently being shaken.
 var _is_shaking: bool = false
+## Number of dice that have finished their roll.
 var _die_finish_count = 0
-
+#endregion
 
 func _ready() -> void:
 	_initialize_dice()
@@ -45,7 +63,7 @@ func _ready() -> void:
 	if (_use_multiple_throwing_spots):
 		_dice_throwing_spots = {}
 		_dice_throwing_spots[General.PlayerID.ONE] = _throwing_position
-		_dice_throwing_spots[General.PlayerID.TWO] = _throwing_position2
+		_dice_throwing_spots[General.PlayerID.TWO] = _throwing_position_p2
 	
 	
 func _input(event: InputEvent) -> void:
@@ -146,8 +164,8 @@ func _initialize_dice() -> void:
 			
 			
 func _get_die_spawning_position():
-	var locationX = randf_range(_spawning_range.x, _spawning_range.y)
-	var locationZ = randf_range(_spawning_range.x, _spawning_range.y)
+	var locationX = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y)
+	var locationZ = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y)
 		
 	return self.global_position + Vector3(locationX, 0, locationZ)
 	
@@ -162,12 +180,12 @@ func _get_die_throwing_positions(playerID: General.PlayerID = 0) -> Array[Vector
 	while result.size() < _num_of_dice:
 		if (num_of_fails >= 100):
 			# If failed many times, try again from scratch and give a warning.
-			push_warning("Dice positioning failed many times, consider tweaking '_minimal_dice_offset' or '_throwing_range'")
+			push_warning("Dice positioning failed many times, consider tweaking '_minimal_dice_offset' or '_max_throwing_position_offset'")
 			result.clear()
 			num_of_fails = 0
 			
-		var random_x = randf_range(-_throwing_range, _throwing_range)
-		var random_z = randf_range(-_throwing_range, _throwing_range)
+		var random_x = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset)
+		var random_z = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset)
 		var random_offset = Vector3(random_x, 0, random_z)
 		var new_sample_position = current_throwing_spots.global_position + random_offset
 		
