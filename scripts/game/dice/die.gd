@@ -25,11 +25,8 @@ signal roll_finished(value: int)
 @export var _gravity_on_ground_multiplier = 2
 @export var _floor_group = "Ground"
 
-@export_category("Effects")
-@export var outline_effect_wait: float = 0.3
-
 @onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
-@onready var _raycast_list: Array[DiceRaycast] = [$DiceRaycast1, $DiceRaycast2, $DiceRaycast3, $DiceRaycast4]
+@onready var _raycast_list: Array[DiceRaycast] = [$Raycasts/DiceRaycast1, $Raycasts/DiceRaycast2, $Raycasts/DiceRaycast3, $Raycasts/DiceRaycast4]
 @onready var _rolling_timer: Timer = $RollTimeoutTimer
 @onready var _collider: CollisionShape3D = $CollisionShape3D
 
@@ -61,8 +58,7 @@ func dehighlight() -> void:
 		
 func outline_if_one() -> void:
 	if _roll_value == 1:
-		await get_tree().create_timer(outline_effect_wait).timeout
-		print("Highlight!")
+		print("Highlight")
 		
 		
 func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void:
@@ -80,7 +76,6 @@ func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void
 	
 	freeze = false
 	mass = _default_gravity
-	#print("Mass set to ", mass)
 	
 	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
 	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
@@ -134,4 +129,3 @@ func _on_body_entered(body):
 	
 	if body.is_in_group(_floor_group):
 		mass = _mass_on_ground
-		#print("Mass set to ", mass)		

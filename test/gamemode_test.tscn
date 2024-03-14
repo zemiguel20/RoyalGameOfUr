@@ -90,7 +90,7 @@ _use_hitbox_instead_of_dice_colliders = true
 
 [node name="Environment" type="Node3D" parent="."]
 
-[node name="Plane" type="CSGMesh3D" parent="Environment"]
+[node name="Plane" type="CSGMesh3D" parent="Environment" groups=["Ground"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.51382, 0)
 use_collision = true
 collision_layer = 3

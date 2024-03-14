@@ -17,27 +17,25 @@ signal roll_finished(value: int) # Emitted when all dice finished, with final va
 ## Minimum offset that dice should have with each other when the dice are thrown.
 @export var _minimal_dice_offset := 0.5
 @export var _use_hitbox_instead_of_dice_colliders: bool
+## If set to true, player 2 will throw the dice from the other side.
+@export var _use_multiple_throwing_spots = true
+@export var _temp = false
 
 @onready var _roll_sfx: AudioStreamPlayer = $RollSFX
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
 @onready var _throwing_position: Node3D = $ThrowingPosition_P1
 @onready var _throwing_position2: Node3D = $ThrowingPosition_P2
 @onready var _click_hitbox: Area3D = $ClickHitbox
+@onready var _outcome_label: Label3D = $Label3D_Outcome
 
 ## Current rolled value.
 var value: int = 0 
 
 var _dice : Array[Die]
-
 var _dice_throwing_spots: Dictionary
 var _positions: Array[Vector3]
-
 var _is_shaking: bool = false
 var _die_finish_count = 0
-
-# This is turned on by default, since we will normally have a gamemode.
-# But when we just want to test dice without a gamemode, we can set this value to false.
-var _use_multiple_throwing_spots = false
 
 
 func _ready() -> void:
@@ -79,6 +77,7 @@ func disable_selection() -> void:
 ## Plays the dice rolling animation and updates the value. Returns the rolled value.
 func roll(playerID: General.PlayerID = 0) -> int:
 	disable_selection()
+	_outcome_label.visible = false	
 	_roll_sfx.play()
 	value = 0
 	_die_finish_count = 0
@@ -96,6 +95,7 @@ func on_dice_click():
 	if _is_shaking:
 		return
 	
+	_outcome_label.visible = false	
 	if _roll_shaking_enabled:
 		start_dice_shake()
 	else:
@@ -197,5 +197,7 @@ func _on_die_finished_rolling(die_value: int):
 	value += die_value
 	_die_finish_count += 1
 	die_stopped.emit(die_value)
+	_outcome_label.text = "%s" % value
 	if (_num_of_dice <= _die_finish_count):
 		roll_finished.emit(value)
+		
