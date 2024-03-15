@@ -79,7 +79,6 @@ script = SubResource("GDScript_b8xbw")
 script = ExtResource("1_xplbu")
 board = NodePath("../Board")
 dice = NodePath("../Dice")
-num_pieces_per_player = 4
 ai_player_two = NodePath("../AIPlayerHard")
 
 [node name="Board" parent="." instance=ExtResource("2_gfyn5")]
@@ -93,6 +92,7 @@ _use_hitbox_instead_of_dice_colliders = true
 [node name="AIPlayerHard" type="Node" parent="."]
 script = ExtResource("4_ancfe")
 central_rosette_score_weight = 0.3
+decrease_per_passed_opponent_piece = false
 max_moving_duration = 1.0
 
 [node name="Environment" type="Node3D" parent="."]

@@ -114,7 +114,6 @@ func on_dice_click():
 	if _is_shaking:
 		return
 	
-	_outcome_label.visible = false	
 	if _roll_shaking_enabled:
 		start_dice_shake()
 	else:
@@ -219,7 +218,5 @@ func _on_die_finished_rolling(die_value: int):
 	value += die_value
 	_die_finish_count += 1
 	die_stopped.emit(die_value)
-	_outcome_label.text = "%s" % value
 	if (_num_of_dice <= _die_finish_count):
 		roll_finished.emit(value)
-		

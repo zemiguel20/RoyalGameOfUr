@@ -35,7 +35,6 @@ func on_click():
 
 func _on_input_event(_camera, event: InputEvent, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
-		print("Clicked!!")
 		on_click()
 
 

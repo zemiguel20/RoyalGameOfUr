@@ -1,3 +1,4 @@
+## Test
 class_name Die
 extends RigidBody3D
 
@@ -6,21 +7,23 @@ signal roll_finished(value: int)
 #region Export Variables
 @export_category("Throwing Physics")
 ## Magnitude of the throwing force applied to this die when starting a roll.
-@export var _throwing_force_magnitude : float = 1.0
+@export var _throwing_force_magnitude: float = 1.0
 ## Angular velocity applied to this die when starting a roll.
-@export var _throwing_angular_velocity : float = 1.0
+@export var _throwing_angular_velocity: float = 1.0
 ## How long colliders are disable upon throwing. Can ofcourse be set to 0.
 @export var _collision_disabling_duration: float = 0.05
 
 @export_subgroup("Throwing Direction")
 ## X is min, Y is max
-@export var _throwing_force_direction_range_x = Vector2(-1, 1)
+@export var _throwing_force_direction_range_x := Vector2(-1, 1)
 ## X is min, Y is max
-@export var _throwing_force_direction_range_z = Vector2(-1, 1)
+@export var _throwing_force_direction_range_z := Vector2(-1, 1)
 
 @export_category("Gravity")
-@export var _gravity_on_ground_multiplier = 2
-@export var _floor_group = "Ground"
+@export var _mass_on_ground_multiplier: float = 2
+
+@export_category("Extras")
+@export var _floor_group: String = "Ground"
 #endregion
 
 #region Onready Variables
@@ -31,7 +34,7 @@ signal roll_finished(value: int)
 #endregion
 
 #region Private Variables
-var _default_gravity
+var _default_mass
 var _mass_on_ground
 var _roll_value
 
@@ -44,8 +47,8 @@ var _disable_collision = false
 #endregion
 
 func _ready():
-	_default_gravity = mass
-	_mass_on_ground = mass * _gravity_on_ground_multiplier
+	_default_mass = mass
+	_mass_on_ground = mass * _mass_on_ground_multiplier
 	
 	
 func highlight() -> void:
@@ -62,9 +65,9 @@ func dehighlight() -> void:
 ## Adds a highlight effect on the dice if it was a 1.		
 func outline_if_one() -> void:
 	if _roll_value == 1:
-		pass
 		# In here we would use a different highligher class to apply some effect.
 		#print("Highlight")
+		pass
 		
 		
 func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void:
@@ -80,7 +83,7 @@ func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void
 	
 	# Unfreeze the body to apply the throwing force.
 	freeze = false
-	mass = _default_gravity
+	mass = _default_mass
 	_apply_throwing_force(playerID)
 	
 	# Disable the collider after a bit.
@@ -125,7 +128,7 @@ func _on_movement_stopped():
 	else:
 		_is_rolling = false
 		freeze = true	
-		mass = _default_gravity
+		mass = _default_mass
 		roll_finished.emit(_roll_value)
 
 
@@ -150,7 +153,7 @@ func _get_random_rotation() -> Basis:
 
 
 ## Throws the dice, by calculating a direction and applying an impulse force.
-## [param] playerID [/param] is used to indicate if we should invert the throwing direction.
+## [param playerID] is used to indicate if we should invert the throwing direction.
 func _apply_throwing_force(playerID):
 	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
 	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
@@ -160,9 +163,10 @@ func _apply_throwing_force(playerID):
 	apply_impulse(throw_force)
 
 
-## Loop through all raycasts in the dice to check.
+## Loop through all raycasts in the dice to check if they are colliding..
 ## If yes, we return the corresponding value, else we return -1
 func _check_roll_value():
+	# The raycasts are set to only collide with the floor.
 	for raycast in _raycast_list:
 		if raycast.is_colliding():
 			return raycast.opposite_side_value
