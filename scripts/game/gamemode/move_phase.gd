@@ -102,3 +102,4 @@ func _unlink_highlighting() -> void:
 		var spot = move.new_spot
 		piece.mouse_entered.disconnect(spot.highlight)
 		piece.mouse_exited.disconnect(spot.dehighlight)
+		spot.dehighlight()
