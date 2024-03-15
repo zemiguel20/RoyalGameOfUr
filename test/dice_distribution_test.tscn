@@ -7,25 +7,22 @@
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
 
-var started: bool = false
-@onready var gamemode = ($Gamemode as Gamemode)
-var phase
-var complete
-var time: float = 0.0
+var _is_complete: bool = false
+var _time: float = 0.0
 
 func _ready():
 	for i in 100:
 		await $Dice.roll()
 		
-	complete = true
+	_is_complete = true
 
 
 func _process(delta):
-	if not complete:
-		time += delta
+	if not _is_complete:
+		_time += delta
 	else:
-		print(\"Time to complete test: \", time)
-		complete = false
+		print(\"_time to _is_complete test: \", _time)
+		_is_complete = false
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmve1"]

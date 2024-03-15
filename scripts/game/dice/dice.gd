@@ -64,11 +64,7 @@ var _die_finish_count = 0
 func _ready() -> void:
 	_initialize_dice()
 	disable_selection()
-	
-	if (_use_multiple_throwing_spots):
-		_dice_throwing_spots = {}
-		_dice_throwing_spots[General.PlayerID.ONE] = _throwing_position
-		_dice_throwing_spots[General.PlayerID.TWO] = _throwing_position_p2
+	_cache_throwing_spots()
 	
 	
 func _input(event: InputEvent) -> void:
@@ -156,9 +152,7 @@ func _initialize_dice() -> void:
 		add_child(instance)
 		_dice.append(instance)
 		
-		instance.setup(_throwing_position.global_position)
 		instance.roll_finished.connect(_on_die_finished_rolling)
-		
 		instance.global_position = _get_die_spawning_position()
 	
 	if _use_hitbox_instead_of_dice_colliders:
@@ -207,6 +201,13 @@ func _get_die_throwing_positions(playerID: General.PlayerID = 0) -> Array[Vector
 			num_of_fails += 1
 		
 	return result
+	
+	
+func _cache_throwing_spots():
+	if (_use_multiple_throwing_spots):
+		_dice_throwing_spots = {}
+		_dice_throwing_spots[General.PlayerID.ONE] = _throwing_position
+		_dice_throwing_spots[General.PlayerID.TWO] = _throwing_position_p2
 
 
 func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):

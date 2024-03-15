@@ -87,7 +87,6 @@ transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.003909
 
 [node name="Dice" parent="." instance=ExtResource("3_1qx56")]
 transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
-_num_of_dice = 8
 _roll_shaking_enabled = true
 _use_hitbox_instead_of_dice_colliders = true
 
