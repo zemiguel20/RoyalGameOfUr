@@ -96,9 +96,9 @@ func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void
 	await get_tree().create_timer(0.05).timeout
 	_is_rolling = true
 	
-	## A timer specifying a maximum rolling duration.
-	## If the 'rolling' did not stop already, it will stop after the timer and roll again.
-	## Stuck timer prevents infinite waiting for small movements
+	# A timer specifying a maximum rolling duration.
+	# If the 'rolling' did not stop already, it will stop after the timer and roll again.
+	# Stuck timer prevents infinite waiting for small movements
 	_rolling_timer.start()
 
 

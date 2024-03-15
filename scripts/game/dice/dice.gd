@@ -168,6 +168,8 @@ func _get_die_spawning_position():
 	return self.global_position + Vector3(locationX, 0, locationZ)
 	
 	
+## Generate random positions to throw the dice from, while making sure that the dice always have a minimun offset of [param _minimal_dice_offset].
+## If the function is not able to generate these positions, it will give a warning. 
 func _get_die_throwing_positions(playerID: General.PlayerID = 0) -> Array[Vector3]: 
 	var result = [] as Array[Vector3]
 	# Failsafe for if no combination is possible, then just try again
