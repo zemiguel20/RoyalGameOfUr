@@ -92,11 +92,12 @@ _use_hitbox_instead_of_dice_colliders = true
 [node name="AIPlayerHard" type="Node" parent="."]
 script = ExtResource("4_ancfe")
 central_rosette_score_weight = 0.3
+decrease_per_passed_opponent_piece = false
 max_moving_duration = 1.0
 
 [node name="Environment" type="Node3D" parent="."]
 
-[node name="Plane" type="CSGMesh3D" parent="Environment"]
+[node name="Plane" type="CSGMesh3D" parent="Environment" groups=["Ground"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.51382, 0)
 use_collision = true
 collision_layer = 3

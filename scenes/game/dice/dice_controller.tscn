@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3bq04omjlr2e"]
+[gd_scene load_steps=14 format=3 uid="uid://c3bq04omjlr2e"]
 
 [ext_resource type="Script" path="res://scripts/game/dice/dice.gd" id="1_ka5gv"]
 [ext_resource type="PackedScene" uid="uid://cxfww4cuco8ex" path="res://scenes/game/dice/d4.tscn" id="2_apa1r"]
 [ext_resource type="AudioStream" uid="uid://dv5nxtgrtwn6q" path="res://audio/test_dice_roll.mp3" id="3_hlajg"]
 [ext_resource type="AudioStream" uid="uid://bdsbgnjpv7ic2" path="res://audio/dice_shaking_loop.mp3" id="3_wfoj5"]
 [ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/dice_border.tres" id="5_hdthg"]
+[ext_resource type="Script" path="res://scripts/game/dice/dice_label.gd" id="6_wittj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rs5kh"]
 size = Vector3(10, 12, 1)
@@ -24,12 +25,19 @@ size = Vector3(10, 12, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_0n13x"]
 size = Vector3(6, 6, 6)
 
+[sub_resource type="Curve" id="Curve_wrwgg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="Dice" type="Node3D"]
 script = ExtResource("1_ka5gv")
 _die_scene = ExtResource("2_apa1r")
 
-[node name="Node3D_ThrowingPosition" type="Node3D" parent="."]
+[node name="ThrowingPosition_P1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2.644)
+
+[node name="ThrowingPosition_P2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2.644)
 
 [node name="RollSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_hlajg")
@@ -93,3 +101,20 @@ input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ClickHitbox"]
 shape = SubResource("BoxShape3D_0n13x")
+
+[node name="Label3D_Outcome" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6.51159, -1.41556, 0.257188)
+pixel_size = 0.05
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(1, 1, 1, 0)
+text = "2
+"
+font_size = 100
+script = ExtResource("6_wittj")
+_color_moves = Color(1, 1, 1, 1)
+_color_no_moves = Color(1, 0.301961, 0.235294, 1)
+_effect_duration = 1.4
+_effect_curve = SubResource("Curve_wrwgg")
+
+[connection signal="die_stopped" from="." to="Label3D_Outcome" method="_on_dice_die_stopped"]
+[connection signal="roll_finished" from="." to="Label3D_Outcome" method="_on_dice_roll_finished"]

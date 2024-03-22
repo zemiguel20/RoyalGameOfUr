@@ -1,0 +1,163 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwduqe4anqd18"]
+
+[ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="1_rqs4x"]
+[ext_resource type="PackedScene" uid="uid://w80iov7yarwa" path="res://scenes/mockup_board.tscn" id="2_eig1d"]
+[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="3_tonn8"]
+
+[sub_resource type="GDScript" id="GDScript_b8xbw"]
+script/source = "extends Node
+
+var _is_complete: bool = false
+var _time: float = 0.0
+
+func _ready():
+	for i in 100:
+		await $Dice.roll()
+		
+	_is_complete = true
+
+
+func _process(delta):
+	if not _is_complete:
+		_time += delta
+	else:
+		print(\"_time to _is_complete test: \", _time)
+		_is_complete = false
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmve1"]
+albedo_color = Color(0.427451, 0.239216, 0.0156863, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0esbx"]
+material = SubResource("StandardMaterial3D_fmve1")
+size = Vector2(100, 100)
+
+[sub_resource type="GDScript" id="GDScript_pp8fu"]
+script/source = "extends CanvasLayer
+
+var num_of_black: int
+var num_of_white: int
+
+var num_of_zeros: int
+var num_of_ones: int
+var num_of_twos: int
+var num_of_threes: int
+var num_of_fours: int
+var num_of_total: int
+
+@onready var individual_rate_label = $VBoxContainer/IndividualRate as Label
+@onready var outcome_zero_label = $\"VBoxContainer/Outcome 0\" as Label
+@onready var outcome_one_label = $\"VBoxContainer/Outcome 1\" as Label
+@onready var outcome_two_label = $\"VBoxContainer/Outcome 2\" as Label
+@onready var outcome_three_label = $\"VBoxContainer/Outcome 3\" as Label
+@onready var outcome_four_label = $\"VBoxContainer/Outcome 4\" as Label
+
+var _dice_value: int = 0
+
+
+func _on_dice_roll_finished(_value: int) -> void:
+	num_of_total += 1
+	print(\"Total: \", num_of_total)
+	
+	if _value == 0:
+		num_of_zeros += 1
+		outcome_zero_label.text = \"Outcome 0: %d\" % num_of_zeros
+	if _value == 1:
+		num_of_ones += 1
+		outcome_one_label.text = \"Outcome 1: %d\" % num_of_ones
+	if _value == 2:
+		num_of_twos += 1
+		outcome_two_label.text = \"Outcome 2: %d\" % num_of_twos
+	if _value == 3:
+		num_of_threes += 1
+		outcome_three_label.text = \"Outcome 3: %d\" % num_of_threes
+	if _value == 4:
+		num_of_fours += 1
+		outcome_four_label.text = \"Outcome 4: %d\" % num_of_fours
+
+
+func _on_dice_die_stopped(value):
+	if value == 0:
+		num_of_white += 1
+	else:
+		num_of_black += 1
+		
+	individual_rate_label.text = \"Individual Dice 1 Rate: %s\" % ((num_of_black as float/(num_of_black + num_of_white) as float) * 100.0)
+"
+
+[node name="DistributionTest" type="Node"]
+script = SubResource("GDScript_b8xbw")
+
+[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice")]
+script = ExtResource("1_rqs4x")
+board = NodePath("../Board")
+dice = NodePath("../Dice")
+
+[node name="Board" parent="." instance=ExtResource("2_eig1d")]
+transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0.188376, -2.46309, 0.0962036)
+
+[node name="Dice" parent="." instance=ExtResource("3_tonn8")]
+transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
+_roll_shaking_enabled = true
+_use_hitbox_instead_of_dice_colliders = true
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Plane" type="CSGMesh3D" parent="Environment" groups=["Ground"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.51382, 0)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+mesh = SubResource("PlaneMesh_0esbx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0192364, -0.835694, 0.548858, 0, 0.54896, 0.835849, -0.999815, -0.0160787, 0.01056, 7.93404, 11.8192, -2.23023)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = SubResource("GDScript_pp8fu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IndividualRate" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Individual Dice 1 Rate:"
+
+[node name="Outcome 0" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Outcome 0:"
+
+[node name="Outcome 1" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Outcome 1:"
+
+[node name="Outcome 2" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Outcome 2:"
+
+[node name="Outcome 3" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Outcome 3:"
+
+[node name="Outcome 4" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Outcome 4:"
+
+[connection signal="game_finished" from="Gamemode" to="." method="_on_gamemode_game_finished"]
+[connection signal="game_finished" from="Gamemode" to="CanvasLayer" method="_on_gamemode_game_finished"]
+[connection signal="got_extra_roll" from="Gamemode" to="CanvasLayer" method="_on_gamemode_got_extra_roll"]
+[connection signal="phase_changed" from="Gamemode" to="CanvasLayer" method="_on_gamemode_phase_changed"]
+[connection signal="rolled_zero" from="Gamemode" to="CanvasLayer" method="_on_gamemode_rolled_zero"]
+[connection signal="clicked" from="Dice" to="Gamemode" method="roll"]
+[connection signal="die_stopped" from="Dice" to="CanvasLayer" method="_on_dice_die_stopped"]
+[connection signal="roll_finished" from="Dice" to="." method="_on_dice_roll_finished"]
+[connection signal="roll_finished" from="Dice" to="CanvasLayer" method="_on_dice_roll_finished"]
+
+[editable path="Board"]
