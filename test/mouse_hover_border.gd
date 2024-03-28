@@ -19,18 +19,15 @@ func _ready():
 
 
 func _process(delta):
-	if not enabled:
-		return
-		
-	print("Enabled for ", direction)
-	if direction == BorderDirection.Left:
-		($"../.." as CameraLookAround).look_left()
-	elif direction == BorderDirection.Right:
-		($"../.." as CameraLookAround).look_right()	
-	elif direction == BorderDirection.Down:
-		($"../.." as CameraLookAround).look_down()	
-	elif direction == BorderDirection.Up:
-		($"../.." as CameraLookAround).look_up()	
+	if enabled:
+		if direction == BorderDirection.Left:
+			($"../.." as CameraLookAround).look_left()
+		elif direction == BorderDirection.Right:
+			($"../.." as CameraLookAround).look_right()	
+		elif direction == BorderDirection.Down:
+			($"../.." as CameraLookAround).look_down()	
+		elif direction == BorderDirection.Up:
+			($"../.." as CameraLookAround).look_up()	
 
 
 func _on_mouse_entered():
@@ -39,3 +36,4 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	enabled = false	
+	($"../.." as CameraLookAround).start_centre()

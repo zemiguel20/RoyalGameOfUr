@@ -137,27 +137,30 @@ text = "Dice: 4"
 layout_mode = 2
 text = "Extra roll!"
 
-[node name="Custom_Camera" type="Camera3D" parent="."]
+[node name="Camera_Parent" type="Node3D" parent="."]
 transform = Transform3D(0.0226874, -0.835592, 0.548882, 0, 0.549023, 0.835807, -0.999743, -0.0189623, 0.0124559, 7.93404, 11.8192, -2.23023)
+
+[node name="Custom_Camera" type="Camera3D" parent="Camera_Parent"]
+transform = Transform3D(1, 4.03865e-17, 1.86265e-09, 0, 1, -2.16824e-08, -1.86265e-09, 2.16824e-08, 1, 0, 0, 0)
 script = ExtResource("5_tb7mi")
 max_rotation = 25.0
 rotation_speed = 0.5
 
-[node name="MouseBorderDetector" type="CanvasLayer" parent="Custom_Camera"]
+[node name="MouseBorderDetector" type="CanvasLayer" parent="Camera_Parent/Custom_Camera"]
 script = ExtResource("6_pnt2d")
 
-[node name="ColorRect" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
+[node name="ColorRect" type="ColorRect" parent="Camera_Parent/Custom_Camera/MouseBorderDetector"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 98.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.392157)
+color = Color(1, 1, 1, 0.117647)
 script = ExtResource("7_8apjs")
 direction = 3
 
-[node name="ColorRect2" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
+[node name="ColorRect2" type="ColorRect" parent="Camera_Parent/Custom_Camera/MouseBorderDetector"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -167,21 +170,21 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.392157)
+color = Color(1, 1, 1, 0.117647)
 script = ExtResource("7_8apjs")
 direction = 2
 
-[node name="ColorRect3" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
+[node name="ColorRect3" type="ColorRect" parent="Camera_Parent/Custom_Camera/MouseBorderDetector"]
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 100.0
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.392157)
+color = Color(1, 1, 1, 0.117647)
 script = ExtResource("7_8apjs")
 
-[node name="ColorRect4" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
+[node name="ColorRect4" type="ColorRect" parent="Camera_Parent/Custom_Camera/MouseBorderDetector"]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -191,7 +194,7 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.392157)
+color = Color(1, 1, 1, 0.117647)
 script = ExtResource("7_8apjs")
 direction = 1
 
