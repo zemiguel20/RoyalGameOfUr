@@ -1,6 +1,9 @@
 class_name CameraLookAround
 extends Camera3D
 
+## NOTE: The camera object should have a local rotation of (0,0,0). 
+## The rotation of the camera is defined by the Camera_Container parent.
+
 ## Max degrees for camera rotation in all directions. 
 @export var max_rotation: float = 15
 @export var rotation_speed: float = 5
@@ -12,14 +15,18 @@ var min_rotation_y: float
 var max_rotation_y: float
 
 var _delta: float
+var _threshold: float = 0.001
 
 var starting_forward
 var starting_right
 var starting_up
 
+var _is_centering
+
 
 func _ready():
-	original_rotation = rotation_degrees
+	original_rotation = rotation	# Local rotation
+	
 	min_rotation_x = rotation_degrees.x - 15
 	max_rotation_x = rotation_degrees.x + 15
 	min_rotation_y = rotation_degrees.y - 15
@@ -32,6 +39,9 @@ func _ready():
 	
 func _process(delta):
 	_delta = delta
+	
+	if _is_centering:
+		centre()
 	
 
 func _input(event):
@@ -50,40 +60,44 @@ func _input(event):
 		
 
 func look_up():
-	#if rotation_degrees.x >= max_rotation_x:
-		#return
+	_is_centering = false
+	if rotation_degrees.x >= max_rotation_x:
+		return
 		
-	#rotation_degrees += rotation_speed * _delta * Vector3.RIGHT
 	rotate_object_local(Vector3.RIGHT, rotation_speed * _delta)		
-	#rotate(starting_right, rotation_speed * _delta)	
 
 
 func look_down():
-	#if rotation_degrees.x <= min_rotation_x:
-		#return
+	_is_centering = false	
+	if rotation_degrees.x <= min_rotation_x:
+		return
 	
-	#rotation_degrees += rotation_speed * _delta * -Vector3.RIGHT
 	rotate_object_local(Vector3.RIGHT, -rotation_speed * _delta)	
-	#rotate(starting_right, -rotation_speed * _delta)
-	
 	
 	
 func look_left():
-	#if rotation_degrees.y <= min_rotation_y:
-		#return
+	_is_centering = false	
+	if rotation_degrees.y >= max_rotation_y:
+		return
 	
-	#rotation_degrees += rotation_speed * _delta * Vector3.UP
 	rotate_object_local(Vector3.UP, rotation_speed * _delta)	
-	#rotate(starting_up, rotation_speed * _delta)		
 	
 func look_right():
-	#if rotation_degrees.y >= max_rotation_y:
-		#return
+	_is_centering = false	
+	if rotation_degrees.y <= min_rotation_y:
+		return
 
-	#rotation_degrees += rotation_speed * _delta * -Vector3.UP
 	rotate_object_local(Vector3.UP, -rotation_speed * _delta)	
-	#rotate(starting_up, -rotation_speed * _delta)
 	
 	
-#func vector_rad_to_deg(vector: Vector3) -> Vector3:
-	#return Vector3(rad_to_deg(vector.x), rad_to_deg(vector.y), rad_to_deg(vector.z))
+func centre():
+	if rotation.distance_to(original_rotation) > _threshold:
+		rotation = rotation.move_toward(original_rotation, rotation_speed * _delta)
+	else:
+		rotation = original_rotation
+		_is_centering = false
+		
+	
+func start_centre():
+	_is_centering = true
+	
