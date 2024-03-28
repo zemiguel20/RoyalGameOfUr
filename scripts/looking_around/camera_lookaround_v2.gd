@@ -1,6 +1,10 @@
 class_name CameraLookAroundV2
 extends Camera3D
 
+## In this variant, we will basically follow the mouse whenever it is inside of a border.
+## It is like a normal looking around controller you would have in a first person game,
+## with the exception that the looking around is only enabled when you are in a [MouseHoverBorder].
+
 
 ## Max degrees for camera rotation in all directions. 
 @export var max_degrees: float = 15
@@ -20,6 +24,7 @@ var starting_right
 var starting_up
 
 var _is_centering
+var _enable_looking = false
 
 
 func _ready():
@@ -30,22 +35,43 @@ func _ready():
 	min_rotation_y = rotation_degrees.y - max_degrees
 	max_degrees_y = rotation_degrees.y + max_degrees
 	
-	starting_forward = basis.z
-	starting_right = basis.x
-	starting_up = basis.y
-	
 	
 func _process(delta):
-	_delta = delta
+	# Cache the delta: time between this and previous frame.
+	_delta = delta	
 	
-	if _is_centering:
+	# FIXME:
+	rotation.z = 0
+	
+	if _is_centering and not _enable_looking:
 		centre()
-	
-
-func _input(event):
-	if not event is InputEventKey:
-		return 
 		
+		
+func _input(event):
+	if event is InputEventKey:
+		if event.keycode == KEY_SPACE and event.is_pressed():
+			_enable_looking = not _enable_looking
+	
+	if not event is InputEventMouseMotion or not _enable_looking:
+		return
+		
+	var mouseMotionEvent = event as InputEventMouseMotion
+	var mouseDelta = mouseMotionEvent.relative as Vector2
+	
+	print("Mouse Delta: ", mouseDelta)
+	print("Rotation: ", rotation_speed * _delta * mouseDelta.x)
+	
+	rotate(Vector3.UP, rotation_speed * _delta * -mouseDelta.x)
+	rotate(Vector3.RIGHT, rotation_speed * _delta * -mouseDelta.y)		
+		
+		
+func enable_looking():
+	_enable_looking = true
+	
+	
+func disable_looking():
+	_enable_looking = false
+	
 	
 func centre():
 	if rotation.distance_to(original_rotation) > _threshold:

@@ -31,9 +31,8 @@ func _process(delta):
 
 
 func _on_mouse_entered():
-	enabled = true
+	($"../.." as CameraLookAroundV2).start_centre()
 
 
 func _on_mouse_exited():
-	enabled = false	
 	($"../.." as CameraLookAroundV2).start_centre()
