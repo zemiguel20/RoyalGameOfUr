@@ -143,7 +143,6 @@ transform = Transform3D(0.0226874, -0.835592, 0.548882, 0, 0.549023, 0.835807, -
 [node name="Custom_Camera" type="Camera3D" parent="Camera_Parent"]
 transform = Transform3D(1, 4.03865e-17, 1.86265e-09, 0, 1, -2.16824e-08, -1.86265e-09, 2.16824e-08, 1, 0, 0, 0)
 script = ExtResource("5_tb7mi")
-max_rotation = 25.0
 rotation_speed = 0.5
 
 [node name="MouseBorderDetector" type="CanvasLayer" parent="Camera_Parent/Custom_Camera"]
