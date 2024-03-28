@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://dktwd7e32f0qe"]
+
+[ext_resource type="Script" path="res://scripts/looking_around/camera_lookaround.gd" id="1_7in43"]
+[ext_resource type="Script" path="res://scripts/looking_around/mouse_hover_border.gd" id="2_uyvrd"]
+
+[sub_resource type="GDScript" id="GDScript_u3adp"]
+script/source = "class_name MouseBorderHoverDetection
+extends CanvasLayer
+#
+#var _borders: Array[MouseHoverBorder]
+#
+#func _ready():
+	#_borders = get_children() as Array[MouseHoverBorder]
+	#
+	#for border in _borders:
+		#border._on_mouse_entered()
+"
+
+[node name="Camera_Parent" type="Node3D"]
+transform = Transform3D(0.0226874, -0.835592, 0.548882, 0, 0.549023, 0.835807, -0.999743, -0.0189623, 0.0124559, 7.93404, 11.8192, -2.23023)
+visible = false
+
+[node name="Custom_Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 4.03865e-17, 1.86265e-09, 0, 1, -2.16824e-08, -1.86265e-09, 2.16824e-08, 1, 0, 0, 0)
+script = ExtResource("1_7in43")
+rotation_speed = 0.5
+
+[node name="MouseBorderDetector" type="CanvasLayer" parent="Custom_Camera"]
+script = SubResource("GDScript_u3adp")
+
+[node name="ColorRect" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 98.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+color = Color(1, 1, 1, 0.117647)
+script = ExtResource("2_uyvrd")
+
+[node name="ColorRect2" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+color = Color(1, 1, 1, 0.117647)
+script = ExtResource("2_uyvrd")
+
+[node name="ColorRect3" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 100.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+color = Color(1, 1, 1, 0.117647)
+script = ExtResource("2_uyvrd")
+
+[node name="ColorRect4" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+color = Color(1, 1, 1, 0.117647)
+script = ExtResource("2_uyvrd")

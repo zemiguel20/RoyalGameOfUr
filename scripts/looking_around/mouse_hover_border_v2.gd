@@ -18,21 +18,13 @@ func _ready():
 	mouse_exited.connect(_on_mouse_exited)
 
 
-func _process(delta):
-	if enabled:
-		if direction == BorderDirection.Left:
-			($"../.." as CameraLookAroundV2).look_left()
-		elif direction == BorderDirection.Right:
-			($"../.." as CameraLookAroundV2).look_right()	
-		elif direction == BorderDirection.Down:
-			($"../.." as CameraLookAroundV2).look_down()	
-		elif direction == BorderDirection.Up:
-			($"../.." as CameraLookAroundV2).look_up()	
-
-
 func _on_mouse_entered():
-	($"../.." as CameraLookAroundV2).start_centre()
+	print("Enabled Looking")
+	($"../.." as CameraLookAroundV2).enable_looking()
 
 
 func _on_mouse_exited():
+	print("Disabled Looking")
+	($"../.." as CameraLookAroundV2).disable_looking()
 	($"../.." as CameraLookAroundV2).start_centre()
+	

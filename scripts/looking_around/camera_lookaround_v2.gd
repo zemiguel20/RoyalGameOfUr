@@ -8,7 +8,8 @@ extends Camera3D
 
 ## Max degrees for camera rotation in all directions. 
 @export var max_degrees: float = 15
-@export var rotation_speed: float = 5
+@export var rotation_speed: float = 0.05
+@export var centering_speed: float = 0.5
 
 var original_rotation: Vector3
 var min_rotation_x: float
@@ -28,6 +29,8 @@ var _enable_looking = false
 
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	
 	original_rotation = rotation	# Local rotation
 	
 	min_rotation_x = rotation_degrees.x - max_degrees
@@ -48,18 +51,15 @@ func _process(delta):
 		
 		
 func _input(event):
-	if event is InputEventKey:
-		if event.keycode == KEY_SPACE and event.is_pressed():
-			_enable_looking = not _enable_looking
+	#if event is InputEventKey:
+		#if event.keycode == KEY_SPACE and event.is_pressed():
+			#_enable_looking = not _enable_looking
 	
 	if not event is InputEventMouseMotion or not _enable_looking:
 		return
 		
 	var mouseMotionEvent = event as InputEventMouseMotion
 	var mouseDelta = mouseMotionEvent.relative as Vector2
-	
-	print("Mouse Delta: ", mouseDelta)
-	print("Rotation: ", rotation_speed * _delta * mouseDelta.x)
 	
 	rotate(Vector3.UP, rotation_speed * _delta * -mouseDelta.x)
 	rotate(Vector3.RIGHT, rotation_speed * _delta * -mouseDelta.y)		
@@ -75,7 +75,7 @@ func disable_looking():
 	
 func centre():
 	if rotation.distance_to(original_rotation) > _threshold:
-		rotation = rotation.move_toward(original_rotation, rotation_speed * _delta)
+		rotation = rotation.move_toward(original_rotation, centering_speed * _delta)
 	else:
 		rotation = original_rotation
 		_is_centering = false
