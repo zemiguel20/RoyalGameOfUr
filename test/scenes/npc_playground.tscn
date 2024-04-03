@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://q3pj5fh32fg0"]
+
+[ext_resource type="Material" uid="uid://d1ayfngndgaui" path="res://materials/floor.tres" id="1_8m4qk"]
+[ext_resource type="Script" path="res://scripts/npc_system/ambient_npc.gd" id="2_fgp32"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_134c2"]
+size = Vector2(100, 100)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4vqeu"]
+points = PackedVector3Array(-50, 0, -50, -50, 0, 50, 50, 0, -50, 50, 0, 50)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xmia1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghwuu"]
+
+[node name="NPC_Playground" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = ExtResource("1_8m4qk")
+mesh = SubResource("PlaneMesh_134c2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_4vqeu")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80288, 1.11885, 0)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("2_fgp32")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("CapsuleMesh_xmia1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("CapsuleShape3D_ghwuu")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.645, 1.11885, -8.40821)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("2_fgp32")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+mesh = SubResource("CapsuleMesh_xmia1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("CapsuleShape3D_ghwuu")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.502498, 1.11885, -6.61914)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("2_fgp32")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+mesh = SubResource("CapsuleMesh_xmia1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+shape = SubResource("CapsuleShape3D_ghwuu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.963854, 0.266431, 0, -0.266431, 0.963854, 2.51469, 6.0908, 14.888)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.303817, 0.95273, 0, -0.95273, 0.303817, 0, 0, 0)
