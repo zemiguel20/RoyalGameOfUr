@@ -41,12 +41,15 @@ kitchen = NodePath("KitchenSpot")
 
 [node name="RigidBody3D4" parent="NPCSystem/NPCs" instance=ExtResource("2_d4i2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25556, 1, 0)
+axis_lock_linear_y = false
 
 [node name="RigidBody3D5" parent="NPCSystem/NPCs" instance=ExtResource("2_d4i2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.23971, 1, -4.72528)
+axis_lock_linear_y = false
 
 [node name="RigidBody3D6" parent="NPCSystem/NPCs" instance=ExtResource("2_d4i2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45172, 1, 7.44283)
+axis_lock_linear_y = false
 
 [node name="KitchenSpot" type="Marker3D" parent="NPCSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22968, -7.95755)
