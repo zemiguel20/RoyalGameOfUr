@@ -11,6 +11,8 @@ func _init(time, npc):
 
 
 func on_start():
+	(_npc._mesh.material_override as BaseMaterial3D).albedo_color = Color.RED
+	
 	_status = Status.Running
 	await _npc.get_tree().create_timer(_wait_time).timeout
 	_status = Status.Succeeded
