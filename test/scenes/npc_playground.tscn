@@ -1,7 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://q3pj5fh32fg0"]
+[gd_scene load_steps=13 format=3 uid="uid://q3pj5fh32fg0"]
 
 [ext_resource type="Material" uid="uid://d1ayfngndgaui" path="res://materials/floor.tres" id="1_8m4qk"]
 [ext_resource type="PackedScene" uid="uid://4goheq1kyhy1" path="res://test/scenes/test_npc.tscn" id="2_d4i2k"]
+[ext_resource type="Material" uid="uid://pyr8trc2qd4t" path="res://materials/rosette.tres" id="3_b4v85"]
+[ext_resource type="Script" path="res://scripts/npc_system/npc_data_manager.gd" id="4_t5h3f"]
+[ext_resource type="Script" path="res://scripts/npc_system/npc_spot.gd" id="5_2ihv5"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_iqif3"]
+radius = 1.0
+height = 2.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_firtq"]
 size = Vector3(1.287, 10, 10)
@@ -26,44 +33,63 @@ points = PackedVector3Array(-50, 0, -50, -50, 0, 50, 50, 0, -50, 50, 0, 50)
 
 [node name="NPC_Playground" type="Node3D"]
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+[node name="NPCSystem" type="Node" parent="." node_paths=PackedStringArray("kitchen")]
+script = ExtResource("4_t5h3f")
+kitchen = NodePath("KitchenSpot")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+[node name="NPCs" type="Node" parent="NPCSystem"]
+
+[node name="RigidBody3D4" parent="NPCSystem/NPCs" instance=ExtResource("2_d4i2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25556, 1, 0)
+
+[node name="RigidBody3D5" parent="NPCSystem/NPCs" instance=ExtResource("2_d4i2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.23971, 1, -4.72528)
+
+[node name="RigidBody3D6" parent="NPCSystem/NPCs" instance=ExtResource("2_d4i2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45172, 1, 7.44283)
+
+[node name="KitchenSpot" type="Marker3D" parent="NPCSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22968, -7.95755)
+script = ExtResource("5_2ihv5")
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="CookingPot" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27726, -9.71207)
+material_override = ExtResource("3_b4v85")
+mesh = SubResource("SphereMesh_iqif3")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Environment"]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/StaticBody3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42453, 3.27695, 0)
 mesh = SubResource("BoxMesh_firtq")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticBody3D2/MeshInstance3D"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Environment/StaticBody3D2/MeshInstance3D"]
 navigation_mesh = SubResource("NavigationMesh_5a1fw")
 
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="StaticBody3D2/MeshInstance3D"]
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="Environment/StaticBody3D2/MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42453, 3.27695, 0)
 shape = SubResource("ConcavePolygonShape3D_tuwxh")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/StaticBody3D"]
 material_override = ExtResource("1_8m4qk")
 mesh = SubResource("PlaneMesh_134c2")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="StaticBody3D/MeshInstance3D"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Environment/StaticBody3D/MeshInstance3D"]
 navigation_mesh = SubResource("NavigationMesh_a2ftb")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_4vqeu")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.963854, 0.266431, 0, -0.266431, 0.963854, 2.51469, 6.0908, 14.888)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.303817, 0.95273, 0, -0.95273, 0.303817, 0, 0, 0)
-
-[node name="RigidBody3D4" parent="." instance=ExtResource("2_d4i2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25556, 1, 0)
-
-[node name="RigidBody3D5" parent="." instance=ExtResource("2_d4i2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.23971, 1, -4.72528)
-
-[node name="RigidBody3D6" parent="." instance=ExtResource("2_d4i2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45172, 1, 7.44283)

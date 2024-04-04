@@ -35,6 +35,7 @@ debug_enabled = true
 debug_path_custom_color = Color(0.870588, 0.113725, 0.337255, 1)
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+avoidance_enabled = false
 radius = 0.5
 height = 2.0
 
