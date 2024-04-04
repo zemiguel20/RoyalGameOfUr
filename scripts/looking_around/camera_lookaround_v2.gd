@@ -5,11 +5,17 @@ extends Camera3D
 ## It is like a normal looking around controller you would have in a first person game,
 ## with the exception that the looking around is only enabled when you are in a [MouseHoverBorder].
 
-
 ## Max degrees for camera rotation in all directions. 
 @export var max_degrees: float = 15
 @export var rotation_speed: float = 0.05
 @export var centering_speed: float = 0.5
+
+@export var enable_feature: bool
+@export var enable_at_game_start: bool
+
+var cursor = load("res://sprites/cursor/Hand Cursor.png")
+
+var is_enabled = false
 
 var original_rotation: Vector3
 var min_rotation_x: float
@@ -29,7 +35,11 @@ var _enable_looking = false
 
 
 func _ready():
+	if not enable_feature:
+		return
+		
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	Input.set_custom_mouse_cursor(cursor)
 	
 	original_rotation = rotation	# Local rotation
 	
@@ -40,6 +50,9 @@ func _ready():
 	
 	
 func _process(delta):
+	if not is_enabled:
+		return
+	
 	# Cache the delta: time between this and previous frame.
 	_delta = delta	
 	
@@ -47,13 +60,16 @@ func _process(delta):
 	rotation.z = 0
 	
 	if _is_centering and not _enable_looking:
-		centre()
+		_centre()
 		
 		
 func _input(event):
-	#if event is InputEventKey:
-		#if event.keycode == KEY_SPACE and event.is_pressed():
-			#_enable_looking = not _enable_looking
+	if event is InputEventKey:
+		if event.keycode == KEY_SPACE and event.is_pressed() and enable_at_game_start:
+			is_enabled = true
+	
+	if not enable_feature or not is_enabled:
+		return
 	
 	if not event is InputEventMouseMotion or not _enable_looking:
 		return
@@ -73,7 +89,7 @@ func disable_looking():
 	_enable_looking = false
 	
 	
-func centre():
+func _centre():
 	if rotation.distance_to(original_rotation) > _threshold:
 		rotation = rotation.move_toward(original_rotation, centering_speed * _delta)
 	else:
@@ -82,5 +98,8 @@ func centre():
 		
 	
 func start_centre():
+	if not is_enabled:
+		return
+		
 	_is_centering = true
 	

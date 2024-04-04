@@ -143,17 +143,24 @@ transform = Transform3D(-4.37114e-08, -0.392241, 0.919863, 0, 0.919863, 0.392241
 transform = Transform3D(1, -7.45057e-09, 1.86264e-08, 7.45057e-09, 1, -2.98023e-08, -1.86264e-08, -2.98023e-08, 1, 0, 0, 0)
 current = true
 script = ExtResource("5_5vmiv")
+max_degrees = 20.0
+rotation_speed = 0.1
+centering_speed = 0.7
+enable_feature = true
+enable_at_game_start = true
 
 [node name="MouseBorderDetector" type="CanvasLayer" parent="Camera_Parent_v2/Custom_Camera"]
 
 [node name="ColorRect" type="ColorRect" parent="Camera_Parent_v2/Custom_Camera/MouseBorderDetector"]
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 1.0
+offset_right = 1.0
 offset_bottom = 224.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.117647)
+color = Color(1, 1, 1, 0)
 script = ExtResource("6_u6vja")
 
 [node name="ColorRect2" type="ColorRect" parent="Camera_Parent_v2/Custom_Camera/MouseBorderDetector"]
@@ -166,7 +173,7 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.117647)
+color = Color(1, 1, 1, 0)
 script = ExtResource("6_u6vja")
 
 [node name="ColorRect3" type="ColorRect" parent="Camera_Parent_v2/Custom_Camera/MouseBorderDetector"]
@@ -176,7 +183,7 @@ offset_right = 259.0
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.117647)
+color = Color(1, 1, 1, 0)
 script = ExtResource("6_u6vja")
 
 [node name="ColorRect4" type="ColorRect" parent="Camera_Parent_v2/Custom_Camera/MouseBorderDetector"]
@@ -189,7 +196,7 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.117647)
+color = Color(1, 1, 1, 0)
 script = ExtResource("6_u6vja")
 
 [connection signal="game_finished" from="GamemodeTest/Gamemode" to="GamemodeTest/CanvasLayer" method="_on_gamemode_game_finished"]
