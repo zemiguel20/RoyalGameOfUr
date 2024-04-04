@@ -16,7 +16,6 @@ func on_start():
 	_status = Status.Running
 	await _npc.get_tree().create_timer(_wait_time).timeout
 	_status = Status.Succeeded
-	print("Done")
 
 
 func on_process(_delta) -> Status:

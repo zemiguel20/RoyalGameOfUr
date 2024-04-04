@@ -1,17 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://4goheq1kyhy1"]
+[gd_scene load_steps=5 format=3 uid="uid://4goheq1kyhy1"]
 
 [ext_resource type="Script" path="res://scripts/npc_system/ambient_npc.gd" id="1_otguk"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7qxl"]
-transparency = 1
-shading_mode = 0
-disable_fog = true
-vertex_color_use_as_albedo = true
-vertex_color_is_srgb = true
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_ouwvt"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_0jpa4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atjh6"]
 
@@ -28,24 +17,12 @@ axis_lock_angular_z = true
 script = ExtResource("1_otguk")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 0.1
+target_desired_distance = 0.2
 path_height_offset = -1.0
+path_max_distance = 34.51
+avoidance_enabled = true
 debug_enabled = true
-debug_path_custom_color = Color(0.870588, 0.113725, 0.337255, 1)
-
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
-avoidance_enabled = false
-radius = 0.5
-height = 2.0
-
-[node name="_MeshInstance3D_57726" type="MeshInstance3D" parent="NavigationObstacle3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1e-05)
-material_override = SubResource("StandardMaterial3D_d7qxl")
-mesh = SubResource("ImmediateMesh_ouwvt")
-
-[node name="_MeshInstance3D_13355" type="MeshInstance3D" parent="NavigationObstacle3D/_MeshInstance3D_57726"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1e-05)
-mesh = SubResource("ArrayMesh_0jpa4")
+debug_path_custom_color = Color(0.0705882, 0.529412, 0, 1)
 
 [node name="Capsule_MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_atjh6")

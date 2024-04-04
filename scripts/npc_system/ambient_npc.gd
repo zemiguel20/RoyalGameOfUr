@@ -14,17 +14,20 @@ var _material: BaseMaterial3D
 var _npc_manager: NPCDataManager
 
 var temp_has_claimed_kitchen
-var is_moving_to_kitchen
+var original_height
 
 func on_ready(manager: NPCDataManager):
 	_npc_manager = manager
 	_material = _mesh.material_override.duplicate()
 	_mesh.material_override = _material
 	
+	original_height = global_position.y
+	
 	#blackboard = Blackboard.new()
 	#blackboard.append("Base", self)
 
 	_current_task = _choose_task()
+	await Engine.get_main_loop().process_frame
 	_current_task.on_start()
 	
 	
@@ -51,7 +54,7 @@ func _choose_task() -> NPCTask:
 	if random == 1:
 		return WaitTask.new(randf_range(0.5, 2.5), self)
 	elif random == 2:
-		var pos := Vector3(randf_range(-6.0, 6.0), global_position.y, randf_range(-6.0, 6.0))
+		var pos := Vector3(randf_range(-6.0, 6.0), original_height, randf_range(-6.0, 6.0))
 		print("Target Position:", pos)
 		var task = MoveTask.new(pos, self, _nav_agent)
 		_nav_agent.velocity_computed.connect(task.velocity_computed)
@@ -61,6 +64,7 @@ func _choose_task() -> NPCTask:
 		if not _npc_manager.kitchen.is_claimed and not temp_has_claimed_kitchen:
 			_npc_manager.kitchen.try_claim(self)
 			temp_has_claimed_kitchen = true
+			_npc_manager.kitchen.global_position.y = original_height
 			return MoveTask.new(_npc_manager.kitchen.global_position, self, _nav_agent)	
 
 	return WaitTask.new(1.0, self)
