@@ -14,5 +14,8 @@ func on_start():
 func on_process(_delta):
 	pass
 	
+func on_physics_process(_delta):
+	pass
+	
 func on_end():
 	pass

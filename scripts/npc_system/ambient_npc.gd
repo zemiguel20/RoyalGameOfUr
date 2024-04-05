@@ -1,6 +1,18 @@
 class_name AmbientNPC
 extends PhysicsBody3D
 
+## These tasks refer to larger tasks, which are a collection of tasks.
+## For example, the KitchenTask is a collection of walking, waiting etc.
+enum NPCTaskType 
+{
+	NoTask = 0,
+	WalkBy = 1,
+	CookMeal = 2,
+	Spectate = 3
+}
+
+@export var possible_tasks: Array[NPCTaskType] 
+
 var blackboard: Blackboard
 var move_speed: float = 2
 ## NPC which is sort of a mix between state machine and behaviour tree.
@@ -39,14 +51,40 @@ func _process(delta):
 		_current_task = _choose_task()
 		_current_task.on_start()
 		
+		
+func _physics_process(delta):
+	var status = _current_task.on_physics_process(delta)
+	
+	# If not running, chooses a new task and starts it.
+	if status != NPCTask.Status.Running:
+		_current_task.on_end()	# Might not be necassary
+		_current_task = _choose_task()
+		_current_task.on_start()
+	
 
 # Helper method for showing different actions
 func set_material_color(color: Color):
 	(_mesh.material_override as BaseMaterial3D).albedo_color = color
 	
 
-# Use the NPCManager/Data thing to check conditions like isKitchenClaimed
 func _choose_task() -> NPCTask:
+	if possible_tasks.size() == 0:
+		return DebugTask.new("Waitinggg")
+		
+	var random_task = possible_tasks.pick_random()
+	
+	if random_task == NPCTaskType.CookMeal:	
+		return DebugTask.new("Cooking meal")
+	elif random_task == NPCTaskType.WalkBy:	
+		return DebugTask.new("Walkinn")	
+	elif random_task == NPCTaskType.Spectate:	
+		return DebugTask.new("Taking a looksie")
+
+	return DebugTask.new("Waitinggg")
+	
+
+# Use the NPCManager/Data thing to check conditions like isKitchenClaimed
+func _choose_task_test() -> NPCTask:
 	if _npc_manager.kitchen.claimer == self:
 		return KitchenTask.new(randf_range(10, 15), self)
 			
