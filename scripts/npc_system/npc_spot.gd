@@ -8,11 +8,13 @@ var _queue
 
 
 ## TODO: Revisit this later
-func try_claim(npc: AmbientNPC, enqueue: bool = true):
+func try_claim(npc: AmbientNPC, enqueue: bool = true) -> bool:
 	if not is_claimed:
 		is_claimed = true
 		claimer = npc
-		return
+		return true
+		
+	return false
 	
 	#if enqueue:
 		#_queue.append(npc)

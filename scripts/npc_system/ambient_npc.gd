@@ -38,7 +38,7 @@ func on_ready(manager: NPCDataManager):
 	#blackboard = Blackboard.new()
 	#blackboard.append("Base", self)
 
-	_current_task = _choose_task()
+	_current_task = _choose_task_test()
 	await Engine.get_main_loop().process_frame
 	_current_task.on_start()
 	
@@ -48,18 +48,18 @@ func _process(delta):
 	# If not running, chooses a new task and starts it.
 	if status != NPCTask.Status.Running:
 		_current_task.on_end()	# Might not be necassary
-		_current_task = _choose_task()
+		_current_task = _choose_task_test()
 		_current_task.on_start()
 		
 		
-func _physics_process(delta):
-	var status = _current_task.on_physics_process(delta)
-	
-	# If not running, chooses a new task and starts it.
-	if status != NPCTask.Status.Running:
-		_current_task.on_end()	# Might not be necassary
-		_current_task = _choose_task()
-		_current_task.on_start()
+#func _physics_process(delta):
+	#var status = _current_task.on_physics_process(delta)
+	#
+	## If not running, chooses a new task and starts it.
+	#if status != NPCTask.Status.Running:
+		#_current_task.on_end()	# Might not be necassary
+		#_current_task = _choose_task_test()
+		#_current_task.on_start()
 	
 
 # Helper method for showing different actions
