@@ -1,13 +1,12 @@
-class_name General
-extends Object
+extends Node
 ## Contains constants and general utility functions
 
 
-enum PlayerID {ONE, TWO}
+enum Player {ONE = 0, TWO = 1}
 
 
-static func get_other_player_id(id: PlayerID) -> PlayerID:
-	return PlayerID.TWO if id == PlayerID.ONE else PlayerID.ONE
+func get_other_player_id(id: Player) -> Player:
+	return Player.TWO if id == Player.ONE else Player.ONE
 
 
 # Not tested yet.

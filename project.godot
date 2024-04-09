@@ -16,6 +16,10 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+General="*res://scripts/autoloads/general.gd"
+
 [dotnet]
 
 project/assembly_name="Royal Game Of Ur"
