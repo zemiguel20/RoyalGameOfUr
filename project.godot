@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 General="*res://scripts/autoloads/general.gd"
+Settings="*res://scripts/autoloads/game_settings.gd"
 
 [dotnet]
 

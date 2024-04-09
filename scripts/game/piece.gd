@@ -1,31 +1,35 @@
 class_name Piece
-extends StaticBody3D
+extends Node3D
 ## Piece of the game. Has selection and highlighting functionality. Also can be physically moved.
+
 
 signal clicked(sender: Piece)
 
+enum MOVE_ANIM {ARC, LINE, NONE}
+
 @export var move_arc_height: float = 1.0
 @export var move_duration: float = 1.0
-@export var player: General.PlayerID = General.PlayerID.ONE
+@export_enum("One:0", "Two:1") var player: int
 @export var material_changer: MaterialHighlighter
 
 
 ## Enables selection and highlighting effects
-func enable_selection():
-	input_ray_pickable = true
+func highlight():
 	material_changer.highlight()
 
 
 ## Disables selection and highlighting effects
-func disable_selection():
-	input_ray_pickable = false
+func dehighlight():
 	material_changer.dehighlight()
 
 
-## Coroutine that moves the piece physically along the given [param movement_path].  [param movement_path] contains global positions.
-func move(movement_path: Array[Vector3]):
-	for pos in movement_path:
-		await _move_arc(pos)
+func move(to: Vector3, anim: MOVE_ANIM):
+	match anim:
+		MOVE_ANIM.ARC:
+			await _move_arc(to)
+		_:
+			global_position = to
+			await get_tree().create_timer(0.1).timeout
 
 
 ## AI calls this function directly
@@ -38,7 +42,7 @@ func _on_input_event(_camera, event: InputEvent, _position, _normal, _shape_idx)
 		on_click()
 
 
-func _move_arc(target_pos : Vector3):
+func _move_arc(target_pos: Vector3):
 	# Linear translation of X and Z
 	var tween_xz = create_tween()
 	tween_xz.bind_node(self).set_parallel(true)
