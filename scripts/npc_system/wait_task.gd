@@ -1,5 +1,5 @@
 class_name WaitTask
-extends NPCTask
+extends BTNode
 
 var _wait_time: float
 var _status: Status

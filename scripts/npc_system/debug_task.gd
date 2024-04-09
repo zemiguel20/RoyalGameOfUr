@@ -1,5 +1,5 @@
 class_name DebugTask
-extends NPCTask
+extends BTNode
 
 var _text: String
 

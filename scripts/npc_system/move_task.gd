@@ -1,5 +1,5 @@
 class_name MoveTask
-extends NPCTask
+extends BTNode
 
 ## Uses the NavigationAgent3D Component to move.
 

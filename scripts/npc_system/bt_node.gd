@@ -1,4 +1,4 @@
-class_name NPCTask
+class_name BTNode
 extends Node
 
 enum Status 
@@ -14,6 +14,7 @@ func on_start():
 func on_process(_delta):
 	pass
 	
+## @experimental Not sure how to make this one work yet
 func on_physics_process(_delta):
 	pass
 	

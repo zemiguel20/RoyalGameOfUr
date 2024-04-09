@@ -3,7 +3,7 @@ extends PhysicsBody3D
 
 ## These tasks refer to larger tasks, which are a collection of tasks.
 ## For example, the KitchenTask is a collection of walking, waiting etc.
-enum NPCTaskType 
+enum BTNodeType 
 {
 	NoTask = 0,
 	WalkBy = 1,
@@ -11,13 +11,13 @@ enum NPCTaskType
 	Spectate = 3
 }
 
-@export var possible_tasks: Array[NPCTaskType] 
+@export var possible_tasks: Array[BTNodeType] 
 
 var blackboard: Blackboard
 var move_speed: float = 2
 ## NPC which is sort of a mix between state machine and behaviour tree.
 var _npcData
-var _current_task: NPCTask
+var _current_task: BTNode
 
 @onready var _nav_agent = $NavigationAgent3D as NavigationAgent3D
 @onready var _mesh = $Capsule_MeshInstance3D as MeshInstance3D
@@ -46,7 +46,7 @@ func on_ready(manager: NPCDataManager):
 func _process(delta):
 	var status = _current_task.on_process(delta)
 	# If not running, chooses a new task and starts it.
-	if status != NPCTask.Status.Running:
+	if status != BTNode.Status.Running:
 		_current_task.on_end()	# Might not be necassary
 		_current_task = _choose_task_test()
 		_current_task.on_start()
@@ -56,7 +56,7 @@ func _process(delta):
 	#var status = _current_task.on_physics_process(delta)
 	#
 	## If not running, chooses a new task and starts it.
-	#if status != NPCTask.Status.Running:
+	#if status != BTNode.Status.Running:
 		#_current_task.on_end()	# Might not be necassary
 		#_current_task = _choose_task_test()
 		#_current_task.on_start()
@@ -67,24 +67,24 @@ func set_material_color(color: Color):
 	(_mesh.material_override as BaseMaterial3D).albedo_color = color
 	
 
-func _choose_task() -> NPCTask:
+func _choose_task() -> BTNode:
 	if possible_tasks.size() == 0:
 		return DebugTask.new("Waitinggg")
 		
 	var random_task = possible_tasks.pick_random()
 	
-	if random_task == NPCTaskType.CookMeal:	
+	if random_task == BTNodeType.CookMeal:	
 		return DebugTask.new("Cooking meal")
-	elif random_task == NPCTaskType.WalkBy:	
+	elif random_task == BTNodeType.WalkBy:	
 		return DebugTask.new("Walkinn")	
-	elif random_task == NPCTaskType.Spectate:	
+	elif random_task == BTNodeType.Spectate:	
 		return DebugTask.new("Taking a looksie")
 
 	return DebugTask.new("Waitinggg")
 	
 
 # Use the NPCManager/Data thing to check conditions like isKitchenClaimed
-func _choose_task_test() -> NPCTask:
+func _choose_task_test() -> BTNode:
 	if _npc_manager.kitchen.claimer == self:
 		return KitchenTask.new(randf_range(10, 15), self)
 			

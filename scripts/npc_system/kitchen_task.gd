@@ -1,5 +1,5 @@
 class_name KitchenTask
-extends NPCTask
+extends BTNode
 
 ## The cooking task consists of playing an animation and waiting for a certain time.
 

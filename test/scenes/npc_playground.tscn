@@ -105,3 +105,5 @@ transform = Transform3D(1, 0, 0, 0, 0.903679, 0.42821, 0, -0.42821, 0.903679, 2.
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.303817, 0.95273, 0, -0.95273, 0.303817, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
