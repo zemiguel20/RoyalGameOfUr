@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk03upbyn04nu"]
+[gd_scene load_steps=6 format=3 uid="uid://dk03upbyn04nu"]
 
 [ext_resource type="Script" path="res://scripts/game/piece.gd" id="1_u7nn1"]
 [ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="2_arhj8"]
@@ -10,10 +10,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enimc"]
 albedo_color = Color(0.231373, 1, 0.211765, 1)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_o4a7m"]
-height = 0.232235
-
-[node name="Piece" type="StaticBody3D" node_paths=PackedStringArray("material_changer")]
+[node name="Piece" type="Node3D" node_paths=PackedStringArray("material_changer")]
 script = ExtResource("1_u7nn1")
 move_duration = 0.3
 material_changer = NodePath("MaterialChanger")
@@ -27,8 +24,3 @@ mesh = SubResource("CylinderMesh_lftn1")
 script = ExtResource("2_arhj8")
 highlight_material = SubResource("StandardMaterial3D_enimc")
 mesh_to_highlight = NodePath("../MeshInstance3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_o4a7m")
-
-[connection signal="input_event" from="." to="." method="_on_input_event"]
