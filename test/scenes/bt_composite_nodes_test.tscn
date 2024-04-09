@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4afu661si3d1"]
+
+[sub_resource type="GDScript" id="GDScript_xduif"]
+resource_name = "CompositeNodesTest"
+script/source = "extends Node
+
+var tree: BTNode
+
+func _ready():
+	tree = _get_sequence_tree()
+	tree.on_start()
+
+func _process(delta):
+	var status = tree.on_process(delta)
+	if status == BTNode.Status.Succeeded:
+		tree = _get_selector_tree()
+	
+	
+func _get_sequence_tree():
+	return SequenceNode.new([
+		DebugTask.new(\"Seqeunce Start -> Sequence will continue\"),
+		WaitTask.new(0.6, self),
+		DebugTask.new(\"Seqeunce Ended\"),
+	])
+
+
+func _get_selector_tree():
+	return SelectorNode.new([
+		DebugTask.new(\"Selector Start -> Loop, since node is true\"),
+		DebugTask.new(\"Selector Continued\"),
+		WaitTask.new(0.6, self),
+		DebugTask.new(\"Selector Ended\"),
+	])
+"
+
+[node name="BtCompositeNodesTest" type="Node"]
+script = SubResource("GDScript_xduif")

@@ -38,7 +38,7 @@ func on_ready(manager: NPCDataManager):
 	#blackboard = Blackboard.new()
 	#blackboard.append("Base", self)
 
-	_current_task = _choose_task_test()
+	_current_task = _choose_task()
 	await Engine.get_main_loop().process_frame
 	_current_task.on_start()
 	
@@ -46,10 +46,10 @@ func on_ready(manager: NPCDataManager):
 func _process(delta):
 	var status = _current_task.on_process(delta)
 	# If not running, chooses a new task and starts it.
-	if status != BTNode.Status.Running:
-		_current_task.on_end()	# Might not be necassary
-		_current_task = _choose_task_test()
-		_current_task.on_start()
+	#if status != BTNode.Status.Running:
+		#_current_task.on_end()	# Might not be necassary
+		#_current_task = _choose_task_test()
+		#_current_task.on_start()
 		
 		
 #func _physics_process(delta):
@@ -68,41 +68,33 @@ func set_material_color(color: Color):
 	
 
 func _choose_task() -> BTNode:
-	if possible_tasks.size() == 0:
-		return DebugTask.new("Waitinggg")
-		
-	var random_task = possible_tasks.pick_random()
-	
-	if random_task == BTNodeType.CookMeal:	
-		return DebugTask.new("Cooking meal")
-	elif random_task == BTNodeType.WalkBy:	
-		return DebugTask.new("Walkinn")	
-	elif random_task == BTNodeType.Spectate:	
-		return DebugTask.new("Taking a looksie")
-
-	return DebugTask.new("Waitinggg")
+	# Sequence Test
+	return SequenceNode.new([
+				DebugTask.new("Seqeunce Start"),
+				WaitTask.new(0.6, self)
+	])
 	
 
-# Use the NPCManager/Data thing to check conditions like isKitchenClaimed
-func _choose_task_test() -> BTNode:
-	if _npc_manager.kitchen.claimer == self:
-		return KitchenTask.new(randf_range(10, 15), self)
-			
-	var random = randi_range(1, 3)
-	if random == 1:
-		return WaitTask.new(randf_range(0.5, 2.5), self)
-	elif random == 2:
-		var pos := Vector3(randf_range(-6.0, 6.0), original_height, randf_range(-6.0, 6.0))
-		print("Target Position:", pos)
-		var task = MoveTask.new(pos, self, _nav_agent)
-		_nav_agent.velocity_computed.connect(task.velocity_computed)
-		return task
-	elif random == 3:
-		# So far this is all for testing purposes.
-		if not _npc_manager.kitchen.is_claimed and not temp_has_claimed_kitchen:
-			_npc_manager.kitchen.try_claim(self)
-			temp_has_claimed_kitchen = true
-			_npc_manager.kitchen.global_position.y = original_height
-			return MoveTask.new(_npc_manager.kitchen.global_position, self, _nav_agent)	
-
-	return WaitTask.new(1.0, self)
+## Use the NPCManager/Data thing to check conditions like isKitchenClaimed
+#func _choose_task_test() -> BTNode:
+	#if _npc_manager.kitchen.claimer == self:
+		#return KitchenTask.new(randf_range(10, 15), self)
+			#
+	#var random = randi_range(1, 3)
+	#if random == 1:
+		#return WaitTask.new(randf_range(0.5, 2.5), self)
+	#elif random == 2:
+		#var pos := Vector3(randf_range(-6.0, 6.0), original_height, randf_range(-6.0, 6.0))
+		#print("Target Position:", pos)
+		#var task = MoveTask.new(pos, self, _nav_agent)
+		#_nav_agent.velocity_computed.connect(task.velocity_computed)
+		#return task
+	#elif random == 3:
+		## So far this is all for testing purposes.
+		#if not _npc_manager.kitchen.is_claimed and not temp_has_claimed_kitchen:
+			#_npc_manager.kitchen.try_claim(self)
+			#temp_has_claimed_kitchen = true
+			#_npc_manager.kitchen.global_position.y = original_height
+			#return MoveTask.new(_npc_manager.kitchen.global_position, self, _nav_agent)	
+#
+	#return WaitTask.new(1.0, self)

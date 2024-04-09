@@ -38,18 +38,8 @@ points = PackedVector3Array(-50, 0, -50, -50, 0, 50, 50, 0, -50, 50, 0, 50)
 script = ExtResource("4_t5h3f")
 kitchen = NodePath("KitchenSpot")
 
-[node name="NPCs" type="Node" parent="NPCSystem"]
-
-[node name="RigidBody3D4" parent="NPCSystem/NPCs" instance=ExtResource("2_d4i2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25556, 1, 0)
-axis_lock_linear_y = false
-
-[node name="RigidBody3D5" parent="NPCSystem/NPCs" instance=ExtResource("2_d4i2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4748, 1, -0.106275)
-axis_lock_linear_y = false
-
-[node name="RigidBody3D6" parent="NPCSystem/NPCs" instance=ExtResource("2_d4i2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45172, 1, 7.44283)
+[node name="NPCs v2" parent="NPCSystem" instance=ExtResource("2_d4i2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3895, 1, 7.44283)
 axis_lock_linear_y = false
 
 [node name="KitchenSpot" type="Marker3D" parent="NPCSystem"]
