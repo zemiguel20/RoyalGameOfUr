@@ -1,6 +1,8 @@
 class_name RandomNode
 extends DecoratorNode
 
+## Decorator Node that has a random chance to run
+
 var _status
 var _probability
 
