@@ -1,9 +1,9 @@
 class_name ParallelNode
 extends BTNode
 
-## Runs all its child nodes simultaneously.
-## Fails when ANY of its children have failed.
-## Succeeeds when ALL of its children have succeeded.
+## @experimental has not been tested!
+## Composite node that runs all its child nodes simultaneously.
+## Fails when ANY of its children have failed.## Succeeeds when ALL of its children have succeeded.
 
 var _child_nodes: Array
 

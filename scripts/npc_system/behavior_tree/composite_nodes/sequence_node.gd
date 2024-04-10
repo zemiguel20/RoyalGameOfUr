@@ -23,9 +23,7 @@ func on_process(_delta):
 		return Status.Succeeded
 	else:
 		_child_nodes[current_index].on_start()
-	
-func on_physics_process(_delta):
-	current_index = 0
+		return Status.Running
 	
 func on_end():
-	pass
+	current_index = 0

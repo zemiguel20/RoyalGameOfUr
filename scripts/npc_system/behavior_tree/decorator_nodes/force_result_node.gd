@@ -1,14 +1,15 @@
 class_name ForceResultNode
 extends DecoratorNode
 
+## Decorator Node that runs its child node, but forces to return a predefined status.
+
 var _result: Status
 
-func _init(_child: BTNode, result: Status):
+func _init(child: BTNode, result: Status):
+	super(child)
 	_result = result
 
-## Returns Running (0) while child node is Running, 
-## Returns Succeeded (1) when child node has Failed, 
-## and returns Failed (-1) when child node has Succeeded
+
 func on_process(delta) -> Status:
 	var child_status = _child.on_process(delta)
 	if child_status != Status.Running:
