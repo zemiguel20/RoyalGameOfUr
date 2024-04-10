@@ -1,40 +1,52 @@
 class_name Spot
 extends Node3D
-## Base class for board spots
+## A spot in the board that can hold a piece or a stack of pieces.
+## Contains game logic for placing pieces.
+## Also has highlight effects.
 
-
-signal pieces_knocked_out(pieces: Array[Piece])
 
 @export var is_safe: bool = false
 @export var give_extra_roll: bool = false
-@export var _highlighter: MaterialHighlighter
 
 var _pieces: Array[Piece] = []
+var _highlighter
 
 
-func highlight() -> void:
-	if _highlighter != null:
-		_highlighter.highlight()
+func _ready():
+	_highlighter = get_node("Highlighter")
 
 
-func dehighlight() -> void:
-	if _highlighter != null:
-		_highlighter.dehighlight()
+func highlight():
+	if _highlighter == null:
+		push_warning("No highlighter found")
+		return
+	_highlighter.highlight()
 
 
-func place_pieces(new_pieces: Array[Piece], anim: Piece.MOVE_ANIM):
+func dehighlight():
+	if _highlighter == null:
+		push_warning("No highlighter found")
+		return
+	_highlighter.dehighlight()
+
+
+## Places the new pieces in the spot, with the given animation.
+## Returns a list of knocked out pieces. If no pieces where knocked out, this list is empty.
+func place_pieces(new_pieces: Array[Piece], anim: Piece.MOVE_ANIM) -> Array[Piece]:
 	if not can_place(new_pieces):
 		push_warning("Cannot move to this spot.")
-		return
+		return []
 	
 	await _place_animation(new_pieces, anim)
 	
 	var player = new_pieces.front().player
+	var knocked_out_pieces = []
 	if not is_occupied(player) and not _pieces.is_empty():
-		var opponent_pieces = remove_pieces()
-		pieces_knocked_out.emit(opponent_pieces)
+		knocked_out_pieces = remove_pieces()
 		
 	_pieces.append_array(new_pieces)
+	
+	return knocked_out_pieces
 
 
 func can_place(pieces: Array[Piece]) -> bool:
