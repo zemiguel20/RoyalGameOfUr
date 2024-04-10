@@ -1,12 +1,22 @@
 class_name Move
+## Data structure for a Move. Inspired in the Command pattern
 
-## Data structure for a Move.
-## From this data, AI is able to get more specific information about the move from the Board.gd class.
-var piece: Piece
-var old_spot: Spot
-var new_spot: Spot
 
-func _init(piece, old_spot, new_spot):
-	self.piece = piece
-	self.old_spot = old_spot
-	self.new_spot = new_spot
+var _from: Spot
+var _to: Spot
+var _manager: BoardGameManager
+
+
+func _init(from: Spot, to: Spot, manager: BoardGameManager):
+	_from = from
+	_to = to
+	_manager = manager
+
+
+# TODO: allow to choose animation type: direct or skipping
+func execute():
+	var pieces = _from.remove_pieces()
+	var knocked_out_pieces = await _to.place_pieces(pieces, Piece.MOVE_ANIM.ARC)
+	for piece in knocked_out_pieces:
+		var starting_spot = _manager.get_random_free_starting_spot()
+		starting_spot.place_pieces([piece], Piece.MOVE_ANIM.ARC)
