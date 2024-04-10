@@ -1,28 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2624smcv0td8"]
+[gd_scene load_steps=5 format=3 uid="uid://c2624smcv0td8"]
 
 [ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece.tscn" id="1_w8nnh"]
-[ext_resource type="PackedScene" uid="uid://cyj2hsx8jciw1" path="res://scenes/game/tile.tscn" id="2_stamt"]
 
 [sub_resource type="GDScript" id="GDScript_7jrdc"]
 script/source = "extends Node
 
 
-@onready var piece_1 = $Piece as Piece
-@onready var piece_2 = $Piece2 as Piece
-@onready var tile_1 = $Tile as Spot
-@onready var tile_2 = $Tile2 as Spot
+@onready var piece = $Piece as Piece
 
 
 func _ready():
-	piece_1.enable_selection()
-	piece_2.disable_selection()
-
-
-func _on_piece_clicked(sender: Piece):
-	var path: Array[Vector3] = []
-	path.append(tile_1.sample_position())
-	path.append(tile_2.sample_position())
-	sender.move(path)
+	await get_tree().create_timer(0.5).timeout
+	await piece.move(piece.global_position + Vector3(0,0,-5), Piece.MOVE_ANIM.ARC)
+	await get_tree().create_timer(0.5).timeout
+	await piece.move(piece.global_position + Vector3(0,1,5), Piece.MOVE_ANIM.ARC)
+	await get_tree().create_timer(0.5).timeout
+	await piece.move(piece.global_position + Vector3(0,-1,-5), Piece.MOVE_ANIM.LINE)
+	await get_tree().create_timer(0.5).timeout
+	await piece.move(piece.global_position + Vector3(0,0,5), Piece.MOVE_ANIM.NONE)
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7kgfi"]
@@ -37,13 +32,9 @@ script = SubResource("GDScript_7jrdc")
 
 [node name="Piece" parent="." instance=ExtResource("1_w8nnh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120266, -3.93835)
-move_duration = 0.5
-
-[node name="Piece2" parent="." instance=ExtResource("1_w8nnh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07852, 0.116728, -0.970955)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0366763, -0.528051, 0.84842, 0, 0.848991, 0.528407, -0.999327, -0.01938, 0.0311379, 5.27847, 4.40151, -6.74797)
+transform = Transform3D(0.00614539, -0.648079, 0.761549, 0, 0.761563, 0.648091, -0.999981, -0.00398277, 0.0046801, 5.4695, 5.41522, -5.8125)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.606682, 0.794944, 0, -0.794944, 0.606682, 0, 4.13003, 0)
@@ -51,11 +42,5 @@ shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_3xjdh")
-
-[node name="Tile" parent="." instance=ExtResource("2_stamt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530848, 0.776058, -7.47886)
-
-[node name="Tile2" parent="." instance=ExtResource("2_stamt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530848, 0.700493, -10.7176)
 
 [connection signal="clicked" from="Piece" to="." method="_on_piece_clicked"]
