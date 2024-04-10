@@ -1,9 +1,8 @@
 class_name Piece
 extends Node3D
-## Piece of the game. Has selection and highlighting functionality. Also can be physically moved.
+## Physical piece in the game.
+## Can be physically moved with a given animation. Also has highlight effects.
 
-
-signal clicked(sender: Piece)
 
 enum MOVE_ANIM {ARC, LINE, NONE}
 
@@ -11,17 +10,26 @@ const MOVE_ARC_HEIGHT: float = 1.0
 const MOVE_DURATION: float = 0.4
 
 @export_enum("One:0", "Two:1") var player: int
-@export var material_changer: MaterialHighlighter
+
+var _highlighter
 
 
-## Enables selection and highlighting effects
+func _ready():
+	_highlighter = get_node("Highlighter")
+
+
 func highlight():
-	material_changer.highlight()
+	if _highlighter == null:
+		push_warning("No highlighter found")
+		return
+	_highlighter.highlight()
 
 
-## Disables selection and highlighting effects
 func dehighlight():
-	material_changer.dehighlight()
+	if _highlighter == null:
+		push_warning("No highlighter found")
+		return
+	_highlighter.dehighlight()
 
 
 func move(to: Vector3, anim: MOVE_ANIM):
