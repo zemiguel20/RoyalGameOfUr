@@ -2,7 +2,7 @@ extends Node
 ## Contains constants and general utility functions
 
 
-enum PLAYER {ONE = 0, TWO = 1}
+enum Player {ONE = 0, TWO = 1}
 
 
 # Not tested yet.

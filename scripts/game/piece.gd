@@ -4,12 +4,12 @@ extends Node3D
 ## Can be physically moved with a given animation. Also has highlight effects.
 
 
-enum MOVE_ANIM {ARC, LINE, NONE}
+enum MoveAnim {ARC, LINE, NONE}
 
 const MOVE_ARC_HEIGHT: float = 1.0
 const MOVE_DURATION: float = 0.4
 
-@export var player: General.PLAYER
+@export var player: General.Player
 
 var _highlighter
 
@@ -32,11 +32,11 @@ func dehighlight():
 	_highlighter.dehighlight()
 
 
-func move(to: Vector3, anim: MOVE_ANIM):
+func move(to: Vector3, anim: MoveAnim):
 	match anim:
-		MOVE_ANIM.ARC:
+		MoveAnim.ARC:
 			await _move_arc(to)
-		MOVE_ANIM.LINE:
+		MoveAnim.LINE:
 			await _move_line(to)
 		_:
 			global_position = to

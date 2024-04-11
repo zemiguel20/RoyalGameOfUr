@@ -33,7 +33,7 @@ func dehighlight():
 
 ## Places the new pieces in the spot, with the given animation.
 ## Returns a list of knocked out pieces. If no pieces where knocked out, this list is empty.
-func place_pieces(new_pieces: Array[Piece], anim: Piece.MOVE_ANIM) -> Array[Piece]:
+func place_pieces(new_pieces: Array[Piece], anim: Piece.MoveAnim) -> Array[Piece]:
 	var knocked_out_pieces: Array[Piece] = []
 	
 	if not can_place(new_pieces):
@@ -68,7 +68,7 @@ func can_place(pieces: Array[Piece]) -> bool:
 	return true
 
 
-func is_occupied(player: General.PLAYER) -> bool:
+func is_occupied(player: General.Player) -> bool:
 	return not _pieces.is_empty() and player == _pieces.front().player
 
 
@@ -82,7 +82,7 @@ func get_pieces() -> Array[Piece]:
 	return _pieces.duplicate()
 
 
-func _place_animation(pieces: Array[Piece], anim: Piece.MOVE_ANIM):
+func _place_animation(pieces: Array[Piece], anim: Piece.MoveAnim):
 	# Temporary reparent of stack to bottom piece so they all move together
 	var base_piece = pieces.front() as Piece
 	var other_pieces = pieces.slice(1, pieces.size()) as Array[Piece]
