@@ -51,6 +51,10 @@ func place_pieces(new_pieces: Array[Piece], anim: Piece.MoveAnim) -> Array[Piece
 	return knocked_out_pieces
 
 
+func place_piece(new_piece: Piece, anim: Piece.MoveAnim) -> Array[Piece]:
+	return await place_pieces([new_piece], anim)
+
+
 func can_place(pieces: Array[Piece]) -> bool:
 	var player = (pieces.front() as Piece).player
 	
@@ -59,7 +63,7 @@ func can_place(pieces: Array[Piece]) -> bool:
 	if is_occupied(player) and not force_allow_stack and not is_safe:
 		return false
 	
-	if is_occupied(player) and not force_allow_stack and is_safe and not Settings.CAN_STACK_IN_SAFE_SPOT:
+	if is_occupied(player) and not force_allow_stack and is_safe and not Settings.can_stack_in_safe_spot:
 		return false
 	
 	if not is_occupied(player) and not is_free() and is_safe:
@@ -69,11 +73,15 @@ func can_place(pieces: Array[Piece]) -> bool:
 
 
 func is_occupied(player: General.Player) -> bool:
-	return not is_free() and player == _pieces.front().player
+	return not is_free() and player == get_occupying_player()
 
 
 func is_free() -> bool:
 	return _pieces.is_empty()
+
+
+func get_occupying_player() -> General.Player:
+	return _pieces.front().player
 
 
 func get_pieces() -> Array[Piece]:

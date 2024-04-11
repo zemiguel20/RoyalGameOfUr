@@ -51,7 +51,7 @@ func _ready() -> void:
 	await _reset()
 	
 	print(\"Testing: Try stack in safe tile with stack setting turned ON\")
-	Settings.CAN_STACK_IN_SAFE_SPOT = true
+	Settings.can_stack_in_safe_spot = true
 	await r_tile.place_pieces([piece1], Piece.MoveAnim.ARC)
 	await r_tile.place_pieces([piece2], Piece.MoveAnim.ARC)
 	assert(r_tile.get_pieces().size() == 2, \"Stacking in safe spots is turned on\")
@@ -76,7 +76,7 @@ func _ready() -> void:
 	await _reset()
 	
 	print(\"Testing: Try moving a stack\")
-	Settings.CAN_STACK_IN_SAFE_SPOT = true
+	Settings.can_stack_in_safe_spot = true
 	await r_tile.place_pieces([piece1], Piece.MoveAnim.ARC)
 	await r_tile.place_pieces([piece2], Piece.MoveAnim.ARC)
 	await tile.place_pieces(r_tile.remove_pieces(), Piece.MoveAnim.ARC)
@@ -89,7 +89,7 @@ func _reset():
 	piece1.move(p1_start, Piece.MoveAnim.NONE)
 	piece2.move(p2_start, Piece.MoveAnim.NONE)
 	piece3.move(p3_start, Piece.MoveAnim.NONE)
-	Settings.CAN_STACK_IN_SAFE_SPOT = false
+	Settings.can_stack_in_safe_spot = false
 	tile.force_allow_stack = false
 	await get_tree().create_timer(1.0).timeout
 "
