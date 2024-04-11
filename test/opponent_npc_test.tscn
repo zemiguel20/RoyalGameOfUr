@@ -1,0 +1,150 @@
+[gd_scene load_steps=10 format=3 uid="uid://bsule7qsp6of1"]
+
+[ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="1_txfd6"]
+[ext_resource type="PackedScene" uid="uid://w80iov7yarwa" path="res://scenes/mockup_board.tscn" id="2_lnlvq"]
+[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="3_sxu04"]
+[ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="4_mih40"]
+[ext_resource type="PackedScene" uid="uid://d0hgcfga28omq" path="res://scenes/npcs/opponent_npc_dev.tscn" id="5_n1h8f"]
+
+[sub_resource type="GDScript" id="GDScript_b8xbw"]
+script/source = "extends Node
+
+var started: bool = false
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and (event as InputEventKey).keycode == KEY_SPACE and not started:
+		started = true
+		($Gamemode as Gamemode).start_game()
+	
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmve1"]
+albedo_color = Color(0.427451, 0.239216, 0.0156863, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0esbx"]
+material = SubResource("StandardMaterial3D_fmve1")
+size = Vector2(100, 100)
+
+[sub_resource type="GDScript" id="GDScript_pp8fu"]
+script/source = "extends CanvasLayer
+
+
+@onready var l_current_player = $VBoxContainer/CurrentPlayer as Label
+@onready var l_current_phase = $VBoxContainer/CurrentPhase as Label
+@onready var l_dice_value = $VBoxContainer/DiceValue as Label
+@onready var l_extra_messages = $VBoxContainer/ExtraMessages as Label
+var _dice_value: int = 0
+
+
+func _ready() -> void:
+	l_current_player.text = \"Player: \"
+	l_current_phase.text = \"Phase: \"
+	l_dice_value.text = \"Dice: \"
+	l_extra_messages.text = \"\"
+
+
+func _on_gamemode_phase_changed(phase: String, current_player: int) -> void:
+	l_current_phase.text = \"Phase: %s\" % phase
+	l_current_player.text = \"Player: %d\" % (current_player + 1)
+
+
+func _on_gamemode_got_extra_roll() -> void:
+	l_extra_messages.text = \"Got extra roll!\"
+	await get_tree().create_timer(2.0).timeout
+	l_extra_messages.text = \"\"
+
+
+func _on_gamemode_rolled_zero() -> void:
+	l_extra_messages.text = \"Turn skipped\"
+	await get_tree().create_timer(2.0).timeout
+	l_extra_messages.text = \"\"
+
+
+func _on_gamemode_game_finished() -> void:
+	l_extra_messages.text = \"Game finished\"
+
+
+func _on_dice_die_stopped(value: int) -> void:
+	_dice_value += value
+	l_dice_value.text = \"Dice: %d\" % _dice_value
+
+
+func _on_dice_roll_finished(_value: int) -> void:
+	_dice_value = 0
+"
+
+[node name="GamemodeTest" type="Node"]
+script = SubResource("GDScript_b8xbw")
+
+[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice", "ai_player_two")]
+script = ExtResource("1_txfd6")
+board = NodePath("../Board")
+dice = NodePath("../Dice")
+ai_player_two = NodePath("../AIPlayerHard")
+
+[node name="Board" parent="." instance=ExtResource("2_lnlvq")]
+transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0.188376, -2.46309, 0.0962036)
+
+[node name="Dice" parent="." instance=ExtResource("3_sxu04")]
+transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
+_roll_shaking_enabled = true
+_use_hitbox_instead_of_dice_colliders = true
+
+[node name="AIPlayerHard" type="Node" parent="."]
+script = ExtResource("4_mih40")
+central_rosette_score_weight = 0.3
+decrease_per_passed_opponent_piece = false
+max_moving_duration = 1.0
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Plane" type="CSGMesh3D" parent="Environment" groups=["Ground"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.51382, 0)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+mesh = SubResource("PlaneMesh_0esbx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0192364, -0.835694, 0.548858, 0, 0.54896, 0.835849, -0.999815, -0.0160787, 0.01056, 7.93404, 11.8192, -2.23023)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = SubResource("GDScript_pp8fu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CurrentPlayer" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Current player: 1"
+
+[node name="CurrentPhase" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Phase: Roll"
+
+[node name="DiceValue" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Dice: 4"
+
+[node name="ExtraMessages" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Extra roll!"
+
+[node name="Opponent" parent="." instance=ExtResource("5_n1h8f")]
+
+[connection signal="game_finished" from="Gamemode" to="CanvasLayer" method="_on_gamemode_game_finished"]
+[connection signal="got_extra_roll" from="Gamemode" to="CanvasLayer" method="_on_gamemode_got_extra_roll"]
+[connection signal="phase_changed" from="Gamemode" to="CanvasLayer" method="_on_gamemode_phase_changed"]
+[connection signal="rolled_zero" from="Gamemode" to="CanvasLayer" method="_on_gamemode_rolled_zero"]
+[connection signal="clicked" from="Dice" to="Gamemode" method="roll"]
+[connection signal="die_stopped" from="Dice" to="CanvasLayer" method="_on_dice_die_stopped"]
+[connection signal="roll_finished" from="Dice" to="CanvasLayer" method="_on_dice_roll_finished"]
+
+[editable path="Board"]
