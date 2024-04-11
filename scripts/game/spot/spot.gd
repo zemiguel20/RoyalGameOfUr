@@ -33,14 +33,16 @@ func dehighlight():
 ## Places the new pieces in the spot, with the given animation.
 ## Returns a list of knocked out pieces. If no pieces where knocked out, this list is empty.
 func place_pieces(new_pieces: Array[Piece], anim: Piece.MOVE_ANIM) -> Array[Piece]:
+	var knocked_out_pieces: Array[Piece] = []
+	
 	if not can_place(new_pieces):
 		push_warning("Cannot move to this spot.")
-		return []
+		return knocked_out_pieces
 	
 	await _place_animation(new_pieces, anim)
 	
 	var player = new_pieces.front().player
-	var knocked_out_pieces = []
+	
 	if not is_occupied(player) and not _pieces.is_empty():
 		knocked_out_pieces = remove_pieces()
 		
