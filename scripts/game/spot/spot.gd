@@ -7,6 +7,7 @@ extends Node3D
 
 @export var is_safe: bool = false
 @export var give_extra_roll: bool = false
+@export var force_allow_stack: bool = false ## If true, always allows stacking, independent of settings
 
 var _pieces: Array[Piece] = []
 var _highlighter
@@ -39,13 +40,12 @@ func place_pieces(new_pieces: Array[Piece], anim: Piece.MOVE_ANIM) -> Array[Piec
 		push_warning("Cannot move to this spot.")
 		return knocked_out_pieces
 	
-	await _place_animation(new_pieces, anim)
-	
 	var player = new_pieces.front().player
-	
 	if not is_occupied(player) and not _pieces.is_empty():
 		knocked_out_pieces = remove_pieces()
-		
+	
+	await _place_animation(new_pieces, anim)
+	
 	_pieces.append_array(new_pieces)
 	
 	return knocked_out_pieces
@@ -54,10 +54,12 @@ func place_pieces(new_pieces: Array[Piece], anim: Piece.MOVE_ANIM) -> Array[Piec
 func can_place(pieces: Array[Piece]) -> bool:
 	var player = (pieces.front() as Piece).player
 	
-	if is_occupied(player) and not is_safe:
+	# NOTE: Check if any rule is violated, otherwise return true
+	
+	if is_occupied(player) and not force_allow_stack and not is_safe:
 		return false
 	
-	if is_occupied(player) and is_safe and not Settings.CAN_STACK_IN_SAFE_SPOT:
+	if is_occupied(player) and not force_allow_stack and is_safe and not Settings.CAN_STACK_IN_SAFE_SPOT:
 		return false
 	
 	if not is_occupied(player) and not _pieces.is_empty() and is_safe:

@@ -16,20 +16,82 @@ script/source = "extends Node
 @onready var piece3 = $Piece3 as Piece
 
 
-var started = false
+var p1_start = Vector3.ZERO
+var p2_start = Vector3.ZERO
+var p3_start = Vector3.ZERO
 
 
 func _ready() -> void:
-	await get_tree().create_timer(1.0).timeout
+	p1_start = piece1.global_position
+	p2_start = piece2.global_position
+	p3_start = piece3.global_position
+	
+	await _reset()
+
+	print(\"Testing: Try stack in normal tile\")
 	await tile.place_pieces([piece1], Piece.MOVE_ANIM.ARC)
 	await tile.place_pieces([piece2], Piece.MOVE_ANIM.ARC)
-	await r_tile.place_pieces([piece2], Piece.MOVE_ANIM.ARC)
+	assert(tile.get_pieces().size() == 1, \"Pieces should not be stackable\")
+	
+	await _reset()
+	
+	print(\"Testing: Try stack in tile with forced stack\")
+	tile.force_allow_stack = true
+	await tile.place_pieces([piece1], Piece.MOVE_ANIM.ARC)
+	await tile.place_pieces([piece2], Piece.MOVE_ANIM.ARC)
+	assert(tile.get_pieces().size() == 2, \"Stacking should be allowed by force\")
+	
+	await _reset()
+	
+	print(\"Testing: Try stack in safe tile with stack setting turned OFF\")
 	await r_tile.place_pieces([piece1], Piece.MOVE_ANIM.ARC)
+	await r_tile.place_pieces([piece2], Piece.MOVE_ANIM.ARC)
+	assert(r_tile.get_pieces().size() == 1, \"Stacking in safe spots is not allowed\")
+	
+	await _reset()
+	
+	print(\"Testing: Try stack in safe tile with stack setting turned ON\")
 	Settings.CAN_STACK_IN_SAFE_SPOT = true
 	await r_tile.place_pieces([piece1], Piece.MOVE_ANIM.ARC)
-	tile.remove_pieces()
+	await r_tile.place_pieces([piece2], Piece.MOVE_ANIM.ARC)
+	assert(r_tile.get_pieces().size() == 2, \"Stacking in safe spots is turned on\")
+	
+	await _reset()
+	
+	print(\"Testing: Try knockout piece in safe zone\")
+	await r_tile.place_pieces([piece1], Piece.MOVE_ANIM.ARC)
 	await r_tile.place_pieces([piece3], Piece.MOVE_ANIM.ARC)
+	assert(r_tile.get_pieces().has(piece1), \"Knockout should not be possible in safe zone\")
+	assert(r_tile.get_pieces().size() == 1, \"Knockout should not be possible in safe zone\")
+	
+	await _reset()
+	
+	print(\"Testing: Try knockout piece in normal spot\")
+	await tile.place_pieces([piece1], Piece.MOVE_ANIM.ARC)
+	var knocked = await tile.place_pieces([piece3], Piece.MOVE_ANIM.ARC)
+	assert(knocked.has(piece1), \"Piece 1 should be knocked out\")
+	assert(tile.get_pieces().has(piece3), \"Tile should have piece 3\")
+	assert(tile.get_pieces().size() == 1, \"Tile should only have one piece\")
+	
+	await _reset()
+	
+	print(\"Testing: Try moving a stack\")
+	Settings.CAN_STACK_IN_SAFE_SPOT = true
+	await r_tile.place_pieces([piece1], Piece.MOVE_ANIM.ARC)
+	await r_tile.place_pieces([piece2], Piece.MOVE_ANIM.ARC)
 	await tile.place_pieces(r_tile.remove_pieces(), Piece.MOVE_ANIM.ARC)
+
+
+func _reset():
+	await get_tree().create_timer(1.0).timeout
+	tile.remove_pieces()
+	r_tile.remove_pieces()
+	piece1.move(p1_start, Piece.MOVE_ANIM.NONE)
+	piece2.move(p2_start, Piece.MOVE_ANIM.NONE)
+	piece3.move(p3_start, Piece.MOVE_ANIM.NONE)
+	Settings.CAN_STACK_IN_SAFE_SPOT = false
+	tile.force_allow_stack = false
+	await get_tree().create_timer(1.0).timeout
 "
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g3yvc"]
