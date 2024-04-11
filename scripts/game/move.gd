@@ -30,3 +30,12 @@ func execute() -> void:
 	for piece in knocked_out_pieces:
 		var starting_spot = _board.get_free_start_spots(_player).pick_random() as Spot
 		starting_spot.place_piece(piece, Piece.MoveAnim.ARC) # WARNING: might need a sync barrier
+
+
+func gives_extra_roll() -> bool:
+	return _to.give_extra_roll
+
+
+func is_winning_move() -> bool:
+	# TODO: implement
+	return false
