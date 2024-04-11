@@ -9,7 +9,7 @@ enum MOVE_ANIM {ARC, LINE, NONE}
 const MOVE_ARC_HEIGHT: float = 1.0
 const MOVE_DURATION: float = 0.4
 
-@export_enum("One:0", "Two:1") var player: int
+@export var player: General.PLAYER
 
 var _highlighter
 

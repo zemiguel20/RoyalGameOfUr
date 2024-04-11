@@ -64,7 +64,7 @@ func can_place(pieces: Array[Piece]) -> bool:
 	return true
 
 
-func is_occupied(player: int) -> bool:
+func is_occupied(player: General.PLAYER) -> bool:
 	return not _pieces.is_empty() and player == _pieces.front().player
 
 
@@ -85,6 +85,7 @@ func _place_animation(pieces: Array[Piece], anim: Piece.MOVE_ANIM):
 	for piece in other_pieces:
 		piece.reparent(base_piece)
 	
+	# TODO: take dimensions into account
 	var base_pos = global_position if _pieces.is_empty() else _pieces.back().global_position
 	var target_pos = base_pos + (Vector3.UP * 0.3)
 	await base_piece.move(target_pos, anim)

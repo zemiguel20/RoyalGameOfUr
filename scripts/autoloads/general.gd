@@ -2,11 +2,7 @@ extends Node
 ## Contains constants and general utility functions
 
 
-enum Player {ONE = 0, TWO = 1}
-
-
-func get_other_player_id(id: Player) -> Player:
-	return Player.TWO if id == Player.ONE else Player.ONE
+enum PLAYER {ONE = 0, TWO = 1}
 
 
 # Not tested yet.
