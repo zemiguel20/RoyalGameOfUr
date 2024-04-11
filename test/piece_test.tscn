@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2624smcv0td8"]
 
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece.tscn" id="1_w8nnh"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece.tscn" id="1_ub136"]
 
 [sub_resource type="GDScript" id="GDScript_7jrdc"]
 script/source = "extends Node
@@ -11,13 +11,13 @@ script/source = "extends Node
 
 func _ready():
 	await get_tree().create_timer(0.5).timeout
-	await piece.move(piece.global_position + Vector3(0,0,-5), Piece.MOVE_ANIM.ARC)
+	await piece.move(piece.global_position + Vector3(0,0,-5), Piece.MoveAnim.ARC)
 	await get_tree().create_timer(0.5).timeout
-	await piece.move(piece.global_position + Vector3(0,1,5), Piece.MOVE_ANIM.ARC)
+	await piece.move(piece.global_position + Vector3(0,1,5), Piece.MoveAnim.ARC)
 	await get_tree().create_timer(0.5).timeout
-	await piece.move(piece.global_position + Vector3(0,-1,-5), Piece.MOVE_ANIM.LINE)
+	await piece.move(piece.global_position + Vector3(0,-1,-5), Piece.MoveAnim.LINE)
 	await get_tree().create_timer(0.5).timeout
-	await piece.move(piece.global_position + Vector3(0,0,5), Piece.MOVE_ANIM.NONE)
+	await piece.move(piece.global_position + Vector3(0,0,5), Piece.MoveAnim.NONE)
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7kgfi"]
@@ -27,10 +27,10 @@ albedo_color = Color(1, 0.564706, 0.176471, 1)
 material = SubResource("StandardMaterial3D_7kgfi")
 size = Vector2(100, 100)
 
-[node name="PieceTileTest" type="Node"]
+[node name="PieceTest" type="Node"]
 script = SubResource("GDScript_7jrdc")
 
-[node name="Piece" parent="." instance=ExtResource("1_w8nnh")]
+[node name="Piece" parent="." instance=ExtResource("1_ub136")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120266, -3.93835)
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -42,5 +42,3 @@ shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_3xjdh")
-
-[connection signal="clicked" from="Piece" to="." method="_on_piece_clicked"]
