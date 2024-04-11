@@ -41,7 +41,7 @@ func place_pieces(new_pieces: Array[Piece], anim: Piece.MoveAnim) -> Array[Piece
 		return knocked_out_pieces
 	
 	var player = new_pieces.front().player
-	if not is_occupied(player) and not _pieces.is_empty():
+	if not is_occupied(player) and not is_free():
 		knocked_out_pieces = remove_pieces()
 	
 	await _place_animation(new_pieces, anim)
@@ -62,24 +62,28 @@ func can_place(pieces: Array[Piece]) -> bool:
 	if is_occupied(player) and not force_allow_stack and is_safe and not Settings.CAN_STACK_IN_SAFE_SPOT:
 		return false
 	
-	if not is_occupied(player) and not _pieces.is_empty() and is_safe:
+	if not is_occupied(player) and not is_free() and is_safe:
 		return false
 	
 	return true
 
 
 func is_occupied(player: General.Player) -> bool:
-	return not _pieces.is_empty() and player == _pieces.front().player
+	return not is_free() and player == _pieces.front().player
+
+
+func is_free() -> bool:
+	return _pieces.is_empty()
+
+
+func get_pieces() -> Array[Piece]:
+	return _pieces.duplicate()
 
 
 func remove_pieces() -> Array[Piece]:
 	var pieces = _pieces.duplicate()
 	_pieces.clear()
 	return pieces
-
-
-func get_pieces() -> Array[Piece]:
-	return _pieces.duplicate()
 
 
 func _place_animation(pieces: Array[Piece], anim: Piece.MoveAnim):
@@ -90,7 +94,7 @@ func _place_animation(pieces: Array[Piece], anim: Piece.MoveAnim):
 		piece.reparent(base_piece)
 	
 	# TODO: take dimensions into account
-	var base_pos = global_position if _pieces.is_empty() else _pieces.back().global_position
+	var base_pos = global_position if is_free() else _pieces.back().global_position
 	var target_pos = base_pos + (Vector3.UP * 0.3)
 	await base_piece.move(target_pos, anim)
 	
