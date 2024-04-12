@@ -18,8 +18,8 @@ var _p_data: Dictionary = {}
 
 func _ready() -> void:
 	# Pack player data
-	_p_data[General.PLAYER.ONE] = [_p1_piece, _p1_start_spots, _p1_track]
-	_p_data[General.PLAYER.TWO] = [_p2_piece, _p2_start_spots, _p2_track]
+	_p_data[General.Player.ONE] = [_p1_piece, _p1_start_spots, _p1_track]
+	_p_data[General.Player.TWO] = [_p2_piece, _p2_start_spots, _p2_track]
 	
 	_check_player_data()
 	_clean()
@@ -45,9 +45,9 @@ func get_track(player: General.Player) -> Array[Spot]:
 func _check_player_data():
 	assert(_p1_piece != null, "No piece prefab was assigned to Player 1")
 	assert(_p2_piece != null, "No piece prefab was assigned to Player 2")
-	assert(_p1_start_spots.size() < Settings.num_pieces, \
+	assert(_p1_start_spots.size() <= Settings.num_pieces, \
 		"Player 1 does not have enough starting spots for the specified number of pieces")
-	assert(_p2_start_spots.size() < Settings.num_pieces, \
+	assert(_p2_start_spots.size() <= Settings.num_pieces, \
 		"Player 2 does not have enough starting spots for the specified number of pieces")
 
 

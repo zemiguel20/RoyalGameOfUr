@@ -1,0 +1,169 @@
+[gd_scene load_steps=7 format=3 uid="uid://s47hmmlcss14"]
+
+[ext_resource type="Script" path="res://scripts/game/spot/spot.gd" id="1_3oqik"]
+[ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/tile_normal.tscn" id="1_8d3jt"]
+[ext_resource type="Script" path="res://scripts/game/board.gd" id="1_mfhgj"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece_white.tscn" id="2_hmauu"]
+[ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/piece_black.tscn" id="3_8cmuf"]
+[ext_resource type="PackedScene" uid="uid://cse8k17ou57w5" path="res://scenes/game/tile_rosette.tscn" id="3_rtphb"]
+
+[node name="Board" type="Node3D" node_paths=PackedStringArray("_p1_start_spots", "_p1_track", "_p2_start_spots", "_p2_track")]
+script = ExtResource("1_mfhgj")
+_p1_piece = ExtResource("2_hmauu")
+_p1_start_spots = [NodePath("StartAndEndSpots/P1StartSpot1"), NodePath("StartAndEndSpots/P1StartSpot2"), NodePath("StartAndEndSpots/P1StartSpot3"), NodePath("StartAndEndSpots/P1StartSpot4"), NodePath("StartAndEndSpots/P1StartSpot5"), NodePath("StartAndEndSpots/P1StartSpot6"), NodePath("StartAndEndSpots/P1StartSpot7")]
+_p1_track = [NodePath("Tiles/P1NormalTile1"), NodePath("Tiles/P1NormalTile2"), NodePath("Tiles/P1NormalTile3"), NodePath("Tiles/P1RosetteTile1"), NodePath("Tiles/SharedNormalTile1"), NodePath("Tiles/SharedNormalTile2"), NodePath("Tiles/SharedNormalTile3"), NodePath("Tiles/SharedRosetteTile"), NodePath("Tiles/SharedNormalTile4"), NodePath("Tiles/SharedNormalTile5"), NodePath("Tiles/SharedNormalTile6"), NodePath("Tiles/SharedNormalTile7"), NodePath("Tiles/P1NormalTile4"), NodePath("Tiles/P1RosetteTile2"), NodePath("StartAndEndSpots/P1EndSpot")]
+_p2_piece = ExtResource("3_8cmuf")
+_p2_start_spots = [NodePath("StartAndEndSpots/P2StartSpot1"), NodePath("StartAndEndSpots/P2StartSpot2"), NodePath("StartAndEndSpots/P2StartSpot3"), NodePath("StartAndEndSpots/P2StartSpot4"), NodePath("StartAndEndSpots/P2StartSpot5"), NodePath("StartAndEndSpots/P2StartSpot6"), NodePath("StartAndEndSpots/P2StartSpot7")]
+_p2_track = [NodePath("Tiles/P2NormalTile1"), NodePath("Tiles/P2NormalTile2"), NodePath("Tiles/P2NormalTile3"), NodePath("Tiles/P2RosetteTile1"), NodePath("Tiles/SharedNormalTile1"), NodePath("Tiles/SharedNormalTile2"), NodePath("Tiles/SharedNormalTile3"), NodePath("Tiles/SharedRosetteTile"), NodePath("Tiles/SharedNormalTile4"), NodePath("Tiles/SharedNormalTile5"), NodePath("Tiles/SharedNormalTile6"), NodePath("Tiles/SharedNormalTile7"), NodePath("Tiles/P2NormalTile4"), NodePath("Tiles/P2RosetteTile2"), NodePath("StartAndEndSpots/P2EndSpot")]
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245152, 0)
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Model"]
+
+[node name="BaseShape" type="CSGBox3D" parent="Model/CSGCombiner3D"]
+size = Vector3(3, 0.5, 8)
+
+[node name="Cut1" type="CSGBox3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+operation = 2
+size = Vector3(1, 1, 2)
+
+[node name="Cut2" type="CSGBox3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+operation = 2
+size = Vector3(1, 1, 2)
+
+[node name="Tiles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.618608, 0)
+metadata/_edit_lock_ = true
+
+[node name="P2NormalTile1" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.991869, 0, 0.491467)
+
+[node name="P2NormalTile2" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0008, 0, 1.4744)
+
+[node name="P2NormalTile3" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0008, 0, 2.4744)
+
+[node name="P1NormalTile1" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999195, 0, 0.4744)
+
+[node name="P1NormalTile2" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999195, 0, 1.4744)
+
+[node name="P1NormalTile3" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999195, 0, 2.4744)
+
+[node name="SharedNormalTile1" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000804901, 0, 3.4744)
+
+[node name="SharedNormalTile2" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000804901, 0, 2.4744)
+
+[node name="SharedNormalTile3" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000804901, 0, 1.4744)
+
+[node name="SharedNormalTile4" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000804901, 0, -0.5256)
+
+[node name="SharedNormalTile5" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000804901, 0, -1.5256)
+
+[node name="SharedNormalTile6" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000804901, 0, -2.5256)
+
+[node name="SharedNormalTile7" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000804901, 0, -3.5256)
+
+[node name="P2NormalTile4" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0008, 0, -3.5256)
+
+[node name="P1NormalTile4" parent="Tiles" instance=ExtResource("1_8d3jt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999195, 0, -3.5256)
+
+[node name="P2RosetteTile1" parent="Tiles" instance=ExtResource("3_rtphb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.989577, 0, 3.48987)
+
+[node name="P1RosetteTile1" parent="Tiles" instance=ExtResource("3_rtphb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01042, 0, 3.48987)
+
+[node name="SharedRosetteTile" parent="Tiles" instance=ExtResource("3_rtphb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0104227, 0, 0.489866)
+give_extra_roll = false
+
+[node name="P2RosetteTile2" parent="Tiles" instance=ExtResource("3_rtphb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.989577, 0, -2.51013)
+
+[node name="P1RosetteTile2" parent="Tiles" instance=ExtResource("3_rtphb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01042, 0, -2.51013)
+
+[node name="StartAndEndSpots" type="Node3D" parent="."]
+
+[node name="P1StartSpot1" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4725, 0, 4.47566)
+script = ExtResource("1_3oqik")
+
+[node name="P1StartSpot2" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29589, 0, 3.9858)
+script = ExtResource("1_3oqik")
+
+[node name="P1StartSpot3" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4725, 0, 3.13114)
+script = ExtResource("1_3oqik")
+
+[node name="P1StartSpot4" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.68153, 0, 2.41197)
+script = ExtResource("1_3oqik")
+
+[node name="P1StartSpot5" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.76433, 0, 1.26548)
+script = ExtResource("1_3oqik")
+
+[node name="P1StartSpot6" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65767, 0, 0.599022)
+script = ExtResource("1_3oqik")
+
+[node name="P1StartSpot7" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.80687, 0, -0.265955)
+script = ExtResource("1_3oqik")
+
+[node name="P2StartSpot1" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.52991, 0, 5.21055)
+script = ExtResource("1_3oqik")
+
+[node name="P2StartSpot2" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70652, 0, 4.72069)
+script = ExtResource("1_3oqik")
+
+[node name="P2StartSpot3" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.52991, 0, 3.86603)
+script = ExtResource("1_3oqik")
+
+[node name="P2StartSpot4" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32088, 0, 3.14686)
+script = ExtResource("1_3oqik")
+
+[node name="P2StartSpot5" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23807, 0, 2.00037)
+script = ExtResource("1_3oqik")
+
+[node name="P2StartSpot6" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.34474, 0, 1.33391)
+script = ExtResource("1_3oqik")
+
+[node name="P2StartSpot7" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.19554, 0, 0.468935)
+script = ExtResource("1_3oqik")
+
+[node name="P1EndSpot" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00033, 0, -1.12869)
+script = ExtResource("1_3oqik")
+force_allow_stack = true
+
+[node name="P2EndSpot" type="Node3D" parent="StartAndEndSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02348, 0, -1.08369)
+script = ExtResource("1_3oqik")
+force_allow_stack = true

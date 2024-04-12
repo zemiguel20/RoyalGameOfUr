@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjv3ocjvay3hx"]
+
+[ext_resource type="Script" path="res://scripts/game/spot/spot.gd" id="1_8au3d"]
+
+[sub_resource type="Gradient" id="Gradient_titps"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.239437, 1)
+colors = PackedColorArray(0, 0.492211, 0.303569, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h1kum"]
+gradient = SubResource("Gradient_titps")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.776699, 0.218447)
+
+[node name="NormalTile" type="Node3D"]
+script = ExtResource("1_8au3d")
+
+[node name="Decal" type="Decal" parent="."]
+size = Vector3(0.8, 0.3, 0.8)
+texture_albedo = SubResource("GradientTexture2D_h1kum")
+upper_fade = 0.0284197
+lower_fade = 0.0215381

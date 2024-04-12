@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2624smcv0td8"]
 
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece.tscn" id="1_ub136"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece_white.tscn" id="1_ub136"]
 
 [sub_resource type="GDScript" id="GDScript_7jrdc"]
 script/source = "extends Node
