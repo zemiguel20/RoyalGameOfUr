@@ -8,6 +8,7 @@ extends Node
 @export var _temp_interruption: DialogueGroup 
 @onready var _dialogue_player = $DialogueGroupPlayer as DialogueGroupPlayer
 @onready var _interruption_player = $InterruptionPlayer as DialogueGroupPlayer
+
 var _current_index = 0
 
 func play_next():
@@ -36,3 +37,7 @@ func interrupt():
 	await _interruption_player.play(_temp_interruption)
 	## FIXME: If we end with an interruption, we will continue, rather than finish. Not intended.
 	_dialogue_player.continue_dialogue()
+
+
+func is_busy():
+	return _dialogue_player.is_playing or _interruption_player.is_playing
