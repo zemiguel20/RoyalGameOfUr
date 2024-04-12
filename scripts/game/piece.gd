@@ -40,7 +40,6 @@ func move(to: Vector3, anim: MoveAnim):
 			await _move_line(to)
 		_:
 			global_position = to
-			await get_tree().create_timer(MOVE_DURATION).timeout
 
 
 func _move_arc(target_pos: Vector3):
