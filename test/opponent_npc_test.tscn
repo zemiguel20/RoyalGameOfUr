@@ -143,6 +143,7 @@ text = "Extra roll!"
 [connection signal="got_extra_roll" from="Gamemode" to="CanvasLayer" method="_on_gamemode_got_extra_roll"]
 [connection signal="phase_changed" from="Gamemode" to="CanvasLayer" method="_on_gamemode_phase_changed"]
 [connection signal="rolled_zero" from="Gamemode" to="CanvasLayer" method="_on_gamemode_rolled_zero"]
+[connection signal="rolled_zero" from="Gamemode" to="Opponent" method="_on_gamemode_rolled_zero"]
 [connection signal="clicked" from="Dice" to="Gamemode" method="roll"]
 [connection signal="die_stopped" from="Dice" to="CanvasLayer" method="_on_dice_die_stopped"]
 [connection signal="roll_finished" from="Dice" to="CanvasLayer" method="_on_dice_roll_finished"]

@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdfdbhwdv6lnb"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_group_player.gd" id="1_yxu6e"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_subtitles.gd" id="2_tq53a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_20yi2"]
+font_size = 21
+
+[node name="DialogueGroupPlayer" type="Node"]
+script = ExtResource("1_yxu6e")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="DialogueSubtitles_CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("subtitle_label")]
+script = ExtResource("2_tq53a")
+subtitle_label = NodePath("Background_Panel/Subtitles_Label")
+
+[node name="Background_Panel" type="Panel" parent="DialogueSubtitles_CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = -136.0
+offset_right = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Subtitles_Label" type="Label" parent="DialogueSubtitles_CanvasLayer/Background_Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = 22.0
+offset_right = -36.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+label_settings = SubResource("LabelSettings_20yi2")
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2
+
+[node name="E to Interrupt" type="Label" parent="DialogueSubtitles_CanvasLayer/Background_Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_top = -88.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press E to interrupt!"
+label_settings = SubResource("LabelSettings_20yi2")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2

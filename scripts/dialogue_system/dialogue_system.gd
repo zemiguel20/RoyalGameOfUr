@@ -5,7 +5,9 @@ extends Node
 
 ## List of all dialogues used by this dialog system.
 @export var dialogue_list: Array[DialogueGroup] 
+@export var _temp_interruption: DialogueGroup 
 @onready var dialogue_player = $DialogueGroupPlayer as DialogueGroupPlayer
+@onready var interruption_player = $InterruptionPlayer as DialogueGroupPlayer
 var _current_index = 0
 
 func play_next():
@@ -24,3 +26,7 @@ func has_next():
 	
 func interrupt():
 	dialogue_player.interrupt()
+	await dialogue_player.on_interruption_ready
+	await interruption_player.play(_temp_interruption)
+	## FIXME: If we end with an interruption, we will continue, rather than finish. Not intended.
+	dialogue_player.continue_dialogue()

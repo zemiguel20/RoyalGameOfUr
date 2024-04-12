@@ -4,6 +4,7 @@ extends Node
 
 ## Signal that emits when the current group of dialogue has been finished.
 signal on_dialogue_finished
+signal on_interruption_ready
 
 var _current_group: DialogueGroup
 var _current_index = 0
@@ -34,11 +35,17 @@ func continue_dialogue():
 	await get_tree().create_timer(clip_length).timeout
 	_current_index += 1
 	
-	if _current_index < _current_group.dialogue_entries.size() and not _is_interrupted:
-		continue_dialogue()
-	elif _current_index >=  _current_group.dialogue_entries.size():
+	if _current_index >= _current_group.dialogue_entries.size():
 		on_dialogue_finished.emit()
 		subtitle_displayer.hide_subtitles()
+		on_interruption_ready.emit()
+	elif _is_interrupted:
+		on_interruption_ready.emit()
+		_is_interrupted = false
+		## TODO: Subtitle displayer should be shared across multiple stuff.
+		subtitle_displayer.hide_subtitles()
+	else:
+		continue_dialogue()
 	
 	
 func interrupt():
