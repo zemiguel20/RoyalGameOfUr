@@ -1,14 +1,14 @@
 extends Node
 
 
-signal roll_phase_started(player: General.PLAYER)
-signal move_phase_started(player: General.PLAYER, roll_value: int)
+signal roll_phase_started(player: General.Player)
+signal move_phase_started(player: General.Player, roll_value: int)
 
-var current_player: General.PLAYER
+var current_player: General.Player
 
 
 func start_game():
-	current_player = randi_range(General.PLAYER.ONE, General.PLAYER.TWO) as General.PLAYER
+	current_player = randi_range(General.Player.ONE, General.Player.TWO) as General.Player
 	roll_phase_started.emit(current_player)
 
 
@@ -35,5 +35,5 @@ func _on_move_executed(move: Move):
 
 
 func _switch_player():
-	current_player = General.PLAYER.ONE if current_player == General.PLAYER.TWO \
+	current_player = General.Player.ONE if current_player == General.Player.TWO \
 		else General.PLAYER.TWO
