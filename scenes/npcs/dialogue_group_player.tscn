@@ -42,20 +42,3 @@ label_settings = SubResource("LabelSettings_20yi2")
 vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 2
-
-[node name="E to Interrupt" type="Label" parent="DialogueSubtitles_CanvasLayer/Background_Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 72.0
-offset_top = -88.0
-offset_bottom = -132.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Press E to interrupt!"
-label_settings = SubResource("LabelSettings_20yi2")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-text_overrun_behavior = 2
