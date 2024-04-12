@@ -37,13 +37,14 @@ func place_pieces(new_pieces: Array[Piece], anim: Piece.MoveAnim) -> Array[Piece
 	var knocked_out_pieces: Array[Piece] = []
 	
 	if not can_place(new_pieces):
-		push_warning("Cannot move to this spot.")
+		push_error("Cannot move to this spot.")
 		return knocked_out_pieces
 	
 	var player = new_pieces.front().player
 	if not is_occupied(player) and not is_free():
 		knocked_out_pieces = remove_pieces()
 	
+	# TODO: UNTIE ANIMATION FROM CURRENT STACK TO REMOVE SYNC PROBLEMS
 	await _place_animation(new_pieces, anim)
 	
 	_pieces.append_array(new_pieces)
@@ -73,15 +74,11 @@ func can_place(pieces: Array[Piece]) -> bool:
 
 
 func is_occupied(player: General.Player) -> bool:
-	return not is_free() and player == get_occupying_player()
+	return not is_free() and player == _pieces.front().player
 
 
 func is_free() -> bool:
 	return _pieces.is_empty()
-
-
-func get_occupying_player() -> General.Player:
-	return _pieces.front().player
 
 
 func get_pieces() -> Array[Piece]:

@@ -15,7 +15,7 @@ func _init(from: Spot, to: Spot, board: Board):
 	_to = to
 	_board = board
 	_executed = false
-	_player = from.get_occupying_player()
+	_player = from.get_pieces().front().player
 
 
 # TODO: allow to choose animation type: direct or skipping
