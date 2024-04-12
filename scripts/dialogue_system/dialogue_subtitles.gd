@@ -2,9 +2,10 @@ class_name DialogueSubtitles
 extends CanvasLayer
 
 @export var subtitle_label: Label
-
+static var instance
 
 func _ready():
+	instance = self
 	hide_subtitles()
 	subtitle_label.text = ""
 	

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://d0hgcfga28omq"]
 
 [ext_resource type="Script" path="res://scripts/opponent_npc.gd" id="1_e1ywa"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_system.gd" id="1_qgrid"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_collection_player.gd" id="2_jrsuj"]
 [ext_resource type="Resource" uid="uid://ch4uxkn16buik" path="res://resources/dialogue/test_dialogue.tres" id="3_q3e2h"]
 [ext_resource type="Resource" uid="uid://otxvr6056j13" path="res://resources/dialogue/test_dialogue_2.tres" id="4_6ny8i"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_group.gd" id="5_f120b"]
@@ -31,13 +31,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.88086, -2.61161, -2.36228)
 script = ExtResource("1_e1ywa")
 
 [node name="DialogueSystem" type="Node" parent="."]
-script = ExtResource("1_qgrid")
-dialogue_list = Array[ExtResource("5_f120b")]([ExtResource("3_q3e2h"), ExtResource("4_6ny8i")])
+script = ExtResource("2_jrsuj")
+_dialogue_list = Array[ExtResource("5_f120b")]([ExtResource("3_q3e2h"), ExtResource("4_6ny8i")])
+_supports_interruptions = true
 _temp_interruption = SubResource("Resource_gromn")
 
 [node name="DialogueGroupPlayer" parent="DialogueSystem" instance=ExtResource("5_q4b08")]
+_use_subtitles = true
 
 [node name="InterruptionPlayer" parent="DialogueSystem" instance=ExtResource("5_q4b08")]
+_use_subtitles = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_w6wjd")
