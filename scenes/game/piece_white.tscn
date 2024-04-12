@@ -6,6 +6,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlg37"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lftn1"]
+height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enimc"]
 albedo_color = Color(0.231373, 1, 0.211765, 1)
@@ -14,7 +15,6 @@ albedo_color = Color(0.231373, 1, 0.211765, 1)
 script = ExtResource("1_12mt1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.00352, 0, 0, 0, 0.104571, 0, 0, 0, 1.00352, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_tlg37")
 mesh = SubResource("CylinderMesh_lftn1")
 

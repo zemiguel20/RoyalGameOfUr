@@ -20,18 +20,16 @@ func _ready():
 	await piece.move(piece.global_position + Vector3(0,0,5), Piece.MoveAnim.NONE)
 "
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_3xjdh"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7kgfi"]
 albedo_color = Color(1, 0.564706, 0.176471, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_3xjdh"]
-material = SubResource("StandardMaterial3D_7kgfi")
-size = Vector2(100, 100)
 
 [node name="PieceTest" type="Node"]
 script = SubResource("GDScript_7jrdc")
 
 [node name="Piece" parent="." instance=ExtResource("1_ub136")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120266, -3.93835)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -3.938)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.00614539, -0.648079, 0.761549, 0, 0.761563, 0.648091, -0.999981, -0.00398277, 0.0046801, 5.4695, 5.41522, -5.8125)
@@ -40,5 +38,7 @@ transform = Transform3D(0.00614539, -0.648079, 0.761549, 0, 0.761563, 0.648091, 
 transform = Transform3D(1, 0, 0, 0, 0.606682, 0.794944, 0, -0.794944, 0.606682, 0, 4.13003, 0)
 shadow_enabled = true
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="CSGMesh3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 mesh = SubResource("PlaneMesh_3xjdh")
+material = SubResource("StandardMaterial3D_7kgfi")
