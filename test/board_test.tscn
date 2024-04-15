@@ -10,13 +10,26 @@ script/source = "extends Node
 
 
 func _ready():
+	Settings.can_move_backwards = true
+	Settings.can_stack_in_safe_spot = true
 	await get_tree().create_timer(0.1).timeout
-	var moves = board.get_possible_moves(General.Player.ONE, 1)
-	print(moves.size())
-	await moves.pick_random().execute()
-	moves = board.get_possible_moves(General.Player.ONE, 1)
-	print(moves.size())
-	await moves.front().execute()
+	#var moves = board.get_possible_moves(General.Player.ONE, 1)
+	#print(moves.size())
+	#await moves.pick_random().execute()
+	#moves = board.get_possible_moves(General.Player.ONE, 1)
+	#print(moves.size())
+	#await moves.front().execute()
+	var player = General.Player.ONE
+	while(true):
+		var steps = randi_range(0, 4)
+		var moves = board.get_possible_moves(player, steps)
+		if not moves.is_empty():
+			var move = moves.pick_random() as Move
+			await move.execute()
+			if move.is_winning_move():
+				print(\"a\")
+				break
+		player = General.Player.ONE if player == General.Player.TWO else General.Player.TWO
 "
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bso3e"]

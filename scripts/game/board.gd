@@ -67,8 +67,18 @@ func get_possible_moves(player: General.Player, steps: int) -> Array[Move]:
 		if landing_spot != null and landing_spot.can_place(spot.get_pieces()):
 			var move: Move = Move.new(spot, landing_spot, self)
 			moves.append(move)
-	
+		
+		if Settings.can_move_backwards:
+			landing_spot = _get_landing_spot(spot, steps, true)
+			if landing_spot != null and landing_spot.can_place(spot.get_pieces()):
+				var move: Move = Move.new(spot, landing_spot, self)
+				moves.append(move)
+		
 	return moves
+
+
+func won(player: General.Player) -> bool:
+	return get_track(player).back().get_pieces().size() == Settings.num_pieces
 
 
 func _get_landing_spot(spot: Spot, steps: int, backwards := false) -> Spot:

@@ -28,7 +28,8 @@ func execute() -> void:
 	var pieces = _from.remove_pieces()
 	var knocked_out_pieces = await _to.place_pieces(pieces, Piece.MoveAnim.ARC)
 	for piece in knocked_out_pieces:
-		var starting_spot = _board.get_free_start_spots(_player).pick_random() as Spot
+		var opponent = knocked_out_pieces.front().player
+		var starting_spot = _board.get_free_start_spots(opponent).pick_random() as Spot
 		starting_spot.place_piece(piece, Piece.MoveAnim.ARC) # WARNING: might need a sync barrier
 
 
@@ -37,5 +38,9 @@ func gives_extra_roll() -> bool:
 
 
 func is_winning_move() -> bool:
-	# TODO: implement
-	return false
+	if _executed:
+		return _board.won(_player)
+	else:
+		var last_spot = _board.get_track(_player).back() as Spot
+		var is_almost_win = last_spot.get_pieces().size() == Settings.num_pieces
+		return is_almost_win and last_spot == _to
