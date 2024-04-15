@@ -16,5 +16,5 @@ fill_to = Vector2(0.912621, 0.0776699)
 is_safe = true
 give_extra_roll = true
 
-[node name="Decal" parent="." index="0"]
-texture_albedo = SubResource("GradientTexture2D_5emcu")
+[node name="Sprite3D" parent="." index="0"]
+texture = SubResource("GradientTexture2D_5emcu")

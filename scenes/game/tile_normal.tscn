@@ -16,8 +16,6 @@ fill_to = Vector2(0.776699, 0.218447)
 [node name="NormalTile" type="Node3D"]
 script = ExtResource("1_8au3d")
 
-[node name="Decal" type="Decal" parent="."]
-size = Vector3(0.8, 0.3, 0.8)
-texture_albedo = SubResource("GradientTexture2D_h1kum")
-upper_fade = 0.0284197
-lower_fade = 0.0215381
+[node name="Sprite3D" type="Sprite3D" parent="."]
+axis = 1
+texture = SubResource("GradientTexture2D_h1kum")
