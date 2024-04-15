@@ -5,6 +5,18 @@
 [sub_resource type="GDScript" id="GDScript_qs2rm"]
 script/source = "extends Node
 
+
+@onready var board = $Board as Board
+
+
+func _ready():
+	await get_tree().create_timer(0.1).timeout
+	var moves = board.get_possible_moves(General.Player.ONE, 1)
+	print(moves.size())
+	await moves.pick_random().execute()
+	moves = board.get_possible_moves(General.Player.ONE, 1)
+	print(moves.size())
+	await moves.front().execute()
 "
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bso3e"]
