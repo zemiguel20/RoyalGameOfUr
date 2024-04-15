@@ -16,10 +16,11 @@ albedo_color = Color(1, 0.286275, 0.341176, 1)
 script = SubResource("GDScript_qs2rm")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.195091, -0.827188, 0.526972, 0, 0.537296, 0.843394, -0.980785, -0.164538, 0.104821, 5.8688, 8.80929, 2.26077)
+transform = Transform3D(0.0653997, -0.812375, 0.579455, 0, 0.580699, 0.814118, -0.997859, -0.0532432, 0.0379776, 4.74257, 6.71463, -0.0659479)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.999962, 0.00765079, -0.00419737, 0, 0.480989, 0.876727, 0.00872654, -0.876693, 0.48097, 2.76682, 13.3676, 2.5028)
+shadow_enabled = true
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)

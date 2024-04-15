@@ -5,6 +5,8 @@ extends Node3D
 ## Also has highlight effects.
 
 
+signal pieces_knocked_out(pieces: Array[Piece]) 
+
 @export var is_safe: bool = false
 @export var give_extra_roll: bool = false
 @export var force_allow_stack: bool = false ## If true, always allows stacking, independent of settings
@@ -43,11 +45,13 @@ func place_pieces(new_pieces: Array[Piece], anim: Piece.MoveAnim) -> Array[Piece
 	var player = new_pieces.front().player
 	if not is_occupied(player) and not is_free():
 		knocked_out_pieces = remove_pieces()
+		pieces_knocked_out.emit(knocked_out_pieces)
 	
-	# TODO: UNTIE ANIMATION FROM CURRENT STACK TO REMOVE SYNC PROBLEMS
-	await _place_animation(new_pieces, anim)
+	var num_pieces = _pieces.size() # FOR ANIMATION
 	
 	_pieces.append_array(new_pieces)
+	
+	await _place_animation(new_pieces, anim, num_pieces)
 	
 	return knocked_out_pieces
 
@@ -91,17 +95,12 @@ func remove_pieces() -> Array[Piece]:
 	return pieces
 
 
-func _place_animation(pieces: Array[Piece], anim: Piece.MoveAnim):
-	# Temporary reparent of stack to bottom piece so they all move together
-	var base_piece = pieces.front() as Piece
-	var other_pieces = pieces.slice(1, pieces.size()) as Array[Piece]
-	for piece in other_pieces:
-		piece.reparent(base_piece)
+func _place_animation(new_pieces: Array[Piece], anim: Piece.MoveAnim, curr_num_pieces: int):
+	var offset = Vector3.UP * 0.15
+	var base_pos = global_position + offset + (curr_num_pieces * offset)
+	for i in new_pieces.size():
+		var piece = new_pieces[i]
+		var target_pos = base_pos + (i * offset)
+		piece.move(target_pos, anim)
 	
-	# TODO: take dimensions into account
-	var base_pos = global_position if is_free() else _pieces.back().global_position
-	var target_pos = base_pos + (Vector3.UP * 0.3)
-	await base_piece.move(target_pos, anim)
-	
-	for piece in other_pieces:
-		piece.reparent(base_piece.get_parent())
+	await get_tree().create_timer(Piece.MOVE_DURATION).timeout

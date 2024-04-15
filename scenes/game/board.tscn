@@ -18,7 +18,6 @@ _p2_track = [NodePath("Tiles/P2NormalTile1"), NodePath("Tiles/P2NormalTile2"), N
 
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245152, 0)
-metadata/_edit_lock_ = true
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Model"]
 
@@ -36,8 +35,7 @@ operation = 2
 size = Vector3(1, 1, 2)
 
 [node name="Tiles" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.618608, 0)
-metadata/_edit_lock_ = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.496799, 0)
 
 [node name="P2NormalTile1" parent="Tiles" instance=ExtResource("1_8d3jt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.991869, 0, 0.491467)
@@ -103,59 +101,59 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01042, 0, -2.51013)
 [node name="StartAndEndSpots" type="Node3D" parent="."]
 
 [node name="P1StartSpot1" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4725, 0, 4.47566)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99305, 0, 4.55904)
 script = ExtResource("1_3oqik")
 
 [node name="P1StartSpot2" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29589, 0, 3.9858)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.00347, 0, 3.8503)
 script = ExtResource("1_3oqik")
 
 [node name="P1StartSpot3" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4725, 0, 3.13114)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.00348, 0, 3.16241)
 script = ExtResource("1_3oqik")
 
 [node name="P1StartSpot4" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.68153, 0, 2.41197)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99305, 0, 2.42239)
 script = ExtResource("1_3oqik")
 
 [node name="P1StartSpot5" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.76433, 0, 1.26548)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.02432, 0, 1.71366)
 script = ExtResource("1_3oqik")
 
 [node name="P1StartSpot6" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65767, 0, 0.599022)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.00045, 0, 0.890858)
 script = ExtResource("1_3oqik")
 
 [node name="P1StartSpot7" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.80687, 0, -0.265955)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.00432, 0, 0.0779957)
 script = ExtResource("1_3oqik")
 
 [node name="P2StartSpot1" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.52991, 0, 5.21055)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02684, 0, 3.99708)
 script = ExtResource("1_3oqik")
 
 [node name="P2StartSpot2" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70652, 0, 4.72069)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00725, 0, 3.12904)
 script = ExtResource("1_3oqik")
 
 [node name="P2StartSpot3" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.52991, 0, 3.86603)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00725, 0, 2.49241)
 script = ExtResource("1_3oqik")
 
 [node name="P2StartSpot4" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32088, 0, 3.14686)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00725, 0, 1.87508)
 script = ExtResource("1_3oqik")
 
 [node name="P2StartSpot5" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23807, 0, 2.00037)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98796, 0, 1.23845)
 script = ExtResource("1_3oqik")
 
 [node name="P2StartSpot6" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.34474, 0, 1.33391)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98796, 0, 0.717568)
 script = ExtResource("1_3oqik")
 
 [node name="P2StartSpot7" type="Node3D" parent="StartAndEndSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.19554, 0, 0.468935)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98796, 0, -0.266312)
 script = ExtResource("1_3oqik")
 
 [node name="P1EndSpot" type="Node3D" parent="StartAndEndSpots"]
