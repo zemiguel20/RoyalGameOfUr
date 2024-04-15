@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw5k0hcse4y5h"]
+
+[ext_resource type="PackedScene" uid="uid://chhc7sqf8vx7e" path="res://models/EnvironmentBlockout1.fbx" id="1_euwrk"]
+[ext_resource type="Environment" uid="uid://bgm8cwy5up3dq" path="res://shaders/WorldLightingSettings.tres" id="2_n3whl"]
+[ext_resource type="PackedScene" uid="uid://b48u4dl4lewgu" path="res://models/Blockout.tscn" id="3_2uh8l"]
+[ext_resource type="PackedScene" uid="uid://b01ccjwqwqwr1" path="res://models/Plank.tscn" id="4_a4r5x"]
+
+[node name="Blockout" type="Node3D"]
+
+[node name="Root Scene" parent="." instance=ExtResource("1_euwrk")]
+transform = Transform3D(10.3242, 0, 0, 0, 10.3242, 0, 0, 0, 10.3242, 0.102598, 0, 0.105237)
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_n3whl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.126744, -0.930471, 0.343744, -0.583004, 0.210489, 0.78473, -0.802523, -0.299864, -0.51579, -0.00553775, 0.0193132, 0.00699997)
+light_color = Color(0.815686, 0.815686, 0.792157, 1)
+light_energy = 2.4
+light_indirect_energy = 5.525
+light_volumetric_fog_energy = 2.293
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_normal_bias = 0.889
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.019
+directional_shadow_fade_start = 0.65
+directional_shadow_max_distance = 109.5
+
+[node name="Camera3D" type="Camera3D" parent="DirectionalLight3D"]
+transform = Transform3D(0.603022, -0.506692, -0.616139, -0.580319, 0.251318, -0.774641, 0.547352, 0.824683, -0.142493, -1.38282, -1.40946, -0.108469)
+current = true
+fov = 64.8
+
+[node name="Root Scene2" parent="." instance=ExtResource("3_2uh8l")]
+transform = Transform3D(7.34332, 0, 0, 0, 7.34332, 0, 0, 0, 7.34332, 0.446819, -0.112522, 0.661057)
+
+[node name="Root Scene3" parent="." instance=ExtResource("4_a4r5x")]
+transform = Transform3D(-1.29294, 0, 2.1805, 0, 2.53501, 0, -2.1805, 0, -1.29294, 0.93229, 0.0132926, 1.47066)
+
+[node name="Root Scene4" parent="." instance=ExtResource("4_a4r5x")]
+transform = Transform3D(1.23615, 0, -2.21319, 0, 2.53501, 0, 2.21319, 0, 1.23615, 0.852591, 0.0132926, 1.3403)
+
+[node name="Root Scene5" parent="." instance=ExtResource("4_a4r5x")]
+transform = Transform3D(1.22975, -1.85687e-07, -2.21715, -3.82829e-07, -2.53536, 3.84321e-14, 2.21715, -3.34781e-07, 1.22975, 0.828266, 0.0189377, 1.29576)
+
+[node name="Root Scene6" parent="." instance=ExtResource("4_a4r5x")]
+transform = Transform3D(-1.22398, 0, 2.22034, 0, -2.53536, 0, -2.22034, 0, -1.22398, 0.901538, 0.0189377, 1.43138)
+
+[node name="Root Scene7" parent="." instance=ExtResource("4_a4r5x")]
+transform = Transform3D(-1.25617, 0, 2.20229, 0, -2.53536, 0, -2.20229, 0, -1.25617, 0.875338, 0.0189377, 1.38472)
