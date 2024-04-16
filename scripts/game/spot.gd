@@ -93,7 +93,7 @@ func highlight():
 
 func dehighlight():
 	if _highlighter != null:
-		_highlighter.dehilight()
+		_highlighter.dehighlight()
 		for piece in _pieces:
 			piece.dehighlight()
 
