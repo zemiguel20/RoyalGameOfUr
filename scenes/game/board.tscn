@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://s47hmmlcss14"]
 
-[ext_resource type="Script" path="res://scripts/game/spot/spot.gd" id="1_3oqik"]
+[ext_resource type="Script" path="res://scripts/game/spot.gd" id="1_3oqik"]
 [ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/tile_normal.tscn" id="1_8d3jt"]
 [ext_resource type="Script" path="res://scripts/game/board.gd" id="1_mfhgj"]
 [ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece_white.tscn" id="2_hmauu"]
