@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://brt3410qchyrf"
-path.s3tc="res://.godot/imported/Ur_FloorBricks_basecolor.png-3e762f9c22faa03e22b40663e1bd8969.s3tc.ctex"
+path.s3tc="res://.godot/imported/Ur_FloorBricks_basecolor.png-40148aa1676ee0bc6b8a56c42bab5031.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/Ur_FloorBricks_basecolor.png"
-dest_files=["res://.godot/imported/Ur_FloorBricks_basecolor.png-3e762f9c22faa03e22b40663e1bd8969.s3tc.ctex"]
+source_file="res://textures/Ur_FloorBricks_basecolor.png"
+dest_files=["res://.godot/imported/Ur_FloorBricks_basecolor.png-40148aa1676ee0bc6b8a56c42bab5031.s3tc.ctex"]
 
 [params]
 

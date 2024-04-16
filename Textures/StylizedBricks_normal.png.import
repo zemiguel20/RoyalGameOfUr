@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://csujaxduqp11n"
-path.s3tc="res://.godot/imported/StylizedBricks_normal.png-222f4f7b8266bca78313d11d85050591.s3tc.ctex"
+path.s3tc="res://.godot/imported/StylizedBricks_normal.png-0d9728c05a880e2871421a5e1ba95f7f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/StylizedBricks_normal.png"
-dest_files=["res://.godot/imported/StylizedBricks_normal.png-222f4f7b8266bca78313d11d85050591.s3tc.ctex"]
+source_file="res://textures/StylizedBricks_normal.png"
+dest_files=["res://.godot/imported/StylizedBricks_normal.png-0d9728c05a880e2871421a5e1ba95f7f.s3tc.ctex"]
 
 [params]
 

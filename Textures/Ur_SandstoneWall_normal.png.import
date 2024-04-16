@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://btm5fvfj134x4"
-path.s3tc="res://.godot/imported/Ur_SandstoneWall_normal.png-eb07fd7b022c05288aaffb44f94969f5.s3tc.ctex"
+path.s3tc="res://.godot/imported/Ur_SandstoneWall_normal.png-8ee5822cc1354da514b04a1a84c6bf3b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/Ur_SandstoneWall_normal.png"
-dest_files=["res://.godot/imported/Ur_SandstoneWall_normal.png-eb07fd7b022c05288aaffb44f94969f5.s3tc.ctex"]
+source_file="res://textures/Ur_SandstoneWall_normal.png"
+dest_files=["res://.godot/imported/Ur_SandstoneWall_normal.png-8ee5822cc1354da514b04a1a84c6bf3b.s3tc.ctex"]
 
 [params]
 

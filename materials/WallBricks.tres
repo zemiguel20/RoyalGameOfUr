@@ -1,10 +1,10 @@
 [gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://be7n0a655i4xg"]
 
-[ext_resource type="Texture2D" uid="uid://k2475yticnly" path="res://Textures/StylizedBricks_basecolor.png" id="1_2apf2"]
-[ext_resource type="Texture2D" uid="uid://if05ybyp5gkx" path="res://Textures/StylizedBricks_ambientocclusion.png" id="2_lit0x"]
-[ext_resource type="Texture2D" uid="uid://c0msvppjsx663" path="res://Textures/StylizedBricks_height.png" id="3_3la4c"]
-[ext_resource type="Texture2D" uid="uid://csujaxduqp11n" path="res://Textures/StylizedBricks_normal.png" id="4_npqok"]
-[ext_resource type="Texture2D" uid="uid://do3mqy2kyu1wj" path="res://Textures/StylizedBricks_roughness.png" id="5_5ad83"]
+[ext_resource type="Texture2D" uid="uid://k2475yticnly" path="res://textures/StylizedBricks_basecolor.png" id="1_2apf2"]
+[ext_resource type="Texture2D" uid="uid://if05ybyp5gkx" path="res://textures/StylizedBricks_ambientocclusion.png" id="2_lit0x"]
+[ext_resource type="Texture2D" uid="uid://c0msvppjsx663" path="res://textures/StylizedBricks_height.png" id="3_3la4c"]
+[ext_resource type="Texture2D" uid="uid://csujaxduqp11n" path="res://textures/StylizedBricks_normal.png" id="4_npqok"]
+[ext_resource type="Texture2D" uid="uid://do3mqy2kyu1wj" path="res://textures/StylizedBricks_roughness.png" id="5_5ad83"]
 
 [resource]
 diffuse_mode = 3

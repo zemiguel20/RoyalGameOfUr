@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chpng0d3nmxr"
-path.s3tc="res://.godot/imported/Ur_SandstoneWall_height.png-1e3d4e1f5f03a26a9fe618b23473ec56.s3tc.ctex"
+path.s3tc="res://.godot/imported/Ur_SandstoneWall_height.png-b1bf3e6a99af7ffb8734388c1768c20b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/Ur_SandstoneWall_height.png"
-dest_files=["res://.godot/imported/Ur_SandstoneWall_height.png-1e3d4e1f5f03a26a9fe618b23473ec56.s3tc.ctex"]
+source_file="res://textures/Ur_SandstoneWall_height.png"
+dest_files=["res://.godot/imported/Ur_SandstoneWall_height.png-b1bf3e6a99af7ffb8734388c1768c20b.s3tc.ctex"]
 
 [params]
 
