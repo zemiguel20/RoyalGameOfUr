@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlqmrxcxklu2d"]
+
+[ext_resource type="PackedScene" uid="uid://0y7jpgh7d4dk" path="res://test/board_test.tscn" id="1_ruqv2"]
+[ext_resource type="Script" path="res://scripts/game/move_picker.gd" id="2_6vjh3"]
+
+[sub_resource type="GDScript" id="GDScript_y8nea"]
+script/source = "extends Node
+
+
+func _ready():
+	await get_tree().create_timer(0.1).timeout
+	var move_picker = $MovePicker
+	move_picker._on_move_phase_started(General.Player.ONE, 1)
+"
+
+[node name="MovePickerTest" instance=ExtResource("1_ruqv2")]
+script = SubResource("GDScript_y8nea")
+
+[node name="MovePicker" type="Node" parent="." index="4" node_paths=PackedStringArray("board")]
+script = ExtResource("2_6vjh3")
+board = NodePath("../Board")
