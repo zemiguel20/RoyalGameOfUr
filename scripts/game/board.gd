@@ -57,11 +57,13 @@ func get_occupied_track_spots(player: General.Player, include_last := false) -> 
 func get_possible_moves(player: General.Player, steps: int) -> Array[Move]:
 	var moves: Array[Move] = []
 	
+	if steps <= 0:
+		return moves
+	
 	var occupied_spots: Array[Spot] = []
 	occupied_spots.append_array(get_occupied_start_spots(player))
 	occupied_spots.append_array(get_occupied_track_spots(player))
 	
-	# TODO: also do for backwards moves
 	for spot in occupied_spots:
 		var landing_spot = _get_landing_spot(spot, steps)
 		if landing_spot != null and landing_spot.can_place(spot.get_pieces()):
@@ -92,8 +94,9 @@ func _get_landing_spot(spot: Spot, steps: int, backwards := false) -> Spot:
 	if backwards and (index - steps) >= 0:
 		return track[index - steps]
 	
-	if backwards and (index - steps) == -1:
-		return get_free_start_spots(player).pick_random()
+	var free_start_spots = get_free_start_spots(player)
+	if backwards and (index - steps) == -1 and not free_start_spots.is_empty():
+		return free_start_spots.pick_random()
 	
 	return null
 
