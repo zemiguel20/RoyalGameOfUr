@@ -5,7 +5,10 @@ extends Node3D
 ## Also has highlight effects.
 
 
-signal pieces_knocked_out(pieces: Array[Piece]) 
+signal pieces_knocked_out(pieces: Array[Piece])
+signal mouse_entered
+signal mouse_exited
+signal selected
 
 @export var is_safe: bool = false
 @export var give_extra_roll: bool = false
@@ -17,20 +20,6 @@ var _highlighter
 
 func _ready():
 	_highlighter = get_node("Highlighter")
-
-
-func highlight():
-	if _highlighter == null:
-		push_warning("No highlighter found")
-		return
-	_highlighter.highlight()
-
-
-func dehighlight():
-	if _highlighter == null:
-		push_warning("No highlighter found")
-		return
-	_highlighter.dehighlight()
 
 
 ## Places the new pieces in the spot, with the given animation.
@@ -95,6 +84,20 @@ func remove_pieces() -> Array[Piece]:
 	return pieces
 
 
+func highlight():
+	if _highlighter != null:
+		_highlighter.highlight()
+		for piece in _pieces:
+			piece.highlight()
+
+
+func dehighlight():
+	if _highlighter != null:
+		_highlighter.dehilight()
+		for piece in _pieces:
+			piece.dehighlight()
+
+
 func _place_animation(new_pieces: Array[Piece], anim: Piece.MoveAnim, curr_num_pieces: int):
 	var offset = Vector3.UP * 0.15
 	var base_pos = global_position + offset + (curr_num_pieces * offset)
@@ -104,3 +107,18 @@ func _place_animation(new_pieces: Array[Piece], anim: Piece.MoveAnim, curr_num_p
 		piece.move(target_pos, anim)
 	
 	await get_tree().create_timer(Piece.MOVE_DURATION).timeout
+
+
+func _on_mouse_entered():
+	mouse_entered.emit()
+
+
+func _on_mouse_exited():
+	mouse_exited.emit()
+
+
+func _on_input_event(_camera, event, _position, _normal, _shape_idx):
+	if event is InputEventMouseButton:
+		event = event as InputEventMouseButton
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+			selected.emit()

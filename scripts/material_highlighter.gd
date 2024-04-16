@@ -4,12 +4,11 @@ extends Node
 
 @export var highlight_material : Material
 @export var mesh_to_highlight : GeometryInstance3D
-@export var starting_material : Material
 
 
 func highlight():
-	mesh_to_highlight.material_override = highlight_material
+	mesh_to_highlight.material_overlay = highlight_material
 
 
 func dehighlight():
-	mesh_to_highlight.material_override = starting_material
+	mesh_to_highlight.material_overlay = null

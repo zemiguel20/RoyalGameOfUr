@@ -10,14 +10,24 @@ script/source = "extends Node
 
 
 func _ready():
+	print(\"Test Arc animation\")
 	await get_tree().create_timer(0.5).timeout
 	await piece.move(piece.global_position + Vector3(0,0,-5), Piece.MoveAnim.ARC)
+	print(\"Test Arc animation to higher place\")
 	await get_tree().create_timer(0.5).timeout
 	await piece.move(piece.global_position + Vector3(0,1,5), Piece.MoveAnim.ARC)
+	print(\"Test line animation\")
 	await get_tree().create_timer(0.5).timeout
 	await piece.move(piece.global_position + Vector3(0,-1,-5), Piece.MoveAnim.LINE)
+	print(\"Test no animation\")
 	await get_tree().create_timer(0.5).timeout
 	await piece.move(piece.global_position + Vector3(0,0,5), Piece.MoveAnim.NONE)
+	print(\"Test highlight\")
+	await get_tree().create_timer(0.5).timeout
+	piece.highlight()
+	await get_tree().create_timer(2.0).timeout
+	piece.dehighlight()
+	
 "
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3xjdh"]

@@ -80,6 +80,9 @@ func _ready() -> void:
 	await r_tile.place_pieces([piece1], Piece.MoveAnim.ARC)
 	await r_tile.place_pieces([piece2], Piece.MoveAnim.ARC)
 	await tile.place_pieces(r_tile.remove_pieces(), Piece.MoveAnim.ARC)
+	
+	print(\"Testing highlight\")
+	tile.highlight()
 
 
 func _reset():
