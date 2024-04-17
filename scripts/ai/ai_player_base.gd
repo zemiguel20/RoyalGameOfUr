@@ -22,10 +22,11 @@ extends Node
 @export_range(0.1,3.0) var max_moving_duration: float = 2.0 
 
 
-var _gamemode: Gamemode
-var _board: Board
+#var _gamemode: Gamemode
+#var _board: Board
+## TODO: Figure out how to interact with dice.
 var _dice: Dice
-var _player_id: General.PlayerID
+var _player_id: General.Player
 
 
 ## Virtual method that contains an algorithm for picking a move.
@@ -33,17 +34,17 @@ func _evaluate_moves(_moves : Array[Move]):
 	pass
 
 
-func setup(gamemode : Gamemode, player_id: General.PlayerID):
-	_gamemode = gamemode
-	_board = gamemode.board
-	_dice = gamemode.dice
+func setup(gamemode : Gamemode, player_id: General.Player):
+	#_board = gamemode.board
+	#_dice = gamemode.dice
 	_player_id = player_id
 	
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
 func roll():
 	# Wait for a moment, Ai should not have inhumane reaction speed.
-	await _gamemode.get_tree().create_timer(0.3).timeout
+	# TODO: Remove Magic numbers?
+	await get_tree().create_timer(0.3).timeout
 	
 	var random = randf()
 	var shake_this_turn = random <= shaking_probability
@@ -59,12 +60,7 @@ func roll():
 	
 ## Decides which piece to move, then make that piece move.
 func make_move(moves : Array[Move]):
-	var piece_to_move = _evaluate_moves(moves)
-	_move_piece(piece_to_move)
-
-	
-## Function to signal a piece to move, mocking the 'clicking' behaviour of the player.
-func _move_piece(piece : Piece):
+	var best_move = _evaluate_moves(moves) as Move
 	var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
 	await get_tree().create_timer(thinking_duration).timeout	
-	piece.on_click()
+	best_move.execute()
