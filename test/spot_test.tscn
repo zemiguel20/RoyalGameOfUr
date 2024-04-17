@@ -82,7 +82,8 @@ func _ready() -> void:
 	await tile.place_pieces(r_tile.remove_pieces(), Piece.MoveAnim.ARC)
 	
 	print(\"Testing highlight\")
-	tile.highlight()
+	tile.highlight_base()
+	tile.highlight_pieces()
 
 
 func _reset():
