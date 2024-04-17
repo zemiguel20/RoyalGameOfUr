@@ -81,7 +81,40 @@ func get_possible_moves(player: General.Player, steps: int) -> Array[Move]:
 
 func won(player: General.Player) -> bool:
 	return get_track(player).back().get_pieces().size() == Settings.num_pieces
+	
+	
+func get_spot(index: int, opponent: General.Player):
+	var track = _p1_track if opponent == General.Player.ONE else _p2_track
+	return track[index]
 
+	
+func get_spot_index(spot: Spot, player: General.Player):
+	var track = _p1_track if player == General.Player.ONE else _p2_track
+	return track.find(spot)
+	
+	
+func is_player_exclusive(spot: Spot) -> bool:
+	return (_p1_track.has(spot) and not _p2_track.has(spot) or
+		not _p1_track.has(spot) and _p2_track.has(spot))
+
+		
+func get_track_size(player: General.Player):
+	var track = _p1_track if player == General.Player.ONE else _p2_track
+	return track.size()
+
+
+#func get_num_pieces_past_spot(spot: Spot, player: General.Player) -> int:
+	## Num of pieces still at the end
+	#var spot_index = get_spot_index(spot, player)
+	#
+	#var num_passed_pieces = 0
+	#for piece: Piece in get_pieces(player):
+		#if (is_in_end_zone(get_current_spot(piece)) or
+			#get_spot_index(get_current_spot(piece), player) > spot_index):
+			#num_passed_pieces += 1
+	#
+	#return num_passed_pieces
+	
 
 func _get_landing_spot(spot: Spot, steps: int, backwards := false) -> Spot:
 	var player = spot.get_pieces().front().player

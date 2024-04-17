@@ -41,7 +41,7 @@ var _throwing_position
 var _is_rolling
 var _is_grounded
 
-var _current_player
+var _invert_throwing_direction
 var _disable_collision = false
 #endregion
 
@@ -66,7 +66,6 @@ func dehighlight() -> void:
 func outline_if_one() -> void:
 	if _roll_value == 1:
 		# In here we would use a different highligher class to apply some effect.
-		#print("Highlight")
 		pass
 		
 		
@@ -75,6 +74,7 @@ func roll(random_throwing_position: Vector3, invert_throwing_direction: bool) ->
 	
 	# Set some local variables
 	_throwing_position = random_throwing_position
+	_invert_throwing_direction = invert_throwing_direction
 	
 	# Set position and rotation
 	global_position = random_throwing_position
@@ -122,7 +122,7 @@ func _on_movement_stopped():
 	
 	# If stuck, roll again.
 	if _roll_value == -1:
-		roll(_throwing_position, _current_player)
+		roll(_throwing_position, _invert_throwing_direction)
 	# Else, reset some values and emit a signal.
 	else:
 		_is_rolling = false

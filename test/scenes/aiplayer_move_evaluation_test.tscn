@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" path="res://test/scripts/ai/ai_player_advanced_evaluation_test.gd" id="1_ghxrv"]
 [ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="2_qljqm"]
-[ext_resource type="PackedScene" uid="uid://w80iov7yarwa" path="res://scenes/mockup_board.tscn" id="3_dl5i8"]
+[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="3_dl5i8"]
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="4_6mbpl"]
 [ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="4_luep3"]
 
-[node name="AiplayerMoveEvaluationTest" type="Node2D"]
+[node name="AiplayerMoveEvaluationTest" type="Node2D" node_paths=PackedStringArray("_board")]
 script = ExtResource("1_ghxrv")
+_board = NodePath("Board")
 
 [node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice", "ai_player_two")]
 script = ExtResource("4_luep3")
@@ -15,10 +16,13 @@ board = NodePath("../Board")
 dice = NodePath("../Dice")
 ai_player_two = NodePath("../AIPlayerAdvanced")
 
-[node name="AIPlayerAdvanced" type="Node" parent="."]
+[node name="AIPlayerAdvanced" type="Node" parent="." node_paths=PackedStringArray("_board", "_dice")]
 script = ExtResource("2_qljqm")
 capture_base_score = 0.95
 piece_progress_score_weight = 0.15
+_player_id = 1
+_board = NodePath("../Board")
+_dice = NodePath("../Dice")
 
 [node name="Board" parent="." instance=ExtResource("3_dl5i8")]
 

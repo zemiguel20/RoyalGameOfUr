@@ -1,7 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwduqe4anqd18"]
+[gd_scene load_steps=6 format=3 uid="uid://cwduqe4anqd18"]
 
-[ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="1_rqs4x"]
-[ext_resource type="PackedScene" uid="uid://w80iov7yarwa" path="res://scenes/mockup_board.tscn" id="2_eig1d"]
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="3_tonn8"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
@@ -11,8 +9,11 @@ var _is_complete: bool = false
 var _time: float = 0.0
 
 func _ready():
+	await get_tree().create_timer(0.5).timeout
+	
 	for i in 100:
-		await $Dice.roll()
+		($Dice as Dice).on_roll_phase_started(randi_range(0,1))
+		await ($Dice as Dice).roll_finished
 		
 	_is_complete = true
 
@@ -88,14 +89,6 @@ func _on_dice_die_stopped(value):
 [node name="DistributionTest" type="Node"]
 script = SubResource("GDScript_b8xbw")
 
-[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice")]
-script = ExtResource("1_rqs4x")
-board = NodePath("../Board")
-dice = NodePath("../Dice")
-
-[node name="Board" parent="." instance=ExtResource("2_eig1d")]
-transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0.188376, -2.46309, 0.0962036)
-
 [node name="Dice" parent="." instance=ExtResource("3_tonn8")]
 transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
 _roll_shaking_enabled = true
@@ -150,14 +143,6 @@ text = "Outcome 3:"
 layout_mode = 2
 text = "Outcome 4:"
 
-[connection signal="game_finished" from="Gamemode" to="." method="_on_gamemode_game_finished"]
-[connection signal="game_finished" from="Gamemode" to="CanvasLayer" method="_on_gamemode_game_finished"]
-[connection signal="got_extra_roll" from="Gamemode" to="CanvasLayer" method="_on_gamemode_got_extra_roll"]
-[connection signal="phase_changed" from="Gamemode" to="CanvasLayer" method="_on_gamemode_phase_changed"]
-[connection signal="rolled_zero" from="Gamemode" to="CanvasLayer" method="_on_gamemode_rolled_zero"]
-[connection signal="clicked" from="Dice" to="Gamemode" method="roll"]
 [connection signal="die_stopped" from="Dice" to="CanvasLayer" method="_on_dice_die_stopped"]
 [connection signal="roll_finished" from="Dice" to="." method="_on_dice_roll_finished"]
 [connection signal="roll_finished" from="Dice" to="CanvasLayer" method="_on_dice_roll_finished"]
-
-[editable path="Board"]

@@ -38,7 +38,7 @@ func _evaluate_moves(moves : Array[Move]) -> Move:
 			best_move_score = score
 			best_move = move
 			
-	return best_move.piece
+	return best_move
 
 
 func _evaluate_move(move: Move) -> float:
@@ -48,7 +48,7 @@ func _evaluate_move(move: Move) -> float:
 	score += _calculate_central_rosette_modifier(move)
 	return score
 	
-		
+	
 func _calculate_base_score(move: Move):
 	## If move is capture
 	if move.is_capture():
@@ -62,27 +62,25 @@ func _calculate_base_score(move: Move):
 	else:
 		return regular_base_score
 
-
+#region ScoreModifiers
 func _calculate_safety_modifier(move: Move):
 	var safety_difference = move.calculate_safety_difference(base_spot_danger)
 	return safety_score_weight * safety_difference
 	
 	
 func _calculate_progress_modifier(move: Move):
-	var progression = move.get_progression_score()	# Value between 0 and 1
+	var progression = move.get_track_progression()	# Value between 0 and 1
 	return piece_progress_score_weight * progression 
 	
 	
 func _calculate_central_rosette_modifier(move: Move):
-	var current_spot = move.old_spot as Spot
-	var landing_spot = move.new_spot as Spot
-	var is_current_spot_central_rosette = move._is_central_rosette(current_spot)
-	var is_landing_spot_central_rosette = move._is_central_rosette(landing_spot)
+	var is_current_spot_central_rosette = move._is_central_rosette(move.to)
+	var is_landing_spot_central_rosette = move._is_central_rosette(move.from)
 	
 	if (not is_current_spot_central_rosette and not is_landing_spot_central_rosette):
 		return 0
 		
-	
+	var num_of_passed_pieces = move.num_pieces_past_spot()
 	var num_of_total_pieces = Settings.num_pieces
 	
 	var score = 1
@@ -97,3 +95,4 @@ func _calculate_central_rosette_modifier(move: Move):
 		final_score += score
 	
 	return central_rosette_score_weight * final_score
+#endregion

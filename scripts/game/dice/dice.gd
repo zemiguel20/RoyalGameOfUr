@@ -67,8 +67,8 @@ var _die_finish_count = 0
 
 func _ready() -> void:
 	_initialize_dice()
-	disable_selection()
 	_cache_throwing_spots()
+	disable_selection()
 	
 	
 func _input(event: InputEvent) -> void:
@@ -211,10 +211,11 @@ func _get_die_throwing_positions() -> Array[Vector3]:
 	
 	
 func _cache_throwing_spots():
+	_current_throwing_spot = _throwing_position
 	if (_use_multiple_throwing_spots):
 		_dice_throwing_spots = {}
-		_dice_throwing_spots[General.PlayerID.ONE] = _throwing_position
-		_dice_throwing_spots[General.PlayerID.TWO] = _throwing_position_p2
+		_dice_throwing_spots[General.Player.ONE] = _throwing_position
+		_dice_throwing_spots[General.Player.TWO] = _throwing_position_p2
 
 
 func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):

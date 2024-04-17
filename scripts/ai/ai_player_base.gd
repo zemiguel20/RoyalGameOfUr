@@ -2,6 +2,15 @@ class_name AIPlayerBase
 extends Node
 ## General component that imitates player actions and decides their move through a specific algorithm. 
 
+signal move_executed(move: Move)
+
+@export_category("Setup")
+@export var _player_id: General.Player
+## I only need the board for getting all the legal moves.
+## TODO: Maybe board can also emit a signal passing the legal moves to move pickers and ai?
+@export var _board: Board
+@export var _dice: Dice
+
 @export_category("Rolling Behaviour")
 ## This variable is not used when dice shaking is disabled.
 ## The probability that the AI will shake the dice this turn, rather than throwing directly.
@@ -22,29 +31,27 @@ extends Node
 @export_range(0.1,3.0) var max_moving_duration: float = 2.0 
 
 
-#var _gamemode: Gamemode
-#var _board: Board
-## TODO: Figure out how to interact with dice.
-var _dice: Dice
-var _player_id: General.Player
-
-
 ## Virtual method that contains an algorithm for picking a move.
 func _evaluate_moves(_moves : Array[Move]):
 	pass
 
 
-func setup(gamemode : Gamemode, player_id: General.Player):
-	#_board = gamemode.board
-	#_dice = gamemode.dice
-	_player_id = player_id
-	
+func _on_roll_phase_started(player: General.Player):
+	print("Player ID: ", _player_id)
+	print("Player Turn: ", player)
+	if player == _player_id:
+		roll()
+		
+		
+func _on_move_phase_started(player: General.Player, roll_value: int):
+	if player == _player_id:
+		perform_move(_board.get_possible_moves(player, roll_value))
+		
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
 func roll():
 	# Wait for a moment, Ai should not have inhumane reaction speed.
-	# TODO: Remove Magic numbers?
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.2).timeout
 	
 	var random = randf()
 	var shake_this_turn = random <= shaking_probability
@@ -59,8 +66,10 @@ func roll():
 	
 	
 ## Decides which piece to move, then make that piece move.
-func make_move(moves : Array[Move]):
+func perform_move(moves: Array[Move]):
 	var best_move = _evaluate_moves(moves) as Move
 	var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
 	await get_tree().create_timer(thinking_duration).timeout	
-	best_move.execute()
+	await best_move.execute()
+	move_executed.emit(best_move)
+	
