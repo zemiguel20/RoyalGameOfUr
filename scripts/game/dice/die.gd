@@ -1,4 +1,3 @@
-## Test
 class_name Die
 extends RigidBody3D
 
@@ -62,7 +61,8 @@ func dehighlight() -> void:
 	# TODO: To disable the 'outline' highlight effect, we could add it here or create a seperate function
 		
 
-## Adds a highlight effect on the dice if it was a 1.		
+## Adds a highlight effect on the dice if it was a 1.	
+## Currently not used.	
 func outline_if_one() -> void:
 	if _roll_value == 1:
 		# In here we would use a different highligher class to apply some effect.
@@ -70,12 +70,11 @@ func outline_if_one() -> void:
 		pass
 		
 		
-func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void:
+func roll(random_throwing_position: Vector3, invert_throwing_direction: bool) -> void:
 	_disable_collision = true
 	
 	# Set some local variables
 	_throwing_position = random_throwing_position
-	_current_player = playerID
 	
 	# Set position and rotation
 	global_position = random_throwing_position
@@ -84,7 +83,7 @@ func roll(random_throwing_position: Vector3, playerID: General.PlayerID) -> void
 	# Unfreeze the body to apply the throwing force.
 	freeze = false
 	mass = _default_mass
-	_apply_throwing_force(playerID)
+	_apply_throwing_force(invert_throwing_direction)
 	
 	# Disable the collider after a bit.
 	await get_tree().create_timer(_collision_disabling_duration).timeout
@@ -154,11 +153,11 @@ func _get_random_rotation() -> Basis:
 
 ## Throws the dice, by calculating a direction and applying an impulse force.
 ## [param playerID] is used to indicate if we should invert the throwing direction.
-func _apply_throwing_force(playerID):
+func _apply_throwing_force(invert: bool):
 	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
 	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
 	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
-	var inverse_direction = -1 if playerID == General.PlayerID.TWO else 1 
+	var inverse_direction = -1 if invert else 1 
 	var throw_force = throw_direction * _throwing_force_magnitude * inverse_direction
 	apply_impulse(throw_force)
 
