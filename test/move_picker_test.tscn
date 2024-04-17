@@ -8,6 +8,7 @@ script/source = "extends Node
 
 
 func _ready():
+	Settings.can_move_backwards = true
 	await get_tree().create_timer(0.1).timeout
 	var move_picker = $MovePicker
 	move_picker._on_move_phase_started(General.Player.ONE, 1)
