@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cix4stkjswrso"]
+[gd_scene load_steps=5 format=3 uid="uid://cix4stkjswrso"]
 
 [ext_resource type="Script" path="res://test/scripts/ai/ai_player_advanced_evaluation_test.gd" id="1_ghxrv"]
 [ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="2_qljqm"]
 [ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="3_dl5i8"]
-[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="4_6mbpl"]
 [ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="4_luep3"]
 
 [node name="AiplayerMoveEvaluationTest" type="Node2D" node_paths=PackedStringArray("_board")]
@@ -13,7 +12,7 @@ _board = NodePath("Board")
 [node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice", "ai_player_two")]
 script = ExtResource("4_luep3")
 board = NodePath("../Board")
-dice = NodePath("../Dice")
+dice = NodePath("")
 ai_player_two = NodePath("../AIPlayerAdvanced")
 
 [node name="AIPlayerAdvanced" type="Node" parent="." node_paths=PackedStringArray("_board", "_dice")]
@@ -22,14 +21,9 @@ capture_base_score = 0.95
 piece_progress_score_weight = 0.15
 _player_id = 1
 _board = NodePath("../Board")
-_dice = NodePath("../Dice")
+_dice = NodePath("")
 
 [node name="Board" parent="." instance=ExtResource("3_dl5i8")]
-
-[node name="Dice" parent="." instance=ExtResource("4_6mbpl")]
-transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
-_roll_shaking_enabled = true
-_use_hitbox_instead_of_dice_colliders = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999962, 0.00765079, -0.00419737, 0, 0.480989, 0.876727, 0.00872654, -0.876693, 0.48097, 2.76681, 13.3698, 7.91143)

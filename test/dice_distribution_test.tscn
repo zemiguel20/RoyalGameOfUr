@@ -12,8 +12,9 @@ func _ready():
 	await get_tree().create_timer(0.5).timeout
 	
 	for i in 100:
-		($Dice as Dice).on_roll_phase_started(randi_range(0,1))
+		($Dice as Dice)._roll()
 		await ($Dice as Dice).roll_finished
+		#($Dice as Dice).on_roll_phase_started(randi_range(0,1))
 		
 	_is_complete = true
 

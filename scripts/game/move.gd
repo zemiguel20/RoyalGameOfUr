@@ -62,8 +62,25 @@ func get_track_progression():
 	return progression
 	
 	
-func num_pieces_past_spot():
-	pass
+func num_pieces_past_current_spot():
+	var spot_index = _board.get_spot_index(from, _player)
+	
+	var num_passed_pieces = 0
+	var opponent = General.get_opposite_player(_player)
+	for occupied_spot in _board.get_occupied_track_spots(opponent, true):
+		var index = _board.get_spot_index(occupied_spot, opponent)
+		if index > spot_index:
+			num_passed_pieces += occupied_spot.get_pieces().size()
+	
+	return num_passed_pieces
+	
+## Returns whether the spot [param to] is exclusive to the player, 
+## or if it is also on the track of the opponent.	
+func is_player_exclusive(spot: Spot) -> bool:
+	var p1_track = _board.get_track(General.Player.ONE)
+	var p2_track = _board.get_track(General.Player.TWO)
+	return (p1_track.has(spot) and not p2_track.has(spot)) or \
+		(not p1_track.has(spot) and p2_track.has(spot))
 
 
 func calculate_safety_difference(base_danger_score: float):
@@ -76,38 +93,26 @@ func calculate_safety_difference(base_danger_score: float):
 
 ## Helper function for calculate_safety_difference()
 func _calculate_spot_danger(spot: Spot, base_danger_score: float):
-		# Give score of 0 when landing_spot is 100% safe. 
-	if (spot.is_safe or gives_extra_roll() or _is_to_exclusive()):
+	# Give score of 0 when landing_spot is 100% safe. 
+	if spot.is_safe or is_player_exclusive(spot) or \
+		gives_extra_roll() and spot == to:
 		return 0
 	
-	# When a spot is not player exclusive, there is always a bit of danger.
 	var total_capture_chance = 0.0
-	# FIXME
 	var index = _board.get_spot_index(spot, _player)
-	# To Jose: Why exactly did you remove the General.get_opposite_player()?
-	var opponent_id = General.Player.ONE if _player == General.Player.TWO else General.Player.TWO 
+	var opponent_id = General.get_opposite_player(_player) 
 	
 	# Check the 4 tiles before this spot for opponent pieces
 	for _i in range(1, 5):
 		var temp_spot := _board.get_spot(index - _i, opponent_id) as Spot
 		var contains_opponent = temp_spot.is_occupied(opponent_id)
 		if contains_opponent:
-			# FIXME: Add dice to settings
-			var capture_chance = DiceProbabilities.get_probability_of_value(_i, Settings._num_of_dice)
+			var capture_chance = DiceProbabilities.get_probability_of_value(_i, Settings.num_dice)
 			total_capture_chance += capture_chance
 	
-	return total_capture_chance
+	return total_capture_chance + base_danger_score
 	
 	
 # Could also move this to spot maybe?
 func _is_central_rosette(spot: Spot) -> bool:
-	return spot.is_safe and not _board.is_player_exclusive(spot)
-	
-
-## Returns whether the spot [param to] is exclusive to the player, 
-## or if it is also on the track of the opponent.
-func _is_to_exclusive():
-	# FIXME
-	return false
-	return _board.is_spot_exclusive(to)
-	
+	return spot.is_safe and not is_player_exclusive(spot)	

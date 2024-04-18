@@ -79,19 +79,19 @@ func _calculate_central_rosette_modifier(move: Move):
 	
 	if (not is_current_spot_central_rosette and not is_landing_spot_central_rosette):
 		return 0
-		
-	var num_of_passed_pieces = move.num_pieces_past_spot()
-	var num_of_total_pieces = Settings.num_pieces
 	
 	var score = 1
-	if (num_of_passed_pieces != 0 and decrease_per_passed_opponent_piece):	
+	# Extra rule: the more pieces are already past the from tile, the less efficient this strategy is.
+	if decrease_per_passed_opponent_piece:	
+		var num_of_passed_pieces = move.num_pieces_past_current_spot()
+		var num_of_total_pieces = Settings.num_pieces
 		var passed_pieces_rate: float = (num_of_passed_pieces as float / num_of_total_pieces)	# Value between 0 and 1
 		score = 1 - passed_pieces_rate	# Value between 0 and 1
 	
 	var final_score = 0
-	if is_current_spot_central_rosette:
-		final_score -= score
 	if is_landing_spot_central_rosette:
+		final_score -= score
+	elif is_current_spot_central_rosette:
 		final_score += score
 	
 	return central_rosette_score_weight * final_score
