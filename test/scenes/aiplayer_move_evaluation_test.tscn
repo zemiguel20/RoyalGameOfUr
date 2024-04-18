@@ -9,19 +9,17 @@
 script = ExtResource("1_ghxrv")
 _board = NodePath("Board")
 
-[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice", "ai_player_two")]
+[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "ai_player_two")]
 script = ExtResource("4_luep3")
 board = NodePath("../Board")
-dice = NodePath("")
 ai_player_two = NodePath("../AIPlayerAdvanced")
 
-[node name="AIPlayerAdvanced" type="Node" parent="." node_paths=PackedStringArray("_board", "_dice")]
+[node name="AIPlayerAdvanced" type="Node" parent="." node_paths=PackedStringArray("_board")]
 script = ExtResource("2_qljqm")
 capture_base_score = 0.95
 piece_progress_score_weight = 0.15
 _player_id = 1
 _board = NodePath("../Board")
-_dice = NodePath("")
 
 [node name="Board" parent="." instance=ExtResource("3_dl5i8")]
 

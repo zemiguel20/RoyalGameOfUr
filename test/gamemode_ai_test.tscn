@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtelb85wam1x3"]
+[gd_scene load_steps=10 format=3 uid="uid://dtelb85wam1x3"]
 
 [ext_resource type="Script" path="res://scripts/game/gamestate_controller.gd" id="1_lx54s"]
 [ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="2_gfyn5"]
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="3_1qx56"]
 [ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="4_ancfe"]
+[ext_resource type="Script" path="res://scripts/game/move_picker.gd" id="4_uh7ay"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
@@ -80,26 +81,22 @@ script = SubResource("GDScript_b8xbw")
 script = ExtResource("1_lx54s")
 
 [node name="Board" parent="." instance=ExtResource("2_gfyn5")]
-transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0.188376, -2.46309, 0.0962036)
+transform = Transform3D(0.999992, 0, -0.00390957, 0, 1, 0, 0.00390957, 0, 0.999992, 0.188376, -2.46309, 0.0962036)
 
 [node name="Dice" parent="." instance=ExtResource("3_1qx56")]
 transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
 _roll_shaking_enabled = true
 _use_hitbox_instead_of_dice_colliders = true
 
+[node name="MovePicker" type="Node" parent="." node_paths=PackedStringArray("board")]
+script = ExtResource("4_uh7ay")
+board = NodePath("../Board")
+
 [node name="AIPlayerHard" type="Node" parent="." node_paths=PackedStringArray("_board", "_dice")]
 script = ExtResource("4_ancfe")
 central_rosette_score_weight = 0.3
 decrease_per_passed_opponent_piece = false
 _player_id = 1
-_board = NodePath("../Board")
-_dice = NodePath("../Dice")
-max_moving_duration = 1.0
-
-[node name="AIPlayerHard2" type="Node" parent="." node_paths=PackedStringArray("_board", "_dice")]
-script = ExtResource("4_ancfe")
-central_rosette_score_weight = 0.3
-decrease_per_passed_opponent_piece = false
 _board = NodePath("../Board")
 _dice = NodePath("../Dice")
 max_moving_duration = 1.0
@@ -147,14 +144,14 @@ text = "Extra roll!"
 
 [connection signal="move_phase_started" from="GameStateController" to="Board" method="get_possible_moves"]
 [connection signal="move_phase_started" from="GameStateController" to="AIPlayerHard" method="_on_move_phase_started"]
-[connection signal="move_phase_started" from="GameStateController" to="AIPlayerHard2" method="_on_move_phase_started"]
+[connection signal="move_phase_started" from="GameStateController" to="MovePicker" method="_on_move_phase_started"]
 [connection signal="roll_phase_started" from="GameStateController" to="Dice" method="on_roll_phase_started"]
 [connection signal="roll_phase_started" from="GameStateController" to="AIPlayerHard" method="_on_roll_phase_started"]
-[connection signal="roll_phase_started" from="GameStateController" to="AIPlayerHard2" method="_on_roll_phase_started"]
 [connection signal="die_stopped" from="Dice" to="CanvasLayer" method="_on_dice_die_stopped"]
 [connection signal="roll_finished" from="Dice" to="GameStateController" method="_on_roll_ended"]
 [connection signal="roll_finished" from="Dice" to="CanvasLayer" method="_on_dice_roll_finished"]
+[connection signal="move_executed" from="MovePicker" to="GameStateController" method="_on_move_executed"]
 [connection signal="move_executed" from="AIPlayerHard" to="GameStateController" method="_on_move_executed"]
-[connection signal="move_executed" from="AIPlayerHard2" to="GameStateController" method="_on_move_executed"]
 
 [editable path="Board"]
+[editable path="Dice"]

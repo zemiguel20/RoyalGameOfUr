@@ -25,7 +25,7 @@ signal roll_finished(value: int) ## Emitted when all dice finished, with the fin
 ## When [code] true [/code], player's can now click a hitbox (a Area3D which is a child of the dice_controller)
 @export var _use_hitbox_instead_of_dice_colliders: bool
 ## If set to true, player 2 will throw the dice from the other side.
-@export var _use_multiple_throwing_spots: bool = true
+@export var _use_multiple_dice_areas: bool = true
 #endregion
 
 #region Onready Variables
@@ -34,14 +34,16 @@ signal roll_finished(value: int) ## Emitted when all dice finished, with the fin
 ## Looping sound played while the dice are shaking.
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
 ## Reference point for the randomly generated 
-@onready var _throwing_position: Node3D = $ThrowingPosition_P1
+@onready var _throwing_position: Node3D = $DiceArea_P1/ThrowingPosition_P1
 ## Throwing Position for Player 2. This one is only used when 
-## [code] _use_multiple_throwing_spots = true [/code]
-@onready var _throwing_position_p2: Node3D = $ThrowingPosition_P2
+## [code] _use_multiple_dice_areas = true [/code]
+@onready var _throwing_position_p2: Node3D = $DiceArea_P2/ThrowingPosition_P2
 ## Hitbox that makes it easier to click the dice.
-@onready var _click_hitbox: Area3D = $ClickHitbox
+@onready var _click_hitbox: Area3D = $DiceArea_P1/ClickHitbox_P1
+## Hitbox that makes it easier to click the dice.
+@onready var _click_hitbox_p2: Area3D = $DiceArea_P2/ClickHitbox_P2
 ## 3D Label displaying the outcome of the dice. Contains its own script with special effects.
-@onready var _outcome_label: DiceOutcomeLabel = $Label3D_Outcome
+@onready var _outcome_label: DiceOutcomeLabel = $DiceArea_P1/Label3D_Outcome_P1
 #endregion
 
 #region Regular Variables
@@ -54,11 +56,16 @@ var _dice : Array[Die]
 var _dice_throwing_spots: Dictionary
 ## The throwing position that will be used for the current roll.
 var _current_throwing_spot: Node3D
+## The clicking hitbox that will be used for the current roll.
+var _current_click_hitbox: Area3D
 ## Array that holds randomly generated positions that the dice will be thrown from.
 var _positions: Array[Vector3]
 ## Indication if we should invert throwing direction of every die this roll.
 ## Used when player 2 throws for example.
 var _invert_throwing_direction: bool
+## The player that is performing the current roll.
+## Used to decide which click hitbox to use.
+var _current_player
 ## Boolean indicating if the dice are currently being shaken.
 var _is_shaking: bool = false
 ## Number of dice that have finished their roll.
@@ -84,15 +91,15 @@ func _input(event: InputEvent) -> void:
 func on_roll_phase_started(player: General.Player):
 	enable_selection()
 	
-	if _use_multiple_throwing_spots:
-		_current_throwing_spot = _dice_throwing_spots[player]	
-	
-	_invert_throwing_direction = false if player == General.Player.ONE else true
+	if _use_multiple_dice_areas:
+		_current_throwing_spot = _dice_throwing_spots[player]
+		_current_player = player
+		_invert_throwing_direction = false if player == General.Player.ONE else true
 
 
 ## Enables selection and highlight effects
 func enable_selection() -> void:
-	_click_hitbox.input_ray_pickable = _use_hitbox_instead_of_dice_colliders
+	_current_click_hitbox.input_ray_pickable = _use_hitbox_instead_of_dice_colliders
 	for die in _dice:
 		die.highlight()
 		die.input_ray_pickable = true
@@ -100,7 +107,7 @@ func enable_selection() -> void:
 
 ## Disables selection and highlight effects
 func disable_selection() -> void:
-	_click_hitbox.input_ray_pickable = false
+	_current_click_hitbox.input_ray_pickable = false
 	for die in _dice:
 		die.dehighlight()
 		die.input_ray_pickable = false
@@ -120,6 +127,7 @@ func _roll() -> int:
 	await roll_finished
 	for die in _dice:
 		die.outline_if_one()
+	_set_click_hitbox()
 	return value
 
 
@@ -156,6 +164,8 @@ func _initialize_dice() -> void:
 	
 	if _use_hitbox_instead_of_dice_colliders:
 		_click_hitbox.input_event.connect(_on_die_input_event)
+		_click_hitbox_p2.input_event.connect(_on_die_input_event)
+		_current_click_hitbox = _click_hitbox
 	else:
 		for die in _dice:
 			die.input_event.connect(_on_die_input_event)
@@ -212,10 +222,15 @@ func _get_die_throwing_positions() -> Array[Vector3]:
 	
 func _cache_throwing_spots():
 	_current_throwing_spot = _throwing_position
-	if (_use_multiple_throwing_spots):
+	if (_use_multiple_dice_areas):
 		_dice_throwing_spots = {}
 		_dice_throwing_spots[General.Player.ONE] = _throwing_position
 		_dice_throwing_spots[General.Player.TWO] = _throwing_position_p2
+		
+
+func _set_click_hitbox():
+	if _use_multiple_dice_areas:
+		_current_click_hitbox = _click_hitbox if _current_player == General.Player.ONE else _click_hitbox_p2
 
 
 func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):

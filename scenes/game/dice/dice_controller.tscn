@@ -7,6 +7,9 @@
 [ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/dice_border.tres" id="5_hdthg"]
 [ext_resource type="Script" path="res://scripts/game/dice/dice_label.gd" id="6_wittj"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0n13x"]
+size = Vector3(6, 6, 6)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_rs5kh"]
 size = Vector3(10, 12, 1)
 
@@ -22,9 +25,6 @@ size = Vector3(10, 12, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_41ig0"]
 size = Vector3(10, 12, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0n13x"]
-size = Vector3(6, 6, 6)
-
 [sub_resource type="Curve" id="Curve_wrwgg"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -33,76 +33,69 @@ point_count = 4
 script = ExtResource("1_ka5gv")
 _die_scene = ExtResource("2_apa1r")
 
-[node name="ThrowingPosition_P1" type="Node3D" parent="."]
+[node name="DiceArea_P1" type="Node3D" parent="."]
+
+[node name="ThrowingPosition_P1" type="Node3D" parent="DiceArea_P1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2.644)
 
-[node name="ThrowingPosition_P2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2.644)
+[node name="ClickHitbox_P1" type="Area3D" parent="DiceArea_P1"]
+transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0, 0)
+input_ray_pickable = false
 
-[node name="RollSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_hlajg")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P1/ClickHitbox_P1"]
+shape = SubResource("BoxShape3D_0n13x")
 
-[node name="ShakeSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_wfoj5")
+[node name="DiceBorders_P1" type="Node3D" parent="DiceArea_P1"]
 
-[node name="DiceBorders" type="Node3D" parent="."]
-
-[node name="Wall" type="StaticBody3D" parent="DiceBorders"]
+[node name="Wall" type="StaticBody3D" parent="DiceArea_P1/DiceBorders_P1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.979, 5)
 input_ray_pickable = false
 physics_material_override = ExtResource("5_hdthg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceBorders/Wall"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P1/DiceBorders_P1/Wall"]
 shape = SubResource("BoxShape3D_rs5kh")
 
-[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceBorders/Wall"]
+[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceArea_P1/DiceBorders_P1/Wall"]
 visible = false
 mesh = SubResource("BoxMesh_hlaw2")
 
-[node name="Wall2" type="StaticBody3D" parent="DiceBorders"]
+[node name="Wall2" type="StaticBody3D" parent="DiceArea_P1/DiceBorders_P1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.979, -5)
 input_ray_pickable = false
 physics_material_override = ExtResource("5_hdthg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceBorders/Wall2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P1/DiceBorders_P1/Wall2"]
 shape = SubResource("BoxShape3D_tsocn")
 
-[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceBorders/Wall2"]
+[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceArea_P1/DiceBorders_P1/Wall2"]
 visible = false
 mesh = SubResource("BoxMesh_hlaw2")
 
-[node name="Wall3" type="StaticBody3D" parent="DiceBorders"]
+[node name="Wall3" type="StaticBody3D" parent="DiceArea_P1/DiceBorders_P1"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 2.979, 0)
 input_ray_pickable = false
 physics_material_override = ExtResource("5_hdthg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceBorders/Wall3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P1/DiceBorders_P1/Wall3"]
 shape = SubResource("BoxShape3D_feblq")
 
-[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceBorders/Wall3"]
+[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceArea_P1/DiceBorders_P1/Wall3"]
 visible = false
 mesh = SubResource("BoxMesh_hlaw2")
 
-[node name="Wall4" type="StaticBody3D" parent="DiceBorders"]
+[node name="Wall4" type="StaticBody3D" parent="DiceArea_P1/DiceBorders_P1"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 2.979, 0)
 input_ray_pickable = false
 physics_material_override = ExtResource("5_hdthg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceBorders/Wall4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P1/DiceBorders_P1/Wall4"]
 shape = SubResource("BoxShape3D_41ig0")
 
-[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceBorders/Wall4"]
+[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceArea_P1/DiceBorders_P1/Wall4"]
 visible = false
 mesh = SubResource("BoxMesh_hlaw2")
 
-[node name="ClickHitbox" type="Area3D" parent="."]
-transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0, 0)
-input_ray_pickable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickHitbox"]
-shape = SubResource("BoxShape3D_0n13x")
-
-[node name="Label3D_Outcome" type="Label3D" parent="."]
+[node name="Label3D_Outcome_P1" type="Label3D" parent="DiceArea_P1"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6.51159, -1.41556, 0.257188)
 pixel_size = 0.05
 modulate = Color(1, 1, 1, 0)
@@ -116,5 +109,88 @@ _color_no_moves = Color(1, 0.301961, 0.235294, 1)
 _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
 
-[connection signal="die_stopped" from="." to="Label3D_Outcome" method="_on_dice_die_stopped"]
-[connection signal="roll_finished" from="." to="Label3D_Outcome" method="_on_dice_roll_finished"]
+[node name="DiceArea_P2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8813, 0, 0)
+
+[node name="ThrowingPosition_P2" type="Node3D" parent="DiceArea_P2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0168858, 3, -2.644)
+
+[node name="ClickHitbox_P2" type="Area3D" parent="DiceArea_P2"]
+transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0, 0)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P2/ClickHitbox_P2"]
+shape = SubResource("BoxShape3D_0n13x")
+
+[node name="DiceBorders_P2" type="Node3D" parent="DiceArea_P2"]
+
+[node name="Wall" type="StaticBody3D" parent="DiceArea_P2/DiceBorders_P2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.979, 5)
+input_ray_pickable = false
+physics_material_override = ExtResource("5_hdthg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P2/DiceBorders_P2/Wall"]
+shape = SubResource("BoxShape3D_rs5kh")
+
+[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceArea_P2/DiceBorders_P2/Wall"]
+visible = false
+mesh = SubResource("BoxMesh_hlaw2")
+
+[node name="Wall2" type="StaticBody3D" parent="DiceArea_P2/DiceBorders_P2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.979, -5)
+input_ray_pickable = false
+physics_material_override = ExtResource("5_hdthg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P2/DiceBorders_P2/Wall2"]
+shape = SubResource("BoxShape3D_tsocn")
+
+[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceArea_P2/DiceBorders_P2/Wall2"]
+visible = false
+mesh = SubResource("BoxMesh_hlaw2")
+
+[node name="Wall3" type="StaticBody3D" parent="DiceArea_P2/DiceBorders_P2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 2.979, 0)
+input_ray_pickable = false
+physics_material_override = ExtResource("5_hdthg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P2/DiceBorders_P2/Wall3"]
+shape = SubResource("BoxShape3D_feblq")
+
+[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceArea_P2/DiceBorders_P2/Wall3"]
+visible = false
+mesh = SubResource("BoxMesh_hlaw2")
+
+[node name="Wall4" type="StaticBody3D" parent="DiceArea_P2/DiceBorders_P2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 2.979, 0)
+input_ray_pickable = false
+physics_material_override = ExtResource("5_hdthg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P2/DiceBorders_P2/Wall4"]
+shape = SubResource("BoxShape3D_41ig0")
+
+[node name="Debug_MeshInstance3D" type="MeshInstance3D" parent="DiceArea_P2/DiceBorders_P2/Wall4"]
+visible = false
+mesh = SubResource("BoxMesh_hlaw2")
+
+[node name="Label3D_Outcome_P2" type="Label3D" parent="DiceArea_P2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6.51159, -1.41556, 0.257188)
+pixel_size = 0.05
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(1, 1, 1, 0)
+text = "2
+"
+font_size = 100
+script = ExtResource("6_wittj")
+_color_moves = Color(1, 1, 1, 1)
+_color_no_moves = Color(1, 0.301961, 0.235294, 1)
+_effect_duration = 1.4
+_effect_curve = SubResource("Curve_wrwgg")
+
+[node name="RollSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hlajg")
+
+[node name="ShakeSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wfoj5")
+
+[connection signal="die_stopped" from="." to="DiceArea_P1/Label3D_Outcome_P1" method="_on_dice_die_stopped"]
+[connection signal="roll_finished" from="." to="DiceArea_P1/Label3D_Outcome_P1" method="_on_dice_roll_finished"]
