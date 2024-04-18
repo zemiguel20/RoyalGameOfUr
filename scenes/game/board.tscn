@@ -144,6 +144,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99553, 0, -0.285603)
 
 [node name="P1EndSpot" parent="StartAndEndSpots" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01355, 0, -0.982234)
+force_allow_stack = true
 
 [node name="P2EndSpot" parent="StartAndEndSpots" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.986453, 0, -0.982234)
+force_allow_stack = true
