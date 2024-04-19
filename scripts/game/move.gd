@@ -46,10 +46,12 @@ func is_winning_move() -> bool:
 		return is_almost_win and last_spot == to
 
 
+## Returns whether the move will be knocking out an opponent piece.
 func is_capture():
-	return to._pieces.size() > 0 and to._pieces.front().player != _player 
+	return to.is_occupied(General.get_opposite_player(_player))
 
 
+## Returns whether the move will be knocking out an opponent piece.
 func moves_to_end_zone():
 	var last_spot = _board.get_track(_player).back() as Spot
 	return last_spot == to
@@ -74,6 +76,7 @@ func num_pieces_past_current_spot():
 	
 	return num_passed_pieces
 	
+	
 ## Returns whether the spot [param to] is exclusive to the player, 
 ## or if it is also on the track of the opponent.	
 func is_player_exclusive(spot: Spot) -> bool:
@@ -88,7 +91,6 @@ func calculate_safety_difference(base_danger_score: float):
 	var new_spot_danger = _calculate_spot_danger(to, base_danger_score)
 	var spot_safety_difference = old_spot_danger - new_spot_danger 	# Value between -1 and 1
 	return spot_safety_difference
-
 
 
 ## Helper function for calculate_safety_difference()

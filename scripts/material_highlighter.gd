@@ -9,5 +9,6 @@ extends Node
 func highlight():
 	mesh_to_highlight.material_overlay = highlight_material
 
+
 func dehighlight():
 	mesh_to_highlight.material_overlay = null
