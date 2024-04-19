@@ -8,8 +8,6 @@ signal roll_finished(value: int) ## Emitted when all dice finished, with the fin
 #endregion
 
 #region Export Variables
-## The number of dice that will be used in the board game.
-@export_range(0, 8) var _num_of_dice: int = 4
 ## The die that will be used in the board game.
 @export var _die_scene: PackedScene
 ## When die are spawned in, they will have an offset from this object calculated as: 
@@ -154,7 +152,7 @@ func on_dice_release():
 	
 ## Spawns the dice in a random position and connects signals
 func _initialize_dice() -> void:
-	for _i in _num_of_dice:
+	for _i in Settings.num_dice:
 		var instance = _die_scene.instantiate() as Die
 		add_child(instance)
 		_dice.append(instance)
@@ -192,7 +190,7 @@ func _get_die_throwing_positions() -> Array[Vector3]:
 	var num_of_fails = 0
 	var result = [] as Array[Vector3]
 	
-	while result.size() < _num_of_dice:
+	while result.size() < _dice.size():
 		if (num_of_fails >= 100):
 			# If failed many times, try again from scratch and give a warning.
 			push_warning("Dice positioning failed many times, consider tweaking '_minimal_dice_offset' or '_max_throwing_position_offset'")
@@ -242,5 +240,5 @@ func _on_die_finished_rolling(die_value: int):
 	value += die_value
 	_die_finish_count += 1
 	die_stopped.emit(die_value)
-	if (_num_of_dice <= _die_finish_count):
+	if (_dice.size() <= _die_finish_count):
 		roll_finished.emit(value)

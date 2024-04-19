@@ -74,8 +74,8 @@ func _calculate_progress_modifier(move: Move):
 	
 	
 func _calculate_central_rosette_modifier(move: Move):
-	var is_current_spot_central_rosette = move._is_central_rosette(move.to)
-	var is_landing_spot_central_rosette = move._is_central_rosette(move.from)
+	var is_current_spot_central_rosette = move._is_central_rosette(move.from)
+	var is_landing_spot_central_rosette = move._is_central_rosette(move.to)
 	
 	if (not is_current_spot_central_rosette and not is_landing_spot_central_rosette):
 		return 0
@@ -90,9 +90,9 @@ func _calculate_central_rosette_modifier(move: Move):
 	
 	var final_score = 0
 	if is_landing_spot_central_rosette:
-		final_score -= score
-	elif is_current_spot_central_rosette:
 		final_score += score
+	elif is_current_spot_central_rosette:
+		final_score -= score
 	
 	return central_rosette_score_weight * final_score
 #endregion

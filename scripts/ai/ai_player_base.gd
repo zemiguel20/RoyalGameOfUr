@@ -37,8 +37,6 @@ func _evaluate_moves(_moves : Array[Move]):
 
 
 func _on_roll_phase_started(player: General.Player):
-	print("Player ID: ", _player_id)
-	print("Player Turn: ", player)
 	if player == _player_id:
 		roll()
 		
