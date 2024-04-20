@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsule7qsp6of1"]
+[gd_scene load_steps=17 format=3 uid="uid://bsule7qsp6of1"]
 
 [ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="1_txfd6"]
 [ext_resource type="PackedScene" uid="uid://w80iov7yarwa" path="res://scenes/mockup_board.tscn" id="2_lnlvq"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="4_mih40"]
 [ext_resource type="PackedScene" uid="uid://d0hgcfga28omq" path="res://scenes/npcs/opponent_npc_dev.tscn" id="5_n1h8f"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_subtitles.gd" id="6_h11lm"]
+[ext_resource type="Script" path="res://test/temp_dialogue_option_3.gd" id="7_1p04c"]
+[ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="7_iqj53"]
+[ext_resource type="Script" path="res://test/temp_dialogue_option_2.gd" id="8_36kyn"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
@@ -77,6 +80,10 @@ func _on_dice_roll_finished(_value: int) -> void:
 [sub_resource type="LabelSettings" id="LabelSettings_tnjk0"]
 font_size = 21
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2ult6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8kk4y"]
+
 [node name="GamemodeTest" type="Node"]
 script = SubResource("GDScript_b8xbw")
 
@@ -113,9 +120,6 @@ mesh = SubResource("PlaneMesh_0esbx")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0192364, -0.835694, 0.548858, 0, 0.54896, 0.835849, -0.999815, -0.0160787, 0.01056, 7.93404, 11.8192, -2.23023)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_pp8fu")
 
@@ -143,6 +147,7 @@ layout_mode = 2
 text = "Extra roll!"
 
 [node name="Opponent" parent="." instance=ExtResource("5_n1h8f")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.747289, -0.0635998, 1.1919)
 
 [node name="Subtitle_System" type="CanvasLayer" parent="." node_paths=PackedStringArray("subtitle_label")]
 script = ExtResource("6_h11lm")
@@ -176,6 +181,82 @@ vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 2
 
+[node name="Cursor_Subtitles" type="Panel" parent="Subtitle_System"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -411.0
+offset_right = 389.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_1p04c")
+
+[node name="Subtitles_Label" type="Label" parent="Subtitle_System/Cursor_Subtitles"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = 22.0
+offset_right = -36.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "This is the final option, where a nice subtitle thing is shown"
+label_settings = SubResource("LabelSettings_tnjk0")
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2
+
+[node name="Blockout" parent="." instance=ExtResource("7_iqj53")]
+
+[node name="Option1" type="Area3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Option1"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.497033, 0.0346316, 0.686446)
+mesh = SubResource("CapsuleMesh_2ult6")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Option1"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.566589, 0.00880587, 0.657072)
+shape = SubResource("BoxShape3D_8kk4y")
+
+[node name="Option2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.813826, 5.96046e-08, 0.596873)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Option2"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2ult6")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Option2"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+shape = SubResource("BoxShape3D_8kk4y")
+
+[node name="Label3D" type="Label3D" parent="Option2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246044, 0)
+pixel_size = 0.001
+billboard = 1
+outline_modulate = Color(1, 1, 1, 0)
+text = "I am a guard"
+font_size = 40
+script = ExtResource("8_36kyn")
+
+[node name="Option3" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.390307, 0.55901, 0.649057)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Option3"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2ult6")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Option3"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+shape = SubResource("BoxShape3D_8kk4y")
+
 [connection signal="game_finished" from="Gamemode" to="CanvasLayer" method="_on_gamemode_game_finished"]
 [connection signal="got_extra_roll" from="Gamemode" to="CanvasLayer" method="_on_gamemode_got_extra_roll"]
 [connection signal="phase_changed" from="Gamemode" to="CanvasLayer" method="_on_gamemode_phase_changed"]
@@ -184,5 +265,12 @@ text_overrun_behavior = 2
 [connection signal="clicked" from="Dice" to="Gamemode" method="roll"]
 [connection signal="die_stopped" from="Dice" to="CanvasLayer" method="_on_dice_die_stopped"]
 [connection signal="roll_finished" from="Dice" to="CanvasLayer" method="_on_dice_roll_finished"]
+[connection signal="mouse_entered" from="Option1" to="Subtitle_System" method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Option1" to="Subtitle_System" method="_on_option_1_mouse_exited"]
+[connection signal="mouse_entered" from="Option2" to="Option2/Label3D" method="_on_option_2_area_entered"]
+[connection signal="mouse_exited" from="Option2" to="Option2/Label3D" method="_on_option_2_area_exited"]
+[connection signal="mouse_entered" from="Option3" to="Subtitle_System/Cursor_Subtitles" method="_on_option_3_mouse_entered"]
+[connection signal="mouse_exited" from="Option3" to="Subtitle_System/Cursor_Subtitles" method="_on_option_3_mouse_exited"]
 
 [editable path="Board"]
+[editable path="Blockout"]
