@@ -10,6 +10,7 @@ signal move_executed(move: Move)
 ## TODO: Maybe board can also emit a signal passing the legal moves to move pickers and ai?
 @export var _board: Board
 @export var _dice: Dice
+@export var _move_picker: MovePicker
 
 @export_category("Rolling Behaviour")
 ## This variable is not used when dice shaking is disabled.
@@ -38,12 +39,15 @@ func _evaluate_moves(_moves : Array[Move]):
 
 func _on_roll_phase_started(player: General.Player):
 	if player == _player_id:
+		_move_picker.toggle(false)
 		roll()
+	else: 
+		_move_picker.toggle(true)
 		
 		
 func _on_move_phase_started(player: General.Player, roll_value: int):
 	if player == _player_id:
-		perform_move(_board.get_possible_moves(player, roll_value))
+		await perform_move(_board.get_possible_moves(player, roll_value))
 		
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.

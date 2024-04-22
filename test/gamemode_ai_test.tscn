@@ -92,13 +92,14 @@ _use_hitbox_instead_of_dice_colliders = true
 script = ExtResource("4_uh7ay")
 board = NodePath("../Board")
 
-[node name="AIPlayerHard" type="Node" parent="." node_paths=PackedStringArray("_board", "_dice")]
+[node name="AIPlayerHard" type="Node" parent="." node_paths=PackedStringArray("_board", "_dice", "_move_picker")]
 script = ExtResource("4_ancfe")
 central_rosette_score_weight = 0.3
 decrease_per_passed_opponent_piece = false
 _player_id = 1
 _board = NodePath("../Board")
 _dice = NodePath("../Dice")
+_move_picker = NodePath("../MovePicker")
 max_moving_duration = 1.0
 
 [node name="Environment" type="Node3D" parent="."]
