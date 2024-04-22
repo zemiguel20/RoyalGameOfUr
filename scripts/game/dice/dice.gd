@@ -114,6 +114,7 @@ func disable_selection() -> void:
 ## Plays the dice rolling animation and updates the value. Returns the rolled value.
 func _roll() -> int:
 	disable_selection()
+	_set_click_hitbox()
 	_outcome_label.visible = false	
 	_roll_sfx.play()
 	value = 0
@@ -125,7 +126,6 @@ func _roll() -> int:
 	await roll_finished
 	for die in _dice:
 		die.outline_if_one()
-	_set_click_hitbox()
 	return value
 
 

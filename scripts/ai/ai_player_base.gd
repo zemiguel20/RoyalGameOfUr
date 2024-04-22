@@ -52,6 +52,7 @@ func _on_move_phase_started(player: General.Player, roll_value: int):
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
 func roll():
+	_dice.disable_selection()
 	# Wait for a moment, Ai should not have inhumane reaction speed.
 	await get_tree().create_timer(0.2).timeout
 	
