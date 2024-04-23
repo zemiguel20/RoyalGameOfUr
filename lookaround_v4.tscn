@@ -7,16 +7,12 @@
 [sub_resource type="LabelSettings" id="LabelSettings_nxxjs"]
 font_size = 30
 
-[node name="Custom_Camera" type="Camera3D" node_paths=PackedStringArray("border_up")]
+[node name="Custom_Camera" type="Camera3D" node_paths=PackedStringArray("_looking_border")]
 transform = Transform3D(1, -7.45057e-09, 1.86264e-08, 7.45057e-09, 1, -2.98023e-08, -1.86264e-08, -2.98023e-08, 1, 0, 0, 0)
 current = true
 script = ExtResource("1_chqge")
 max_degrees = 50.0
-rotation_speed = 0.01
-centering_speed = 2.3
-enable_feature = true
-enable_at_game_start = true
-border_up = NodePath("CanvasLayer_ModeChange/Border_Up")
+_looking_border = NodePath("CanvasLayer_ModeChange/Border_Up")
 
 [node name="CanvasLayer_ModeChange" type="CanvasLayer" parent="."]
 

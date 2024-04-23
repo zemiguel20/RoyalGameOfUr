@@ -95,7 +95,7 @@ ai_player_two = NodePath("../AIPlayerHard")
 transform = Transform3D(0.00673198, 0, 0.00388671, 0, 0.00777342, 0, -0.00388671, 0, 0.00673198, 0.862239, 0.0260538, 1.38567)
 
 [node name="Dice" parent="OLD_GamemodeTest" instance=ExtResource("4_m3jmt")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.92269, 0.0260538, 1.34318)
+transform = Transform3D(0.0069282, 0, 0.004, 0, 0.008, 0, -0.004, 0, 0.0069282, 0.940734, 0.0260538, 1.33277)
 _roll_shaking_enabled = true
 _use_hitbox_instead_of_dice_colliders = true
 
@@ -134,9 +134,7 @@ text = "Extra roll!"
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 0.919994, 0.109034, 1.44549)
 rotation_edit_mode = 2
 max_degrees = 35.0
-rotation_speed = 0.1
-centering_speed = 0.9
-degrees_down_to_trigger = 23.0
+_enable_feature = true
 
 [connection signal="game_finished" from="OLD_GamemodeTest/Gamemode" to="OLD_GamemodeTest/CanvasLayer" method="_on_gamemode_game_finished"]
 [connection signal="got_extra_roll" from="OLD_GamemodeTest/Gamemode" to="OLD_GamemodeTest/CanvasLayer" method="_on_gamemode_got_extra_roll"]
@@ -148,3 +146,4 @@ degrees_down_to_trigger = 23.0
 
 [editable path="Environment"]
 [editable path="OLD_GamemodeTest/Board"]
+[editable path="OLD_GamemodeTest/Dice"]
