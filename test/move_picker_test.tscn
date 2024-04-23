@@ -7,15 +7,17 @@
 script/source = "extends Node
 
 
+var player = General.Player.ONE
+@onready var move_picker = $MovePicker
+
+
 func _ready():
 	Settings.can_move_backwards = true
 	await get_tree().create_timer(0.1).timeout
-	var move_picker = $MovePicker
 	move_picker._on_move_phase_started(General.Player.ONE, 1)
 
 
 func _on_move_picker_move_executed(_move: Move) -> void:
-	var move_picker = $MovePicker
 	move_picker._on_move_phase_started(General.Player.ONE, 1)
 "
 
