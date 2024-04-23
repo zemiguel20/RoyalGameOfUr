@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyv4h7haakr1c"]
+[gd_scene load_steps=10 format=3 uid="uid://dyv4h7haakr1c"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_6ydlx"]
 [ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="2_iy2s7"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="4_m3jmt"]
 [ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="5_5wpgc"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://lookaround_v4.tscn" id="6_4y6j8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_080q8"]
+size = Vector3(0.358398, 0.001, 0.125)
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
@@ -71,6 +74,14 @@ func _on_dice_roll_finished(_value: int) -> void:
 
 [node name="Environment" parent="." instance=ExtResource("1_6ydlx")]
 
+[node name="Area3D" type="Area3D" parent="Environment/Table" index="0" groups=["Ground"]]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.857886, 0.0185585, 1.3861)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Table/Area3D"]
+shape = SubResource("BoxShape3D_080q8")
+
 [node name="OLD_GamemodeTest" type="Node" parent="."]
 script = SubResource("GDScript_b8xbw")
 
@@ -81,10 +92,10 @@ dice = NodePath("../Dice")
 ai_player_two = NodePath("../AIPlayerHard")
 
 [node name="Board" parent="OLD_GamemodeTest" instance=ExtResource("3_wp85y")]
-transform = Transform3D(0.00674712, 0, 0.00386036, 0, 0.00777342, 0, -0.00386036, 0, 0.00674712, 0.862239, 0.0260538, 1.38567)
+transform = Transform3D(0.00673198, 0, 0.00388671, 0, 0.00777342, 0, -0.00388671, 0, 0.00673198, 0.862239, 0.0260538, 1.38567)
 
 [node name="Dice" parent="OLD_GamemodeTest" instance=ExtResource("4_m3jmt")]
-transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.92269, 0.0260538, 1.34318)
 _roll_shaking_enabled = true
 _use_hitbox_instead_of_dice_colliders = true
 
@@ -121,7 +132,11 @@ text = "Extra roll!"
 
 [node name="Custom_Camera" parent="." instance=ExtResource("6_4y6j8")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 0.919994, 0.109034, 1.44549)
+rotation_edit_mode = 2
+max_degrees = 35.0
 rotation_speed = 0.1
+centering_speed = 0.9
+degrees_down_to_trigger = 23.0
 
 [connection signal="game_finished" from="OLD_GamemodeTest/Gamemode" to="OLD_GamemodeTest/CanvasLayer" method="_on_gamemode_game_finished"]
 [connection signal="got_extra_roll" from="OLD_GamemodeTest/Gamemode" to="OLD_GamemodeTest/CanvasLayer" method="_on_gamemode_got_extra_roll"]

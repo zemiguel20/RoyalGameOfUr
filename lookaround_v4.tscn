@@ -7,7 +7,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_nxxjs"]
 font_size = 30
 
-[node name="Custom_Camera" type="Camera3D" node_paths=PackedStringArray("border_up", "border_down")]
+[node name="Custom_Camera" type="Camera3D" node_paths=PackedStringArray("border_up")]
 transform = Transform3D(1, -7.45057e-09, 1.86264e-08, 7.45057e-09, 1, -2.98023e-08, -1.86264e-08, -2.98023e-08, 1, 0, 0, 0)
 current = true
 script = ExtResource("1_chqge")
@@ -17,7 +17,6 @@ centering_speed = 2.3
 enable_feature = true
 enable_at_game_start = true
 border_up = NodePath("CanvasLayer_ModeChange/Border_Up")
-border_down = NodePath("CanvasLayer_ModeChange/Border_Down")
 
 [node name="CanvasLayer_ModeChange" type="CanvasLayer" parent="."]
 
@@ -47,38 +46,6 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "^ Look Around ^"
-label_settings = SubResource("LabelSettings_nxxjs")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Border_Down" type="ColorRect" parent="CanvasLayer_ModeChange"]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -467.0
-offset_top = -89.0
-offset_right = 467.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0, 0, 0, 0.329412)
-
-[node name="Label" type="Label" parent="CanvasLayer_ModeChange/Border_Down"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -11.5
-offset_right = 50.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Return"
 label_settings = SubResource("LabelSettings_nxxjs")
 horizontal_alignment = 1
 vertical_alignment = 1
