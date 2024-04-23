@@ -60,10 +60,13 @@ func _input(event):
 		
 
 func look_up():
+	print("Up")
 	_is_centering = false
 	if rotation_degrees.x >= max_degrees_x:
+		print("Oof")	
 		return
 		
+	print("Wtf?")			
 	rotate_object_local(Vector3.RIGHT, rotation_speed * _delta)		
 
 

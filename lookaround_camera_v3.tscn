@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvu20mgrm7obc"]
+
+[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://lookaround_v4.tscn" id="1_6s2xi"]
+
+[node name="Camera_Parent_v3" type="Node3D"]
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 0.919994, 0.109034, 1.44549)
+
+[node name="Custom_Camera" parent="." instance=ExtResource("1_6s2xi")]

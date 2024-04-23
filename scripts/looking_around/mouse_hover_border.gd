@@ -31,6 +31,7 @@ func _process(delta):
 
 
 func _on_mouse_entered():
+	print("Yay")
 	enabled = true
 
 

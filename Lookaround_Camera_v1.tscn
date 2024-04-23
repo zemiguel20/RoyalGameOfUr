@@ -35,7 +35,7 @@ offset_bottom = 98.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.117647)
+color = Color(1, 1, 1, 0)
 script = ExtResource("2_uyvrd")
 
 [node name="ColorRect2" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
@@ -48,7 +48,7 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.117647)
+color = Color(1, 1, 1, 0)
 script = ExtResource("2_uyvrd")
 
 [node name="ColorRect3" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
@@ -58,7 +58,7 @@ offset_right = 100.0
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.117647)
+color = Color(1, 1, 1, 0)
 script = ExtResource("2_uyvrd")
 
 [node name="ColorRect4" type="ColorRect" parent="Custom_Camera/MouseBorderDetector"]
@@ -71,5 +71,5 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(1, 1, 1, 0.117647)
+color = Color(1, 1, 1, 0)
 script = ExtResource("2_uyvrd")

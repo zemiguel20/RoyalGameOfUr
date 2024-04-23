@@ -13,7 +13,6 @@ extends Camera3D
 @export var enable_feature: bool
 @export var enable_at_game_start: bool
 
-var cursor = load("res://sprites/cursor/Hand Cursor.png")
 
 var is_enabled = false
 
@@ -39,7 +38,6 @@ func _ready():
 		return
 		
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-	Input.set_custom_mouse_cursor(cursor)
 	
 	original_rotation = rotation	# Local rotation
 	
@@ -78,7 +76,8 @@ func _input(event):
 	var mouseDelta = mouseMotionEvent.relative as Vector2
 	
 	rotate(Vector3.UP, rotation_speed * _delta * -mouseDelta.x)
-	rotate(Vector3.RIGHT, rotation_speed * _delta * -mouseDelta.y)		
+	rotate_object_local(Vector3.RIGHT, rotation_speed * _delta * -mouseDelta.y)		
+	#rotate(Vector3.RIGHT, rotation_speed * _delta * -mouseDelta.y)		
 		
 		
 func enable_looking():
@@ -89,17 +88,16 @@ func disable_looking():
 	_enable_looking = false
 	
 	
-func _centre():
-	if rotation.distance_to(original_rotation) > _threshold:
-		rotation = rotation.move_toward(original_rotation, centering_speed * _delta)
-	else:
-		rotation = original_rotation
-		_is_centering = false
-		
-	
 func start_centre():
 	if not is_enabled:
 		return
 		
 	_is_centering = true
 	
+	
+func _centre():
+	if rotation.distance_to(original_rotation) > _threshold:
+		rotation = rotation.move_toward(original_rotation, centering_speed * _delta)
+	else:
+		rotation = original_rotation
+		_is_centering = false
