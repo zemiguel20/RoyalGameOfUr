@@ -36,4 +36,4 @@ func _on_move_executed(move: Move):
 
 func _switch_player():
 	current_player = General.Player.ONE if current_player == General.Player.TWO \
-		else General.PLAYER.TWO
+		else General.Player.TWO
