@@ -65,13 +65,12 @@ func get_possible_moves(player: General.Player, steps: int) -> Array[Move]:
 	occupied_spots.append_array(get_occupied_track_spots(player))
 	
 	for spot in occupied_spots:
-		var landing_spot = _get_landing_spot(spot, steps)
-		if landing_spot != null and landing_spot.can_place(spot.get_pieces()):
-			var move: Move = Move.new(spot, landing_spot, self)
-			moves.append(move)
-		
+		var landing_spots = [] as Array[Spot]
+		landing_spots.append(_get_landing_spot(spot, steps))
 		if Settings.can_move_backwards:
-			landing_spot = _get_landing_spot(spot, steps, true)
+			landing_spots.append(_get_landing_spot(spot, steps, true))
+	
+		for landing_spot in landing_spots:
 			if landing_spot != null and landing_spot.can_place(spot.get_pieces()):
 				var move: Move = Move.new(spot, landing_spot, self)
 				moves.append(move)
@@ -84,17 +83,17 @@ func won(player: General.Player) -> bool:
 	
 	
 func get_spot(index: int, opponent: General.Player):
-	var track = _p1_track if opponent == General.Player.ONE else _p2_track
+	var track = get_track(opponent)
 	return track[index]
 
 	
 func get_spot_index(spot: Spot, player: General.Player):
-	var track = _p1_track if player == General.Player.ONE else _p2_track
+	var track = get_track(player)
 	return track.find(spot)
 
 		
 func get_track_size(player: General.Player):
-	var track = _p1_track if player == General.Player.ONE else _p2_track
+	var track = get_track(player)
 	return track.size()
 	
 
