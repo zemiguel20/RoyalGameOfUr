@@ -45,7 +45,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01042, 0, 3.48987)
 
 [node name="SharedRosetteTile" parent="Tiles" instance=ExtResource("5_dht20")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0104227, 0, 0.489866)
-give_extra_roll = false
 
 [node name="P2RosetteTile2" parent="Tiles" instance=ExtResource("5_dht20")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.989577, 0, -2.51013)

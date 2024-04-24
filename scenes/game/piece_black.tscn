@@ -1,10 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://cch6w4r6da147"]
 
 [ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece_white.tscn" id="1_cf788"]
-[ext_resource type="Material" uid="uid://caumk6qg3daim" path="res://materials/black.tres" id="2_f1csa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2vva"]
+albedo_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
 
 [node name="P2Piece" instance=ExtResource("1_cf788")]
 player = 1
 
 [node name="MeshInstance3D" parent="." index="0"]
-material_override = ExtResource("2_f1csa")
+material_override = SubResource("StandardMaterial3D_w2vva")

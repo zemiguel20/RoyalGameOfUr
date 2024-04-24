@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dlqmrxcxklu2d"]
 
-[ext_resource type="PackedScene" uid="uid://0y7jpgh7d4dk" path="res://test/board_test.tscn" id="1_ruqv2"]
+[ext_resource type="PackedScene" uid="uid://0y7jpgh7d4dk" path="res://test/scenes/board_test.tscn" id="1_ruqv2"]
 [ext_resource type="Script" path="res://scripts/game/move_picker.gd" id="2_6vjh3"]
 
 [sub_resource type="GDScript" id="GDScript_y8nea"]

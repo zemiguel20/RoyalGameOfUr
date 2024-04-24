@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3rplnb2n1336"]
+[gd_scene load_steps=8 format=3 uid="uid://b2d6i5xct0dtj"]
 
 [ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="1_qmmkb"]
-[ext_resource type="Material" uid="uid://dtjsro41ih73d" path="res://materials/plane.tres" id="2_oqni5"]
 
 [sub_resource type="GDScript" id="GDScript_0kq4i"]
 script/source = "extends Node3D
@@ -16,6 +15,9 @@ func _on_dice_clicked():
 	print(value)
 	$CanvasLayer/Label. _on_dice_controller_roll_finished(value)
 "
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uig3o"]
+albedo_color = Color(0.380392, 0.639216, 0.333333, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vs1jm"]
 
@@ -54,7 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 0.63815, 0.769912, 0, -0.769912, 0.63815, 0,
 transform = Transform3D(93.977, 0, 0, 0, 1, 0, 0, 0, 93.977, 0, -1.31016, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Plane"]
-material_override = ExtResource("2_oqni5")
+material_override = SubResource("StandardMaterial3D_uig3o")
 mesh = SubResource("PlaneMesh_vs1jm")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
@@ -84,5 +86,3 @@ label_settings = SubResource("LabelSettings_m30x0")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = SubResource("GDScript_l6841")
-
-[connection signal="clicked" from="Dice" to="." method="_on_dice_clicked"]

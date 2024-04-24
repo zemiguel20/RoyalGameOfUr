@@ -5,7 +5,11 @@ extends Node
 enum Player {ONE = 0, TWO = 1}
 
 
-# Not tested yet.
+func get_opposite_player(_player: General.Player):
+	return General.Player.ONE if _player == General.Player.TWO else General.Player.TWO
+
+
+# Not tested yet and also not used at the moment.
 static func get_random_position_in_boxshape_3D(shape : BoxShape3D) -> Vector3:
 	var random_position = Vector3()
 	random_position.x = randi_range(shape.position - shape.size.x/2, shape.position + shape.size.x/2)
