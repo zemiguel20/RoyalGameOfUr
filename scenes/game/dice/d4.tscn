@@ -4,10 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://models/test_die_d4.glb" id="1_y0dub"]
 [ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_raycast.tscn" id="3_nd3gk"]
 [ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="4_7sy51"]
-[ext_resource type="Material" uid="uid://cfjbmqrrcl4xo" path="res://materials/test.tres" id="5_d72al"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xnfvc"]
 points = PackedVector3Array(0, -1, -1, -0.864103, -1, 0.499182, 0.864519, -1, 0.499182, 0, 0.412, -0.004)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqfn5"]
+render_priority = 1
+albedo_color = Color(0.380392, 0.639216, 0.333333, 1)
 
 [node name="D4" type="RigidBody3D"]
 mass = 2.0
@@ -52,7 +55,7 @@ opposite_side_value = 1
 
 [node name="MaterialHighlighter" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
 script = ExtResource("4_7sy51")
-highlight_material = ExtResource("5_d72al")
+highlight_material = SubResource("StandardMaterial3D_eqfn5")
 mesh_to_highlight = NodePath("../test_die_d4/Dice_001")
 
 [node name="RollTimeoutTimer" type="Timer" parent="."]
