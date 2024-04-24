@@ -1,3 +1,4 @@
+class_name MovePicker
 extends Node
 
 
@@ -8,6 +9,10 @@ signal move_executed(move: Move)
 var _moves: Array[Move] = []
 var _selected_from_spot: Spot = null
 
+
+func get_moves() -> Array[Move]:
+	return _moves.duplicate()
+	
 
 func start_selection(moves: Array[Move]):
 	_moves = moves.duplicate()

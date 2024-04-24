@@ -6,9 +6,6 @@ signal move_executed(move: Move)
 
 @export_category("Setup")
 @export var _player_id: General.Player
-## I only need the board for getting all the legal moves.
-## TODO: Maybe board can also emit a signal passing the legal moves to move pickers and ai?
-@export var _board: Board
 @export var _dice: Dice
 @export var _move_picker: MovePicker
 
@@ -39,15 +36,16 @@ func _evaluate_moves(_moves : Array[Move]):
 
 func _on_roll_phase_started(player: General.Player):
 	if player == _player_id:
-		_move_picker.toggle(false)
 		roll()
-	else: 
-		_move_picker.toggle(true)
 		
 		
 func _on_move_phase_started(player: General.Player, roll_value: int):
 	if player == _player_id:
-		await perform_move(_board.get_possible_moves(player, roll_value))
+		var moves = _move_picker.get_moves()
+		var best_move = _evaluate_moves(moves)
+		# HACK disable the selection
+		_move_picker.end_selection()
+		await _move_picker.execute_move(best_move)
 		
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
