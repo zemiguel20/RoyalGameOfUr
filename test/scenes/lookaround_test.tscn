@@ -30,6 +30,7 @@ transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 3.10344,
 
 [node name="Camera_Lookaround" parent="." instance=ExtResource("3_4a2hg")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 0.919994, 0.109034, 1.44549)
+switch_threshold_ratio = 0.75
 
 [editable path="Environment"]
 [editable path="Board"]

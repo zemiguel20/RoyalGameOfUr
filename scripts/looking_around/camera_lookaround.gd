@@ -12,17 +12,15 @@ extends Camera3D
 ## Euler rotation in degrees of the fixed camera orientation used when looking at the board.
 ## The current orientation of the camera will be used as a default for the looking orientation.
 @export var _board_look_rotation := Vector3(-30, 32, 0)
-## When the rotation in degrees is lower than this value in the x axis, 
-## the camera will switch back to the fixed board camera.
-## Message to Ze: Alternatively, I could also change this variable to be relative to the board rotation and looking rotation.
-## So this value would have a range of (0, 1) and we do an inverse lerp with the rotation to check if the camera is closer to the looking rotation or the board rotation.
-## Example: If look_rot = (0, 30, 0), board_rot = (-40, 30, 0) and we are currently at (-30, 30, 0) our score would be 0.75. So here we would specify which score we need to switch.
-@export var switch_threshold_degrees_x: float = -23
+## When the camera nearly matches the board look rotation rather than the default looking around rotation,
+## the camera will switch back to the fixed board camera. 
+## The higher the value, the more you need to look at the board to switch modes.
+@export_range(0.5, 0.99) var switch_threshold_ratio: float = 0.8 
 
-@export_group("Self References")
 ## Upon hovering over this ui element, the camera will switch to the looking around mode.
-@onready var _looking_border = $CanvasLayer_ModeChange/LookingBorder as Control	
+@onready var _looking_border = $CanvasLayer_ModeChange/LookingBorder as Control
 
+## This rotation will take the global position of the current camera orientation when starting the game.
 var _looking_around_rotation: Vector3
 var _min_rotation_x: float
 var _max_rotation_x: float
@@ -64,8 +62,8 @@ func _input(event):
 	rotation.x = clampf(rotation.x, _min_rotation_x, _max_rotation_x)
 	rotation.y = clampf(rotation.y, _min_rotation_y, _max_rotation_y)
 	
-	# If the player looks down at the board, exit looking around mode.
-	if rotation.x - _looking_around_rotation.x < deg_to_rad(switch_threshold_degrees_x):
+	var rotation_ratio = inverse_lerp(_looking_around_rotation.x, _board_look_rotation.x, rotation.x)
+	if rotation_ratio > switch_threshold_ratio:
 		_return_to_board()
 		
 		
