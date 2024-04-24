@@ -9,6 +9,8 @@ func get_opposite_player(_player: General.Player):
 	return General.Player.ONE if _player == General.Player.TWO else General.Player.TWO
 
 
+## To keep the inspectors designer friendly, I have export variables in degrees, which I then convert to radians.
+## This is a quick helper function for converting an euler rotation from degrees to radians.
 func deg_to_rad(vector: Vector3):
 	return Vector3(deg_to_rad(vector.x), deg_to_rad(vector.y), deg_to_rad(vector.z))
 
