@@ -1,22 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8o1oiumwk2ow"]
 
-[ext_resource type="Script" path="res://scripts/looking_around/camera_lookaround_v3.gd" id="1_chqge"]
+[ext_resource type="Script" path="res://scripts/looking_around/camera_lookaround.gd" id="1_ojtcq"]
 
 [sub_resource type="Theme" id="Theme_n4fxd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nxxjs"]
 font_size = 30
 
-[node name="Custom_Camera" type="Camera3D" node_paths=PackedStringArray("_looking_border")]
+[node name="Camara_Lookaround" type="Camera3D"]
 transform = Transform3D(1, -7.45057e-09, 1.86264e-08, 7.45057e-09, 1, -2.98023e-08, -1.86264e-08, -2.98023e-08, 1, 0, 0, 0)
 current = true
-script = ExtResource("1_chqge")
+script = ExtResource("1_ojtcq")
 max_degrees = 50.0
-_looking_border = NodePath("CanvasLayer_ModeChange/Border_Up")
 
 [node name="CanvasLayer_ModeChange" type="CanvasLayer" parent="."]
 
-[node name="Border_Up" type="ColorRect" parent="CanvasLayer_ModeChange"]
+[node name="LookingBorder" type="ColorRect" parent="CanvasLayer_ModeChange"]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
@@ -28,7 +27,7 @@ grow_horizontal = 2
 theme = SubResource("Theme_n4fxd")
 color = Color(0, 0, 0, 0.329412)
 
-[node name="Label" type="Label" parent="CanvasLayer_ModeChange/Border_Up"]
+[node name="Label" type="Label" parent="CanvasLayer_ModeChange/LookingBorder"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

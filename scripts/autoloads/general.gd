@@ -9,6 +9,10 @@ func get_opposite_player(_player: General.Player):
 	return General.Player.ONE if _player == General.Player.TWO else General.Player.TWO
 
 
+func deg_to_rad(vector: Vector3):
+	return Vector3(deg_to_rad(vector.x), deg_to_rad(vector.y), deg_to_rad(vector.z))
+
+
 # Not tested yet and also not used at the moment.
 static func get_random_position_in_boxshape_3D(shape : BoxShape3D) -> Vector3:
 	var random_position = Vector3()
