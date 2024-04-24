@@ -76,14 +76,13 @@ func num_pieces_past_current_spot():
 	
 	return num_passed_pieces
 	
-	
-## Returns whether the spot [param to] is exclusive to the player, 
-## or if it is also on the track of the opponent.	
-func is_player_exclusive(spot: Spot) -> bool:
-	var p1_track = _board.get_track(General.Player.ONE)
-	var p2_track = _board.get_track(General.Player.TWO)
-	return (p1_track.has(spot) and not p2_track.has(spot)) or \
-		(not p1_track.has(spot) and p2_track.has(spot))
+
+func is_from_central_rosette():
+	return _is_central_rosette(from)	
+
+
+func is_to_central_rosette():
+	return _is_central_rosette(to)
 
 
 func calculate_safety_difference(base_danger_score: float):
@@ -96,7 +95,7 @@ func calculate_safety_difference(base_danger_score: float):
 ## Helper function for calculate_safety_difference()
 func _calculate_spot_danger(spot: Spot, base_danger_score: float):
 	# Give score of 0 when landing_spot is 100% safe. 
-	if spot.is_safe or is_player_exclusive(spot) or \
+	if spot.is_safe or _is_player_exclusive(spot) or \
 		gives_extra_roll() and spot == to:
 		return 0
 	
@@ -115,6 +114,14 @@ func _calculate_spot_danger(spot: Spot, base_danger_score: float):
 	return total_capture_chance + base_danger_score
 	
 	
-# Could also move this to spot maybe?
 func _is_central_rosette(spot: Spot) -> bool:
-	return spot.is_safe and not is_player_exclusive(spot)	
+	return spot.is_safe and not _is_player_exclusive(spot)
+	
+		
+## Returns whether the spot [param to] is exclusive to the player, 
+## or if it is also on the track of the opponent.	
+func _is_player_exclusive(spot: Spot) -> bool:
+	var p1_track = _board.get_track(General.Player.ONE)
+	var p2_track = _board.get_track(General.Player.TWO)
+	return (p1_track.has(spot) and not p2_track.has(spot)) or \
+		(not p1_track.has(spot) and p2_track.has(spot))

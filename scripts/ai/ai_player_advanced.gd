@@ -74,8 +74,8 @@ func _calculate_progress_modifier(move: Move):
 	
 	
 func _calculate_central_rosette_modifier(move: Move):
-	var is_current_spot_central_rosette = move._is_central_rosette(move.from)
-	var is_landing_spot_central_rosette = move._is_central_rosette(move.to)
+	var is_current_spot_central_rosette = move.is_from_central_rosette()
+	var is_landing_spot_central_rosette = move.is_to_central_rosette()
 	
 	if (not is_current_spot_central_rosette and not is_landing_spot_central_rosette):
 		return 0
