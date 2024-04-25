@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxfww4cuco8ex"]
+[gd_scene load_steps=7 format=3 uid="uid://d25g2nw03mmdi"]
 
 [ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="1_spk2b"]
 [ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://models/test_die_d4.glb" id="1_y0dub"]
@@ -29,29 +29,29 @@ _mass_on_ground_multiplier = 10.0
 [node name="test_die_d4" parent="." instance=ExtResource("1_y0dub")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.445, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, -1.49012e-08, 2.23517e-08, 1.49012e-08, 1, 1.58819e-22, -2.23517e-08, 3.33067e-16, 1, -7.45058e-09, 0.445, -1.49012e-08)
-shape = SubResource("ConvexPolygonShape3D_xnfvc")
-
 [node name="Raycasts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00605106, -0.226553, 0)
 
 [node name="DiceRaycast1" parent="Raycasts" instance=ExtResource("3_nd3gk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.482731, 0)
-target_position = Vector3(0, -0.3, 0)
+target_position = Vector3(0, -1, 0)
 opposite_side_value = 1
 
 [node name="DiceRaycast2" parent="Raycasts" instance=ExtResource("3_nd3gk")]
-transform = Transform3D(-0.241594, 0.809894, 0.534513, -0.0234063, -0.555533, 0.831165, 0.970095, 0.188293, 0.15317, -0.250743, -0.00129297, -0.117775)
-target_position = Vector3(0, -0.3, 0)
+transform = Transform3D(-0.241594, 0.809894, 0.534513, -0.0234063, -0.555533, 0.831165, 0.970095, 0.188293, 0.15317, 0, 0, 0)
+target_position = Vector3(0, -1, 0)
 
 [node name="DiceRaycast3" parent="Raycasts" instance=ExtResource("3_nd3gk")]
-transform = Transform3D(-0.3665, -0.830192, -0.420069, -6.81723e-08, -0.451484, 0.892279, -0.930418, 0.32702, 0.165469, 0.259253, 0.048102, -0.0798577)
-target_position = Vector3(0, -0.3, 0)
+transform = Transform3D(-0.3665, -0.830192, -0.420069, -6.81723e-08, -0.451484, 0.892279, -0.930418, 0.32702, 0.165469, 0, 0, 0)
+target_position = Vector3(0, -1, 0)
 
 [node name="DiceRaycast4" parent="Raycasts" instance=ExtResource("3_nd3gk")]
-transform = Transform3D(0.995737, 0.00991924, 0.0917004, -0.079273, -0.416195, 0.905813, 0.0471502, -0.909221, -0.413634, 0.0143663, -0.0188969, 0.254404)
-target_position = Vector3(0, -0.3, 0)
+transform = Transform3D(0.995737, 0.00991924, 0.0917004, -0.079273, -0.416195, 0.905813, 0.0471502, -0.909221, -0.413634, 0, 0, 0)
+target_position = Vector3(0, -1, 0)
 opposite_side_value = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, -1.49012e-08, 2.23517e-08, 1.49012e-08, 1, 1.58819e-22, -2.23517e-08, 3.33067e-16, 1, -7.45058e-09, 0.445, -1.49012e-08)
+shape = SubResource("ConvexPolygonShape3D_xnfvc")
 
 [node name="MaterialHighlighter" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
 script = ExtResource("4_7sy51")
