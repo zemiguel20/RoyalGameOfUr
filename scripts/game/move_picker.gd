@@ -4,8 +4,6 @@ extends Node
 
 signal move_executed(move: Move)
 
-@export var board: Board
-
 var _moves: Array[Move] = []
 var _selected_from_spot: Spot = null
 
@@ -51,8 +49,7 @@ func end_selection():
 	_selected_from_spot = null
 
 
-func _on_move_phase_started(player: General.Player, roll_value: int):
-	var moves = board.get_possible_moves(player, roll_value)
+func _on_move_phase_started(_player, moves: Array[Move]):
 	start_selection(moves)
 
 

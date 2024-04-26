@@ -16,7 +16,6 @@ func _input(event: InputEvent) -> void:
 		$GameState.start_game()
 	
 
-
 func _on_game_state_roll_phase_started(_player):
 	var value = randi_range(0, 4)
 	print(\"Rolled %d\" % value)
@@ -81,12 +80,12 @@ func _on_dice_roll_finished(_value: int) -> void:
 [node name="GamemodeTest" type="Node"]
 script = SubResource("GDScript_b8xbw")
 
-[node name="MovePicker" type="Node" parent="." node_paths=PackedStringArray("board")]
+[node name="MovePicker" type="Node" parent="."]
 script = ExtResource("1_vqg4n")
-board = NodePath("../Board")
 
-[node name="GameState" type="Node" parent="."]
+[node name="GameState" type="Node" parent="." node_paths=PackedStringArray("_board")]
 script = ExtResource("1_sto2p")
+_board = NodePath("../Board")
 
 [node name="Board" parent="." instance=ExtResource("3_3t76i")]
 transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0.188376, -2.46309, 0.0962036)

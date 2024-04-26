@@ -3,7 +3,9 @@ extends Node
 
 
 signal roll_phase_started(player: General.Player)
-signal move_phase_started(player: General.Player, roll_value: int)
+signal move_phase_started(player: General.Player, moves: Array[Move])
+
+@export var _board: Board
 
 var current_player: General.Player
 
@@ -18,8 +20,9 @@ func end_game():
 
 
 func _on_roll_ended(roll_value: int):
-	if roll_value > 0:
-		move_phase_started.emit(current_player, roll_value)
+	var moves = _board.get_possible_moves(current_player, roll_value)
+	if not moves.is_empty():
+		move_phase_started.emit(current_player, moves)
 	else:
 		_switch_player()
 		roll_phase_started.emit(current_player)

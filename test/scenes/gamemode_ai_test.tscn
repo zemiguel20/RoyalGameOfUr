@@ -77,8 +77,9 @@ func _on_dice_roll_finished(_value: int) -> void:
 [node name="SinglePlayer" type="Node"]
 script = SubResource("GDScript_b8xbw")
 
-[node name="GameStateController" type="Node" parent="."]
+[node name="GameStateController" type="Node" parent="." node_paths=PackedStringArray("_board")]
 script = ExtResource("1_n7p33")
+_board = NodePath("../Board")
 
 [node name="Board" parent="." instance=ExtResource("2_nyr51")]
 transform = Transform3D(0.999992, 0, -0.00390957, 0, 1, 0, 0.00390957, 0, 0.999992, 0.188376, -2.46309, 0.0962036)
@@ -88,9 +89,8 @@ transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-1
 _roll_shaking_enabled = true
 _use_hitbox_instead_of_dice_colliders = true
 
-[node name="MovePicker" type="Node" parent="." node_paths=PackedStringArray("board")]
+[node name="MovePicker" type="Node" parent="."]
 script = ExtResource("4_ja2vu")
-board = NodePath("../Board")
 
 [node name="AIPlayerHard" type="Node" parent="." node_paths=PackedStringArray("_dice", "_move_picker")]
 script = ExtResource("5_857y4")
