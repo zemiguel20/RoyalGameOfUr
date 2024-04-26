@@ -50,7 +50,7 @@ func _move_arc(target_pos: Vector3):
 	tween_xz.tween_property(self, "global_position:z", target_pos.z, MOVE_DURATION)
 	
 	# Arc translation of Y
-	var high_point = maxf(global_position.y, target_pos.y) + MOVE_ARC_HEIGHT
+	var high_point = maxf(global_position.y, target_pos.y) + MOVE_ARC_HEIGHT * global_basis.get_scale().y
 	var tween_y = create_tween().set_trans(Tween.TRANS_CUBIC)
 	tween_y.tween_property(self, "global_position:y", high_point, MOVE_DURATION * 0.5).set_ease(Tween.EASE_OUT)
 	tween_y.tween_property(self, "global_position:y", target_pos.y, MOVE_DURATION * 0.5).set_ease(Tween.EASE_IN)
