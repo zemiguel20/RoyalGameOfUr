@@ -107,7 +107,7 @@ func dehighlight_pieces():
 
 
 func _place_animation(new_pieces: Array[Piece], anim: Piece.MoveAnim, curr_num_pieces: int):
-	var offset = Vector3.UP * PIECE_OFFSET_Y * global_transform.basis.get_scale()		## Take scale of the board into account!
+	var offset = Vector3.UP * PIECE_OFFSET_Y * global_basis.get_scale()		## Take scale of the board into account!
 	var base_pos = global_position + offset + (curr_num_pieces * offset)
 	for i in new_pieces.size():
 		var piece = new_pieces[i]

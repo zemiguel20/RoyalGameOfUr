@@ -1,6 +1,6 @@
 ## Dice controller. Controls the dice rolling animation and stores its value.
 class_name Dice
-extends Node
+extends Node3D
 
 #region Signals
 signal die_stopped(value: int) ## Emitted when a single die stops, with its value
@@ -49,7 +49,7 @@ signal roll_finished(value: int) ## Emitted when all dice finished, with the fin
 var value: int = 0 
 
 ## Array containing every die.
-var _dice : Array[Die]
+var _dice : Array
 ## Dictionary that maps _throwing_position and _throwing_position_p2 to a PlayerId.
 var _dice_throwing_spots: Dictionary
 ## The throwing position that will be used for the current roll.
@@ -100,7 +100,7 @@ func enable_selection() -> void:
 	_current_click_hitbox.input_ray_pickable = _use_hitbox_instead_of_dice_colliders
 	for die in _dice:
 		die.highlight()
-		die.input_ray_pickable = true
+		#die.input_ray_pickable = true
 		
 
 ## Disables selection and highlight effects
@@ -108,25 +108,7 @@ func disable_selection() -> void:
 	_current_click_hitbox.input_ray_pickable = false
 	for die in _dice:
 		die.dehighlight()
-		die.input_ray_pickable = false
-
-
-## Plays the dice rolling animation and updates the value. Returns the rolled value.
-func _roll() -> int:
-	disable_selection()
-	_set_click_hitbox()
-	_outcome_label.visible = false	
-	_roll_sfx.play()
-	value = 0
-	_die_finish_count = 0
-	var die_positions = _get_die_throwing_positions()
-	
-	for i in _dice.size():
-		_dice[i].roll(die_positions[i], _invert_throwing_direction)
-	await roll_finished
-	for die in _dice:
-		die.outline_if_one()
-	return value
+		#die.input_ray_pickable = false
 
 
 func on_dice_click():
@@ -150,15 +132,34 @@ func on_dice_release():
 	_roll()
 	
 	
+## Plays the dice rolling animation and updates the value. Returns the rolled value.
+func _roll() -> int:
+	disable_selection()
+	_set_click_hitbox()
+	_outcome_label.visible = false	
+	_roll_sfx.play()
+	value = 0
+	_die_finish_count = 0
+	var die_positions = _get_die_throwing_positions()
+	
+	for i in _dice.size():
+		_dice[i].roll(die_positions[i], _invert_throwing_direction)
+	await roll_finished
+	
+	#for die in _dice:
+		#die.outline_if_one()
+	return value
+	
+	
 ## Spawns the dice in a random position and connects signals
 func _initialize_dice() -> void:
 	for _i in Settings.num_dice:
-		var instance = _die_scene.instantiate() as Die
+		var instance = _die_scene.instantiate()
 		add_child(instance)
 		_dice.append(instance)
 		
 		instance.roll_finished.connect(_on_die_finished_rolling)
-		instance.global_position = _get_die_spawning_position()
+		instance.global_transform.origin = _get_die_spawning_position()
 	
 	if _use_hitbox_instead_of_dice_colliders:
 		_click_hitbox.input_event.connect(_on_die_input_event)
@@ -167,7 +168,7 @@ func _initialize_dice() -> void:
 	else:
 		for die in _dice:
 			die.input_event.connect(_on_die_input_event)
-			
+
 	
 func _start_dice_shake():
 	_is_shaking = true
@@ -177,8 +178,8 @@ func _start_dice_shake():
 			
 			
 func _get_die_spawning_position():
-	var locationX = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y)
-	var locationZ = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y)
+	var locationX = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y) * scale.x
+	var locationZ = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y) * scale.z
 		
 	return self.global_position + Vector3(locationX, 0, locationZ)
 	
@@ -198,15 +199,15 @@ func _get_die_throwing_positions() -> Array[Vector3]:
 			num_of_fails = 0
 			
 		# Randomly decide the offset from the throwing position.
-		var random_x = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset)
-		var random_z = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset)
+		var random_x = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset) * scale.x
+		var random_z = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset) * scale.z
 		var random_offset = Vector3(random_x, 0, random_z)
 		var new_sample_position = _current_throwing_spot.global_position + random_offset
 		
 		# Check if random position meets the requirements.
 		var does_overlap = false
 		for sample_position in result:
-			if sample_position.distance_to(new_sample_position) < _minimal_dice_offset:
+			if sample_position.distance_to(new_sample_position) < _minimal_dice_offset * scale.x:
 				does_overlap = true
 		
 		# Add to the result when the position does not overlap with other dice.
@@ -241,4 +242,5 @@ func _on_die_finished_rolling(die_value: int):
 	_die_finish_count += 1
 	die_stopped.emit(die_value)
 	if (_dice.size() <= _die_finish_count):
+		## TODO Polish: Might me nice to have a delay when throwing a 0
 		roll_finished.emit(value)

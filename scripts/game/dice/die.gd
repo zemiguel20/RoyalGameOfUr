@@ -27,12 +27,14 @@ signal roll_finished(value: int)
 
 #region Onready Variables
 @onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
-@onready var _raycast_list: Array[DiceRaycast] = [$Raycasts/DiceRaycast1, $Raycasts/DiceRaycast2, $Raycasts/DiceRaycast3, $Raycasts/DiceRaycast4]
 @onready var _rolling_timer: Timer = $RollTimeoutTimer
 @onready var _collider: CollisionShape3D = $CollisionShape3D
 #endregion
 
 #region Private Variables
+
+var temp2 = false
+var _raycast_list: Array[Node]
 var _default_mass
 var _mass_on_ground
 var _roll_value
@@ -43,11 +45,38 @@ var _is_grounded
 
 var _invert_throwing_direction
 var _disable_collision = false
+
+var _intended_scale := Vector3.ONE
+var temp
+var should_unfreeze
 #endregion
 
 func _ready():
+	freeze = true
+	gravity_scale *= global_basis.get_scale().y * global_basis.get_scale().y
+	#Engine.time_scale = 0.1
+	#temp = global_position
+	print(global_position)		
 	_default_mass = mass
 	_mass_on_ground = mass * _mass_on_ground_multiplier
+	#await get_tree().create_timer(1).timeout
+	print(global_position)		
+	
+	#should_unfreeze = true
+	freeze = false
+	#await get_tree().create_timer(1).timeout
+	
+	print(global_position)	
+	
+	_raycast_list = get_node("Raycasts").get_children() as Array[Node]
+	
+	for raycast: DiceRaycast in _raycast_list:
+		raycast.target_position *= global_basis.get_scale()
+	
+	
+func _process(delta):
+	pass
+	#print(linear_velocity)
 	
 	
 func highlight() -> void:
@@ -70,14 +99,16 @@ func outline_if_one() -> void:
 		
 		
 func roll(random_throwing_position: Vector3, invert_throwing_direction: bool) -> void:
-	_disable_collision = true
+	print("ROLL!")
+	
+	#_disable_collision = true
 	
 	# Set some local variables
 	_throwing_position = random_throwing_position
 	_invert_throwing_direction = invert_throwing_direction
 	
 	# Set position and rotation
-	global_position = random_throwing_position
+	global_transform.origin = random_throwing_position
 	basis = _get_random_rotation()
 	
 	# Unfreeze the body to apply the throwing force.
@@ -99,10 +130,18 @@ func roll(random_throwing_position: Vector3, invert_throwing_direction: bool) ->
 	# If the 'rolling' did not stop already, it will stop after the timer and roll again.
 	# Stuck timer prevents infinite waiting for small movements
 	_rolling_timer.start()
-
-
+	
+	
 ## Changing the collision state should be done in _physics_process.
 func _physics_process(delta):
+	#if should_unfreeze and temp != null:
+		#freeze = false
+		#global_transform.origin = temp
+		#temp == null
+		#should_unfreeze = false
+	
+	set_scale(Vector3.ONE)
+	
 	if _disable_collision and not _collider.disabled:
 		_collider.disabled = true
 	elif not _disable_collision and _collider.disabled:
@@ -112,6 +151,8 @@ func _physics_process(delta):
 ## Triggers when the sleeping state of the rigidbody is changed.
 ## Checks the rolled value, and decides to either reroll or freeze and emit their value.
 func _on_movement_stopped():
+	print("Is Sleeping: ", sleeping)
+	
 	if not _is_rolling:
 		return
 
@@ -134,6 +175,8 @@ func _on_movement_stopped():
 ## Triggers when the rigidbody collides.
 ## Used to increase the mass of a dice when it collides with the floor.
 func _on_body_entered(body):
+	#print(body)
+	
 	if not _is_rolling:
 		return
 	
@@ -154,12 +197,17 @@ func _get_random_rotation() -> Basis:
 ## Throws the dice, by calculating a direction and applying an impulse force.
 ## [param playerID] is used to indicate if we should invert the throwing direction.
 func _apply_throwing_force(invert: bool):
+	## Reset any speed
+	linear_velocity = Vector3.ZERO	
+	angular_velocity = Vector3.ZERO
+	
 	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
 	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
 	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
 	var inverse_direction = -1 if invert else 1 
-	var throw_force = throw_direction * _throwing_force_magnitude * inverse_direction
+	var throw_force = throw_direction * _throwing_force_magnitude * inverse_direction * global_basis.get_scale().x 
 	apply_impulse(throw_force)
+	
 
 
 ## Loop through all raycasts in the dice to check if they are colliding..
@@ -169,5 +217,13 @@ func _check_roll_value():
 	for raycast in _raycast_list:
 		if raycast.is_colliding():
 			return raycast.opposite_side_value
+		else:
+			push_warning("Not Colliding!")
 			
 	return -1
+	
+	
+## HACK Fkn Stupid
+func _integrate_forces(state):
+	pass
+	#set_scale(Vector3.ONE)

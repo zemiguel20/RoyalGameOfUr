@@ -27,7 +27,7 @@ func _process(delta):
 ## The flow of this animation is defined by [param _effect_curve] 
 func play_effect(new_color: Color, duration: float):
 	visible = true
-	var old_color = modulate
+	var old_color = _default_color
 	var time = 0 
 	
 	while time <= duration:
