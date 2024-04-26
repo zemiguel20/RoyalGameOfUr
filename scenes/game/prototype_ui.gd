@@ -38,10 +38,10 @@ func _fadeout(duration: float):
 		await Engine.get_main_loop().process_frame
 	
 
-func _input(event):
-	if event is InputEventKey and (event as InputEventKey).keycode == KEY_P and (event as InputEventKey).pressed:
-		print("Fadeout")
-		_on_game_ended()
+#func _input(event):
+	#if event is InputEventKey and (event as InputEventKey).keycode == KEY_P and (event as InputEventKey).pressed:
+		#print("Fadeout")
+		#_on_game_ended()
 
 
 func _on_color_rect_gui_input(event):
