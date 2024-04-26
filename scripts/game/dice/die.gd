@@ -53,7 +53,7 @@ var should_unfreeze
 
 func _ready():
 	freeze = true
-	gravity_scale *= global_basis.get_scale().y * global_basis.get_scale().y
+	gravity_scale *= global_basis.get_scale().y
 	#Engine.time_scale = 0.1
 	#temp = global_position
 	print(global_position)		
@@ -70,8 +70,8 @@ func _ready():
 	
 	_raycast_list = get_node("Raycasts").get_children() as Array[Node]
 	
-	for raycast: DiceRaycast in _raycast_list:
-		raycast.target_position *= global_basis.get_scale()
+	#for raycast: DiceRaycast in _raycast_list:
+		#raycast.target_position *= global_basis.get_scale().y
 	
 	
 func _process(delta):

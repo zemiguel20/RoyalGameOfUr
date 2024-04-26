@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/game/dice/dice_label.gd" id="6_wittj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0n13x"]
-size = Vector3(6, 6, 6)
+size = Vector3(6, 5, 6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rs5kh"]
 size = Vector3(10, 12, 1)
@@ -35,15 +35,17 @@ _die_scene = ExtResource("2_uodau")
 _minimal_dice_offset = 0.8
 
 [node name="DiceArea_P1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97471, 0)
 
 [node name="ThrowingPosition_P1" type="Node3D" parent="DiceArea_P1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2.644)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2.644)
 
 [node name="ClickHitbox_P1" type="Area3D" parent="DiceArea_P1"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0, 0)
 input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P1/ClickHitbox_P1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515259, 0)
 shape = SubResource("BoxShape3D_0n13x")
 
 [node name="DiceBorders_P1" type="Node3D" parent="DiceArea_P1"]
@@ -111,13 +113,13 @@ _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
 
 [node name="DiceArea_P2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8813, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8813, 2.97471, 0)
 
 [node name="ThrowingPosition_P2" type="Node3D" parent="DiceArea_P2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0168858, 3, -2.644)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0168858, 1.5, -2.644)
 
 [node name="ClickHitbox_P2" type="Area3D" parent="DiceArea_P2"]
-transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0, 0)
+transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0.515, 0)
 input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P2/ClickHitbox_P2"]

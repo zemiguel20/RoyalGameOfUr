@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://ty6eqqsipbbi"]
+
+[ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_or8np"]
+[ext_resource type="PackedScene" uid="uid://dtelb85wam1x3" path="res://test/scenes/gamemode_ai_test.tscn" id="2_bumil"]
+[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="4_uy0rn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_080q8"]
+size = Vector3(0.358398, 0.122564, 0.125)
+
+[node name="CameraTest" type="Node"]
+
+[node name="Environment" parent="." instance=ExtResource("1_or8np")]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="DirectionalLight3D" parent="Environment" index="1"]
+transform = Transform3D(0.00126744, -0.00930471, 0.00343744, -0.00583004, 0.00210489, 0.0078473, -0.00802523, -0.00299864, -0.0051579, 0.605703, 0.73247, 1.47961)
+directional_shadow_mode = 2
+directional_shadow_max_distance = 300.0
+
+[node name="StaticBody3D_Table" type="StaticBody3D" parent="Environment/Table" index="0" groups=["Ground"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Table/StaticBody3D_Table" groups=["Ground"]]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.871, -0.044, 1.379)
+shape = SubResource("BoxShape3D_080q8")
+
+[node name="SinglePlayer" parent="." instance=ExtResource("2_bumil")]
+
+[node name="Board" parent="SinglePlayer" index="1"]
+transform = Transform3D(0.529919, 0, -0.848048, 0, 1, 0, 0.848048, 0, 0.529919, 85.8914, 1.82418, 137.461)
+
+[node name="P1StartSpot1" parent="SinglePlayer/Board/StartAndEndSpots" index="0"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 3.10344, 0, 4.29707)
+
+[node name="Dice" parent="SinglePlayer" index="2"]
+transform = Transform3D(0.606218, 0, 0.35, 0, 0.7, 0, -0.35, 0, 0.606218, 93.4674, 1.91216, 134.793)
+
+[node name="DiceBorders_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="2"]
+visible = false
+
+[node name="DiceBorders_P2" parent="SinglePlayer/Dice/DiceArea_P2" index="2"]
+visible = false
+
+[node name="Environment" parent="SinglePlayer" index="5"]
+visible = false
+
+[node name="Camera3D" parent="SinglePlayer" index="6"]
+visible = false
+
+[node name="Custom_Camera" parent="." instance=ExtResource("4_uy0rn")]
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 91.0683, 11.2749, 145.713)
+max_degrees = 35.0
+
+[editable path="Environment"]
+[editable path="SinglePlayer"]
+[editable path="SinglePlayer/Board"]
+[editable path="SinglePlayer/Dice"]
