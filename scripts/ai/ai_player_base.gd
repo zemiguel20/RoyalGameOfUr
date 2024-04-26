@@ -39,9 +39,8 @@ func _on_roll_phase_started(player: General.Player):
 		roll()
 		
 		
-func _on_move_phase_started(player: General.Player, roll_value: int):
+func _on_move_phase_started(player: General.Player, moves: Array[Move]):
 	if player == _player_id:
-		var moves = _move_picker.get_moves()
 		var best_move = _evaluate_moves(moves)
 		# HACK disable the selection
 		_move_picker.end_selection()
