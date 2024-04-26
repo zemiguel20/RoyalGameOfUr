@@ -38,7 +38,8 @@ func _ready():
 	_define_main_orientations()
 	_define_constraints()
 	
-	await get_tree().create_timer(.5).timeout
+	
+func _on_game_start():
 	_return_to_board()
 	_looking_border.mouse_entered.connect(_enter_looking_mode)
 	

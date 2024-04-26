@@ -217,13 +217,5 @@ func _check_roll_value():
 	for raycast in _raycast_list:
 		if raycast.is_colliding():
 			return raycast.opposite_side_value
-		else:
-			push_warning("Not Colliding!")
 			
 	return -1
-	
-	
-## HACK Fkn Stupid
-func _integrate_forces(state):
-	pass
-	#set_scale(Vector3.ONE)
