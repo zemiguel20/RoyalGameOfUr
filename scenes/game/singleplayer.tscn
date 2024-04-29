@@ -10,16 +10,6 @@ size = Vector3(0.358398, 0.122564, 0.125)
 
 [node name="CameraTest" type="Node"]
 
-[node name="Environment" parent="." instance=ExtResource("1_8hyat")]
-
-[node name="StaticBody3D_Table" type="StaticBody3D" parent="Environment/Table" index="0" groups=["Ground"]]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Table/StaticBody3D_Table" groups=["Ground"]]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.870624, -0.0422237, 1.37875)
-shape = SubResource("BoxShape3D_080q8")
-
 [node name="SinglePlayer" parent="." instance=ExtResource("2_7rpl1")]
 
 [node name="Board" parent="SinglePlayer" index="1"]
@@ -45,11 +35,51 @@ visible = false
 [node name="Camera3D" parent="SinglePlayer" index="6"]
 visible = false
 
+[node name="Environment" parent="." instance=ExtResource("1_8hyat")]
+
+[node name="StaticBody3D_Table" type="StaticBody3D" parent="Environment/Table" index="0" groups=["Ground"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Table/StaticBody3D_Table" groups=["Ground"]]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.870624, -0.0422237, 1.37875)
+shape = SubResource("BoxShape3D_080q8")
+
+[node name="MeshInstance3D" parent="Environment/game_for_scale" index="1"]
+visible = false
+
+[node name="MeshInstance3D2" parent="Environment/game_for_scale" index="2"]
+visible = false
+
+[node name="MeshInstance3D3" parent="Environment/game_for_scale" index="3"]
+visible = false
+
+[node name="MeshInstance3D4" parent="Environment/game_for_scale" index="4"]
+visible = false
+
+[node name="MeshInstance3D5" parent="Environment/game_for_scale" index="5"]
+visible = false
+
+[node name="MeshInstance3D6" parent="Environment/game_for_scale" index="6"]
+visible = false
+
+[node name="test_die_d4" parent="Environment/game_for_scale" index="7"]
+visible = false
+
+[node name="test_die_d5" parent="Environment/game_for_scale" index="8"]
+visible = false
+
+[node name="test_die_d6" parent="Environment/game_for_scale" index="9"]
+visible = false
+
+[node name="test_die_d7" parent="Environment/game_for_scale" index="10"]
+visible = false
+
 [node name="Custom_Camera" parent="." instance=ExtResource("3_cc1xq")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 0.919994, 0.109034, 1.44549)
 max_degrees = 35.0
 
-[editable path="Environment"]
 [editable path="SinglePlayer"]
 [editable path="SinglePlayer/Board"]
 [editable path="SinglePlayer/Dice"]
+[editable path="Environment"]
