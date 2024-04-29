@@ -140,7 +140,7 @@ func _physics_process(delta):
 		#temp == null
 		#should_unfreeze = false
 	
-	set_scale(Vector3.ONE)
+	#set_scale(Vector3.ONE)
 	
 	if _disable_collision and not _collider.disabled:
 		_collider.disabled = true

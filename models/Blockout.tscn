@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://bxhsn63hsvyt8" path="res://materials/FloorTiles.tres" id="2_80kxr"]
 [ext_resource type="Material" uid="uid://be7n0a655i4xg" path="res://materials/WallBricks.tres" id="3_v6h7p"]
 [ext_resource type="Material" uid="uid://bdxhaotnxq6de" path="res://materials/Sandstone.tres" id="4_n0xeq"]
-[ext_resource type="PackedScene" path="res://models/main_walls_Low.fbx" id="5_w6xu6"]
+[ext_resource type="PackedScene" uid="uid://bjr1q6y03u8lb" path="res://models/main_walls_Low.fbx" id="5_w6xu6"]
 
 [node name="Root Scene" instance=ExtResource("1_keigh")]
 
