@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=16 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_or8np"]
 [ext_resource type="PackedScene" uid="uid://dtelb85wam1x3" path="res://test/scenes/gamemode_ai_test.tscn" id="2_bumil"]
 [ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_scaled.tscn" id="3_261ls"]
-[ext_resource type="PackedScene" uid="uid://b0noq2uwb36su" path="res://scenes/game/dice/d4_backup.tscn" id="3_lmoor"]
 [ext_resource type="Script" path="res://scenes/game/prototype_ui.gd" id="4_racao"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="4_uy0rn"]
 [ext_resource type="PackedScene" uid="uid://bhokhs6y6rc75" path="res://models/fbx-guard-wip-posed-v2.fbx" id="6_h8q4i"]
@@ -81,17 +80,11 @@ transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 3.10344,
 
 [node name="Dice" parent="SinglePlayer" index="2"]
 transform = Transform3D(0.0225167, 0, 0.013, 0, 0.026, 0, -0.013, 0, 0.0225167, 3.43781, 0.0789857, 5.00215)
-_die_scene = ExtResource("3_lmoor")
-
-[node name="DiceArea_P1" parent="SinglePlayer/Dice" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97471, 0)
+_die_scene = ExtResource("3_261ls")
 
 [node name="DiceBorders_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 visible = false
-
-[node name="DiceArea_P2" parent="SinglePlayer/Dice" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8813, 2.97471, 0)
 
 [node name="DiceBorders_P2" parent="SinglePlayer/Dice/DiceArea_P2" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)

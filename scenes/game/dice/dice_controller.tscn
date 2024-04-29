@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d25g2nw03mmdi" path="res://scenes/game/dice/d4.tscn" id="2_uodau"]
 [ext_resource type="AudioStream" uid="uid://dv5nxtgrtwn6q" path="res://audio/test_dice_roll.mp3" id="3_hlajg"]
 [ext_resource type="AudioStream" uid="uid://bdsbgnjpv7ic2" path="res://audio/dice_shaking_loop.mp3" id="3_wfoj5"]
-[ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/dice_border.tres" id="5_hdthg"]
+[ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/pm_dice_border.tres" id="5_hdthg"]
 [ext_resource type="Script" path="res://scripts/game/dice/dice_label.gd" id="6_wittj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0n13x"]

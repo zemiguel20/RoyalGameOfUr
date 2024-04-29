@@ -29,6 +29,8 @@ signal roll_finished(value: int)
 @onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
 @onready var _rolling_timer: Timer = $RollTimeoutTimer
 @onready var _collider: CollisionShape3D = $CollisionShape3D
+@onready var _mesh1 := $d4_test as MeshInstance3D
+@onready var _mesh2 := $d4_model_scaled as MeshInstance3D
 #endregion
 
 #region Private Variables
@@ -54,6 +56,11 @@ var apply_force_this_frame = false
 #endregion
 
 func _ready():
+	print("Max Down ", Vector3.DOWN.dot(Vector3.DOWN))
+	
+	#print("Mesh1: ", )
+	
+	
 	freeze = true
 	gravity_scale *= global_basis.get_scale().y
 	#Engine.time_scale = 0.1
@@ -101,8 +108,6 @@ func outline_if_one() -> void:
 		
 		
 func roll(random_throwing_position: Vector3, invert_throwing_direction: bool) -> void:
-	print("ROLL!")
-	
 	#_disable_collision = true
 	
 	# Set some local variables
@@ -137,8 +142,6 @@ func roll(random_throwing_position: Vector3, invert_throwing_direction: bool) ->
 	
 ## Changing the collision state should be done in _physics_process.
 func _physics_process(delta):
-	print("Linear: ", linear_velocity)	
-	
 	#if should_unfreeze and temp != null:
 		#freeze = false
 		#global_transform.origin = temp
@@ -160,8 +163,6 @@ func _physics_process(delta):
 ## Triggers when the sleeping state of the rigidbody is changed.
 ## Checks the rolled value, and decides to either reroll or freeze and emit their value.
 func _on_movement_stopped():
-	print("Is Sleeping: ", sleeping)
-	
 	if not _is_rolling:
 		return
 
@@ -206,7 +207,6 @@ func _get_random_rotation() -> Basis:
 ## Throws the dice, by calculating a direction and applying an impulse force.
 ## [param playerID] is used to indicate if we should invert the throwing direction.
 func _apply_throwing_force(invert: bool):
-	print("THROW")
 	### Reset any speed
 	
 	#linear_velocity = Vector3(0.00001, 0, 0)
@@ -225,14 +225,27 @@ func _apply_throwing_force(invert: bool):
 ## Loop through all raycasts in the dice to check if they are colliding..
 ## If yes, we return the corresponding value, else we return -1
 func _check_roll_value():
+	## TODO rename
+	var max_downness = 0.0
+	var best_value = -1
+	
+	for raycast: DiceRaycast in _raycast_list:
+		var normal = -raycast.global_transform.basis.y.normalized() # Get down direction of normal.
+		var downness = normal.dot(Vector3.DOWN) # Use dot product to check if it is facing down in world space.
+		if downness > max_downness:
+			max_downness = downness
+			best_value = raycast.opposite_side_value
+			
+	# TODO: Add threshold here just in case.
+	print("Max down_accurary: ", max_downness	)
+	return best_value
+	
+	
+func _check_raycasts():
 	# The raycasts are set to only collide with the floor.
 	var value = -1
 	for raycast: DiceRaycast in _raycast_list:
 		if raycast.is_colliding():
-			if value != -1:
-				print("Double detection!!!")
-			
-			print_rich("Collision: ", raycast.get_collider())
 			value = raycast.opposite_side_value
 			
 	return value
