@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7x3ka2rwdola"]
+
+[ext_resource type="Script" path="res://scripts/game/dice/dice_normal.gd" id="1_21oow"]
+
+[node name="DiceNormal" type="Node3D"]
+script = ExtResource("1_21oow")

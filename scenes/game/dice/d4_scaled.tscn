@@ -146,29 +146,21 @@ transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_f1by2")
 skeleton = NodePath("")
 
-[node name="Raycasts" type="Node3D" parent="."]
+[node name="Normals" type="Node3D" parent="."]
 transform = Transform3D(0.05, 0, 0.0866025, 0, 0.1, 0, -0.0866025, 0, 0.05, 0, -0.00137585, 0)
 
-[node name="DiceRaycast1" parent="Raycasts" instance=ExtResource("2_424c5")]
+[node name="DiceNormal1" parent="Normals" instance=ExtResource("2_424c5")]
 transform = Transform3D(1, 0, 5.96046e-08, 0, 0.999999, 0, -5.96046e-08, 0, 1, 0, -0.02, 0)
-target_position = Vector3(0, -0.1, 0)
-hit_from_inside = false
 opposite_side_value = 1
 
-[node name="DiceRaycast2" parent="Raycasts" instance=ExtResource("2_424c5")]
+[node name="DiceNormal2" parent="Normals" instance=ExtResource("2_424c5")]
 transform = Transform3D(-0.241594, 0.809894, 0.534513, -0.0234063, -0.555533, 0.831164, 0.970095, 0.188293, 0.15317, -0.0242968, 0.016666, -0.00564879)
-target_position = Vector3(0, -0.1, 0)
-hit_from_inside = false
 
-[node name="DiceRaycast3" parent="Raycasts" instance=ExtResource("2_424c5")]
+[node name="DiceNormal3" parent="Normals" instance=ExtResource("2_424c5")]
 transform = Transform3D(-0.3665, -0.830192, -0.420069, -6.81723e-08, -0.451484, 0.892279, -0.930418, 0.32702, 0.165469, 0.0249058, 0.0135445, -0.0098106)
-target_position = Vector3(0, -0.1, 0)
-hit_from_inside = false
 
-[node name="DiceRaycast4" parent="Raycasts" instance=ExtResource("2_424c5")]
+[node name="DiceNormal4" parent="Normals" instance=ExtResource("2_424c5")]
 transform = Transform3D(0.995737, 0.00991929, 0.0917004, -0.079273, -0.416195, 0.905812, 0.0471502, -0.909221, -0.413634, -0.00151036, 0.0124858, 0.0265113)
-target_position = Vector3(0, -0.1, 0)
-hit_from_inside = false
 opposite_side_value = 1
 
 [node name="MaterialHighlighter" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]

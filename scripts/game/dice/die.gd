@@ -36,7 +36,7 @@ signal roll_finished(value: int)
 #region Private Variables
 
 var temp2 = false
-var _raycast_list: Array[Node]
+var _normal_list: Array[Node]
 var _default_mass
 var _mass_on_ground
 var _roll_value
@@ -58,9 +58,6 @@ var apply_force_this_frame = false
 func _ready():
 	print("Max Down ", Vector3.DOWN.dot(Vector3.DOWN))
 	
-	#print("Mesh1: ", )
-	
-	
 	freeze = true
 	gravity_scale *= global_basis.get_scale().y
 	#Engine.time_scale = 0.1
@@ -77,10 +74,7 @@ func _ready():
 	
 	print(global_position)	
 	
-	_raycast_list = get_node("Raycasts").get_children() as Array[Node]
-	
-	#for raycast: DiceRaycast in _raycast_list:
-		#raycast.target_position *= global_basis.get_scale().y
+	_normal_list = get_node("Normals").get_children() as Array[Node]
 	
 	
 func _process(delta):
@@ -222,30 +216,20 @@ func _apply_throwing_force(invert: bool):
 	#apply_central_impulse(throw_force)
 	
 
-## Loop through all raycasts in the dice to check if they are colliding..
+## Loop through all normals in the dice to check if they are colliding..
 ## If yes, we return the corresponding value, else we return -1
 func _check_roll_value():
 	## TODO rename
 	var max_downness = 0.0
 	var best_value = -1
 	
-	for raycast: DiceRaycast in _raycast_list:
-		var normal = -raycast.global_transform.basis.y.normalized() # Get down direction of normal.
-		var downness = normal.dot(Vector3.DOWN) # Use dot product to check if it is facing down in world space.
+	for normal: DiceNormal in _normal_list:
+		var down_direction = -normal.global_transform.basis.y.normalized() # Get down direction of normal.
+		var downness = down_direction.dot(Vector3.DOWN) # Use dot product to check if it is facing down in world space.
 		if downness > max_downness:
 			max_downness = downness
-			best_value = raycast.opposite_side_value
+			best_value = normal.opposite_side_value
 			
 	# TODO: Add threshold here just in case.
 	print("Max down_accurary: ", max_downness	)
 	return best_value
-	
-	
-func _check_raycasts():
-	# The raycasts are set to only collide with the floor.
-	var value = -1
-	for raycast: DiceRaycast in _raycast_list:
-		if raycast.is_colliding():
-			value = raycast.opposite_side_value
-			
-	return value
