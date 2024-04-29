@@ -49,6 +49,8 @@ var _disable_collision = false
 var _intended_scale := Vector3.ONE
 var temp
 var should_unfreeze
+
+var apply_force_this_frame = false
 #endregion
 
 func _ready():
@@ -112,8 +114,9 @@ func roll(random_throwing_position: Vector3, invert_throwing_direction: bool) ->
 	basis = _get_random_rotation()
 	
 	# Unfreeze the body to apply the throwing force.
-	freeze = false
 	mass = _default_mass
+	#apply_force_this_frame = true
+	freeze = false
 	_apply_throwing_force(invert_throwing_direction)
 	
 	# Disable the collider after a bit.
@@ -134,6 +137,8 @@ func roll(random_throwing_position: Vector3, invert_throwing_direction: bool) ->
 	
 ## Changing the collision state should be done in _physics_process.
 func _physics_process(delta):
+	print("Linear: ", linear_velocity)	
+	
 	#if should_unfreeze and temp != null:
 		#freeze = false
 		#global_transform.origin = temp
@@ -146,6 +151,10 @@ func _physics_process(delta):
 		_collider.disabled = true
 	elif not _disable_collision and _collider.disabled:
 		_collider.disabled = false
+		
+	if apply_force_this_frame:
+		apply_force_this_frame = false
+		_apply_throwing_force(_invert_throwing_direction)
 
 
 ## Triggers when the sleeping state of the rigidbody is changed.
@@ -197,25 +206,33 @@ func _get_random_rotation() -> Basis:
 ## Throws the dice, by calculating a direction and applying an impulse force.
 ## [param playerID] is used to indicate if we should invert the throwing direction.
 func _apply_throwing_force(invert: bool):
-	## Reset any speed
-	linear_velocity = Vector3.ZERO	
-	angular_velocity = Vector3.ZERO
+	print("THROW")
+	### Reset any speed
+	
+	#linear_velocity = Vector3(0.00001, 0, 0)
+	#angular_velocity = Vector3.ZERO
 	
 	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
 	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
 	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
 	var inverse_direction = -1 if invert else 1 
 	var throw_force = throw_direction * _throwing_force_magnitude * inverse_direction * global_basis.get_scale().x 
-	apply_impulse(throw_force)
+	## Setting velocity rather than applying force makes sure that the forces are not additive.
+	linear_velocity = throw_force
+	#apply_central_impulse(throw_force)
 	
-
 
 ## Loop through all raycasts in the dice to check if they are colliding..
 ## If yes, we return the corresponding value, else we return -1
 func _check_roll_value():
 	# The raycasts are set to only collide with the floor.
-	for raycast in _raycast_list:
+	var value = -1
+	for raycast: DiceRaycast in _raycast_list:
 		if raycast.is_colliding():
-			return raycast.opposite_side_value
+			if value != -1:
+				print("Double detection!!!")
 			
-	return -1
+			print_rich("Collision: ", raycast.get_collider())
+			value = raycast.opposite_side_value
+			
+	return value
