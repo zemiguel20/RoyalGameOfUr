@@ -9,5 +9,5 @@ var num_pieces: int = 7:
 ## The number of dice that will be used in the board game.
 var num_dice: int = 4:
 	set(value):
-		num_pieces = clampi(num_pieces, 1, 8)
+		num_pieces = clampi(num_pieces, 1, 5)
 var can_move_backwards: bool = false

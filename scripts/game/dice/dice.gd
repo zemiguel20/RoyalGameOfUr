@@ -32,10 +32,10 @@ signal roll_finished(value: int) ## Emitted when all dice finished, with the fin
 ## Looping sound played while the dice are shaking.
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
 ## Reference point for the randomly generated 
-@onready var _throwing_position: Node3D = $DiceArea_P1/ThrowingPosition_P1
+@onready var _throwing_positions: Node3D = $DiceArea_P1/ThrowingSpots_P1
 ## Throwing Position for Player 2. This one is only used when 
 ## [code] _use_multiple_dice_areas = true [/code]
-@onready var _throwing_position_p2: Node3D = $DiceArea_P2/ThrowingPosition_P2
+@onready var _throwing_positions_p2: Node3D = $DiceArea_P2/ThrowingSpots_P2
 ## Hitbox that makes it easier to click the dice.
 @onready var _click_hitbox: Area3D = $DiceArea_P1/ClickHitbox_P1
 ## Hitbox that makes it easier to click the dice.
@@ -50,10 +50,8 @@ var value: int = 0
 
 ## Array containing every die.
 var _dice : Array
-## Dictionary that maps _throwing_position and _throwing_position_p2 to a PlayerId.
+## Dictionary that maps _throwing_positions and _throwing_positions_p2 to a PlayerId.
 var _dice_throwing_spots: Dictionary
-## The throwing position that will be used for the current roll.
-var _current_throwing_spot: Node3D
 ## The clicking hitbox that will be used for the current roll.
 var _current_click_hitbox: Area3D
 ## Array that holds randomly generated positions that the dice will be thrown from.
@@ -88,11 +86,7 @@ func _input(event: InputEvent) -> void:
 		
 func on_roll_phase_started(player: General.Player):
 	enable_selection()
-	
-	if _use_multiple_dice_areas:
-		_current_throwing_spot = _dice_throwing_spots[player]
-		_current_player = player
-		_invert_throwing_direction = false if player == General.Player.ONE else true
+	_current_player = player
 
 
 ## Enables selection and highlight effects
@@ -140,10 +134,12 @@ func _roll() -> int:
 	_roll_sfx.play()
 	value = 0
 	_die_finish_count = 0
-	var die_positions = _get_die_throwing_positions()
 	
-	for i in _dice.size():
-		_dice[i].roll(die_positions[i], _invert_throwing_direction)
+	
+	for die in _dice:
+		var throw_spot := _get_random_free_spot()
+		throw_spot._is_free = false
+		die.roll(throw_spot)
 	await roll_finished
 	
 	#for die in _dice:
@@ -186,45 +182,60 @@ func _get_die_spawning_position():
 	
 ## Generate random positions to throw the dice from, while making sure that the dice always have a minimun offset of [param _minimal_dice_offset].
 ## If the function is not able to generate these positions, it will give a warning. 
-func _get_die_throwing_positions() -> Array[Vector3]: 
-	# Failsafe for if no combination is possible, then just try again
-	var num_of_fails = 0
-	var result = [] as Array[Vector3]
+#func _get_die_throwing_positions() -> Array[Vector3]: 
+	## Failsafe for if no combination is possible, then just try again
+	#var num_of_fails = 0
+	#var result = [] as Array[Vector3]
+	#
+	#while result.size() < _dice.size():
+		#if (num_of_fails >= 100):
+			## If failed many times, try again from scratch and give a warning.
+			#push_warning("Dice positioning failed many times, consider tweaking '_minimal_dice_offset' or '_max_throwing_position_offset'")
+			#result.clear()
+			#num_of_fails = 0
+			#
+		## Randomly decide the offset from the throwing position.
+		#var random_x = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset) * scale.x
+		#var random_z = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset) * scale.z
+		#var random_offset = Vector3(random_x, 0, random_z)
+		#
+		## Check if random position meets the requirements.
+		#var does_overlap = false
+		#for sample_position in result:
+			#if sample_position.distance_to(new_sample_position) < _minimal_dice_offset * scale.x:
+				#does_overlap = true
+		#
+		## Add to the result when the position does not overlap with other dice.
+		#if not does_overlap:
+			#result.append(new_sample_position)
+		#else:		
+			#num_of_fails += 1
+		#
+	#return result
 	
-	while result.size() < _dice.size():
-		if (num_of_fails >= 100):
-			# If failed many times, try again from scratch and give a warning.
-			push_warning("Dice positioning failed many times, consider tweaking '_minimal_dice_offset' or '_max_throwing_position_offset'")
-			result.clear()
-			num_of_fails = 0
-			
-		# Randomly decide the offset from the throwing position.
-		var random_x = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset) * scale.x
-		var random_z = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset) * scale.z
-		var random_offset = Vector3(random_x, 0, random_z)
-		var new_sample_position = _current_throwing_spot.global_position + random_offset
-		
-		# Check if random position meets the requirements.
-		var does_overlap = false
-		for sample_position in result:
-			if sample_position.distance_to(new_sample_position) < _minimal_dice_offset * scale.x:
-				does_overlap = true
-		
-		# Add to the result when the position does not overlap with other dice.
-		if not does_overlap:
-			result.append(new_sample_position)
-		else:		
-			num_of_fails += 1
-		
-	return result
 	
+func _get_random_free_spot() -> DiceSpot:
+	var spots = (_dice_throwing_spots[_current_player] as Array[DiceSpot])
+	spots.shuffle()
+	
+	for spot: DiceSpot in spots:
+		if spot.is_free():
+			spot._is_free = false
+			return spot
+	
+	push_error("No free dice spots! Are you playing with 6 or more dice?")
+	return null
 	
 func _cache_throwing_spots():
-	_current_throwing_spot = _throwing_position
-	if (_use_multiple_dice_areas):
-		_dice_throwing_spots = {}
-		_dice_throwing_spots[General.Player.ONE] = _throwing_position
-		_dice_throwing_spots[General.Player.TWO] = _throwing_position_p2
+	var spots_p1 = _throwing_positions.get_children() as Array[DiceSpot]
+	var spots_p2 = _throwing_positions_p2.get_children() as Array[DiceSpot]
+	
+	_dice_throwing_spots = {}
+	_dice_throwing_spots[General.Player.ONE] = spots_p1
+	if _use_multiple_dice_areas:
+		_dice_throwing_spots[General.Player.TWO] = spots_p2
+	else:
+		_dice_throwing_spots[General.Player.TWO] = spots_p1
 		
 
 func _set_click_hitbox():

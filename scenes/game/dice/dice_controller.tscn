@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c3bq04omjlr2e"]
+[gd_scene load_steps=15 format=3 uid="uid://c3bq04omjlr2e"]
 
 [ext_resource type="Script" path="res://scripts/game/dice/dice.gd" id="1_ka5gv"]
-[ext_resource type="PackedScene" uid="uid://d25g2nw03mmdi" path="res://scenes/game/dice/d4.tscn" id="2_uodau"]
+[ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_scaled.tscn" id="2_66rme"]
 [ext_resource type="AudioStream" uid="uid://dv5nxtgrtwn6q" path="res://audio/test_dice_roll.mp3" id="3_hlajg"]
+[ext_resource type="PackedScene" uid="uid://cm3qnh7nq0itd" path="res://scenes/game/dice/dice_throw_spot.tscn" id="3_p3m62"]
 [ext_resource type="AudioStream" uid="uid://bdsbgnjpv7ic2" path="res://audio/dice_shaking_loop.mp3" id="3_wfoj5"]
 [ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/pm_dice_border.tres" id="5_hdthg"]
 [ext_resource type="Script" path="res://scripts/game/dice/dice_label.gd" id="6_wittj"]
@@ -31,14 +32,29 @@ point_count = 4
 
 [node name="Dice" type="Node3D"]
 script = ExtResource("1_ka5gv")
-_die_scene = ExtResource("2_uodau")
+_die_scene = ExtResource("2_66rme")
 _minimal_dice_offset = 0.8
 
 [node name="DiceArea_P1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97471, 0)
 
-[node name="ThrowingPosition_P1" type="Node3D" parent="DiceArea_P1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2.644)
+[node name="ThrowingSpots_P1" type="Node3D" parent="DiceArea_P1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4.02413)
+
+[node name="ThrowSpot1" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="ThrowSpot2" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, 0)
+
+[node name="ThrowSpot3" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4, 0, 0)
+
+[node name="ThrowSpot4" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 5, 0)
+
+[node name="ThrowSpot5" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 5, 0)
 
 [node name="ClickHitbox_P1" type="Area3D" parent="DiceArea_P1"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0, 0)
@@ -113,10 +129,25 @@ _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
 
 [node name="DiceArea_P2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8813, 2.97471, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.253223, 2.97471, -17.1861)
 
-[node name="ThrowingPosition_P2" type="Node3D" parent="DiceArea_P2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0168858, 1.5, -2.644)
+[node name="ThrowingSpots_P2" type="Node3D" parent="DiceArea_P2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4.1396)
+
+[node name="ThrowSpot1" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ThrowSpot2" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="ThrowSpot3" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="ThrowSpot4" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, 0)
+
+[node name="ThrowSpot5" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 0)
 
 [node name="ClickHitbox_P2" type="Area3D" parent="DiceArea_P2"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0.515, 0)

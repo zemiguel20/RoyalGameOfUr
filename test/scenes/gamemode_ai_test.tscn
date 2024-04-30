@@ -144,7 +144,6 @@ text = "Dice: 4"
 layout_mode = 2
 text = "Extra roll!"
 
-[connection signal="move_phase_started" from="GameStateController" to="Board" method="get_possible_moves"]
 [connection signal="move_phase_started" from="GameStateController" to="MovePicker" method="_on_move_phase_started"]
 [connection signal="move_phase_started" from="GameStateController" to="AIPlayerHard" method="_on_move_phase_started"]
 [connection signal="roll_phase_started" from="GameStateController" to="Dice" method="on_roll_phase_started"]

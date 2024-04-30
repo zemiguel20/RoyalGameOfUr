@@ -44,7 +44,7 @@ func _on_move_phase_started(player: General.Player, moves: Array[Move]):
 		var best_move = _evaluate_moves(moves)
 		# HACK disable the selection
 		_move_picker.end_selection()
-		await _move_picker.execute_move(best_move)
+		perform_move(best_move)
 		
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
@@ -66,10 +66,7 @@ func roll():
 	
 	
 ## Decides which piece to move, then make that piece move.
-func perform_move(moves: Array[Move]):
-	var best_move = _evaluate_moves(moves) as Move
+func perform_move(move: Move):
 	var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
 	await get_tree().create_timer(thinking_duration).timeout	
-	await best_move.execute()
-	move_executed.emit(best_move)
-	
+	await _move_picker.execute_move(move)
