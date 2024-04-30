@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://d25g2nw03mmdi"]
 
 [ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="1_spk2b"]
-[ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_raycast.tscn" id="3_nd3gk"]
+[ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_normal.tscn" id="3_nd3gk"]
 [ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="4_7sy51"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hovkk"]

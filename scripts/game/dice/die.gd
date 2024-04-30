@@ -29,8 +29,6 @@ signal roll_finished(value: int)
 @onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
 @onready var _rolling_timer: Timer = $RollTimeoutTimer
 @onready var _collider: CollisionShape3D = $CollisionShape3D
-@onready var _mesh1 := $d4_test as MeshInstance3D
-@onready var _mesh2 := $d4_model_scaled as MeshInstance3D
 #endregion
 
 #region Private Variables
@@ -43,43 +41,28 @@ var _roll_value
 
 var _throwing_position
 var _is_rolling
-var _is_grounded
 
 var _invert_throwing_direction
 var _disable_collision = false
-
-var _intended_scale := Vector3.ONE
-var temp
-var should_unfreeze
 
 var apply_force_this_frame = false
 #endregion
 
 func _ready():
-	print("Max Down ", Vector3.DOWN.dot(Vector3.DOWN))
-	
+	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
 	freeze = true
 	gravity_scale *= global_basis.get_scale().y
 	#Engine.time_scale = 0.1
 	#temp = global_position
-	print(global_position)		
 	_default_mass = mass
 	_mass_on_ground = mass * _mass_on_ground_multiplier
 	#await get_tree().create_timer(1).timeout
-	print(global_position)		
 	
 	#should_unfreeze = true
 	freeze = false
 	#await get_tree().create_timer(1).timeout
 	
-	print(global_position)	
-	
 	_normal_list = get_node("Normals").get_children() as Array[Node]
-	
-	
-func _process(delta):
-	pass
-	#print(linear_velocity)
 	
 	
 func highlight() -> void:
@@ -135,7 +118,7 @@ func roll(random_throwing_position: Vector3, invert_throwing_direction: bool) ->
 	
 	
 ## Changing the collision state should be done in _physics_process.
-func _physics_process(delta):
+func _physics_process(_delta):
 	#if should_unfreeze and temp != null:
 		#freeze = false
 		#global_transform.origin = temp
@@ -152,6 +135,9 @@ func _physics_process(delta):
 	if apply_force_this_frame:
 		apply_force_this_frame = false
 		_apply_throwing_force(_invert_throwing_direction)
+		
+	if linear_velocity.length() < 0.01 and _is_rolling:
+		_on_movement_stopped()
 
 
 ## Triggers when the sleeping state of the rigidbody is changed.
@@ -208,6 +194,7 @@ func _apply_throwing_force(invert: bool):
 	
 	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
 	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
+	## TODO:
 	var throw_direction = Vector3(random_direction_x, 0, random_direction_z).normalized()
 	var inverse_direction = -1 if invert else 1 
 	var throw_force = throw_direction * _throwing_force_magnitude * inverse_direction * global_basis.get_scale().x 
