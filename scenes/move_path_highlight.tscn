@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk6q50tq0w026"]
+
+[ext_resource type="Script" path="res://scripts/scrolling_texture_path.gd" id="1_soc02"]
+[ext_resource type="Texture2D" uid="uid://swh27vy5ypr8" path="res://textures/arrow.svg" id="2_nsxkj"]
+
+[sub_resource type="Curve3D" id="Curve3D_nnjux"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2.49309, 0, -0.260138, 0, 0, 0, 0, 0, 0, 0.497018, 0, -1.02426, 0, 0, 0, 0, 0, 0, 0.383209, 0.420984, 1.90614, 0, 0, 0, 0, 0, 0, -0.595878, 0.381525, 1.86338, 0, 0, 0, 0, 0, 0, -0.532209, 0, -1.05545, 0, 0, 0, 0, 0, 0, -0.516614, 0, -5.07878, 0, 0, 0, 0, 0, 0, 0.43464, 0, -5.10997, 0, 0, 0, 0, 0, 0, 0.481423, 0, -2.50572, 0, 0, 0, 0, 0, 0, 2.49309, 0, -0.260138),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[node name="MovePathHighlight" type="Path3D"]
+curve = SubResource("Curve3D_nnjux")
+script = ExtResource("1_soc02")
+texture = ExtResource("2_nsxkj")
