@@ -113,7 +113,7 @@ render_priority = 1
 albedo_color = Color(0.380392, 0.639216, 0.333333, 1)
 
 [node name="D4_Improved" type="RigidBody3D"]
-mass = 2.0
+mass = 4.0
 physics_material_override = ExtResource("1_7qrkn")
 gravity_scale = 3.0
 continuous_cd = true
@@ -126,7 +126,9 @@ _throwing_force_magnitude = 10.0
 _throwing_angular_velocity = 0.0
 _throwing_force_direction_range_x = Vector2(0, -1)
 _throwing_force_direction_range_z = Vector2(-0.5, 0.5)
-_mass_on_ground_multiplier = 10.0
+_mass_on_ground_multiplier = 7.0
+_down_accuracy_threshold = 0.9
+_velocity_threshold = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

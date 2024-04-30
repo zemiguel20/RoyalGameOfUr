@@ -24,6 +24,7 @@ signal roll_finished(value: int)
 @export_category("Extras")
 @export var _floor_group: String = "Ground"
 @export var _down_accuracy_threshold: float = 0.8
+@export var _velocity_threshold: float = 0.05
 #endregion
 
 #region Onready Variables
@@ -119,7 +120,7 @@ func _physics_process(_delta):
 		_collider.disabled = false
 		
 	## TODO: Make scale independent.
-	if linear_velocity.length() < 0.01 and angular_velocity.length() < 0.01 and _is_rolling:
+	if linear_velocity.length() < _velocity_threshold and angular_velocity.length() < _velocity_threshold and _is_rolling:
 		_on_movement_stopped()
 
 
@@ -176,7 +177,6 @@ func _apply_throwing_force(dice_spot: Node3D):
 	var multiplier = randf_range(0.4, 1.1)
 	var throw_force = throw_direction * _throwing_force_magnitude * global_basis.get_scale().x * multiplier
 	## Setting velocity rather than applying force makes sure that the forces are not additive.
-	dice_spot._is_free = true
 	linear_velocity = throw_force
 	
 

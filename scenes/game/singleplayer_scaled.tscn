@@ -98,19 +98,19 @@ transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, -14.0622
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 2.87025, 0.505961, -2.24774)
 
 [node name="ThrowSpot1" parent="SinglePlayer/Dice/DiceArea_P1/ThrowingSpots_P1" index="0"]
-transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, 0, 0.106581, 0)
+transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, 0, -0.10147, 0)
 
 [node name="ThrowSpot2" parent="SinglePlayer/Dice/DiceArea_P1/ThrowingSpots_P1" index="1"]
-transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, 2, 0.106581, 0)
+transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, 0.999969, -0.10147, -1.52588e-05)
 
 [node name="ThrowSpot3" parent="SinglePlayer/Dice/DiceArea_P1/ThrowingSpots_P1" index="2"]
-transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, -2, 0.106581, 7.62939e-06)
+transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, -1.00003, -0.10147, 0)
 
 [node name="ThrowSpot4" parent="SinglePlayer/Dice/DiceArea_P1/ThrowingSpots_P1" index="3"]
-transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, -0.999969, 2.38635, 1.52588e-05)
+transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, -1, 1.75774, 1.52588e-05)
 
 [node name="ThrowSpot5" parent="SinglePlayer/Dice/DiceArea_P1/ThrowingSpots_P1" index="4"]
-transform = Transform3D(-1, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, -1, 1.00003, 2.38636, -7.62939e-06)
+transform = Transform3D(-1, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, -1, 1.00003, 1.75775, -7.62939e-06)
 
 [node name="ClickHitbox_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="1"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 7.62939e-06, 0, -1.33679)
@@ -120,13 +120,13 @@ transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, -7.62939
 visible = false
 
 [node name="Wall" parent="SinglePlayer/Dice/DiceArea_P1/DiceBorders_P1" index="0"]
-transform = Transform3D(1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, 1, 1.52588e-05, 2.979, 1.50949)
+transform = Transform3D(1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, 1, 7.62939e-06, 2.979, 1.13354)
 
 [node name="Debug_MeshInstance3D" parent="SinglePlayer/Dice/DiceArea_P1/DiceBorders_P1/Wall" index="1"]
 visible = true
 
 [node name="Wall2" parent="SinglePlayer/Dice/DiceArea_P1/DiceBorders_P1" index="1"]
-transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -7.62939e-06, 2.979, -4.41357)
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -1.52588e-05, 2.979, -3.83307)
 
 [node name="Debug_MeshInstance3D" parent="SinglePlayer/Dice/DiceArea_P1/DiceBorders_P1/Wall2" index="1"]
 visible = true
@@ -147,19 +147,19 @@ transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, -14.0622
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.96738, 1.5, 0.194702)
 
 [node name="ThrowSpot1" parent="SinglePlayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47355, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79269, 0)
 
 [node name="ThrowSpot2" parent="SinglePlayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00002, 1.47355, -3.05176e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00008, -1.79269, -4.57764e-05)
 
 [node name="ThrowSpot3" parent="SinglePlayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99991, 1.47355, 1.52588e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99983, -1.79269, 2.28882e-05)
 
 [node name="ThrowSpot4" parent="SinglePlayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999985, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999878, 1.73375, 0)
 
 [node name="ThrowSpot5" parent="SinglePlayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00002, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00003, 1.73375, -7.62939e-06)
 
 [node name="DiceBorders_P2" parent="SinglePlayer/Dice/DiceArea_P2" index="2"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
