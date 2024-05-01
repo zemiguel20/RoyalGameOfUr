@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=18 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_or8np"]
 [ext_resource type="PackedScene" uid="uid://dtelb85wam1x3" path="res://test/scenes/gamemode_ai_test.tscn" id="2_bumil"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_scaled.tscn" id="3_261ls"]
 [ext_resource type="Script" path="res://scenes/game/prototype_ui.gd" id="4_racao"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="4_uy0rn"]
+[ext_resource type="Script" path="res://scenes/game/quit_button.gd" id="5_yensc"]
 [ext_resource type="PackedScene" uid="uid://bhokhs6y6rc75" path="res://models/fbx-guard-wip-posed-v2.fbx" id="6_h8q4i"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
@@ -193,6 +194,7 @@ visible = false
 visible = false
 
 [node name="Prototype_UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 script = ExtResource("4_racao")
 
 [node name="Fade_Panel" type="ColorRect" parent="Prototype_UI"]
@@ -211,7 +213,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="Prototype_UI/Main Menu"]
+[node name="Play" type="Button" parent="Prototype_UI/Main Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -227,11 +229,29 @@ grow_vertical = 2
 theme = SubResource("Theme_q1r3c")
 text = "Play"
 
+[node name="Quit" type="Button" parent="Prototype_UI/Main Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 371.0
+offset_top = 201.0
+offset_right = 529.0
+offset_bottom = 269.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_q1r3c")
+text = "Quit"
+script = ExtResource("5_yensc")
+
 [node name="Custom_Camera" parent="." instance=ExtResource("4_uy0rn")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 3.55736, 0.46958, 5.87574)
-max_degrees = 35.0
+max_degrees_down = 50.0
+max_degrees_left = 32.0
+max_degrees_right = 5.0
 _board_look_rotation = Vector3(-35, 32, 0)
-switch_threshold_ratio = 0.7
 
 [node name="Opponent_Model" parent="." instance=ExtResource("6_h8q4i")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 3.1308, -0.313869, 5.09029)
@@ -251,7 +271,8 @@ visible = false
 [connection signal="game_started" from="SinglePlayer/GameStateController" to="Custom_Camera" method="_on_game_start"]
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 [connection signal="play_pressed" from="Prototype_UI" to="SinglePlayer/GameStateController" method="start_game"]
-[connection signal="pressed" from="Prototype_UI/Main Menu/Button" to="SinglePlayer/GameStateController" method="start_game"]
+[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="SinglePlayer/GameStateController" method="start_game"]
+[connection signal="pressed" from="Prototype_UI/Main Menu/Quit" to="Prototype_UI/Main Menu/Quit" method="_on_pressed"]
 
 [editable path="Environment"]
 [editable path="SinglePlayer"]

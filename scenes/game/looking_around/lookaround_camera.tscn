@@ -11,7 +11,6 @@ font_size = 30
 transform = Transform3D(1, -7.45057e-09, 1.86264e-08, 7.45057e-09, 1, -2.98023e-08, -1.86264e-08, -2.98023e-08, 1, 0, 0, 0)
 current = true
 script = ExtResource("1_ojtcq")
-max_degrees = 50.0
 
 [node name="CanvasLayer_ModeChange" type="CanvasLayer" parent="."]
 

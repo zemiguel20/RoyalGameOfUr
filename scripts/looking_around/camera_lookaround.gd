@@ -3,8 +3,10 @@
 class_name CameraLookAround
 extends Camera3D
 
-## Max degrees for camera rotation in all directions. 
-@export var max_degrees: float = 35
+@export var max_degrees_up: float = 35
+@export var max_degrees_down: float = 35
+@export var max_degrees_left: float = 35
+@export var max_degrees_right: float = 35
 ## Sensitivity of the mouse in x and y. 
 ## TODO Make this a setting in the settings menu of the game in the future
 @export var _looking_sensitivity: float = 0.1
@@ -74,11 +76,10 @@ func _define_main_orientations():
 	
 	
 func _define_constraints():
-	var max_radians = deg_to_rad(max_degrees)
-	_min_rotation_x = _looking_around_rotation.x - max_radians
-	_max_rotation_x = _looking_around_rotation.x + max_radians
-	_min_rotation_y = _looking_around_rotation.y - max_radians
-	_max_rotation_y = _looking_around_rotation.y + max_radians	
+	_max_rotation_x = _looking_around_rotation.x + deg_to_rad(max_degrees_up)
+	_min_rotation_x = _looking_around_rotation.x - deg_to_rad(max_degrees_down)
+	_min_rotation_y = _looking_around_rotation.y - deg_to_rad(max_degrees_right)
+	_max_rotation_y = _looking_around_rotation.y + deg_to_rad(max_degrees_left)
 		
 		
 func _return_to_board():
