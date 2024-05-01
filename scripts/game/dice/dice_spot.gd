@@ -1,7 +1,6 @@
 class_name DiceSpot
 extends Node3D
 
-var _is_free := true
+@export var throwing_velocity_multiplier: float = 1.0
+var is_free := true
 
-func is_free():
-	return _is_free

@@ -43,6 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4.02413)
 
 [node name="ThrowSpot1" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+throwing_velocity_multiplier = 1.5
 
 [node name="ThrowSpot2" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, 0)
@@ -52,9 +53,11 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4, 0,
 
 [node name="ThrowSpot4" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 5, 0)
+throwing_velocity_multiplier = 0.5
 
 [node name="ThrowSpot5" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 5, 0)
+throwing_velocity_multiplier = 0.5
 
 [node name="ClickHitbox_P1" type="Area3D" parent="DiceArea_P1"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0, 0)
@@ -136,18 +139,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4.1396)
 
 [node name="ThrowSpot1" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+throwing_velocity_multiplier = 0.9
 
 [node name="ThrowSpot2" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+throwing_velocity_multiplier = 1.2
 
 [node name="ThrowSpot3" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+throwing_velocity_multiplier = 0.9
 
 [node name="ThrowSpot4" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, 0)
+throwing_velocity_multiplier = 0.6
 
 [node name="ThrowSpot5" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 0)
+throwing_velocity_multiplier = 0.6
 
 [node name="ClickHitbox_P2" type="Area3D" parent="DiceArea_P2"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 0.515, 0)

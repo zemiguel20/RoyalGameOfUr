@@ -80,21 +80,20 @@ func outline_if_one() -> void:
 		pass
 		
 		
-func roll(_throwing_spot: DiceSpot) -> void:
+func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	#_disable_collision = true
 	
 	# Set some local variables
-	_throwing_position = _throwing_spot
+	_throwing_position = throwing_spot
 	
 	# Set position and rotation
-	global_transform.origin = _throwing_spot.global_position
+	global_transform.origin = throwing_spot.global_position
 	basis = _get_random_rotation()
 	
 	# Unfreeze the body to apply the throwing force.
 	mass = _default_mass
-	#apply_force_this_frame = true
 	freeze = false
-	_apply_throwing_force(_throwing_spot)
+	_apply_throwing_force(throwing_spot, is_reroll)
 	
 	# Disable the collider after a bit.
 	await get_tree().create_timer(_collision_disabling_duration).timeout
@@ -119,8 +118,10 @@ func _physics_process(_delta):
 	elif not _disable_collision and _collider.disabled:
 		_collider.disabled = false
 		
-	## TODO: Make scale independent.
-	if linear_velocity.length() < _velocity_threshold and angular_velocity.length() < _velocity_threshold and _is_rolling:
+	if linear_velocity.length() < _velocity_threshold * global_basis.get_scale().x \
+		and angular_velocity.length() < _velocity_threshold * global_basis.get_scale().x \
+		and _is_rolling \
+		and mass == _mass_on_ground:
 		_on_movement_stopped()
 
 
@@ -137,7 +138,7 @@ func _on_movement_stopped():
 	
 	# If stuck, roll again.
 	if _roll_value == -1:
-		roll(_throwing_position)
+		roll(_throwing_position, true)
 	# Else, reset some values and emit a signal.
 	else:
 		_is_rolling = false
@@ -168,33 +169,32 @@ func _get_random_rotation() -> Basis:
 
 ## Throws the dice, by calculating a direction and applying an impulse force.
 ## [param playerID] is used to indicate if we should invert the throwing direction.
-func _apply_throwing_force(dice_spot: Node3D):
-	var random_direction_x = randf_range(_throwing_force_direction_range_x.x, _throwing_force_direction_range_x.y)
-	var random_direction_z = randf_range(_throwing_force_direction_range_z.x, _throwing_force_direction_range_z.y)
-	## TODO:
+func _apply_throwing_force(dice_spot: DiceSpot, is_reroll: bool = false):
 	var throw_direction = dice_spot.global_basis.z.normalized()	# Forward vector of throwing position.
-	#var throw_direction = throwing
-	var multiplier = randf_range(0.4, 1.1)
+	var multiplier = dice_spot.throwing_velocity_multiplier
 	var throw_force = throw_direction * _throwing_force_magnitude * global_basis.get_scale().x * multiplier
+	if is_reroll:
+		print("REROLL")
+		throw_force *= randf_range(0.4, 0.6)
+	
 	## Setting velocity rather than applying force makes sure that the forces are not additive.
 	linear_velocity = throw_force
 	
 
-## Loop through all normals in the dice to check if they are colliding..
-## If yes, we return the corresponding value, else we return -1
+## Loop through all normals in the dice to check how much they are facing down.
+## If the most down facing normal is not meeting the requirements of the _down_accuracy_threshold, return -1
 func _check_roll_value():
-	## TODO rename
-	var max_downness = 0.0
+	var max_down_accuracy = 0.0
 	var best_value = -1
 	
 	for normal: DiceNormal in _normal_list:
 		var down_direction = -normal.global_transform.basis.y.normalized() # Get down direction of normal.
-		var downness = down_direction.dot(Vector3.DOWN) # Use dot product to check if it is facing down in world space.
-		if downness > max_downness:
-			max_downness = downness
+		var down_accuracy = down_direction.dot(Vector3.DOWN) # Use dot product to check if it is facing down in world space.
+		if down_accuracy > max_down_accuracy:
+			max_down_accuracy = down_accuracy
 			best_value = normal.opposite_side_value
 	
-	if max_downness > _down_accuracy_threshold:
+	if max_down_accuracy > _down_accuracy_threshold:
 		return best_value
 	else:
 		return -1

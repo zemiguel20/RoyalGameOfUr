@@ -137,10 +137,10 @@ func _roll() -> int:
 	
 	
 	for die in _dice:
-		var throw_spot := _get_random_free_spot()
+		var throw_spot := _get_random_free_spot(_current_player)
 		die.roll(throw_spot)
 		
-	_clear_spot_occupations()
+	_clear_spot_occupations(_current_player)
 	await roll_finished
 	
 	#for die in _dice:
@@ -215,23 +215,22 @@ func _get_die_spawning_position():
 	#return result
 	
 	
-func _clear_spot_occupations():
-	for spot in _get_throwing_spots(_current_player):
-		spot._is_free = true
+func _clear_spot_occupations(_player: General.Player):
+	for spot in _get_throwing_spots(_player):
+		spot.is_free = true
 		
 	
 func _get_throwing_spots(_player: General.Player):
-	# FIXME
 	return (_dice_throwing_spots[_player] as Array[DiceSpot])
 	
 	
-func _get_random_free_spot() -> DiceSpot:
-	var spots = (_dice_throwing_spots[_current_player] as Array[DiceSpot])
+func _get_random_free_spot(_player: General.Player) -> DiceSpot:
+	var spots = _get_throwing_spots(_player)
 	spots.shuffle()
 	
 	for spot: DiceSpot in spots:
-		if spot.is_free():
-			spot._is_free = false
+		if spot.is_free:
+			spot.is_free = false
 			return spot
 	
 	push_error("No free dice spots! Are you playing with 6 or more dice?")
