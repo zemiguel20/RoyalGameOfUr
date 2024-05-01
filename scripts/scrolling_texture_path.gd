@@ -58,6 +58,42 @@ func _process(delta):
 		spawn.progress += (velocity * delta)
 
 
+func _populate_path():
+	# Calculate new number of spawns
+	var length = curve.get_baked_length()
+	var spawn_count = int(length * density)
+	
+	# Add or remove spawns so that the new spawn count is met
+	var difference = spawn_count - _spawn_pool.size()
+	if difference > 0:
+		_spawn_objects(difference)
+	elif difference < 0:
+		_despawn_objects(absi(difference))
+	
+	# Adjust spawn positions
+	for i in _spawn_pool.size():
+		var spawn = _spawn_pool[i]
+		spawn.progress = (length / spawn_count) * i # Spread arrows evenly spaced along path
+	
+	_update_sprites()
+
+
+func _spawn_objects(count : int):
+	for i in count:
+		var spawn = PathFollow3D.new()
+		var sprite = Sprite3D.new()
+		sprite.axis = Vector3.AXIS_Y
+		spawn.add_child(sprite)
+		add_child(spawn)
+		_spawn_pool.append(spawn)
+
+
+func _despawn_objects(count : int):
+	for i in count:
+		var spawn = _spawn_pool.pop_back()
+		spawn.queue_free()
+
+
 func _update_sprites():
 	for spawn in _spawn_pool:
 		var sprite = spawn.get_child(0) as Sprite3D
@@ -66,26 +102,3 @@ func _update_sprites():
 		sprite.flip_h = flip_h
 		sprite.modulate.a = alpha
 		sprite.scale = sprite_scale
-
-
-func _populate_path():
-	# Clear size of the spawned objects pool
-	for spawn in _spawn_pool:
-		spawn.queue_free()
-	_spawn_pool.clear()
-	
-	# Calculate number of spawns
-	var length = curve.get_baked_length()
-	var arrow_count = int(length * density)
-	# Spawn objects and add them to scene tree
-	for i in arrow_count:
-		var arrow_pathfollow = PathFollow3D.new()
-		arrow_pathfollow.progress = (length / arrow_count) * i # Spread arrows evenly spaced along path
-		var arrow_sprite = Sprite3D.new()
-		arrow_sprite.axis = Vector3.AXIS_Y
-		arrow_pathfollow.add_child(arrow_sprite)
-		
-		add_child(arrow_pathfollow)
-		_spawn_pool.append(arrow_pathfollow)
-	
-	_update_sprites()
