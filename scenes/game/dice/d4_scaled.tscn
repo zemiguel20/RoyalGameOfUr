@@ -132,7 +132,7 @@ _down_accuracy_threshold = 0.9
 _velocity_threshold = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_7xxli")
 
 [node name="d4_test" type="Node3D" parent="."]
@@ -144,7 +144,7 @@ mesh = SubResource("ArrayMesh_ujxgq")
 skeleton = NodePath("")
 
 [node name="d4_model_scaled" type="Node3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.000256667, 0)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.000256667, 0)
 
 [node name="Final" type="MeshInstance3D" parent="d4_model_scaled"]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 0, 0, 0)

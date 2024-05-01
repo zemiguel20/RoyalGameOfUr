@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=19 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_or8np"]
 [ext_resource type="PackedScene" uid="uid://dtelb85wam1x3" path="res://test/scenes/gamemode_ai_test.tscn" id="2_bumil"]
 [ext_resource type="PhysicsMaterial" uid="uid://bm2xsy30hwwj7" path="res://physics_materials/pm_dice_floor.tres" id="2_l3pra"]
 [ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_scaled.tscn" id="3_261ls"]
+[ext_resource type="PackedScene" uid="uid://ckh07dylodtpk" path="res://scenes/game/dice/dice_spawn_spot.tscn" id="4_cvfbh"]
 [ext_resource type="Script" path="res://scenes/game/prototype_ui.gd" id="4_racao"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="4_uy0rn"]
 [ext_resource type="Script" path="res://scenes/game/quit_button.gd" id="5_yensc"]
@@ -113,10 +114,38 @@ transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, -1, 1.
 [node name="ThrowSpot5" parent="SinglePlayer/Dice/DiceArea_P1/ThrowingSpots_P1" index="4"]
 transform = Transform3D(-1, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, -1, 1.00003, 1.75775, -7.62939e-06)
 
-[node name="ClickHitbox_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="1"]
+[node name="SpawnSpots_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="1"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -7.62939e-06, -3, -3.05057)
+visible = false
+
+[node name="SpawnSpot" parent="SinglePlayer/Dice/DiceArea_P1/SpawnSpots_P1" index="0"]
+transform = Transform3D(0.809253, 0, 0.587461, 0, 1, 0, -0.587461, 0, 0.809253, -1.0186, -0.194113, -0.587585)
+
+[node name="SpawnSpot2" parent="SinglePlayer/Dice/DiceArea_P1/SpawnSpots_P1" index="1"]
+transform = Transform3D(0.320183, 0, -0.947356, 0, 1, 0, 0.947356, 0, 0.320183, -1.27618, 0, 1.30646)
+
+[node name="SpawnSpot4" parent="SinglePlayer/Dice/DiceArea_P1/SpawnSpots_P1" index="3"]
+transform = Transform3D(0.456772, 0, 0.889584, 0, 1, 0, -0.889584, 0, 0.456772, 1.19581, 0, -1.24014)
+
+[node name="SpawnSpot9" parent="SinglePlayer/Dice/DiceArea_P1/SpawnSpots_P1" index="4" instance=ExtResource("4_cvfbh")]
+transform = Transform3D(0.456772, 0, 0.889584, 0, 1, 0, -0.889584, 0, 0.456772, 2.48492, 0, -0.266357)
+
+[node name="SpawnSpot5" parent="SinglePlayer/Dice/DiceArea_P1/SpawnSpots_P1" index="5" instance=ExtResource("4_cvfbh")]
+transform = Transform3D(0.527801, 0, 0.849368, 0, 1, 0, -0.849368, 0, 0.527801, 2.98527, 0, 1.02374)
+
+[node name="SpawnSpot6" parent="SinglePlayer/Dice/DiceArea_P1/SpawnSpots_P1" index="6" instance=ExtResource("4_cvfbh")]
+transform = Transform3D(0.235719, 0, -0.971822, 0, 1, 0, 0.971822, 0, 0.235719, -3.53115, 0, -0.863342)
+
+[node name="SpawnSpot7" parent="SinglePlayer/Dice/DiceArea_P1/SpawnSpots_P1" index="7" instance=ExtResource("4_cvfbh")]
+transform = Transform3D(0.235719, 0, -0.971822, 0, 1, 0, 0.971822, 0, 0.235719, -3.53585, -7.15256e-07, 1.50531)
+
+[node name="SpawnSpot8" parent="SinglePlayer/Dice/DiceArea_P1/SpawnSpots_P1" index="8" instance=ExtResource("4_cvfbh")]
+transform = Transform3D(0.235719, 0, -0.971822, 0, 1, 0, 0.971822, 0, 0.235719, 4.19296, -7.15256e-07, -1.14572)
+
+[node name="ClickHitbox_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="2"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 7.62939e-06, 0, -1.33679)
 
-[node name="DiceBorders_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="2"]
+[node name="DiceBorders_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="3"]
 transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, -7.62939e-06, 0, -0.539154)
 visible = false
 
@@ -138,7 +167,7 @@ visible = true
 [node name="Debug_MeshInstance3D" parent="SinglePlayer/Dice/DiceArea_P1/DiceBorders_P1/Wall4" index="1"]
 visible = true
 
-[node name="Label3D_Outcome_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="3"]
+[node name="Label3D_Outcome_P1" parent="SinglePlayer/Dice/DiceArea_P1" index="4"]
 transform = Transform3D(1, -5.96046e-08, 1.77636e-15, 0, -4.37114e-08, 1, -5.96046e-08, -1, -4.37114e-08, 10.1008, -1.41556, -6.31183)
 
 [node name="DiceArea_P2" parent="SinglePlayer/Dice" index="1"]
@@ -161,6 +190,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999878, 1.73375, 0)
 
 [node name="ThrowSpot5" parent="SinglePlayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00003, 1.73375, -7.62939e-06)
+
+[node name="SpawnSpot" parent="SinglePlayer/Dice/DiceArea_P2/SpawnSpots_P2" index="0"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -1.00814, 0, -0.756744)
+
+[node name="SpawnSpot2" parent="SinglePlayer/Dice/DiceArea_P2/SpawnSpots_P2" index="1"]
+transform = Transform3D(0.713312, 0, 0.700847, 0, 1, 0, -0.700847, 0, 0.713312, -1.27617, 0, 1.30646)
+
+[node name="SpawnSpot3" parent="SinglePlayer/Dice/DiceArea_P2/SpawnSpots_P2" index="2"]
+transform = Transform3D(0.94813, 0, 0.317884, 0, 1, 0, -0.317884, 0, 0.94813, 1.19582, 0, 1.01186)
+
+[node name="SpawnSpot7" parent="SinglePlayer/Dice/DiceArea_P2/SpawnSpots_P2" index="4" instance=ExtResource("4_cvfbh")]
+transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, 4.00871, 4.76837e-07, 0.912888)
+
+[node name="SpawnSpot8" parent="SinglePlayer/Dice/DiceArea_P2/SpawnSpots_P2" index="5" instance=ExtResource("4_cvfbh")]
+transform = Transform3D(0.895207, 0, 0.445651, 0, 1, 0, -0.445651, 0, 0.895207, 3.00977, 4.76837e-07, -0.880585)
+
+[node name="SpawnSpot5" parent="SinglePlayer/Dice/DiceArea_P2/SpawnSpots_P2" index="6" instance=ExtResource("4_cvfbh")]
+transform = Transform3D(0.497761, 0, 0.867314, 0, 1, 0, -0.867314, 0, 0.497761, -3.69106, 0, -1.1012)
+
+[node name="SpawnSpot6" parent="SinglePlayer/Dice/DiceArea_P2/SpawnSpots_P2" index="7" instance=ExtResource("4_cvfbh")]
+transform = Transform3D(0.497761, 0, 0.867314, 0, 1, 0, -0.867314, 0, 0.497761, -2.835, 0, 0.744186)
 
 [node name="DiceBorders_P2" parent="SinglePlayer/Dice/DiceArea_P2" index="2"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)

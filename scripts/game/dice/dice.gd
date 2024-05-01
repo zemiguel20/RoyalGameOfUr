@@ -12,9 +12,11 @@ signal roll_finished(value: int) ## Emitted when all dice finished, with the fin
 @export var _die_scene: PackedScene
 ## When die are spawned in, they will have an offset from this object calculated as: 
 ## [code] randf_range(0, _max_spawning_position_offset) [/code]
+## TODO: Delete
 @export var _max_spawning_position_offset := Vector2(-3, 3)
 ## When die are spawned in, they will have an offset from the selected throwing_position calculated as: 
 ## [code] randf_range(0, _max_throwing_position_offset) [/code]
+## TODO: Delete
 @export var _max_throwing_position_offset := 1.7
 ## Minimum offset that dice should have with each other when the dice are thrown.
 @export var _minimal_dice_offset := 0.5
@@ -32,10 +34,12 @@ signal roll_finished(value: int) ## Emitted when all dice finished, with the fin
 ## Looping sound played while the dice are shaking.
 @onready var _shake_sfx: AudioStreamPlayer = $ShakeSFX
 ## Reference point for the randomly generated 
+## TODO: Confusing Names!!
 @onready var _throwing_positions: Node3D = $DiceArea_P1/ThrowingSpots_P1
 ## Throwing Position for Player 2. This one is only used when 
 ## [code] _use_multiple_dice_areas = true [/code]
 @onready var _throwing_positions_p2: Node3D = $DiceArea_P2/ThrowingSpots_P2
+@onready var _spawn_spot_container: Node3D = $DiceArea_P1/SpawnSpots_P1
 ## Hitbox that makes it easier to click the dice.
 @onready var _click_hitbox: Area3D = $DiceArea_P1/ClickHitbox_P1
 ## Hitbox that makes it easier to click the dice.
@@ -49,7 +53,8 @@ signal roll_finished(value: int) ## Emitted when all dice finished, with the fin
 var value: int = 0 
 
 ## Array containing every die.
-var _dice : Array
+var _dice: Array
+var _spawn_spots: Array
 ## Dictionary that maps _throwing_positions and _throwing_positions_p2 to a PlayerId.
 var _dice_throwing_spots: Dictionary
 ## The clicking hitbox that will be used for the current roll.
@@ -140,7 +145,7 @@ func _roll() -> int:
 		var throw_spot := _get_random_free_spot(_current_player)
 		die.roll(throw_spot)
 		
-	_clear_spot_occupations(_current_player)
+	_free_throwing_spots(_current_player)
 	await roll_finished
 	
 	#for die in _dice:
@@ -150,13 +155,18 @@ func _roll() -> int:
 	
 ## Spawns the dice in a random position and connects signals
 func _initialize_dice() -> void:
-	for _i in Settings.num_dice:
+	_cache_spawning_spots()
+	var num_dice = Settings.num_dice
+	var available_spots = _get_available_spawning_spots(num_dice) 
+	
+	for _i in num_dice:
 		var instance = _die_scene.instantiate()
 		add_child(instance)
 		_dice.append(instance)
 		
 		instance.roll_finished.connect(_on_die_finished_rolling)
-		instance.global_transform.origin = _get_die_spawning_position()
+		instance.global_transform.origin = available_spots[_i].global_position
+		instance.global_basis = available_spots[_i].global_basis
 	
 	if _use_hitbox_instead_of_dice_colliders:
 		_click_hitbox.input_event.connect(_on_die_input_event)
@@ -174,48 +184,18 @@ func _start_dice_shake():
 	_shake_sfx.play()
 			
 			
-func _get_die_spawning_position():
-	var locationX = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y) * scale.x
-	var locationZ = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y) * scale.z
-		
-	return self.global_position + Vector3(locationX, 0, locationZ)
-	
-	
-## Generate random positions to throw the dice from, while making sure that the dice always have a minimun offset of [param _minimal_dice_offset].
-## If the function is not able to generate these positions, it will give a warning. 
-#func _get_die_throwing_positions() -> Array[Vector3]: 
-	## Failsafe for if no combination is possible, then just try again
-	#var num_of_fails = 0
-	#var result = [] as Array[Vector3]
-	#
-	#while result.size() < _dice.size():
-		#if (num_of_fails >= 100):
-			## If failed many times, try again from scratch and give a warning.
-			#push_warning("Dice positioning failed many times, consider tweaking '_minimal_dice_offset' or '_max_throwing_position_offset'")
-			#result.clear()
-			#num_of_fails = 0
-			#
-		## Randomly decide the offset from the throwing position.
-		#var random_x = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset) * scale.x
-		#var random_z = randf_range(-_max_throwing_position_offset, _max_throwing_position_offset) * scale.z
-		#var random_offset = Vector3(random_x, 0, random_z)
+#func _get_die_spawning_position():
+	#var locationX = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y) * scale.x
+	#var locationZ = randf_range(_max_spawning_position_offset.x, _max_spawning_position_offset.y) * scale.z
 		#
-		## Check if random position meets the requirements.
-		#var does_overlap = false
-		#for sample_position in result:
-			#if sample_position.distance_to(new_sample_position) < _minimal_dice_offset * scale.x:
-				#does_overlap = true
-		#
-		## Add to the result when the position does not overlap with other dice.
-		#if not does_overlap:
-			#result.append(new_sample_position)
-		#else:		
-			#num_of_fails += 1
-		#
-	#return result
+	#return self.global_position + Vector3(locationX, 0, locationZ)
+	
+func _get_available_spawning_spots(amount: int):
+	_spawn_spots.shuffle()
+	return _spawn_spots.slice(0, amount)
 	
 	
-func _clear_spot_occupations(_player: General.Player):
+func _free_throwing_spots(_player: General.Player):
 	for spot in _get_throwing_spots(_player):
 		spot.is_free = true
 		
@@ -235,6 +215,10 @@ func _get_random_free_spot(_player: General.Player) -> DiceSpot:
 	
 	push_error("No free dice spots! Are you playing with 6 or more dice?")
 	return null
+	
+	
+func _cache_spawning_spots():
+	_spawn_spots = _spawn_spot_container.get_children()
 	
 	
 func _cache_throwing_spots():
