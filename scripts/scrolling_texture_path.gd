@@ -30,6 +30,11 @@ extends Path3D
 	set(new_value):
 		alpha = new_value
 		_update_sprites()
+
+@export var sorting_offset : float = 1.0:
+	set(new_value):
+		sorting_offset = new_value
+		_update_sprites()
 #endregion
 
 #region Scrolling behaviour editor variables
@@ -102,3 +107,4 @@ func _update_sprites():
 		sprite.flip_h = flip_h
 		sprite.modulate.a = alpha
 		sprite.scale = sprite_scale
+		sprite.sorting_offset = sorting_offset

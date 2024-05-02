@@ -30,6 +30,7 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 9
+up_vector_enabled = false
 
 [node name="MovePickerTest" instance=ExtResource("1_ruqv2")]
 script = SubResource("GDScript_y8nea")
