@@ -42,6 +42,7 @@ func _ready():
 	
 	
 func _on_game_start():
+	## TODO: Start game after return to board finished!
 	_return_to_board()
 	_looking_border.mouse_entered.connect(_enter_looking_mode)
 	

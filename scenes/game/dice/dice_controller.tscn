@@ -22,10 +22,10 @@ size = Vector3(10, 12, 1)
 size = Vector3(10, 12, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_feblq"]
-size = Vector3(10, 12, 1)
+size = Vector3(6.08105, 12, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_41ig0"]
-size = Vector3(10, 12, 1)
+size = Vector3(5.97949, 12, 1)
 
 [sub_resource type="Curve" id="Curve_wrwgg"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
