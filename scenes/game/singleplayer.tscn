@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scenes/game/quit_button.gd" id="6_3dit1"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://bhokhs6y6rc75" path="res://models/fbx-guard-wip-posed-v2.fbx" id="8_ofv7c"]
-[ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_scaled.tscn" id="9_5lg8h"]
+[ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4.tscn" id="9_5lg8h"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -63,9 +63,9 @@ script = SubResource("GDScript_fbn4f")
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="DirectionalLight3D" parent="Environment" index="1"]
-transform = Transform3D(0.00126744, -0.00930471, 0.00343744, -0.00583004, 0.00210489, 0.0078473, -0.00802523, -0.00299864, -0.0051579, 0.605703, 0.73247, 1.47961)
+transform = Transform3D(0.126744, -0.930471, 0.343744, -0.583004, 0.210489, 0.78473, -0.802523, -0.299864, -0.51579, 0.605703, 0.73247, 1.47961)
 directional_shadow_mode = 2
-directional_shadow_max_distance = 300.0
+directional_shadow_max_distance = 420.0
 
 [node name="Camera3D" parent="Environment" index="3"]
 transform = Transform3D(0.231883, -0.108052, 0.0863428, 0.00651993, 0.176902, 0.203871, -0.138159, -0.173004, 0.154537, 0.872157, 0.113499, 1.44488)
@@ -82,47 +82,13 @@ transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.871, -0.
 shape = SubResource("BoxShape3D_080q8")
 
 [node name="Board2" parent="Environment/game_for_scale" index="0"]
-transform = Transform3D(-0.00359479, 0, 0.00600645, 0, 0.007, 0, -0.00600645, 0, -0.00359479, 0.82518, 0.0203158, 1.40125)
 visible = true
-
-[node name="MeshInstance3D" parent="Environment/game_for_scale" index="1"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.826951, 0.0195771, 1.41728)
-
-[node name="MeshInstance3D2" parent="Environment/game_for_scale" index="2"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.832609, 0.0195771, 1.41387)
-
-[node name="MeshInstance3D3" parent="Environment/game_for_scale" index="3"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.838566, 0.0195771, 1.41029)
-
-[node name="MeshInstance3D4" parent="Environment/game_for_scale" index="4"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.822374, 0.0195771, 1.38422)
-
-[node name="MeshInstance3D5" parent="Environment/game_for_scale" index="5"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.816095, 0.0195771, 1.38674)
-
-[node name="MeshInstance3D6" parent="Environment/game_for_scale" index="6"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.809821, 0.0195771, 1.39079)
-
-[node name="test_die_d6" parent="Environment/game_for_scale" index="9"]
-transform = Transform3D(0.00511323, 0, 0.00144092, 0, 0.00531238, 0, -0.00144092, 0, 0.00511323, 0.860551, 0.0276422, 1.41178)
-
-[node name="test_die_d7" parent="Environment/game_for_scale" index="10"]
-transform = Transform3D(0.00511323, 0, 0.00144092, 0, 0.00531238, 0, -0.00144092, 0, 0.00511323, 0.873239, 0.0276422, 1.41441)
 
 [node name="Boardgame_Singleplayer" parent="." instance=ExtResource("3_dtnui")]
 script = null
 
 [node name="Board" parent="Boardgame_Singleplayer" index="1"]
 transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 3.35944, 0.0837373, 5.57506)
-
-[node name="P1StartSpot1" parent="Boardgame_Singleplayer/Board/StartAndEndSpots" index="0"]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 3.10344, 0, 4.29707)
-
-[node name="P1StartSpot5" parent="Boardgame_Singleplayer/Board/StartAndEndSpots" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.08133, 0, 1.2514)
-
-[node name="P1StartSpot6" parent="Boardgame_Singleplayer/Board/StartAndEndSpots" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.07028, 0, 0.466324)
 
 [node name="Dice" parent="Boardgame_Singleplayer" index="2"]
 transform = Transform3D(0.0220493, 0, 0.0137779, 0, 0.026, 0, -0.0137779, 0, 0.0220493, 3.66769, 0.0789857, 5.40031)
@@ -226,16 +192,16 @@ transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967
 visible = false
 
 [node name="ThrowSpot1" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79269, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999985, -1.79269, 0)
 
 [node name="ThrowSpot2" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00008, -1.79269, -4.57764e-05)
 
 [node name="ThrowSpot3" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99983, -1.79269, 2.28882e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000167847, -1.79269, 1.52588e-05)
 
 [node name="ThrowSpot4" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999878, 1.73375, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000137329, 1.73375, 7.62939e-06)
 
 [node name="ThrowSpot5" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00003, 1.73375, -7.62939e-06)
@@ -269,7 +235,7 @@ transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
 visible = false
 
 [node name="Wall" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/DiceBorders_P2" index="0"]
-transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -7.62939e-06, 2.979, 3.48996)
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -1.52588e-05, 2.979, 2.40988)
 
 [node name="Debug_MeshInstance3D" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/DiceBorders_P2/Wall" index="1"]
 visible = true
@@ -380,6 +346,5 @@ visible = false
 
 [editable path="Environment"]
 [editable path="Boardgame_Singleplayer"]
-[editable path="Boardgame_Singleplayer/Board"]
 [editable path="Boardgame_Singleplayer/Dice"]
 [editable path="D4_Improved"]
