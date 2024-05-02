@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtelb85wam1x3"]
+[gd_scene load_steps=10 format=3 uid="uid://dtelb85wam1x3"]
 
 [ext_resource type="Script" path="res://scripts/game/gamestate_controller.gd" id="1_n7p33"]
 [ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="2_nyr51"]
-[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="3_6dw8j"]
+[ext_resource type="PackedScene" uid="uid://b7wqojt2nphja" path="res://scenes/game/dice/dice_controller_environment.tscn" id="3_ap6th"]
 [ext_resource type="Script" path="res://scripts/game/move_picker.gd" id="4_ja2vu"]
-[ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_die.tscn" id="4_vur0q"]
 [ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="5_857y4"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
@@ -19,13 +18,6 @@ func _input(event: InputEvent) -> void:
 		controller.start_game()
 	
 "
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmve1"]
-albedo_color = Color(0.427451, 0.239216, 0.0156863, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_0esbx"]
-material = SubResource("StandardMaterial3D_fmve1")
-size = Vector2(100, 100)
 
 [sub_resource type="GDScript" id="GDScript_pp8fu"]
 script/source = "extends CanvasLayer
@@ -75,6 +67,13 @@ func _on_dice_roll_finished(_value: int) -> void:
 	_dice_value = 0
 "
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmve1"]
+albedo_color = Color(0.427451, 0.239216, 0.0156863, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0esbx"]
+material = SubResource("StandardMaterial3D_fmve1")
+size = Vector2(100, 100)
+
 [node name="SinglePlayer" type="Node"]
 script = SubResource("GDScript_b8xbw")
 
@@ -83,13 +82,16 @@ script = ExtResource("1_n7p33")
 _board = NodePath("../Board")
 
 [node name="Board" parent="." instance=ExtResource("2_nyr51")]
-transform = Transform3D(0.999992, 0, -0.00390957, 0, 1, 0, 0.00390957, 0, 0.999992, 0.188376, -2.46309, 0.0962036)
+transform = Transform3D(0.0369997, 0, -0.000144654, 0, 0.037, 0, 0.000144654, 0, 0.0369997, 0, -3.5142, 0)
 
-[node name="Dice" parent="." instance=ExtResource("3_6dw8j")]
-transform = Transform3D(6.98002e-06, -3.05164e-13, 0.02, 5.20946e-17, 0.02, 3.05164e-13, -0.02, -5.4408e-17, 6.98002e-06, 6.08443, -3.35551, -12.8534)
-_die_scene = ExtResource("4_vur0q")
-_roll_shaking_enabled = true
-_use_hitbox_instead_of_dice_colliders = true
+[node name="Dice" parent="." instance=ExtResource("3_ap6th")]
+transform = Transform3D(-1.1365e-09, 0, 0.026, 0, 0.026, 0, -0.026, 0, -1.1365e-09, -1.34219e-08, -3.508, -0.307057)
+
+[node name="DiceArea_P1" parent="Dice" index="0"]
+transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, -14.0622, 2.97472, 9.59756)
+
+[node name="DiceArea_P2" parent="Dice" index="1"]
+transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, -14.0622, 2.97472, -7.6722)
 
 [node name="MovePicker" type="Node" parent="."]
 script = ExtResource("4_ja2vu")
@@ -103,20 +105,8 @@ _dice = NodePath("../Dice")
 _move_picker = NodePath("../MovePicker")
 max_moving_duration = 1.0
 
-[node name="Environment" type="Node3D" parent="."]
-
-[node name="Plane" type="CSGMesh3D" parent="Environment" groups=["Ground"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.51382, 0)
-use_collision = true
-collision_layer = 3
-collision_mask = 3
-mesh = SubResource("PlaneMesh_0esbx")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0192364, -0.835694, 0.548858, 0, 0.54896, 0.835849, -0.999815, -0.0160787, 0.01056, 6.73583, -2.63801, -12.5941)
+transform = Transform3D(0.0192364, -0.835694, 0.548858, 0, 0.54896, 0.835849, -0.999815, -0.0160787, 0.01056, 0.23475, -3.18271, 0.00451659)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_pp8fu")
@@ -144,13 +134,24 @@ text = "Dice: 4"
 layout_mode = 2
 text = "Extra roll!"
 
+[node name="Environment" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.022014, 0)
+
+[node name="Plane" type="CSGMesh3D" parent="Environment" groups=["Ground"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.51382, 0)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+mesh = SubResource("PlaneMesh_0esbx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
+
 [connection signal="move_phase_started" from="GameStateController" to="MovePicker" method="_on_move_phase_started"]
 [connection signal="move_phase_started" from="GameStateController" to="AIPlayerHard" method="_on_move_phase_started"]
 [connection signal="roll_phase_started" from="GameStateController" to="Dice" method="on_roll_phase_started"]
 [connection signal="roll_phase_started" from="GameStateController" to="AIPlayerHard" method="_on_roll_phase_started"]
-[connection signal="die_stopped" from="Dice" to="CanvasLayer" method="_on_dice_die_stopped"]
 [connection signal="roll_finished" from="Dice" to="GameStateController" method="_on_roll_ended"]
-[connection signal="roll_finished" from="Dice" to="CanvasLayer" method="_on_dice_roll_finished"]
 [connection signal="move_executed" from="MovePicker" to="GameStateController" method="_on_move_executed"]
 [connection signal="move_executed" from="AIPlayerHard" to="GameStateController" method="_on_move_executed"]
 

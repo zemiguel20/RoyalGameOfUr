@@ -14,6 +14,7 @@ var current_player: General.Player
 
 func start_game():
 	current_player = randi_range(General.Player.ONE, General.Player.TWO) as General.Player
+	current_player = General.Player.ONE
 	game_started.emit()
 	roll_phase_started.emit(current_player)
 	

@@ -95,7 +95,7 @@ func _physics_process(_delta):
 		and _is_rolling \
 		and mass == _mass_on_ground:
 		_on_movement_stopped()
-
+	
 
 ## Triggers when the sleeping state of the rigidbody is changed.
 ## Checks the rolled value, and decides to either reroll or freeze and emit their value.
