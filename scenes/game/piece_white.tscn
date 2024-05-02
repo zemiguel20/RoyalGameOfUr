@@ -32,7 +32,7 @@ script = ExtResource("1_12mt1")
 mesh = SubResource("CylinderMesh_lftn1")
 surface_material_override/0 = SubResource("StandardMaterial3D_tlg37")
 
-[node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
+[node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("meshes_to_highlight")]
 script = ExtResource("2_llyc4")
 highlight_material = SubResource("ShaderMaterial_mchf5")
-mesh_to_highlight = NodePath("../Model")
+meshes_to_highlight = [NodePath("../Model")]

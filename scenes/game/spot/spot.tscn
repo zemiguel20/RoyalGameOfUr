@@ -30,10 +30,10 @@ script = ExtResource("1_76bsc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0602112, 0)
 shape = SubResource("BoxShape3D_7g88m")
 
-[node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
+[node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("meshes_to_highlight")]
 script = ExtResource("2_mfjwg")
 highlight_material = SubResource("ShaderMaterial_kdq40")
-mesh_to_highlight = NodePath("../HighlightMesh")
+meshes_to_highlight = [NodePath("../HighlightMesh")]
 
 [node name="HighlightMesh" type="MeshInstance3D" parent="."]
 cast_shadow = 0
