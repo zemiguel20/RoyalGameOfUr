@@ -6,30 +6,19 @@ extends Node3D
 
 enum MoveAnim {ARC, LINE, NONE}
 
-const MOVE_ARC_HEIGHT: float = 1.0
-const MOVE_DURATION: float = 0.4
+const MOVE_ARC_HEIGHT : float = 1.0
+const MOVE_DURATION : float = 0.4
 
-@export var player: General.Player
+@export var player : General.Player
 
-var _highlighter
-
-
-func _ready():
-	_highlighter = get_node("Highlighter")
+@onready var _highlighter := $Highlighter as MaterialHighlighterComponent
 
 
-func highlight():
-	if _highlighter == null:
-		push_warning("No highlighter found")
+func set_highlight(active : bool, color := Color.WHITE) -> void:
+	if !_highlighter:
 		return
-	_highlighter.highlight()
-
-
-func dehighlight():
-	if _highlighter == null:
-		push_warning("No highlighter found")
-		return
-	_highlighter.dehighlight()
+	_highlighter.highlight_color = color
+	_highlighter.active = active
 
 
 func move(to: Vector3, anim: MoveAnim):

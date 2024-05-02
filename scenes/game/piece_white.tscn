@@ -1,25 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk03upbyn04nu"]
+[gd_scene load_steps=9 format=3 uid="uid://dk03upbyn04nu"]
 
 [ext_resource type="Script" path="res://scripts/game/piece.gd" id="1_12mt1"]
+[ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="2_co58u"]
+[ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="2_en43k"]
 [ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="2_llyc4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlg37"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lftn1"]
 height = 0.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dw4ip"]
-albedo_color = Color(0.862745, 0.729412, 0.243137, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlg37"]
+albedo_color = Color(0.778335, 0.647139, 0.573442, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwr0o"]
+render_priority = 0
+shader = ExtResource("2_en43k")
+shader_parameter/border_width = 0.07
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mchf5"]
+resource_local_to_scene = true
+render_priority = 10
+next_pass = SubResource("ShaderMaterial_rwr0o")
+shader = ExtResource("2_co58u")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alpha = 0.25
 
 [node name="P1Piece" type="Node3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_12mt1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_tlg37")
+[node name="Model" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_lftn1")
+surface_material_override/0 = SubResource("StandardMaterial3D_tlg37")
 
 [node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
 script = ExtResource("2_llyc4")
-highlight_material = SubResource("StandardMaterial3D_dw4ip")
-mesh_to_highlight = NodePath("../MeshInstance3D")
+highlight_material = SubResource("ShaderMaterial_mchf5")
+mesh_to_highlight = NodePath("../Model")

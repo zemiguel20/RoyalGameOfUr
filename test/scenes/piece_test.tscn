@@ -1,15 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2624smcv0td8"]
+[gd_scene load_steps=6 format=3 uid="uid://c2624smcv0td8"]
 
 [ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece_white.tscn" id="1_jvxm2"]
+[ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/piece_black.tscn" id="2_hi6r4"]
 
 [sub_resource type="GDScript" id="GDScript_7jrdc"]
 script/source = "extends Node
 
 
 @onready var piece = $Piece as Piece
+@onready var piece2 = $P2Piece as Piece
 
 
 func _ready():
+	_color_roulette()
 	print(\"Test Arc animation\")
 	await get_tree().create_timer(0.5).timeout
 	await piece.move(piece.global_position + Vector3(0,0,-5), Piece.MoveAnim.ARC)
@@ -24,10 +27,16 @@ func _ready():
 	await piece.move(piece.global_position + Vector3(0,0,5), Piece.MoveAnim.NONE)
 	print(\"Test highlight\")
 	await get_tree().create_timer(0.5).timeout
-	piece.highlight()
-	await get_tree().create_timer(2.0).timeout
-	piece.dehighlight()
+	piece.set_highlight(true)
+	await get_tree().create_timer(5.0).timeout
+	piece.set_highlight(false)
 	
+
+func _color_roulette():
+	while(true):
+		var rand_color = Color(randf_range(0.0, 1.0), randf_range(0.0, 1.0), randf_range(0.0, 1.0))
+		piece2.set_highlight(true, rand_color)
+		await get_tree().create_timer(1.0).timeout
 "
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3xjdh"]
@@ -39,7 +48,7 @@ albedo_color = Color(1, 0.564706, 0.176471, 1)
 script = SubResource("GDScript_7jrdc")
 
 [node name="Piece" parent="." instance=ExtResource("1_jvxm2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -3.938)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.113132, -3.938)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.00614539, -0.648079, 0.761549, 0, 0.761563, 0.648091, -0.999981, -0.00398277, 0.0046801, 5.4695, 5.41522, -5.8125)
@@ -52,3 +61,6 @@ shadow_enabled = true
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 mesh = SubResource("PlaneMesh_3xjdh")
 material = SubResource("StandardMaterial3D_7kgfi")
+
+[node name="P2Piece" parent="." instance=ExtResource("2_hi6r4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63719, 0.150966, -2.19505)
