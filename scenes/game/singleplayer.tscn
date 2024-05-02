@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scenes/game/quit_button.gd" id="6_3dit1"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://bhokhs6y6rc75" path="res://models/fbx-guard-wip-posed-v2.fbx" id="8_ofv7c"]
-[ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4.tscn" id="9_5lg8h"]
+[ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_die.tscn" id="9_5lg8h"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node

@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://bfyhvb7v43pnc"]
 
-[ext_resource type="PhysicsMaterial" uid="uid://cewt4j3gn56bt" path="res://physics_materials/pm_die.tres" id="1_kmfq0"]
-[ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="2_1i8dq"]
-[ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_normal.tscn" id="3_fxrac"]
-[ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="4_lcjkj"]
+[ext_resource type="PhysicsMaterial" uid="uid://cewt4j3gn56bt" path="res://physics_materials/pm_die.tres" id="1_b5kjg"]
+[ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="2_snn4w"]
+[ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_normal.tscn" id="3_legrj"]
+[ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="4_heb7x"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7xxli"]
 points = PackedVector3Array(-0.0086516, -0.00351831, -0.0050059, -2.69534e-05, 0.0105548, 1.70977e-05, 0.00866721, -0.00351831, -0.0050059, 6.95512e-06, -0.00351831, 0.00999263)
@@ -114,7 +114,7 @@ albedo_color = Color(0.380392, 0.639216, 0.333333, 1)
 
 [node name="D4_Improved" type="RigidBody3D"]
 mass = 4.0
-physics_material_override = ExtResource("1_kmfq0")
+physics_material_override = ExtResource("1_b5kjg")
 gravity_scale = 3.0
 freeze_mode = 1
 continuous_cd = true
@@ -122,11 +122,8 @@ max_contacts_reported = 10
 contact_monitor = true
 linear_damp = 0.3
 angular_damp = 0.3
-script = ExtResource("2_1i8dq")
+script = ExtResource("2_snn4w")
 _throwing_force_magnitude = 10.0
-_throwing_angular_velocity = 0.0
-_throwing_force_direction_range_x = Vector2(0, -1)
-_throwing_force_direction_range_z = Vector2(-0.5, 0.5)
 _mass_on_ground_multiplier = 7.0
 _down_accuracy_threshold = 0.9
 _velocity_threshold = 0.1
@@ -136,7 +133,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_7xxli")
 
 [node name="d4_test" type="Node3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 visible = false
 
 [node name="Simple" type="MeshInstance3D" parent="d4_test"]
@@ -154,22 +151,22 @@ skeleton = NodePath("")
 [node name="Normals" type="Node3D" parent="."]
 transform = Transform3D(0.05, 0, 0.0866025, 0, 0.1, 0, -0.0866025, 0, 0.05, 0, -0.00137585, 0)
 
-[node name="DiceNormal1" parent="Normals" instance=ExtResource("3_fxrac")]
+[node name="DiceNormal1" parent="Normals" instance=ExtResource("3_legrj")]
 transform = Transform3D(1, 0, 5.96046e-08, 0, 0.999999, 0, -5.96046e-08, 0, 1, 0, -0.02, 0)
 opposite_side_value = 1
 
-[node name="DiceNormal2" parent="Normals" instance=ExtResource("3_fxrac")]
+[node name="DiceNormal2" parent="Normals" instance=ExtResource("3_legrj")]
 transform = Transform3D(-0.241594, 0.809894, 0.534513, -0.0234063, -0.555533, 0.831164, 0.970095, 0.188293, 0.15317, -0.0242968, 0.016666, -0.00564879)
 
-[node name="DiceNormal3" parent="Normals" instance=ExtResource("3_fxrac")]
+[node name="DiceNormal3" parent="Normals" instance=ExtResource("3_legrj")]
 transform = Transform3D(-0.3665, -0.830192, -0.420069, -6.81723e-08, -0.451484, 0.892279, -0.930418, 0.32702, 0.165469, 0.0249058, 0.0135445, -0.0098106)
 
-[node name="DiceNormal4" parent="Normals" instance=ExtResource("3_fxrac")]
+[node name="DiceNormal4" parent="Normals" instance=ExtResource("3_legrj")]
 transform = Transform3D(0.995737, 0.00991929, 0.0917004, -0.079273, -0.416195, 0.905812, 0.0471502, -0.909221, -0.413634, -0.00151036, 0.0124858, 0.0265113)
 opposite_side_value = 1
 
 [node name="MaterialHighlighter" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
-script = ExtResource("4_lcjkj")
+script = ExtResource("4_heb7x")
 highlight_material = SubResource("StandardMaterial3D_eqfn5")
 mesh_to_highlight = NodePath("../d4_model_scaled/Final")
 

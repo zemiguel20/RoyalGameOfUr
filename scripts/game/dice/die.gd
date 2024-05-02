@@ -7,22 +7,13 @@ signal roll_finished(value: int)
 @export_category("Throwing Physics")
 ## Magnitude of the throwing force applied to this die when starting a roll.
 @export var _throwing_force_magnitude: float = 1.0
-## Angular velocity applied to this die when starting a roll.
-@export var _throwing_angular_velocity: float = 1.0
-## How long colliders are disable upon throwing. Can ofcourse be set to 0.
-@export var _collision_disabling_duration: float = 0.00
+@export var _min_reroll_force_multiplier: float = 0.2
+@export var _max_reroll_force_multiplier: float = 0.5
 
-@export_subgroup("Throwing Direction")
-## X is min, Y is max
-@export var _throwing_force_direction_range_x := Vector2(-1, 1)
-## X is min, Y is max
-@export var _throwing_force_direction_range_z := Vector2(-1, 1)
-
-@export_category("Gravity")
-@export var _mass_on_ground_multiplier: float = 2
 
 @export_category("Extras")
 @export var _floor_group: String = "Ground"
+@export var _mass_on_ground_multiplier: float = 2
 @export var _down_accuracy_threshold: float = 0.8
 @export var _velocity_threshold: float = 0.05
 #endregion
@@ -30,12 +21,9 @@ signal roll_finished(value: int)
 #region Onready Variables
 @onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
 @onready var _rolling_timer: Timer = $RollTimeoutTimer
-@onready var _collider: CollisionShape3D = $CollisionShape3D
 #endregion
 
 #region Private Variables
-
-var temp2 = false
 var _normal_list: Array[Node]
 var _default_mass
 var _mass_on_ground
@@ -43,11 +31,6 @@ var _roll_value
 
 var _throwing_position
 var _is_rolling
-
-var _invert_throwing_direction
-var _disable_collision = false
-
-var apply_force_this_frame = false
 #endregion
 
 func _ready():
@@ -81,8 +64,6 @@ func outline_if_one() -> void:
 		
 		
 func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
-	#_disable_collision = true
-	
 	# Set some local variables
 	_throwing_position = throwing_spot
 	
@@ -94,10 +75,6 @@ func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	mass = _default_mass
 	freeze = false
 	_apply_throwing_force(throwing_spot, is_reroll)
-	
-	# Disable the collider after a bit.
-	await get_tree().create_timer(_collision_disabling_duration).timeout
-	_disable_collision = false
 	
 	# Wait a short while before setting _is_rolling to true.
 	# Immediately setting will trigger _on_movement_stopped with sleeping = false,
@@ -113,11 +90,6 @@ func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	
 ## Changing the collision state should be done in _physics_process.
 func _physics_process(_delta):
-	if _disable_collision and not _collider.disabled:
-		_collider.disabled = true
-	elif not _disable_collision and _collider.disabled:
-		_collider.disabled = false
-		
 	if linear_velocity.length() < _velocity_threshold * global_basis.get_scale().x \
 		and angular_velocity.length() < _velocity_threshold * global_basis.get_scale().x \
 		and _is_rolling \
@@ -170,12 +142,11 @@ func _get_random_rotation() -> Basis:
 ## Throws the dice, by calculating a direction and applying an impulse force.
 ## [param playerID] is used to indicate if we should invert the throwing direction.
 func _apply_throwing_force(dice_spot: DiceSpot, is_reroll: bool = false):
-	var throw_direction = dice_spot.global_basis.z.normalized()	# Forward vector of throwing position.
+	var throw_direction = dice_spot.get_direction()
 	var multiplier = dice_spot.throwing_velocity_multiplier
 	var throw_force = throw_direction * _throwing_force_magnitude * global_basis.get_scale().x * multiplier
 	if is_reroll:
-		print("REROLL")
-		throw_force *= randf_range(0.4, 0.6)
+		throw_force *= randf_range(_min_reroll_force_multiplier, _max_reroll_force_multiplier)
 	
 	## Setting velocity rather than applying force makes sure that the forces are not additive.
 	linear_velocity = throw_force
@@ -188,7 +159,7 @@ func _check_roll_value():
 	var best_value = -1
 	
 	for normal: DiceNormal in _normal_list:
-		var down_direction = -normal.global_transform.basis.y.normalized() # Get down direction of normal.
+		var down_direction = -normal.global_basis.y.normalized() # Get down direction of normal.
 		var down_accuracy = down_direction.dot(Vector3.DOWN) # Use dot product to check if it is facing down in world space.
 		if down_accuracy > max_down_accuracy:
 			max_down_accuracy = down_accuracy
