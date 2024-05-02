@@ -17,11 +17,8 @@ const PIECE_OFFSET_Y = 0.15
 @export var force_allow_stack: bool = false ## If true, always allows stacking, independent of settings
 
 var _pieces: Array[Piece] = []
-var _highlighter
 
-
-func _ready():
-	_highlighter = get_node("Highlighter")
+@onready var _highlighter := $Highlighter as MaterialHighlighterComponent
 
 
 ## Places the new pieces in the spot, with the given animation.
@@ -88,7 +85,7 @@ func remove_pieces() -> Array[Piece]:
 
 func highlight_base():
 	if _highlighter != null:
-		_highlighter.highlight()
+		_highlighter.active = true
 
 
 func highlight_pieces():
@@ -98,7 +95,7 @@ func highlight_pieces():
 
 func dehighlight_base():
 	if _highlighter != null:
-		_highlighter.dehighlight()
+		_highlighter.active = false
 
 
 func dehighlight_pieces():
