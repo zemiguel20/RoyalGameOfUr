@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/game/dice/dice_label.gd" id="6_wittj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0n13x"]
-size = Vector3(6, 5, 6)
+size = Vector3(6, 3.83289, 3.69043)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rs5kh"]
 size = Vector3(10, 12, 1)
@@ -34,7 +34,6 @@ point_count = 4
 [node name="Dice" type="Node3D"]
 script = ExtResource("1_ka5gv")
 _die_scene = ExtResource("2_66rme")
-_minimal_dice_offset = 0.8
 
 [node name="DiceArea_P1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97471, 0)

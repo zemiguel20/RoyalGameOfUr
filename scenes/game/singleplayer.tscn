@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=23 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_1w765"]
 [ext_resource type="PhysicsMaterial" uid="uid://bm2xsy30hwwj7" path="res://physics_materials/pm_dice_floor.tres" id="2_inw0s"]
@@ -25,11 +25,17 @@ func _on_prototype_ui_fadeout_finished():
 [sub_resource type="BoxShape3D" id="BoxShape3D_080q8"]
 size = Vector3(0.358398, 0.128358, 0.125)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8xt6p"]
+size = Vector3(6, 3.83289, 4.77588)
+
 [sub_resource type="BoxMesh" id="BoxMesh_xk8l6"]
 size = Vector3(6, 12, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_871mg"]
 size = Vector3(6, 12, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3iugv"]
+size = Vector3(6, 3.83289, 3.69043)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k58kw"]
 
@@ -146,6 +152,10 @@ transform = Transform3D(0.235719, 0, -0.971822, 0, 1, 0, 0.971822, 0, 0.235719, 
 [node name="ClickHitbox_P1" parent="Boardgame_Singleplayer/Dice/DiceArea_P1" index="2"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 7.62939e-06, 0, -1.33679)
 
+[node name="CollisionShape3D" parent="Boardgame_Singleplayer/Dice/DiceArea_P1/ClickHitbox_P1" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52588e-05, -0.0682981, 0.612061)
+shape = SubResource("BoxShape3D_8xt6p")
+
 [node name="DiceBorders_P1" parent="Boardgame_Singleplayer/Dice/DiceArea_P1" index="3"]
 transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, -7.62939e-06, 0, -0.539154)
 visible = false
@@ -254,6 +264,9 @@ visible = true
 transform = Transform3D(0.688813, 0, 2.98023e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = true
 
+[node name="CollisionShape3D" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ClickHitbox_P2" index="0"]
+shape = SubResource("BoxShape3D_3iugv")
+
 [node name="Environment" parent="Boardgame_Singleplayer" index="5"]
 visible = false
 
@@ -346,5 +359,6 @@ visible = false
 
 [editable path="Environment"]
 [editable path="Boardgame_Singleplayer"]
+[editable path="Boardgame_Singleplayer/Board"]
 [editable path="Boardgame_Singleplayer/Dice"]
 [editable path="D4_Improved"]
