@@ -41,10 +41,12 @@ func end_selection():
 		move.from.selected.disconnect(_on_from_spot_selected.bind(move.from))
 		move.to.selected.disconnect(_on_to_spot_selected.bind(move.to))
 		
-		move.from.dehighlight_base()
-		move.from.dehighlight_pieces()
-		move.to.dehighlight_base()
-		move.to.dehighlight_pieces()
+		move.from.set_highlight(false)
+		move.to.set_highlight(false)
+		for piece in move.from.get_pieces():
+			piece.set_highlight(false)
+		for piece in move.to.get_pieces():
+			piece.set_highlight(false)
 	
 	_selected_from_spot = null
 
@@ -56,15 +58,15 @@ func _on_move_phase_started(_player, moves: Array[Move]):
 func _on_from_spot_hovered(spot: Spot):
 	if not _selected_from_spot: # Hovering only works if there is no selection
 		for move in _filter_moves(spot):
-			move.from.highlight_base()
-			move.to.highlight_base()
+			move.from.set_highlight(true)
+			move.to.set_highlight(true)
 
 
 func _on_from_spot_dehovered(spot: Spot):
 	if not _selected_from_spot: # Hovering only works if there is no selection
 		for move in _filter_moves(spot):
-			move.from.dehighlight_base()
-			move.to.dehighlight_base()
+			move.from.set_highlight(false)
+			move.to.set_highlight(false)
 
 
 func _on_from_spot_selected(spot: Spot):
@@ -105,20 +107,24 @@ func _input(event):
 
 func _pre_selection_highlight():
 	for move in _moves:
-		move.from.highlight_pieces()
+		for piece in move.from.get_pieces():
+			piece.set_highlight(true)
 		
-		move.from.dehighlight_base()
-		move.to.dehighlight_base()
+		move.from.set_highlight(false)
+		move.to.set_highlight(false)
 
 
 func _post_selection_highlight():
 	for move in _moves:
-		move.from.dehighlight_pieces()
+		for piece in move.from.get_pieces():
+			piece.set_highlight(false)
 	
 	for move in _filter_moves(_selected_from_spot):
-		move.from.highlight_base()
-		move.from.highlight_pieces()
-		move.to.highlight_base()
+		move.from.set_highlight(true, Color.GREEN)
+		move.to.set_highlight(true, Color.GREEN)
+		
+		for piece in move.from.get_pieces():
+			piece.set_highlight(true, Color.GREEN)
 
 
 func _filter_moves(from: Spot = null, to: Spot = null) -> Array[Move]:
