@@ -83,24 +83,11 @@ func remove_pieces() -> Array[Piece]:
 	return pieces
 
 
-func highlight_base():
-	if _highlighter != null:
-		_highlighter.active = true
-
-
-func highlight_pieces():
-	for piece in _pieces:
-		piece.highlight()
-
-
-func dehighlight_base():
-	if _highlighter != null:
-		_highlighter.active = false
-
-
-func dehighlight_pieces():
-	for piece in _pieces:
-		piece.dehighlight()
+func set_highlight(active : bool, color := Color.WHITE) -> void:
+	if !_highlighter:
+		return
+	_highlighter.highlight_color = color
+	_highlighter.active = active
 
 
 func _place_animation(new_pieces: Array[Piece], anim: Piece.MoveAnim, curr_num_pieces: int):

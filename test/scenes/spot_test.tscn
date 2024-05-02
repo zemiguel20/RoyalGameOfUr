@@ -14,6 +14,7 @@ script/source = "extends Node
 @onready var piece1 = $Piece as Piece
 @onready var piece2 = $Piece2 as Piece
 @onready var piece3 = $Piece3 as Piece
+@onready var tile_2 = $Tile2
 
 
 var p1_start = Vector3.ZERO
@@ -25,6 +26,8 @@ func _ready() -> void:
 	p1_start = piece1.global_position
 	p2_start = piece2.global_position
 	p3_start = piece3.global_position
+	
+	_color_roulette()
 	
 	await _reset()
 
@@ -80,10 +83,6 @@ func _ready() -> void:
 	await r_tile.place_pieces([piece1], Piece.MoveAnim.ARC)
 	await r_tile.place_pieces([piece2], Piece.MoveAnim.ARC)
 	await tile.place_pieces(r_tile.remove_pieces(), Piece.MoveAnim.ARC)
-	
-	print(\"Testing highlight\")
-	tile.highlight_base()
-	tile.highlight_pieces()
 
 
 func _reset():
@@ -96,6 +95,13 @@ func _reset():
 	Settings.can_stack_in_safe_spot = false
 	tile.force_allow_stack = false
 	await get_tree().create_timer(1.0).timeout
+
+
+func _color_roulette():
+	while(true):
+		var rand_color = Color(randf_range(0.0, 1.0), randf_range(0.0, 1.0), randf_range(0.0, 1.0))
+		tile_2.set_highlight(true, rand_color)
+		await get_tree().create_timer(1.0).timeout
 "
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g3yvc"]
@@ -122,6 +128,9 @@ shadow_enabled = true
 
 [node name="Tile" parent="." instance=ExtResource("1_twtv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.639, 0.005, 0.015)
+
+[node name="Tile2" parent="." instance=ExtResource("1_twtv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06721, 0.005, 2.70799)
 
 [node name="RosetteTile" parent="." instance=ExtResource("2_qxn0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.465, 0.00365034, 0.028)
