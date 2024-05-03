@@ -46,7 +46,7 @@ _die_scene = ExtResource("2_obgxw")
 _roll_shaking_enabled = true
 
 [node name="DiceArea_P1" type="Node3D" parent="."]
-transform = Transform3D(0.026, 0, 1.54972e-09, 0, 0.026, 0, -1.54972e-09, 0, 0.026, 0, 2.975, 0)
+transform = Transform3D(0.026, 0, 1.54972e-09, 0, 0.026, 0, -1.54972e-09, 0, 0.026, 0, 0.1, 0.21102)
 
 [node name="ThrowingSpots_P1" type="Node3D" parent="DiceArea_P1"]
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 2.87025, 0.505961, -2.24774)
@@ -176,7 +176,7 @@ _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
 
 [node name="DiceArea_P2" type="Node3D" parent="."]
-transform = Transform3D(0.026, 0, 1.54972e-09, 0, 0.026, 0, -1.54972e-09, 0, 0.026, -7.62939e-06, 2.975, -15.5775)
+transform = Transform3D(0.026, 0, 1.54972e-09, 0, 0.026, 0, -1.54972e-09, 0, 0.026, 0, 0.1, -0.131)
 
 [node name="ThrowingSpots_P2" type="Node3D" parent="DiceArea_P2"]
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.96738, 1.5, 0.194702)

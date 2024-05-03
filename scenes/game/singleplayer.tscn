@@ -1,14 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=19 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_1w765"]
 [ext_resource type="PhysicsMaterial" uid="uid://bm2xsy30hwwj7" path="res://physics_materials/pm_dice_floor.tres" id="2_inw0s"]
-[ext_resource type="PackedScene" uid="uid://dtelb85wam1x3" path="res://test/scenes/gamemode_ai_test.tscn" id="3_dtnui"]
-[ext_resource type="PackedScene" uid="uid://ckh07dylodtpk" path="res://scenes/game/dice/dice_spawn_spot.tscn" id="4_txp5g"]
-[ext_resource type="Script" path="res://scenes/game/prototype_ui.gd" id="5_8sxhn"]
-[ext_resource type="Script" path="res://scenes/game/quit_button.gd" id="6_3dit1"]
+[ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
+[ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="5_8sxhn"]
+[ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://bhokhs6y6rc75" path="res://models/fbx-guard-wip-posed-v2.fbx" id="8_ofv7c"]
 [ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_die.tscn" id="9_5lg8h"]
+[ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -24,18 +24,6 @@ func _on_prototype_ui_fadeout_finished():
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_080q8"]
 size = Vector3(0.358398, 0.128358, 0.125)
-
-[sub_resource type="BoxMesh" id="BoxMesh_xk8l6"]
-size = Vector3(6, 12, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_871mg"]
-size = Vector3(6, 12, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8xt6p"]
-size = Vector3(6, 3.83289, 4.77588)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_3iugv"]
-size = Vector3(6, 3.83289, 3.69043)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k58kw"]
 
@@ -62,7 +50,7 @@ Button/styles/pressed = SubResource("StyleBoxEmpty_84i4a")
 [sub_resource type="BoxMesh" id="BoxMesh_smyfn"]
 size = Vector3(1, 2, 1)
 
-[node name="Singleplayer_Test" type="Node"]
+[node name="Singleplayer" type="Node"]
 script = SubResource("GDScript_fbn4f")
 
 [node name="Environment" parent="." instance=ExtResource("1_1w765")]
@@ -90,101 +78,21 @@ shape = SubResource("BoxShape3D_080q8")
 [node name="Board2" parent="Environment/game_for_scale" index="0"]
 visible = true
 
-[node name="Boardgame_Singleplayer" parent="." instance=ExtResource("3_dtnui")]
-script = null
+[node name="Boardgame" parent="." instance=ExtResource("3_xprge")]
 
-[node name="Board" parent="Boardgame_Singleplayer" index="1"]
-transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 3.35944, 0.0837373, 5.57506)
+[node name="AIPlayerHard" parent="." node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("9_m0jtg")]
+_dice = NodePath("../Boardgame/Dice")
+_move_picker = NodePath("../Boardgame/MovePicker")
 
-[node name="Dice" parent="Boardgame_Singleplayer" index="2"]
-transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 3.34168, 0.0789857, 5.56132)
+[node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 3.55736, 0.46958, 5.87574)
+max_degrees_down = 50.0
+max_degrees_left = 32.0
+max_degrees_right = 5.0
+_board_look_rotation = Vector3(-35, 32, 0)
 
-[node name="DiceArea_P1" parent="Boardgame_Singleplayer/Dice" index="0"]
-transform = Transform3D(0.026, 0, 1.86265e-09, 0, 0.026, 0, -1.86265e-09, 0, 0.026, 0, 0.1, 0.21102)
-
-[node name="ThrowingSpots_P1" parent="Boardgame_Singleplayer/Dice/DiceArea_P1" index="0"]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 2.943, 0.5, -1.324)
-
-[node name="SpawnSpots_P1" parent="Boardgame_Singleplayer/Dice/DiceArea_P1" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.62939e-06, -3, -1.36588)
-
-[node name="SpawnSpot10" parent="Boardgame_Singleplayer/Dice/DiceArea_P1/SpawnSpots_P1" index="4" instance=ExtResource("4_txp5g")]
-transform = Transform3D(0.456772, 0, 0.889584, 0, 1, 0, -0.889584, 0, 0.456772, 2.48492, 0, -0.266357)
-
-[node name="SpawnSpot11" parent="Boardgame_Singleplayer/Dice/DiceArea_P1/SpawnSpots_P1" index="5" instance=ExtResource("4_txp5g")]
-transform = Transform3D(0.527801, 0, 0.849368, 0, 1, 0, -0.849368, 0, 0.527801, 2.98527, 0, 1.02374)
-
-[node name="SpawnSpot12" parent="Boardgame_Singleplayer/Dice/DiceArea_P1/SpawnSpots_P1" index="6" instance=ExtResource("4_txp5g")]
-transform = Transform3D(0.235719, 0, -0.971822, 0, 1, 0, 0.971822, 0, 0.235719, -3.53115, 0, -0.863342)
-
-[node name="SpawnSpot13" parent="Boardgame_Singleplayer/Dice/DiceArea_P1/SpawnSpots_P1" index="7" instance=ExtResource("4_txp5g")]
-transform = Transform3D(0.235719, 0, -0.971822, 0, 1, 0, 0.971822, 0, 0.235719, -3.53585, -7.15256e-07, 1.50531)
-
-[node name="SpawnSpot14" parent="Boardgame_Singleplayer/Dice/DiceArea_P1/SpawnSpots_P1" index="8" instance=ExtResource("4_txp5g")]
-transform = Transform3D(0.235719, 0, -0.971822, 0, 1, 0, 0.971822, 0, 0.235719, 4.19296, -7.15256e-07, -1.14572)
-
-[node name="DiceBorders_P1" parent="Boardgame_Singleplayer/Dice/DiceArea_P1" index="2"]
-transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, 0, 0, 0)
-
-[node name="Debug_MeshInstance3D" parent="Boardgame_Singleplayer/Dice/DiceArea_P1/DiceBorders_P1/Wall3" index="1"]
-mesh = SubResource("BoxMesh_xk8l6")
-
-[node name="Debug_MeshInstance3D" parent="Boardgame_Singleplayer/Dice/DiceArea_P1/DiceBorders_P1/Wall4" index="1"]
-mesh = SubResource("BoxMesh_871mg")
-
-[node name="CollisionShape3D" parent="Boardgame_Singleplayer/Dice/DiceArea_P1/ClickHitbox_P1" index="0"]
-shape = SubResource("BoxShape3D_8xt6p")
-
-[node name="DiceArea_P2" parent="Boardgame_Singleplayer/Dice" index="1"]
-transform = Transform3D(0.026, 0, 2.79397e-09, 0, 0.026, 0, -2.79397e-09, 0, 0.026, -2.38419e-07, 0.1, -0.130684)
-
-[node name="ThrowingSpots_P2" parent="Boardgame_Singleplayer/Dice/DiceArea_P2" index="0"]
-transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967, 0.5, 0.71)
-
-[node name="ThrowSpot1" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999985, -0.101, 0)
-
-[node name="ThrowSpot2" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00008, -0.101, -4.57764e-05)
-
-[node name="ThrowSpot3" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000167847, -0.101, 1.52588e-05)
-
-[node name="ThrowSpot4" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="3"]
-transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.476288, 1.73375, 7.62939e-06)
-
-[node name="ThrowSpot5" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ThrowingSpots_P2" index="4"]
-transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 1.60487, 1.73375, -7.62939e-06)
-
-[node name="SpawnSpots_P2" parent="Boardgame_Singleplayer/Dice/DiceArea_P2" index="1"]
-transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.253242, -3, -0.616714)
-
-[node name="SpawnSpot9" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/SpawnSpots_P2" index="4" instance=ExtResource("4_txp5g")]
-transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, 4.00871, 4.76837e-07, 0.912888)
-
-[node name="SpawnSpot10" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/SpawnSpots_P2" index="5" instance=ExtResource("4_txp5g")]
-transform = Transform3D(0.895207, 0, 0.445651, 0, 1, 0, -0.445651, 0, 0.895207, 3.00977, 4.76837e-07, -0.880585)
-
-[node name="SpawnSpot11" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/SpawnSpots_P2" index="6" instance=ExtResource("4_txp5g")]
-transform = Transform3D(0.497761, 0, 0.867314, 0, 1, 0, -0.867314, 0, 0.497761, -3.69106, 0, -1.1012)
-
-[node name="SpawnSpot12" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/SpawnSpots_P2" index="7" instance=ExtResource("4_txp5g")]
-transform = Transform3D(0.497761, 0, 0.867314, 0, 1, 0, -0.867314, 0, 0.497761, -2.835, 0, 0.744186)
-
-[node name="CollisionShape3D" parent="Boardgame_Singleplayer/Dice/DiceArea_P2/ClickHitbox_P2" index="0"]
-shape = SubResource("BoxShape3D_3iugv")
-
-[node name="Label3D_Outcome_P2" parent="Boardgame_Singleplayer/Dice/DiceArea_P2" index="4"]
-visible = false
-
-[node name="Camera3D" parent="Boardgame_Singleplayer" index="5"]
-visible = false
-
-[node name="CanvasLayer" parent="Boardgame_Singleplayer" index="6"]
-visible = false
-
-[node name="Environment" parent="Boardgame_Singleplayer" index="7"]
-visible = false
+[node name="Opponent_Model" parent="." instance=ExtResource("8_ofv7c")]
+transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 3.1308, -0.313869, 5.09029)
 
 [node name="Prototype_UI" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -239,16 +147,6 @@ theme = SubResource("Theme_q1r3c")
 text = "Quit"
 script = ExtResource("6_3dit1")
 
-[node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
-transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 3.55736, 0.46958, 5.87574)
-max_degrees_down = 50.0
-max_degrees_left = 32.0
-max_degrees_right = 5.0
-_board_look_rotation = Vector3(-35, 32, 0)
-
-[node name="Opponent_Model" parent="." instance=ExtResource("8_ofv7c")]
-transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 3.1308, -0.313869, 5.09029)
-
 [node name="Reference" type="CSGMesh3D" parent="."]
 transform = Transform3D(0.529919, 0, -0.848048, 0, 1, 0, 0.848048, 0, 0.529919, 0.830782, 0.672215, 3.81683)
 visible = false
@@ -259,16 +157,18 @@ process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17741, 0.0848224, 5.32352)
 visible = false
 
-[connection signal="game_ended" from="Boardgame_Singleplayer/GameStateController" to="Prototype_UI" method="_on_game_ended"]
-[connection signal="game_started" from="Boardgame_Singleplayer/GameStateController" to="Prototype_UI" method="_on_game_started"]
-[connection signal="game_started" from="Boardgame_Singleplayer/GameStateController" to="Custom_Camera" method="_on_game_start"]
+[connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
+[connection signal="game_started" from="Boardgame/GameStateController" to="Custom_Camera" method="_on_game_start"]
+[connection signal="move_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_move_phase_started"]
+[connection signal="roll_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_roll_phase_started"]
+[connection signal="move_executed" from="AIPlayerHard" to="Boardgame/GameStateController" method="_on_move_executed"]
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
-[connection signal="play_pressed" from="Prototype_UI" to="Boardgame_Singleplayer/GameStateController" method="start_game"]
-[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Boardgame_Singleplayer/GameStateController" method="start_game"]
+[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Boardgame/GameStateController" method="start_game"]
+[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Quit" to="Prototype_UI/Main Menu/Quit" method="_on_pressed"]
 
 [editable path="Environment"]
-[editable path="Boardgame_Singleplayer"]
-[editable path="Boardgame_Singleplayer/Board"]
-[editable path="Boardgame_Singleplayer/Dice"]
+[editable path="Boardgame"]
+[editable path="Boardgame/Board"]
+[editable path="Boardgame/Dice"]
 [editable path="D4_Improved"]

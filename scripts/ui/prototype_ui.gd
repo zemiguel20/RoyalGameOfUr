@@ -44,12 +44,12 @@ func _fadeout(duration: float):
 		#_on_game_ended()
 
 
-func _on_color_rect_gui_input(event):
-	## Check if Play button has been clicked.
-	print("GUI")
-	if event is InputEventMouseButton:
-		play_pressed.emit()
-
-
-func _on_color_rect_mouse_entered():
-	print("hffw")
+#func _on_color_rect_gui_input(event):
+	### Check if Play button has been clicked.
+	#print("GUI")
+	#if event is InputEventMouseButton:
+		#play_pressed.emit()
+#
+#
+#func _on_color_rect_mouse_entered():
+	#print("hffw")
