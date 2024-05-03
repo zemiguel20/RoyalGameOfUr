@@ -29,6 +29,7 @@ shader_parameter/alpha = 0.25
 script = ExtResource("1_12mt1")
 
 [node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("CylinderMesh_lftn1")
 surface_material_override/0 = SubResource("StandardMaterial3D_tlg37")
 
