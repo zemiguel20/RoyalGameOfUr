@@ -1,7 +1,7 @@
 extends Node
 
 
-var can_stack_in_safe_spot: bool = false
+var can_stack_in_safe_spot: bool = true
 ## The number of pieces that will be used in the board game.
 var num_pieces: int = 7:
 	set(value):

@@ -79,6 +79,7 @@ shape = SubResource("BoxShape3D_080q8")
 visible = true
 
 [node name="Boardgame" parent="." instance=ExtResource("3_xprge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="AIPlayerHard" parent="." node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("9_m0jtg")]
 _dice = NodePath("../Boardgame/Dice")

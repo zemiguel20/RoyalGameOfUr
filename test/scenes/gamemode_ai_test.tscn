@@ -1,15 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtelb85wam1x3"]
+[gd_scene load_steps=7 format=3 uid="uid://dtelb85wam1x3"]
 
-[ext_resource type="Script" path="res://scripts/game/gamestate_controller.gd" id="1_n7p33"]
-[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="2_nyr51"]
-[ext_resource type="PackedScene" uid="uid://b7wqojt2nphja" path="res://scenes/game/dice/dice_controller_environment.tscn" id="3_ap6th"]
-[ext_resource type="Script" path="res://scripts/game/move_picker.gd" id="4_ja2vu"]
+[ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="1_u8f6v"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="5_5mf5v"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
 
-@onready var controller = $GameStateController as GameStateController
+@onready var controller = $Boardgame/GameStateController as GameStateController
 var started: bool = false
 
 func _input(event: InputEvent) -> void:
@@ -77,26 +74,18 @@ size = Vector2(100, 100)
 [node name="SinglePlayer" type="Node"]
 script = SubResource("GDScript_b8xbw")
 
-[node name="GameStateController" type="Node" parent="." node_paths=PackedStringArray("_board")]
-script = ExtResource("1_n7p33")
-_board = NodePath("../Board")
+[node name="Boardgame" parent="." instance=ExtResource("1_u8f6v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.359, -3.61995, -5.575)
 
-[node name="Board" parent="." instance=ExtResource("2_nyr51")]
-transform = Transform3D(0.0369997, 0, -0.000144654, 0, 0.037, 0, 0.000144654, 0, 0.0369997, 0, -3.5142, 0)
+[node name="Board" parent="Boardgame" index="1"]
+transform = Transform3D(0.037, 0, 0, 0, 0.037, 0, 0, 0, 0.037, 3.35944, 0.0837373, 5.57506)
 
-[node name="Dice" parent="." instance=ExtResource("3_ap6th")]
-transform = Transform3D(-1.1365e-09, 0, 0.026, 0, 0.026, 0, -0.026, 0, -1.1365e-09, -1.34219e-08, -3.508, -0.307057)
+[node name="Dice" parent="Boardgame" index="2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.34168, 0.0890064, 5.56132)
 
-[node name="DiceArea_P1" parent="Dice" index="0"]
-transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, -14.0622, 2.97472, 9.59756)
-
-[node name="DiceArea_P2" parent="Dice" index="1"]
-transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, -14.0622, 2.97472, -7.6722)
-
-[node name="MovePicker" type="Node" parent="."]
-script = ExtResource("4_ja2vu")
-
-[node name="AIPlayerHard" parent="." instance=ExtResource("5_5mf5v")]
+[node name="AIPlayerHard" parent="." node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("5_5mf5v")]
+_dice = NodePath("../Boardgame/Dice")
+_move_picker = NodePath("../Boardgame/MovePicker")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.0192364, -0.835694, 0.548858, 0, 0.54896, 0.835849, -0.999815, -0.0160787, 0.01056, 0.23475, -3.18271, 0.00451659)
@@ -140,10 +129,10 @@ mesh = SubResource("PlaneMesh_0esbx")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
 
-[connection signal="move_phase_started" from="GameStateController" to="MovePicker" method="_on_move_phase_started"]
-[connection signal="roll_phase_started" from="GameStateController" to="Dice" method="on_roll_phase_started"]
-[connection signal="roll_finished" from="Dice" to="GameStateController" method="_on_roll_ended"]
-[connection signal="move_executed" from="MovePicker" to="GameStateController" method="_on_move_executed"]
+[connection signal="move_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_move_phase_started"]
+[connection signal="roll_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_roll_phase_started"]
+[connection signal="move_executed" from="AIPlayerHard" to="Boardgame/GameStateController" method="_on_move_executed"]
 
-[editable path="Board"]
-[editable path="Dice"]
+[editable path="Boardgame"]
+[editable path="Boardgame/Board"]
+[editable path="Boardgame/Dice"]
