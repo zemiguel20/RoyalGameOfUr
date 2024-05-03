@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://swh27vy5ypr8" path="res://textures/arrow.svg" id="2_nsxkj"]
 
 [sub_resource type="Curve3D" id="Curve3D_ugcqv"]
+resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.69794, 0, -0.0334239, 0, 0, 0, 0, 0, 0, 3.59643, 0, -0.0200545, 0, 0, 0, 0, 0, 0, 3.55632, 0, 2.17256, 0, 0, 0, 0, 0, 0, 3.35078, -1.8196, 3.91699, 0, 0, 0, 0, 0, 0, -2.21057, 0.174085, 5.64011),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
@@ -15,3 +16,7 @@ up_vector_enabled = false
 curve = SubResource("Curve3D_ugcqv")
 script = ExtResource("1_soc02")
 texture = ExtResource("2_nsxkj")
+sprite_scale = Vector3(0.5, 0.5, 0.5)
+sorting_offset = 100.0
+density = 7.0
+velocity = 0.5

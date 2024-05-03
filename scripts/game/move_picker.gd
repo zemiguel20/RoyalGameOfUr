@@ -4,8 +4,18 @@ extends Node
 
 signal move_executed(move: Move)
 
-var _moves: Array[Move] = []
-var _selected_from_spot: Spot = null
+var _moves : Array[Move] = []
+var _selected_from_spot : Spot = null
+var _path_highlighters : Array[ScrollingTexturePath3D] = []
+
+
+func _ready():
+	var move_path_highlight = preload("res://scenes/move_path_highlight.tscn")
+	for i in 2: # TODO: make this equal to number of free spots once the get_possible_moves supports all free spots
+		var path = move_path_highlight.instantiate()
+		path.curve.clear_points()
+		_path_highlighters.append(path)
+		add_child(path)
 
 
 func get_moves() -> Array[Move]:
@@ -48,6 +58,9 @@ func end_selection():
 		for piece in move.to.get_pieces():
 			piece.set_highlight(false)
 	
+	for path_highlighter in _path_highlighters:
+		path_highlighter.curve.clear_points()
+	
 	_selected_from_spot = null
 
 
@@ -57,16 +70,25 @@ func _on_move_phase_started(_player, moves: Array[Move]):
 
 func _on_from_spot_hovered(spot: Spot):
 	if not _selected_from_spot: # Hovering only works if there is no selection
-		for move in _filter_moves(spot):
+		var linked_moves = _filter_moves(spot)
+		for i in linked_moves.size():
+			var move = linked_moves[i]
 			move.from.set_highlight(true)
 			move.to.set_highlight(true)
+			var path_highlighter = _path_highlighters[i]
+			path_highlighter.curve.add_point(move.from.global_position)
+			path_highlighter.curve.add_point(move.to.global_position)
 
 
 func _on_from_spot_dehovered(spot: Spot):
 	if not _selected_from_spot: # Hovering only works if there is no selection
-		for move in _filter_moves(spot):
+		var linked_moves = _filter_moves(spot)
+		for i in linked_moves.size():
+			var move = linked_moves[i]
 			move.from.set_highlight(false)
 			move.to.set_highlight(false)
+			var path_highlighter = _path_highlighters[i]
+			path_highlighter.curve.clear_points()
 
 
 func _on_from_spot_selected(spot: Spot):
@@ -112,6 +134,9 @@ func _pre_selection_highlight():
 		
 		move.from.set_highlight(false)
 		move.to.set_highlight(false)
+	
+	for path_highlighter in _path_highlighters:
+		path_highlighter.curve.clear_points()
 
 
 func _post_selection_highlight():
