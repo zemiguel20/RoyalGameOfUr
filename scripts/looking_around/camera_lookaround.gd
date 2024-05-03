@@ -3,6 +3,10 @@
 class_name CameraLookAround
 extends Camera3D
 
+## Sends a signal when the intro cinematic is finsihed 
+## and the camera is positioned to look at the game view.
+signal on_intro_ended
+
 @export var max_degrees_up: float = 35
 @export var max_degrees_down: float = 35
 @export var max_degrees_left: float = 35
@@ -41,9 +45,9 @@ func _ready():
 	_define_constraints()
 	
 	
-func _on_game_start():
-	## TODO: Start game after return to board finished!
-	_return_to_board()
+func _on_play_pressed():
+	await _return_to_board()
+	on_intro_ended.emit()
 	_looking_border.mouse_entered.connect(_enter_looking_mode)
 	
 	

@@ -161,6 +161,7 @@ visible = false
 [connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
 [connection signal="game_started" from="Boardgame/GameStateController" to="Custom_Camera" method="_on_game_start"]
 [connection signal="move_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_move_phase_started"]
+[connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
 [connection signal="roll_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_roll_phase_started"]
 [connection signal="move_executed" from="AIPlayerHard" to="Boardgame/GameStateController" method="_on_move_executed"]
 [connection signal="on_intro_ended" from="Custom_Camera" to="Boardgame/GameStateController" method="start_game"]

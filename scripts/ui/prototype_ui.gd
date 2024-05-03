@@ -14,11 +14,6 @@ func _process(delta):
 	_delta = delta
 
 
-func _on_game_started():
-	visible = false
-	_main_menu.visible = false
-	
-	
 func _on_game_ended():
 	visible = true
 	await _fadeout(_fading_duration)
@@ -36,20 +31,9 @@ func _fadeout(duration: float):
 		var next_color = old_color.lerp(new_color, time/duration)
 		_fade_panel.color = next_color
 		await Engine.get_main_loop().process_frame
-	
-
-#func _input(event):
-	#if event is InputEventKey and (event as InputEventKey).keycode == KEY_P and (event as InputEventKey).pressed:
-		#print("Fadeout")
-		#_on_game_ended()
 
 
-#func _on_color_rect_gui_input(event):
-	### Check if Play button has been clicked.
-	#print("GUI")
-	#if event is InputEventMouseButton:
-		#play_pressed.emit()
-#
-#
-#func _on_color_rect_mouse_entered():
-	#print("hffw")
+func _on_play_pressed():
+	visible = false
+	_main_menu.visible = false
+	play_pressed.emit()

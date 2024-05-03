@@ -54,7 +54,7 @@ visible = false
 
 [node name="ThrowSpot1" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
 transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, 0, -0.10147, 0)
-throwing_velocity_multiplier = 1.5
+throwing_velocity_multiplier = 1.35
 
 [node name="ThrowSpot2" parent="DiceArea_P1/ThrowingSpots_P1" instance=ExtResource("3_p3m62")]
 transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, 0.999969, -0.10147, -1.52588e-05)
@@ -184,7 +184,7 @@ visible = false
 
 [node name="ThrowSpot1" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999985, -1.79269, 0)
-throwing_velocity_multiplier = 1.5
+throwing_velocity_multiplier = 1.35
 
 [node name="ThrowSpot2" parent="DiceArea_P2/ThrowingSpots_P2" instance=ExtResource("3_p3m62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00008, -1.79269, -4.57764e-05)

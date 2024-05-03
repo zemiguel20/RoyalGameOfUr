@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfyhvb7v43pnc"]
+[gd_scene load_steps=14 format=3 uid="uid://bfyhvb7v43pnc"]
 
+[ext_resource type="PhysicsMaterial" uid="uid://cewt4j3gn56bt" path="res://physics_materials/pm_die.tres" id="1_b5kjg"]
 [ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="2_snn4w"]
 [ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_normal.tscn" id="3_legrj"]
 [ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="4_heb7x"]
@@ -113,11 +114,14 @@ albedo_color = Color(0.380392, 0.639216, 0.333333, 1)
 
 [node name="D4_Improved" type="RigidBody3D"]
 mass = 4.0
+physics_material_override = ExtResource("1_b5kjg")
 gravity_scale = 0.078
 freeze_mode = 1
 continuous_cd = true
 max_contacts_reported = 10
 contact_monitor = true
+linear_damp = 0.3
+angular_damp = 0.3
 script = ExtResource("2_snn4w")
 _throwing_force_magnitude = 0.26
 _mass_on_ground_multiplier = 7.0

@@ -6,6 +6,7 @@ signal game_started
 signal roll_phase_started(player: General.Player)
 signal move_phase_started(player: General.Player, moves: Array[Move])
 signal game_ended
+signal no_moves
 
 @export var _board: Board
 
@@ -28,6 +29,7 @@ func _on_roll_ended(roll_value: int):
 	if not moves.is_empty():
 		move_phase_started.emit(current_player, moves)
 	else:
+		no_moves.emit()
 		_switch_player()
 		roll_phase_started.emit(current_player)
 
