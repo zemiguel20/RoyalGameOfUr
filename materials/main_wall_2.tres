@@ -7,7 +7,6 @@
 
 [resource]
 cull_mode = 2
-diffuse_mode = 3
 albedo_texture = ExtResource("1_tdfle")
 roughness_texture = ExtResource("4_1864k")
 normal_enabled = true

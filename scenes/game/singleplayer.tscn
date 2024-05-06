@@ -1,14 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=15 format=3 uid="uid://ty6eqqsipbbi"]
 
-[ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_1w765"]
-[ext_resource type="PhysicsMaterial" uid="uid://bm2xsy30hwwj7" path="res://physics_materials/pm_dice_floor.tres" id="2_inw0s"]
+[ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
 [ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="5_8sxhn"]
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
-[ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_die.tscn" id="9_5lg8h"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
-[ext_resource type="PackedScene" path="res://models/opponent_textured.tscn" id="9_yxcrq"]
+[ext_resource type="PackedScene" uid="uid://clwe1fjp2o660" path="res://models/opponent_textured.tscn" id="9_yxcrq"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -21,9 +19,6 @@ func _input(event):
 func _on_prototype_ui_fadeout_finished():
 	get_tree().reload_current_scene()
 "
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_080q8"]
-size = Vector3(0.358398, 0.128358, 0.125)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k58kw"]
 
@@ -47,49 +42,26 @@ Button/styles/hover = SubResource("StyleBoxEmpty_lt74h")
 Button/styles/normal = SubResource("StyleBoxEmpty_6wjab")
 Button/styles/pressed = SubResource("StyleBoxEmpty_84i4a")
 
-[sub_resource type="BoxMesh" id="BoxMesh_smyfn"]
-size = Vector3(1, 2, 1)
-
 [node name="Singleplayer" type="Node"]
 script = SubResource("GDScript_fbn4f")
 
-[node name="Environment" parent="." instance=ExtResource("1_1w765")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
-
-[node name="DirectionalLight3D" parent="Environment" index="1"]
-transform = Transform3D(0.126744, -0.930471, 0.343744, -0.583004, 0.210489, 0.78473, -0.802523, -0.299864, -0.51579, 0.605703, 0.73247, 1.47961)
-directional_shadow_mode = 2
-directional_shadow_max_distance = 420.0
-
-[node name="Camera3D" parent="Environment" index="3"]
-transform = Transform3D(0.231883, -0.108052, 0.0863428, 0.00651993, 0.176902, 0.203871, -0.138159, -0.173004, 0.154537, 0.872157, 0.113499, 1.44488)
-current = false
-
-[node name="StaticBody3D_Table" type="StaticBody3D" parent="Environment/Table" index="0" groups=["Ground"]]
-collision_layer = 3
-collision_mask = 3
-input_ray_pickable = false
-physics_material_override = ExtResource("2_inw0s")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Table/StaticBody3D_Table" groups=["Ground"]]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.871, -0.0411028, 1.379)
-shape = SubResource("BoxShape3D_080q8")
-
-[node name="Board2" parent="Environment/game_for_scale" index="0"]
-visible = true
+[node name="Environment" parent="." instance=ExtResource("1_i3yx6")]
 
 [node name="Boardgame" parent="." instance=ExtResource("3_xprge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="AIPlayerHard" parent="." node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("9_m0jtg")]
-_dice = NodePath("../Boardgame/Dice")
-_move_picker = NodePath("../Boardgame/MovePicker")
+[node name="Board" parent="Boardgame" index="1"]
+transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 4.4739, -0.197751, 6.36155)
+
+[node name="Dice" parent="Boardgame" index="2"]
+transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 4.44211, -0.239571, 6.346)
+
+[node name="AIPlayerHard" parent="." instance=ExtResource("9_m0jtg")]
 
 [node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
-transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 3.55736, 0.46958, 5.87574)
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.84403, 0.181017, 6.98504)
 max_degrees_down = 50.0
 max_degrees_left = 32.0
-max_degrees_right = 5.0
 _board_look_rotation = Vector3(-35, 32, 0)
 
 [node name="Prototype_UI" type="CanvasLayer" parent="."]
@@ -146,34 +118,15 @@ text = "Quit"
 script = ExtResource("6_3dit1")
 
 [node name="Opponent_Model" parent="." instance=ExtResource("9_yxcrq")]
-transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 3.1308, -0.313869, 5.09029)
+transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.08525, -0.655595, 5.72598)
 
-[node name="Reference" type="CSGMesh3D" parent="."]
-transform = Transform3D(0.529919, 0, -0.848048, 0, 1, 0, 0.848048, 0, 0.529919, 0.830782, 0.672215, 3.81683)
-visible = false
-mesh = SubResource("BoxMesh_smyfn")
-
-[node name="D4_Improved" parent="." instance=ExtResource("9_5lg8h")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17741, 0.0848224, 5.32352)
-visible = false
-
-[connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
-[connection signal="game_started" from="Boardgame/GameStateController" to="Custom_Camera" method="_on_game_start"]
-[connection signal="move_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_move_phase_started"]
-[connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
-[connection signal="roll_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_roll_phase_started"]
-[connection signal="move_executed" from="AIPlayerHard" to="Boardgame/GameStateController" method="_on_move_executed"]
-[connection signal="on_intro_ended" from="Custom_Camera" to="Boardgame/GameStateController" method="start_game"]
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 [connection signal="play_pressed" from="Prototype_UI" to="Custom_Camera" method="_on_play_pressed"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Boardgame/GameStateController" method="start_game"]
-[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_play_pressed"]
+[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Quit" to="Prototype_UI/Main Menu/Quit" method="_on_pressed"]
 
-[editable path="Environment"]
 [editable path="Boardgame"]
 [editable path="Boardgame/Board"]
 [editable path="Boardgame/Dice"]
-[editable path="D4_Improved"]
