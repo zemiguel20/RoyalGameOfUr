@@ -118,7 +118,6 @@ func on_dice_release():
 func _roll() -> int:
 	disable_selection()
 	_set_click_hitbox()
-	_outcome_label.visible = false	
 	_roll_sfx.play()
 	value = 0
 	_die_finish_count = 0

@@ -11,6 +11,7 @@ extends Label3D
 var _default_color
 var _delta
 var _target_color
+var _tween_color
 
 func _ready():
 	_default_color = modulate
@@ -28,21 +29,24 @@ func _process(delta):
 ## The flow of this animation is defined by [param _effect_curve] 
 func play_effect(duration: float):
 	visible = true
-	var old_color = _default_color
-	var time = 0 
 	
-	while time <= duration:
-		time += _delta
-		var next_color = old_color.lerp(_target_color, _effect_curve.sample(time/duration))
-		modulate = next_color
-		await Engine.get_main_loop().process_frame
-		
-	visible = false
+	await tween_to_color(_target_color, duration / 4)
+	await get_tree().create_timer(duration).timeout
+	await tween_to_color(_default_color, duration / 4)
 	
+	
+func tween_to_color(color: Color, duration: float):
+	_tween_color = create_tween()
+	_tween_color.bind_node(self).set_parallel(true)
+	_tween_color.tween_property(self, "modulate", color, duration)
+	await _tween_color.finished
+
 
 func _on_dice_roll_finished(value: int):
 	text = "%s" % value
 	_target_color = _color_moves
+	# HACK: Possibly wait for no moves signal.
+	await get_tree().create_timer(0.1).timeout	
 	play_effect(_effect_duration)	
 
 
