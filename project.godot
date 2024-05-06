@@ -25,6 +25,11 @@ Settings="*res://scripts/autoloads/game_settings.gd"
 
 project/assembly_name="Royal Game Of Ur"
 
+[layer_names]
+
+3d_physics/layer_1="Layer 1"
+3d_physics/layer_2="Spots"
+
 [rendering]
 
 lights_and_shadows/directional_shadow/size=8192

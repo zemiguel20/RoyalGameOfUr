@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://brehcf7q3asq0"]
+
+[ext_resource type="Script" path="res://test/movement_prototype/scripts/tile.gd" id="1_b3r8a"]
+[ext_resource type="Material" uid="uid://bij3p05yemii6" path="res://test/movement_prototype/materials/mat_tile_default.tres" id="2_1om30"]
+[ext_resource type="Material" uid="uid://2blbcxihq4xn" path="res://test/movement_prototype/materials/mat_tile_highlight.tres" id="2_8nxru"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c5lm1"]
+size = Vector3(0.9, 0.1, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mh2n5"]
+size = Vector3(1, 0.1, 1)
+
+[node name="Tile" type="Node3D" node_paths=PackedStringArray("mesh") groups=["tiles"]]
+script = ExtResource("1_b3r8a")
+mesh = NodePath("Model")
+mat_default = ExtResource("2_1om30")
+mat_highlight = ExtResource("2_8nxru")
+
+[node name="Model" type="CSGMesh3D" parent="."]
+mesh = SubResource("BoxMesh_c5lm1")
+material = ExtResource("2_1om30")
+
+[node name="TileArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TileArea"]
+shape = SubResource("BoxShape3D_mh2n5")
+
+[connection signal="mouse_entered" from="TileArea" to="." method="_on_tile_area_mouse_entered"]
+[connection signal="mouse_exited" from="TileArea" to="." method="_on_tile_area_mouse_exited"]
