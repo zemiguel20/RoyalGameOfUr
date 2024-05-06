@@ -1,9 +1,9 @@
 [gd_resource type="Environment" load_steps=4 format=3 uid="uid://hs0xfuy4e64r"]
 
-[ext_resource type="Texture2D" uid="uid://vxpgd4lp7qqk" path="res://textures/resting_place_1k.hdr" id="1_gtvok"]
+[ext_resource type="Texture2D" uid="uid://j2pmyil1ic4h" path="res://textures/rosendal_mountain_midmorning_2k.hdr" id="1_diby4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c1f5q"]
-panorama = ExtResource("1_gtvok")
+panorama = ExtResource("1_diby4")
 
 [sub_resource type="Sky" id="Sky_ll8bh"]
 sky_material = SubResource("PanoramaSkyMaterial_c1f5q")
@@ -12,7 +12,7 @@ radiance_size = 1
 [resource]
 background_mode = 2
 sky = SubResource("Sky_ll8bh")
-sky_rotation = Vector3(0, -4.34063, 0)
+sky_rotation = Vector3(-0.228638, -0.685914, -0.225147)
 ambient_light_source = 2
 ambient_light_color = Color(0.901961, 0.882353, 0.882353, 1)
 ambient_light_energy = 0.5
