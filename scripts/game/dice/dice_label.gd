@@ -30,15 +30,11 @@ func _process(delta):
 func play_effect(duration: float):
 	visible = true
 	
-	await tween_to_color(_target_color, duration / 4)
-	await get_tree().create_timer(duration).timeout
-	await tween_to_color(_default_color, duration / 4)
-	
-	
-func tween_to_color(color: Color, duration: float):
 	_tween_color = create_tween()
-	_tween_color.bind_node(self).set_parallel(true)
-	_tween_color.tween_property(self, "modulate", color, duration)
+	_tween_color.bind_node(self)
+	_tween_color.tween_property(self, "modulate", _target_color, duration/4)
+	_tween_color.tween_interval(duration/2)
+	_tween_color.tween_property(self, "modulate", _default_color, duration/4)
 	await _tween_color.finished
 
 
