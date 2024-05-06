@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm3qnh7nq0itd"]
+
+[ext_resource type="Script" path="res://scripts/game/dice/dice_spot.gd" id="1_5608x"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wblwe"]
+radius = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2c6nc"]
+size = Vector3(0.1, 0.1, 2.3642)
+
+[node name="ThrowingSpot" type="Node3D"]
+script = ExtResource("1_5608x")
+
+[node name="Gizmo" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_wblwe")
+disabled = true
+
+[node name="Gizmo2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.09219)
+shape = SubResource("BoxShape3D_2c6nc")
+disabled = true

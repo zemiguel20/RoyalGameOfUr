@@ -1,139 +1,795 @@
-[gd_scene load_steps=5 format=3 uid="uid://b48u4dl4lewgu"]
+[gd_scene load_steps=6 format=3 uid="uid://b48u4dl4lewgu"]
 
 [ext_resource type="PackedScene" uid="uid://chhc7sqf8vx7e" path="res://models/EnvironmentBlockout1.fbx" id="1_keigh"]
 [ext_resource type="Material" uid="uid://bxhsn63hsvyt8" path="res://materials/FloorTiles.tres" id="2_80kxr"]
 [ext_resource type="Material" uid="uid://be7n0a655i4xg" path="res://materials/WallBricks.tres" id="3_v6h7p"]
 [ext_resource type="Material" uid="uid://bdxhaotnxq6de" path="res://materials/Sandstone.tres" id="4_n0xeq"]
+[ext_resource type="PackedScene" uid="uid://bjr1q6y03u8lb" path="res://models/main_walls_Low.fbx" id="5_w6xu6"]
 
 [node name="Root Scene" instance=ExtResource("1_keigh")]
 
 [node name="pCube127" parent="RootNode/group1" index="0"]
-transform = Transform3D(0.999997, 0, -0.00247245, 0, 1, 0, 0.00247245, 0, 0.999997, -0.319179, 0.288869, -0.17021)
+transform = Transform3D(8.82184, 0, -0.0218116, 0, 8.82187, 0, 0.0218116, 0, 8.82184, -2.05472, 2.124, -1.12209)
 
 [node name="pCube126" parent="RootNode/group1" index="1"]
-transform = Transform3D(0.999997, 0, -0.00247245, 0, 1, 0, 0.00247245, 0, 0.999997, -0.319108, 0.288869, -0.199015)
+transform = Transform3D(8.82184, 0, -0.0218116, 0, 8.82187, 0, 0.0218116, 0, 8.82184, -2.05409, 2.124, -1.3762)
 
 [node name="pCube125" parent="RootNode/group1" index="2"]
-transform = Transform3D(0.999997, 0, -0.00247245, 0, 1, 0, 0.00247245, 0, 0.999997, -0.31904, 0.288869, -0.226407)
+transform = Transform3D(8.82184, 0, -0.0218116, 0, 8.82187, 0, 0.0218116, 0, 8.82184, -2.05349, 2.124, -1.61786)
 
 [node name="pCube124" parent="RootNode/group1" index="3"]
-transform = Transform3D(0.999997, 0, -0.00247245, 0, 1, 0, 0.00247245, 0, 0.999997, -0.318972, 0.288869, -0.2538)
+transform = Transform3D(8.82184, 0, -0.0218116, 0, 8.82187, 0, 0.0218116, 0, 8.82184, -2.05289, 2.124, -1.85951)
 
 [node name="pCube123" parent="RootNode/group1" index="4"]
-transform = Transform3D(0.999997, 0, -0.00247245, 0, 1, 0, 0.00247245, 0, 0.999997, -0.318903, 0.288869, -0.281998)
+transform = Transform3D(8.82184, 0, -0.0218116, 0, 8.82187, 0, 0.0218116, 0, 8.82184, -2.05229, 2.124, -2.10827)
 
 [node name="pCube122" parent="RootNode/group1" index="5"]
-transform = Transform3D(0.999997, 0, -0.00247245, 0, 1, 0, 0.00247245, 0, 0.999997, -0.318831, 0.288869, -0.310803)
+transform = Transform3D(8.82184, 0, -0.0218116, 0, 8.82187, 0, 0.0218116, 0, 8.82184, -2.05165, 2.124, -2.36238)
 
 [node name="pCube121" parent="RootNode/group1" index="6"]
-transform = Transform3D(0.999997, 0, -0.00247245, 0, 1, 0, 0.00247245, 0, 0.999997, -0.318764, 0.288869, -0.338195)
+transform = Transform3D(8.82184, 0, -0.0218116, 0, 8.82187, 0, 0.0218116, 0, 8.82184, -2.05106, 2.124, -2.60403)
 
 [node name="pCube120" parent="RootNode/group1" index="7"]
-transform = Transform3D(0.000469148, 0, 1, 0, 1, 0, -1, 0, 0.000469148, -0.321218, 0.224989, -0.172855)
+transform = Transform3D(0.00413876, 0, 8.82187, 0, 8.82187, 0, -8.82187, 0, 0.00413876, -2.0727, 1.56046, -1.14543)
 material_override = ExtResource("3_v6h7p")
 
 [node name="pCube119" parent="RootNode/group1" index="8"]
-transform = Transform3D(0.999997, 0, -0.00247245, 0, 1, 0, 0.00247245, 0, 0.999997, -0.31875, 0.288869, -0.367704)
+transform = Transform3D(8.82184, 0, -0.0218116, 0, 8.82187, 0, 0.0218116, 0, 8.82184, -2.05093, 2.124, -2.86436)
+
+[node name="pCube118" parent="RootNode/group1" index="9"]
+transform = Transform3D(7.80119, 0, 0, 0, 6.05424, 0, 0, 0, 7.80119, 1.01205, -0.762254, -0.214143)
+
+[node name="pCube117" parent="RootNode/group1" index="10"]
+transform = Transform3D(7.80119, 0, 0, 0, 22.3575, 0, 0, 0, 7.80119, 1.26007, -2.29718, -0.214143)
+
+[node name="pCube116" parent="RootNode/group1" index="11"]
+transform = Transform3D(7.80119, 0, 0, 0, 22.3575, 0, 0, 0, 7.80119, 1.14419, -2.29718, -0.214143)
+
+[node name="pCube115" parent="RootNode/group1" index="12"]
+transform = Transform3D(7.80119, 0, 0, 0, 22.3575, 0, 0, 0, 7.80119, 0.884385, -2.29718, -0.214143)
+
+[node name="pCube114" parent="RootNode/group1" index="13"]
+transform = Transform3D(7.80119, 0, 0, 0, 22.3575, 0, 0, 0, 7.80119, 0.783883, -2.29718, -0.214143)
+
+[node name="pCube113" parent="RootNode/group1" index="14"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 0.0110089, 0.5235, 1.69478)
+
+[node name="pCube112" parent="RootNode/group1" index="15"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 0.265124, 0.5235, 1.69528)
+
+[node name="pCube111" parent="RootNode/group1" index="16"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 0.506776, 0.5235, 1.69578)
+
+[node name="pCube110" parent="RootNode/group1" index="17"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 0.748429, 0.5235, 1.69626)
+
+[node name="pCube109" parent="RootNode/group1" index="18"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 0.997187, 0.5235, 1.69675)
+
+[node name="pCube108" parent="RootNode/group1" index="19"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 1.2513, 0.5235, 1.69726)
+
+[node name="pCube107" parent="RootNode/group1" index="20"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 1.49296, 0.5235, 1.69774)
+
+[node name="pCube106" parent="RootNode/group1" index="21"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 1.75327, 0.5235, 1.69774)
+
+[node name="pCube105" parent="RootNode/group1" index="22"]
+transform = Transform3D(23.9508, 0, 0, 0, 23.9508, 0, 0, 0, 12.1108, 1.96317, -0.521056, 1.06878)
+
+[node name="pCube104" parent="RootNode/group1" index="23"]
+transform = Transform3D(20.1487, 0, 0, 0, 23.9508, 0, 0, 0, 10.1883, 1.96317, -0.338033, 1.06878)
+
+[node name="pCube103" parent="RootNode/group1" index="24"]
+transform = Transform3D(5.53395, 0, 0, 0, 18.3051, 0, 0, 0, 7.78669, 1.87044, -0.206879, 1.06878)
+
+[node name="pCube102" parent="RootNode/group1" index="25"]
+transform = Transform3D(5.53395, 0, 0, 0, 18.3051, 0, 0, 0, 7.51106, 1.86052, -0.206879, 0.415598)
+
+[node name="pCube101" parent="RootNode/group1" index="26"]
+transform = Transform3D(20.1487, 0, 0, 0, 23.9508, 0, 0, 0, 9.82763, 1.95856, -0.338033, 0.415598)
+
+[node name="pCube100" parent="RootNode/group1" index="27"]
+transform = Transform3D(23.9508, 0, 0, 0, 23.9508, 0, 0, 0, 11.6821, 1.96317, -0.521056, 0.415598)
 
 [node name="pCube99" parent="RootNode/group1" index="28"]
-transform = Transform3D(0.866711, 0, 0.951282, 0, 1, 0, -0.498811, 0, 1.6529, 0.0752804, -0.0213913, 0.111151)
+transform = Transform3D(7.64601, 0, 8.39208, 0, 8.82187, 0, -4.40044, 0, 14.5817, 1.42515, -0.613073, 1.36003)
+
+[node name="pCylinder67" parent="RootNode/group1" index="29"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.757387, 0.00790424, -0.0390598)
+
+[node name="pCylinder66" parent="RootNode/group1" index="30"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.699053, -0.0350815, -0.0390598)
+
+[node name="pCylinder65" parent="RootNode/group1" index="31"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.790758, -0.0350815, -0.0458261)
+
+[node name="pCube98" parent="RootNode/group1" index="32"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.65095, 1.7281, 0, -1.7281, 8.65095, -0.767454, -0.419849, 0.198084)
+
+[node name="pCylinder64" parent="RootNode/group1" index="33"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -0.953707, 0.101154, -0.0274178)
+
+[node name="pCylinder63" parent="RootNode/group1" index="34"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.19081, 0.101154, -0.0274178)
+
+[node name="pCylinder62" parent="RootNode/group1" index="35"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.21164, 0.123494, -0.0274178)
+
+[node name="pCylinder61" parent="RootNode/group1" index="36"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.23056, 0.101154, -0.0274178)
+
+[node name="pCylinder60" parent="RootNode/group1" index="37"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.27029, 0.101154, -0.0274178)
+
+[node name="pCylinder59" parent="RootNode/group1" index="38"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.25046, 0.123494, -0.0274178)
+
+[node name="pCylinder58" parent="RootNode/group1" index="39"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.00776, 0.0451326, -0.0274178)
+
+[node name="pCylinder57" parent="RootNode/group1" index="40"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.08766, 0.0460351, -0.0274178)
+
+[node name="pCylinder56" parent="RootNode/group1" index="41"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.04657, 0.0451326, -0.0274178)
+
+[node name="pCylinder55" parent="RootNode/group1" index="42"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.26499, 0.0227927, -0.0274178)
+
+[node name="pCylinder54" parent="RootNode/group1" index="43"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.20627, 0.0227927, -0.0274178)
+
+[node name="pCylinder53" parent="RootNode/group1" index="44"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.1459, 0.0227927, -0.0274178)
+
+[node name="pCylinder52" parent="RootNode/group1" index="45"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.10615, 0.0227927, -0.0274178)
+
+[node name="pCylinder51" parent="RootNode/group1" index="46"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.06641, 0.0227927, -0.0274178)
+
+[node name="pCylinder50" parent="RootNode/group1" index="47"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -1.02667, 0.0227927, -0.0274178)
+
+[node name="pCylinder49" parent="RootNode/group1" index="48"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -0.986921, 0.0227927, -0.0274178)
+
+[node name="pCylinder48" parent="RootNode/group1" index="49"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -0.940569, 0.0227927, -0.0274178)
+
+[node name="pCylinder47" parent="RootNode/group1" index="50"]
+transform = Transform3D(1.26381, 0, 0, 0, 0, -1.26381, 0, 1.26381, 0, -0.909279, 0.0227927, -0.0274178)
+
+[node name="pCube82" parent="RootNode/group1" index="51"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.31409, 0.0791501, -0.0806568)
+
+[node name="pCube81" parent="RootNode/group1" index="52"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.09032, 0.00255354, -0.0806568)
+
+[node name="pCube80" parent="RootNode/group1" index="53"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.09032, 0.0854383, -0.0806568)
+
+[node name="pCube79" parent="RootNode/group1" index="54"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.865345, 0.0791501, -0.0806568)
+
+[node name="pCube78" parent="RootNode/group1" index="55"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.09032, 0.154286, -0.0806568)
+
+[node name="pCube77" parent="RootNode/group1" index="56"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.09032, 0.225079, -0.0806568)
+
+[node name="pCube76" parent="RootNode/group1" index="57"]
+transform = Transform3D(4.56651, 0, 0, 0, 4.56651, 0, 0, 0, 4.56651, -1.6304, -0.321483, 0.12092)
+
+[node name="pCube75" parent="RootNode/group1" index="58"]
+transform = Transform3D(4.56651, 0, 0, 0, 4.56651, 0, 0, 0, 4.56651, -1.26212, -0.321483, 0.12092)
+
+[node name="pCube74" parent="RootNode/group1" index="59"]
+transform = Transform3D(4.56651, 0, 0, 0, 4.56651, 0, 0, 0, 4.56651, -0.821305, -0.321483, 0.12092)
+
+[node name="pCube73" parent="RootNode/group1" index="60"]
+transform = Transform3D(4.56651, 0, 0, 0, 4.56651, 0, 0, 0, 4.56651, -0.380492, -0.321483, 0.12092)
+
+[node name="pCube72" parent="RootNode/group1" index="61"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.369212, -0.0677633, -0.0579205)
+
+[node name="pSphere82" parent="RootNode/group1" index="62"]
+transform = Transform3D(1.28714, 0, -6.63747, 0, 6.76111, 0, 6.63747, 0, 1.28714, 1.44173, -0.419724, -0.163424)
+
+[node name="pSphere81" parent="RootNode/group1" index="63"]
+transform = Transform3D(1.28714, 0, -6.63747, 0, 6.76111, 0, 6.63747, 0, 1.28714, 1.19423, -0.419724, -0.173732)
+
+[node name="pSphere80" parent="RootNode/group1" index="64"]
+transform = Transform3D(1.28714, 0, -6.63747, 0, 6.76111, 0, 6.63747, 0, 1.28714, 1.01648, -0.419724, -0.142965)
+
+[node name="pSphere79" parent="RootNode/group1" index="65"]
+transform = Transform3D(1.28714, 0, -6.63747, 0, 6.76111, 0, 6.63747, 0, 1.28714, 0.867051, -0.419724, -0.155726)
+
+[node name="pSphere78" parent="RootNode/group1" index="66"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.252681, 0.271755, -0.16635)
+
+[node name="pSphere77" parent="RootNode/group1" index="67"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.295941, 0.313698, -0.16635)
+
+[node name="pSphere76" parent="RootNode/group1" index="68"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.314679, 0.260261, -0.16635)
+
+[node name="pSphere75" parent="RootNode/group1" index="69"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.292507, 0.279985, -0.16635)
+
+[node name="pSphere74" parent="RootNode/group1" index="70"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.240146, 0.248601, -0.16635)
+
+[node name="pSphere73" parent="RootNode/group1" index="71"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.239173, 0.294356, -0.16199)
+
+[node name="pSphere72" parent="RootNode/group1" index="72"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.103903, 0.23761, -0.16635)
+
+[node name="pSphere71" parent="RootNode/group1" index="73"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.147163, 0.279552, -0.16635)
+
+[node name="pSphere70" parent="RootNode/group1" index="74"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.165902, 0.226116, -0.16635)
+
+[node name="pSphere69" parent="RootNode/group1" index="75"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.143729, 0.245839, -0.16635)
+
+[node name="pSphere68" parent="RootNode/group1" index="76"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.0913682, 0.214455, -0.16635)
+
+[node name="pSphere67" parent="RootNode/group1" index="77"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.0903954, 0.26021, -0.16199)
+
+[node name="pCylinder46" parent="RootNode/group1" index="78"]
+transform = Transform3D(7.60786, 0, 0, 0, 7.60786, 0, 0, 0, 7.60786, -1.5103, -0.267987, 0.495279)
+
+[node name="pCylinder45" parent="RootNode/group1" index="79"]
+transform = Transform3D(7.60786, 0, 0, 0, 7.60786, 0, 0, 0, 7.60786, -1.5103, -0.267987, 0.238711)
+
+[node name="pCylinder44" parent="RootNode/group1" index="80"]
+transform = Transform3D(7.60786, 0, 0, 0, 7.60786, 0, 0, 0, 7.60786, -1.5103, -0.267987, -0.0224362)
+
+[node name="pCylinder43" parent="RootNode/group1" index="81"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.19669, -0.247233, -0.0458261)
+
+[node name="pCylinder42" parent="RootNode/group1" index="82"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.1298, -0.247233, -0.0458261)
+
+[node name="pCylinder41" parent="RootNode/group1" index="83"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.26045, -0.247233, -0.0458261)
+
+[node name="pCylinder40" parent="RootNode/group1" index="84"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.00695, -0.247233, -0.0458261)
+
+[node name="pCylinder39" parent="RootNode/group1" index="85"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.19669, -0.182385, -0.0458261)
+
+[node name="pCylinder38" parent="RootNode/group1" index="86"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.907023, -0.182385, -0.0458261)
+
+[node name="pCylinder37" parent="RootNode/group1" index="87"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.02444, -0.182385, -0.0458261)
+
+[node name="pCylinder36" parent="RootNode/group1" index="88"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.26045, -0.182385, -0.0458261)
+
+[node name="pCylinder35" parent="RootNode/group1" index="89"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.10499, -0.182385, -0.0390598)
+
+[node name="pCube71" parent="RootNode/group1" index="90"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.09032, -0.364585, -0.115844)
+
+[node name="pCube70" parent="RootNode/group1" index="91"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.865345, -0.287989, -0.115844)
+
+[node name="pCube69" parent="RootNode/group1" index="92"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.09032, -0.142059, -0.115844)
+
+[node name="pCube68" parent="RootNode/group1" index="93"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.31409, -0.287989, -0.115844)
+
+[node name="pCube67" parent="RootNode/group1" index="94"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.09032, -0.212854, -0.115844)
+
+[node name="pCylinder34" parent="RootNode/group1" index="95"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.26045, -0.326833, -0.0458261)
+
+[node name="pCylinder33" parent="RootNode/group1" index="96"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.907023, -0.326833, -0.0458261)
+
+[node name="pCube66" parent="RootNode/group1" index="97"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.09032, -0.2817, -0.115844)
+
+[node name="pCylinder32" parent="RootNode/group1" index="98"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.907023, -0.247233, -0.0458261)
+
+[node name="pCylinder31" parent="RootNode/group1" index="99"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.19669, -0.326833, -0.0458261)
+
+[node name="pCylinder30" parent="RootNode/group1" index="100"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.1298, -0.326833, -0.0458261)
+
+[node name="pCylinder29" parent="RootNode/group1" index="101"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -1.06167, -0.326833, -0.0458261)
+
+[node name="pCylinder28" parent="RootNode/group1" index="102"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.749724, -0.182385, -0.0458261)
+
+[node name="pCylinder27" parent="RootNode/group1" index="103"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.685965, -0.182385, -0.0458261)
+
+[node name="pCylinder26" parent="RootNode/group1" index="104"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.594261, -0.182385, -0.0390598)
+
+[node name="pCylinder25" parent="RootNode/group1" index="105"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.513718, -0.182385, -0.0458261)
+
+[node name="pCylinder24" parent="RootNode/group1" index="106"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.396297, -0.182385, -0.0458261)
+
+[node name="pCylinder23" parent="RootNode/group1" index="107"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.749724, -0.247233, -0.0458261)
+
+[node name="pCylinder22" parent="RootNode/group1" index="108"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.685965, -0.247233, -0.0458261)
+
+[node name="pCylinder21" parent="RootNode/group1" index="109"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.619079, -0.247233, -0.0458261)
+
+[node name="pCylinder20" parent="RootNode/group1" index="110"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.496219, -0.247233, -0.0458261)
+
+[node name="pCylinder19" parent="RootNode/group1" index="111"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.396297, -0.247233, -0.0458261)
+
+[node name="pCylinder18" parent="RootNode/group1" index="112"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.396297, -0.326833, -0.0458261)
+
+[node name="pCylinder17" parent="RootNode/group1" index="113"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.550946, -0.326833, -0.0458261)
+
+[node name="pCylinder16" parent="RootNode/group1" index="114"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.619079, -0.326833, -0.0458261)
+
+[node name="pCylinder15" parent="RootNode/group1" index="115"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.685965, -0.326833, -0.0458261)
+
+[node name="pCylinder14" parent="RootNode/group1" index="116"]
+transform = Transform3D(2.83634, 0, 0, 0, 0, -2.83634, 0, 2.83634, 0, -0.749724, -0.326833, -0.0458261)
+
+[node name="pCube65" parent="RootNode/group1" index="117"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.579592, -0.142059, -0.115844)
+
+[node name="pCube64" parent="RootNode/group1" index="118"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.579592, -0.212854, -0.115844)
+
+[node name="pCube63" parent="RootNode/group1" index="119"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.579592, -0.364585, -0.115844)
+
+[node name="pCube62" parent="RootNode/group1" index="120"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.354619, -0.287989, -0.115844)
+
+[node name="pCube61" parent="RootNode/group1" index="121"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.803363, -0.287989, -0.115844)
+
+[node name="pCube60" parent="RootNode/group1" index="122"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.579592, -0.2817, -0.115844)
+
+[node name="pSphere66" parent="RootNode/group1" index="123"]
+transform = Transform3D(6.76111, 0, 0, 0, 6.76111, 0, 0, 0, 6.76111, -0.0370836, 0.0611326, 1.05041)
+
+[node name="pCylinder13" parent="RootNode/group1" index="124"]
+transform = Transform3D(1.25218, 0, 0, 0, 1.25218, 0, 0, 0, 1.25218, -0.0577035, -0.0401347, 1.06434)
+
+[node name="pSphere65" parent="RootNode/group1" index="125"]
+transform = Transform3D(6.76111, 0, 0, 0, 6.76111, 0, 0, 0, 6.76111, -0.072829, 0.0611326, 1.07603)
+
+[node name="pSphere64" parent="RootNode/group1" index="126"]
+transform = Transform3D(6.76111, 0, 0, 0, 6.76111, 0, 0, 0, 6.76111, -0.0624225, 0.107112, 1.03547)
+
+[node name="pSphere63" parent="RootNode/group1" index="127"]
+transform = Transform3D(6.76111, 0, 0, 0, 6.76111, 0, 0, 0, 6.76111, -0.0370836, -0.0429602, -0.0946174)
+
+[node name="pCylinder12" parent="RootNode/group1" index="128"]
+transform = Transform3D(1.25218, 0, 0, 0, 1.25218, 0, 0, 0, 1.25218, -0.0577035, -0.144228, -0.080686)
+
+[node name="pSphere62" parent="RootNode/group1" index="129"]
+transform = Transform3D(6.76111, 0, 0, 0, 6.76111, 0, 0, 0, 6.76111, -0.072829, -0.0429602, -0.0689964)
+
+[node name="pSphere61" parent="RootNode/group1" index="130"]
+transform = Transform3D(6.76111, 0, 0, 0, 6.76111, 0, 0, 0, 6.76111, -0.0624225, 0.00301861, -0.109561)
+
+[node name="pSphere60" parent="RootNode/group1" index="131"]
+transform = Transform3D(5.45301, 0, 3.99718, 0, 6.76111, 0, -3.99718, 0, 5.45301, 1.68903, 0.0611326, -0.122858)
+
+[node name="pCylinder11" parent="RootNode/group1" index="132"]
+transform = Transform3D(1.25218, 0, 0, 0, 1.25218, 0, 0, 0, 1.25218, 1.66447, -0.0401347, -0.0910556)
+
+[node name="pSphere59" parent="RootNode/group1" index="133"]
+transform = Transform3D(5.45301, 0, 3.99718, 0, 6.76111, 0, -3.99718, 0, 5.45301, 1.67534, 0.0611326, -0.081062)
+
+[node name="pSphere58" parent="RootNode/group1" index="134"]
+transform = Transform3D(5.45301, 0, 3.99718, 0, 6.76111, 0, -3.99718, 0, 5.45301, 1.65975, 0.107112, -0.119931)
+
+[node name="pSphere57" parent="RootNode/group1" index="135"]
+transform = Transform3D(4.35835, 0, -5.16889, 0, 6.76111, 0, 5.16889, 0, 4.35835, 0.62228, -0.0552028, -0.110346)
+
+[node name="pSphere56" parent="RootNode/group1" index="136"]
+transform = Transform3D(4.36139, 0.047726, -5.1661, -0.0834186, 6.76059, -0.0079682, 5.16566, 0.0688794, 4.36164, 0.62719, -0.101182, -0.0813415)
+
+[node name="pSphere55" parent="RootNode/group1" index="137"]
+transform = Transform3D(4.35835, 0, -5.16889, 0, 6.76111, 0, 5.16889, 0, 4.35835, 0.58456, -0.101182, -0.0921531)
+
+[node name="pCylinder10" parent="RootNode/group1" index="138"]
+transform = Transform3D(1.25218, 0, 0, 0, 1.07019, 0, 0, 0, 1.25218, 0.638136, -0.181614, -0.0866605)
+
+[node name="pCube59" parent="RootNode/group1" index="139"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 1.15193, -0.443767, -0.154096)
+
+[node name="pSphere54" parent="RootNode/group1" index="140"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.56241, 0.238172, -0.16635)
+
+[node name="pSphere53" parent="RootNode/group1" index="141"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.543672, 0.291609, -0.16635)
+
+[node name="pSphere52" parent="RootNode/group1" index="142"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.819094, 0.361932, -0.16635)
+
+[node name="pSphere51" parent="RootNode/group1" index="143"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.596033, 0.322993, -0.16635)
+
+[node name="pSphere50" parent="RootNode/group1" index="144"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.767856, 0.329138, -0.16635)
+
+[node name="pSphere49" parent="RootNode/group1" index="145"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.682877, 0.331838, -0.16635)
+
+[node name="pSphere48" parent="RootNode/group1" index="146"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.715495, 0.297753, -0.16635)
+
+[node name="pSphere47" parent="RootNode/group1" index="147"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.624514, 0.272267, -0.16199)
+
+[node name="pSphere46" parent="RootNode/group1" index="148"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.677848, 0.257897, -0.16635)
+
+[node name="pSphere45" parent="RootNode/group1" index="149"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.625487, 0.226513, -0.16635)
+
+[node name="pSphere44" parent="RootNode/group1" index="150"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.650255, 0.200937, -0.16635)
+
+[node name="pSphere43" parent="RootNode/group1" index="151"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.424799, 0.238172, -0.16635)
+
+[node name="pSphere42" parent="RootNode/group1" index="152"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.406061, 0.291609, -0.16635)
+
+[node name="pSphere41" parent="RootNode/group1" index="153"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.681483, 0.361932, -0.16635)
+
+[node name="pSphere40" parent="RootNode/group1" index="154"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.458422, 0.322993, -0.16635)
+
+[node name="pSphere39" parent="RootNode/group1" index="155"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.630246, 0.329138, -0.16635)
+
+[node name="pSphere38" parent="RootNode/group1" index="156"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.545266, 0.331838, -0.16635)
+
+[node name="pSphere37" parent="RootNode/group1" index="157"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.577884, 0.297753, -0.16635)
+
+[node name="pSphere36" parent="RootNode/group1" index="158"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.486903, 0.272267, -0.16199)
+
+[node name="pSphere35" parent="RootNode/group1" index="159"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.540237, 0.257897, -0.16635)
+
+[node name="pSphere34" parent="RootNode/group1" index="160"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.487876, 0.226513, -0.16635)
+
+[node name="pSphere33" parent="RootNode/group1" index="161"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.512644, 0.200937, -0.16635)
+
+[node name="pCube57" parent="RootNode/group1" index="162"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 1.94124, -0.414579, 0.379476)
+
+[node name="pCube56" parent="RootNode/group1" index="163"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.0998414, -0.406401, 1.10248)
+
+[node name="pCube55" parent="RootNode/group1" index="164"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.0998414, -0.406401, 1.0301)
+
+[node name="pCube54" parent="RootNode/group1" index="165"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.0103708, -0.406401, 1.0301)
+
+[node name="pCylinder9" parent="RootNode/group1" index="166"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.0449419, -0.232787, 1.06536)
+
+[node name="pCube53" parent="RootNode/group1" index="167"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.0103708, -0.406401, 1.10248)
+
+[node name="pSphere32" parent="RootNode/group1" index="168"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.2638, 0.272267, -0.16199)
+
+[node name="pSphere31" parent="RootNode/group1" index="169"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.354781, 0.297753, -0.16635)
+
+[node name="pSphere30" parent="RootNode/group1" index="170"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.407142, 0.329138, -0.16635)
+
+[node name="pSphere29" parent="RootNode/group1" index="171"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.555772, 0.294121, -0.16635)
+
+[node name="pSphere28" parent="RootNode/group1" index="172"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.146198, 0.144065, -0.16199)
+
+[node name="pSphere27" parent="RootNode/group1" index="173"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.237179, 0.169553, -0.16635)
+
+[node name="pSphere26" parent="RootNode/group1" index="174"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.28954, 0.200937, -0.16635)
+
+[node name="pSphere25" parent="RootNode/group1" index="175"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.431533, 0.191236, -0.16635)
+
+[node name="pSphere24" parent="RootNode/group1" index="176"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, -0.0466865, 0.288734, -0.16635)
+
+[node name="pSphere23" parent="RootNode/group1" index="177"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, -0.0145073, 0.319637, -0.16635)
+
+[node name="pSphere22" parent="RootNode/group1" index="178"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, -0.086777, 0.322401, -0.16635)
+
+[node name="pSphere21" parent="RootNode/group1" index="179"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.00489552, 0.287689, -0.16635)
+
+[node name="pSphere20" parent="RootNode/group1" index="180"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.00920545, 0.255505, -0.16635)
+
+[node name="pSphere19" parent="RootNode/group1" index="181"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.083473, 0.258122, -0.16635)
+
+[node name="pSphere18" parent="RootNode/group1" index="182"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.0727896, 0.20681, -0.16635)
+
+[node name="pCylinder4" parent="RootNode/group1" index="183"]
+transform = Transform3D(1.77317, 0, 0.82251, 0, 1.95465, 0, -0.82251, 0, 1.77317, 0.11705, -0.16216, -0.173569)
 
 [node name="pCube40" parent="RootNode/group1" index="184"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.141818, 0.343626, -1.5849)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube39" parent="RootNode/group1" index="185"]
+transform = Transform3D(0, 0, 8.82187, 0, 8.82187, 0, -8.82187, 0, 0, 0.273353, -0.399187, -1.74029)
 material_override = ExtResource("3_v6h7p")
+
+[node name="pCube38" parent="RootNode/group1" index="186"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.945564, -0.399187, -1.03928)
 
 [node name="pCube37" parent="RootNode/group1" index="187"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.23391, -0.399187, -1.03928)
 material_override = ExtResource("3_v6h7p")
 
+[node name="pSphere17" parent="RootNode/group1" index="188"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.458381, 0.361932, -0.16635)
+
+[node name="pSphere16" parent="RootNode/group1" index="189"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.322163, 0.331838, -0.16635)
+
+[node name="pSphere15" parent="RootNode/group1" index="190"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.182957, 0.291609, -0.16635)
+
+[node name="pSphere14" parent="RootNode/group1" index="191"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.235318, 0.322993, -0.16635)
+
+[node name="pCylinder3" parent="RootNode/group1" index="192"]
+transform = Transform3D(-1.78938, 3.3171e-16, -0.763259, 2.19136e-16, 1.94536, 3.3171e-16, 0.763259, 2.19136e-16, -1.78938, 0.0794262, -0.150948, -0.166134)
+
+[node name="pSphere13" parent="RootNode/group1" index="193"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.0588901, -0.0271008, -0.176684)
+
+[node name="pSphere12" parent="RootNode/group1" index="194"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.465764, 0.222879, -0.16635)
+
+[node name="pSphere11" parent="RootNode/group1" index="195"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.500411, 0.249666, -0.16635)
+
+[node name="pSphere10" parent="RootNode/group1" index="196"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.422052, 0.236817, -0.16635)
+
+[node name="pSphere9" parent="RootNode/group1" index="197"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.317133, 0.257897, -0.16635)
+
+[node name="pSphere8" parent="RootNode/group1" index="198"]
+transform = Transform3D(4.61668, 0, 0, 0, 4.61668, 0, 0, 0, 4.61668, 0.201695, 0.238172, -0.16635)
+
+[node name="pSphere7" parent="RootNode/group1" index="199"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.264772, 0.226513, -0.16635)
+
+[node name="pSphere6" parent="RootNode/group1" index="200"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.0608725, 0.171772, -0.16199)
+
+[node name="pSphere5" parent="RootNode/group1" index="201"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, -0.00161994, 0.214282, -0.16635)
+
+[node name="pSphere4" parent="RootNode/group1" index="202"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.173792, 0.201025, -0.16199)
+
+[node name="pSphere3" parent="RootNode/group1" index="203"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.128873, 0.124998, -0.16199)
+
+[node name="pSphere2" parent="RootNode/group1" index="204"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.0585342, 0.080709, -0.16199)
+
+[node name="pSphere1" parent="RootNode/group1" index="205"]
+transform = Transform3D(5.67047, 0, 0, 0, 5.67047, 0, 0, 0, 5.67047, 0.102049, 0.0246272, -0.16199)
+
+[node name="pCylinder2" parent="RootNode/group1" index="206"]
+transform = Transform3D(-1.78938, 3.3171e-16, -0.763259, 2.19136e-16, 1.94536, 3.3171e-16, 0.763259, 2.19136e-16, -1.78938, 0.0794262, -0.226713, -0.166134)
+
+[node name="pCylinder1" parent="RootNode/group1" index="207"]
+transform = Transform3D(1.94536, 0, 0, 0, 1.94536, 0, 0, 0, 1.94536, 0.0755506, -0.186361, -0.165453)
+
 [node name="pCube33" parent="RootNode/group1" index="208"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.141818, -0.424362, -1.5849)
 material_override = ExtResource("2_80kxr")
 
 [node name="pCube32" parent="RootNode/group1" index="209"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.117686, 0.85617, 1.47689)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube31" parent="RootNode/group1" index="210"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.117686, 0.85617, 1.72159)
+material_override = ExtResource("4_n0xeq")
+
+[node name="pCube30" parent="RootNode/group1" index="211"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 1.75709, 0.459806, -0.207337)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube29" parent="RootNode/group1" index="212"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 0.0148252, 0.459806, -0.210306)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube28" parent="RootNode/group1" index="213"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 0.268941, 0.459806, -0.209797)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube27" parent="RootNode/group1" index="214"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 0.510593, 0.459806, -0.209312)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube26" parent="RootNode/group1" index="215"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 0.752244, 0.459806, -0.208828)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube25" parent="RootNode/group1" index="216"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 1.001, 0.459806, -0.20833)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube24" parent="RootNode/group1" index="217"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 1.49677, 0.459806, -0.207337)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube23" parent="RootNode/group1" index="218"]
+transform = Transform3D(-0.0176729, 2.16073e-15, -8.82184, 2.1642e-18, 8.82187, 2.16073e-15, 8.82184, 2.1642e-18, -0.0176729, 1.25512, 0.459806, -0.207821)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube22" parent="RootNode/group1" index="219"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.117686, 0.85617, 0.741263)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube21" parent="RootNode/group1" index="220"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.117686, 0.85617, 0.982916)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube20" parent="RootNode/group1" index="221"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.117686, 0.85617, 1.23704)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube19" parent="RootNode/group1" index="222"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.117686, 0.85617, 0.250851)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube18" parent="RootNode/group1" index="223"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.117686, 0.85617, 0.49961)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube17" parent="RootNode/group1" index="224"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.117686, 0.85617, -0.00326423)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube16" parent="RootNode/group1" index="225"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.117686, 0.85617, -0.244917)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube15" parent="RootNode/group1" index="226"]
+transform = Transform3D(0, 0, 8.82187, 0, 8.82187, 0, -8.82187, 0, 0, -0.131534, -0.424362, 0.217018)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube14" parent="RootNode/group1" index="227"]
+transform = Transform3D(0, 0, 8.82187, 0, 8.82187, 0, -8.82187, 0, 0, -0.133279, -0.424362, 0.896739)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube13" parent="RootNode/group1" index="228"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -2.09965, -0.424362, 0.524079)
 material_override = ExtResource("4_n0xeq")
 
+[node name="pCube12" parent="RootNode/group1" index="229"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.25664, 0.753813, 0.405505)
+
+[node name="pCube11" parent="RootNode/group1" index="230"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.22507, 0.0781232, 1.45674)
+
 [node name="pCube10" parent="RootNode/group1" index="231"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.24569, 0.0781232, -0.614963)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube9" parent="RootNode/group1" index="232"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.25664, -0.424362, 0.379476)
 material_override = ExtResource("2_80kxr")
 
+[node name="pCube8" parent="RootNode/group1" index="233"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.761035, -0.0350375, 1.35631)
+
+[node name="pCube7" parent="RootNode/group1" index="234"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 1.00798, -0.128737, -0.188132)
+
 [node name="pCube6" parent="RootNode/group1" index="235"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.161368, -4.03605, 0.379476)
 material_override = ExtResource("4_n0xeq")
 
+[node name="pCube5" parent="RootNode/group1" index="236"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 1.41355, -1.45989, -0.214635)
+
 [node name="pCube4" parent="RootNode/group1" index="237"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -0.0554848, -0.424362, -0.203441)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube3" parent="RootNode/group1" index="238"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.419505, -1.20676, -0.203441)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube2" parent="RootNode/group1" index="239"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.0381492, -3.35792, -0.228302)
 material_override = ExtResource("4_n0xeq")
 
 [node name="pCube1" parent="RootNode/group1" index="240"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.761035, -0.424362, 0.517362)
 material_override = ExtResource("2_80kxr")
 
 [node name="pCube587" parent="RootNode/group1/Trees" index="0"]
-transform = Transform3D(0.638573, 0, 0, 0, 0.638573, 0, 0, 0, 0.638573, -0.126712, 0.218768, -0.123542)
+transform = Transform3D(5.6334, 0, 0, 0, 5.6334, 0, 0, 0, 5.6334, -0.356801, 1.50557, -0.710395)
+
+[node name="pCube586" parent="RootNode/group1/Trees" index="1"]
+transform = Transform3D(4.31739, 0, 0, 0, 5.26106, 0, 0, 0, 4.31739, -1.33118, 1.7644, -2.43668)
 
 [node name="pCube585" parent="RootNode/group1/Trees" index="2"]
-transform = Transform3D(0.711248, 0, 0, 0, 0.711248, 0, 0, 0, 0.711248, -0.0696489, 0.142353, -0.126396)
+transform = Transform3D(6.27454, 0, 0, 0, 6.27454, 0, 0, 0, 6.27454, 0.146602, 0.831456, -0.735573)
+
+[node name="pCube584" parent="RootNode/group1/Trees" index="3"]
+transform = Transform3D(5.58693, 0, 0, 0, 5.58693, 0, 0, 0, 5.58693, -0.0308699, 1.42617, -1.48117)
+
+[node name="pSphere83" parent="RootNode/group1" index="242"]
+transform = Transform3D(4.35835, 0, -5.16889, 0, 6.76111, 0, 5.16889, 0, 4.35835, 0.613778, -0.116077, -0.128028)
 
 [node name="Ziggurat" parent="RootNode" index="1"]
-transform = Transform3D(7.01283, 0, 23.7892, 0, 30.3731, 0, -23.7892, 0, 7.01283, -0.400082, 0.2779, -0.675803)
+transform = Transform3D(61.8663, 0, 209.865, 0, 267.948, 0, -209.865, 0, 61.8663, -2.76844, 2.02724, -5.58237)
 material_override = ExtResource("3_v6h7p")
+
+[node name="pCylinder68" parent="RootNode" index="2"]
+transform = Transform3D(6.58452, 0, 0, 0, 6.58452, 0, 0, 0, 6.58452, 0.557139, -0.431862, 0.267761)
+
+[node name="pCylinder69" parent="RootNode" index="3"]
+transform = Transform3D(6.19857, 0, 0, 0, 6.19857, 0, 0, 0, 6.19857, 1.2098, -0.444751, 0.24849)
+
+[node name="pCylinder70" parent="RootNode" index="4"]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 2.46699, -0.424362, 0.379476)
+
+[node name="Root Scene" parent="." index="2" instance=ExtResource("5_w6xu6")]
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.761333, -0.423434, 0.386459)

@@ -1,4 +1,4 @@
-[gd_resource type="Environment" load_steps=4 format=3 uid="uid://bgm8cwy5up3dq"]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://hs0xfuy4e64r"]
 
 [ext_resource type="Texture2D" uid="uid://vxpgd4lp7qqk" path="res://textures/resting_place_1k.hdr" id="1_gtvok"]
 
@@ -31,6 +31,7 @@ glow_enabled = true
 glow_bloom = 0.04
 fog_enabled = true
 fog_light_color = Color(0.631373, 0.698039, 0.819608, 1)
+fog_density = 0.001
 fog_sky_affect = 0.599
 volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0.498039, 0.615686, 0.701961, 1)

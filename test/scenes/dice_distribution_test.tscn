@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwduqe4anqd18"]
 
-[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="1_rd2mi"]
+[ext_resource type="PackedScene" uid="uid://b7wqojt2nphja" path="res://scenes/game/dice/dice_controller.tscn" id="1_m5su7"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
@@ -10,6 +10,8 @@ var _time: float = 0.0
 
 func _ready():
 	await get_tree().create_timer(0.5).timeout
+	($Dice as Dice)._current_player = 0
+	
 	
 	for i in 100:
 		($Dice as Dice)._roll()
@@ -90,10 +92,8 @@ func _on_dice_die_stopped(value):
 [node name="DistributionTest" type="Node"]
 script = SubResource("GDScript_b8xbw")
 
-[node name="Dice" parent="." instance=ExtResource("1_rd2mi")]
-transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
-_roll_shaking_enabled = true
-_use_hitbox_instead_of_dice_colliders = true
+[node name="Dice" parent="." instance=ExtResource("1_m5su7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.53077, 0)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -108,7 +108,7 @@ mesh = SubResource("PlaneMesh_0esbx")
 transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0192364, -0.835694, 0.548858, 0, 0.54896, 0.835849, -0.999815, -0.0160787, 0.01056, 7.93404, 11.8192, -2.23023)
+transform = Transform3D(0.0192364, -0.835694, 0.548858, 0, 0.54896, 0.835849, -0.999815, -0.0160787, 0.01056, 0.207932, -3.1595, 0.048)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_pp8fu")
@@ -145,5 +145,4 @@ layout_mode = 2
 text = "Outcome 4:"
 
 [connection signal="die_stopped" from="Dice" to="CanvasLayer" method="_on_dice_die_stopped"]
-[connection signal="roll_finished" from="Dice" to="." method="_on_dice_roll_finished"]
 [connection signal="roll_finished" from="Dice" to="CanvasLayer" method="_on_dice_roll_finished"]

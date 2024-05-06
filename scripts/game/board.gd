@@ -120,9 +120,9 @@ func _get_landing_spot(spot: Spot, steps: int, backwards := false) -> Spot:
 func _check_player_data():
 	assert(_p1_piece != null, "No piece prefab was assigned to Player 1")
 	assert(_p2_piece != null, "No piece prefab was assigned to Player 2")
-	assert(_p1_start_spots.size() <= Settings.num_pieces, \
+	assert(_p1_start_spots.size() >= Settings.num_pieces, \
 		"Player 1 does not have enough starting spots for the specified number of pieces")
-	assert(_p2_start_spots.size() <= Settings.num_pieces, \
+	assert(_p2_start_spots.size() >= Settings.num_pieces, \
 		"Player 2 does not have enough starting spots for the specified number of pieces")
 
 

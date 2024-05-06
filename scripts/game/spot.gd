@@ -10,6 +10,8 @@ signal mouse_entered
 signal mouse_exited
 signal selected
 
+const PIECE_OFFSET_Y = 0.15
+
 @export var is_safe: bool = false
 @export var give_extra_roll: bool = false
 @export var force_allow_stack: bool = false ## If true, always allows stacking, independent of settings
@@ -105,7 +107,7 @@ func dehighlight_pieces():
 
 
 func _place_animation(new_pieces: Array[Piece], anim: Piece.MoveAnim, curr_num_pieces: int):
-	var offset = Vector3.UP * 0.15
+	var offset = Vector3.UP * PIECE_OFFSET_Y * global_basis.get_scale().y		## Take scale of the board into account!
 	var base_pos = global_position + offset + (curr_num_pieces * offset)
 	for i in new_pieces.size():
 		var piece = new_pieces[i]

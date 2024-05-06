@@ -10,6 +10,8 @@ extends Label3D
 
 var _default_color
 var _delta
+var _target_color
+var _tween_color
 
 func _ready():
 	_default_color = modulate
@@ -25,23 +27,24 @@ func _process(delta):
 ## Example of a simple highlighting effect for the dice label.
 ## In this method, we lerp from the label'original color to a new color, following a curve.
 ## The flow of this animation is defined by [param _effect_curve] 
-func play_effect(new_color: Color, duration: float):
+func play_effect(duration: float):
 	visible = true
-	var old_color = modulate
-	var time = 0 
 	
-	while time <= duration:
-		time += _delta
-		var next_color = old_color.lerp(new_color, _effect_curve.sample(time/duration))
-		modulate = next_color
-		await Engine.get_main_loop().process_frame
-		
-	visible = false
-	
+	_tween_color = create_tween()
+	_tween_color.bind_node(self)
+	_tween_color.tween_property(self, "modulate", _target_color, duration/4)
+	_tween_color.tween_interval(duration/2)
+	_tween_color.tween_property(self, "modulate", _default_color, duration/4)
+	await _tween_color.finished
+
 
 func _on_dice_roll_finished(value: int):
 	text = "%s" % value
-	if value == 0:
-		play_effect(_color_no_moves, _effect_duration)
-	else:
-		play_effect(_color_moves, _effect_duration)		
+	_target_color = _color_moves
+	# HACK: Possibly wait for no moves signal.
+	await get_tree().create_timer(0.1).timeout	
+	play_effect(_effect_duration)	
+
+
+func _on_no_moves():
+	_target_color = _color_no_moves

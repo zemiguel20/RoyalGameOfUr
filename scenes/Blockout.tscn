@@ -1,16 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw5k0hcse4y5h"]
+[gd_scene load_steps=8 format=3 uid="uid://bw5k0hcse4y5h"]
 
-[ext_resource type="Environment" uid="uid://bgm8cwy5up3dq" path="res://shaders/WorldLightingSettings.tres" id="2_n3whl"]
+[ext_resource type="Environment" uid="uid://hs0xfuy4e64r" path="res://shaders/WorldLightingSettings.tres" id="2_n3whl"]
 [ext_resource type="PackedScene" uid="uid://b48u4dl4lewgu" path="res://models/Blockout.tscn" id="3_2uh8l"]
 [ext_resource type="PackedScene" uid="uid://b01ccjwqwqwr1" path="res://models/Plank.tscn" id="4_a4r5x"]
+[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="4_b6l14"]
+[ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://models/test_die_d4.glb" id="5_cwawq"]
+[ext_resource type="PackedScene" uid="uid://cycvsdricr17j" path="res://models/TableCloth.fbx" id="6_qnkt8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_agkbu"]
 
 [node name="Blockout" type="Node3D"]
+transform = Transform3D(8.22, 0, 0, 0, 8.22, 0, 0, 0, 8.22, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_n3whl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.126744, -0.930471, 0.343744, -0.583004, 0.210489, 0.78473, -0.802523, -0.299864, -0.51579, -0.00553775, 0.0193132, 0.00699997)
+transform = Transform3D(0.322797, -0.915638, -0.239602, 0.1588, -0.197169, 0.967423, -0.933051, -0.35033, 0.0817578, -0.00553775, 0.0193132, 0.00699997)
 light_color = Color(0.815686, 0.815686, 0.792157, 1)
 light_energy = 2.4
 light_indirect_energy = 5.525
@@ -21,13 +27,13 @@ shadow_normal_bias = 0.889
 directional_shadow_mode = 1
 directional_shadow_split_1 = 0.019
 directional_shadow_fade_start = 0.65
-directional_shadow_max_distance = 109.5
+directional_shadow_max_distance = 43.3
 
 [node name="BlockoutMap" parent="." instance=ExtResource("3_2uh8l")]
-transform = Transform3D(7.34332, 0, 0, 0, 7.34332, 0, 0, 0, 7.34332, 0.446819, -0.112522, 0.661057)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.313728, 0.252967, 0.367007)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.848048, 0.0194182, 0.529563, 0, 0.999328, -0.0366437, -0.529919, 0.0310756, 0.847479, 0.951816, 0.0923961, 1.49642)
+transform = Transform3D(0.858825, -0.400194, 0.319788, 0.0241479, 0.655191, 0.755077, -0.5117, -0.640757, 0.572359, 0.872157, 0.0910064, 1.44488)
 current = true
 fov = 64.8
 
@@ -40,10 +46,61 @@ transform = Transform3D(-1.29294, 0, 2.1805, 0, 2.53501, 0, -2.1805, 0, -1.29294
 transform = Transform3D(1.23615, 0, -2.21319, 0, 2.53501, 0, 2.21319, 0, 1.23615, 0.852591, 0.0132926, 1.3403)
 
 [node name="TablePlank3" parent="Table" instance=ExtResource("4_a4r5x")]
-transform = Transform3D(1.22975, -1.85687e-07, -2.21715, -3.82829e-07, -2.53536, 3.84321e-14, 2.21715, -3.34781e-07, 1.22975, 0.828266, 0.0189377, 1.29576)
+transform = Transform3D(1.28275, -1.85687e-07, -2.18691, -3.82718e-07, -2.53536, -9.21303e-09, 2.18691, -3.34781e-07, 1.28275, 0.826833, 0.0189386, 1.29527)
 
 [node name="TablePlank4" parent="Table" instance=ExtResource("4_a4r5x")]
 transform = Transform3D(-1.22398, 0, 2.22034, 0, -2.53536, 0, -2.22034, 0, -1.22398, 0.901538, 0.0189377, 1.43138)
 
 [node name="TablePlank5" parent="Table" instance=ExtResource("4_a4r5x")]
-transform = Transform3D(-1.25617, 0, 2.20229, 0, -2.53536, 0, -2.20229, 0, -1.25617, 0.875338, 0.0189377, 1.38472)
+transform = Transform3D(-1.27637, 0, 2.19064, 0, -2.53536, 0, -2.19064, 0, -1.27637, 0.8755, 0.0189377, 1.38501)
+
+[node name="cloth" parent="." instance=ExtResource("6_qnkt8")]
+transform = Transform3D(4.79902, 0, -8.16304, 0, 9.52308, 0, 7.98754, 0, 4.90446, 0.850561, 0.0196978, 1.41003)
+
+[node name="game_for_scale" type="Node" parent="."]
+
+[node name="Board2" parent="game_for_scale" instance=ExtResource("4_b6l14")]
+transform = Transform3D(-0.00359479, 0, 0.00600645, 0, 0.007, 0, -0.00600645, 0, -0.00359479, 0.82518, 0.0203158, 1.40125)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="game_for_scale"]
+transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.826951, 0.0195771, 1.41728)
+mesh = SubResource("CylinderMesh_agkbu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="game_for_scale"]
+transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.832609, 0.0195771, 1.41387)
+mesh = SubResource("CylinderMesh_agkbu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="game_for_scale"]
+transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.838566, 0.0195771, 1.41029)
+mesh = SubResource("CylinderMesh_agkbu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="game_for_scale"]
+transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.822374, 0.0195771, 1.38422)
+mesh = SubResource("CylinderMesh_agkbu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="game_for_scale"]
+transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.816095, 0.0195771, 1.38674)
+mesh = SubResource("CylinderMesh_agkbu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="game_for_scale"]
+transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.809821, 0.0195771, 1.39079)
+mesh = SubResource("CylinderMesh_agkbu")
+skeleton = NodePath("../..")
+
+[node name="test_die_d4" parent="game_for_scale" instance=ExtResource("5_cwawq")]
+transform = Transform3D(0.00531238, 0, 0, 0, 0.00531238, 0, 0, 0, 0.00531238, 0.841974, 0.0246928, 1.42573)
+
+[node name="test_die_d5" parent="game_for_scale" instance=ExtResource("5_cwawq")]
+transform = Transform3D(0.00146269, 0, 0.00510705, 0, 0.00531238, 0, -0.00510705, 0, 0.00146269, 0.855461, 0.0246928, 1.4217)
+
+[node name="test_die_d6" parent="game_for_scale" instance=ExtResource("5_cwawq")]
+transform = Transform3D(0.00511323, 0, 0.00144092, 0, 0.00531238, 0, -0.00144092, 0, 0.00511323, 0.860551, 0.0276422, 1.41178)
+
+[node name="test_die_d7" parent="game_for_scale" instance=ExtResource("5_cwawq")]
+transform = Transform3D(0.00511323, 0, 0.00144092, 0, 0.00531238, 0, -0.00144092, 0, 0.00511323, 0.873239, 0.0276422, 1.41441)
