@@ -47,5 +47,4 @@ func _on_dice_roll_finished(value: int):
 
 
 func _on_no_moves():
-	print("Set Target Color")
 	_target_color = _color_no_moves

@@ -49,5 +49,6 @@ transform = Transform3D(4.79902, 0, -8.16304, 0, 9.52308, 0, 7.98754, 0, 4.90446
 
 [node name="Reference_Scale" parent="." instance=ExtResource("2_csl6i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372539, -0.663783, 0.728179)
+visible = false
 
 [editable path="Environment"]

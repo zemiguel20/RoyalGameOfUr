@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b7wqojt2nphja"]
+[gd_scene load_steps=20 format=3 uid="uid://b7wqojt2nphja"]
 
 [ext_resource type="Script" path="res://scripts/game/dice/dice.gd" id="1_ka5gv"]
 [ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_die.tscn" id="2_66rme"]
@@ -37,6 +37,9 @@ size = Vector3(6, 3.83289, 4.77588)
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_iof8i"]
+size = Vector3(10.6155, 1, 8.46777)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_3iugv"]
 size = Vector3(6, 3.83289, 3.69043)
 
@@ -71,7 +74,7 @@ transform = Transform3D(-1, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, -1, 1.0000
 throwing_velocity_multiplier = 0.5
 
 [node name="SpawnSpots_P1" type="Node3D" parent="DiceArea_P1"]
-transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -7.62939e-06, -3, -3.05057)
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -7.60684e-06, -3, -2.29399)
 visible = false
 
 [node name="SpawnSpot" parent="DiceArea_P1/SpawnSpots_P1" instance=ExtResource("4_e34ex")]
@@ -174,6 +177,12 @@ _color_moves = Color(1, 1, 1, 1)
 _color_no_moves = Color(1, 0.301961, 0.235294, 1)
 _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
+
+[node name="Floor_Collider_P1" type="StaticBody3D" parent="DiceArea_P1" groups=["Ground"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P1/Floor_Collider_P1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.61948, -0.459701)
+shape = SubResource("BoxShape3D_iof8i")
 
 [node name="DiceArea_P2" type="Node3D" parent="."]
 transform = Transform3D(0.026, 0, 1.54972e-09, 0, 0.026, 0, -1.54972e-09, 0, 0.026, 0, 0.1, -0.131)
@@ -300,6 +309,12 @@ _color_moves = Color(1, 1, 1, 1)
 _color_no_moves = Color(1, 0.301961, 0.235294, 1)
 _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
+
+[node name="Floor_Collider_P2" type="StaticBody3D" parent="DiceArea_P2" groups=["Ground"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P2/Floor_Collider_P2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.61948, -0.459701)
+shape = SubResource("BoxShape3D_iof8i")
 
 [node name="RollSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_hlajg")
