@@ -16,12 +16,12 @@ func _ready():
 	Settings.can_move_backwards = true
 	await get_tree().create_timer(0.1).timeout
 	var moves = board.get_possible_moves(player, 1);
-	move_phase_started.emit(General.Player.ONE, moves)
+	$MovePicker.start(moves)
 
 
 func _on_move_picker_move_executed(_move: Move) -> void:
 	var moves = board.get_possible_moves(player, 1);
-	move_phase_started.emit(General.Player.ONE, moves)
+	$MovePicker.start(moves)
 "
 
 [sub_resource type="Curve3D" id="Curve3D_fgcub"]
@@ -43,5 +43,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.41018, 0, 1.41478)
 visible = false
 curve = SubResource("Curve3D_fgcub")
 
-[connection signal="move_phase_started" from="." to="MovePicker" method="_on_move_phase_started"]
 [connection signal="move_executed" from="MovePicker" to="." method="_on_move_picker_move_executed"]
