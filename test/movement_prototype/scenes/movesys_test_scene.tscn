@@ -1,14 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://cs5x453dm77q"]
+[gd_scene load_steps=11 format=3 uid="uid://cs5x453dm77q"]
 
 [ext_resource type="Script" path="res://test/movement_prototype/scripts/move_systems/movesys_dnd_click.gd" id="1_6ig54"]
 [ext_resource type="PackedScene" uid="uid://brehcf7q3asq0" path="res://test/movement_prototype/prefabs/tile.tscn" id="1_doj0g"]
 [ext_resource type="Script" path="res://test/movement_prototype/scripts/move_systems/movesys_click.gd" id="1_qvmpt"]
-[ext_resource type="Script" path="res://test/movement_prototype/scripts/move_systems/mscontroller.gd" id="1_wxu04"]
+[ext_resource type="Script" path="res://test/movement_prototype/scripts/move_systems/ms_controller.gd" id="1_wxu04"]
 [ext_resource type="PackedScene" uid="uid://bjfmki4yr7wom" path="res://test/movement_prototype/prefabs/piece.tscn" id="2_if87y"]
 [ext_resource type="Script" path="res://test/movement_prototype/scripts/move_systems/movesys_dnd_hold.gd" id="3_2s7tf"]
 [ext_resource type="PackedScene" uid="uid://bfan4cu8dxbge" path="res://test/movement_prototype/prefabs/tile_spawn.tscn" id="5_i12y5"]
 [ext_resource type="PackedScene" uid="uid://b4gwf228qgx8t" path="res://test/movement_prototype/prefabs/tile_rosette.tscn" id="7_7faun"]
-[ext_resource type="Material" uid="uid://da5dvpjm2mlkn" path="res://test/movement_prototype/materials/mat_tile_red.tres" id="7_yujg3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pwvts"]
 size = Vector3(3, 0.5, 8)
@@ -21,17 +20,17 @@ size = Vector3(1, 1, 2)
 [node name="Meta" type="Node3D" parent="."]
 script = ExtResource("1_wxu04")
 
-[node name="MoveSysDDClick" type="Node3D" parent="Meta" node_paths=PackedStringArray("tileParent")]
+[node name="MoveSysDDClick" type="Node3D" parent="Meta" node_paths=PackedStringArray("_tileParent")]
 script = ExtResource("1_6ig54")
-tileParent = NodePath("../../Board/Tiles")
+_tileParent = NodePath("../../Board/Tiles")
 
-[node name="MoveSysDDHold" type="Node3D" parent="Meta" node_paths=PackedStringArray("tileParent")]
+[node name="MoveSysDDHold" type="Node3D" parent="Meta" node_paths=PackedStringArray("_tileParent")]
 script = ExtResource("3_2s7tf")
-tileParent = NodePath("../../Board/Tiles")
+_tileParent = NodePath("../../Board/Tiles")
 
-[node name="MoveSysClick" type="Node3D" parent="Meta" node_paths=PackedStringArray("tileParent")]
+[node name="MoveSysClick" type="Node3D" parent="Meta" node_paths=PackedStringArray("_tileParent")]
 script = ExtResource("1_qvmpt")
-tileParent = NodePath("../../Board/Tiles")
+_tileParent = NodePath("../../Board/Tiles")
 
 [node name="Board" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
@@ -51,10 +50,9 @@ mesh = SubResource("BoxMesh_bwcnj")
 
 [node name="Tiles" type="Node3D" parent="Board"]
 
-[node name="StartTile" parent="Board/Tiles" node_paths=PackedStringArray("pieces") instance=ExtResource("5_i12y5")]
+[node name="StartTile" parent="Board/Tiles" node_paths=PackedStringArray("_pieces") instance=ExtResource("5_i12y5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.25, -0.5)
-pieces = [NodePath("../../../Pieces/Piece"), NodePath("../../../Pieces/Piece2"), NodePath("../../../Pieces/Piece3"), NodePath("../../../Pieces/Piece4"), NodePath("../../../Pieces/Piece5"), NodePath("../../../Pieces/Piece6"), NodePath("../../../Pieces/Piece7")]
-max_pieces_dragged = 1
+_pieces = [NodePath("../../../Pieces/Piece"), NodePath("../../../Pieces/Piece2"), NodePath("../../../Pieces/Piece3"), NodePath("../../../Pieces/Piece4"), NodePath("../../../Pieces/Piece5"), NodePath("../../../Pieces/Piece6"), NodePath("../../../Pieces/Piece7")]
 
 [node name="Tile" parent="Board/Tiles" instance=ExtResource("1_doj0g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, 0.5)
@@ -67,7 +65,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, 2.5)
 
 [node name="Tile4_R" parent="Board/Tiles" instance=ExtResource("7_7faun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, 3.5)
-mat_default = ExtResource("7_yujg3")
 
 [node name="Tile5" parent="Board/Tiles" instance=ExtResource("1_doj0g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 3.5)
@@ -80,7 +77,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 1.5)
 
 [node name="Tile8_R" parent="Board/Tiles" instance=ExtResource("7_7faun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.5)
-mat_default = ExtResource("7_yujg3")
 
 [node name="Tile9" parent="Board/Tiles" instance=ExtResource("1_doj0g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -0.5)
@@ -99,11 +95,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, -3.5)
 
 [node name="Tile14_R" parent="Board/Tiles" instance=ExtResource("7_7faun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, -2.5)
-mat_default = ExtResource("7_yujg3")
 
 [node name="Tile15_R" parent="Board/Tiles" instance=ExtResource("7_7faun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.25, 3.5)
-mat_default = ExtResource("7_yujg3")
 
 [node name="Tile16" parent="Board/Tiles" instance=ExtResource("1_doj0g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.25, 2.5)
@@ -116,14 +110,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.25, 0.5)
 
 [node name="Tile19_R" parent="Board/Tiles" instance=ExtResource("7_7faun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.25, -2.5)
-mat_default = ExtResource("7_yujg3")
 
 [node name="Tile20" parent="Board/Tiles" instance=ExtResource("1_doj0g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.25, -3.5)
 
 [node name="EndTile" parent="Board/Tiles" instance=ExtResource("5_i12y5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.25, -1.5)
-max_pieces_dragged = 1
 
 [node name="Pieces" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)

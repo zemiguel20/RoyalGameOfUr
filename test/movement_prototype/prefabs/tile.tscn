@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://brehcf7q3asq0"]
 
-[ext_resource type="Script" path="res://test/movement_prototype/scripts/tile.gd" id="1_b3r8a"]
+[ext_resource type="Script" path="res://test/movement_prototype/scripts/_tile.gd" id="1_b3r8a"]
 [ext_resource type="Material" uid="uid://bij3p05yemii6" path="res://test/movement_prototype/materials/mat_tile_default.tres" id="2_1om30"]
 [ext_resource type="Material" uid="uid://2blbcxihq4xn" path="res://test/movement_prototype/materials/mat_tile_highlight.tres" id="2_8nxru"]
 
@@ -10,11 +10,11 @@ size = Vector3(0.9, 0.1, 0.9)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mh2n5"]
 size = Vector3(1, 0.1, 1)
 
-[node name="Tile" type="Node3D" node_paths=PackedStringArray("mesh") groups=["tiles"]]
+[node name="Tile" type="Node3D" node_paths=PackedStringArray("_mesh") groups=["tiles"]]
 script = ExtResource("1_b3r8a")
-mesh = NodePath("Model")
-mat_default = ExtResource("2_1om30")
-mat_highlight = ExtResource("2_8nxru")
+_mesh = NodePath("Model")
+_mat_default = ExtResource("2_1om30")
+_mat_highlight = ExtResource("2_8nxru")
 
 [node name="Model" type="CSGMesh3D" parent="."]
 mesh = SubResource("BoxMesh_c5lm1")

@@ -4,7 +4,8 @@
 [ext_resource type="Material" uid="uid://bjewrg8ok1xko" path="res://test/movement_prototype/materials/mat_tile_black.tres" id="2_y2uhe"]
 
 [node name="Tile" instance=ExtResource("1_dvlxo")]
-mat_default = ExtResource("2_y2uhe")
+_mat_default = ExtResource("2_y2uhe")
+_max_pieces_dragged = 1
 
 [node name="Model" parent="." index="0"]
 material = ExtResource("2_y2uhe")

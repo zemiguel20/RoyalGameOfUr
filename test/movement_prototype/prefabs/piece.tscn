@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjfmki4yr7wom"]
 
-[ext_resource type="Script" path="res://test/movement_prototype/scripts/piece.gd" id="1_y758p"]
+[ext_resource type="Script" path="res://test/movement_prototype/scripts/_piece.gd" id="1_y758p"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_i2bnb"]
 top_radius = 0.35
