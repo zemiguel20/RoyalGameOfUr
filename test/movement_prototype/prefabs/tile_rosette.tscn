@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4gwf228qgx8t"]
+
+[ext_resource type="PackedScene" uid="uid://brehcf7q3asq0" path="res://test/movement_prototype/prefabs/tile.tscn" id="1_22q4a"]
+[ext_resource type="Material" uid="uid://da5dvpjm2mlkn" path="res://test/movement_prototype/materials/mat_tile_red.tres" id="2_kg0a7"]
+
+[node name="RosetteTile" instance=ExtResource("1_22q4a")]
+_mat_default = ExtResource("2_kg0a7")
+
+[node name="Model" parent="." index="0"]
+material = ExtResource("2_kg0a7")
