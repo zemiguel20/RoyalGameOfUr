@@ -2,7 +2,7 @@
 
 [ext_resource type="Environment" uid="uid://hs0xfuy4e64r" path="res://shaders/WorldLightingSettings.tres" id="2_n3whl"]
 [ext_resource type="PackedScene" uid="uid://b48u4dl4lewgu" path="res://models/Blockout.tscn" id="3_2uh8l"]
-[ext_resource type="PackedScene" path="res://models/Plank.tscn" id="4_a4r5x"]
+[ext_resource type="PackedScene" uid="uid://b01ccjwqwqwr1" path="res://models/Plank.tscn" id="4_a4r5x"]
 [ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="4_b6l14"]
 [ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://models/test_die_d4.glb" id="5_cwawq"]
 [ext_resource type="PackedScene" uid="uid://cycvsdricr17j" path="res://models/TableCloth.fbx" id="6_qnkt8"]
