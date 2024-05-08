@@ -36,6 +36,10 @@ signal roll_finished(value: int)
 @onready var _click_hitbox_p2: Area3D = $DiceArea_P2/ClickHitbox_P2
 ## 3D Label displaying the outcome of the dice. Contains its own script with special effects.
 @onready var _outcome_label: DiceOutcomeLabel = $DiceArea_P1/Label3D_Outcome_P1
+## Approximate area that P1's dice can land in
+@onready var _dice_area_p1: Node3D = $DiceArea_P1
+## Approximate area that P2's dice can land in
+@onready var _dice_area_p2: Node3D = $DiceArea_P2
 #endregion
 
 #region Regular Variables
@@ -72,11 +76,36 @@ func _input(event: InputEvent) -> void:
 	# since releasing the mouse can be done outside of the click hitboxes.
 	if event is InputEventMouseButton and event.is_released():
 		on_dice_release()
-		
-		
+
+var first_turn_passed = false
 func on_roll_phase_started(player: General.Player):
-	enable_selection()
 	_current_player = player
+	
+	if (first_turn_passed):
+		var other_hitbox = _click_hitbox_p2 if _current_click_hitbox == _click_hitbox else _click_hitbox
+		var diff_vector = other_hitbox.global_position - _current_click_hitbox.global_position
+		await _move_to_opposite_side(diff_vector)
+	else:
+		first_turn_passed = true
+	
+	enable_selection()
+
+
+func _move_to_opposite_side(move_vector: Vector3):
+	# Linear translation of X and Z
+	var tween_xz = create_tween()
+	tween_xz.bind_node(self).set_parallel(true)
+	tween_xz.tween_property(self, "global_position:x", global_position.x + move_vector.x, 1)
+	tween_xz.tween_property(self, "global_position:z", global_position.z + move_vector.z, 1)
+	
+	# Arc translation of Y
+	#var high_point = maxf(self.global_position.y, global_position.y + move_vector.y) + (0.026 * global_basis.get_scale().y)
+	#var tween_y = create_tween().set_trans(Tween.TRANS_CUBIC)
+	#tween_y.tween_property(self, "global_position:y", global_position.y + high_point, 0.5).set_ease(Tween.EASE_OUT)
+	#tween_y.tween_property(self, "global_position:y", global_position.y + move_vector.y, 0.5).set_ease(Tween.EASE_IN)
+	
+	# Tweens run at same time, so only wait for one of them
+	await tween_xz.finished
 
 
 ## Enables selection and highlight effects
