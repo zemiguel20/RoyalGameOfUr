@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://wqcqoxpojsis" path="res://textures/Ur_FloorBricks_roughness.png" id="5_cm2ls"]
 
 [resource]
+albedo_color = Color(0.858824, 0.776471, 0.74902, 1)
 albedo_texture = ExtResource("1_gektt")
 roughness_texture = ExtResource("5_cm2ls")
 normal_enabled = true
