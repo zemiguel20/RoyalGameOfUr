@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://ypg8ltq81dur"]
+
+[ext_resource type="Texture2D" uid="uid://c1ibjjrls46tq" path="res://textures/board/Board_blockout_Base_color.png" id="1_xwfsj"]
+[ext_resource type="Texture2D" uid="uid://1q8s3hp1qvke" path="res://textures/board/Board_blockout_Normal.png" id="3_0dul1"]
+[ext_resource type="Texture2D" uid="uid://dw1f6to5uk4ub" path="res://textures/board/Board_blockout_Roughness.png" id="4_ruc45"]
+
+[resource]
+albedo_texture = ExtResource("1_xwfsj")
+roughness_texture = ExtResource("4_ruc45")
+normal_enabled = true
+normal_texture = ExtResource("3_0dul1")
+ao_enabled = true

@@ -1,12 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=17 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
+[ext_resource type="Material" uid="uid://ypg8ltq81dur" path="res://materials/board.tres" id="3_8pbq5"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
 [ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="5_8sxhn"]
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
+[ext_resource type="PackedScene" uid="uid://dmjf6wpb2arvg" path="res://models/Board_low.fbx" id="8_48rpu"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
-[ext_resource type="PackedScene" path="res://models/opponent_textured.tscn" id="9_yxcrq"]
+[ext_resource type="PackedScene" uid="uid://clwe1fjp2o660" path="res://models/opponent_textured.tscn" id="9_yxcrq"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -50,8 +52,15 @@ script = SubResource("GDScript_fbn4f")
 [node name="Boardgame" parent="." instance=ExtResource("3_xprge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
+[node name="GameStateController" parent="Boardgame" index="0"]
+_board = null
+
 [node name="Board" parent="Boardgame" index="1"]
 transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 4.4739, -0.207527, 6.36155)
+visible = false
+
+[node name="BaseShape" parent="Boardgame/Board/Model/CSGCombiner3D" index="0"]
+material_override = ExtResource("3_8pbq5")
 
 [node name="Dice" parent="Boardgame" index="2"]
 transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 4.44211, -0.213149, 6.346)
@@ -68,9 +77,9 @@ transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, -0.09
 [node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/Floor_Collider_P2" index="0"]
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, -4.02627, -0.459686)
 
-[node name="AIPlayerHard" parent="." node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("9_m0jtg")]
-_dice = NodePath("../Boardgame/Dice")
-_move_picker = NodePath("../Boardgame/MovePicker")
+[node name="AIPlayerHard" parent="." instance=ExtResource("9_m0jtg")]
+_dice = null
+_move_picker = null
 
 [node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
@@ -134,16 +143,14 @@ script = ExtResource("6_3dit1")
 [node name="Opponent_Model" parent="." instance=ExtResource("9_yxcrq")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.08525, -0.655595, 5.72598)
 
-[connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
-[connection signal="move_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_move_phase_started"]
-[connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
-[connection signal="roll_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_roll_phase_started"]
-[connection signal="move_executed" from="AIPlayerHard" to="Boardgame/GameStateController" method="_on_move_executed"]
+[node name="Board" parent="." instance=ExtResource("8_48rpu")]
+transform = Transform3D(2.33073, 0, 1.43287, 0, 2.73595, 0, -1.43287, 0, 2.33073, 4.47693, -0.18877, 6.36229)
+
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 [connection signal="play_pressed" from="Prototype_UI" to="Custom_Camera" method="_on_play_pressed"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Boardgame/GameStateController" method="start_game"]
-[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_play_pressed"]
+[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Quit" to="Prototype_UI/Main Menu/Quit" method="_on_pressed"]
 
 [editable path="Boardgame"]
