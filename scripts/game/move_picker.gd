@@ -23,6 +23,7 @@ func start(moves: Array[Move]):
 	_connect_signals()
 	_pre_from_selection_highlight()
 
+
 #region Signal callbacks
 func _connect_signals():
 	for move in _moves:
@@ -146,8 +147,16 @@ func _add_path_highlighter(move : Move):
 	var move_path_highlight = preload("res://scenes/move_path_highlight.tscn")
 	var path = move_path_highlight.instantiate()
 	path.curve.clear_points()
+	
 	path.curve.add_point(move.from.global_position)
+	
+	# Midpoint to fix clipping through board
+	var midpoint = move.from.global_position.lerp(move.to.global_position, 0.5)
+	midpoint.y = maxf(move.from.global_position.y, move.to.global_position.y)
+	path.curve.add_point(midpoint)
+	
 	path.curve.add_point(move.to.global_position)
+	
 	add_child(path)
 
 
