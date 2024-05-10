@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cgkfm7n305bgj"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_3nkie"]
-[ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard.fbx" id="2_csl6i"]
+[ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard_standing.fbx" id="2_csl6i"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
