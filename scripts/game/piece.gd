@@ -9,8 +9,6 @@ enum MoveAnim {ARC, LINE, NONE}
 const MOVE_ARC_HEIGHT : float = 1.0
 const MOVE_DURATION : float = 0.4
 
-@export var player : General.Player
-
 @onready var _highlighter := $Highlighter as MaterialHighlighterComponent
 
 
