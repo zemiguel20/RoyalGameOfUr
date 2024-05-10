@@ -57,7 +57,12 @@ func _process(delta):
 
 		
 func _input(event):
-	if not _is_enabled or not event is InputEventMouseMotion:
+	if event is InputEventMouseButton:
+		event = event as InputEventMouseButton
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
+			_switch_mode()
+			
+	if not event is InputEventMouseMotion or not _is_enabled:
 		return
 	
 	# Rotate based on mouse movement.	
@@ -87,17 +92,24 @@ func _define_constraints():
 	_max_rotation_y = _looking_around_rotation.y + deg_to_rad(max_degrees_left)
 		
 		
+func _switch_mode():
+	if _is_enabled:
+		_return_to_board()
+	else:
+		_enter_looking_mode()
+
+		
 func _return_to_board():
 	_is_enabled = false	
 	await _rotate_with_speed(_board_look_rotation, _centering_speed)
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED	
-	_looking_border.visible = true	
+	#_looking_border.visible = true	
 
 
 ## Triggered when hovering over the looking around border.
 func _enter_looking_mode():
-	_looking_border.visible = false
+	#_looking_border.visible = false
 	await _rotate_with_speed(_looking_around_rotation, _centering_speed)
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
