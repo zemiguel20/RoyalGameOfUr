@@ -22,7 +22,7 @@ fill_to = Vector2(0.912621, 0.0776699)
 
 [node name="RosetteTile" instance=ExtResource("1_l03v7")]
 is_safe = true
-give_extra_roll = true
+give_extra_turn = true
 
 [node name="Highlighter" parent="." index="1"]
 highlight_material = SubResource("ShaderMaterial_f8qey")
