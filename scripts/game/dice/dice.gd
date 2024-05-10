@@ -204,7 +204,8 @@ func _set_click_hitbox():
 
 
 func _on_die_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):
-	if event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton and event.is_pressed() \
+	and event.button_index == MOUSE_BUTTON_LEFT:
 		on_dice_click()
 
 
