@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcjpac1cs0xcy"]
+
+[ext_resource type="PackedScene" uid="uid://it24m6uyqxlk" path="res://models/fbx_guard_animated.fbx" id="1_jat7h"]
+[ext_resource type="Material" uid="uid://dq4qt2h6vrkcj" path="res://materials/guard/mat_guard_colors.tres" id="2_nuktw"]
+[ext_resource type="Script" path="res://models/animation_test.gd" id="3_ihjcy"]
+
+[node name="Opponent_Guard_Animated" instance=ExtResource("1_jat7h")]
+
+[node name="Skeleton3D" parent="RootNode" index="1"]
+bones/1/rotation = Quaternion(0.111435, -0.005218, 0.0464822, 0.99267)
+bones/2/rotation = Quaternion(0.119863, -4.06822e-18, -4.75079e-18, 0.99279)
+bones/3/rotation = Quaternion(0.083986, -7.10251e-19, -8.4269e-18, 0.996467)
+bones/4/rotation = Quaternion(0.247252, -0.00127453, -0.0528002, 0.967511)
+bones/5/rotation = Quaternion(-0.108579, 0, -4.1359e-25, 0.994088)
+bones/7/rotation = Quaternion(-0.0168499, -0.0868665, -0.00146945, 0.996076)
+bones/11/rotation = Quaternion(0.624381, 0.34, -0.57239, 0.408555)
+bones/13/rotation = Quaternion(-0.0236562, 0.00272034, 0.571281, 0.820409)
+bones/15/rotation = Quaternion(0.121304, 0.0232732, 0.186979, 0.974568)
+bones/16/rotation = Quaternion(0.0385483, -0.00260864, 0.0674671, 0.996973)
+bones/23/rotation = Quaternion(0.0527186, 0.0028795, 0.0544628, 0.997119)
+bones/25/rotation = Quaternion(-0.0209062, -1.43691e-09, 3.86122e-09, 0.999781)
+bones/27/rotation = Quaternion(-0.0417707, -0.00219117, 0.0523391, 0.997753)
+bones/29/rotation = Quaternion(0.0237908, -7.90923e-10, 3.69321e-09, 0.999717)
+bones/31/rotation = Quaternion(0.0339139, 0.000427862, 0.0126079, 0.999345)
+bones/32/rotation = Quaternion(0.0894741, -1.64909e-09, 4.01024e-09, 0.995989)
+bones/36/rotation = Quaternion(0.39691, -0.0596436, -0.00189606, 0.915916)
+bones/37/rotation = Quaternion(-0.0282216, -0.0685233, -0.271823, 0.95949)
+bones/38/rotation = Quaternion(-0.42221, 0.14814, 0.0516908, 0.892817)
+bones/39/rotation = Quaternion(0.11936, -0.0197548, -0.162085, 0.979332)
+bones/44/rotation = Quaternion(0.12168, -2.04194e-09, 2.62076e-09, 0.992569)
+bones/48/rotation = Quaternion(0.124949, -4.00387e-09, 3.37787e-09, 0.992163)
+bones/53/rotation = Quaternion(-0.0228868, -1.51618e-09, 2.65253e-09, 0.999738)
+bones/56/rotation = Quaternion(0.131036, -5.90104e-10, 1.91403e-09, 0.991378)
+bones/59/rotation = Quaternion(0.00790768, 0.523885, 0.846653, -0.0930617)
+bones/60/rotation = Quaternion(-0.485548, -0.0200305, -0.00530022, 0.873964)
+bones/62/rotation = Quaternion(0.315611, -0.134545, 0.0452606, 0.93821)
+bones/64/rotation = Quaternion(-0.0730727, 0.28897, 0.944013, 0.141407)
+bones/66/rotation = Quaternion(0.502638, -0.0831126, 0.0486262, 0.859117)
+bones/67/rotation = Quaternion(0.316775, 0.134652, -0.045484, 0.937792)
+
+[node name="MESH_Guard" parent="RootNode/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_nuktw")
+
+[node name="AnimationPlayer" parent="." index="1"]
+script = ExtResource("3_ihjcy")
