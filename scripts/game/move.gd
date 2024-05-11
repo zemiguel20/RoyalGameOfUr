@@ -73,7 +73,6 @@ func execute(animation : Piece.MoveAnim = Piece.MoveAnim.NONE) -> void:
 		knocked_out_pieces = p_to_copy.duplicate()
 		p_to_copy.clear()
 	
-	
 	# Update board state moved pieces
 	for piece in p_from_copy:
 		_board._get_player_data(player).piece_spot_dict[piece] = to
@@ -88,15 +87,11 @@ func execute(animation : Piece.MoveAnim = Piece.MoveAnim.NONE) -> void:
 	# Animations move pieces
 	var piece_scale = pieces_in_from.front().scale.y
 	var offset = Vector3.UP * General.PIECE_OFFSET_Y * piece_scale
-	var base_pos = to.global_position + offset + (p_to_copy.size() * offset)
+	var base_pos = to.global_position + offset/2 + (p_to_copy.size() * offset)
 	for i in p_from_copy.size():
 		var piece = p_from_copy[i] as Piece
 		var target_pos = base_pos + (i * offset)
 		piece.move(target_pos, animation)
-	
-	# Await animation finished
-	if animation != Piece.MoveAnim.NONE:
-		await _board.get_tree().create_timer(Piece.MOVE_DURATION).timeout
 	
 	# Animation knock out
 	for i in knocked_out_pieces.size():
