@@ -1,4 +1,4 @@
-## Node responsible for executing 
+## Node responsible for executing a DialogueGroup, which consists of audio and subtitles.
 class_name DialogueGroupPlayer
 extends Node
 
