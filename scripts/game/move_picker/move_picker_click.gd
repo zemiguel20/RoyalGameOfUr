@@ -1,12 +1,18 @@
-class_name MovePicker
-extends Node
+class_name ClickMovePicker
+extends MovePicker
+##
 
-
-signal move_executed(move: Move)
 
 var _moves : Array[Move] = []
 var _selected_from_spot : Spot = null
 var _selected_to_spot : Spot = null
+
+
+func start(moves : Array[Move]):
+	_moves = moves.duplicate()
+	_selected_from_spot = null
+	_connect_signals()
+	_pre_from_selection_highlight()
 
 
 func _input(event):
@@ -17,14 +23,6 @@ func _input(event):
 			_pre_from_selection_highlight()
 
 
-func start(moves: Array[Move]):
-	_moves = moves.duplicate()
-	_selected_from_spot = null
-	_connect_signals()
-	_pre_from_selection_highlight()
-
-
-#region Signal callbacks
 func _connect_signals():
 	for move in _moves:
 		move.from.mouse_entered.connect(_on_from_hovered.bind(move.from), CONNECT_REFERENCE_COUNTED)
@@ -73,7 +71,7 @@ func _on_from_selected(spot: Spot):
 	_clear_all_highlighting()
 	
 	if not Settings.can_move_backwards:
-		_execute_move()
+		_finalize_selection()
 	else:
 		_post_from_selection_highlight()
 
@@ -87,8 +85,7 @@ func _on_to_selected(spot: Spot):
 	
 	_selected_to_spot = spot
 	
-	_execute_move()
-#endregion
+	_finalize_selection()
 
 
 #region Moves
@@ -104,7 +101,7 @@ func _filter_moves(from: Spot = null, to: Spot = null) -> Array[Move]:
 	return filtered
 
 
-func _execute_move():
+func _finalize_selection():
 	var selected_move = _filter_moves(_selected_from_spot, _selected_to_spot).front() as Move
 	
 	_disconnect_signals()
@@ -112,7 +109,7 @@ func _execute_move():
 	_selected_from_spot = null
 	_selected_to_spot = null
 	
-	await selected_move.execute()
+	await selected_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(selected_move)
 #endregion
 
@@ -167,9 +164,9 @@ func _clear_path_highlighters():
 
 func _set_highlight_move_pieces(move : Move, enabled : bool, from_color : Color = Color.WHITE, \
 to_color : Color = Color.WHITE):
-	for piece in move.from.get_pieces():
+	for piece in move.pieces_in_from:
 		piece.set_highlight(enabled, from_color)
-	for piece in move.to.get_pieces():
+	for piece in move.pieces_in_to:
 		piece.set_highlight(enabled, to_color)
 
 
