@@ -98,9 +98,9 @@ func _on_to_spot_selected(spot: Spot):
 func _input(event):
 	# Mouse right click to cancel selection
 	if _selected_from_spot and event is InputEventMouseButton and event.is_pressed() \
-	and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT:
-		_selected_from_spot = null
-		_pre_selection_highlight()
+		and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT:
+			_selected_from_spot = null
+			_pre_selection_highlight()
 
 
 func _pre_selection_highlight():
