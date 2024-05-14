@@ -36,7 +36,8 @@ func _evaluate_moves(_moves : Array[Move]):
 
 func _on_roll_phase_started(player: General.Player):
 	if player == _player_id:
-		await _dice.dice_ready
+		if not _dice.is_ready:
+			await _dice.dice_ready
 		roll()
 		
 		

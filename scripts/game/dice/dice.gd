@@ -50,6 +50,7 @@ signal dice_ready()
 #region Regular Variables
 ## Current rolled value.
 var value: int = 0 
+var is_ready = false
 
 ## Array containing every die.
 var _dice: Array
@@ -82,13 +83,17 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_released():
 		on_dice_release()
 
+
 func on_roll_phase_started(player: General.Player):
+	is_ready = false
+	
 	## If the player that needs to throw does not have the dice yet, move to that players side.
 	if _use_multiple_dice_areas and _current_player != player:
 		await _move_to_opposite_side()
 	
 	_current_player = player
 	_set_click_hitbox()	
+	is_ready = true
 	dice_ready.emit()
 	enable_selection()
 
@@ -188,8 +193,6 @@ func _anim_move_dice_to_position(move_vector: Vector3, duration: float):
 		tween_xz.bind_node(die).set_parallel(true)
 		tween_xz.tween_property(die, "global_position:x", die.global_position.x + move_vector.x, duration)
 		tween_xz.tween_property(die, "global_position:z", die.global_position.z + move_vector.z, duration)
-	
-		print("Move Vector", move_vector.y)
 	
 		# Arc translation of Y
 		var high_point = die.global_position.y + _arc_height * global_basis.get_scale().y
