@@ -1,23 +1,26 @@
 ## Node responsible for executing a DialogueGroup, which consists of audio and subtitles.
-class_name DialogueGroupPlayer
+class_name DialogueSequencePlayer
 extends Node
 
-## Signal that emits when the current group of dialogue has been finished.
+## TODO Change, integrate AnimationPlayer
+
+## Signal that emits when the current sequence of dialogue has been finished.
 signal on_dialogue_finished
 signal on_interruption_ready
 
 @export var _use_subtitles: bool
-var is_playing: bool
-var _current_group: DialogueGroup
-var _current_index = 0
-var _is_interrupted
 
 @onready var audio_player = $AudioStreamPlayer3D as AudioStreamPlayer3D
 @onready var subtitle_displayer
 
+var is_playing: bool
+var _current_sequence: DialogueSequence
+var _current_index = 0
+var _is_interrupted
 
-func play(group):
-	_current_group = group
+
+func play(sequence):
+	_current_sequence = sequence
 	_current_index = 0
 	continue_dialogue()
 	await on_dialogue_finished
@@ -27,12 +30,12 @@ func play(group):
 ## Used for when the dialogue was interrupted after one of the dialogue entries.
 ## Will continue playing the next entry.
 func continue_dialogue():
-	if _current_index >= _current_group.dialogue_entries.size():
-		finish_group()
+	if _current_index >= _current_sequence.dialogue_entries.size():
+		finish_sequence()
 		return
 		
 	is_playing = true
-	var _current_entry = _current_group.dialogue_entries[_current_index] as DialogueSingleEntry
+	var _current_entry = _current_sequence.dialogue_entries[_current_index] as DialogueSingleEntry
 	audio_player.stream = _current_entry.audio
 	audio_player.play()
 	if _use_subtitles:
@@ -49,7 +52,7 @@ func continue_dialogue():
 		continue_dialogue()
 		
 		
-func finish_group():
+func finish_sequence():
 	if _use_subtitles:
 		DialogueSubtitles.instance.hide_subtitles()
 		

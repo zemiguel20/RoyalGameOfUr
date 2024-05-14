@@ -8,6 +8,7 @@ extends Node
 @export var _dialogue_list: Array[DialogueGroup] 
 @export var _supports_interruptions: bool
 @export var _temp_interruption: DialogueGroup 
+
 @onready var _dialogue_player = $DialogueGroupPlayer as DialogueGroupPlayer
 @onready var _interruption_player = $InterruptionPlayer as DialogueGroupPlayer
 

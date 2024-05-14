@@ -15,7 +15,7 @@ var talking_animation: Animation
 @export var reaction_dialogue_delay: float = 5.0
 
 @onready var _dialogue_system = $DialogueSystem as DialogueCollectionPlayer
-@onready var _animation_player = $AnimationPlayer as AnimationPlayer
+@onready var _animation_player = $AnimationPlayer as OpponentAnimationPlayer
 
 var _time_until_next_dialogue: float
 ## Reconsider timer vs awaiting
@@ -23,8 +23,12 @@ var _time_until_next_dialogue: float
 var _is_timer_active: bool
 
 
+## TODO: I think we would need a random player and a sequence player.
+
+
 func _ready():
-	visible = false
+	#visible = false
+	_animation_player.play_talking()
 	
 
 func _process(delta):
@@ -34,7 +38,7 @@ func _process(delta):
 	_time_until_next_dialogue -= delta
 	if _time_until_next_dialogue <= 0:
 		start_next_dialogue()
-		
+	
 		
 func start_next_dialogue():
 	await _dialogue_system.play_next()
@@ -43,6 +47,10 @@ func start_next_dialogue():
 	else:
 		_is_timer_active = false
 
+
+func _on_player():
+	
+	
 
 # Could also name this play_reaction
 func _play_interruption():
@@ -56,21 +64,13 @@ func _on_gamemode_rolled_zero():
 	
 func _on_play_pressed():
 	visible = true
-	_animation_player.play("clip_walkIn")
-	await _wait_until_animation_end()
-	
-	# Start first dialogue after a delay.
-	await get_tree().create_timer(starting_dialogue_delay).timeout
-	await start_next_dialogue()
-	_is_timer_active = true	
-	_play_default_idle()
-	on_opponent_ready.emit()
-	
-	
-func _play_default_idle():
-	_animation_player.play("clip_breathing")
-	
-	
-func _wait_until_animation_end():
-	await get_tree().create_timer(_animation_player.current_animation_length).timeout
+	#_animation_player.play("clip_walkIn")
+	#await _wait_until_animation_end()
+	#
+	## Start first dialogue after a delay.
+	#await get_tree().create_timer(starting_dialogue_delay).timeout
+	#await start_next_dialogue()
+	#_is_timer_active = true	
+	#_play_default_idle()
+	#on_opponent_ready.emit()
 	

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/opponent_npc.gd" id="1_e1ywa"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_collection_player.gd" id="2_jrsuj"]
-[ext_resource type="Resource" uid="uid://ch4uxkn16buik" path="res://resources/dialogue/test_dialogue.tres" id="3_q3e2h"]
-[ext_resource type="Resource" uid="uid://otxvr6056j13" path="res://resources/dialogue/test_dialogue_2.tres" id="4_6ny8i"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_group.gd" id="5_f120b"]
+[ext_resource type="Resource" uid="uid://ch4uxkn16buik" path="res://resources/dialogue/sequences/test_dialogue.tres" id="3_q3e2h"]
+[ext_resource type="Resource" uid="uid://otxvr6056j13" path="res://resources/dialogue/sequences/test_dialogue_2.tres" id="4_6ny8i"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_sequence.gd" id="5_f120b"]
 [ext_resource type="PackedScene" uid="uid://bdfdbhwdv6lnb" path="res://scenes/npcs/dialogue_group_player.tscn" id="5_q4b08"]
 [ext_resource type="AudioStream" uid="uid://c6hsa8x31s3vx" path="res://audio/placeholder_ai_voices/ac_test_interruption.mp3" id="5_xisbd"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_single_entry.gd" id="6_fr3mb"]
