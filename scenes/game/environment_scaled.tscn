@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgkfm7n305bgj"]
+[gd_scene load_steps=6 format=3 uid="uid://cgkfm7n305bgj"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_3nkie"]
+[ext_resource type="PackedScene" uid="uid://dyy5yhl1vyj6f" path="res://models/RockSeat.tscn" id="1_158m1"]
 [ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard_standing.fbx" id="2_csl6i"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
@@ -46,6 +47,9 @@ shape = SubResource("BoxShape3D_080q8")
 
 [node name="cloth" parent="Environment" index="5"]
 transform = Transform3D(4.79902, 0, -8.16304, 0, 9.52308, 0, 7.98754, 0, 4.90446, 1.12564, -0.0535423, 1.60522)
+
+[node name="RockSeat" parent="Environment" instance=ExtResource("1_158m1")]
+transform = Transform3D(0.212012, 0, 0.13248, 0, 0.25, 0, -0.13248, 0, 0.212012, 1.04314, -0.166942, 1.45068)
 
 [node name="Reference_Scale" parent="." instance=ExtResource("2_csl6i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372539, -0.663783, 0.728179)
