@@ -7,6 +7,8 @@ extends Node3D
 signal die_stopped(value: int)
 ## Emitted when all dice finished, with the final value
 signal roll_finished(value: int)
+## Emitted when the dice have finished their animation of moving to the correct player.
+signal dice_ready()
 #endregion
 
 #region Export Variables
@@ -16,6 +18,9 @@ signal roll_finished(value: int)
 @export var _roll_shaking_enabled: bool = false
 ## If set to true, player 2 will throw the dice from the other side.
 @export var _use_multiple_dice_areas: bool = true
+@export_group("Transfer Animation")
+@export var _anim_duration: float = 0.7
+@export var _arc_height: float = 0.05
 #endregion
 
 #region Onready Variables
@@ -55,7 +60,7 @@ var _throwing_spots: Dictionary
 var _current_click_hitbox: Area3D
 ## The player that is performing the current roll.
 ## Used to decide which click hitbox to use.
-var _current_player
+var _current_player = 0
 ## Boolean indicating if the dice are currently being shaken.
 var _is_shaking: bool = false
 ## Number of dice that have finished their roll.
@@ -77,35 +82,15 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_released():
 		on_dice_release()
 
-var first_turn_passed = false
 func on_roll_phase_started(player: General.Player):
+	## If the player that needs to throw does not have the dice yet, move to that players side.
+	if _use_multiple_dice_areas and _current_player != player:
+		await _move_to_opposite_side()
+	
 	_current_player = player
-	
-	if (first_turn_passed):
-		var other_hitbox = _click_hitbox_p2 if _current_click_hitbox == _click_hitbox else _click_hitbox
-		var diff_vector = other_hitbox.global_position - _current_click_hitbox.global_position
-		await _move_to_opposite_side(diff_vector)
-	else:
-		first_turn_passed = true
-	
+	_set_click_hitbox()	
+	dice_ready.emit()
 	enable_selection()
-
-
-func _move_to_opposite_side(move_vector: Vector3):
-	# Linear translation of X and Z
-	var tween_xz = create_tween()
-	tween_xz.bind_node(self).set_parallel(true)
-	tween_xz.tween_property(self, "global_position:x", global_position.x + move_vector.x, 1)
-	tween_xz.tween_property(self, "global_position:z", global_position.z + move_vector.z, 1)
-	
-	# Arc translation of Y
-	#var high_point = maxf(self.global_position.y, global_position.y + move_vector.y) + (0.026 * global_basis.get_scale().y)
-	#var tween_y = create_tween().set_trans(Tween.TRANS_CUBIC)
-	#tween_y.tween_property(self, "global_position:y", global_position.y + high_point, 0.5).set_ease(Tween.EASE_OUT)
-	#tween_y.tween_property(self, "global_position:y", global_position.y + move_vector.y, 0.5).set_ease(Tween.EASE_IN)
-	
-	# Tweens run at same time, so only wait for one of them
-	await tween_xz.finished
 
 
 ## Enables selection and highlight effects
@@ -146,7 +131,6 @@ func on_dice_release():
 ## Plays the dice rolling animation and updates the value. Returns the rolled value.
 func _roll() -> int:
 	disable_selection()
-	_set_click_hitbox()
 	_roll_sfx.play()
 	value = 0
 	_die_finish_count = 0
@@ -189,6 +173,34 @@ func _start_dice_shake():
 	for die in _dice:
 		die.visible = false
 	_shake_sfx.play()
+	
+	
+func _move_to_opposite_side():
+	var other_hitbox = _click_hitbox_p2 if _current_click_hitbox == _click_hitbox else _click_hitbox
+	var diff_vector = other_hitbox.global_position - _current_click_hitbox.global_position
+	await _anim_move_dice_to_position(diff_vector, _anim_duration)
+
+
+func _anim_move_dice_to_position(move_vector: Vector3, duration: float):
+	# Linear translation of X and Z
+	for die in _dice:
+		var tween_xz = create_tween()
+		tween_xz.bind_node(die).set_parallel(true)
+		tween_xz.tween_property(die, "global_position:x", die.global_position.x + move_vector.x, duration)
+		tween_xz.tween_property(die, "global_position:z", die.global_position.z + move_vector.z, duration)
+	
+		print("Move Vector", move_vector.y)
+	
+		# Arc translation of Y
+		var high_point = die.global_position.y + _arc_height * global_basis.get_scale().y
+		var tween_y = create_tween().set_trans(Tween.TRANS_CUBIC)
+		tween_y.tween_property(die, "global_position:y", high_point, duration/2).set_ease(Tween.EASE_OUT)
+		## NOTE Tbh no clue why here I should suddenly do - move_vector instead of plus, but ill take it...
+		tween_y.tween_property(die, "global_position:y", die.global_position.y - move_vector.y, duration/2).set_ease(Tween.EASE_IN)
+	
+	
+	# Tweens run at same time, so only wait for one of them
+	await get_tree().create_timer(duration).timeout
 			
 
 ## Returns [param amount] random but different spawning spots.
@@ -212,6 +224,7 @@ func _get_random_free_spot(_player: General.Player, amount: int) -> Array:
 	
 func _cache_spawning_spots():
 	_spawn_spots = _spawn_spot_container.get_children()
+	
 	
 	
 func _cache_throwing_spots():
