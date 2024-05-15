@@ -25,13 +25,14 @@ func start(moves : Array[Move]):
 	_change_state(State.FROM_SELECT)
 
 
-#func _process(_delta):
-	#if not _pieces_to_drag.is_empty():
-		#_update_dragged_pieces()
+func _process(delta):
+	if not _pieces_to_drag.is_empty():
+		_update_dragged_pieces(delta)
 
 
 func _input(event):
 	if _state == State.TO_SELECT and event.is_action_pressed("game_spot_selection_cancel"):
+		_reset_dragged_pieces()
 		_change_state(State.FROM_SELECT)
 
 
@@ -75,6 +76,9 @@ func _setup_state():
 					piece.set_highlight(true, Color.GREEN)
 				var path_highlighter = _create_path_highlighter(move)
 				add_child(path_highlighter)
+			
+			# Starts dragging selected pieces
+			_pieces_to_drag = _filter_moves(_selected_from_spot).front().pieces_in_from.duplicate()
 		_:
 			pass
 
@@ -104,6 +108,9 @@ func _clear_state():
 			piece.set_highlight(false)
 	for path_highlighter in get_children():
 		path_highlighter.queue_free()
+	
+	# Stops dragging pieces
+	_pieces_to_drag.clear()
 
 
 func _on_from_hovered(from : Spot):
@@ -160,7 +167,7 @@ func _finalize_selection():
 	
 	_change_state(State.IDLE)
 	
-	await selected_move.execute(Piece.MoveAnim.ARC)
+	await selected_move.execute(Piece.MoveAnim.LINE)
 	move_executed.emit(selected_move)
 
 
@@ -181,24 +188,20 @@ func _create_path_highlighter(move : Move) -> ScrollingTexturePath3D:
 	return path
 
 
-func _start_drag():
-	_pieces_to_drag = _filter_moves(_selected_from_spot).front().pieces_in_from
-	# Temporarily reparents all pieces to base piece of stack for dragging
-	var base_piece = _pieces_to_drag.front() as Piece
-	for piece : Piece in _pieces_to_drag.slice(1):
-		piece.reparent(base_piece)
+func _reset_dragged_pieces():
+	# TODO: turn into function in piece - calculate stack offset
+	# TODO: ajdust origin or pieces to remove need of offset/2
+	var pieces = _pieces_to_drag.duplicate()
+	var piece_scale = pieces.front().scale.y
+	var offset = Vector3.UP * General.PIECE_OFFSET_Y * piece_scale
+	var base_pos = _selected_from_spot.global_position + offset/2
+	for i in pieces.size():
+		var piece = pieces[i] as Piece
+		var target_pos = base_pos + (i * offset)
+		piece.move(target_pos, Piece.MoveAnim.LINE)
 
 
-func _stop_drag():
-	# Restores original hierarchy
-	var base_piece = _pieces_to_drag.front() as Piece
-	for piece : Piece in _pieces_to_drag.slice(1):
-		piece.reparent(base_piece.get_parent())
-	
-	_pieces_to_drag.clear()
-
-
-func _update_dragged_pieces():
+func _update_dragged_pieces(delta : float):
 	var cam = get_viewport().get_camera_3d()
 	var mouse_pos = get_viewport().get_mouse_position()
 	
@@ -211,5 +214,6 @@ func _update_dragged_pieces():
 			var z = clamp(result.z, -5, 5)
 			
 			var index = _pieces_to_drag.find(piece)
-			var y = General.PIECE_OFFSET_Y * piece.scale.y * index
-			piece.target_pos = Vector3(x, piece.global_position.y, z)
+			var y = 1 + General.PIECE_OFFSET_Y * piece.scale.y * index
+			var target_pos = Vector3(x,y,z)
+			piece.global_position = lerp(piece.global_position, target_pos, 8 * delta)
