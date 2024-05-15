@@ -30,7 +30,7 @@ signal move_executed(move: Move)
 
 
 ## Virtual method that contains an algorithm for picking a move.
-func _evaluate_moves(_moves : Array[Move]):
+func _determine_next_move(_moves : Array[Move]):
 	pass
 
 
@@ -41,7 +41,7 @@ func _on_roll_phase_started(player: General.Player):
 		
 func _on_move_phase_started(player: General.Player, moves: Array[Move]):
 	if player == _player_id:
-		var best_move = _evaluate_moves(moves)
+		var best_move = _determine_next_move(moves)
 		# HACK disable the selection
 		_move_picker.end_selection()
 		perform_move(best_move)

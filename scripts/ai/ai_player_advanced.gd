@@ -23,22 +23,35 @@ extends AIPlayerBase
 ## Turning this bool off, will only check deduct points when ALL of the opponents pieces are past the central rosette.
 @export var decrease_per_passed_opponent_piece: bool = true
 
+@export_category("Move picking chances")
+## Chance for the opponent to pick the best move available to them, using a weight system
+@export var _best_move_weight: int = 10
+## Chance for the opponent to pick the second best move available to them, using a weight system
+@export var _second_move_weight: int = 0
+## Chance for the opponent to pick a random suboptimal move, using a weight system
+@export var _random_move_weight: int = 0
 
-func _evaluate_moves(moves : Array[Move]) -> Move:
-	var best_move = null
-	var best_move_score = -1
+func _determine_next_move(moves : Array[Move]) -> Move:
+	if (moves.size() == 1):
+		return moves[0]
 	
-	for move in moves:
-		# Make extra sure that ai wont move back when it has a winning move.
-		if move.is_winning_move():
-			return move
-		
-		var score = _evaluate_move(move)
-		if score > best_move_score:
-			best_move_score = score
-			best_move = move
-			
-	return best_move
+	var ordered_moves = moves.duplicate()
+	ordered_moves.sort_custom(_sort_best_moves)
+	
+	var result
+	var rand = randi_range(0, _best_move_weight + _second_move_weight + _random_move_weight)
+	if rand < _best_move_weight:
+		result = ordered_moves[0]
+	elif rand < _best_move_weight + _second_move_weight or moves.size() == 2:
+		result = ordered_moves[1]
+	else:
+		result = ordered_moves[randi_range(2, ordered_moves.size()-1)]
+	
+	return result
+
+
+func _sort_best_moves(a, b):
+	return _evaluate_move(a) > _evaluate_move(b)
 
 
 func _evaluate_move(move: Move) -> float:

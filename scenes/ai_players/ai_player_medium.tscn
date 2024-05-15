@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dp5t0vtem7sty"]
+
+[ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="1_txfgf"]
+
+[node name="AIPlayerMedium" type="Node"]
+script = ExtResource("1_txfgf")
+decrease_per_passed_opponent_piece = false
+_best_move_weight = 15
+_second_move_weight = 4
+_random_move_weight = 1
+_player_id = 1
+max_moving_duration = 1.0
