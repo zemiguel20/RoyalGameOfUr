@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bdfdbhwdv6lnb"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_sequence_player.gd" id="1_yxu6e"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_sequence_player.gd" id="1_yxu6e"]
 
 [node name="DialogueGroupPlayer" type="Node"]
 script = ExtResource("1_yxu6e")

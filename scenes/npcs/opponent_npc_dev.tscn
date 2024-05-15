@@ -1,22 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0hgcfga28omq"]
+[gd_scene load_steps=5 format=3 uid="uid://d0hgcfga28omq"]
 
 [ext_resource type="Script" path="res://scripts/opponent_npc.gd" id="1_e1ywa"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_collection_player.gd" id="2_jrsuj"]
-[ext_resource type="Resource" uid="uid://ch4uxkn16buik" path="res://resources/dialogue/sequences/test_dialogue.tres" id="3_q3e2h"]
-[ext_resource type="Resource" uid="uid://otxvr6056j13" path="res://resources/dialogue/sequences/test_dialogue_2.tres" id="4_6ny8i"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_sequence.gd" id="5_f120b"]
 [ext_resource type="PackedScene" uid="uid://bdfdbhwdv6lnb" path="res://scenes/npcs/dialogue_group_player.tscn" id="5_q4b08"]
-[ext_resource type="AudioStream" uid="uid://c6hsa8x31s3vx" path="res://audio/placeholder_ai_voices/ac_test_interruption.mp3" id="5_xisbd"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_single_entry.gd" id="6_fr3mb"]
-
-[sub_resource type="Resource" id="Resource_i0j6c"]
-script = ExtResource("6_fr3mb")
-audio = ExtResource("5_xisbd")
-subtitle = "Interruption! I finished my previous sentence and will now continue again"
-
-[sub_resource type="Resource" id="Resource_gromn"]
-script = ExtResource("5_f120b")
-dialogue_entries = Array[ExtResource("6_fr3mb")]([SubResource("Resource_i0j6c")])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxsye"]
 albedo_color = Color(0.741176, 0.772549, 0.8, 1)
@@ -31,10 +16,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.88086, -2.61161, -2.36228)
 script = ExtResource("1_e1ywa")
 
 [node name="DialogueSystem" type="Node" parent="."]
-script = ExtResource("2_jrsuj")
-_dialogue_list = Array[ExtResource("5_f120b")]([ExtResource("3_q3e2h"), ExtResource("4_6ny8i")])
-_supports_interruptions = true
-_temp_interruption = SubResource("Resource_gromn")
 
 [node name="DialogueGroupPlayer" parent="DialogueSystem" instance=ExtResource("5_q4b08")]
 _use_subtitles = true

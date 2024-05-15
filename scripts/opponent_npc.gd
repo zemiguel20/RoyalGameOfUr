@@ -14,7 +14,7 @@ var talking_animation: Animation
 ## to prevent the dialogue interrupting the reaction or the dialogue being skipped.
 @export var reaction_dialogue_delay: float = 5.0
 
-@onready var _dialogue_system = $DialogueSystem as DialogueCollectionPlayer
+@onready var _dialogue_system = $DialogueSystem as DialogueSystem
 @onready var _animation_player = $AnimationPlayer as OpponentAnimationPlayer
 
 var _time_until_next_dialogue: float
@@ -23,12 +23,9 @@ var _time_until_next_dialogue: float
 var _is_timer_active: bool
 
 
-## TODO: I think we would need a random player and a sequence player.
-
-
 func _ready():
-	#visible = false
-	_animation_player.play_talking()
+	visible = false
+	#_animation_player.play_talking()
 	
 
 func _process(delta):
@@ -37,25 +34,22 @@ func _process(delta):
 		
 	_time_until_next_dialogue -= delta
 	if _time_until_next_dialogue <= 0:
-		start_next_dialogue()
-	
-		
-func start_next_dialogue():
-	await _dialogue_system.play_next()
-	if _dialogue_system.has_next():
-		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
-	else:
-		_is_timer_active = false
-
-
-func _on_player():
-	
+		_play_story_dialogue()
 	
 
 # Could also name this play_reaction
 func _play_interruption():
 	_time_until_next_dialogue += reaction_dialogue_delay
 	await _dialogue_system.interrupt()
+	
+	
+func _play_story_dialogue():
+	var success = await _dialogue_system.play(DialogueSystem.Category.STORY)
+	## If something went wrong when playing the story dialogues, do not try to trigger a next sequence. 
+	if success:
+		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
+	else: 
+		_is_timer_active = false
 	
 
 func _on_gamemode_rolled_zero():
@@ -64,13 +58,10 @@ func _on_gamemode_rolled_zero():
 	
 func _on_play_pressed():
 	visible = true
-	#_animation_player.play("clip_walkIn")
-	#await _wait_until_animation_end()
-	#
+	await _animation_player.play_animation(OpponentAnimationPlayer.Anim_Name.WALKIN, true)
 	## Start first dialogue after a delay.
-	#await get_tree().create_timer(starting_dialogue_delay).timeout
-	#await start_next_dialogue()
-	#_is_timer_active = true	
-	#_play_default_idle()
-	#on_opponent_ready.emit()
+	await get_tree().create_timer(starting_dialogue_delay).timeout
+	await _play_story_dialogue()
+	_is_timer_active = true	
+	on_opponent_ready.emit()
 	

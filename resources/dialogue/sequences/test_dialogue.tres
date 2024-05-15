@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://ch4uxkn16buik"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_single_entry.gd" id="1_kky4t"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_sequence.gd" id="1_nuhyl"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_kky4t"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_nuhyl"]
 [ext_resource type="AudioStream" uid="uid://dx33hm5bsil3d" path="res://audio/placeholder_ai_voices/ac_test_1.mp3" id="1_yuk3o"]
 [ext_resource type="AudioStream" uid="uid://ojg3rxuh2561" path="res://audio/placeholder_ai_voices/ac_test_2.mp3" id="3_wl5xr"]
 [ext_resource type="AudioStream" uid="uid://72k5cyp3xo2v" path="res://audio/placeholder_ai_voices/ac_test_3.mp3" id="4_xxs17"]

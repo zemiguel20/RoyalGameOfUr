@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="DialogueSequence" load_steps=7 format=3 uid="uid://otxvr6056j13"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_sequence.gd" id="1_okttv"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_okttv"]
 [ext_resource type="AudioStream" uid="uid://dcou1nfn4uivl" path="res://audio/placeholder_ai_voices/ac_test_4.mp3" id="1_pdxll"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_single_entry.gd" id="2_5a1we"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="2_5a1we"]
 [ext_resource type="AudioStream" uid="uid://t5rkw1pkcj8i" path="res://audio/placeholder_ai_voices/ac_test_5.mp3" id="3_83bld"]
 
 [sub_resource type="Resource" id="Resource_3bla4"]

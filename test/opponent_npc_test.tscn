@@ -1,12 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://bsule7qsp6of1"]
+[gd_scene load_steps=15 format=3 uid="uid://bsule7qsp6of1"]
 
-[ext_resource type="Script" path="res://scripts/game/gamemode/gamemode.gd" id="1_txfd6"]
-[ext_resource type="PackedScene" uid="uid://w80iov7yarwa" path="res://scenes/mockup_board.tscn" id="2_lnlvq"]
-[ext_resource type="PackedScene" uid="uid://c3bq04omjlr2e" path="res://scenes/game/dice/dice_controller.tscn" id="3_sxu04"]
+[ext_resource type="Script" path="res://scripts/game/gamestate_controller.gd" id="1_txfd6"]
+[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="2_lnlvq"]
+[ext_resource type="PackedScene" uid="uid://b7wqojt2nphja" path="res://scenes/game/dice/dice_controller.tscn" id="3_sxu04"]
 [ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="4_mih40"]
 [ext_resource type="PackedScene" uid="uid://d0hgcfga28omq" path="res://scenes/npcs/opponent_npc_dev.tscn" id="5_n1h8f"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/dialogue_subtitles.gd" id="6_h11lm"]
-[ext_resource type="Script" path="res://test/temp_dialogue_option_3.gd" id="7_1p04c"]
+[ext_resource type="PackedScene" uid="uid://b5rqut7t53w0r" path="res://scenes/ui/subtitle_system.tscn" id="6_11yjt"]
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="7_iqj53"]
 [ext_resource type="Script" path="res://test/temp_dialogue_option_2.gd" id="8_36kyn"]
 
@@ -77,9 +76,6 @@ func _on_dice_roll_finished(_value: int) -> void:
 	_dice_value = 0
 "
 
-[sub_resource type="LabelSettings" id="LabelSettings_tnjk0"]
-font_size = 21
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_2ult6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8kk4y"]
@@ -87,20 +83,14 @@ font_size = 21
 [node name="GamemodeTest" type="Node"]
 script = SubResource("GDScript_b8xbw")
 
-[node name="Gamemode" type="Node" parent="." node_paths=PackedStringArray("board", "dice", "ai_player_two")]
+[node name="Gamemode" type="Node" parent="."]
 script = ExtResource("1_txfd6")
-board = NodePath("../Board")
-dice = NodePath("../Dice")
-ai_player_two = NodePath("../AIPlayerHard")
 
 [node name="Board" parent="." instance=ExtResource("2_lnlvq")]
 transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0.188376, -2.46309, 0.0962036)
 
 [node name="Dice" parent="." instance=ExtResource("3_sxu04")]
 transform = Transform3D(0.000349022, -1.52582e-11, 1, 2.60473e-15, 1, 1.52582e-11, -1, -2.6054e-15, 0.000349022, 0.0466204, -1.92159, -12.8534)
-_num_of_dice = 1
-_roll_shaking_enabled = true
-_use_hitbox_instead_of_dice_colliders = true
 
 [node name="AIPlayerHard" type="Node" parent="."]
 script = ExtResource("4_mih40")
@@ -149,67 +139,7 @@ text = "Extra roll!"
 [node name="Opponent" parent="." instance=ExtResource("5_n1h8f")]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.747289, -0.0635998, 1.1919)
 
-[node name="Subtitle_System" type="CanvasLayer" parent="." node_paths=PackedStringArray("subtitle_label")]
-script = ExtResource("6_h11lm")
-subtitle_label = NodePath("Background_Panel/Subtitles_Label")
-
-[node name="Background_Panel" type="Panel" parent="Subtitle_System"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 52.0
-offset_top = -136.0
-offset_right = -52.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Subtitles_Label" type="Label" parent="Subtitle_System/Background_Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 36.0
-offset_top = 22.0
-offset_right = -36.0
-offset_bottom = -22.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-label_settings = SubResource("LabelSettings_tnjk0")
-vertical_alignment = 1
-autowrap_mode = 3
-text_overrun_behavior = 2
-
-[node name="Cursor_Subtitles" type="Panel" parent="Subtitle_System"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -411.0
-offset_right = 389.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("7_1p04c")
-
-[node name="Subtitles_Label" type="Label" parent="Subtitle_System/Cursor_Subtitles"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 36.0
-offset_top = 22.0
-offset_right = -36.0
-offset_bottom = -22.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "This is the final option, where a nice subtitle thing is shown"
-label_settings = SubResource("LabelSettings_tnjk0")
-vertical_alignment = 1
-autowrap_mode = 3
-text_overrun_behavior = 2
+[node name="Subtitle_System" parent="." instance=ExtResource("6_11yjt")]
 
 [node name="Blockout" parent="." instance=ExtResource("7_iqj53")]
 
@@ -257,20 +187,10 @@ skeleton = NodePath("../..")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 shape = SubResource("BoxShape3D_8kk4y")
 
-[connection signal="game_finished" from="Gamemode" to="CanvasLayer" method="_on_gamemode_game_finished"]
-[connection signal="got_extra_roll" from="Gamemode" to="CanvasLayer" method="_on_gamemode_got_extra_roll"]
-[connection signal="phase_changed" from="Gamemode" to="CanvasLayer" method="_on_gamemode_phase_changed"]
-[connection signal="rolled_zero" from="Gamemode" to="CanvasLayer" method="_on_gamemode_rolled_zero"]
-[connection signal="rolled_zero" from="Gamemode" to="Opponent" method="_on_gamemode_rolled_zero"]
-[connection signal="clicked" from="Dice" to="Gamemode" method="roll"]
 [connection signal="die_stopped" from="Dice" to="CanvasLayer" method="_on_dice_die_stopped"]
 [connection signal="roll_finished" from="Dice" to="CanvasLayer" method="_on_dice_roll_finished"]
-[connection signal="mouse_entered" from="Option1" to="Subtitle_System" method="_on_area_3d_mouse_entered"]
-[connection signal="mouse_exited" from="Option1" to="Subtitle_System" method="_on_option_1_mouse_exited"]
 [connection signal="mouse_entered" from="Option2" to="Option2/Label3D" method="_on_option_2_area_entered"]
 [connection signal="mouse_exited" from="Option2" to="Option2/Label3D" method="_on_option_2_area_exited"]
-[connection signal="mouse_entered" from="Option3" to="Subtitle_System/Cursor_Subtitles" method="_on_option_3_mouse_entered"]
-[connection signal="mouse_exited" from="Option3" to="Subtitle_System/Cursor_Subtitles" method="_on_option_3_mouse_exited"]
 
 [editable path="Board"]
 [editable path="Blockout"]

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://blhv56k0dgjw6"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_cwsln"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_106ab"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="3_h4ujd"]
+
+[sub_resource type="Resource" id="Resource_va02w"]
+script = ExtResource("1_cwsln")
+caption = "Hallo, intro!"
+anim_variations = Array[int]([7])
+
+[sub_resource type="Resource" id="Resource_aigro"]
+script = ExtResource("1_cwsln")
+caption = "Meteen meer text"
+anim_variations = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_tmfpq"]
+script = ExtResource("2_106ab")
+weight = 5
+dialogue_entries = Array[ExtResource("1_cwsln")]([SubResource("Resource_va02w"), SubResource("Resource_aigro")])
+
+[sub_resource type="Resource" id="Resource_l1vmr"]
+script = ExtResource("1_cwsln")
+caption = "Nog maar eentje"
+anim_variations = Array[int]([2, 1])
+
+[sub_resource type="Resource" id="Resource_37psx"]
+script = ExtResource("2_106ab")
+weight = 5
+dialogue_entries = Array[ExtResource("1_cwsln")]([SubResource("Resource_l1vmr")])
+
+[resource]
+script = ExtResource("3_h4ujd")
+category = 0
+play_in_order = true
+dialogue_sequences = Array[ExtResource("2_106ab")]([SubResource("Resource_tmfpq"), SubResource("Resource_37psx")])
+weight_for_empty = 0
