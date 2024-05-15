@@ -34,7 +34,9 @@ func _init(board : Board, player : int, from : Spot, to : Spot):
 	self.player = player
 	
 	pieces_in_from = _board.get_spot_pieces(from)
+	pieces_in_from.make_read_only()
 	pieces_in_to = _board.get_spot_pieces(to)
+	pieces_in_to.make_read_only()
 	
 	knocks_opo = _board.is_spot_occupied_by_player(to, General.get_opponent(player))
 	
