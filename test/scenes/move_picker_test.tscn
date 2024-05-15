@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlqmrxcxklu2d"]
+
+[ext_resource type="PackedScene" uid="uid://0y7jpgh7d4dk" path="res://test/scenes/board_test.tscn" id="1_ruqv2"]
+[ext_resource type="Script" path="res://scripts/game/move_picker.gd" id="2_6vjh3"]
+
+[sub_resource type="GDScript" id="GDScript_y8nea"]
+script/source = "extends Node
+
+signal move_phase_started(player: General.Player, moves: Array[Move])
+var player = General.Player.ONE
+@onready var board = $Board as Board
+
+
+func _ready():
+	Settings.can_move_backwards = true
+	await get_tree().create_timer(0.1).timeout
+	var moves = board.get_possible_moves(player, 1);
+	move_phase_started.emit(General.Player.ONE, moves)
+
+
+func _on_move_picker_move_executed(_move: Move) -> void:
+	var moves = board.get_possible_moves(player, 1);
+	move_phase_started.emit(General.Player.ONE, moves)
+"
+
+[node name="MovePickerTest" instance=ExtResource("1_ruqv2")]
+script = SubResource("GDScript_y8nea")
+
+[node name="MovePicker" type="Node" parent="." index="4"]
+script = ExtResource("2_6vjh3")
+
+[connection signal="move_phase_started" from="." to="MovePicker" method="_on_move_phase_started"]
+[connection signal="move_executed" from="MovePicker" to="." method="_on_move_picker_move_executed"]

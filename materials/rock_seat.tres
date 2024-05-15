@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://c2niet62jk1qj"]
+
+[ext_resource type="Texture2D" uid="uid://y3fxa3lvw1ah" path="res://textures/rock_seat/RockSeat_Base_color.png" id="1_u7xqk"]
+[ext_resource type="Texture2D" uid="uid://c3sgn3l8em05l" path="res://textures/rock_seat/RockSeat_Metallic.png" id="3_fdfnf"]
+[ext_resource type="Texture2D" uid="uid://7t2soc5hwsvw" path="res://textures/rock_seat/RockSeat_Normal.png" id="4_fcly6"]
+[ext_resource type="Texture2D" uid="uid://dtbk1w1uqforw" path="res://textures/rock_seat/RockSeat_Roughness.png" id="5_ptkjs"]
+
+[resource]
+albedo_texture = ExtResource("1_u7xqk")
+metallic = 1.0
+metallic_texture = ExtResource("3_fdfnf")
+roughness_texture = ExtResource("5_ptkjs")
+normal_enabled = true
+normal_texture = ExtResource("4_fcly6")
+ao_enabled = true

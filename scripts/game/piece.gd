@@ -1,55 +1,67 @@
 class_name Piece
-extends StaticBody3D
-## Piece of the game. Has selection and highlighting functionality. Also can be physically moved.
-
-signal clicked(sender: Piece)
-
-@export var move_arc_height: float = 1.0
-@export var move_duration: float = 1.0
-@export var player: General.PlayerID = General.PlayerID.ONE
-@export var material_changer: MaterialHighlighter
+extends Node3D
+## Physical piece in the game.
+## Can be physically moved with a given animation. Also has highlight effects.
 
 
-## Enables selection and highlighting effects
-func enable_selection():
-	input_ray_pickable = true
-	material_changer.highlight()
+enum MoveAnim {ARC, LINE, NONE}
+
+const MOVE_ARC_HEIGHT: float = 1.0
+const MOVE_DURATION: float = 0.4
+
+@export var player: General.Player
+
+var _highlighter
 
 
-## Disables selection and highlighting effects
-func disable_selection():
-	input_ray_pickable = false
-	material_changer.dehighlight()
+func _ready():
+	_highlighter = get_node("Highlighter")
 
 
-## Coroutine that moves the piece physically along the given [param movement_path].  [param movement_path] contains global positions.
-func move(movement_path: Array[Vector3]):
-	for pos in movement_path:
-		await _move_arc(pos)
+func highlight():
+	if _highlighter == null:
+		push_warning("No highlighter found")
+		return
+	_highlighter.highlight()
 
 
-## AI calls this function directly
-func on_click():
-	clicked.emit(self)
+func dehighlight():
+	if _highlighter == null:
+		push_warning("No highlighter found")
+		return
+	_highlighter.dehighlight()
 
 
-func _on_input_event(_camera, event: InputEvent, _position, _normal, _shape_idx):
-	if event is InputEventMouseButton and event.is_pressed():
-		on_click()
+func move(to: Vector3, anim: MoveAnim):
+	match anim:
+		MoveAnim.ARC:
+			await _move_arc(to)
+		MoveAnim.LINE:
+			await _move_line(to)
+		_:
+			global_position = to
 
 
-func _move_arc(target_pos : Vector3):
+func _move_arc(target_pos: Vector3):
 	# Linear translation of X and Z
 	var tween_xz = create_tween()
 	tween_xz.bind_node(self).set_parallel(true)
-	tween_xz.tween_property(self, "global_position:x", target_pos.x, move_duration)
-	tween_xz.tween_property(self, "global_position:z", target_pos.z, move_duration)
+	tween_xz.tween_property(self, "global_position:x", target_pos.x, MOVE_DURATION)
+	tween_xz.tween_property(self, "global_position:z", target_pos.z, MOVE_DURATION)
 	
 	# Arc translation of Y
-	var high_point = maxf(global_position.y, target_pos.y) + move_arc_height
+	var high_point = maxf(global_position.y, target_pos.y) + MOVE_ARC_HEIGHT * global_basis.get_scale().y
 	var tween_y = create_tween().set_trans(Tween.TRANS_CUBIC)
-	tween_y.tween_property(self, "global_position:y", high_point, move_duration * 0.5).set_ease(Tween.EASE_OUT)
-	tween_y.tween_property(self, "global_position:y", target_pos.y, move_duration * 0.5).set_ease(Tween.EASE_IN)
+	tween_y.tween_property(self, "global_position:y", high_point, MOVE_DURATION * 0.5).set_ease(Tween.EASE_OUT)
+	tween_y.tween_property(self, "global_position:y", target_pos.y, MOVE_DURATION * 0.5).set_ease(Tween.EASE_IN)
 	
 	# Tweens run at same time, so only wait for one of them
 	await tween_xz.finished
+
+
+func _move_line(target_pos: Vector3):
+	var tween = create_tween().bind_node(self)
+	tween.set_trans(Tween.TRANS_QUINT)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", target_pos, MOVE_DURATION)
+	await tween.finished

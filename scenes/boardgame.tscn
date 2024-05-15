@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbdwwx2xsmnky"]
+
+[ext_resource type="Script" path="res://scripts/game/gamestate_controller.gd" id="1_ra0ie"]
+[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="2_iw4um"]
+[ext_resource type="PackedScene" uid="uid://b7wqojt2nphja" path="res://scenes/game/dice/dice_controller.tscn" id="3_d2rw8"]
+[ext_resource type="Script" path="res://scripts/game/move_picker.gd" id="4_e55y7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xk8l6"]
+size = Vector3(6, 12, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_871mg"]
+size = Vector3(6, 12, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8xt6p"]
+size = Vector3(6, 3.83289, 4.77588)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3iugv"]
+size = Vector3(6, 3.83289, 3.69043)
+
+[node name="Boardgame" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.359, -0.084, -5.575)
+
+[node name="GameStateController" type="Node" parent="." node_paths=PackedStringArray("_board")]
+script = ExtResource("1_ra0ie")
+_board = NodePath("../Board")
+
+[node name="Board" parent="." instance=ExtResource("2_iw4um")]
+transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 3.35944, 0.0837373, 5.57506)
+
+[node name="Dice" parent="." instance=ExtResource("3_d2rw8")]
+transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 3.34168, 0.0789857, 5.56132)
+
+[node name="DiceArea_P1" parent="Dice" index="0"]
+transform = Transform3D(0.026, 0, 1.86265e-09, 0, 0.026, 0, -1.86265e-09, 0, 0.026, 0, 0.1, 0.21102)
+
+[node name="ThrowingSpots_P1" parent="Dice/DiceArea_P1" index="0"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 2.943, 0.5, -1.324)
+
+[node name="SpawnSpots_P1" parent="Dice/DiceArea_P1" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.62939e-06, -3, -1.36588)
+
+[node name="DiceBorders_P1" parent="Dice/DiceArea_P1" index="2"]
+transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, 0, 0, 0)
+
+[node name="Debug_MeshInstance3D" parent="Dice/DiceArea_P1/DiceBorders_P1/Wall3" index="1"]
+mesh = SubResource("BoxMesh_xk8l6")
+
+[node name="Debug_MeshInstance3D" parent="Dice/DiceArea_P1/DiceBorders_P1/Wall4" index="1"]
+mesh = SubResource("BoxMesh_871mg")
+
+[node name="CollisionShape3D" parent="Dice/DiceArea_P1/ClickHitbox_P1" index="0"]
+shape = SubResource("BoxShape3D_8xt6p")
+
+[node name="DiceArea_P2" parent="Dice" index="1"]
+transform = Transform3D(0.026, 0, 2.79397e-09, 0, 0.026, 0, -2.79397e-09, 0, 0.026, -2.38419e-07, 0.1, -0.130684)
+
+[node name="ThrowingSpots_P2" parent="Dice/DiceArea_P2" index="0"]
+transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967, 0.5, 0.71)
+
+[node name="ThrowSpot1" parent="Dice/DiceArea_P2/ThrowingSpots_P2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999985, -0.101, 0)
+
+[node name="ThrowSpot2" parent="Dice/DiceArea_P2/ThrowingSpots_P2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00008, -0.101, -4.57764e-05)
+
+[node name="ThrowSpot3" parent="Dice/DiceArea_P2/ThrowingSpots_P2" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000167847, -0.101, 1.52588e-05)
+
+[node name="ThrowSpot4" parent="Dice/DiceArea_P2/ThrowingSpots_P2" index="3"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.476288, 1.73375, 7.62939e-06)
+
+[node name="ThrowSpot5" parent="Dice/DiceArea_P2/ThrowingSpots_P2" index="4"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 1.60487, 1.73375, -7.62939e-06)
+
+[node name="SpawnSpots_P2" parent="Dice/DiceArea_P2" index="1"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.253242, -3, -0.616714)
+
+[node name="CollisionShape3D" parent="Dice/DiceArea_P2/ClickHitbox_P2" index="0"]
+shape = SubResource("BoxShape3D_3iugv")
+
+[node name="Label3D_Outcome_P2" parent="Dice/DiceArea_P2" index="4"]
+visible = false
+
+[node name="MovePicker" type="Node" parent="."]
+script = ExtResource("4_e55y7")
+
+[connection signal="move_phase_started" from="GameStateController" to="MovePicker" method="_on_move_phase_started"]
+[connection signal="roll_phase_started" from="GameStateController" to="Dice" method="on_roll_phase_started"]
+[connection signal="roll_finished" from="Dice" to="GameStateController" method="_on_roll_ended"]
+[connection signal="move_executed" from="MovePicker" to="GameStateController" method="_on_move_executed"]
+
+[editable path="Board"]
+[editable path="Dice"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyy5yhl1vyj6f"]
+
+[ext_resource type="PackedScene" uid="uid://c0u4lnjuniod0" path="res://models/fbx-rock-seat.fbx" id="1_11j1m"]
+[ext_resource type="Material" uid="uid://c2niet62jk1qj" path="res://materials/rock_seat.tres" id="2_k051k"]
+
+[node name="Root Scene" instance=ExtResource("1_11j1m")]
+
+[node name="rock" parent="RootNode" index="0"]
+material_override = ExtResource("2_k051k")

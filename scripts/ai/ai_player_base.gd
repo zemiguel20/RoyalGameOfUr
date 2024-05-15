@@ -2,6 +2,13 @@ class_name AIPlayerBase
 extends Node
 ## General component that imitates player actions and decides their move through a specific algorithm. 
 
+signal move_executed(move: Move)
+
+@export_category("Setup")
+@export var _player_id: General.Player
+@export var _dice: Dice
+@export var _move_picker: MovePicker
+
 @export_category("Rolling Behaviour")
 ## This variable is not used when dice shaking is disabled.
 ## The probability that the AI will shake the dice this turn, rather than throwing directly.
@@ -22,28 +29,29 @@ extends Node
 @export_range(0.1,3.0) var max_moving_duration: float = 2.0 
 
 
-var _gamemode: Gamemode
-var _board: Board
-var _dice: Dice
-var _player_id: General.PlayerID
-
-
 ## Virtual method that contains an algorithm for picking a move.
 func _evaluate_moves(_moves : Array[Move]):
 	pass
 
 
-func setup(gamemode : Gamemode, player_id: General.PlayerID):
-	_gamemode = gamemode
-	_board = gamemode.board
-	_dice = gamemode.dice
-	_player_id = player_id
-	
+func _on_roll_phase_started(player: General.Player):
+	if player == _player_id:
+		roll()
+		
+		
+func _on_move_phase_started(player: General.Player, moves: Array[Move]):
+	if player == _player_id:
+		var best_move = _evaluate_moves(moves)
+		# HACK disable the selection
+		_move_picker.end_selection()
+		perform_move(best_move)
+		
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
 func roll():
+	_dice.disable_selection()
 	# Wait for a moment, Ai should not have inhumane reaction speed.
-	await _gamemode.get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.2).timeout
 	
 	var random = randf()
 	var shake_this_turn = random <= shaking_probability
@@ -58,13 +66,7 @@ func roll():
 	
 	
 ## Decides which piece to move, then make that piece move.
-func make_move(moves : Array[Move]):
-	var piece_to_move = _evaluate_moves(moves)
-	_move_piece(piece_to_move)
-
-	
-## Function to signal a piece to move, mocking the 'clicking' behaviour of the player.
-func _move_piece(piece : Piece):
+func perform_move(move: Move):
 	var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
 	await get_tree().create_timer(thinking_duration).timeout	
-	piece.on_click()
+	await _move_picker.execute_move(move)

@@ -1,0 +1,26 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://qqlct1iyv78x"]
+
+[ext_resource type="Texture2D" uid="uid://noqseigs4n0h" path="res://textures/table_cloth/TableCloth_Base_color.png" id="1_ja6ga"]
+[ext_resource type="Texture2D" uid="uid://cb8j0x8c01on1" path="res://textures/table_cloth/TableCloth_Mixed_AO.png" id="2_tydsq"]
+[ext_resource type="Texture2D" uid="uid://cisf644qxgiqq" path="res://textures/table_cloth/TableCloth_Height.png" id="3_ecabd"]
+[ext_resource type="Texture2D" uid="uid://dti5nr3pgrs4x" path="res://textures/table_cloth/TableCloth_Opacity.png" id="3_jl2q2"]
+[ext_resource type="Texture2D" uid="uid://bl25ejmp3vnc6" path="res://textures/table_cloth/TableCloth_Normal.png" id="4_08ns3"]
+
+[resource]
+transparency = 1
+albedo_color = Color(1, 0.686275, 0.541176, 1)
+albedo_texture = ExtResource("1_ja6ga")
+normal_enabled = true
+normal_scale = 0.35
+normal_texture = ExtResource("4_08ns3")
+rim = 0.0
+anisotropy = -0.87
+ao_enabled = true
+ao_texture = ExtResource("2_tydsq")
+heightmap_texture = ExtResource("3_ecabd")
+subsurf_scatter_enabled = true
+subsurf_scatter_transmittance_depth = 1.046
+subsurf_scatter_transmittance_boost = 0.2
+backlight = Color(0.196078, 0.196078, 0.196078, 1)
+detail_mask = ExtResource("3_jl2q2")
+detail_blend_mode = 1

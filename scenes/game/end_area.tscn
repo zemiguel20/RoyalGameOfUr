@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccnlb2yds0s8s"]
-
-[ext_resource type="Script" path="res://scripts/game/spot/piece_group.gd" id="1_ay5j7"]
-
-[node name="EndArea" type="Node3D"]
-script = ExtResource("1_ay5j7")
-_orientation = 1
-_spawn_offset = 0.5
