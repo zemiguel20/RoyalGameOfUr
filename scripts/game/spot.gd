@@ -42,5 +42,5 @@ func _on_mouse_exited():
 
 
 func _on_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):
-	if event.is_action("game_spot_selected"):
+	if event.is_action_pressed("game_spot_selected"):
 		selected.emit()
