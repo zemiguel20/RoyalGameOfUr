@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlqmrxcxklu2d"]
 
 [ext_resource type="PackedScene" uid="uid://0y7jpgh7d4dk" path="res://test/scenes/board_test.tscn" id="1_ruqv2"]
-[ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_click.gd" id="2_6vjh3"]
+[ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_interactive.gd" id="2_6vjh3"]
 [ext_resource type="PackedScene" uid="uid://dk6q50tq0w026" path="res://scenes/move_path_highlight.tscn" id="3_sam0t"]
 
 [sub_resource type="GDScript" id="GDScript_y8nea"]
@@ -16,6 +16,7 @@ var player = General.Player.ONE
 
 func _ready():
 	Settings.can_move_backwards = true
+	Settings.can_stack_in_safe_spot = true
 	
 	move_picker.move_executed.connect(_on_move_picker_move_executed)
 	
