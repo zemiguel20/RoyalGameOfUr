@@ -1,10 +1,10 @@
 [gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://bdxhaotnxq6de"]
 
-[ext_resource type="Texture2D" uid="uid://b7qmwvma3xo7b" path="res://textures/Ur_SandstoneWall_basecolor.png" id="1_g6nqp"]
-[ext_resource type="Texture2D" uid="uid://cpulbhyvo5551" path="res://textures/Ur_SandstoneWall_ambientocclusion.png" id="2_3dchi"]
-[ext_resource type="Texture2D" uid="uid://chpng0d3nmxr" path="res://textures/Ur_SandstoneWall_height.png" id="3_p00ne"]
-[ext_resource type="Texture2D" uid="uid://btm5fvfj134x4" path="res://textures/Ur_SandstoneWall_normal.png" id="4_281rj"]
-[ext_resource type="Texture2D" uid="uid://wqcqoxpojsis" path="res://textures/Ur_FloorBricks_roughness.png" id="5_eiobt"]
+[ext_resource type="Texture2D" uid="uid://b7qmwvma3xo7b" path="res://textures/duplicate_textures/Ur_SandstoneWall_basecolor.png" id="1_g6nqp"]
+[ext_resource type="Texture2D" uid="uid://cpulbhyvo5551" path="res://textures/duplicate_textures/Ur_SandstoneWall_ambientocclusion.png" id="2_3dchi"]
+[ext_resource type="Texture2D" uid="uid://chpng0d3nmxr" path="res://textures/duplicate_textures/Ur_SandstoneWall_height.png" id="3_p00ne"]
+[ext_resource type="Texture2D" uid="uid://btm5fvfj134x4" path="res://textures/duplicate_textures/Ur_SandstoneWall_normal.png" id="4_281rj"]
+[ext_resource type="Texture2D" uid="uid://wqcqoxpojsis" path="res://textures/duplicate_textures/Ur_FloorBricks_roughness.png" id="5_eiobt"]
 
 [resource]
 albedo_texture = ExtResource("1_g6nqp")
@@ -16,6 +16,6 @@ ao_enabled = true
 ao_texture = ExtResource("2_3dchi")
 heightmap_enabled = true
 heightmap_texture = ExtResource("3_p00ne")
-uv1_scale = Vector3(1.665, 1.665, 1.665)
+uv1_scale = Vector3(0.24, 0.24, 0.24)
 uv1_triplanar = true
 uv1_world_triplanar = true
