@@ -6,13 +6,21 @@ extends MovePicker
 ## Keep in mind that the default values are just an estimate of what a difficult AI would have.
 ## Changing these values can greatly impact the behaviour of the AI
 
-@export_category("Base Scores")
+@export_group("Move picking chances")
+## Chance for the opponent to pick the best move available to them, using a weight system
+@export var _best_move_weight: int = 10
+## Chance for the opponent to pick the second best move available to them, using a weight system
+@export var _second_move_weight: int = 0
+## Chance for the opponent to pick a random suboptimal move, using a weight system
+@export var _random_move_weight: int = 0
+
+@export_group("Base Scores")
 @export_range(0, 1) var capture_base_score: float = 0.9
 @export_range(0, 1) var grants_roll_base_score: float  = 0.7
 @export_range(0, 1) var end_move_base_score: float = 0.6
 @export_range(0, 1) var regular_base_score: float = 0.5
 
-@export_category("Score modifiers")
+@export_group("Score modifiers")
 @export_range(0, 1) var safety_score_weight: float = 0.4
 ## Base danger value for tiles that are not 100% safe, so spots that are on the path of both players.
 @export_range(0, 1) var base_spot_danger: float = 0.1
@@ -26,28 +34,37 @@ extends MovePicker
 @export var decrease_per_passed_opponent_piece: bool = true
 
 
-func start(moves : Array[Move]) -> void:
-	
+func start(moves: Array[Move]) -> void:
 	# Simulate thinking
 	await get_tree().create_timer(0.2).timeout
-	
-	var best_move : Move = null
-	var best_move_score = -1
-	
-	# Evaluate moves
-	for move in moves:
-		# Make extra sure that ai wont move back when it has a winning move.
-		if move.wins:
-			best_move = move
-		else:
-			var score = _evaluate_move(move)
-			if score > best_move_score:
-				best_move_score = score
-				best_move = move
+	var best_move: Move = _determine_next_move(moves)
 			
 	# Execute move
 	await best_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(best_move)
+	
+	
+func _determine_next_move(moves : Array[Move]) -> Move:
+	if (moves.size() == 1):
+		return moves[0]
+
+	var ordered_moves = moves.duplicate()
+	ordered_moves.sort_custom(_sort_best_moves)
+	
+	var result
+	var rand = randi_range(0, _best_move_weight + _second_move_weight + _random_move_weight)
+	if rand < _best_move_weight:
+		result = ordered_moves[0]
+	elif rand < _best_move_weight + _second_move_weight or moves.size() == 2:
+		result = ordered_moves[1]
+	else:
+		result = ordered_moves[randi_range(2, ordered_moves.size()-1)]
+	
+	return result
+
+
+func _sort_best_moves(a, b):
+	return _evaluate_move(a) > _evaluate_move(b)
 
 
 func _evaluate_move(move: Move) -> float:

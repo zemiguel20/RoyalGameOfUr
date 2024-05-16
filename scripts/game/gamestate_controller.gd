@@ -46,6 +46,7 @@ func _on_roll_ended(roll_value: int):
 		no_moves.emit()
 		current_player = General.get_opponent(current_player)
 		dice.on_roll_phase_started(current_player)
+		roll_phase_started.emit(current_player)
 
 
 func _on_move_executed(move: Move):

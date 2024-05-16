@@ -27,5 +27,6 @@ fill_to = Vector2(0.776699, 0.218447)
 highlight_material = SubResource("ShaderMaterial_hknjr")
 
 [node name="TileTexture" type="Sprite3D" parent="." index="3"]
+visible = false
 axis = 1
 texture = SubResource("GradientTexture2D_qwbrt")

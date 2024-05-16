@@ -173,8 +173,8 @@ func _can_place(player : int, spot : Spot) -> bool:
 		return false
 	
 	# Cannot stack in safe spot if force stack or game setting not enabled
-	if is_spot_occupied_by_player(spot, player) and not spot.force_allow_stack \
-	and spot.is_safe and Settings.can_stack_in_safe_spot:
+	if is_spot_occupied_by_player(spot, player) and spot.is_safe \
+	and not spot.force_allow_stack and not Settings.can_stack_in_safe_spot:
 		return false
 	
 	# Cannot play in safe spot occupied by opponent

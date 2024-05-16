@@ -167,7 +167,7 @@ func _finalize_selection():
 	
 	_change_state(State.IDLE)
 	
-	await selected_move.execute(Piece.MoveAnim.LINE)
+	await selected_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(selected_move)
 
 

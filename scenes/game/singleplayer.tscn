@@ -73,12 +73,19 @@ transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.0
 
 [node name="ThrowingSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="0"]
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967, 5.653, 0.71)
+visible = true
 
 [node name="SpawnSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="1"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.253, 2.153, -0.617)
 
 [node name="DiceBorders_P2" parent="Boardgame/Dice/DiceArea_P2" index="2"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 3.153, 0)
+
+[node name="Wall2" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="1"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 7.62939e-06, 2.979, -3.10864)
+
+[node name="Wall3" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="2"]
+transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, -5.24678, 2.979, 0)
 
 [node name="ClickHitbox_P2" parent="Boardgame/Dice/DiceArea_P2" index="3"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 5.668, 0)
@@ -89,9 +96,14 @@ transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 1.165
 [node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/Floor_Collider_P2" index="0"]
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
 
-[node name="AIPlayerHard" parent="." node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("9_m0jtg")]
-_dice = NodePath("../Boardgame/Dice")
-_move_picker = NodePath("../Boardgame/MovePicker")
+[node name="AIMovePicker" parent="Boardgame" index="3"]
+_best_move_weight = 15
+_second_move_weight = 4
+_random_move_weight = 1
+
+[node name="AIRoller" parent="Boardgame" node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("9_m0jtg")]
+_dice = NodePath("../Dice")
+_move_picker = NodePath("../MovePicker")
 
 [node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
@@ -157,7 +169,7 @@ transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.
 
 [connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
-[connection signal="roll_phase_started" from="Boardgame/GameStateController" to="AIPlayerHard" method="_on_roll_phase_started"]
+[connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 [connection signal="play_pressed" from="Prototype_UI" to="Custom_Camera" method="_on_play_pressed"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Boardgame/GameStateController" method="start_game"]

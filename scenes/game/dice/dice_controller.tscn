@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b7wqojt2nphja"]
+[gd_scene load_steps=21 format=3 uid="uid://b7wqojt2nphja"]
 
 [ext_resource type="Script" path="res://scripts/game/dice/dice.gd" id="1_ka5gv"]
 [ext_resource type="PackedScene" uid="uid://bfyhvb7v43pnc" path="res://scenes/game/dice/d4_die.tscn" id="2_66rme"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ckh07dylodtpk" path="res://scenes/game/dice/dice_spawn_spot.tscn" id="4_e34ex"]
 [ext_resource type="PhysicsMaterial" uid="uid://e1gked2srf8t" path="res://physics_materials/pm_dice_border.tres" id="5_hdthg"]
 [ext_resource type="Script" path="res://scripts/game/dice/dice_label.gd" id="6_wittj"]
+[ext_resource type="PhysicsMaterial" uid="uid://bm2xsy30hwwj7" path="res://physics_materials/pm_dice_floor.tres" id="7_qou2u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rs5kh"]
 size = Vector3(10, 12, 1)
@@ -179,6 +180,7 @@ _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
 
 [node name="Floor_Collider_P1" type="StaticBody3D" parent="DiceArea_P1" groups=["Ground"]]
+physics_material_override = ExtResource("7_qou2u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P1/Floor_Collider_P1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.61948, -0.459701)
@@ -311,6 +313,7 @@ _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
 
 [node name="Floor_Collider_P2" type="StaticBody3D" parent="DiceArea_P2" groups=["Ground"]]
+physics_material_override = ExtResource("7_qou2u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P2/Floor_Collider_P2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.61948, -0.459701)
