@@ -107,14 +107,14 @@ func execute(animation : Piece.MoveAnim = Piece.MoveAnim.NONE) -> void:
 
 
 func num_pieces_past_current_spot():
-	var spot_index = _board.get_spot_index(from, player)
+	var spot_index = _board.get_track(player).find(from)
 	
 	var num_passed_pieces = 0
-	var opponent = General.get_opposite_player(player)
+	var opponent = General.get_opponent(player)
 	for occupied_spot in _board.get_occupied_track_spots(opponent, true):
-		var index = _board.get_spot_index(occupied_spot, opponent)
+		var index = _board.get_track(opponent).find(occupied_spot)
 		if index > spot_index:
-			num_passed_pieces += occupied_spot.get_pieces().size()
+			num_passed_pieces += _board.get_spot_pieces(occupied_spot).size()
 	
 	return num_passed_pieces
 
@@ -134,14 +134,14 @@ func _calculate_spot_danger(spot: Spot, base_danger_score: float):
 	
 	var total_capture_chance = 0.0
 	var index = _board.get_track(player).find(spot)
-	var opponent_id = General.get_opposite_player(player) 
+	var opponent_id = General.get_opponent(player) 
 	
 	# Check the 4 tiles before this spot for opponent pieces
-	for _i in range(1, 5):
-		var temp_spot := _board.get_spot(index - _i, opponent_id) as Spot
-		var contains_opponent = temp_spot.is_occupied(opponent_id)
+	for i in range(1, 5):
+		var temp_spot = _board.get_track(opponent_id)[index - i] as Spot
+		var contains_opponent = _board.is_spot_occupied_by_player(temp_spot, opponent_id)
 		if contains_opponent:
-			var capture_chance = DiceProbabilities.get_probability_of_value(_i, Settings.num_dice)
+			var capture_chance = DiceProbabilities.get_probability_of_value(i, Settings.num_dice)
 			total_capture_chance += capture_chance
 	
 	return total_capture_chance + base_danger_score
