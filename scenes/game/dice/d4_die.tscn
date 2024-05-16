@@ -179,9 +179,10 @@ transform = Transform3D(-0.3665, -0.830192, -0.420069, -6.81723e-08, -0.451484, 
 transform = Transform3D(0.995737, 0.00991929, 0.0917004, -0.079273, -0.416195, 0.905812, 0.0471502, -0.909221, -0.413634, -0.00151036, 0.0124858, 0.0265113)
 opposite_side_value = 1
 
-[node name="Highlighter" type="Node" parent="."]
+[node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("meshes_to_highlight")]
 script = ExtResource("4_heb7x")
 highlight_material = SubResource("ShaderMaterial_0rurm")
+meshes_to_highlight = [NodePath("../d4_model_scaled2/Final")]
 
 [node name="RollTimeoutTimer" type="Timer" parent="."]
 wait_time = 3.2
