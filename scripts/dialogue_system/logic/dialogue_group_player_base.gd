@@ -24,6 +24,7 @@ func play_sequence_from_group(group: DialogueGroup) -> bool:
 		await _sequence_player.interrupt()
 		await _sequence_player.on_interruption_ready
 		await _interruption_sequence_player.play(sequence)
+		await _sequence_player.continue_dialogue()
 		
 	return true
 		
