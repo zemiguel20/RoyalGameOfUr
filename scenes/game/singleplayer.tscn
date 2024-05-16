@@ -108,8 +108,9 @@ _move_picker = NodePath("../MovePicker")
 [node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
 max_degrees_down = 50.0
-max_degrees_left = 32.0
 _board_look_rotation = Vector3(-35, 32, 0)
+_trans_type = 1
+_ease_type = 1
 
 [node name="Prototype_UI" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
