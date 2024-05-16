@@ -56,3 +56,4 @@ func _on_move_executed(move: Move):
 	if not move.gives_extra_turn:
 		current_player = General.get_opponent(current_player)
 	dice.on_roll_phase_started(current_player)
+	roll_phase_started.emit(current_player)

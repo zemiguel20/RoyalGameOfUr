@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfyhvb7v43pnc"]
+[gd_scene load_steps=17 format=3 uid="uid://bfyhvb7v43pnc"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cewt4j3gn56bt" path="res://physics_materials/pm_die.tres" id="1_b5kjg"]
 [ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="2_snn4w"]
 [ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_normal.tscn" id="3_legrj"]
+[ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_qt1jb"]
 [ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="4_heb7x"]
+[ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="4_oxlur"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7xxli"]
 points = PackedVector3Array(-0.0086516, -0.00351831, -0.0050059, -2.69534e-05, 0.0105548, 1.70977e-05, 0.00866721, -0.00351831, -0.0050059, 6.95512e-06, -0.00351831, 0.00999263)
@@ -108,9 +110,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_utk6q")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqfn5"]
-render_priority = 1
-albedo_color = Color(0.380392, 0.639216, 0.333333, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nersh"]
+render_priority = 0
+shader = ExtResource("3_qt1jb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alpha = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rurm"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_nersh")
+shader = ExtResource("4_oxlur")
+shader_parameter/border_width = 0.1
+shader_parameter/color = Color(1, 1, 1, 1)
 
 [node name="D4_Improved" type="RigidBody3D"]
 mass = 4.0
@@ -165,10 +176,10 @@ transform = Transform3D(-0.3665, -0.830192, -0.420069, -6.81723e-08, -0.451484, 
 transform = Transform3D(0.995737, 0.00991929, 0.0917004, -0.079273, -0.416195, 0.905812, 0.0471502, -0.909221, -0.413634, -0.00151036, 0.0124858, 0.0265113)
 opposite_side_value = 1
 
-[node name="MaterialHighlighter" type="Node" parent="." node_paths=PackedStringArray("mesh_to_highlight")]
+[node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("meshes_to_highlight")]
 script = ExtResource("4_heb7x")
-highlight_material = SubResource("StandardMaterial3D_eqfn5")
-mesh_to_highlight = NodePath("../d4_model_scaled2/Final")
+highlight_material = SubResource("ShaderMaterial_0rurm")
+meshes_to_highlight = [NodePath("../d4_model_scaled2/Final")]
 
 [node name="RollTimeoutTimer" type="Timer" parent="."]
 wait_time = 3.2
