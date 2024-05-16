@@ -56,6 +56,18 @@ func _play_random_dialogue():
 		_is_timer_active = false
 
 
+func play_dialog_mistake():
+	_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
+
+
+func play_dialog_opponent_piece_captured():
+	_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
+
+
+func play_dialog_player_piece_captured():
+	_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
+
+
 func _play_interruption(category):
 	_time_until_next_dialogue += reaction_dialogue_delay
 	await _dialogue_system.play(category)
@@ -75,3 +87,11 @@ func _on_play_pressed():
 func _input(event):
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:
 		_play_interruption(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
+
+
+func _on_ai_move_picker__on_suboptimal_move():
+	pass # Replace with function body.
+
+
+func _on_move_picker__on_opponent_piece_captured():
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=7 format=3 uid="uid://b31u1blrsob06"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=8 format=3 uid="uid://b31u1blrsob06"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_5inn7"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_a6wi3"]
@@ -9,14 +9,19 @@ script = ExtResource("1_5inn7")
 caption = "Ha! Got you."
 anim_variations = Array[int]([6])
 
+[sub_resource type="Resource" id="Resource_51nnl"]
+script = ExtResource("2_cy317")
+dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_c7dik")])
+weight = 5
+
 [sub_resource type="Resource" id="Resource_bbg53"]
 script = ExtResource("1_5inn7")
 caption = "Better luck next time, friend."
 anim_variations = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_51nnl"]
+[sub_resource type="Resource" id="Resource_xpd7x"]
 script = ExtResource("2_cy317")
-dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_c7dik"), SubResource("Resource_bbg53")])
+dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_bbg53")])
 weight = 5
 
 [resource]
@@ -24,5 +29,5 @@ script = ExtResource("1_a6wi3")
 category = 4
 play_in_order = false
 has_priority = false
-dialogue_sequences = Array[ExtResource("2_cy317")]([SubResource("Resource_51nnl")])
+dialogue_sequences = Array[ExtResource("2_cy317")]([SubResource("Resource_51nnl"), SubResource("Resource_xpd7x")])
 weight_for_empty = 5

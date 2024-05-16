@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_rg4u4")
 category = 11
-play_in_order = false
+play_in_order = true
 has_priority = false
-dialogue_sequences = Array[Resource("res://scripts/dialogue_system/data/dialogue_sequence.gd")]([ExtResource("1_cuvik"), ExtResource("2_3plon")])
+dialogue_sequences = Array[Resource("res://scripts/dialogue_system/data/dialogue_sequence.gd")]([ExtResource("2_3plon"), ExtResource("1_cuvik")])
 weight_for_empty = 5

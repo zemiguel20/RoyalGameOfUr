@@ -6,6 +6,9 @@ extends MovePicker
 ## Keep in mind that the default values are just an estimate of what a difficult AI would have.
 ## Changing these values can greatly impact the behaviour of the AI
 
+signal _on_suboptimal_move
+signal _on_player_piece_captured
+
 @export_group("Move picking chances")
 ## Chance for the opponent to pick the best move available to them, using a weight system
 @export var _best_move_weight: int = 10
@@ -51,15 +54,20 @@ func _determine_next_move(moves : Array[Move]) -> Move:
 	var ordered_moves = moves.duplicate()
 	ordered_moves.sort_custom(_sort_best_moves)
 	
-	var result
+	var result: Move
 	var rand = randi_range(0, _best_move_weight + _second_move_weight + _random_move_weight)
 	if rand < _best_move_weight:
 		result = ordered_moves[0]
 	elif rand < _best_move_weight + _second_move_weight or moves.size() == 2:
+		_on_suboptimal_move.emit()
 		result = ordered_moves[1]
 	else:
+		_on_suboptimal_move.emit()
 		result = ordered_moves[randi_range(2, ordered_moves.size()-1)]
-	
+		
+	if result.knocks_opo:
+		_on_player_piece_captured.emit()
+		
 	return result
 
 

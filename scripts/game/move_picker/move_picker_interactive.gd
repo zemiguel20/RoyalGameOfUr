@@ -8,6 +8,7 @@ extends MovePicker
 ## Additionaly, it controls the highlighting effects during selection, and also makes the selected
 ## pieces follow the cursor.
 
+signal _on_opponent_piece_captured
 
 enum State {IDLE, FROM_SELECT, TO_SELECT}
 
@@ -166,6 +167,9 @@ func _finalize_selection():
 	var selected_move = _filter_moves(_selected_from_spot, _selected_to_spot).front() as Move
 	
 	_change_state(State.IDLE)
+	
+	if selected_move.knocks_opo:
+		_on_opponent_piece_captured.emit()
 	
 	await selected_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(selected_move)
