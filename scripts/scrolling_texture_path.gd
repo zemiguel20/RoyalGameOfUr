@@ -39,7 +39,7 @@ extends Path3D
 
 #region Scrolling behaviour editor variables
 @export_group("Scrolling")
-@export_range(1.0, 10.0) var density : float = 1.0:
+@export_range(1.0, 1000.0) var density : float = 1.0:
 	set(new_value):
 		density = new_value
 		_populate_path()

@@ -174,6 +174,12 @@ func _finalize_selection():
 func _create_path_highlighter(move : Move) -> ScrollingTexturePath3D:
 	var move_path_highlight = preload("res://scenes/move_path_highlight.tscn")
 	var path = move_path_highlight.instantiate()
+	
+	var scale = move.from.global_basis.get_scale()
+	path.sprite_scale = path.sprite_scale * scale
+	path.density = path.density / scale.length()
+	path.velocity = path.velocity * scale.length()
+	
 	path.curve.clear_points()
 	
 	path.curve.add_point(move.from.global_position)

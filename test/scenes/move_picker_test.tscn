@@ -41,6 +41,9 @@ up_vector_enabled = false
 [node name="MovePickerTest" instance=ExtResource("1_ruqv2")]
 script = SubResource("GDScript_y8nea")
 
+[node name="Board" parent="." index="3"]
+transform = Transform3D(0.389188, 0, 0, 0, 0.389188, 0, 0, 0, 0.389188, -0.0227148, 0, -0.0378337)
+
 [node name="MovePicker" type="Node" parent="." index="4"]
 script = ExtResource("2_6vjh3")
 
