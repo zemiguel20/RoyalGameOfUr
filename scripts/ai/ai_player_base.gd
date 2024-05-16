@@ -19,6 +19,7 @@ signal move_executed(move: Move)
 ## This variable is not used when dice shaking is disabled.
 ## Maximum duration the AI will shake the dice. 
 @export_range(0.1,3.0) var max_shaking_duration: float = 2.0 
+@export_range(0.1,3.0) var rolling_delay: float = 0.5
 
 @export_category("Moving Behaviour")
 ## Minimum duration the AI will take to choose a move. 
@@ -53,7 +54,7 @@ func _on_move_phase_started(player: General.Player, moves: Array[Move]):
 func roll():
 	_dice.disable_selection()
 	# Wait for a moment, Ai should not have inhumane reaction speed.
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(rolling_delay).timeout
 	
 	var random = randf()
 	var shake_this_turn = random <= shaking_probability

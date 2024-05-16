@@ -56,6 +56,9 @@ transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.01
 [node name="Dice" parent="Boardgame" index="2"]
 transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 4.44211, -0.213149, 6.346)
 
+[node name="DiceArea_P1" parent="Boardgame/Dice" index="0"]
+transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, 0, 0.1, 0.211021)
+
 [node name="DiceBorders_P1" parent="Boardgame/Dice/DiceArea_P1" index="2"]
 transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, 0, -2, 0)
 
@@ -66,7 +69,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.988, 0)
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
 
 [node name="DiceArea_P2" parent="Boardgame/Dice" index="1"]
-transform = Transform3D(0.026, 0, 2.79397e-09, 0, 0.026, 0, -2.79397e-09, 0, 0.026, 0, -0.034, -0.131)
+transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, -4.76837e-07, -0.0308831, -0.131)
 
 [node name="ThrowingSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="0"]
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967, 5.653, 0.71)
@@ -160,8 +163,8 @@ transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 [connection signal="play_pressed" from="Prototype_UI" to="Custom_Camera" method="_on_play_pressed"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Boardgame/GameStateController" method="start_game"]
-[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_play_pressed"]
+[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Quit" to="Prototype_UI/Main Menu/Quit" method="_on_pressed"]
 
 [editable path="Boardgame"]

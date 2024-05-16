@@ -181,8 +181,8 @@ func _start_dice_shake():
 	
 	
 func _move_to_opposite_side():
-	var other_hitbox = _click_hitbox_p2 if _current_click_hitbox == _click_hitbox else _click_hitbox
-	var diff_vector = other_hitbox.global_position - _current_click_hitbox.global_position
+	var invert = -1 if _current_player == General.Player.ONE else 1
+	var diff_vector = (_dice_area_p1.global_position - _dice_area_p2.global_position) * invert
 	await _anim_move_dice_to_position(diff_vector, _anim_duration)
 
 
@@ -199,7 +199,7 @@ func _anim_move_dice_to_position(move_vector: Vector3, duration: float):
 		var tween_y = create_tween().set_trans(Tween.TRANS_CUBIC)
 		tween_y.tween_property(die, "global_position:y", high_point, duration/2).set_ease(Tween.EASE_OUT)
 		## NOTE Tbh no clue why here I should suddenly do - move_vector instead of plus, but ill take it...
-		tween_y.tween_property(die, "global_position:y", die.global_position.y - move_vector.y, duration/2).set_ease(Tween.EASE_IN)
+		tween_y.tween_property(die, "global_position:y", die.global_position.y + move_vector.y * _dice_area_p1.global_basis.get_scale().y, duration/2).set_ease(Tween.EASE_IN)
 	
 	
 	# Tweens run at same time, so only wait for one of them
