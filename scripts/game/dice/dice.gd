@@ -8,7 +8,7 @@ signal die_stopped(value: int)
 ## Emitted when all dice finished, with the final value
 signal roll_finished(value: int)
 ## Emitted when the dice have finished their animation of moving to the correct player.
-signal dice_ready()
+signal dice_transfer_finished()
 #endregion
 
 #region Export Variables
@@ -94,7 +94,7 @@ func on_roll_phase_started(player: General.Player):
 	_current_player = player
 	_set_click_hitbox()	
 	is_ready = true
-	dice_ready.emit()
+	dice_transfer_finished.emit()
 	enable_selection()
 
 
