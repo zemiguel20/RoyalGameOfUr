@@ -73,12 +73,19 @@ transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.0
 
 [node name="ThrowingSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="0"]
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967, 5.653, 0.71)
+visible = true
 
 [node name="SpawnSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="1"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.253, 2.153, -0.617)
 
 [node name="DiceBorders_P2" parent="Boardgame/Dice/DiceArea_P2" index="2"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 3.153, 0)
+
+[node name="Wall2" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="1"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 7.62939e-06, 2.979, -3.10864)
+
+[node name="Wall3" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="2"]
+transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, -5.24678, 2.979, 0)
 
 [node name="ClickHitbox_P2" parent="Boardgame/Dice/DiceArea_P2" index="3"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 5.668, 0)
