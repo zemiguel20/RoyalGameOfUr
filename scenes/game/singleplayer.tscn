@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=23 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="Material" uid="uid://ypg8ltq81dur" path="res://materials/board.tres" id="3_8pbq5"]
@@ -9,6 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://dmjf6wpb2arvg" path="res://models/Board_low.fbx" id="8_48rpu"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
 [ext_resource type="PackedScene" uid="uid://clwe1fjp2o660" path="res://models/opponent_textured.tscn" id="9_yxcrq"]
+[ext_resource type="Texture2D" uid="uid://c5677q0o5hg14" path="res://textures/decals/UrSymbol_3.png" id="10_tym6r"]
+[ext_resource type="Texture2D" uid="uid://dv367edg6pvis" path="res://textures/decals/UrSymbol_4.png" id="11_pr6k0"]
+[ext_resource type="Texture2D" uid="uid://cnr6ujj85gwtk" path="res://textures/decals/UrSymbol_5.png" id="12_3kerj"]
+[ext_resource type="Texture2D" uid="uid://bffuk7kxx2mcp" path="res://textures/decals/UrSymbol_1.png" id="13_pw474"]
+[ext_resource type="Texture2D" uid="uid://b7g2aud284htl" path="res://textures/decals/UrSymbol_6.png" id="14_2667m"]
+[ext_resource type="Texture2D" uid="uid://baj3gx7vr4gom" path="res://textures/decals/UrSymbol_2.png" id="15_edyxj"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -83,6 +89,7 @@ _move_picker = null
 
 [node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
+visible = false
 max_degrees_down = 50.0
 max_degrees_left = 32.0
 _board_look_rotation = Vector3(-35, 32, 0)
@@ -144,7 +151,147 @@ script = ExtResource("6_3dit1")
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.08525, -0.655595, 5.72598)
 
 [node name="Board" parent="." instance=ExtResource("8_48rpu")]
-transform = Transform3D(2.33073, 0, 1.43287, 0, 2.73595, 0, -1.43287, 0, 2.33073, 4.47693, -0.18877, 6.36229)
+transform = Transform3D(2.33073, 0, 1.43287, 0, 2.73595, 0, -1.43287, 0, 2.33073, 4.46534, -0.18877, 6.35001)
+
+[node name="Decal" type="Decal" parent="Board"]
+transform = Transform3D(0.0045734, 0, -1.39698e-09, 0, 0.0045734, 0, 1.39698e-09, 0, 0.0045734, -0.00678992, -0.00410693, 0.00122142)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("10_tym6r")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+
+[node name="Decal6" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.62981e-09, 0, 0.00465718, 0, 1.62981e-09, 0, 0.00465718, -0.0186083, -0.00410693, 0.00122142)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("11_pr6k0")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal8" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0186685, -0.00410693, -0.0104942)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("12_3kerj")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal9" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0298408, -0.00410693, 0.00107241)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("12_3kerj")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal10" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0184408, -0.00410693, 0.0126262)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("12_3kerj")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal11" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.00532317, -0.00410693, 0.0017848)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("12_3kerj")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal12" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0408882, -0.00410693, 0.000553131)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("12_3kerj")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal13" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0421957, -0.00410693, 0.00139832)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("13_pw474")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal14" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0298072, -0.00410693, 0.0128129)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("14_2667m")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal15" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0298073, -0.00410693, -0.0101683)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("14_2667m")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal16" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.00678134, -0.00410693, -0.0101683)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("14_2667m")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal17" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.00678122, -0.00410693, 0.0128918)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("14_2667m")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal18" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0292022, -0.00410693, 0.000871181)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("14_2667m")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal19" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0406921, -0.00410693, 0.012212)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("15_edyxj")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal20" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0406921, -0.00410693, -0.011718)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("15_edyxj")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal7" type="Decal" parent="Board"]
+transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0172831, -0.00410693, 0.00189877)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("11_pr6k0")
+modulate = Color(1, 1, 1, 0.619608)
+upper_fade = 0.000168266
+
+[node name="Decal4" type="Decal" parent="Board"]
+transform = Transform3D(-4.90146e-05, 0, -0.00468799, 0, 0.00468824, 0, 0.00468799, 0, -4.90146e-05, -0.0419871, -0.00410693, 0.0127797)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("10_tym6r")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+
+[node name="Decal5" type="Decal" parent="Board"]
+transform = Transform3D(1.62981e-09, 0, 0.00468824, 0, 0.00468824, 0, -0.00468824, 0, 1.62981e-09, -0.0419869, -0.00410693, -0.01018)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("10_tym6r")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+
+[node name="Decal2" type="Decal" parent="Board"]
+transform = Transform3D(0.00124379, 0, 0.00464187, 0, 0.00480561, 0, -0.00464187, 0, 0.00124379, 0.029413, -0.00410694, 0.0120728)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("10_tym6r")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+
+[node name="Decal3" type="Decal" parent="Board"]
+transform = Transform3D(-0.00480562, 0, 2.56114e-09, 0, 0.00480561, 0, -2.56114e-09, 0, -0.00480562, 0.0294131, -0.00410694, -0.0110962)
+size = Vector3(2, 1, 2)
+texture_albedo = ExtResource("10_tym6r")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
 
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 [connection signal="play_pressed" from="Prototype_UI" to="Custom_Camera" method="_on_play_pressed"]
