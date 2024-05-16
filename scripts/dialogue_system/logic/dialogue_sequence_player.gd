@@ -8,7 +8,7 @@ signal on_interruption_ready
 
 @export var _use_subtitles: bool
 ## NOTE: Since we do not have audio for the playtest, we have a constant waiting time.
-@export var _temp_max_entry_length: float = 3.0
+@export var _temp_min_entry_length: float = 5.0
 
 ## Giving these through a setup function might be nice.
 @onready var _audio_player = $AudioStreamPlayer3D as AudioStreamPlayer3D
@@ -36,6 +36,7 @@ func continue_dialogue():
 		finish_sequence()
 		return
 		
+	print("%s playing new entry!" % name)
 	is_playing = true
 	var _current_entry = _current_sequence.dialogue_entries[_current_index] as DialogueSingleEntry
 	
@@ -52,7 +53,7 @@ func continue_dialogue():
 		
 	# Wait for audio to be over.
 	## TODO: Revert back when audio is actually there.
-	var entry_length = maxf(_temp_max_entry_length, _animation_player.current_animation_length)
+	var entry_length = maxf(_temp_min_entry_length, _animation_player.current_animation_length)
 	await get_tree().create_timer(entry_length).timeout
 	_current_index += 1
 	
@@ -66,6 +67,7 @@ func finish_sequence():
 	if _use_subtitles:
 		_subtitle_displayer.hide_subtitles()
 		
+	print("%s finished!" % name)		
 	on_dialogue_finished.emit()
 	on_interruption_ready.emit()
 	is_playing = false
@@ -75,11 +77,18 @@ func handle_interruption():
 	if _use_subtitles:
 		_subtitle_displayer.hide_subtitles()
 		
+	## Rename to something like on_has_paused
 	on_interruption_ready.emit()
 	_is_interrupted = false	
 	is_playing = false
+	print("%s is now pausing!" % name)	
 	
 	
 func interrupt():
+	print("%s has been requested to pause!" % name)	
 	_is_interrupted = true
+	
+
+func is_busy():
+	return is_playing
 

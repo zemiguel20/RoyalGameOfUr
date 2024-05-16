@@ -33,5 +33,6 @@ dialogue_entries = Array[ExtResource("1_cwsln")]([SubResource("Resource_l1vmr")]
 script = ExtResource("3_h4ujd")
 category = 0
 play_in_order = true
+has_priority = false
 dialogue_sequences = Array[ExtResource("2_106ab")]([SubResource("Resource_tmfpq"), SubResource("Resource_37psx")])
 weight_for_empty = 0

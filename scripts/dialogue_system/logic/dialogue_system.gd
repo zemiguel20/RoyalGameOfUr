@@ -3,8 +3,8 @@ extends Node
 
 enum Category {
 	STORY, 
-	OPPONENT_KNOCKED_OUT,
-	PLAYER_KNOCKED_OUT,
+	OPPONENT_GETS_KNOCKED_OUT,
+	PLAYER_GETS_KNOCKED_OUT,
 	OPPONENT_WAITING
 }
 
@@ -25,7 +25,7 @@ func _ready():
 
 ## Tries to play a DialogueSequence in the correct category. Returns whether the operation was successfull.
 func play(category: Category) -> bool:
-	if is_busy() and not can_interrupt(_current_dialogue_player):
+	if is_busy() and _interruption_sequence_player.is_busy():
 		return false
 		
 	for group in _dialogue_groups:
@@ -42,5 +42,5 @@ func play(category: Category) -> bool:
 func is_busy() -> bool:
 	return _player_inorder.is_busy() or _player_random.is_busy()
 	
-func can_interrupt(group_player: DialogueGroupPlayerBase):
-	return not group_player.is_busy() or _interruption_sequence_player.is_busy()
+func can_interrupt():
+	return not _interruption_sequence_player.is_busy()

@@ -2,5 +2,5 @@
 class_name DialogueSequence
 extends Resource
 
-@export_range(0, 10) var weight: int = 5
 @export var dialogue_entries: Array[DialogueSingleEntry]
+@export_range(0, 10) var weight: int = 5

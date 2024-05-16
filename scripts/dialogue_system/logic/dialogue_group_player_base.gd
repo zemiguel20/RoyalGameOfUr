@@ -9,7 +9,7 @@ var _current_group: DialogueGroup
 
 ## Tries to play a DialogueSequence in from the group [param group]. Returns whether the operation was successfull.
 func play_sequence_from_group(group: DialogueGroup) -> bool:
-	if is_busy() and _interruption_sequence_player.is_playing or not check_priority(group):
+	if is_busy() and (_interruption_sequence_player.is_busy() or not check_priority(group)):
 		return false
 		
 	var sequence = _pick_sequence(group)
@@ -20,6 +20,7 @@ func play_sequence_from_group(group: DialogueGroup) -> bool:
 	if not is_busy():
 		await _sequence_player.play(sequence)
 	else:
+		#TODO improve interruption code.
 		await _sequence_player.interrupt()
 		await _sequence_player.on_interruption_ready
 		await _interruption_sequence_player.play(sequence)
@@ -27,8 +28,9 @@ func play_sequence_from_group(group: DialogueGroup) -> bool:
 	return true
 		
 		
-func assign_sequence_player(sequence_player: DialogueSequencePlayer, _interruption_sequence_player: DialogueSequencePlayer):
+func assign_sequence_player(sequence_player: DialogueSequencePlayer, interruption_sequence_player: DialogueSequencePlayer):
 	_sequence_player = sequence_player
+	_interruption_sequence_player = interruption_sequence_player
 	
 	
 func check_priority(new_group: DialogueGroup):

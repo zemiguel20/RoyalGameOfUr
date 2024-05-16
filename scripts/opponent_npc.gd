@@ -25,7 +25,6 @@ var _is_timer_active: bool
 
 func _ready():
 	visible = false
-	#_animation_player.play_talking()
 	
 
 func _process(delta):
@@ -36,12 +35,6 @@ func _process(delta):
 	if _time_until_next_dialogue <= 0:
 		_play_story_dialogue()
 	
-
-# Could also name this play_reaction
-func _play_interruption():
-	_time_until_next_dialogue += reaction_dialogue_delay
-	await _dialogue_system.interrupt()
-	
 	
 func _play_story_dialogue():
 	var success = await _dialogue_system.play(DialogueSystem.Category.STORY)
@@ -51,11 +44,12 @@ func _play_story_dialogue():
 	else: 
 		_is_timer_active = false
 	
+	
+func _play_interruption(category):
+	_time_until_next_dialogue += reaction_dialogue_delay
+	await _dialogue_system.play(category)
+	
 
-func _on_gamemode_rolled_zero():
-	_play_interruption()
-	
-	
 func _on_play_pressed():
 	visible = true
 	await _animation_player.play_animation(OpponentAnimationPlayer.Anim_Name.WALKIN, true)
@@ -65,3 +59,8 @@ func _on_play_pressed():
 	_is_timer_active = true	
 	on_opponent_ready.emit()
 	
+	
+## Reactions for now: Knockout? Debug Button. No Moves?
+func _input(event):
+	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:
+		_play_interruption(DialogueSystem.Category.OPPONENT_GETS_KNOCKED_OUT)

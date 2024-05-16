@@ -8,4 +8,4 @@ extends Resource
 ## If true, this group will interrupt a group that is currently playing if it does not have priority
 @export var has_priority: bool
 @export var dialogue_sequences: Array[DialogueSequence]
-@export_range(1, 10) var weight_for_empty: int
+@export_range(0, 10) var weight_for_empty: int
