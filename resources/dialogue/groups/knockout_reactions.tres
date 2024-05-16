@@ -31,7 +31,7 @@ weight = 5
 
 [resource]
 script = ExtResource("1_epc3u")
-category = 1
+category = 3
 play_in_order = false
 has_priority = true
 dialogue_sequences = Array[ExtResource("2_y0rmk")]([SubResource("Resource_321kf"), SubResource("Resource_1vdge")])

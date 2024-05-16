@@ -33,22 +33,33 @@ func _process(delta):
 		
 	_time_until_next_dialogue -= delta
 	if _time_until_next_dialogue <= 0:
-		_play_story_dialogue()
-	
-	
+		_play_random_dialogue()
+
+
 func _play_story_dialogue():
-	var success = await _dialogue_system.play(DialogueSystem.Category.STORY)
+	var success = await _dialogue_system.play(DialogueSystem.Category.INTRO_STORY)
+	success = await _dialogue_system.play(DialogueSystem.Category.INTRO_RULES_QUESTION)
+	success = await _dialogue_system.play(DialogueSystem.Category.INTRO_GAME_START)
+	## If something went wrong when playing the story dialogues, do not try to trigger a next sequence.
+	if success:
+		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
+	else: 
+		_is_timer_active = false
+
+
+func _play_random_dialogue():
+	var success = await _dialogue_system.play(DialogueSystem.Category.RANDOM_CONVERSATION)
 	## If something went wrong when playing the story dialogues, do not try to trigger a next sequence. 
 	if success:
 		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
 	else: 
 		_is_timer_active = false
-	
-	
+
+
 func _play_interruption(category):
 	_time_until_next_dialogue += reaction_dialogue_delay
 	await _dialogue_system.play(category)
-	
+
 
 func _on_play_pressed():
 	visible = true
@@ -63,4 +74,4 @@ func _on_play_pressed():
 ## Reactions for now: Knockout? Debug Button. No Moves?
 func _input(event):
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:
-		_play_interruption(DialogueSystem.Category.OPPONENT_GETS_KNOCKED_OUT)
+		_play_interruption(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)

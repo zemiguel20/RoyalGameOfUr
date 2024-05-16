@@ -49,7 +49,7 @@ func continue_dialogue():
 	## TODO: Change, maybe we should give the whole list, and let the whole list play in a random order, 
 	## but dont start a new animation if the 
 	if _current_entry.anim_variations != null and _current_entry.anim_variations.size() > 0:	
-		_animation_player.play_animation(_current_entry.anim_variations[0], true)
+		_animation_player.play_animation(_current_entry.anim_variations[0], false)
 		
 	# Wait for audio to be over.
 	## TODO: Revert back when audio is actually there.
@@ -68,9 +68,9 @@ func finish_sequence():
 		_subtitle_displayer.hide_subtitles()
 		
 	print("%s finished!" % name)		
+	is_playing = false
 	on_dialogue_finished.emit()
 	on_interruption_ready.emit()
-	is_playing = false
 	
 	
 func handle_interruption():
@@ -78,9 +78,9 @@ func handle_interruption():
 		_subtitle_displayer.hide_subtitles()
 		
 	## Rename to something like on_has_paused
+	is_playing = false
 	on_interruption_ready.emit()
 	_is_interrupted = false	
-	is_playing = false
 	print("%s is now pausing!" % name)	
 	
 	

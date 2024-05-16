@@ -2,10 +2,18 @@ class_name DialogueSystem
 extends Node
 
 enum Category {
-	STORY, 
-	OPPONENT_GETS_KNOCKED_OUT,
-	PLAYER_GETS_KNOCKED_OUT,
-	OPPONENT_WAITING
+	INTRO_STORY = 0,
+	INTRO_RULES_QUESTION = 1,
+	INTRO_GAME_START = 2,
+	GAME_OPPONENT_GETS_CAPTURED = 3,
+	GAME_PLAYER_GETS_CAPTURED = 4,
+	GAME_OPPONENT_MISTAKE = 5,
+	GAME_PLAYER_MISTAKE = 6,
+	GAME_OPPONENT_WIN = 7,
+	GAME_PLAYER_WIN = 8,
+	GAME_OPPONENT_WAITING = 9,
+	GAME_OPPONENT_THINKING = 10,
+	RANDOM_CONVERSATION = 11,
 }
 
 @export var _dialogue_groups: Array[DialogueGroup]
@@ -21,7 +29,7 @@ var _current_dialogue_player: DialogueGroupPlayerBase
 func _ready():
 	_player_inorder.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
 	_player_random.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
-	
+
 
 ## Tries to play a DialogueSequence in the correct category. Returns whether the operation was successfull.
 func play(category: Category) -> bool:

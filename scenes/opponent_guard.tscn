@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bcjpac1cs0xcy"]
+[gd_scene load_steps=16 format=3 uid="uid://bcjpac1cs0xcy"]
 
 [ext_resource type="PackedScene" uid="uid://it24m6uyqxlk" path="res://models/fbx_guard_animated.fbx" id="1_jat7h"]
 [ext_resource type="Material" uid="uid://dq4qt2h6vrkcj" path="res://materials/guard/mat_guard_colors.tres" id="2_nuktw"]
@@ -7,13 +7,19 @@
 [ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_system.gd" id="5_dxxwf"]
 [ext_resource type="PackedScene" uid="uid://b5rqut7t53w0r" path="res://scenes/ui/subtitle_system.tscn" id="5_hwe48"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_random_player.gd" id="6_fvtk2"]
+[ext_resource type="Resource" uid="uid://c4s5ljc8dbt6o" path="res://resources/dialogue/groups/intro_story.tres" id="7_7nwkm"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_inorder_player.gd" id="7_fkgtg"]
-[ext_resource type="Resource" uid="uid://blhv56k0dgjw6" path="res://resources/dialogue/groups/story_group_test.tres" id="7_qruwh"]
-[ext_resource type="Resource" uid="uid://b5vd1on5hn0q3" path="res://resources/dialogue/groups/knockout_reactions.tres" id="8_5mrww"]
+[ext_resource type="Resource" uid="uid://dgfe3vpdsmwyf" path="res://resources/dialogue/groups/intro_game_start.tres" id="8_huw5v"]
+[ext_resource type="Resource" uid="uid://bdjtjqb6rugmh" path="res://resources/dialogue/groups/random_conversation.tres" id="9_os1th"]
+[ext_resource type="Resource" uid="uid://cm3tybkthodww" path="res://resources/dialogue/groups/game_opponent_gets_captured.tres" id="10_3fa74"]
 [ext_resource type="PackedScene" uid="uid://bdfdbhwdv6lnb" path="res://scenes/npcs/dialogue_group_player.tscn" id="10_mrnxq"]
+[ext_resource type="Resource" uid="uid://b31u1blrsob06" path="res://resources/dialogue/groups/game_player_gets_captured.tres" id="11_d0ho7"]
+[ext_resource type="Resource" uid="uid://bn8skq46su8tj" path="res://resources/dialogue/groups/game_opponent_mistake.tres" id="12_wtttm"]
 
 [node name="Opponent_Guard_Animated" instance=ExtResource("1_jat7h")]
 script = ExtResource("2_pjd45")
+min_time_between_dialogues = 20.0
+max_time_between_dialogues = 60.0
 
 [node name="Skeleton3D" parent="RootNode" index="1"]
 bones/1/rotation = Quaternion(0.111435, -0.005218, 0.0464822, 0.99267)
@@ -57,7 +63,7 @@ script = ExtResource("4_g1c61")
 
 [node name="DialogueSystem" type="Node" parent="." index="3"]
 script = ExtResource("5_dxxwf")
-_dialogue_groups = Array[Resource("res://scripts/dialogue_system/data/dialogue_group.gd")]([ExtResource("7_qruwh"), ExtResource("8_5mrww")])
+_dialogue_groups = Array[Resource("res://scripts/dialogue_system/data/dialogue_group.gd")]([ExtResource("7_7nwkm"), ExtResource("8_huw5v"), ExtResource("9_os1th"), ExtResource("10_3fa74"), ExtResource("11_d0ho7"), ExtResource("12_wtttm")])
 
 [node name="DialogueGroupPlayer_Random" type="Node" parent="DialogueSystem" index="0"]
 script = ExtResource("6_fvtk2")

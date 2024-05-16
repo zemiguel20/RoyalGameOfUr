@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=7 format=3 uid="uid://b1mcaftl0frsa"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_f1x1r"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_yfia4"]
+
+[sub_resource type="Resource" id="Resource_l004w"]
+script = ExtResource("1_f1x1r")
+caption = "Hey, wanna hear a joke?"
+anim_variations = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_hyjxb"]
+script = ExtResource("1_f1x1r")
+caption = "So, a dog walks into a bar..."
+anim_variations = Array[int]([6])
+
+[sub_resource type="Resource" id="Resource_mrw1n"]
+script = ExtResource("1_f1x1r")
+caption = "He walks in, and says: I cannot see a thing..."
+anim_variations = Array[int]([4])
+
+[sub_resource type="Resource" id="Resource_m5sdh"]
+script = ExtResource("1_f1x1r")
+caption = "\"...I'll open this one!\""
+anim_variations = Array[int]([7])
+
+[resource]
+script = ExtResource("1_yfia4")
+dialogue_entries = Array[ExtResource("1_f1x1r")]([SubResource("Resource_l004w"), SubResource("Resource_hyjxb"), SubResource("Resource_mrw1n"), SubResource("Resource_m5sdh")])
+weight = 5

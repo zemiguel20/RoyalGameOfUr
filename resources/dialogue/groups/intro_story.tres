@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=4 format=3 uid="uid://c4s5ljc8dbt6o"]
+
+[ext_resource type="Resource" uid="uid://wcucy243n267" path="res://resources/dialogue/sequences/intro_story_1.tres" id="1_qkoli"]
+[ext_resource type="Resource" uid="uid://qf6gyjt7j251" path="res://resources/dialogue/sequences/intro_story_2.tres" id="2_76o7y"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="2_q02uq"]
+
+[resource]
+script = ExtResource("2_q02uq")
+category = 0
+play_in_order = false
+has_priority = true
+dialogue_sequences = Array[Resource("res://scripts/dialogue_system/data/dialogue_sequence.gd")]([ExtResource("1_qkoli"), ExtResource("2_76o7y")])
+weight_for_empty = 0
