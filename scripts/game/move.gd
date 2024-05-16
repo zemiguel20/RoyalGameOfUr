@@ -87,7 +87,7 @@ func execute(animation : Piece.MoveAnim = Piece.MoveAnim.NONE) -> void:
 		_board._get_player_data(General.get_opponent(player)).piece_spot_dict[piece] = spot
 	
 	# Animations move pieces
-	var piece_scale = pieces_in_from.front().scale.y
+	var piece_scale = (pieces_in_from.front() as Piece).global_basis.get_scale().y
 	var offset = Vector3.UP * General.PIECE_OFFSET_Y * piece_scale
 	var base_pos = to.global_position + offset/2 + (p_to_copy.size() * offset)
 	for i in p_from_copy.size():
