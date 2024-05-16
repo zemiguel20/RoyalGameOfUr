@@ -26,7 +26,8 @@ func start_game():
 	current_player = randi_range(General.Player.ONE, General.Player.TWO)
 	game_started.emit()
 	dice.on_roll_phase_started(current_player)
-	
+	roll_phase_started.emit(current_player)
+
 
 func end_game():
 	print("Game Finished: Player %d won" % (current_player + 1))
