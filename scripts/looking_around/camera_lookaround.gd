@@ -59,7 +59,7 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton:
 		event = event as InputEventMouseButton
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_MIDDLE:
 			_switch_mode()
 			
 	if not event is InputEventMouseMotion or not _is_enabled:
