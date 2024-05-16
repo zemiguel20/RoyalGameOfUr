@@ -7,6 +7,8 @@ extends Node3D
 signal die_stopped(value: int)
 ## Emitted when all dice finished, with the final value
 signal roll_finished(value: int)
+## Emitted when the dice have finished their animation of moving to the correct player.
+signal dice_transfer_finished()
 #endregion
 
 #region Export Variables
@@ -16,6 +18,9 @@ signal roll_finished(value: int)
 @export var _roll_shaking_enabled: bool = false
 ## If set to true, player 2 will throw the dice from the other side.
 @export var _use_multiple_dice_areas: bool = true
+@export_group("Transfer Animation")
+@export var _anim_duration: float = 0.7
+@export var _arc_height: float = 0.05
 #endregion
 
 #region Onready Variables
@@ -36,11 +41,16 @@ signal roll_finished(value: int)
 @onready var _click_hitbox_p2: Area3D = $DiceArea_P2/ClickHitbox_P2
 ## 3D Label displaying the outcome of the dice. Contains its own script with special effects.
 @onready var _outcome_label: DiceOutcomeLabel = $DiceArea_P1/Label3D_Outcome_P1
+## Approximate area that P1's dice can land in
+@onready var _dice_area_p1: Node3D = $DiceArea_P1
+## Approximate area that P2's dice can land in
+@onready var _dice_area_p2: Node3D = $DiceArea_P2
 #endregion
 
 #region Regular Variables
 ## Current rolled value.
 var value: int = 0 
+var is_ready = false
 
 ## Array containing every die.
 var _dice: Array
@@ -51,7 +61,7 @@ var _throwing_spots: Dictionary
 var _current_click_hitbox: Area3D
 ## The player that is performing the current roll.
 ## Used to decide which click hitbox to use.
-var _current_player
+var _current_player = 0
 ## Boolean indicating if the dice are currently being shaken.
 var _is_shaking: bool = false
 ## Number of dice that have finished their roll.
@@ -72,11 +82,20 @@ func _input(event: InputEvent) -> void:
 	# since releasing the mouse can be done outside of the click hitboxes.
 	if event is InputEventMouseButton and event.is_released():
 		on_dice_release()
-		
-		
+
+
 func on_roll_phase_started(player: General.Player):
-	enable_selection()
+	is_ready = false
+	
+	## If the player that needs to throw does not have the dice yet, move to that players side.
+	if _use_multiple_dice_areas and _current_player != player:
+		await _move_to_opposite_side()
+	
 	_current_player = player
+	_set_click_hitbox()	
+	is_ready = true
+	dice_transfer_finished.emit()
+	enable_selection()
 
 
 ## Enables selection and highlight effects
@@ -117,7 +136,6 @@ func on_dice_release():
 ## Plays the dice rolling animation and updates the value. Returns the rolled value.
 func _roll() -> int:
 	disable_selection()
-	_set_click_hitbox()
 	_roll_sfx.play()
 	value = 0
 	_die_finish_count = 0
@@ -160,6 +178,32 @@ func _start_dice_shake():
 	for die in _dice:
 		die.visible = false
 	_shake_sfx.play()
+	
+	
+func _move_to_opposite_side():
+	var invert = -1 if _current_player == General.Player.ONE else 1
+	var diff_vector = (_dice_area_p1.global_position - _dice_area_p2.global_position) * invert
+	await _anim_move_dice_to_position(diff_vector, _anim_duration)
+
+
+func _anim_move_dice_to_position(move_vector: Vector3, duration: float):
+	# Linear translation of X and Z
+	for die in _dice:
+		var tween_xz = create_tween()
+		tween_xz.bind_node(die).set_parallel(true)
+		tween_xz.tween_property(die, "global_position:x", die.global_position.x + move_vector.x, duration)
+		tween_xz.tween_property(die, "global_position:z", die.global_position.z + move_vector.z, duration)
+	
+		# Arc translation of Y
+		var high_point = die.global_position.y + _arc_height * global_basis.get_scale().y
+		var tween_y = create_tween().set_trans(Tween.TRANS_CUBIC)
+		tween_y.tween_property(die, "global_position:y", high_point, duration/2).set_ease(Tween.EASE_OUT)
+		## NOTE Tbh no clue why here I should suddenly do - move_vector instead of plus, but ill take it...
+		tween_y.tween_property(die, "global_position:y", die.global_position.y + move_vector.y * _dice_area_p1.global_basis.get_scale().y, duration/2).set_ease(Tween.EASE_IN)
+	
+	
+	# Tweens run at same time, so only wait for one of them
+	await get_tree().create_timer(duration).timeout
 			
 
 ## Returns [param amount] random but different spawning spots.
@@ -183,6 +227,7 @@ func _get_random_free_spot(_player: General.Player, amount: int) -> Array:
 	
 func _cache_spawning_spots():
 	_spawn_spots = _spawn_spot_container.get_children()
+	
 	
 	
 func _cache_throwing_spots():
