@@ -1,0 +1,171 @@
+[gd_scene load_steps=22 format=3 uid="uid://d0r5qjvfovi2u"]
+
+[ext_resource type="Material" uid="uid://bxhsn63hsvyt8" path="res://materials/FloorTiles.tres" id="1_5fiyt"]
+[ext_resource type="Environment" uid="uid://hs0xfuy4e64r" path="res://shaders/WorldLightingSettings.tres" id="2_s5vby"]
+[ext_resource type="PackedScene" uid="uid://mowvg73f88gq" path="res://models/pots/bowl_1.fbx" id="3_2iknd"]
+[ext_resource type="PackedScene" uid="uid://bswebxbp0pejp" path="res://models/pots/bowl_2.fbx" id="4_milnl"]
+[ext_resource type="PackedScene" uid="uid://kk63tl1apuvv" path="res://models/pots/bowl_3.fbx" id="5_s1c8j"]
+[ext_resource type="PackedScene" uid="uid://bf7ysxl7dppt7" path="res://models/pots/challice.fbx" id="6_n6a0o"]
+[ext_resource type="PackedScene" uid="uid://bi0lr600ryh7s" path="res://models/pots/pot_1.fbx" id="7_e8wnj"]
+[ext_resource type="PackedScene" uid="uid://b458lwbh4qyfd" path="res://models/pots/pot_2.fbx" id="8_pmcfw"]
+[ext_resource type="PackedScene" uid="uid://dafjubl511po4" path="res://models/pots/pot_3.fbx" id="9_acadi"]
+[ext_resource type="PackedScene" uid="uid://dx83jpe2re6un" path="res://models/pots/pot_4.fbx" id="10_b3ij1"]
+[ext_resource type="PackedScene" uid="uid://d4gidmqrk3b1i" path="res://models/pots/pot_5.fbx" id="11_71a6g"]
+[ext_resource type="PackedScene" uid="uid://c6jravfw3ijqf" path="res://models/pots/pot_6.fbx" id="12_4vv13"]
+[ext_resource type="PackedScene" uid="uid://c1plavvxdyksn" path="res://models/pots/pot_7.fbx" id="13_x5h1h"]
+[ext_resource type="PackedScene" uid="uid://bqfil2oy1nbk8" path="res://models/pots/pot_8.fbx" id="14_wmceb"]
+[ext_resource type="PackedScene" uid="uid://dqygwfqru3fc3" path="res://models/pots/pot_9.fbx" id="15_adim5"]
+[ext_resource type="Material" uid="uid://be7n0a655i4xg" path="res://materials/WallBricks.tres" id="16_tshv5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jydsc"]
+resource_name = "lambert1"
+albedo_color = Color(0.665185, 0.665185, 0.665185, 1)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_k2h22"]
+_surfaces = [{
+"aabb": AABB(-0.100252, -0.000599812, -0.0938037, 0.257653, 0.00119962, 0.240637),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 1, 0, 3, 0, 0, 0, 4, 0, 6, 0, 5, 0, 6, 0, 4, 0, 7, 0, 4, 0, 0, 0, 3, 0, 4, 0, 5, 0, 0, 0, 5, 0, 6, 0, 2, 0, 5, 0, 2, 0, 0, 0, 1, 0, 2, 0, 6, 0, 6, 0, 7, 0, 1, 0, 7, 0, 3, 0, 1, 0, 7, 0, 4, 0, 3, 0),
+"name": "lambert1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xi7lk"]
+resource_name = "Root Scene_pCube1"
+_surfaces = [{
+"aabb": AABB(-0.100252, -0.000599812, -0.0938037, 0.257653, 0.00119962, 0.240637),
+"attribute_data": PackedByteArray(255, 31, 255, 255, 255, 95, 255, 191, 255, 31, 255, 191, 255, 95, 255, 255, 255, 159, 255, 255, 255, 223, 255, 255, 255, 223, 255, 191, 255, 159, 255, 191, 255, 159, 0, 0, 255, 95, 0, 0, 255, 95, 255, 63, 255, 159, 255, 63, 255, 159, 255, 63, 255, 95, 255, 127, 255, 159, 255, 127, 255, 95, 255, 63, 255, 95, 255, 191, 255, 159, 255, 127, 255, 95, 255, 127, 255, 159, 255, 191, 255, 159, 255, 191, 255, 95, 255, 191, 255, 95, 255, 255, 255, 159, 255, 255),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 1, 0, 3, 0, 0, 0, 4, 0, 6, 0, 5, 0, 6, 0, 4, 0, 7, 0, 8, 0, 10, 0, 9, 0, 8, 0, 11, 0, 10, 0, 12, 0, 14, 0, 13, 0, 12, 0, 13, 0, 15, 0, 16, 0, 18, 0, 17, 0, 17, 0, 19, 0, 16, 0, 20, 0, 22, 0, 21, 0, 20, 0, 23, 0, 22, 0),
+"material": SubResource("StandardMaterial3D_jydsc"),
+"name": "lambert1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 255, 191, 0, 0, 255, 255, 255, 255, 255, 191, 0, 0, 255, 255, 0, 0, 255, 191, 0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 255, 255, 255, 255, 255, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 0, 0, 255, 255, 0, 0, 255, 191, 255, 255, 255, 255, 255, 255, 255, 191, 255, 255, 255, 255, 255, 255, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 0, 0, 0, 0, 255, 255, 255, 127, 255, 255, 0, 0, 255, 255, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_k2h22")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rgssi"]
+_surfaces = [{
+"aabb": AABB(-0.005, -0.005, -0.166867, 0.01, 0.0913181, 0.249771),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 1, 0, 3, 0, 0, 0, 4, 0, 6, 0, 5, 0, 6, 0, 4, 0, 7, 0, 4, 0, 5, 0, 0, 0, 3, 0, 4, 0, 0, 0, 5, 0, 6, 0, 2, 0, 0, 0, 5, 0, 2, 0, 1, 0, 2, 0, 6, 0, 7, 0, 1, 0, 6, 0, 7, 0, 4, 0, 3, 0, 1, 0, 7, 0, 3, 0),
+"name": "lambert1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ripk5"]
+resource_name = "Root Scene_pCube39"
+_surfaces = [{
+"aabb": AABB(-0.005, -0.005, -0.166867, 0.01, 0.0913181, 0.249771),
+"attribute_data": PackedByteArray(255, 31, 255, 255, 255, 95, 255, 191, 255, 31, 255, 191, 255, 95, 255, 255, 255, 159, 255, 255, 255, 223, 255, 255, 255, 223, 255, 191, 255, 159, 255, 191, 255, 159, 0, 0, 255, 95, 255, 63, 255, 159, 255, 63, 255, 95, 0, 0, 255, 159, 255, 63, 255, 95, 255, 127, 255, 159, 255, 127, 255, 95, 255, 63, 255, 95, 255, 191, 255, 159, 255, 127, 255, 95, 255, 127, 255, 159, 255, 191, 255, 159, 255, 191, 255, 95, 255, 255, 255, 159, 255, 255, 255, 95, 255, 191),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 1, 0, 3, 0, 0, 0, 4, 0, 6, 0, 5, 0, 6, 0, 4, 0, 7, 0, 8, 0, 10, 0, 9, 0, 11, 0, 8, 0, 9, 0, 12, 0, 14, 0, 13, 0, 15, 0, 12, 0, 13, 0, 16, 0, 18, 0, 17, 0, 19, 0, 16, 0, 17, 0, 20, 0, 22, 0, 21, 0, 23, 0, 20, 0, 21, 0),
+"material": SubResource("StandardMaterial3D_jydsc"),
+"name": "lambert1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 255, 191, 0, 0, 255, 255, 255, 255, 255, 191, 0, 0, 255, 255, 0, 0, 255, 191, 0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 255, 255, 255, 255, 255, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 0, 0, 255, 255, 0, 0, 255, 191, 255, 255, 255, 255, 255, 255, 255, 191, 255, 255, 255, 255, 255, 255, 255, 127, 0, 0, 0, 0, 255, 255, 255, 127, 255, 255, 0, 0, 255, 255, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_rgssi")
+
+[node name="EnvironmentArtTestScene" type="Node3D"]
+
+[node name="pCube1" type="MeshInstance3D" parent="."]
+transform = Transform3D(67.4957, 0, 0, 0, 67.4957, 0, 0, 0, 67.4957, -0.590116, -0.366624, -0.775581)
+material_override = ExtResource("1_5fiyt")
+mesh = SubResource("ArrayMesh_xi7lk")
+skeleton = NodePath("")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="pCube1"]
+transform = Transform3D(-0.0578749, -0.0887748, -0.0402345, 0.0169415, -0.0552433, 0.0975215, -0.0959832, 0.0437777, 0.0414731, -0.0176076, 0.137497, 0.109075)
+light_color = Color(0.815686, 0.815686, 0.792157, 1)
+light_energy = 2.4
+light_indirect_energy = 5.525
+light_volumetric_fog_energy = 2.293
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_normal_bias = 0.889
+directional_shadow_split_1 = 0.019
+directional_shadow_fade_start = 0.65
+directional_shadow_max_distance = 649.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="pCube1"]
+environment = ExtResource("2_s5vby")
+
+[node name="Pots" type="Node3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.583492, -0.316214, -0.330106)
+
+[node name="bowl_1" parent="Pots" instance=ExtResource("3_2iknd")]
+transform = Transform3D(138.255, 0, 0, 0, 138.255, 0, 0, 0, 138.255, 7.791, 0.00984812, 5.84254)
+
+[node name="bowl_2" parent="Pots" instance=ExtResource("4_milnl")]
+transform = Transform3D(138.255, 0, 0, 0, 138.255, 0, 0, 0, 138.255, 7.81504, 0.00984812, 3.66396)
+
+[node name="bowl_3" parent="Pots" instance=ExtResource("5_s1c8j")]
+transform = Transform3D(138.255, 0, 0, 0, 138.255, 0, 0, 0, 138.255, 5.72607, 0.00984812, 6.30466)
+
+[node name="challice1" parent="Pots" instance=ExtResource("6_n6a0o")]
+transform = Transform3D(42.0204, 0, 131.715, 0, 138.255, 0, -131.715, 0, 42.0204, 6.21107, 0.00984812, 8.63655)
+
+[node name="pot_1" parent="Pots" instance=ExtResource("7_e8wnj")]
+transform = Transform3D(138.255, 0, 0, 0, 138.255, 0, 0, 0, 138.255, 7.07056, 0.0292115, 10.7586)
+
+[node name="pot_2" parent="Pots" instance=ExtResource("8_pmcfw")]
+transform = Transform3D(7.78481, -25.4346, 135.672, 1.45703, 135.896, 25.3928, -138.028, 0, 7.92, 3.97277, -0.0762166, 4.87298)
+
+[node name="pot_3" parent="Pots" instance=ExtResource("9_acadi")]
+transform = Transform3D(138.255, 0, 0, 0, 138.255, 0, 0, 0, 138.255, 5.47653, 0.00984812, 2.66216)
+
+[node name="pot_4" parent="Pots" instance=ExtResource("10_b3ij1")]
+transform = Transform3D(138.255, 0, 0, 0, 138.255, 0, 0, 0, 138.255, 4.11789, 0.0292115, 12.3736)
+
+[node name="pot_5" parent="Pots" instance=ExtResource("11_71a6g")]
+transform = Transform3D(138.255, 0, 0, 0, 138.255, 0, 0, 0, 138.255, 5.72035, 0.00984812, 0.0734851)
+
+[node name="pot_6" parent="Pots" instance=ExtResource("12_4vv13")]
+transform = Transform3D(138.255, 0, 0, 0, 138.255, 0, 0, 0, 138.255, 1.2156, 0.00984812, 5.85268)
+
+[node name="pot_7" parent="Pots" instance=ExtResource("13_x5h1h")]
+transform = Transform3D(-41.7497, -19.5711, -130.34, -39.355, 132.336, -7.26496, 125.788, 34.9079, -45.5333, 4.02705, -0.255692, 1.50421)
+
+[node name="pot_8" parent="Pots" instance=ExtResource("14_wmceb")]
+transform = Transform3D(138.255, 0, 0, 0, 138.255, 0, 0, 0, 138.255, 4.07545, 0.0292075, 9.72874)
+
+[node name="pot_9" parent="Pots" instance=ExtResource("15_adim5")]
+transform = Transform3D(62.2522, 0, 123.447, 0, 138.255, 0, -123.447, 0, 62.2522, -1.33381, 0.0292115, 13.3719)
+
+[node name="pCube39" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 172.672, 0, 172.672, 0, -172.672, 0, 0, 0.828549, -2.13765, -7.13265)
+material_override = ExtResource("16_tshv5")
+mesh = SubResource("ArrayMesh_ripk5")
+skeleton = NodePath("")
+
+[node name="pCube40" type="MeshInstance3D" parent="."]
+transform = Transform3D(172.672, 0, 0, 0, 172.672, 0, 0, 0, 172.672, -7.81526, -1.54264, 2.11284)
+material_override = ExtResource("16_tshv5")
+mesh = SubResource("ArrayMesh_ripk5")
+skeleton = NodePath("")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.681326, -0.305865, 0.665012, 0.0241479, 0.917409, 0.397212, -0.731581, -0.254572, 0.632441, 4.91675, 2.95344, 4.84478)
+visible = false
+fov = 47.1

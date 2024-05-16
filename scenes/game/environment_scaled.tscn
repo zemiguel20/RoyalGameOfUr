@@ -1,8 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgkfm7n305bgj"]
+[gd_scene load_steps=19 format=3 uid="uid://cgkfm7n305bgj"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_3nkie"]
-[ext_resource type="PackedScene" uid="uid://dyy5yhl1vyj6f" path="res://models/RockSeat.tscn" id="1_158m1"]
-[ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard_standing.fbx" id="2_csl6i"]
+[ext_resource type="PackedScene" uid="uid://mowvg73f88gq" path="res://models/pots/bowl_1.fbx" id="2_7xpms"]
+[ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard.fbx" id="2_csl6i"]
+[ext_resource type="PackedScene" uid="uid://bswebxbp0pejp" path="res://models/pots/bowl_2.fbx" id="3_711w1"]
+[ext_resource type="PackedScene" uid="uid://kk63tl1apuvv" path="res://models/pots/bowl_3.fbx" id="4_pr8mw"]
+[ext_resource type="PackedScene" uid="uid://bf7ysxl7dppt7" path="res://models/pots/challice.fbx" id="5_mttwx"]
+[ext_resource type="PackedScene" uid="uid://bi0lr600ryh7s" path="res://models/pots/pot_1.fbx" id="6_jnxdo"]
+[ext_resource type="PackedScene" uid="uid://b458lwbh4qyfd" path="res://models/pots/pot_2.fbx" id="7_jpb62"]
+[ext_resource type="PackedScene" uid="uid://dafjubl511po4" path="res://models/pots/pot_3.fbx" id="8_hmotn"]
+[ext_resource type="PackedScene" uid="uid://dx83jpe2re6un" path="res://models/pots/pot_4.fbx" id="9_4nd6s"]
+[ext_resource type="PackedScene" uid="uid://d4gidmqrk3b1i" path="res://models/pots/pot_5.fbx" id="10_7b1ei"]
+[ext_resource type="PackedScene" uid="uid://c6jravfw3ijqf" path="res://models/pots/pot_6.fbx" id="11_bucpp"]
+[ext_resource type="PackedScene" uid="uid://c1plavvxdyksn" path="res://models/pots/pot_7.fbx" id="12_ip18f"]
+[ext_resource type="PackedScene" uid="uid://bqfil2oy1nbk8" path="res://models/pots/pot_8.fbx" id="13_ujr4w"]
+[ext_resource type="PackedScene" uid="uid://dqygwfqru3fc3" path="res://models/pots/pot_9.fbx" id="14_o53er"]
+[ext_resource type="PackedScene" uid="uid://cghfm2xmx5feh" path="res://scenes/environment_base.tscn" id="16_rid1p"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -26,12 +39,22 @@ script = SubResource("GDScript_fbn4f")
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="DirectionalLight3D" parent="Environment" index="1"]
-transform = Transform3D(-0.103608, -0.206509, -0.0954956, 0.0522388, -0.123719, 0.210866, -0.221442, 0.0674354, 0.0944244, 0.605703, 0.73247, 1.47961)
+transform = Transform3D(-0.105969, -0.199284, -0.107501, 0.0536406, -0.137407, 0.201847, -0.219985, 0.0624918, 0.101002, 0.605703, 0.73247, 1.47961)
+light_color = Color(0.890196, 0.890196, 0.878431, 1)
+shadow_bias = 0.1
+shadow_normal_bias = 0.0
 directional_shadow_mode = 2
-directional_shadow_max_distance = 649.5
+directional_shadow_split_1 = 0.029
+directional_shadow_split_2 = 0.076
+directional_shadow_split_3 = 0.433
+directional_shadow_max_distance = 300.0
+
+[node name="BlockoutMap" parent="Environment" index="2"]
+visible = false
 
 [node name="Camera3D" parent="Environment" index="3"]
 transform = Transform3D(0.231883, -0.108052, 0.0863428, 0.00651993, 0.176902, 0.203871, -0.138159, -0.173004, 0.154537, 0.872157, 0.113499, 1.44488)
+visible = false
 current = false
 
 [node name="Table" parent="Environment" index="4"]
@@ -48,11 +71,115 @@ shape = SubResource("BoxShape3D_080q8")
 [node name="cloth" parent="Environment" index="5"]
 transform = Transform3D(4.79902, 0, -8.16304, 0, 9.52308, 0, 7.98754, 0, 4.90446, 1.12564, -0.0535423, 1.60522)
 
+[node name="Pots" type="Node3D" parent="Environment"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="bowl_1" parent="Environment/Pots" instance=ExtResource("2_7xpms")]
+transform = Transform3D(14.9829, 0, 0, 0, 14.9829, 0, 0, 0, 14.9829, 4.1069, -0.235306, 6.5048)
+
+[node name="bowl_4" parent="Environment/Pots" instance=ExtResource("2_7xpms")]
+transform = Transform3D(14.9829, 0, 0, 0, 14.9829, 0, 0, 0, 14.9829, 4.81361, -0.235306, 6.34625)
+
+[node name="bowl_2" parent="Environment/Pots" instance=ExtResource("3_711w1")]
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 4.98227, -0.216114, 6.21503)
+
+[node name="bowl_3" parent="Environment/Pots" instance=ExtResource("4_pr8mw")]
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 4.97992, -0.247018, 5.88977)
+
+[node name="challice1" parent="Environment/Pots" instance=ExtResource("5_mttwx")]
+transform = Transform3D(-10.2517, 0, -6.93752, 0, 12.3785, 0, 6.93752, 0, -10.2517, 4.78712, -0.224185, 6.16507)
+
+[node name="pot_1" parent="Environment/Pots" instance=ExtResource("6_jnxdo")]
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 3.46357, -0.690172, 6.0859)
+
+[node name="pot_2" parent="Environment/Pots" instance=ExtResource("7_jpb62")]
+transform = Transform3D(-9.63769, -3.2064, 19.3324, -2.19058, 21.5851, 2.48797, -19.4736, -0.841223, -9.84764, 3.69291, -0.666669, 6.66076)
+
+[node name="pot_3" parent="Environment/Pots" instance=ExtResource("8_hmotn")]
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 4.84284, -0.695386, 5.19222)
+
+[node name="pot_4" parent="Environment/Pots" instance=ExtResource("9_4nd6s")]
+transform = Transform3D(10.2969, 0, 14.8496, 0, 18.0703, 0, -14.8496, 0, 10.2969, 3.54493, -0.627012, 6.46137)
+
+[node name="pot_5" parent="Environment/Pots" instance=ExtResource("10_7b1ei")]
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 5.41611, -0.627012, 5.83319)
+
+[node name="pot_21" parent="Environment/Pots" instance=ExtResource("10_7b1ei")]
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 0.367431, -0.627012, 5.00005)
+
+[node name="pot_6" parent="Environment/Pots" instance=ExtResource("11_bucpp")]
+transform = Transform3D(10.2969, 0, 14.8496, 0, 18.0703, 0, -14.8496, 0, 10.2969, 3.12803, -0.627012, 6.29036)
+
+[node name="pot_7" parent="Environment/Pots" instance=ExtResource("12_ip18f")]
+transform = Transform3D(17.9302, 2.11427, -0.75827, -2.13164, 17.94, -0.3831, 0.70798, 0.469578, 18.0503, 5.14335, -0.636689, 5.45043)
+
+[node name="pot_24" parent="Environment/Pots" instance=ExtResource("12_ip18f")]
+transform = Transform3D(17.3566, -4.79536, 1.51267, 4.70692, 17.4069, 1.17434, -1.76877, -0.73394, 17.9685, 3.48257, -0.687472, 1.28388)
+
+[node name="pot_8" parent="Environment/Pots" instance=ExtResource("13_ujr4w")]
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 5.68129, -0.306736, 5.04641)
+
+[node name="pot_23" parent="Environment/Pots" instance=ExtResource("13_ujr4w")]
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 5.47788, -0.627012, 6.18993)
+
+[node name="pot_11" parent="Environment/Pots" instance=ExtResource("13_ujr4w")]
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 4.07259, -0.627012, 7.58084)
+
+[node name="pot_9" parent="Environment/Pots" instance=ExtResource("14_o53er")]
+transform = Transform3D(10.2969, 0, 14.8496, 0, 18.0703, 0, -14.8496, 0, 10.2969, 3.35945, -0.627012, 7.1431)
+
+[node name="pot_10" parent="Environment/Pots" instance=ExtResource("14_o53er")]
+transform = Transform3D(3.43497, 0, 17.7408, 0, 18.0703, 0, -17.7408, 0, 3.43497, 5.30081, -0.627012, 1.44973)
+
+[node name="bowl_5" parent="Environment/Pots" instance=ExtResource("2_7xpms")]
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 3.10918, -0.699151, 1.86601)
+
+[node name="bowl_6" parent="Environment/Pots" instance=ExtResource("3_711w1")]
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 3.40438, -0.699151, 1.75442)
+
+[node name="bowl_7" parent="Environment/Pots" instance=ExtResource("4_pr8mw")]
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 2.93799, -0.699151, 1.61177)
+
+[node name="challice2" parent="Environment/Pots" instance=ExtResource("5_mttwx")]
+transform = Transform3D(19.9859, 0, 1.27352, 0, 20.0263, 0, -1.27352, 0, 19.9859, 2.64894, -0.699151, 1.80013)
+
+[node name="pot_12" parent="Environment/Pots" instance=ExtResource("7_jpb62")]
+transform = Transform3D(19.033, -1.34069, 6.0829, 0.211052, 19.6846, 3.67817, -6.22533, -3.43162, 18.7223, 3.03873, -0.711618, 1.29975)
+
+[node name="pot_13" parent="Environment/Pots" instance=ExtResource("8_hmotn")]
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 3.41628, -0.699151, 1.3861)
+
+[node name="pot_14" parent="Environment/Pots" instance=ExtResource("9_4nd6s")]
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 2.12072, -0.696346, 1.8447)
+
+[node name="pot_15" parent="Environment/Pots" instance=ExtResource("10_7b1ei")]
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 4.41553, -0.699151, 1.12583)
+
+[node name="pot_16" parent="Environment/Pots" instance=ExtResource("11_bucpp")]
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 2.76122, -0.699151, 0.979399)
+
+[node name="pot_22" parent="Environment/Pots" instance=ExtResource("11_bucpp")]
+transform = Transform3D(6.21511, 0, -15.9081, 0, 17.0791, 0, 15.9081, 0, 6.21511, 0.451441, -0.69299, 5.44942)
+
+[node name="pot_19" parent="Environment/Pots" instance=ExtResource("11_bucpp")]
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 2.70705, -0.699151, 6.50092)
+
+[node name="pot_17" parent="Environment/Pots" instance=ExtResource("13_ujr4w")]
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 2.47532, -0.696347, 1.69956)
+
+[node name="pot_18" parent="Environment/Pots" instance=ExtResource("14_o53er")]
+transform = Transform3D(19.9368, 0, -1.89196, 0, 20.0263, 0, 1.89196, 0, 19.9368, 1.69866, -0.696346, 1.16179)
+
+[node name="pot_20" parent="Environment/Pots" instance=ExtResource("14_o53er")]
+transform = Transform3D(19.9368, 0, -1.89196, 0, 20.0263, 0, 1.89196, 0, 19.9368, -0.630171, -0.696346, 5.43218)
 [node name="RockSeat" parent="Environment" instance=ExtResource("1_158m1")]
 transform = Transform3D(0.212012, 0, 0.13248, 0, 0.25, 0, -0.13248, 0, 0.212012, 1.04314, -0.166942, 1.45068)
 
 [node name="Reference_Scale" parent="." instance=ExtResource("2_csl6i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372539, -0.663783, 0.728179)
 visible = false
+
+[node name="EnvironmentBase" parent="." instance=ExtResource("16_rid1p")]
+transform = Transform3D(4.15175, 0, 0, 0, 4.15175, 0, 0, 0, 4.15175, -1.27249, 1.03828, 1.35919)
 
 [editable path="Environment"]

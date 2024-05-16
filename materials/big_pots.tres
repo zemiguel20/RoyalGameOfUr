@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://8ijce4tsqa0d"]
+
+[ext_resource type="Texture2D" uid="uid://ccpw7iwu51bq6" path="res://textures/pots/big_pots1_Base_color.png" id="1_g8o5d"]
+[ext_resource type="Texture2D" uid="uid://b4xxwlcwuy8pd" path="res://textures/pots/big_pots1_Mixed_AO.png" id="2_n82bi"]
+[ext_resource type="Texture2D" uid="uid://bj7ev7w7ssi4x" path="res://textures/pots/big_pots1_Normal_OpenGL.png" id="3_rncye"]
+[ext_resource type="Texture2D" uid="uid://bumrv0bn36r0l" path="res://textures/pots/big_pots1_Roughness.png" id="4_i3asx"]
+
+[resource]
+albedo_texture = ExtResource("1_g8o5d")
+roughness_texture = ExtResource("4_i3asx")
+normal_enabled = true
+normal_texture = ExtResource("3_rncye")
+ao_enabled = true
+ao_texture = ExtResource("2_n82bi")
