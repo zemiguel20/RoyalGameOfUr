@@ -19,7 +19,7 @@ signal roll_finished(value: int)
 #endregion
 
 #region Onready Variables
-@onready var _highlighter: MaterialHighlighter = $MaterialHighlighter
+@onready var _highlighter = $Highlighter as MaterialHighlighterComponent
 @onready var _rolling_timer: Timer = $RollTimeoutTimer
 #endregion
 
@@ -46,12 +46,12 @@ func _ready():
 	
 func highlight() -> void:
 	if _highlighter != null:
-		_highlighter.highlight()
+		_highlighter.active = true
 
 
 func dehighlight() -> void:
 	if _highlighter != null:
-		_highlighter.dehighlight()
+		_highlighter.active = false
 	# TODO: To disable the 'outline' highlight effect, we could add it here or create a seperate function
 		
 

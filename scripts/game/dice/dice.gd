@@ -53,7 +53,7 @@ var value: int = 0
 var is_ready = false
 
 ## Array containing every die.
-var _dice: Array
+var _dice: Array[Die]
 var _spawn_spots: Array
 ## Dictionary that maps _throw_spots_container and _throw_spots_container_p2 to a PlayerId.
 var _throwing_spots: Dictionary
@@ -87,6 +87,8 @@ func _input(event: InputEvent) -> void:
 func on_roll_phase_started(player: General.Player):
 	is_ready = false
 	
+	disable_selection()
+	
 	## If the player that needs to throw does not have the dice yet, move to that players side.
 	if _use_multiple_dice_areas and _current_player != player:
 		await _move_to_opposite_side()
@@ -94,8 +96,8 @@ func on_roll_phase_started(player: General.Player):
 	_current_player = player
 	_set_click_hitbox()	
 	is_ready = true
-	dice_transfer_finished.emit()
 	enable_selection()
+	dice_transfer_finished.emit()
 
 
 ## Enables selection and highlight effects

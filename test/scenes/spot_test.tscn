@@ -1,101 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhkdop3qcru8a"]
+[gd_scene load_steps=7 format=3 uid="uid://dhkdop3qcru8a"]
 
 [ext_resource type="PackedScene" uid="uid://5sw0dk37mf47" path="res://scenes/game/spot/tile_normal.tscn" id="1_twtv8"]
 [ext_resource type="PackedScene" uid="uid://cse8k17ou57w5" path="res://scenes/game/spot/tile_rosette.tscn" id="2_qxn0r"]
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/piece_white.tscn" id="3_6mfxs"]
-[ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/piece_black.tscn" id="4_08e4r"]
+[ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/spot/spot.tscn" id="3_kg04q"]
 
 [sub_resource type="GDScript" id="GDScript_x1y6j"]
 script/source = "extends Node
 
 
-@onready var tile = $Tile as Spot
-@onready var r_tile = $RosetteTile as Spot
-@onready var piece1 = $Piece as Piece
-@onready var piece2 = $Piece2 as Piece
-@onready var piece3 = $Piece3 as Piece
-
-
-var p1_start = Vector3.ZERO
-var p2_start = Vector3.ZERO
-var p3_start = Vector3.ZERO
+@onready var _tile = $Tile
+@onready var _rosette_tile = $RosetteTile
+@onready var _spot = $Spot
 
 
 func _ready() -> void:
-	p1_start = piece1.global_position
-	p2_start = piece2.global_position
-	p3_start = piece3.global_position
-	
-	await _reset()
-
-	print(\"Testing: Try stack in normal tile\")
-	await tile.place_pieces([piece1], Piece.MoveAnim.ARC)
-	await tile.place_pieces([piece2], Piece.MoveAnim.ARC)
-	assert(tile.get_pieces().size() == 1, \"Pieces should not be stackable\")
-	
-	await _reset()
-	
-	print(\"Testing: Try stack in tile with forced stack\")
-	tile.force_allow_stack = true
-	await tile.place_pieces([piece1], Piece.MoveAnim.ARC)
-	await tile.place_pieces([piece2], Piece.MoveAnim.ARC)
-	assert(tile.get_pieces().size() == 2, \"Stacking should be allowed by force\")
-	
-	await _reset()
-	
-	print(\"Testing: Try stack in safe tile with stack setting turned OFF\")
-	await r_tile.place_pieces([piece1], Piece.MoveAnim.ARC)
-	await r_tile.place_pieces([piece2], Piece.MoveAnim.ARC)
-	assert(r_tile.get_pieces().size() == 1, \"Stacking in safe spots is not allowed\")
-	
-	await _reset()
-	
-	print(\"Testing: Try stack in safe tile with stack setting turned ON\")
-	Settings.can_stack_in_safe_spot = true
-	await r_tile.place_pieces([piece1], Piece.MoveAnim.ARC)
-	await r_tile.place_pieces([piece2], Piece.MoveAnim.ARC)
-	assert(r_tile.get_pieces().size() == 2, \"Stacking in safe spots is turned on\")
-	
-	await _reset()
-	
-	print(\"Testing: Try knockout piece in safe zone\")
-	await r_tile.place_pieces([piece1], Piece.MoveAnim.ARC)
-	await r_tile.place_pieces([piece3], Piece.MoveAnim.ARC)
-	assert(r_tile.get_pieces().has(piece1), \"Knockout should not be possible in safe zone\")
-	assert(r_tile.get_pieces().size() == 1, \"Knockout should not be possible in safe zone\")
-	
-	await _reset()
-	
-	print(\"Testing: Try knockout piece in normal spot\")
-	await tile.place_pieces([piece1], Piece.MoveAnim.ARC)
-	var knocked = await tile.place_pieces([piece3], Piece.MoveAnim.ARC)
-	assert(knocked.has(piece1), \"Piece 1 should be knocked out\")
-	assert(tile.get_pieces().has(piece3), \"Tile should have piece 3\")
-	assert(tile.get_pieces().size() == 1, \"Tile should only have one piece\")
-	
-	await _reset()
-	
-	print(\"Testing: Try moving a stack\")
-	Settings.can_stack_in_safe_spot = true
-	await r_tile.place_pieces([piece1], Piece.MoveAnim.ARC)
-	await r_tile.place_pieces([piece2], Piece.MoveAnim.ARC)
-	await tile.place_pieces(r_tile.remove_pieces(), Piece.MoveAnim.ARC)
-	
-	print(\"Testing highlight\")
-	tile.highlight_base()
-	tile.highlight_pieces()
+	_color_roulette(_tile)
+	_color_roulette(_rosette_tile)
+	_color_roulette(_spot)
 
 
-func _reset():
-	await get_tree().create_timer(1.0).timeout
-	tile.remove_pieces()
-	r_tile.remove_pieces()
-	piece1.move(p1_start, Piece.MoveAnim.NONE)
-	piece2.move(p2_start, Piece.MoveAnim.NONE)
-	piece3.move(p3_start, Piece.MoveAnim.NONE)
-	Settings.can_stack_in_safe_spot = false
-	tile.force_allow_stack = false
-	await get_tree().create_timer(1.0).timeout
+func _color_roulette(spot : Spot):
+	while(true):
+		var rand_color = Color(randf_range(0.0, 1.0), randf_range(0.0, 1.0), randf_range(0.0, 1.0))
+		spot.set_highlight(true, rand_color)
+		await get_tree().create_timer(1.0).timeout
 "
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g3yvc"]
@@ -114,23 +42,17 @@ mesh = SubResource("PlaneMesh_g3yvc")
 material = SubResource("StandardMaterial3D_4c7a7")
 
 [node name="Camera3D" type="Camera3D" parent="Environment"]
-transform = Transform3D(0.999991, 0.00219803, -0.00376902, 0, 0.863835, 0.503775, 0.00436313, -0.50377, 0.863827, -0.210747, 3.87758, 6.1573)
+transform = Transform3D(0.999962, 0.00522131, -0.00699218, 0, 0.801254, 0.598325, 0.00872655, -0.598302, 0.801223, 0.0283286, 2.25855, 2.77212)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(0.938752, 0.126596, 0.320497, -0.344594, 0.344877, 0.873107, 0, -0.930072, 0.367378, 0, 1.12308, 0)
 shadow_enabled = true
 
 [node name="Tile" parent="." instance=ExtResource("1_twtv8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.639, 0.005, 0.015)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00113994, 0.005, 0.00880715)
 
 [node name="RosetteTile" parent="." instance=ExtResource("2_qxn0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.465, 0.00365034, 0.028)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99758, 0.00365034, -0.00296411)
 
-[node name="Piece" parent="." instance=ExtResource("3_6mfxs")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.814, 0.1, 1.351)
-
-[node name="Piece2" parent="." instance=ExtResource("3_6mfxs")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4, 0.1, -1)
-
-[node name="Piece3" parent="." instance=ExtResource("4_08e4r")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.382, 0.1, 3.561)
+[node name="Spot" parent="." instance=ExtResource("3_kg04q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.018, 0.001, 0.006)
