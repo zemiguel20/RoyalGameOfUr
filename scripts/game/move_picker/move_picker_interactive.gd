@@ -19,6 +19,8 @@ var _selected_from_spot : Spot = null
 var _selected_to_spot : Spot = null
 var _pieces_to_drag : Array[Piece] = [] # Easier access to pieces while dragging them
 
+@onready var move_highlighter = $MoveHighlighterComponent as MoveHighlighterComponent
+
 
 func start(moves : Array[Move]):
 	_moves = moves.duplicate()
@@ -57,8 +59,7 @@ func _setup_state():
 			
 			# Highlight pieces
 			for move in _moves:
-				for piece in move.pieces_in_from:
-					piece.set_highlight(true)
+				move_highlighter.highlight_selectable_pieces(move)
 	
 		State.TO_SELECT:
 			# Connect signals for input interaction
@@ -70,12 +71,7 @@ func _setup_state():
 			
 			# Highlight moves
 			for move in filtered_moves:
-				move.from.set_highlight(true, Color.GREEN)
-				move.to.set_highlight(true, Color.GREEN)
-				for piece in move.pieces_in_from:
-					piece.set_highlight(true, Color.GREEN)
-				var path_highlighter = _create_path_highlighter(move)
-				add_child(path_highlighter)
+				move_highlighter.highlight_pieces_selected(move)
 			
 			# Starts dragging selected pieces
 			_pieces_to_drag = _filter_moves(_selected_from_spot).front().pieces_in_from.duplicate()
@@ -100,35 +96,20 @@ func _clear_state():
 	
 	# Clear all highlighting
 	for move in _moves:
-		move.from.set_highlight(false)
-		move.to.set_highlight(false)
-		for piece in move.pieces_in_from:
-			piece.set_highlight(false)
-		for piece in move.pieces_in_to:
-			piece.set_highlight(false)
-	for path_highlighter in get_children():
-		path_highlighter.queue_free()
+		move_highlighter.clear_highlight(move)
 	
 	# Stops dragging pieces
 	_pieces_to_drag.clear()
 
 
 func _on_from_hovered(from : Spot):
-	# Highlight moves including from
 	for move in _filter_moves(from):
-		move.from.set_highlight(true)
-		move.to.set_highlight(true)
-		var path_highlighter = _create_path_highlighter(move)
-		add_child(path_highlighter)
+		move_highlighter.highlight_move_preview(move)
 
 
 func _on_from_dehovered(from : Spot):
-	# Remove highlight moves including from
 	for move in _filter_moves(from):
-		move.from.set_highlight(false)
-		move.to.set_highlight(false)
-	for path_highlighter in get_children():
-		path_highlighter.queue_free()
+		move_highlighter.highlight_selectable_pieces(move)
 
 
 func _on_from_selected(spot: Spot):
@@ -169,29 +150,6 @@ func _finalize_selection():
 	
 	await selected_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(selected_move)
-
-
-func _create_path_highlighter(move : Move) -> ScrollingTexturePath3D:
-	var move_path_highlight = preload("res://scenes/move_path_highlight.tscn")
-	var path = move_path_highlight.instantiate()
-	
-	var scale = move.from.global_basis.get_scale()
-	path.sprite_scale = path.sprite_scale * scale
-	path.density = path.density / scale.length()
-	path.velocity = path.velocity * scale.length()
-	
-	path.curve.clear_points()
-	
-	path.curve.add_point(move.from.global_position)
-	
-	# Midpoint to fix clipping through board
-	var midpoint = move.from.global_position.lerp(move.to.global_position, 0.5)
-	midpoint.y = maxf(move.from.global_position.y, move.to.global_position.y)
-	path.curve.add_point(midpoint)
-	
-	path.curve.add_point(move.to.global_position)
-	
-	return path
 
 
 func _reset_dragged_pieces():
