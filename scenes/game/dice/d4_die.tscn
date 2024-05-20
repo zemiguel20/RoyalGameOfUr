@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/game/dice/die.gd" id="2_snn4w"]
 [ext_resource type="PackedScene" uid="uid://b7x3ka2rwdola" path="res://scenes/game/dice/dice_normal.tscn" id="3_legrj"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_qt1jb"]
-[ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="4_heb7x"]
+[ext_resource type="Script" path="res://scripts/game/highlighting/material_highlighter.gd" id="4_heb7x"]
 [ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="4_oxlur"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7xxli"]

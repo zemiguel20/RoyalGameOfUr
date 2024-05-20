@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjv3ocjvay3hx"]
 
-[ext_resource type="Script" path="res://scripts/game/board/spot.gd" id="1_76bsc"]
-[ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="2_mfjwg"]
+[ext_resource type="Script" path="res://scripts/game/board/spot.gd" id="1_mlgru"]
+[ext_resource type="Script" path="res://scripts/game/highlighting/material_highlighter.gd" id="2_55vti"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_tbfc8"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q5ogc"]
@@ -22,7 +22,7 @@ transparency = 1
 albedo_color = Color(1, 1, 1, 0)
 
 [node name="Spot" type="Node3D"]
-script = ExtResource("1_76bsc")
+script = ExtResource("1_mlgru")
 
 [node name="SelectionHitbox" type="Area3D" parent="."]
 
@@ -30,7 +30,7 @@ script = ExtResource("1_76bsc")
 shape = SubResource("ConcavePolygonShape3D_q5ogc")
 
 [node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("meshes_to_highlight")]
-script = ExtResource("2_mfjwg")
+script = ExtResource("2_55vti")
 highlight_material = SubResource("ShaderMaterial_kdq40")
 meshes_to_highlight = [NodePath("../HighlightMesh")]
 

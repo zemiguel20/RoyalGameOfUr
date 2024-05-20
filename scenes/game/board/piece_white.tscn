@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://dk03upbyn04nu"]
 
-[ext_resource type="Script" path="res://scripts/game/board/piece.gd" id="1_2uoel"]
-[ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="2_u3emi"]
-[ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="3_8dhi7"]
-[ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="4_2ay1d"]
+[ext_resource type="Script" path="res://scripts/game/board/piece.gd" id="1_wfvf6"]
+[ext_resource type="Script" path="res://scripts/game/highlighting/material_highlighter.gd" id="2_6a8el"]
+[ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="3_vbuws"]
+[ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="4_hs56r"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lftn1"]
 height = 0.2
@@ -13,7 +13,7 @@ albedo_color = Color(0.778335, 0.647139, 0.573442, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rwr0o"]
 render_priority = 0
-shader = ExtResource("3_8dhi7")
+shader = ExtResource("3_vbuws")
 shader_parameter/border_width = 0.1
 shader_parameter/color = Color(1, 1, 1, 1)
 
@@ -21,12 +21,12 @@ shader_parameter/color = Color(1, 1, 1, 1)
 resource_local_to_scene = true
 render_priority = 10
 next_pass = SubResource("ShaderMaterial_rwr0o")
-shader = ExtResource("4_2ay1d")
+shader = ExtResource("4_hs56r")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/alpha = 0.25
 
 [node name="WhitePiece" type="Node3D"]
-script = ExtResource("1_2uoel")
+script = ExtResource("1_wfvf6")
 
 [node name="Model" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
@@ -34,6 +34,6 @@ mesh = SubResource("CylinderMesh_lftn1")
 surface_material_override/0 = SubResource("StandardMaterial3D_tlg37")
 
 [node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("meshes_to_highlight")]
-script = ExtResource("2_u3emi")
+script = ExtResource("2_6a8el")
 highlight_material = SubResource("ShaderMaterial_mchf5")
 meshes_to_highlight = [NodePath("../Model")]
