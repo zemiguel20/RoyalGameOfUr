@@ -76,12 +76,6 @@ func _create_path_highlighter(move: Move) -> ScrollingTexturePath3D:
 	
 	var path = path_highlighter_scene.instantiate()
 	
-	# Scale path highlighter to piece scale TODO: adjust size in prefab itself
-	var scale = move.from.global_basis.get_scale()
-	path.sprite_scale = path.sprite_scale * scale
-	path.density = path.density / scale.length()
-	path.velocity = path.velocity * scale.length()
-	
 	path.curve.clear_points()
 	
 	path.curve.add_point(move.from.global_position)
