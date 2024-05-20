@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="2_mfjwg"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_tbfc8"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7g88m"]
-size = Vector3(1, 0.1, 1)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q5ogc"]
+data = PackedVector3Array(0.015, 0, 0.015, -0.015, 0, 0.015, 0.015, 0, -0.015, -0.015, 0, 0.015, -0.015, 0, -0.015, 0.015, 0, -0.015)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdq40"]
 resource_local_to_scene = true
@@ -15,7 +15,7 @@ shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/alpha = 0.25
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0xytr"]
-size = Vector2(1, 1)
+size = Vector2(0.03, 0.03)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s762x"]
 transparency = 1
@@ -27,8 +27,7 @@ script = ExtResource("1_76bsc")
 [node name="SelectionHitbox" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0602112, 0)
-shape = SubResource("BoxShape3D_7g88m")
+shape = SubResource("ConcavePolygonShape3D_q5ogc")
 
 [node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("meshes_to_highlight")]
 script = ExtResource("2_mfjwg")

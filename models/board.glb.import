@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dmjf6wpb2arvg"
-path="res://.godot/imported/Board_low.fbx-fd6821d37c58d411e68010b0f81fcc5c.scn"
+uid="uid://dbj3goom4nkop"
+path="res://.godot/imported/board.glb-b1ef7747e4f917488a91beb14bd0ba1a.scn"
 
 [deps]
 
-source_file="res://models/Board_low.fbx"
-dest_files=["res://.godot/imported/Board_low.fbx-fd6821d37c58d411e68010b0f81fcc5c.scn"]
+source_file="res://models/board.glb"
+dest_files=["res://.godot/imported/board.glb-b1ef7747e4f917488a91beb14bd0ba1a.scn"]
 
 [params]
 
@@ -24,7 +24,7 @@ meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
-animation/import=true
+animation/import=false
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true

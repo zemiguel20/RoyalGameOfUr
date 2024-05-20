@@ -11,7 +11,7 @@ albedo_color = Color(0.242031, 0.187744, 0.133749, 1)
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_502rx")
-shader_parameter/border_width = 0.07
+shader_parameter/border_width = 0.1
 shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lm0ks"]

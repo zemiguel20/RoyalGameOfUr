@@ -14,7 +14,7 @@ albedo_color = Color(0.778335, 0.647139, 0.573442, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rwr0o"]
 render_priority = 0
 shader = ExtResource("3_8dhi7")
-shader_parameter/border_width = 0.07
+shader_parameter/border_width = 0.1
 shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mchf5"]
@@ -29,7 +29,7 @@ shader_parameter/alpha = 0.25
 script = ExtResource("1_2uoel")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 mesh = SubResource("CylinderMesh_lftn1")
 surface_material_override/0 = SubResource("StandardMaterial3D_tlg37")
 
