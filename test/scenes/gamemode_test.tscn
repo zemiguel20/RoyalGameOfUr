@@ -1,25 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://t6r5hmgp5c1u"]
+[gd_scene load_steps=10 format=3 uid="uid://t6r5hmgp5c1u"]
 
 [ext_resource type="Script" path="res://scripts/game/gamestate_controller.gd" id="1_sto2p"]
-[ext_resource type="Script" path="res://scripts/game/move_picker.gd" id="1_vqg4n"]
+[ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_interactive.gd" id="1_vqg4n"]
+[ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_ai.gd" id="2_12tr1"]
 [ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="3_3t76i"]
+[ext_resource type="Script" path="res://scripts/game/dice/dice_random.gd" id="4_gbrtq"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
 
 var started: bool = false
-signal mock_rolled(value: int)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_SPACE and not started:
 		started = true
-		$GameState.start_game()
-	
-
-func _on_game_state_roll_phase_started(_player):
-	var value = randi_range(0, 4)
-	print(\"Rolled %d\" % value)
-	mock_rolled.emit(value)
+		$GameStateController.start_game()
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmve1"]
@@ -83,17 +78,25 @@ script = SubResource("GDScript_b8xbw")
 [node name="MovePicker" type="Node" parent="."]
 script = ExtResource("1_vqg4n")
 
-[node name="GameState" type="Node" parent="." node_paths=PackedStringArray("_board")]
+[node name="AIMovePicker" type="Node" parent="."]
+script = ExtResource("2_12tr1")
+
+[node name="GameStateController" type="Node" parent="." node_paths=PackedStringArray("_board", "p1_move_picker", "p2_move_picker", "dice")]
 script = ExtResource("1_sto2p")
 _board = NodePath("../Board")
+p1_move_picker = NodePath("../MovePicker")
+p2_move_picker = NodePath("../AIMovePicker")
+dice = NodePath("../MockDice")
+
+[node name="MockDice" type="Node3D" parent="."]
+script = ExtResource("4_gbrtq")
 
 [node name="Board" parent="." instance=ExtResource("3_3t76i")]
-transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0.188376, -2.46309, 0.0962036)
+transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0, 0, 0)
 
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="Plane" type="CSGMesh3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.51382, 0)
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -103,7 +106,7 @@ mesh = SubResource("PlaneMesh_0esbx")
 transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.999945, -0.00931523, 0.00487033, 0, 0.46333, 0.886186, -0.0105116, 0.886137, -0.463304, 0.491505, 4.27477, -3.70132)
+transform = Transform3D(-0.999609, -0.0214089, 0.0179934, 0, 0.643399, 0.765531, -0.0279661, 0.765232, -0.643147, 1.25373, 7.516, -5.58262)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_pp8fu")
@@ -130,8 +133,3 @@ text = "Dice: 4"
 [node name="ExtraMessages" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Extra roll!"
-
-[connection signal="mock_rolled" from="." to="GameState" method="_on_roll_ended"]
-[connection signal="move_executed" from="MovePicker" to="GameState" method="_on_move_executed"]
-[connection signal="move_phase_started" from="GameState" to="MovePicker" method="_on_move_phase_started"]
-[connection signal="roll_phase_started" from="GameState" to="." method="_on_game_state_roll_phase_started"]
