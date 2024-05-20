@@ -1,10 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://t6r5hmgp5c1u"]
 
 [ext_resource type="Script" path="res://scripts/game/gamestate_controller.gd" id="1_sto2p"]
-[ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_interactive.gd" id="1_vqg4n"]
 [ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_ai.gd" id="2_12tr1"]
-[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="3_3t76i"]
+[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board/board.tscn" id="3_3t76i"]
 [ext_resource type="Script" path="res://scripts/game/dice/dice_random.gd" id="4_gbrtq"]
+[ext_resource type="PackedScene" uid="uid://cv3xq2670msr6" path="res://scenes/game/move_picker/move_picker_interactive.tscn" id="4_ks4b5"]
+[ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_random.gd" id="4_mige8"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
@@ -18,81 +19,26 @@ func _input(event: InputEvent) -> void:
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmve1"]
-albedo_color = Color(0.427451, 0.239216, 0.0156863, 1)
+albedo_color = Color(0.303129, 0.303129, 0.303129, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0esbx"]
 material = SubResource("StandardMaterial3D_fmve1")
 size = Vector2(100, 100)
 
-[sub_resource type="GDScript" id="GDScript_pp8fu"]
-script/source = "extends CanvasLayer
-
-
-@onready var l_current_player = $VBoxContainer/CurrentPlayer as Label
-@onready var l_current_phase = $VBoxContainer/CurrentPhase as Label
-@onready var l_dice_value = $VBoxContainer/DiceValue as Label
-@onready var l_extra_messages = $VBoxContainer/ExtraMessages as Label
-var _dice_value: int = 0
-
-
-func _ready() -> void:
-	l_current_player.text = \"Player: \"
-	l_current_phase.text = \"Phase: \"
-	l_dice_value.text = \"Dice: \"
-	l_extra_messages.text = \"\"
-
-
-func _on_gamemode_phase_changed(phase: String, current_player: int) -> void:
-	l_current_phase.text = \"Phase: %s\" % phase
-	l_current_player.text = \"Player: %d\" % (current_player + 1)
-
-
-func _on_gamemode_got_extra_roll() -> void:
-	l_extra_messages.text = \"Got extra roll!\"
-	await get_tree().create_timer(2.0).timeout
-	l_extra_messages.text = \"\"
-
-
-func _on_gamemode_rolled_zero() -> void:
-	l_extra_messages.text = \"Turn skipped\"
-	await get_tree().create_timer(2.0).timeout
-	l_extra_messages.text = \"\"
-
-
-func _on_gamemode_game_finished() -> void:
-	l_extra_messages.text = \"Game finished\"
-
-
-func _on_dice_die_stopped(value: int) -> void:
-	_dice_value += value
-	l_dice_value.text = \"Dice: %d\" % _dice_value
-
-
-func _on_dice_roll_finished(_value: int) -> void:
-	_dice_value = 0
-"
-
 [node name="GamemodeTest" type="Node"]
 script = SubResource("GDScript_b8xbw")
-
-[node name="MovePicker" type="Node" parent="."]
-script = ExtResource("1_vqg4n")
-
-[node name="AIMovePicker" type="Node" parent="."]
-script = ExtResource("2_12tr1")
 
 [node name="GameStateController" type="Node" parent="." node_paths=PackedStringArray("_board", "p1_move_picker", "p2_move_picker", "dice")]
 script = ExtResource("1_sto2p")
 _board = NodePath("../Board")
-p1_move_picker = NodePath("../MovePicker")
-p2_move_picker = NodePath("../AIMovePicker")
+p1_move_picker = NodePath("../MovePickers/InteractiveMovePicker")
+p2_move_picker = NodePath("../MovePickers/RandomMovePicker")
 dice = NodePath("../MockDice")
 
 [node name="MockDice" type="Node3D" parent="."]
 script = ExtResource("4_gbrtq")
 
 [node name="Board" parent="." instance=ExtResource("3_3t76i")]
-transform = Transform3D(0.00390953, 0, 0.999992, 0, 1, 0, -0.999992, 0, 0.00390953, 0, 0, 0)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -106,30 +52,14 @@ mesh = SubResource("PlaneMesh_0esbx")
 transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.999609, -0.0214089, 0.0179934, 0, 0.643399, 0.765531, -0.0279661, 0.765232, -0.643147, 1.25373, 7.516, -5.58262)
+transform = Transform3D(0.0497542, -0.741031, 0.669625, 0, 0.670456, 0.74195, -0.998762, -0.0369151, 0.033358, 0.30898, 0.342352, 0.0153921)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = SubResource("GDScript_pp8fu")
+[node name="MovePickers" type="Node" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="InteractiveMovePicker" parent="MovePickers" instance=ExtResource("4_ks4b5")]
 
-[node name="CurrentPlayer" type="Label" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-text = "Current player: 1"
+[node name="AIMovePicker" type="Node" parent="MovePickers"]
+script = ExtResource("2_12tr1")
 
-[node name="CurrentPhase" type="Label" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-text = "Phase: Roll"
-
-[node name="DiceValue" type="Label" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-text = "Dice: 4"
-
-[node name="ExtraMessages" type="Label" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-text = "Extra roll!"
+[node name="RandomMovePicker" type="Node" parent="MovePickers"]
+script = ExtResource("4_mige8")
