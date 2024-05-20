@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cch6w4r6da147"]
 
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/pieces/piece_white.tscn" id="1_seyrh"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/board/piece_white.tscn" id="1_seyrh"]
 [ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="2_502rx"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_onlo5"]
 

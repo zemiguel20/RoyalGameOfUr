@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjv3ocjvay3hx"]
 
-[ext_resource type="Script" path="res://scripts/game/spot.gd" id="1_76bsc"]
+[ext_resource type="Script" path="res://scripts/game/board/spot.gd" id="1_76bsc"]
 [ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="2_mfjwg"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_tbfc8"]
 

@@ -1,5 +1,4 @@
 class_name Move
-extends RefCounted
 ## Contains information relative to a specific move. Can be executed like the command pattern.
 
 

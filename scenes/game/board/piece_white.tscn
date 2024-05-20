@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dk03upbyn04nu"]
 
-[ext_resource type="Script" path="res://scripts/game/piece.gd" id="1_2uoel"]
+[ext_resource type="Script" path="res://scripts/game/board/piece.gd" id="1_2uoel"]
 [ext_resource type="Script" path="res://scripts/material_highlighter.gd" id="2_u3emi"]
 [ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="3_8dhi7"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="4_2ay1d"]

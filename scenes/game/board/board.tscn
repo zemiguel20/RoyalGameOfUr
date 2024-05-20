@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://s47hmmlcss14"]
 
-[ext_resource type="Script" path="res://scripts/game/board.gd" id="1_mfhgj"]
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/pieces/piece_white.tscn" id="2_hmauu"]
-[ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/pieces/piece_black.tscn" id="3_8cmuf"]
+[ext_resource type="Script" path="res://scripts/game/board/board.gd" id="1_mfhgj"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/board/piece_white.tscn" id="2_hmauu"]
+[ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/board/piece_black.tscn" id="3_8cmuf"]
 [ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/board/spot.tscn" id="4_tsucu"]
 [ext_resource type="PackedScene" uid="uid://bimn0tu6hs0nw" path="res://scenes/game/board/board_with_decals.tscn" id="8_h5eyh"]
 
