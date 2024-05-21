@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjv3ocjvay3hx"]
 
 [ext_resource type="Script" path="res://scripts/game/board/spot.gd" id="1_mlgru"]
-[ext_resource type="Script" path="res://scripts/game/highlighting/material_highlighter.gd" id="2_55vti"]
+[ext_resource type="Script" path="res://scripts/game/components/material_highlighter.gd" id="2_55vti"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_tbfc8"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q5ogc"]

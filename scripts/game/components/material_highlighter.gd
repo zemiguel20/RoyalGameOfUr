@@ -1,30 +1,29 @@
 @tool
-class_name MaterialHighlighterComponent
-extends Node
+class_name MaterialHighlighterComponent extends Node
 ## Applies a highlight material to a target mesh as an overlay. Can be turned on or off.
 
 
-@export var highlight_material : Material
+@export var highlight_material: Material
 
-@export var highlight_color : Color = Color.WHITE:
+@export var highlight_color: Color = Color.WHITE:
 	set(new_value):
 		highlight_color = new_value
 		_update_color()
 
-@export var meshes_to_highlight : Array[GeometryInstance3D]:
+@export var meshes_to_highlight: Array[GeometryInstance3D]:
 	set(new_instance):
 		# Reset current meshes before updating list
 		_update_highlight(false)
 		meshes_to_highlight = new_instance
 		_update_highlight()
 
-@export var active : bool = false:
+@export var active: bool = false:
 	set(new_value):
 		active = new_value
 		_update_highlight()
 
 
-func _update_highlight(turn_on : bool = active):
+func _update_highlight(turn_on: bool = active):
 	if !meshes_to_highlight:
 		return
 	
