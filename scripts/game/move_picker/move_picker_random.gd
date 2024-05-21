@@ -6,5 +6,6 @@ extends MovePicker
 ## Immediately picks a random move from [param moves].
 func start(moves : Array[Move]) -> void:
 	var move = moves.pick_random() as Move
-	await move.execute()
+	move.execute()
+	await move.execution_finished
 	move_executed.emit(move)

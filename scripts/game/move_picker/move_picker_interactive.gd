@@ -148,21 +148,20 @@ func _finalize_selection():
 	
 	_change_state(State.IDLE)
 	
-	await selected_move.execute(Piece.MoveAnim.ARC)
+	var animation = General.MoveAnim.LINE if Settings.can_move_backwards else General.MoveAnim.ARC
+	selected_move.execute(animation)
+	await selected_move.execution_finished
 	move_executed.emit(selected_move)
 
 
 func _reset_dragged_pieces():
-	# TODO: turn into function in piece - calculate stack offset
-	# TODO: ajdust origin or pieces to remove need of offset/2
 	var pieces = _pieces_to_drag.duplicate()
-	var piece_scale = pieces.front().scale.y
-	var offset = Vector3.UP * General.PIECE_OFFSET_Y * piece_scale
-	var base_pos = _selected_from_spot.global_position + offset/2
+	var offset = Vector3.UP * (pieces.front() as Piece).get_height_scaled()
 	for i in pieces.size():
 		var piece = pieces[i] as Piece
-		var target_pos = base_pos + (i * offset)
-		piece.move(target_pos, Piece.MoveAnim.LINE)
+		var target_pos = _selected_from_spot.global_position + (i * offset)
+		piece.move(target_pos, General.MoveAnim.LINE)
+	await (pieces.front() as Piece).movement_finished
 
 
 func _update_dragged_pieces(delta : float):
