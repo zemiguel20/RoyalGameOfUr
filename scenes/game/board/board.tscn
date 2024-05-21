@@ -19,7 +19,7 @@ _p2_track = [NodePath("Tiles/P2Tile1"), NodePath("Tiles/P2Tile2"), NodePath("Til
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108967, 0)
 
 [node name="Tiles" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0216668, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022, 0)
 
 [node name="P1Tile1" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0358832, 0, 0.0187571)
