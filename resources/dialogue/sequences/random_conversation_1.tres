@@ -26,4 +26,5 @@ anim_variations = Array[int]([7])
 [resource]
 script = ExtResource("1_yfia4")
 dialogue_entries = Array[ExtResource("1_f1x1r")]([SubResource("Resource_l004w"), SubResource("Resource_hyjxb"), SubResource("Resource_mrw1n"), SubResource("Resource_m5sdh")])
+is_skipable = true
 weight = 5

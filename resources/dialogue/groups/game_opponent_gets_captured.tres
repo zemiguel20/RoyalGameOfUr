@@ -12,6 +12,7 @@ anim_variations = Array[int]([2])
 [sub_resource type="Resource" id="Resource_cpsie"]
 script = ExtResource("2_gckjy")
 dialogue_entries = Array[ExtResource("1_2sxg3")]([SubResource("Resource_ibr8n")])
+is_skipable = true
 weight = 5
 
 [sub_resource type="Resource" id="Resource_su0mh"]
@@ -22,6 +23,7 @@ anim_variations = Array[int]([5])
 [sub_resource type="Resource" id="Resource_2r6f2"]
 script = ExtResource("2_gckjy")
 dialogue_entries = Array[ExtResource("1_2sxg3")]([SubResource("Resource_su0mh")])
+is_skipable = true
 weight = 5
 
 [resource]

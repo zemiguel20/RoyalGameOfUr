@@ -52,9 +52,14 @@ func play_animation(anim_name: Anim_Name, return_to_idle: bool = true):
 		
 	play_default_animation()
 
+
+func cancel_animation():
+	stop()
+	play_default_animation()
+
 	
 func play_default_animation():
-	play("clip_breathing")
+	play("clip_breathing", 0.5)
 
 
 func _wait_until_animation_end(extra_delay: float = 0):

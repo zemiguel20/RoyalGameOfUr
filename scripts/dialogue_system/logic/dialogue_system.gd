@@ -29,7 +29,15 @@ var _current_dialogue_player: DialogueGroupPlayerBase
 func _ready():
 	_player_inorder.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
 	_player_random.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
-
+	
+	
+func _input(event):
+	if event.is_action_pressed("skip_dialogue"):
+		if _interruption_sequence_player.is_busy():
+			_interruption_sequence_player.skip()
+		elif _dialogue_sequence_player.is_busy():
+			_dialogue_sequence_player.skip()
+			
 
 ## Tries to play a DialogueSequence in the correct category. Returns whether the operation was successfull.
 func play(category: Category) -> bool:
