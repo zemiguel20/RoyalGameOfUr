@@ -36,7 +36,7 @@ script = SubResource("GDScript_b8xbw")
 script = ExtResource("1_sto2p")
 _board = NodePath("../Board")
 p1_move_picker = NodePath("../MovePickers/InteractiveMovePicker")
-p2_move_picker = NodePath("../MovePickers/RandomMovePicker")
+p2_move_picker = NodePath("../MovePickers/AIMovePicker")
 dice = NodePath("../MockDice")
 
 [node name="MockDice" type="Node3D" parent="."]

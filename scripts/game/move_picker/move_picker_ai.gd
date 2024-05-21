@@ -22,8 +22,6 @@ extends MovePicker
 
 @export_group("Score modifiers")
 @export_range(0, 1) var safety_score_weight: float = 0.4
-## Base danger value for tiles that are not 100% safe, so spots that are on the path of both players.
-@export_range(0, 1) var base_spot_danger: float = 0.1
 ## Pieces that are further across the board get more priority
 @export_range(0, 1) var piece_progress_score_weight: float = 0.2
 ## Float that decides priority of occupying a central rosette.
@@ -74,8 +72,8 @@ func _evaluate_move(move: Move) -> float:
 	score += _calculate_progress_modifier(move)
 	score += _calculate_central_rosette_modifier(move)
 	return score
-	
-	
+
+
 func _calculate_base_score(move: Move):
 	if move.knocks_opo:
 		return capture_base_score
@@ -89,8 +87,7 @@ func _calculate_base_score(move: Move):
 
 #region ScoreModifiers
 func _calculate_safety_modifier(move: Move):
-	var safety_difference = move.calculate_safety_difference(base_spot_danger)
-	return safety_score_weight * safety_difference
+	return safety_score_weight * move.safety_score
 	
 	
 func _calculate_progress_modifier(move: Move):
@@ -108,7 +105,7 @@ func _calculate_central_rosette_modifier(move: Move):
 	var score = 1
 	# Extra rule: the more pieces are already past the from tile, the less efficient this strategy is.
 	if decrease_per_passed_opponent_piece:
-		var num_of_passed_pieces = move.num_pieces_past_current_spot()
+		var num_of_passed_pieces = move.num_opo_pieces_ahead
 		var num_of_total_pieces = Settings.num_pieces
 		var passed_pieces_rate: float = (num_of_passed_pieces as float / num_of_total_pieces)	# Value between 0 and 1
 		score = 1 - passed_pieces_rate	# Value between 0 and 1

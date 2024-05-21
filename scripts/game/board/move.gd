@@ -15,6 +15,8 @@ var gives_extra_turn : bool ## Whether move gives player an extra turn
 var is_from_central_safe : bool  ## Whether [member from] is a safe spot at the central/shared part of the track
 var is_to_central_safe : bool  ## Whether [member to] is a safe spot at the central/shared part of the track
 var from_track_pos : float ## Position of the [member from] spot in the track, as a value between 0 and 1.
+var num_opo_pieces_ahead: int ## Number of opponent pieces ahead of the 'from' spot.
+var safety_score: float ## Higher score means this moves pieces to a more safe spot.
 
 var _board : Board # Access to board state
 var _executed : bool # Whether move has already been executed
@@ -52,6 +54,10 @@ func _init(board : Board, player : int, from : Spot, to : Spot):
 	is_to_central_safe = to.is_safe and not _board.is_spot_exclusive(to)
 	
 	from_track_pos = float(track.find(from) + 1) / float(track.size())
+	
+	num_opo_pieces_ahead = _get_num_opponent_pieces_ahead()
+	
+	safety_score = _calculate_capture_chance(from) - _calculate_capture_chance(to)
 
 
 ## Updated the board state accordingly, and optionally can play piece movement animations.
@@ -109,30 +115,24 @@ func execute(animation := General.MoveAnim.NONE) -> void:
 	execution_finished.emit()
 
 
-func num_pieces_past_current_spot():
-	var spot_index = _board.get_track(player).find(from)
+func _get_num_opponent_pieces_ahead() -> int:
+	var from_index = _board.get_track(player).find(from)
 	
-	var num_passed_pieces = 0
+	var num_pieces_ahead = 0
 	var opponent = General.get_opponent(player)
 	for occupied_spot in _board.get_occupied_track_spots(opponent, true):
 		var index = _board.get_track(opponent).find(occupied_spot)
-		if index > spot_index:
-			num_passed_pieces += _board.get_spot_pieces(occupied_spot).size()
+		if index > from_index:
+			num_pieces_ahead += _board.get_spot_pieces(occupied_spot).size()
 	
-	return num_passed_pieces
+	return num_pieces_ahead
 
 
-func calculate_safety_difference(base_danger_score: float):
-	var old_spot_danger = _calculate_spot_danger(from, base_danger_score)
-	var new_spot_danger = _calculate_spot_danger(to, base_danger_score)
-	var spot_safety_difference = old_spot_danger - new_spot_danger 	# Value between -1 and 1
-	return spot_safety_difference
-
-
-# Helper function for calculate_safety_difference()
-func _calculate_spot_danger(spot: Spot, base_danger_score: float):
+# 0 -> safe spot, 1 -> can be captured with any roll
+# WARNING: MIGHT NEED CLEAR UP, code is a bit confusing. Is capture change sum guaranteed max of 1?
+func _calculate_capture_chance(spot: Spot) -> float:
 	# Give score of 0 when landing_spot is 100% safe. 
-	if spot.is_safe or _board.is_spot_exclusive(spot) or gives_extra_turn and spot == to:
+	if spot.is_safe or _board.is_spot_exclusive(spot):
 		return 0
 	
 	var total_capture_chance = 0.0
@@ -147,4 +147,4 @@ func _calculate_spot_danger(spot: Spot, base_danger_score: float):
 			var capture_chance = DiceProbabilities.get_probability_of_value(i, Settings.num_dice)
 			total_capture_chance += capture_chance
 	
-	return total_capture_chance + base_danger_score
+	return total_capture_chance
