@@ -28,5 +28,6 @@ give_extra_turn = true
 highlight_material = SubResource("ShaderMaterial_f8qey")
 
 [node name="TileTexture" type="Sprite3D" parent="." index="3"]
+visible = false
 axis = 1
 texture = SubResource("GradientTexture2D_5emcu")

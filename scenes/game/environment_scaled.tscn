@@ -1,8 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://cgkfm7n305bgj"]
+[gd_scene load_steps=20 format=3 uid="uid://cgkfm7n305bgj"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_3nkie"]
 [ext_resource type="PackedScene" uid="uid://mowvg73f88gq" path="res://models/pots/bowl_1.fbx" id="2_7xpms"]
-[ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard.fbx" id="2_csl6i"]
+[ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard_standing.fbx" id="2_csl6i"]
 [ext_resource type="PackedScene" uid="uid://bswebxbp0pejp" path="res://models/pots/bowl_2.fbx" id="3_711w1"]
 [ext_resource type="PackedScene" uid="uid://kk63tl1apuvv" path="res://models/pots/bowl_3.fbx" id="4_pr8mw"]
 [ext_resource type="PackedScene" uid="uid://bf7ysxl7dppt7" path="res://models/pots/challice.fbx" id="5_mttwx"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bqfil2oy1nbk8" path="res://models/pots/pot_8.fbx" id="13_ujr4w"]
 [ext_resource type="PackedScene" uid="uid://dqygwfqru3fc3" path="res://models/pots/pot_9.fbx" id="14_o53er"]
 [ext_resource type="PackedScene" uid="uid://cghfm2xmx5feh" path="res://scenes/environment_base.tscn" id="16_rid1p"]
+[ext_resource type="PackedScene" uid="uid://dyy5yhl1vyj6f" path="res://models/RockSeat.tscn" id="17_ts4fo"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -55,7 +56,6 @@ visible = false
 [node name="Camera3D" parent="Environment" index="3"]
 transform = Transform3D(0.231883, -0.108052, 0.0863428, 0.00651993, 0.176902, 0.203871, -0.138159, -0.173004, 0.154537, 0.872157, 0.113499, 1.44488)
 visible = false
-current = false
 
 [node name="Table" parent="Environment" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27508, -0.0732401, 0.195189)
@@ -179,5 +179,8 @@ visible = false
 
 [node name="EnvironmentBase" parent="." instance=ExtResource("16_rid1p")]
 transform = Transform3D(4.15175, 0, 0, 0, 4.15175, 0, 0, 0, 4.15175, -1.27249, 1.03828, 1.35919)
+
+[node name="RockSeat" parent="." instance=ExtResource("17_ts4fo")]
+transform = Transform3D(0.773862, 0, 0.633354, 0, 1, 0, -0.633354, 0, 0.773862, 4.25453, -0.598883, 5.77846)
 
 [editable path="Environment"]

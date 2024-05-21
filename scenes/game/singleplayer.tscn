@@ -1,20 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=15 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
-[ext_resource type="Material" uid="uid://ypg8ltq81dur" path="res://materials/board.tres" id="3_8pbq5"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
 [ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="5_8sxhn"]
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
+[ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
-[ext_resource type="PackedScene" uid="uid://dmjf6wpb2arvg" path="res://models/Board_low.fbx" id="8_48rpu"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
-[ext_resource type="PackedScene" uid="uid://clwe1fjp2o660" path="res://models/opponent_textured.tscn" id="9_yxcrq"]
-[ext_resource type="Texture2D" uid="uid://c5677q0o5hg14" path="res://textures/decals/UrSymbol_3.png" id="10_tym6r"]
-[ext_resource type="Texture2D" uid="uid://dv367edg6pvis" path="res://textures/decals/UrSymbol_4.png" id="11_pr6k0"]
-[ext_resource type="Texture2D" uid="uid://cnr6ujj85gwtk" path="res://textures/decals/UrSymbol_5.png" id="12_3kerj"]
-[ext_resource type="Texture2D" uid="uid://bffuk7kxx2mcp" path="res://textures/decals/UrSymbol_1.png" id="13_pw474"]
-[ext_resource type="Texture2D" uid="uid://b7g2aud284htl" path="res://textures/decals/UrSymbol_6.png" id="14_2667m"]
-[ext_resource type="Texture2D" uid="uid://baj3gx7vr4gom" path="res://textures/decals/UrSymbol_2.png" id="15_edyxj"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -58,41 +50,72 @@ script = SubResource("GDScript_fbn4f")
 [node name="Boardgame" parent="." instance=ExtResource("3_xprge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="GameStateController" parent="Boardgame" index="0"]
-_board = null
-
 [node name="Board" parent="Boardgame" index="1"]
 transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 4.4739, -0.207527, 6.36155)
-visible = false
-
-[node name="BaseShape" parent="Boardgame/Board/Model/CSGCombiner3D" index="0"]
-material_override = ExtResource("3_8pbq5")
 
 [node name="Dice" parent="Boardgame" index="2"]
 transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 4.44211, -0.213149, 6.346)
 
+[node name="DiceArea_P1" parent="Boardgame/Dice" index="0"]
+transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, 0, 0.1, 0.211021)
+
+[node name="DiceBorders_P1" parent="Boardgame/Dice/DiceArea_P1" index="2"]
+transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, 0, -2, 0)
+
 [node name="Floor_Collider_P1" parent="Boardgame/Dice/DiceArea_P1" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.435281, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.988, 0)
 
 [node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/Floor_Collider_P1" index="0"]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 1.52588e-05, -3.55324, -0.459717)
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
+
+[node name="DiceArea_P2" parent="Boardgame/Dice" index="1"]
+transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, -4.76837e-07, -0.0308831, -0.131)
+
+[node name="ThrowingSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="0"]
+transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967, 5.653, 0.71)
+visible = true
+
+[node name="SpawnSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="1"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.253, 2.153, -0.617)
+
+[node name="DiceBorders_P2" parent="Boardgame/Dice/DiceArea_P2" index="2"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 3.153, 0)
+
+[node name="Wall2" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="1"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 7.62939e-06, 2.979, -3.10864)
+
+[node name="Wall3" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="2"]
+transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, -5.24678, 2.979, 0)
+
+[node name="ClickHitbox_P2" parent="Boardgame/Dice/DiceArea_P2" index="3"]
+transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 5.668, 0)
 
 [node name="Floor_Collider_P2" parent="Boardgame/Dice/DiceArea_P2" index="5"]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, -0.0962644, 0)
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 1.165, 0)
 
 [node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/Floor_Collider_P2" index="0"]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, -4.02627, -0.459686)
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
 
-[node name="AIPlayerHard" parent="." instance=ExtResource("9_m0jtg")]
-_dice = null
-_move_picker = null
+[node name="AIMovePicker" parent="Boardgame" index="3"]
+_best_move_weight = 15
+_second_move_weight = 4
+_random_move_weight = 1
+
+[node name="MovePicker" parent="Boardgame" index="4"]
+board_surface_y = -0.187
+
+[node name="AIRoller" parent="Boardgame" node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("9_m0jtg")]
+_dice = NodePath("../Dice")
+_move_picker = NodePath("../MovePicker")
 
 [node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
-visible = false
 max_degrees_down = 50.0
-max_degrees_left = 32.0
+max_degrees_left = 45.0
+max_degrees_right = 45.0
 _board_look_rotation = Vector3(-35, 32, 0)
+_trans_type = 1
+_ease_type = 1
 
 [node name="Prototype_UI" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -147,158 +170,22 @@ theme = SubResource("Theme_q1r3c")
 text = "Quit"
 script = ExtResource("6_3dit1")
 
-[node name="Opponent_Model" parent="." instance=ExtResource("9_yxcrq")]
-transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.08525, -0.655595, 5.72598)
+[node name="Opponent_Guard_Animated" parent="." instance=ExtResource("7_tegfk")]
+transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
 
-[node name="Board" parent="." instance=ExtResource("8_48rpu")]
-transform = Transform3D(2.33073, 0, 1.43287, 0, 2.73595, 0, -1.43287, 0, 2.33073, 4.46534, -0.18877, 6.35001)
-
-[node name="Decal" type="Decal" parent="Board"]
-transform = Transform3D(0.0045734, 0, -1.39698e-09, 0, 0.0045734, 0, 1.39698e-09, 0, 0.0045734, -0.00678992, -0.00410693, 0.00122142)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("10_tym6r")
-modulate = Color(1, 1, 1, 0.87451)
-upper_fade = 0.000168266
-
-[node name="Decal6" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.62981e-09, 0, 0.00465718, 0, 1.62981e-09, 0, 0.00465718, -0.0186083, -0.00410693, 0.00122142)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("11_pr6k0")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal8" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0186685, -0.00410693, -0.0104942)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("12_3kerj")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal9" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0298408, -0.00410693, 0.00107241)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("12_3kerj")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal10" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0184408, -0.00410693, 0.0126262)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("12_3kerj")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal11" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.00532317, -0.00410693, 0.0017848)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("12_3kerj")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal12" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0408882, -0.00410693, 0.000553131)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("12_3kerj")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal13" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0421957, -0.00410693, 0.00139832)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("13_pw474")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal14" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0298072, -0.00410693, 0.0128129)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("14_2667m")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal15" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.0298073, -0.00410693, -0.0101683)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("14_2667m")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal16" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.00678134, -0.00410693, -0.0101683)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("14_2667m")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal17" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, -0.00678122, -0.00410693, 0.0128918)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("14_2667m")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal18" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0292022, -0.00410693, 0.000871181)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("14_2667m")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal19" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0406921, -0.00410693, 0.012212)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("15_edyxj")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal20" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0406921, -0.00410693, -0.011718)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("15_edyxj")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal7" type="Decal" parent="Board"]
-transform = Transform3D(0.00465718, 0, -1.86265e-09, 0, 0.00465718, 0, 1.86265e-09, 0, 0.00465718, 0.0172831, -0.00410693, 0.00189877)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("11_pr6k0")
-modulate = Color(1, 1, 1, 0.619608)
-upper_fade = 0.000168266
-
-[node name="Decal4" type="Decal" parent="Board"]
-transform = Transform3D(-4.90146e-05, 0, -0.00468799, 0, 0.00468824, 0, 0.00468799, 0, -4.90146e-05, -0.0419871, -0.00410693, 0.0127797)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("10_tym6r")
-modulate = Color(1, 1, 1, 0.87451)
-upper_fade = 0.000168266
-
-[node name="Decal5" type="Decal" parent="Board"]
-transform = Transform3D(1.62981e-09, 0, 0.00468824, 0, 0.00468824, 0, -0.00468824, 0, 1.62981e-09, -0.0419869, -0.00410693, -0.01018)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("10_tym6r")
-modulate = Color(1, 1, 1, 0.87451)
-upper_fade = 0.000168266
-
-[node name="Decal2" type="Decal" parent="Board"]
-transform = Transform3D(0.00124379, 0, 0.00464187, 0, 0.00480561, 0, -0.00464187, 0, 0.00124379, 0.029413, -0.00410694, 0.0120728)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("10_tym6r")
-modulate = Color(1, 1, 1, 0.87451)
-upper_fade = 0.000168266
-
-[node name="Decal3" type="Decal" parent="Board"]
-transform = Transform3D(-0.00480562, 0, 2.56114e-09, 0, 0.00480561, 0, -2.56114e-09, 0, -0.00480562, 0.0294131, -0.00410694, -0.0110962)
-size = Vector3(2, 1, 2)
-texture_albedo = ExtResource("10_tym6r")
-modulate = Color(1, 1, 1, 0.87451)
-upper_fade = 0.000168266
-
+[connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
+[connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
+[connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
+[connection signal="_on_player_piece_captured" from="Boardgame/AIMovePicker" to="Opponent_Guard_Animated" method="play_dialog_player_piece_captured"]
+[connection signal="_on_suboptimal_move" from="Boardgame/AIMovePicker" to="Opponent_Guard_Animated" method="play_dialog_mistake"]
+[connection signal="_on_opponent_piece_captured" from="Boardgame/MovePicker" to="Opponent_Guard_Animated" method="play_dialog_opponent_piece_captured"]
+[connection signal="on_intro_ended" from="Custom_Camera" to="Boardgame/GameStateController" method="start_game"]
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
-[connection signal="play_pressed" from="Prototype_UI" to="Custom_Camera" method="_on_play_pressed"]
-[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Boardgame/GameStateController" method="start_game"]
+[connection signal="play_pressed" from="Prototype_UI" to="Opponent_Guard_Animated" method="_on_play_pressed"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_play_pressed"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Quit" to="Prototype_UI/Main Menu/Quit" method="_on_pressed"]
+[connection signal="on_opponent_ready" from="Opponent_Guard_Animated" to="Custom_Camera" method="_on_play_pressed"]
 
 [editable path="Boardgame"]
 [editable path="Boardgame/Board"]

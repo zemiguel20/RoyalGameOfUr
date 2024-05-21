@@ -52,7 +52,7 @@ _data = {
 }
 
 [node name="Board" type="Node3D"]
-transform = Transform3D(2.33073, 0, 1.43287, 0, 2.73595, 0, -1.43287, 0, 2.33073, 4.46534, -0.18877, 6.35001)
+transform = Transform3D(2.33073, 0, 1.43287, 0, 2.73595, 0, -1.43287, 0, 2.33073, 0, 0, 0)
 
 [node name="RootNode" type="Node3D" parent="."]
 
