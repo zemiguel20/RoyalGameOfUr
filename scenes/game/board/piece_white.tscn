@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dk03upbyn04nu"]
+[gd_scene load_steps=10 format=3 uid="uid://dk03upbyn04nu"]
 
 [ext_resource type="Script" path="res://scripts/game/board/piece.gd" id="1_wfvf6"]
 [ext_resource type="Script" path="res://scripts/game/components/material_highlighter.gd" id="2_vok24"]
 [ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="3_vbuws"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="4_hs56r"]
+[ext_resource type="Script" path="res://scripts/game/components/movable.gd" id="5_1e4gm"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lftn1"]
 height = 0.2
@@ -29,11 +30,19 @@ shader_parameter/alpha = 0.25
 script = ExtResource("1_wfvf6")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.00099886, 0)
 mesh = SubResource("CylinderMesh_lftn1")
 surface_material_override/0 = SubResource("StandardMaterial3D_tlg37")
 
 [node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("meshes_to_highlight")]
-script = ExtResource("2_6a8el")
+script = ExtResource("2_vok24")
 highlight_material = SubResource("ShaderMaterial_mchf5")
 meshes_to_highlight = [NodePath("../Model")]
+
+[node name="Movable" type="Node" parent="." node_paths=PackedStringArray("root_parent")]
+script = ExtResource("5_1e4gm")
+root_parent = NodePath("..")
+arc_height = 0.1
+duration = 0.4
+
+[connection signal="movement_finished" from="Movable" to="." method="_on_movable_finished"]
