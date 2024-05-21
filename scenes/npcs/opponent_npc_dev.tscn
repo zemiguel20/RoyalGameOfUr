@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0hgcfga28omq"]
 
 [ext_resource type="Script" path="res://scripts/opponent_npc.gd" id="1_e1ywa"]
-[ext_resource type="PackedScene" uid="uid://bdfdbhwdv6lnb" path="res://scenes/npcs/dialogue_group_player.tscn" id="5_q4b08"]
+[ext_resource type="PackedScene" uid="uid://bdfdbhwdv6lnb" path="res://scenes/npcs/dialogue_sequence_player.tscn" id="5_q4b08"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxsye"]
 albedo_color = Color(0.741176, 0.772549, 0.8, 1)

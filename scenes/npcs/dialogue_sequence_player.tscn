@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_sequence_player.gd" id="1_yxu6e"]
 
-[node name="DialogueGroupPlayer" type="Node"]
+[node name="DialogueSequencePlayer" type="Node"]
 script = ExtResource("1_yxu6e")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
