@@ -1,6 +1,7 @@
 class_name Move
 ## Contains information relative to a specific move. Can be executed like the command pattern.
 
+signal execution_finished
 
 var player : int ## Player making the move.
 var from : Spot ## Spot where the move is coming from.
@@ -53,7 +54,7 @@ func _init(board : Board, player : int, from : Spot, to : Spot):
 
 
 ## Updated the board state accordingly, and optionally can play piece movement animations.
-func execute(animation : Piece.MoveAnim = Piece.MoveAnim.NONE) -> void:
+func execute(animation := General.MoveAnim.NONE) -> void:
 	if _executed:
 		return
 	
@@ -86,23 +87,24 @@ func execute(animation : Piece.MoveAnim = Piece.MoveAnim.NONE) -> void:
 		_board._get_player_data(General.get_opponent(player)).piece_spot_dict[piece] = spot
 	
 	# Animations move pieces
-	var piece_scale = (pieces_in_from.front() as Piece).global_basis.get_scale().y
-	var offset = Vector3.UP * General.PIECE_OFFSET_Y * piece_scale
-	var base_pos = to.global_position + offset/2 + (p_to_copy.size() * offset)
+	var offset = Vector3.UP * (pieces_in_from.front() as Piece).get_height_scaled()
+	var base_pos = to.global_position + (p_to_copy.size() * offset)
 	for i in p_from_copy.size():
 		var piece = p_from_copy[i] as Piece
 		var target_pos = base_pos + (i * offset)
 		piece.move(target_pos, animation)
 	
+	await (p_from_copy.back() as Piece).movement_finished
+	
 	# Animation knock out
 	for i in knocked_out_pieces.size():
 		var piece = knocked_out_pieces[i] as Piece
 		var spot = free_spots[i] as Spot
-		piece.move(spot.global_position + offset, Piece.MoveAnim.ARC)
+		piece.move(spot.global_position, General.MoveAnim.ARC)
 	
-	# Await animation finished
-	if animation != Piece.MoveAnim.NONE:
-		await _board.get_tree().create_timer(Piece.MOVE_DURATION).timeout
+	await (knocked_out_pieces.back() as Piece).movement_finished
+	
+	execution_finished.emit()
 
 
 func num_pieces_past_current_spot():
