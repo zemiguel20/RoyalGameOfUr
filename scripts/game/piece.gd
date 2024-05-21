@@ -1,45 +1,44 @@
 class_name Piece
 extends Node3D
-## Physical piece in the game.
-## Can be physically moved with a given animation. Also has highlight effects.
+## Physical piece in the game. Can be moved with a given animation. Also has highlight effects.
 
 
-enum MoveAnim {ARC, LINE, NONE}
+## Types of animation for the movement. Animation duration defined in [constant MOVE_DURATION].
+enum MoveAnim {
+	ARC, ## Moves from point A to B in a arc. Uses [constant MOVE_ARC_HEIGHT].
+	LINE, ## Moves linearly from point A to B.
+	NONE, ## No animation. Movement is instantaneous.
+}
 
-const MOVE_ARC_HEIGHT: float = 1.0
-const MOVE_DURATION: float = 0.4
+## Height offset (in meters) for the ARC animation, 
+## relative to the highest point between 'to' and 'from'.
+const MOVE_ARC_HEIGHT : float = 1.0
+## Movement duration in seconds.
+const MOVE_DURATION : float = 0.4
 
-@export var player: General.Player
-
-var _highlighter
-
-
-func _ready():
-	_highlighter = get_node("Highlighter")
+@onready var _highlighter := $Highlighter as MaterialHighlighterComponent
 
 
-func highlight():
-	if _highlighter == null:
-		push_warning("No highlighter found")
+## Updates the highlight state. [param active] sets the active state of the effect, and
+## [param color] sets the color of the effect.
+func set_highlight(active : bool, color := Color.WHITE) -> void:
+	if not _highlighter:
 		return
-	_highlighter.highlight()
+	
+	_highlighter.highlight_color = color
+	_highlighter.active = active
 
 
-func dehighlight():
-	if _highlighter == null:
-		push_warning("No highlighter found")
-		return
-	_highlighter.dehighlight()
-
-
-func move(to: Vector3, anim: MoveAnim):
+## Moves the piece to the target point [param dest], in global coordinates.
+## An animation [param anim] can be specified.
+func move(dest : Vector3, anim : MoveAnim = MoveAnim.NONE) -> void:
 	match anim:
 		MoveAnim.ARC:
-			await _move_arc(to)
+			await _move_arc(dest)
 		MoveAnim.LINE:
-			await _move_line(to)
+			await _move_line(dest)
 		_:
-			global_position = to
+			global_position = dest
 
 
 func _move_arc(target_pos: Vector3):

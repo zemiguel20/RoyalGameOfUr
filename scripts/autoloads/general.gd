@@ -2,11 +2,13 @@ extends Node
 ## Contains constants and general utility functions
 
 
-enum Player {ONE = 0, TWO = 1}
+enum Player {ONE = 0, TWO = 1} ## Player IDs
+
+const PIECE_OFFSET_Y = 0.15 ## Offset for stacking. Easier than calculating offset using AABB.
 
 
-func get_opposite_player(_player: General.Player):
-	return General.Player.ONE if _player == General.Player.TWO else General.Player.TWO
+func get_opponent(player : Player) -> Player:
+	return Player.ONE if player == Player.TWO else Player.TWO
 
 
 ## To keep the inspectors designer friendly, I have export variables in degrees, which I then convert to radians.

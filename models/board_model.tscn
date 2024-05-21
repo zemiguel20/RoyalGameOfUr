@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cruarr73cttrx"]
+
+[ext_resource type="PackedScene" uid="uid://dmjf6wpb2arvg" path="res://models/Board_low.fbx" id="1_le7rs"]
+
+[node name="Board Model" instance=ExtResource("1_le7rs")]
