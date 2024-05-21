@@ -70,7 +70,7 @@ func _input(event):
 	
 	if event is InputEventMouseButton:
 		event = event as InputEventMouseButton
-		if event.button_index == MOUSE_BUTTON_MIDDLE:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.is_pressed():
 				_is_looking_around = true
 				if tween_rot and tween_rot.is_running():
