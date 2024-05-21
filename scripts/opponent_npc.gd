@@ -75,7 +75,7 @@ func _play_interruption(category):
 
 func _on_play_pressed():
 	visible = true
-	await _animation_player.play_animation(OpponentAnimationPlayer.Anim_Name.WALKIN, true)
+	await _animation_player.play_walkin()
 	## Start first dialogue after a delay.
 	await get_tree().create_timer(starting_dialogue_delay).timeout
 	await _play_story_dialogue()
