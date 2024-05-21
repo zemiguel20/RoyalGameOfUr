@@ -26,7 +26,7 @@ func move(target_pos: Vector3, anim := General.MoveAnim.NONE) -> void:
 			move_line(target_pos)
 		_:
 			root_parent.global_position = target_pos
-			movement_finished.emit()
+			(func(): movement_finished.emit()).call_deferred()
 
 
 func move_arc(target_pos: Vector3):

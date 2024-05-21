@@ -32,4 +32,4 @@ func get_height_scaled() -> float:
 
 
 func _on_movable_finished():
-	(func(): movement_finished.emit()).call_deferred()
+	movement_finished.emit()
