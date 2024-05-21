@@ -8,6 +8,7 @@ extends MovePicker
 ## Additionaly, it controls the highlighting effects during selection, and also makes the selected
 ## pieces follow the cursor.
 
+signal _on_opponent_piece_captured
 
 enum State {IDLE, FROM_SELECT, TO_SELECT}
 
@@ -19,6 +20,8 @@ var _selected_from_spot : Spot = null
 var _selected_to_spot : Spot = null
 var _pieces_to_drag : Array[Piece] = [] # Easier access to pieces while dragging them
 
+# HACK
+var _allow_dragging = false
 
 func start(moves : Array[Move]):
 	_moves = moves.duplicate()
@@ -31,6 +34,11 @@ func _process(delta):
 
 
 func _input(event):
+	if event is InputEventKey and event.keycode == KEY_1:
+		_allow_dragging = true
+	if event is InputEventKey and event.keycode == KEY_2:
+		_allow_dragging = false
+	
 	if _state == State.TO_SELECT and event.is_action_pressed("game_spot_selection_cancel"):
 		_reset_dragged_pieces()
 		_change_state(State.FROM_SELECT)
@@ -136,7 +144,7 @@ func _on_from_selected(spot: Spot):
 	
 	_selected_from_spot = spot
 	
-	if not Settings.can_move_backwards:
+	if not Settings.can_move_backwards and not _allow_dragging:
 		_finalize_selection()
 	else:
 		_change_state(State.TO_SELECT)
@@ -166,6 +174,9 @@ func _finalize_selection():
 	var selected_move = _filter_moves(_selected_from_spot, _selected_to_spot).front() as Move
 	
 	_change_state(State.IDLE)
+	
+	if selected_move.knocks_opo:
+		_on_opponent_piece_captured.emit()
 	
 	await selected_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(selected_move)
@@ -216,10 +227,12 @@ func _update_dragged_pieces(delta : float):
 	
 	if result != null:
 		for piece in _pieces_to_drag:
-			var x = clamp(result.x, -1.5, 2.5)
-			var z = clamp(result.z, -5, 5)
+			## HACK
+			var x = clamp(result.x, piece.global_position.x - 1.5 * 0.05, piece.global_position.x + 2.5 * 0.05)
+			var z = clamp(result.z, piece.global_position.z -5 * 0.05, piece.global_position.z + 5 * 0.05)
 			
+			## HACK Get the scaling right			
 			var index = _pieces_to_drag.find(piece)
-			var y = 1 + General.PIECE_OFFSET_Y * piece.scale.y * index
+			var y = board_surface_y + 1 * piece.global_basis.get_scale().y + General.PIECE_OFFSET_Y * piece.global_basis.get_scale().y * index
 			var target_pos = Vector3(x,y,z)
 			piece.global_position = lerp(piece.global_position, target_pos, 8 * delta)
