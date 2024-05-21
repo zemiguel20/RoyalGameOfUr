@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b48u4dl4lewgu"]
+[gd_scene load_steps=7 format=3 uid="uid://b48u4dl4lewgu"]
 
 [ext_resource type="PackedScene" uid="uid://chhc7sqf8vx7e" path="res://models/EnvironmentBlockout1.fbx" id="1_keigh"]
 [ext_resource type="Material" uid="uid://bxhsn63hsvyt8" path="res://materials/FloorTiles.tres" id="2_80kxr"]
 [ext_resource type="Material" uid="uid://be7n0a655i4xg" path="res://materials/WallBricks.tres" id="3_v6h7p"]
 [ext_resource type="Material" uid="uid://bdxhaotnxq6de" path="res://materials/Sandstone.tres" id="4_n0xeq"]
 [ext_resource type="PackedScene" uid="uid://bjr1q6y03u8lb" path="res://models/main_walls_Low.fbx" id="5_w6xu6"]
+[ext_resource type="ArrayMesh" uid="uid://bdqsj626txjgs" path="res://models/NewMainWalls_low.obj" id="6_4tqsj"]
 
 [node name="Root Scene" instance=ExtResource("1_keigh")]
 
@@ -793,3 +794,7 @@ transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 2.46699, -0
 
 [node name="Root Scene" parent="." index="2" instance=ExtResource("5_w6xu6")]
 transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.761333, -0.423434, 0.386459)
+
+[node name="NewMainWallsLow" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(0.0897738, 0, 0, 0, 0.0897738, 0, 0, 0, 0.0897738, 0.782075, -0.431345, 0.390692)
+mesh = ExtResource("6_4tqsj")

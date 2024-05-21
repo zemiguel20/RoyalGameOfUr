@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://ptaftaqwr37d"]
+
+[ext_resource type="Texture2D" uid="uid://cfg71sp7mp7b2" path="res://textures/main_walls/MainWall2_Base_color.png" id="1_fui0i"]
+[ext_resource type="Texture2D" uid="uid://decsucevojstx" path="res://textures/main_walls/MainWall2_Mixed_AO.png" id="2_b60oo"]
+[ext_resource type="Texture2D" uid="uid://3eg8nxxgvq30" path="res://textures/main_walls/MainWall2_Normal_OpenGL.png" id="3_g78yx"]
+[ext_resource type="Texture2D" uid="uid://dxrqsm28qpovy" path="res://textures/main_walls/MainWall2_Roughness.png" id="4_y0u2v"]
+
+[resource]
+cull_mode = 2
+albedo_color = Color(0.8, 0.792157, 0.811765, 1)
+albedo_texture = ExtResource("1_fui0i")
+roughness_texture = ExtResource("4_y0u2v")
+normal_enabled = true
+normal_texture = ExtResource("3_g78yx")
+ao_enabled = true
+ao_texture = ExtResource("2_b60oo")

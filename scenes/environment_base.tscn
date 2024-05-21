@@ -1,9 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://cghfm2xmx5feh"]
+[gd_scene load_steps=45 format=3 uid="uid://cghfm2xmx5feh"]
 
 [ext_resource type="Material" uid="uid://bxhsn63hsvyt8" path="res://materials/FloorTiles.tres" id="1_0uabv"]
 [ext_resource type="PackedScene" uid="uid://bjr1q6y03u8lb" path="res://models/main_walls_Low.fbx" id="2_y5tcu"]
 [ext_resource type="Material" uid="uid://bdxhaotnxq6de" path="res://materials/Sandstone.tres" id="3_axtiq"]
 [ext_resource type="Material" uid="uid://be7n0a655i4xg" path="res://materials/WallBricks.tres" id="4_fbu7u"]
+[ext_resource type="PackedScene" uid="uid://dctgnmctha8ei" path="res://models/new_wall_1.fbx" id="5_rjren"]
+[ext_resource type="PackedScene" uid="uid://bcd3pxj0ne4qu" path="res://models/new_wall_2.fbx" id="6_lhkew"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jydsc"]
 resource_name = "lambert1"
@@ -705,9 +707,11 @@ skeleton = NodePath("")
 
 [node name="Root Scene" parent="." instance=ExtResource("2_y5tcu")]
 transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.761333, -0.423434, 0.386459)
+visible = false
 
 [node name="Root Scene2" parent="." instance=ExtResource("2_y5tcu")]
 transform = Transform3D(-8.82187, 0, -7.71232e-07, 0, 8.82187, 0, 7.71232e-07, 0, -8.82187, 1.00555, -0.423434, 1.09635)
+visible = false
 
 [node name="pCube40" type="MeshInstance3D" parent="."]
 transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.141818, 0.343626, -1.5849)
@@ -807,3 +811,15 @@ transform = Transform3D(61.8663, 0, 209.865, 0, 267.948, 0, -209.865, 0, 61.8663
 material_override = ExtResource("4_fbu7u")
 mesh = SubResource("ArrayMesh_mvt8o")
 skeleton = NodePath("")
+
+[node name="Root Scene6" parent="." instance=ExtResource("5_rjren")]
+transform = Transform3D(8.95425, 0, 0, 0, 8.95425, 0, 0, 0, 8.95425, 0.775986, -0.446341, 0.418504)
+
+[node name="Root Scene4" parent="." instance=ExtResource("6_lhkew")]
+transform = Transform3D(8.95425, 0, 0, 0, 8.95425, 0, 0, 0, 8.95425, 0.775986, -0.446341, 0.418504)
+
+[node name="Root Scene7" parent="." instance=ExtResource("5_rjren")]
+transform = Transform3D(-8.95419, 0, 0.0310998, 0, 8.95425, 0, -0.0310998, 0, -8.95419, 1.02979, -0.446341, 1.17995)
+
+[node name="Root Scene5" parent="." instance=ExtResource("6_lhkew")]
+transform = Transform3D(-8.95419, 0, 0.0310998, 0, 8.95425, 0, -0.0310998, 0, -8.95419, 1.02979, -0.446341, 1.17995)
