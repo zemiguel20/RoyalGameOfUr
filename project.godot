@@ -40,6 +40,7 @@ game_spot_selection_cancel={
 
 [layer_names]
 
+3d_render/layer_3="Board"
 3d_physics/layer_1="Layer 1"
 3d_physics/layer_2="Spots"
 
