@@ -96,13 +96,14 @@ func execute(animation := General.MoveAnim.NONE) -> void:
 	
 	await (p_from_copy.back() as Piece).movement_finished
 	
-	# Animation knock out
-	for i in knocked_out_pieces.size():
-		var piece = knocked_out_pieces[i] as Piece
-		var spot = free_spots[i] as Spot
-		piece.move(spot.global_position, General.MoveAnim.ARC)
-	
-	await (knocked_out_pieces.back() as Piece).movement_finished
+	if not knocked_out_pieces.is_empty():
+		# Animation knock out
+		for i in knocked_out_pieces.size():
+			var piece = knocked_out_pieces[i] as Piece
+			var spot = free_spots[i] as Spot
+			piece.move(spot.global_position, General.MoveAnim.ARC)
+		
+		await (knocked_out_pieces.back() as Piece).movement_finished
 	
 	execution_finished.emit()
 
