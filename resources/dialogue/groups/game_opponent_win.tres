@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://bq1xtpwx1lvkn"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_2exyj"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_jihle"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="3_vwmxw"]
+
+[sub_resource type="Resource" id="Resource_s5wm3"]
+script = ExtResource("1_2exyj")
+caption = "Better luck next time, friend. Well played!"
+anim_variations = Array[int]([5])
+fixed_duration = 3.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_6obr2"]
+script = ExtResource("2_jihle")
+max_repetitions = 3
+dialogue_entries = Array[ExtResource("1_2exyj")]([SubResource("Resource_s5wm3")])
+weight = 5
+
+[resource]
+script = ExtResource("3_vwmxw")
+category = 7
+play_in_order = false
+has_priority = false
+initial_delay = 0.5
+dialogue_sequences = Array[ExtResource("2_jihle")]([SubResource("Resource_6obr2")])
+weight_for_empty = 0

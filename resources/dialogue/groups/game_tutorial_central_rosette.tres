@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://be8yyrja7vjak"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_7e1rc"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_b6alj"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_00tpo"]
+
+[sub_resource type="Resource" id="Resource_fjq4e"]
+script = ExtResource("1_b6alj")
+caption = "When you land on this central rosette, your piece is also protected from being knocked out."
+anim_variations = Array[int]([7])
+fixed_duration = 5.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_y3sno"]
+script = ExtResource("2_00tpo")
+max_repetitions = 1
+dialogue_entries = Array[ExtResource("1_b6alj")]([SubResource("Resource_fjq4e")])
+weight = 5
+
+[resource]
+script = ExtResource("1_7e1rc")
+category = 15
+play_in_order = false
+has_priority = false
+initial_delay = 0.5
+dialogue_sequences = Array[ExtResource("2_00tpo")]([SubResource("Resource_y3sno")])
+weight_for_empty = 0

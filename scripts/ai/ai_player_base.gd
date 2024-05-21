@@ -10,6 +10,8 @@ signal move_executed(move: Move)
 @export var _move_picker: MovePicker
 
 @export_category("Rolling Behaviour")
+var _are_actions_enabled: bool = true
+var _waiting_for_dice_roll: bool
 ## This variable is not used when dice shaking is disabled.
 ## The probability that the AI will shake the dice this turn, rather than throwing directly.
 @export_range(0, 1) var shaking_probability = 1.0
@@ -22,6 +24,8 @@ signal move_executed(move: Move)
 @export_range(0.1,3.0) var rolling_delay: float = 0.5
 
 @export_category("Moving Behaviour")
+var _waiting_for_piece_move: bool
+var _cached_moves
 ## Minimum duration the AI will take to choose a move. 
 ## We simulate thinking time so that the AI feels more humane.
 @export_range(0.1,3.0) var min_moving_duration: float = 0.3
@@ -35,20 +39,43 @@ func _evaluate_moves(_moves : Array[Move]):
 	pass
 
 
+func _disable_rolling():
+	_are_actions_enabled = false
+
+
+func _enable_rolling():
+	_are_actions_enabled = true
+	
+	if _waiting_for_dice_roll:
+		_waiting_for_dice_roll = false
+		print("Conversation resumed at end of dialog!")
+		_on_roll_phase_started(General.Player.TWO)
+	elif _waiting_for_piece_move:
+		_waiting_for_piece_move = false
+		_on_move_phase_started(General.Player.TWO, _cached_moves)
+
+
 func _on_roll_phase_started(player: General.Player):
-	if player == _player_id:
+	if player == _player_id and _are_actions_enabled:
 		if not _dice.is_ready:
 			await _dice.dice_transfer_finished
 		roll()
-		
-		
+	else:
+		print("Could not roll because opponent is focused on his dialog")
+		_waiting_for_dice_roll = true
+
+
 func _on_move_phase_started(player: General.Player, moves: Array[Move]):
-	if player == _player_id:
+	if player == _player_id and _are_actions_enabled:
 		var best_move = _evaluate_moves(moves)
 		# HACK disable the selection
 		_move_picker.end_selection()
 		perform_move(best_move)
-		
+	else:
+		print("Could not move because opponent is focused on his dialog")
+		_cached_moves = moves.duplicate()
+		_waiting_for_piece_move = true
+
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
 func roll():

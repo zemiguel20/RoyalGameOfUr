@@ -7,19 +7,26 @@
 script = ExtResource("1_xgdgq")
 caption = "Oh, have you heard?"
 anim_variations = Array[int]([7])
+fixed_duration = 2.0
+prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_s7eyw"]
 script = ExtResource("1_xgdgq")
-caption = "Innana is to visit us next week, all the way from Tell Hariri!"
+caption = "Innana is to visit us next week, all the way from Mari!"
 anim_variations = Array[int]([])
+fixed_duration = 5.0
+prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_eoeho"]
 script = ExtResource("1_xgdgq")
 caption = "Maybe if we wake early that day, we can catch a glimpse of her."
 anim_variations = Array[int]([1])
+fixed_duration = 4.0
+prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_ycmlp")
+max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_xgdgq")]([SubResource("Resource_lho8x"), SubResource("Resource_s7eyw"), SubResource("Resource_eoeho")])
 requires_click = true
 weight = 5

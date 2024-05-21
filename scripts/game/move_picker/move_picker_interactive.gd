@@ -8,7 +8,9 @@ extends MovePicker
 ## Additionaly, it controls the highlighting effects during selection, and also makes the selected
 ## pieces follow the cursor.
 
-signal _on_opponent_piece_captured
+signal _on_play_dialogue(category: DialogueSystem.Category)
+
+var _has_emitted_tutorial_capture_signal
 
 enum State {IDLE, FROM_SELECT, TO_SELECT}
 
@@ -175,11 +177,30 @@ func _finalize_selection():
 	
 	_change_state(State.IDLE)
 	
-	if selected_move.knocks_opo:
-		_on_opponent_piece_captured.emit()
+	_check_for_tutorial_signals(selected_move)
+	if selected_move.knocks_opo and _has_emitted_tutorial_capture_signal:
+		_on_play_dialogue.emit(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
 	
 	await selected_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(selected_move)
+
+
+func _check_for_tutorial_signals(move: Move):
+	# TODO: Only run this method when playing with default rules
+	_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_EXPLANATION)
+	
+	if move.knocks_opo:
+		_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED)
+		_has_emitted_tutorial_capture_signal = true
+	
+	if move.to.is_safe:
+		if move.is_to_central_safe:
+			_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
+		else:
+			_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
+	
+	if move.to.force_allow_stack:
+		_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
 
 
 func _create_path_highlighter(move : Move) -> ScrollingTexturePath3D:

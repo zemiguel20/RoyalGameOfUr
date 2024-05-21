@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=6 format=3 uid="uid://wcucy243n267"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=5 format=3 uid="uid://wcucy243n267"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_3j0ti"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_fpopl"]
@@ -7,19 +7,18 @@
 script = ExtResource("1_3j0ti")
 caption = "(sigh) ...that's better."
 anim_variations = Array[int]([3])
+fixed_duration = -1.0
+prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_73wnr"]
 script = ExtResource("1_3j0ti")
-caption = "I swear if Sennacherib wants me in Babylon, I’m gonna need a new suit of armour!"
-anim_variations = Array[int]([])
-
-[sub_resource type="Resource" id="Resource_vtih1"]
-script = ExtResource("1_3j0ti")
-caption = "(chuckles) I'm too old for this..."
-anim_variations = Array[int]([])
+caption = "I swear, these shifts last twice as long on an empty stomach!"
+anim_variations = Array[int]([5])
+fixed_duration = 4.0
+prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_fpopl")
-dialogue_entries = Array[ExtResource("1_3j0ti")]([SubResource("Resource_7k2gv"), SubResource("Resource_73wnr"), SubResource("Resource_vtih1")])
-requires_click = true
-weight = 0
+max_repetitions = 1
+dialogue_entries = Array[ExtResource("1_3j0ti")]([SubResource("Resource_7k2gv"), SubResource("Resource_73wnr")])
+weight = 5

@@ -19,11 +19,13 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 52.0
-offset_top = -179.0
-offset_right = -52.0
+offset_left = 285.0
+offset_top = -158.0
+offset_right = -292.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="Subtitles_Label" type="Label" parent="Background_Panel"]
 layout_mode = 1
@@ -38,6 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 label_settings = SubResource("LabelSettings_tnjk0")
+horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 2
