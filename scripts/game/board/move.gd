@@ -42,7 +42,8 @@ func _init(board : Board, player : int, from : Spot, to : Spot):
 	
 	moves_to_end = to == track.back()
 	
-	var is_almost_win = _board.get_spot_pieces(track.back()).size() == (Settings.num_pieces - 1)
+	var is_almost_win = moves_to_end and \
+			pieces_in_to.size() + pieces_in_from.size() == Settings.num_pieces
 	wins = is_almost_win and moves_to_end
 	
 	gives_extra_turn = to.give_extra_turn
