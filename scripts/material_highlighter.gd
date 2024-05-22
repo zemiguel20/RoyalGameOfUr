@@ -1,4 +1,4 @@
-#@tool
+@tool
 class_name MaterialHighlighterComponent
 extends Node
 ## Applies a highlight material to a target mesh as an overlay. Can be turned on or off.

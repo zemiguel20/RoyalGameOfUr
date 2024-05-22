@@ -63,7 +63,6 @@ func _calculate_base_score(move: Move):
 	else:
 		return regular_base_score
 
-
 #region ScoreModifiers
 func _calculate_safety_modifier(move: Move):
 	var safety_difference = move.calculate_safety_difference(base_spot_danger)
@@ -98,7 +97,3 @@ func _calculate_central_rosette_modifier(move: Move):
 	
 	return central_rosette_score_weight * final_score
 #endregion
-
-
-func _on_game_state_controller_roll_phase_started(player):
-	pass # Replace with function body.
