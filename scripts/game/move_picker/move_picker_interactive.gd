@@ -138,8 +138,6 @@ func _on_from_dehovered(from : Spot):
 
 
 func _on_from_selected(spot: Spot):
-	print("From clicked")
-	
 	if spot.force_allow_stack:
 		on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
 	
@@ -151,9 +149,7 @@ func _on_from_selected(spot: Spot):
 		_change_state(State.TO_SELECT)
 
 
-func _on_to_selected(spot: Spot):
-	print("To clicked")
-	
+func _on_to_selected(spot: Spot):	
 	_selected_to_spot = spot
 	
 	_finalize_selection()

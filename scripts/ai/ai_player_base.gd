@@ -48,7 +48,6 @@ func _enable_rolling():
 	
 	if _waiting_for_dice_roll:
 		_waiting_for_dice_roll = false
-		print("Conversation resumed at end of dialog!")
 		_on_roll_phase_started(General.Player.TWO)
 	elif _waiting_for_piece_move:
 		_waiting_for_piece_move = false
@@ -62,7 +61,6 @@ func _on_roll_phase_started(player: General.Player):
 			if _are_actions_enabled:
 				roll()
 			else:
-				print("Could not roll because opponent is focused on his dialog")
 				_waiting_for_dice_roll = true
 
 
@@ -74,7 +72,6 @@ func _on_move_phase_started(player: General.Player, moves: Array[Move]):
 			_move_picker.end_selection()
 			perform_move(best_move)
 		else:
-			print("Could not move because opponent is focused on his dialog")
 			_cached_moves = moves.duplicate()
 			_waiting_for_piece_move = true
 

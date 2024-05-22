@@ -99,15 +99,3 @@ func _on_play_pressed():
 func _input(event):
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:
 		_play_interruption(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
-
-
-func _on_ai_move_picker__on_suboptimal_move():
-	pass # Replace with function body.
-
-
-func _on_move_picker__on_opponent_piece_captured():
-	pass # Replace with function body.
-
-
-func _on_move_picker_on_play_tutorial_dialogue(category):
-	pass # Replace with function body.

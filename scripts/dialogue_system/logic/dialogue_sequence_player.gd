@@ -17,8 +17,6 @@ signal on_resume_opponent_action
 @onready var _animation_player =  $"../../AnimationPlayer" as OpponentAnimationPlayer
 @onready var _subtitle_displayer = $"../../Subtitle_System" as DialogueSubtitles
 
-@export var max_repetitions: int = 1
-
 var is_playing: bool
 var _current_sequence: DialogueSequence
 var _current_index = -1
@@ -42,7 +40,6 @@ func continue_dialogue():
 		finish_sequence()
 		return
 		
-	print("%s playing new entry!" % name)
 	is_playing = true
 	var _current_entry = _current_sequence.dialogue_entries[_current_index] as DialogueSingleEntry
 	
@@ -90,7 +87,6 @@ func finish_sequence():
 	if _use_subtitles:
 		_subtitle_displayer.hide_subtitles()
 		
-	print("%s finished!" % name)		
 	is_playing = false
 	on_dialogue_finished.emit()
 	on_interruption_ready.emit()
@@ -117,11 +113,9 @@ func handle_interruption():
 	is_playing = false
 	on_interruption_ready.emit()
 	_is_interrupted = false	
-	print("%s is now pausing!" % name)	
 	
 	
 func interrupt():
-	print("%s has been requested to pause!" % name)	
 	_is_interrupted = true
 	
 
