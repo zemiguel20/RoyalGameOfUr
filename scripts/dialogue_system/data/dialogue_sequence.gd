@@ -3,4 +3,5 @@ class_name DialogueSequence
 extends Resource
 
 @export var dialogue_entries: Array[DialogueSingleEntry]
+@export var requires_click: bool = true
 @export_range(0, 10) var weight: int = 5

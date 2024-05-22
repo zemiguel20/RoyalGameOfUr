@@ -25,36 +25,44 @@ var _animation_names = [
 	"clip_walkIn"
 ]
 
+
+
 var thinking_animations: Array
 var knockout_reaction_probability: float = 0.5
 var knockout_animations: Array
 var idle_animations: Array
 
 
-func play_walkin():
-	play_animation(Anim_Name.WALKIN, true)
+func _process(delta):
+	if not is_playing():
+		print("Was not playing!")
+		play_default_animation()	
 	
 	
-func play_talking():
-	play_animation(Anim_Name.THROWUPHAND, true)
-	
-
-func play_animation(anim_name: Anim_Name, return_to_idle: bool = true):
+func play_animation(anim_name: Anim_Name, return_to_idle: bool = true, custom_blend = 0.5):
 	var clip_name = _animation_names[anim_name]
-	play(clip_name, 0.5)
-	
-	## HACK Skip 2 seconds if it is the walking animation
-	if anim_name == Anim_Name.WALKIN:
-		seek(2)
-		await  _wait_until_animation_end(-2)
-	else:
-		await  _wait_until_animation_end()
+	print("Last Animation: ", current_animation)	
+	if clip_name == current_animation:
+		return
 		
+	play(clip_name, custom_blend)
+	await  _wait_until_animation_end()
+
+
+func cancel_animation():
+	stop()
 	play_default_animation()
 
 	
 func play_default_animation():
-	play("clip_breathing")
+	if current_animation != "clip_breathing":
+		play("clip_breathing")
+		
+		
+func play_walkin():
+	play_animation(Anim_Name.WALKIN, true, 0.0)
+	seek(1.7)
+	await  _wait_until_animation_end(-2)
 
 
 func _wait_until_animation_end(extra_delay: float = 0):

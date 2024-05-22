@@ -21,4 +21,5 @@ anim_variations = Array[int]([])
 [resource]
 script = ExtResource("1_fpopl")
 dialogue_entries = Array[ExtResource("1_3j0ti")]([SubResource("Resource_7k2gv"), SubResource("Resource_73wnr"), SubResource("Resource_vtih1")])
+requires_click = true
 weight = 0
