@@ -51,7 +51,7 @@ func _play_story_dialogue():
 
 
 func _play_random_dialogue():
-	if (_tutorial_categories_had.size() < 5):
+	if (_tutorial_categories_had.size() < 4):
 		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
 		return
 		
@@ -64,8 +64,18 @@ func _play_random_dialogue():
 
 
 func play_dialog(category: DialogueSystem.Category):
+	_dialogue_system.play(category)
+
+
+func play_tutorial_dialog(category: DialogueSystem.Category):
 	if !_tutorial_categories_had.has(category):
 		_tutorial_categories_had.append(category)
+		
+	if (category == DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED \
+	and _tutorial_categories_had.has(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)) \
+	or (category == DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED \
+	and _tutorial_categories_had.has(DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED)):
+		return
 		
 	_dialogue_system.play(category)
 
@@ -96,4 +106,8 @@ func _on_ai_move_picker__on_suboptimal_move():
 
 
 func _on_move_picker__on_opponent_piece_captured():
+	pass # Replace with function body.
+
+
+func _on_move_picker_on_play_tutorial_dialogue(category):
 	pass # Replace with function body.

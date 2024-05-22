@@ -174,8 +174,10 @@ script = ExtResource("6_3dit1")
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
 
 [connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
-[connection signal="_on_play_dialogue" from="Boardgame/AIMovePicker" to="Opponent_Guard_Animated" method="play_dialog"]
-[connection signal="_on_play_dialogue" from="Boardgame/MovePicker" to="Opponent_Guard_Animated" method="play_dialog"]
+[connection signal="on_play_dialogue" from="Boardgame/AIMovePicker" to="Opponent_Guard_Animated" method="play_dialog"]
+[connection signal="on_play_tutorial_dialogue" from="Boardgame/AIMovePicker" to="Opponent_Guard_Animated" method="play_tutorial_dialog"]
+[connection signal="on_play_dialogue" from="Boardgame/MovePicker" to="Opponent_Guard_Animated" method="play_dialog"]
+[connection signal="on_play_tutorial_dialogue" from="Boardgame/MovePicker" to="Opponent_Guard_Animated" method="play_tutorial_dialog"]
 [connection signal="on_intro_ended" from="Custom_Camera" to="Boardgame/GameStateController" method="start_game"]
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 [connection signal="play_pressed" from="Prototype_UI" to="Opponent_Guard_Animated" method="_on_play_pressed"]

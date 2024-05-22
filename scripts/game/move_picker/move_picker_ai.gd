@@ -6,8 +6,6 @@ extends MovePicker
 ## Keep in mind that the default values are just an estimate of what a difficult AI would have.
 ## Changing these values can greatly impact the behaviour of the AI
 
-signal _on_play_dialogue(category: DialogueSystem.Category)
-
 var _has_emitted_tutorial_capture_signal
 
 @export_group("Move picking chances")
@@ -66,34 +64,34 @@ func _determine_next_move(moves : Array[Move]) -> Move:
 			result = ordered_moves[randi_range(2, ordered_moves.size()-1)]
 		
 		var missed_move = ordered_moves[0]
-		if ((not missed_move.from.is_safe and missed_move.to.is_safe) \
-		and not (not result.from.is_safe and result.to.is_safe)) \
-		or (missed_move.knocks_opo and not result.knocks_opo):
-			_on_play_dialogue.emit(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
+		if ((!missed_move.from.is_safe and missed_move.to.is_safe) \
+		and not (!result.from.is_safe and result.to.is_safe)) \
+		or (missed_move.knocks_opo and !result.knocks_opo):
+			on_play_dialogue.emit(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
 		
 	_check_for_tutorial_signals(result)
 	if result.knocks_opo and _has_emitted_tutorial_capture_signal:
-		_on_play_dialogue.emit(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
+		on_play_dialogue.emit(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
 	
 	return result
 
 
 func _check_for_tutorial_signals(move: Move):
 	# TODO: Only run this method when playing with default rules
-	_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_EXPLANATION)
+	on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_EXPLANATION)
 	
 	if move.knocks_opo:
-		_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)
-		_has_emitted_tutorial_capture_signal = true
+		on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)
+		has_emitted_tutorial_capture_signal = true
 	
 	if move.to.is_safe:
 		if move.is_to_central_safe:
-			_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
+			on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
 		else:
-			_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
+			on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
 	
 	if move.to.force_allow_stack:
-		_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
+		on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
 
 
 func _sort_best_moves(a, b):

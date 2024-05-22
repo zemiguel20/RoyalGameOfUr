@@ -9,21 +9,21 @@ script = ExtResource("1_ygw3d")
 caption = "Oh, right."
 anim_variations = Array[int]([1])
 fixed_duration = 2.0
-prevents_opponent_action = false
+prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_gcifj"]
 script = ExtResource("1_ygw3d")
 caption = "The rules for this board are a little different."
 anim_variations = Array[int]([1])
 fixed_duration = 3.0
-prevents_opponent_action = false
+prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_itek7"]
 script = ExtResource("1_ygw3d")
 caption = "I will explain them to you as we go."
 anim_variations = Array[int]([])
 fixed_duration = 3.0
-prevents_opponent_action = false
+prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_r4bmf"]
 script = ExtResource("2_im31s")

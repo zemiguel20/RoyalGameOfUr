@@ -8,10 +8,6 @@ extends MovePicker
 ## Additionaly, it controls the highlighting effects during selection, and also makes the selected
 ## pieces follow the cursor.
 
-signal _on_play_dialogue(category: DialogueSystem.Category)
-
-var _has_emitted_tutorial_capture_signal
-
 enum State {IDLE, FROM_SELECT, TO_SELECT}
 
 @export var board_surface_y: float = 0.35
@@ -144,6 +140,9 @@ func _on_from_dehovered(from : Spot):
 func _on_from_selected(spot: Spot):
 	print("From clicked")
 	
+	if spot.force_allow_stack:
+		on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
+	
 	_selected_from_spot = spot
 	
 	if not Settings.can_move_backwards and not _allow_dragging:
@@ -178,8 +177,8 @@ func _finalize_selection():
 	_change_state(State.IDLE)
 	
 	_check_for_tutorial_signals(selected_move)
-	if selected_move.knocks_opo and _has_emitted_tutorial_capture_signal:
-		_on_play_dialogue.emit(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
+	if selected_move.knocks_opo and has_emitted_tutorial_capture_signal:
+		on_play_dialogue.emit(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
 	
 	await selected_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(selected_move)
@@ -187,20 +186,20 @@ func _finalize_selection():
 
 func _check_for_tutorial_signals(move: Move):
 	# TODO: Only run this method when playing with default rules
-	_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_EXPLANATION)
+	on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_EXPLANATION)
 	
 	if move.knocks_opo:
-		_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED)
-		_has_emitted_tutorial_capture_signal = true
+		on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED)
+		has_emitted_tutorial_capture_signal = true
 	
 	if move.to.is_safe:
 		if move.is_to_central_safe:
-			_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
+			on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
 		else:
-			_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
+			on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
 	
 	if move.to.force_allow_stack:
-		_on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
+		on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
 
 
 func _create_path_highlighter(move : Move) -> ScrollingTexturePath3D:
