@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://t6r5hmgp5c1u"]
 
 [ext_resource type="Script" path="res://scripts/game/gamestate_controller.gd" id="1_sto2p"]
-[ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_ai.gd" id="2_12tr1"]
 [ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board/board.tscn" id="3_3t76i"]
 [ext_resource type="Script" path="res://scripts/game/dice/dice_random.gd" id="4_gbrtq"]
 [ext_resource type="PackedScene" uid="uid://cv3xq2670msr6" path="res://scenes/game/move_picker/move_picker_interactive.tscn" id="4_ks4b5"]
 [ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_random.gd" id="4_mige8"]
+[ext_resource type="PackedScene" uid="uid://d3gx24dw7xjud" path="res://scenes/game/move_picker/move_picker_ai.tscn" id="5_xncr4"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
@@ -62,8 +62,7 @@ transform = Transform3D(0.0497542, -0.741031, 0.669625, 0, 0.670456, 0.74195, -0
 
 [node name="InteractiveMovePicker" parent="MovePickers" instance=ExtResource("4_ks4b5")]
 
-[node name="AIMovePicker" type="Node" parent="MovePickers"]
-script = ExtResource("2_12tr1")
+[node name="AIMovePicker" parent="MovePickers" instance=ExtResource("5_xncr4")]
 
 [node name="RandomMovePicker" type="Node" parent="MovePickers"]
 script = ExtResource("4_mige8")

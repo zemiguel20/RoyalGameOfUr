@@ -31,11 +31,31 @@ extends MovePicker
 ## Turning this bool off, will only check deduct points when ALL of the opponents pieces are past the central rosette.
 @export var decrease_per_passed_opponent_piece: bool = true
 
+@export_group("Moving Behaviour")
+## Minimum duration the AI will take to choose a move. 
+## We simulate thinking time so that the AI feels more humane.
+@export_range(0.1,3.0) var min_moving_duration: float = 0.3
+## Maximum duration the AI will take to choose a move. 
+## We simulate thinking time so that the AI feels more humane.
+@export_range(0.1,3.0) var max_moving_duration: float = 2.0
+## Duration of the highlight of the chosen move
+@export_range(0.1, 5.0) var move_highlight_duration: float = 1.0
+
+@onready var move_highlighter = $MoveHighlighterComponent as MoveHighlighterComponent
+
 
 func start(moves: Array[Move]) -> void:
 	# Simulate thinking
-	await get_tree().create_timer(0.2).timeout
+	var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
+	await get_tree().create_timer(thinking_duration).timeout
+	
 	var best_move: Move = _determine_next_move(moves)
+	
+	move_highlighter.highlight_move_preview(best_move)
+	
+	await get_tree().create_timer(move_highlight_duration).timeout
+	
+	move_highlighter.clear_highlight(best_move)
 	
 	# Execute move
 	best_move.execute(General.MoveAnim.ARC)
