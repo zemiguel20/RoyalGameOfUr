@@ -13,6 +13,7 @@ height = 0.2
 albedo_color = Color(0.778335, 0.647139, 0.573442, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rwr0o"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_vbuws")
 shader_parameter/border_width = 0.1
