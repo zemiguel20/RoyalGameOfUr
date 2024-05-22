@@ -13,8 +13,8 @@ dest_files=["res://.godot/imported/d4_model.glb-7f4ab5e7fbcbf32dc0bcded8e457a8cf
 
 [params]
 
-nodes/root_type=""
-nodes/root_name=""
+nodes/root_type="Die"
+nodes/root_name="Die"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 meshes/ensure_tangents=true

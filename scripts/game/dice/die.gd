@@ -24,7 +24,7 @@ signal roll_finished(value: int)
 #endregion
 
 #region Private Variables
-var _normal_list: Array[Node]
+var _normal_list: Array[DieNormal]
 var _default_mass
 var _mass_on_ground
 var _roll_value
@@ -41,9 +41,12 @@ func _ready():
 	_mass_on_ground = mass * _mass_on_ground_multiplier
 	
 	freeze = false
-	_normal_list = get_node("Normals").get_children() as Array[Node]
+	_normal_list = get_node("Normals").get_children() as Array[DieNormal]
 	
-	
+	body_entered.connect(_on_body_entered)
+	sleeping_state_changed.connect(_on_movement_stopped)
+
+
 func highlight() -> void:
 	if _highlighter != null:
 		_highlighter.active = true
@@ -158,7 +161,7 @@ func _check_roll_value():
 	var max_down_accuracy = 0.0
 	var best_value = -1
 	
-	for normal: DiceNormal in _normal_list:
+	for normal in _normal_list:
 		var down_direction = -normal.global_basis.y.normalized() # Get down direction of normal.
 		var down_accuracy = down_direction.dot(Vector3.DOWN) # Use dot product to check if it is facing down in world space.
 		if down_accuracy > max_down_accuracy:
