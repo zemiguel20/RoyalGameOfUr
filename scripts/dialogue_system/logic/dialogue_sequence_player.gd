@@ -46,7 +46,7 @@ func continue_dialogue():
 		_audio_player.stream = _current_entry.audio
 		_audio_player.play()
 	if _use_subtitles and _current_entry.caption != null:
-		_subtitle_displayer.display_subtitle(_current_entry.caption)
+		_subtitle_displayer.display_subtitle(_current_entry.caption, _current_sequence.requires_click)
 	## TODO: Change, maybe we should give the whole list, and let the whole list play in a random order, 
 	## but dont start a new animation if the 
 	if _current_entry.anim_variations != null and _current_entry.anim_variations.size() > 0:	
