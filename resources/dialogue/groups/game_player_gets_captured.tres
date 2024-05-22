@@ -15,7 +15,7 @@ prevents_opponent_action = false
 script = ExtResource("2_cy317")
 max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_c7dik")])
-requires_click = true
+requires_click = false
 weight = 5
 
 [sub_resource type="Resource" id="Resource_bbg53"]
@@ -29,7 +29,7 @@ prevents_opponent_action = false
 script = ExtResource("2_cy317")
 max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_bbg53")])
-requires_click = true
+requires_click = false
 weight = 5
 
 [sub_resource type="Resource" id="Resource_1na1r"]
@@ -43,6 +43,7 @@ prevents_opponent_action = false
 script = ExtResource("2_cy317")
 max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_1na1r")])
+requires_click = false
 weight = 5
 
 [sub_resource type="Resource" id="Resource_phv4q"]
@@ -56,6 +57,7 @@ prevents_opponent_action = false
 script = ExtResource("2_cy317")
 max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_phv4q")])
+requires_click = false
 weight = 5
 
 [resource]

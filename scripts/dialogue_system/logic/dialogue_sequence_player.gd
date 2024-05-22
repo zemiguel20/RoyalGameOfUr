@@ -66,7 +66,7 @@ func continue_dialogue():
 			entry_length = maxf(_temp_min_entry_length, _animation_player.current_animation_length)
 		
 		await get_tree().create_timer(maxf(entry_length, 1)).timeout
-		_current_index += 1
+		continue_dialogue()
 		
 	#if _is_interrupted:
 		#handle_interruption()

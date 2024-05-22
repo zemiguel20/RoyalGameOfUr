@@ -15,7 +15,7 @@ prevents_opponent_action = false
 script = ExtResource("2_4dm5i")
 max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_l2v3u")]([SubResource("Resource_0y3bl")])
-requires_click = true
+requires_click = false
 weight = 5
 
 [sub_resource type="Resource" id="Resource_ym3t7"]
@@ -29,7 +29,7 @@ prevents_opponent_action = false
 script = ExtResource("2_4dm5i")
 max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_l2v3u")]([SubResource("Resource_ym3t7")])
-requires_click = true
+requires_click = false
 weight = 5
 
 [sub_resource type="Resource" id="Resource_41o34"]
@@ -43,6 +43,7 @@ prevents_opponent_action = false
 script = ExtResource("2_4dm5i")
 max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_l2v3u")]([SubResource("Resource_41o34")])
+requires_click = false
 weight = 5
 
 [resource]
