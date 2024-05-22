@@ -52,14 +52,13 @@ func continue_dialogue():
 	if _current_entry.anim_variations != null and _current_entry.anim_variations.size() > 0:	
 		_animation_player.play_animation(_current_entry.anim_variations[0], false)
 		
-	if not _current_sequence.is_skipable:
+	if not _current_sequence.requires_click:
 		# Wait for audio to be over.
 		## TODO: Revert back when audio is actually there.
 		var entry_length = maxf(_temp_min_entry_length, _animation_player.current_animation_length)
 		await get_tree().create_timer(entry_length).timeout
 		_current_index += 1
 		
-	#
 	#if _is_interrupted:
 		#handle_interruption()
 	#else:
@@ -67,12 +66,12 @@ func continue_dialogue():
 		
 		
 func skip():
-	if not is_busy() or not _current_sequence.is_skipable:
+	if not is_busy() or not _current_sequence.requires_click:
 		return
 	
 	## Stop players
 	_audio_player.stop()
-	_animation_player.cancel_animation()
+	#_animation_player.cancel_animation()
 	_subtitle_displayer.hide_subtitles()
 	
 	continue_dialogue()

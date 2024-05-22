@@ -25,6 +25,8 @@ var _animation_names = [
 	"clip_walkIn"
 ]
 
+
+
 var thinking_animations: Array
 var knockout_reaction_probability: float = 0.5
 var knockout_animations: Array
@@ -33,14 +35,17 @@ var idle_animations: Array
 
 func _process(delta):
 	if not is_playing():
+		print("Was not playing!")
 		play_default_animation()	
 	
 	
-func play_animation(anim_name: Anim_Name, return_to_idle: bool = true, custom_blend = 1):
+func play_animation(anim_name: Anim_Name, return_to_idle: bool = true, custom_blend = 0.5):
 	var clip_name = _animation_names[anim_name]
-	if clip_name != current_animation:
-		play(clip_name, custom_blend)
+	print("Last Animation: ", current_animation)	
+	if clip_name == current_animation:
+		return
 		
+	play(clip_name, custom_blend)
 	await  _wait_until_animation_end()
 
 
@@ -51,7 +56,7 @@ func cancel_animation():
 	
 func play_default_animation():
 	if current_animation != "clip_breathing":
-		play("clip_breathing", 0.2)
+		play("clip_breathing")
 		
 		
 func play_walkin():
