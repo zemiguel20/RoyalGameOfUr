@@ -5,6 +5,8 @@ extends Node
 ## Signal that emits when the current sequence of dialogue has been finished.
 signal on_dialogue_finished
 signal on_interruption_ready
+signal on_prevent_opponent_action
+signal on_resume_opponent_action
 
 @export var _use_subtitles: bool
 ## NOTE: Since we do not have audio for the playtest, we have a constant waiting time.
@@ -19,6 +21,7 @@ var is_playing: bool
 var _current_sequence: DialogueSequence
 var _current_index = -1
 var _is_interrupted
+var _already_prevents_opponent_action: bool
 
 
 func play(sequence: DialogueSequence):
@@ -37,7 +40,6 @@ func continue_dialogue():
 		finish_sequence()
 		return
 		
-	print("%s playing new entry!" % name)
 	is_playing = true
 	var _current_entry = _current_sequence.dialogue_entries[_current_index] as DialogueSingleEntry
 	
@@ -52,12 +54,16 @@ func continue_dialogue():
 	if _current_entry.anim_variations != null and _current_entry.anim_variations.size() > 0:	
 		_animation_player.play_animation(_current_entry.anim_variations[0], false)
 		
+	_handle_opponent_action_prevention(_current_entry)
 	if not _current_sequence.requires_click:
 		# Wait for audio to be over.
 		## TODO: Revert back when audio is actually there.
-		var entry_length = maxf(_temp_min_entry_length, _animation_player.current_animation_length)
-		await get_tree().create_timer(entry_length).timeout
-		_current_index += 1
+		var entry_length = _current_entry.fixed_duration
+		if entry_length == -1:
+			entry_length = maxf(_temp_min_entry_length, _animation_player.current_animation_length)
+		
+		await get_tree().create_timer(maxf(entry_length, 1)).timeout
+		continue_dialogue()
 		
 	#if _is_interrupted:
 		#handle_interruption()
@@ -81,12 +87,24 @@ func finish_sequence():
 	if _use_subtitles:
 		_subtitle_displayer.hide_subtitles()
 		
-	print("%s finished!" % name)		
 	is_playing = false
 	on_dialogue_finished.emit()
 	on_interruption_ready.emit()
 	
-	
+	if _already_prevents_opponent_action:
+		_already_prevents_opponent_action = false
+		on_resume_opponent_action.emit()
+
+
+func _handle_opponent_action_prevention(entry: DialogueSingleEntry):
+	if entry.prevents_opponent_action and !_already_prevents_opponent_action:
+		_already_prevents_opponent_action = true
+		on_prevent_opponent_action.emit()
+	elif !entry.prevents_opponent_action and _already_prevents_opponent_action:
+		_already_prevents_opponent_action = false
+		on_resume_opponent_action.emit()
+
+
 func handle_interruption():
 	if _use_subtitles:
 		_subtitle_displayer.hide_subtitles()
@@ -95,11 +113,9 @@ func handle_interruption():
 	is_playing = false
 	on_interruption_ready.emit()
 	_is_interrupted = false	
-	print("%s is now pausing!" % name)	
 	
 	
 func interrupt():
-	print("%s has been requested to pause!" % name)	
 	_is_interrupted = true
 	
 

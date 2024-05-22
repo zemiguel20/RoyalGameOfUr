@@ -6,8 +6,7 @@ extends MovePicker
 ## Keep in mind that the default values are just an estimate of what a difficult AI would have.
 ## Changing these values can greatly impact the behaviour of the AI
 
-signal _on_suboptimal_move
-signal _on_player_piece_captured
+var _has_emitted_tutorial_capture_signal
 
 @export_group("Move picking chances")
 ## Chance for the opponent to pick the best move available to them, using a weight system
@@ -41,7 +40,9 @@ func start(moves: Array[Move]) -> void:
 	# Simulate thinking
 	await get_tree().create_timer(0.2).timeout
 	var best_move: Move = _determine_next_move(moves)
-			
+	
+	await decrease_per_passed_opponent_piece
+	
 	# Execute move
 	await best_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(best_move)
@@ -58,17 +59,41 @@ func _determine_next_move(moves : Array[Move]) -> Move:
 	var rand = randi_range(0, _best_move_weight + _second_move_weight + _random_move_weight)
 	if rand < _best_move_weight:
 		result = ordered_moves[0]
-	elif rand < _best_move_weight + _second_move_weight or moves.size() == 2:
-		_on_suboptimal_move.emit()
-		result = ordered_moves[1]
-	else:
-		_on_suboptimal_move.emit()
-		result = ordered_moves[randi_range(2, ordered_moves.size()-1)]
+	else:			
+		if rand < _best_move_weight + _second_move_weight or moves.size() == 2:
+			result = ordered_moves[1]
+		else:
+			result = ordered_moves[randi_range(2, ordered_moves.size()-1)]
 		
-	if result.knocks_opo:
-		_on_player_piece_captured.emit()
+		var missed_move = ordered_moves[0]
+		if ((!missed_move.from.is_safe and missed_move.to.is_safe) \
+		and not (!result.from.is_safe and result.to.is_safe)) \
+		or (missed_move.knocks_opo and !result.knocks_opo):
+			on_play_dialogue.emit(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
 		
+	_check_for_tutorial_signals(result)
+	if result.knocks_opo and _has_emitted_tutorial_capture_signal:
+		on_play_dialogue.emit(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
+	
 	return result
+
+
+func _check_for_tutorial_signals(move: Move):
+	# TODO: Only run this method when playing with default rules
+	on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_EXPLANATION)
+	
+	if move.knocks_opo:
+		on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)
+		has_emitted_tutorial_capture_signal = true
+	
+	if move.to.is_safe:
+		if move.is_to_central_safe:
+			on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
+		else:
+			on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
+	
+	if move.to.force_allow_stack:
+		on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
 
 
 func _sort_best_moves(a, b):
@@ -81,8 +106,8 @@ func _evaluate_move(move: Move) -> float:
 	score += _calculate_progress_modifier(move)
 	score += _calculate_central_rosette_modifier(move)
 	return score
-	
-	
+
+
 func _calculate_base_score(move: Move):
 	if move.knocks_opo:
 		return capture_base_score

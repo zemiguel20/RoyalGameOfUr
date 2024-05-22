@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=8 format=3 uid="uid://cm3tybkthodww"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=12 format=3 uid="uid://cm3tybkthodww"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_2sxg3"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_tbyis"]
@@ -6,24 +6,58 @@
 
 [sub_resource type="Resource" id="Resource_ibr8n"]
 script = ExtResource("1_2sxg3")
-caption = "Ah... could have seen that coming."
+caption = "Ah... you got me."
 anim_variations = Array[int]([2])
+fixed_duration = 3.0
+prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_cpsie"]
 script = ExtResource("2_gckjy")
+max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_2sxg3")]([SubResource("Resource_ibr8n")])
-requires_click = true
+requires_click = false
 weight = 5
 
 [sub_resource type="Resource" id="Resource_su0mh"]
 script = ExtResource("1_2sxg3")
 caption = "Sweet like Judean wine, my friend."
 anim_variations = Array[int]([5])
+fixed_duration = 3.0
+prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_2r6f2"]
 script = ExtResource("2_gckjy")
+max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_2sxg3")]([SubResource("Resource_su0mh")])
-requires_click = true
+requires_click = false
+weight = 5
+
+[sub_resource type="Resource" id="Resource_f2m3c"]
+script = ExtResource("1_2sxg3")
+caption = "Hmmm... lucky bastard."
+anim_variations = Array[int]([6])
+fixed_duration = 3.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_hl2et"]
+script = ExtResource("2_gckjy")
+max_repetitions = 1
+dialogue_entries = Array[ExtResource("1_2sxg3")]([SubResource("Resource_f2m3c")])
+requires_click = false
+weight = 5
+
+[sub_resource type="Resource" id="Resource_lsn2f"]
+script = ExtResource("1_2sxg3")
+caption = "There goes my swallow."
+anim_variations = Array[int]([4])
+fixed_duration = 2.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_djy16"]
+script = ExtResource("2_gckjy")
+max_repetitions = 1
+dialogue_entries = Array[ExtResource("1_2sxg3")]([SubResource("Resource_lsn2f")])
+requires_click = false
 weight = 5
 
 [resource]
@@ -31,5 +65,6 @@ script = ExtResource("1_tbyis")
 category = 3
 play_in_order = false
 has_priority = false
-dialogue_sequences = Array[ExtResource("2_gckjy")]([SubResource("Resource_cpsie"), SubResource("Resource_2r6f2")])
-weight_for_empty = 10
+initial_delay = 0.5
+dialogue_sequences = Array[ExtResource("2_gckjy")]([SubResource("Resource_cpsie"), SubResource("Resource_2r6f2"), SubResource("Resource_hl2et"), SubResource("Resource_djy16")])
+weight_for_empty = 20

@@ -10,9 +10,7 @@ func _ready():
 
 func _on_option_2_area_entered():
 	font_size = max_font_size
-	print("hoi")
-	
+
 
 func _on_option_2_area_exited():
 	font_size = min_font_size
-	print("doie")

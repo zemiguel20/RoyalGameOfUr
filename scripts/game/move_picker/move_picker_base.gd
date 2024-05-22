@@ -6,6 +6,10 @@ extends Node
 
 
 signal move_executed(move : Move)
+signal on_play_dialogue(category: DialogueSystem.Category)
+signal on_play_tutorial_dialogue(category: DialogueSystem.Category)
+
+var has_emitted_tutorial_capture_signal
 
 
 ## Starts the selection system for the given list of [param moves].
