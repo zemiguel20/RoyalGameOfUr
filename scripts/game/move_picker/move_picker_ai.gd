@@ -40,7 +40,9 @@ func start(moves: Array[Move]) -> void:
 	# Simulate thinking
 	await get_tree().create_timer(0.2).timeout
 	var best_move: Move = _determine_next_move(moves)
-			
+	
+	await decrease_per_passed_opponent_piece
+	
 	# Execute move
 	await best_move.execute(Piece.MoveAnim.ARC)
 	move_executed.emit(best_move)

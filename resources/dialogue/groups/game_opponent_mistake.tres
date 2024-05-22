@@ -36,7 +36,7 @@ weight = 5
 script = ExtResource("1_l2v3u")
 caption = "Hmm. That wasn't smart..."
 anim_variations = Array[int]([6])
-fixed_duration = 3.0
+fixed_duration = 0.5
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_wshif"]

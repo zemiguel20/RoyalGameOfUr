@@ -12,9 +12,9 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_73wnr"]
 script = ExtResource("1_gsgn5")
-caption = "You heard? Sennacherib wants Ninos in Tušḫan."
+caption = "You heard? Sennacherib wants Ninos in the city of Tušḫan."
 anim_variations = Array[int]([1])
-fixed_duration = 4.0
+fixed_duration = 5.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_vtih1"]

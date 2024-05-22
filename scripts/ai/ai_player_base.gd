@@ -56,25 +56,27 @@ func _enable_rolling():
 
 
 func _on_roll_phase_started(player: General.Player):
-	if player == _player_id and _are_actions_enabled:
-		if not _dice.is_ready:
-			await _dice.dice_transfer_finished
-		roll()
-	else:
-		print("Could not roll because opponent is focused on his dialog")
-		_waiting_for_dice_roll = true
+	if player == _player_id:
+			if not _dice.is_ready:
+				await _dice.dice_transfer_finished
+			if _are_actions_enabled:
+				roll()
+			else:
+				print("Could not roll because opponent is focused on his dialog")
+				_waiting_for_dice_roll = true
 
 
 func _on_move_phase_started(player: General.Player, moves: Array[Move]):
-	if player == _player_id and _are_actions_enabled:
-		var best_move = _evaluate_moves(moves)
-		# HACK disable the selection
-		_move_picker.end_selection()
-		perform_move(best_move)
-	else:
-		print("Could not move because opponent is focused on his dialog")
-		_cached_moves = moves.duplicate()
-		_waiting_for_piece_move = true
+	if player == _player_id:
+		if _are_actions_enabled:
+			var best_move = _evaluate_moves(moves)
+			# HACK disable the selection
+			_move_picker.end_selection()
+			perform_move(best_move)
+		else:
+			print("Could not move because opponent is focused on his dialog")
+			_cached_moves = moves.duplicate()
+			_waiting_for_piece_move = true
 
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
