@@ -1,14 +1,14 @@
 [gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bprkej5dgkxm4"]
 
-[ext_resource type="Texture2D" uid="uid://13y2h4vg2op" path="res://textures/duplicate_textures/TablePlank_Base_color.png" id="1_8kjir"]
-[ext_resource type="Texture2D" uid="uid://c33m11qefl3j" path="res://textures/duplicate_textures/TablePlank_Mixed_AO.png" id="2_rtv77"]
-[ext_resource type="Texture2D" uid="uid://ciqt1n0f7co3f" path="res://textures/duplicate_textures/TablePlank_Normal.png" id="3_55t1f"]
-[ext_resource type="Texture2D" uid="uid://dvb63kqllv1yp" path="res://textures/duplicate_textures/TablePlank_Roughness.png" id="4_0c3vg"]
+[ext_resource type="Texture2D" uid="uid://13y2h4vg2op" path="res://textures/table_planks/TablePlank_Base_color.png" id="1_nroxk"]
+[ext_resource type="Texture2D" uid="uid://c33m11qefl3j" path="res://textures/table_planks/TablePlank_Mixed_AO.png" id="2_o6ocm"]
+[ext_resource type="Texture2D" uid="uid://3jq2on0huqtw" path="res://textures/table_planks/TablePlank_Normal_OpenGL.png" id="3_5lfpk"]
+[ext_resource type="Texture2D" uid="uid://dvb63kqllv1yp" path="res://textures/table_planks/TablePlank_Roughness.png" id="4_1ohy8"]
 
 [resource]
-albedo_texture = ExtResource("1_8kjir")
-roughness_texture = ExtResource("4_0c3vg")
+albedo_texture = ExtResource("1_nroxk")
+roughness_texture = ExtResource("4_1ohy8")
 normal_enabled = true
-normal_texture = ExtResource("3_55t1f")
+normal_texture = ExtResource("3_5lfpk")
 ao_enabled = true
-ao_texture = ExtResource("2_rtv77")
+ao_texture = ExtResource("2_o6ocm")

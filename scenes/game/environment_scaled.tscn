@@ -15,8 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://c1plavvxdyksn" path="res://models/pots/pot_7.fbx" id="12_ip18f"]
 [ext_resource type="PackedScene" uid="uid://bqfil2oy1nbk8" path="res://models/pots/pot_8.fbx" id="13_ujr4w"]
 [ext_resource type="PackedScene" uid="uid://dqygwfqru3fc3" path="res://models/pots/pot_9.fbx" id="14_o53er"]
-[ext_resource type="PackedScene" uid="uid://cghfm2xmx5feh" path="res://scenes/environment_base.tscn" id="16_rid1p"]
-[ext_resource type="PackedScene" uid="uid://dyy5yhl1vyj6f" path="res://models/RockSeat.tscn" id="17_ts4fo"]
+[ext_resource type="PackedScene" uid="uid://bqu6oyo2hlmmb" path="res://scenes/environment_base.tscn" id="16_rid1p"]
+[ext_resource type="PackedScene" path="res://models/RockSeat.tscn" id="17_ts4fo"]
 [ext_resource type="PackedScene" uid="uid://bc0dgjlpis5or" path="res://models/Chest_low.fbx" id="18_piu6a"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
@@ -41,7 +41,7 @@ script = SubResource("GDScript_fbn4f")
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="DirectionalLight3D" parent="Environment" index="1"]
-transform = Transform3D(-0.105969, -0.199284, -0.107501, 0.0536406, -0.137407, 0.201847, -0.219985, 0.0624918, 0.101002, 0.605703, 0.73247, 1.47961)
+transform = Transform3D(-0.0942421, -0.222395, 0.0644898, -0.0271459, 0.0797574, 0.235376, -0.22996, 0.0817268, -0.0542144, 0.619666, 0.746462, 1.47467)
 light_color = Color(0.890196, 0.890196, 0.878431, 1)
 shadow_bias = 0.1
 shadow_normal_bias = 0.0
@@ -49,7 +49,8 @@ directional_shadow_mode = 2
 directional_shadow_split_1 = 0.029
 directional_shadow_split_2 = 0.076
 directional_shadow_split_3 = 0.433
-directional_shadow_max_distance = 300.0
+directional_shadow_max_distance = 27.9
+directional_shadow_pancake_size = 0.0
 
 [node name="BlockoutMap" parent="Environment" index="2"]
 visible = false
@@ -85,7 +86,7 @@ transform = Transform3D(14.9829, 0, 0, 0, 14.9829, 0, 0, 0, 14.9829, 4.81361, -0
 transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 4.98227, -0.216114, 6.21503)
 
 [node name="bowl_9" parent="Environment/Pots" instance=ExtResource("3_711w1")]
-transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 5.20175, -0.196546, 2.09329)
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 5.20175, -0.2225, 2.09329)
 
 [node name="bowl_3" parent="Environment/Pots" instance=ExtResource("4_pr8mw")]
 transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 4.97992, -0.247018, 5.88977)
@@ -139,7 +140,7 @@ transform = Transform3D(3.43497, 0, 17.7408, 0, 18.0703, 0, -17.7408, 0, 3.43497
 transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 3.10918, -0.699151, 1.86601)
 
 [node name="bowl_8" parent="Environment/Pots" instance=ExtResource("2_7xpms")]
-transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 5.0162, -0.194851, 1.78114)
+transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 5.0162, -0.227216, 1.78114)
 
 [node name="bowl_6" parent="Environment/Pots" instance=ExtResource("3_711w1")]
 transform = Transform3D(7.28762, 0, -18.6533, 0, 20.0263, 0, 18.6533, 0, 7.28762, 3.40438, -0.699151, 1.75442)
@@ -194,7 +195,7 @@ transform = Transform3D(0.773862, 0, 0.633354, 0, 1, 0, -0.633354, 0, 0.773862, 
 transform = Transform3D(-23.502, 0, -31.3917, 0, 39.2146, 0, 31.3917, 0, -23.502, 1.11331, -0.660946, 1.90576)
 
 [node name="Chest2" parent="." instance=ExtResource("18_piu6a")]
-transform = Transform3D(-30.869, 0, -24.1844, 0, 39.2146, 0, 24.1844, 0, -30.869, 5.21108, -0.660946, 2.02966)
+transform = Transform3D(-30.869, 0, -24.1844, 0, 39.2146, 0, 24.1844, 0, -30.869, 5.21108, -0.701566, 2.02966)
 
 [node name="Chest3" parent="." instance=ExtResource("18_piu6a")]
 transform = Transform3D(36.3878, 0, 14.6189, 0, 39.2146, 0, -14.6189, 0, 36.3878, 1.09679, -0.660946, 5.20301)
