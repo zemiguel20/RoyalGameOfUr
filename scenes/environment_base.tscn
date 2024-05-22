@@ -1,11 +1,11 @@
-[gd_scene load_steps=45 format=3 uid="uid://cghfm2xmx5feh"]
+[gd_scene load_steps=45 format=3 uid="uid://bqu6oyo2hlmmb"]
 
 [ext_resource type="Material" uid="uid://bxhsn63hsvyt8" path="res://materials/FloorTiles.tres" id="1_0uabv"]
 [ext_resource type="PackedScene" uid="uid://bjr1q6y03u8lb" path="res://models/main_walls_Low.fbx" id="2_y5tcu"]
 [ext_resource type="Material" uid="uid://bdxhaotnxq6de" path="res://materials/Sandstone.tres" id="3_axtiq"]
 [ext_resource type="Material" uid="uid://be7n0a655i4xg" path="res://materials/WallBricks.tres" id="4_fbu7u"]
-[ext_resource type="PackedScene" uid="uid://dctgnmctha8ei" path="res://models/new_wall_1.fbx" id="5_rjren"]
 [ext_resource type="PackedScene" uid="uid://bcd3pxj0ne4qu" path="res://models/new_wall_2.fbx" id="6_lhkew"]
+[ext_resource type="PackedScene" uid="uid://dctgnmctha8ei" path="res://models/new_wall_1.fbx" id="6_n3y3j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jydsc"]
 resource_name = "lambert1"
@@ -797,29 +797,35 @@ mesh = SubResource("ArrayMesh_g4vyo")
 skeleton = NodePath("")
 
 [node name="pCube585" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(6.27454, 0, 0, 0, 6.27454, 0, 0, 0, 6.27454, 0.146602, 0.831456, -0.735573)
+transform = Transform3D(6.26996, 0.238656, 0.0210257, -0.238926, 6.26938, 0.0872428, -0.01769, -0.0879798, 6.2739, -0.250628, 0.86344, -0.637995)
 mesh = SubResource("ArrayMesh_5pgre")
 skeleton = NodePath("")
 
 [node name="pCube584" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(5.58693, 0, 0, 0, 5.58693, 0, 0, 0, 5.58693, -0.0308699, 1.42617, -1.48117)
+transform = Transform3D(5.54076, -0.715577, -0.0410703, 0.712849, 5.53489, -0.26576, 0.0747265, 0.258324, 5.58045, 0.117543, 1.41087, -1.53686)
 mesh = SubResource("ArrayMesh_rj1pe")
 skeleton = NodePath("")
 
 [node name="Ziggurat" type="MeshInstance3D" parent="."]
-transform = Transform3D(61.8663, 0, 209.865, 0, 267.948, 0, -209.865, 0, 61.8663, -2.76844, 2.02724, -5.58237)
+transform = Transform3D(67.2148, -20.9576, 223.917, 10.8929, 286.209, 14.5913, -224.306, 7.61894, 67.8069, -2.76844, 2.02724, -5.58237)
 material_override = ExtResource("4_fbu7u")
 mesh = SubResource("ArrayMesh_mvt8o")
 skeleton = NodePath("")
 
-[node name="Root Scene6" parent="." instance=ExtResource("5_rjren")]
+[node name="Root Scene6" type="Node3D" parent="."]
 transform = Transform3D(8.95425, 0, 0, 0, 8.95425, 0, 0, 0, 8.95425, 0.775986, -0.446341, 0.418504)
 
 [node name="Root Scene4" parent="." instance=ExtResource("6_lhkew")]
 transform = Transform3D(8.95425, 0, 0, 0, 8.95425, 0, 0, 0, 8.95425, 0.775986, -0.446341, 0.418504)
 
-[node name="Root Scene7" parent="." instance=ExtResource("5_rjren")]
+[node name="Root Scene7" type="Node3D" parent="."]
 transform = Transform3D(-8.95419, 0, 0.0310998, 0, 8.95425, 0, -0.0310998, 0, -8.95419, 1.02979, -0.446341, 1.17995)
 
 [node name="Root Scene5" parent="." instance=ExtResource("6_lhkew")]
 transform = Transform3D(-8.95419, 0, 0.0310998, 0, 8.95425, 0, -0.0310998, 0, -8.95419, 1.02979, -0.446341, 1.17995)
+
+[node name="Root Scene3" parent="." instance=ExtResource("6_n3y3j")]
+transform = Transform3D(8.95425, 0, 0, 0, 8.95425, 0, 0, 0, 8.95425, 0.775986, -0.446341, 0.418504)
+
+[node name="Root Scene8" parent="." instance=ExtResource("6_n3y3j")]
+transform = Transform3D(-8.9542, 0, 0.0310998, 0, 8.95425, 0, -0.0310998, 0, -8.9542, 1.01317, -0.446341, 1.17419)

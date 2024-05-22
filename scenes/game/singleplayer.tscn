@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
 [ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="5_8sxhn"]
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
-[ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
+[ext_resource type="PackedScene" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
 
@@ -50,14 +50,181 @@ script = SubResource("GDScript_fbn4f")
 [node name="Boardgame" parent="." instance=ExtResource("3_xprge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="GameStateController" parent="Boardgame" index="0"]
-_board = null
-p1_move_picker = null
-p2_move_picker = null
-dice = null
-
 [node name="Board" parent="Boardgame" index="1"]
 transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 4.4739, -0.207527, 6.36155)
+
+[node name="P2RosetteTile1" parent="Boardgame/Board/Tiles" index="0"]
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1RosetteTile1" parent="Boardgame/Board/Tiles" index="1"]
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="SharedRosetteTile" parent="Boardgame/Board/Tiles" index="2"]
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2RosetteTile2" parent="Boardgame/Board/Tiles" index="3"]
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1RosetteTile2" parent="Boardgame/Board/Tiles" index="4"]
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2NormalTile1" parent="Boardgame/Board/Tiles" index="5"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2NormalTile2" parent="Boardgame/Board/Tiles" index="6"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2NormalTile3" parent="Boardgame/Board/Tiles" index="7"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1NormalTile1" parent="Boardgame/Board/Tiles" index="8"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1NormalTile2" parent="Boardgame/Board/Tiles" index="9"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1NormalTile3" parent="Boardgame/Board/Tiles" index="10"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="SharedNormalTile1" parent="Boardgame/Board/Tiles" index="11"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="SharedNormalTile2" parent="Boardgame/Board/Tiles" index="12"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="SharedNormalTile3" parent="Boardgame/Board/Tiles" index="13"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="SharedNormalTile4" parent="Boardgame/Board/Tiles" index="14"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="SharedNormalTile5" parent="Boardgame/Board/Tiles" index="15"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="SharedNormalTile6" parent="Boardgame/Board/Tiles" index="16"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="SharedNormalTile7" parent="Boardgame/Board/Tiles" index="17"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1NormalTile4" parent="Boardgame/Board/Tiles" index="18"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2NormalTile4" parent="Boardgame/Board/Tiles" index="19"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1StartSpot1" parent="Boardgame/Board/StartAndEndSpots" index="0"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1StartSpot2" parent="Boardgame/Board/StartAndEndSpots" index="1"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1StartSpot3" parent="Boardgame/Board/StartAndEndSpots" index="2"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1StartSpot4" parent="Boardgame/Board/StartAndEndSpots" index="3"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1StartSpot5" parent="Boardgame/Board/StartAndEndSpots" index="4"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1StartSpot6" parent="Boardgame/Board/StartAndEndSpots" index="5"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1StartSpot7" parent="Boardgame/Board/StartAndEndSpots" index="6"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2StartSpot1" parent="Boardgame/Board/StartAndEndSpots" index="7"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2StartSpot2" parent="Boardgame/Board/StartAndEndSpots" index="8"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2StartSpot3" parent="Boardgame/Board/StartAndEndSpots" index="9"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2StartSpot4" parent="Boardgame/Board/StartAndEndSpots" index="10"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2StartSpot5" parent="Boardgame/Board/StartAndEndSpots" index="11"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2StartSpot6" parent="Boardgame/Board/StartAndEndSpots" index="12"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P2StartSpot7" parent="Boardgame/Board/StartAndEndSpots" index="13"]
+is_safe = null
+give_extra_roll = null
+force_allow_stack = null
+
+[node name="P1EndSpot" parent="Boardgame/Board/StartAndEndSpots" index="14"]
+is_safe = null
+give_extra_roll = null
+
+[node name="P2EndSpot" parent="Boardgame/Board/StartAndEndSpots" index="15"]
+is_safe = null
+give_extra_roll = null
 
 [node name="Dice" parent="Boardgame" index="2"]
 transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 4.44211, -0.213149, 6.346)
@@ -111,8 +278,6 @@ _random_move_weight = 1
 board_surface_y = -0.187
 
 [node name="AIRoller" parent="Boardgame" instance=ExtResource("9_m0jtg")]
-_dice = null
-_move_picker = null
 
 [node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
@@ -120,8 +285,6 @@ max_degrees_down = 50.0
 max_degrees_left = 45.0
 max_degrees_right = 45.0
 _board_look_rotation = Vector3(-35, 32, 0)
-_trans_type = 1
-_ease_type = 1
 
 [node name="Prototype_UI" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
