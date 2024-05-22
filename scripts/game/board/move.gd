@@ -15,6 +15,8 @@ var gives_extra_turn : bool ## Whether move gives player an extra turn
 var is_from_central_safe : bool  ## Whether [member from] is a safe spot at the central/shared part of the track
 var is_to_central_safe : bool  ## Whether [member to] is a safe spot at the central/shared part of the track
 var from_track_pos : float ## Position of the [member from] spot in the track, as a value between 0 and 1.
+var is_from_central: bool  ## Whether [member from] is at the central/shared part of the track
+var is_to_central: bool  ## Whether [member to] is at the central/shared part of the track
 var num_opo_pieces_ahead: int ## Number of opponent pieces ahead of the 'from' spot.
 var safety_score: float ## Higher score means this moves pieces to a more safe spot.
 
@@ -50,8 +52,8 @@ func _init(board : Board, player : int, from : Spot, to : Spot):
 	
 	gives_extra_turn = to.give_extra_turn
 	
-	is_from_central_safe = from.is_safe and not _board.is_spot_exclusive(from)
-	is_to_central_safe = to.is_safe and not _board.is_spot_exclusive(to)
+	is_from_central = not _board.is_spot_exclusive(from)
+	is_to_central = not _board.is_spot_exclusive(to)
 	
 	from_track_pos = float(track.find(from) + 1) / float(track.size())
 	
