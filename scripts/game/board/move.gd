@@ -3,20 +3,21 @@ class_name Move
 
 signal execution_finished
 
-var player : int ## Player making the move.
-var from : Spot ## Spot where the move is coming from.
-var to : Spot ## Spot where the move is going to.
-var pieces_in_from : Array[Piece] ## Pieces placed in the [member from] spot (before execution).
-var pieces_in_to : Array[Piece] ## Pieces placed in the [member to] spot (before execution). 
-var knocks_opo : bool ## Whether knocks out opponent.
-var moves_to_end : bool ## Whether [member to] is the end of the track.
-var wins : bool ## Whether move wins the game.
-var gives_extra_turn : bool ## Whether move gives player an extra turn
-var is_from_central_safe : bool  ## Whether [member from] is a safe spot at the central/shared part of the track
-var is_to_central_safe : bool  ## Whether [member to] is a safe spot at the central/shared part of the track
-var from_track_pos : float ## Position of the [member from] spot in the track, as a value between 0 and 1.
+## Base danger value for spots that are shared between both players' paths, and are not 100% safe.
+const BASE_SHARED_SPOT_DANGER_SCORE: float = 0.1
+
+var player: int ## Player making the move.
+var from: Spot ## Spot where the move is coming from.
+var to: Spot ## Spot where the move is going to.
+var pieces_in_from: Array[Piece] ## Pieces placed in the [member from] spot (before execution).
+var pieces_in_to: Array[Piece] ## Pieces placed in the [member to] spot (before execution). 
+var knocks_opo: bool ## Whether knocks out opponent.
+var moves_to_end: bool ## Whether [member to] is the end of the track.
+var wins: bool ## Whether move wins the game.
+var gives_extra_turn: bool ## Whether move gives player an extra turn
 var is_from_central: bool  ## Whether [member from] is at the central/shared part of the track
 var is_to_central: bool  ## Whether [member to] is at the central/shared part of the track
+var from_track_pos: float ## Position of the [member from] spot in the track, as a value between 0 and 1.
 var num_opo_pieces_ahead: int ## Number of opponent pieces ahead of the 'from' spot.
 var safety_score: float ## Higher score means this moves pieces to a more safe spot.
 
@@ -59,7 +60,7 @@ func _init(board : Board, player : int, from : Spot, to : Spot):
 	
 	num_opo_pieces_ahead = _get_num_opponent_pieces_ahead()
 	
-	safety_score = _calculate_capture_chance(from) - _calculate_capture_chance(to)
+	safety_score = _calculate_danger_score(from) - _calculate_danger_score(to)
 
 
 ## Updated the board state accordingly, and optionally can play piece movement animations.
@@ -131,8 +132,7 @@ func _get_num_opponent_pieces_ahead() -> int:
 
 
 # 0 -> safe spot, 1 -> can be captured with any roll
-# WARNING: MIGHT NEED CLEAR UP, code is a bit confusing. Is capture change sum guaranteed max of 1?
-func _calculate_capture_chance(spot: Spot) -> float:
+func _calculate_danger_score(spot: Spot) -> float:
 	# Give score of 0 when landing_spot is 100% safe. 
 	if spot.is_safe or _board.is_spot_exclusive(spot):
 		return 0
@@ -141,12 +141,15 @@ func _calculate_capture_chance(spot: Spot) -> float:
 	var index = _board.get_track(player).find(spot)
 	var opponent_id = General.get_opponent(player) 
 	
-	# Check the 4 tiles before this spot for opponent pieces
-	for i in range(1, 5):
+	# Check the tiles before this spot for opponent pieces
+	for i in range(1, Settings.num_dice + 1):
 		var temp_spot = _board.get_track(opponent_id)[index - i] as Spot
 		var contains_opponent = _board.is_spot_occupied_by_player(temp_spot, opponent_id)
 		if contains_opponent:
-			var capture_chance = DiceProbabilities.get_probability_of_value(i, Settings.num_dice)
+			var capture_chance = General.get_probability_of_value(i, Settings.num_dice)
 			total_capture_chance += capture_chance
 	
-	return total_capture_chance
+	# BASE_DANGER_SCORE is a simplified way of saying that even if direct chance of capture is 0,
+	# the opponent might get an extra roll, instead of actually calculating the chances
+	# of getting an extra roll.
+	return BASE_SHARED_SPOT_DANGER_SCORE + total_capture_chance
