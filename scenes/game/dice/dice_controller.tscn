@@ -180,6 +180,7 @@ _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
 
 [node name="Floor_Collider_P1" type="StaticBody3D" parent="DiceArea_P1" groups=["Ground"]]
+input_ray_pickable = false
 physics_material_override = ExtResource("7_qou2u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P1/Floor_Collider_P1"]
@@ -313,6 +314,7 @@ _effect_duration = 1.4
 _effect_curve = SubResource("Curve_wrwgg")
 
 [node name="Floor_Collider_P2" type="StaticBody3D" parent="DiceArea_P2" groups=["Ground"]]
+input_ray_pickable = false
 physics_material_override = ExtResource("7_qou2u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DiceArea_P2/Floor_Collider_P2"]

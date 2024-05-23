@@ -5,6 +5,8 @@ signal play_pressed
 signal fadeout_finished
 
 @export var _fading_duration = 2.5
+@export var _hotseat_scene: PackedScene = preload("res://scenes/game/hotseat.tscn")
+
 @onready var _main_menu = $"Main Menu" as Control
 @onready var _fade_panel = $Fade_Panel as ColorRect
 
@@ -37,3 +39,8 @@ func _on_play_pressed():
 	visible = false
 	_main_menu.visible = false
 	play_pressed.emit()
+
+
+func _on_hotseat_pressed():
+	#get_tree().unload_current_scene()
+	get_tree().change_scene_to_packed(_hotseat_scene)

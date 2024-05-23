@@ -18,7 +18,8 @@ var current_player : int
 
 func _ready():
 	p1_move_picker.move_executed.connect(_on_move_executed)
-	p2_move_picker.move_executed.connect(_on_move_executed)
+	## In case p1 and p2 use the same MovePicker, do CONNECT_REFERENCE_COUNTED
+	p2_move_picker.move_executed.connect(_on_move_executed, CONNECT_REFERENCE_COUNTED)
 	dice.roll_finished.connect(_on_roll_ended)
 
 

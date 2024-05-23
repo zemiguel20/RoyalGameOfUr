@@ -1,29 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://hcad14f7py6i"]
+[gd_scene load_steps=4 format=3 uid="uid://hcad14f7py6i"]
 
 [ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="1_wtptb"]
+[ext_resource type="Theme" uid="uid://doy1wmiu17ppq" path="res://themes/main_menu_theme.tres" id="2_muwpp"]
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="2_s6jec"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k58kw"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ttc2"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lt74h"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6wjab"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_84i4a"]
-
-[sub_resource type="Theme" id="Theme_q1r3c"]
-Button/colors/font_color = Color(1, 0.686275, 0, 1)
-Button/colors/font_hover_color = Color(1, 0.764706, 0, 1)
-Button/colors/font_hover_pressed_color = Color(0.986026, 0.753848, 0, 1)
-Button/colors/font_pressed_color = Color(0.984314, 0.752941, 0, 1)
-Button/font_sizes/font_size = 100
-Button/styles/disabled = SubResource("StyleBoxEmpty_k58kw")
-Button/styles/focus = SubResource("StyleBoxEmpty_3ttc2")
-Button/styles/hover = SubResource("StyleBoxEmpty_lt74h")
-Button/styles/normal = SubResource("StyleBoxEmpty_6wjab")
-Button/styles/pressed = SubResource("StyleBoxEmpty_84i4a")
 
 [node name="Prototype_UI" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -45,21 +24,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="Button" parent="Main Menu"]
+[node name="MarginContainer" type="MarginContainer" parent="Main Menu"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -205.0
-offset_top = -75.0
-offset_right = 197.0
-offset_bottom = 89.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_q1r3c")
-text = "Play"
+theme_override_constants/margin_top = 395
+theme_override_constants/margin_bottom = 325
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Play" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_muwpp")
+text = "Singleplayer"
+
+[node name="Hotseat" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_muwpp")
+theme_override_font_sizes/font_size = 90
+text = "Multiplayer"
 
 [node name="Quit" type="Button" parent="Main Menu"]
 layout_mode = 1
@@ -74,10 +62,10 @@ offset_right = -20.0
 offset_bottom = -17.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = SubResource("Theme_q1r3c")
+theme = ExtResource("2_muwpp")
 text = "Quit"
 script = ExtResource("2_s6jec")
 
-[connection signal="pressed" from="Main Menu/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Main Menu/Play" to="." method="_on_game_started"]
+[connection signal="pressed" from="Main Menu/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Main Menu/MarginContainer/VBoxContainer/Hotseat" to="." method="_on_hotseat_pressed"]
 [connection signal="pressed" from="Main Menu/Quit" to="Main Menu/Quit" method="_on_pressed"]

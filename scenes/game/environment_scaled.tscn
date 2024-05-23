@@ -56,6 +56,7 @@ visible = false
 [node name="Camera3D" parent="Environment" index="3"]
 transform = Transform3D(0.231883, -0.108052, 0.0863428, 0.00651993, 0.176902, 0.203871, -0.138159, -0.173004, 0.154537, 0.872157, 0.113499, 1.44488)
 visible = false
+current = false
 
 [node name="Table" parent="Environment" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27508, -0.0732401, 0.195189)

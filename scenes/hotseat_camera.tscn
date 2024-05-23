@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://h02ggg0io0d2"]
+
+[node name="Camera3D" type="Camera3D"]
+transform = Transform3D(-0.529919, -0.848048, -3.70694e-08, 0, -4.37114e-08, 1, -0.848048, 0.529919, 2.31635e-08, 4.48452, 0.0824035, 6.36487)
+current = true
