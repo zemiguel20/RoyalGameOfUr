@@ -61,7 +61,9 @@ transform = Transform3D(-0.523986, -0.851727, -3.72302e-08, 0, -4.37114e-08, 1, 
 
 [node name="Game_UI" parent="." instance=ExtResource("5_r7crt")]
 
+[connection signal="game_ended" from="Boardgame_Hotseat/GameStateController" to="Game_UI" method="_on_game_ended"]
 [connection signal="no_moves" from="Boardgame_Hotseat/GameStateController" to="Boardgame_Hotseat/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
+[connection signal="fadeout_finished" from="Game_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 
 [editable path="Boardgame_Hotseat"]
 [editable path="Boardgame_Hotseat/Board"]
