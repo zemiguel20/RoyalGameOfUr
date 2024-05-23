@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi82twr2yasvy"]
+
+[ext_resource type="Script" path="res://scripts/ui/fade_panel.gd" id="1_q3ds5"]
+
+[node name="Game_UI" type="CanvasLayer"]
+follow_viewport_enabled = true
+script = ExtResource("1_q3ds5")
+
+[node name="Fade_Panel" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)

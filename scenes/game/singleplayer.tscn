@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
-[ext_resource type="PackedScene" uid="uid://hcad14f7py6i" path="res://scenes/ui/main_menu.tscn" id="6_edgbl"]
+[ext_resource type="PackedScene" uid="uid://bi82twr2yasvy" path="res://scenes/ui/game_ui.tscn" id="6_q02o6"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
@@ -13,8 +13,8 @@ script/source = "extends Node
 func _input(event):
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_R:
 		get_tree().reload_current_scene()
-
-
+		
+		
 func _on_prototype_ui_fadeout_finished():
 	get_tree().reload_current_scene()
 "
@@ -97,9 +97,9 @@ _ease_type = 1
 [node name="Opponent_Guard_Animated" parent="." instance=ExtResource("7_tegfk")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
 
-[node name="Main_UI" parent="." instance=ExtResource("6_edgbl")]
+[node name="Game_UI" parent="." instance=ExtResource("6_q02o6")]
 
-[connection signal="game_ended" from="Boardgame/GameStateController" to="Main_UI" method="_on_game_ended"]
+[connection signal="game_ended" from="Boardgame/GameStateController" to="Game_UI" method="_on_game_ended"]
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
 [connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
 [connection signal="on_play_dialogue" from="Boardgame/AIMovePicker" to="Opponent_Guard_Animated" method="play_dialog"]
@@ -110,8 +110,7 @@ transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.
 [connection signal="on_opponent_ready" from="Opponent_Guard_Animated" to="Custom_Camera" method="_on_play_pressed"]
 [connection signal="on_prevent_opponent_action" from="Opponent_Guard_Animated/DialogueSystem/DialogueSequencePlayer" to="Boardgame/AIRoller" method="_disable_rolling"]
 [connection signal="on_resume_opponent_action" from="Opponent_Guard_Animated/DialogueSystem/DialogueSequencePlayer" to="Boardgame/AIRoller" method="_enable_rolling"]
-[connection signal="fadeout_finished" from="Main_UI" to="." method="_on_prototype_ui_fadeout_finished"]
-[connection signal="play_pressed" from="Main_UI" to="Opponent_Guard_Animated" method="_on_play_pressed"]
+[connection signal="fadeout_finished" from="Game_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 
 [editable path="Boardgame"]
 [editable path="Boardgame/Board"]

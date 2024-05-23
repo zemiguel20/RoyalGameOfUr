@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2frxyvssdycg"]
+
+[ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_2ebqo"]
+[ext_resource type="PackedScene" uid="uid://hcad14f7py6i" path="res://scenes/ui/main_menu_ui.tscn" id="6_mefj5"]
+
+[node name="MainMenu" type="Node"]
+
+[node name="Menu_UI" parent="." instance=ExtResource("6_mefj5")]
+
+[node name="Environment" parent="." instance=ExtResource("1_2ebqo")]
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
+current = true

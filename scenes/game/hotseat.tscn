@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0powse8h8176"]
+[gd_scene load_steps=7 format=3 uid="uid://c0powse8h8176"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_3clkv"]
 [ext_resource type="PackedScene" uid="uid://dqtfd40ylflpl" path="res://scenes/boardgame_hotseat.tscn" id="2_bsplm"]
-[ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="5_dymc1"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="5_np066"]
-[ext_resource type="Theme" uid="uid://doy1wmiu17ppq" path="res://themes/main_menu_theme.tres" id="6_56kx8"]
-[ext_resource type="PackedScene" uid="uid://h02ggg0io0d2" path="res://scenes/hotseat_camera.tscn" id="6_gmnos"]
-[ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="7_o7or0"]
+[ext_resource type="PackedScene" uid="uid://bi82twr2yasvy" path="res://scenes/ui/game_ui.tscn" id="5_r7crt"]
+[ext_resource type="PackedScene" uid="uid://i35i8p3tlk8v" path="res://scenes/hotseat_camera.tscn" id="6_gmnos"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -61,74 +59,9 @@ _dialogue_groups = Array[Resource("res://scripts/dialogue_system/data/dialogue_g
 [node name="Camera_Hotseat" parent="." instance=ExtResource("6_gmnos")]
 transform = Transform3D(-0.523986, -0.851727, -3.72302e-08, 0, -4.37114e-08, 1, -0.851727, 0.523986, 2.29042e-08, 4.47144, 0.0824035, 6.34394)
 
-[node name="Main_UI" type="CanvasLayer" parent="."]
-visible = false
-follow_viewport_enabled = true
-script = ExtResource("5_dymc1")
-_hotseat_scene = null
+[node name="Game_UI" parent="." instance=ExtResource("5_r7crt")]
 
-[node name="Fade_Panel" type="ColorRect" parent="Main_UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-
-[node name="Main Menu" type="Control" parent="Main_UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Main_UI/Main Menu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_top = 395
-theme_override_constants/margin_bottom = 325
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Main_UI/Main Menu/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 50
-
-[node name="Play" type="Button" parent="Main_UI/Main Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_56kx8")
-text = "Singleplayer"
-
-[node name="Hotseat" type="Button" parent="Main_UI/Main Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_56kx8")
-theme_override_font_sizes/font_size = 90
-text = "Multiplayer"
-
-[node name="Quit" type="Button" parent="Main_UI/Main Menu"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -229.0
-offset_top = -154.0
-offset_right = -20.0
-offset_bottom = -17.0
-grow_horizontal = 0
-grow_vertical = 0
-theme = ExtResource("6_56kx8")
-text = "Quit"
-script = ExtResource("7_o7or0")
-
-[connection signal="game_ended" from="Boardgame_Hotseat/GameStateController" to="Main_UI" method="_on_game_ended"]
 [connection signal="no_moves" from="Boardgame_Hotseat/GameStateController" to="Boardgame_Hotseat/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
-[connection signal="pressed" from="Main_UI/Main Menu/MarginContainer/VBoxContainer/Hotseat" to="Main_UI" method="_on_hotseat_pressed"]
-[connection signal="pressed" from="Main_UI/Main Menu/Quit" to="Main_UI/Main Menu/Quit" method="_on_pressed"]
 
 [editable path="Boardgame_Hotseat"]
 [editable path="Boardgame_Hotseat/Board"]

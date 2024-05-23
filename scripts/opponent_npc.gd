@@ -28,6 +28,7 @@ var _tutorial_categories_had: Array[DialogueSystem.Category]
 
 func _ready():
 	visible = false
+	_on_play_pressed()
 	
 
 func _process(delta):
@@ -93,9 +94,3 @@ func _on_play_pressed():
 	await _play_story_dialogue()
 	_is_timer_active = true	
 	on_opponent_ready.emit()
-	
-	
-## Reactions for now: Knockout? Debug Button. No Moves?
-func _input(event):
-	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:
-		_play_interruption(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
