@@ -42,5 +42,4 @@ func _on_play_pressed():
 
 
 func _on_hotseat_pressed():
-	#get_tree().unload_current_scene()
 	get_tree().change_scene_to_packed(_hotseat_scene)

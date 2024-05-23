@@ -11,7 +11,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_84i4a"]
 
 [resource]
-Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_color = Color(0.918665, 0.701511, 1.15514e-06, 1)
 Button/colors/font_hover_color = Color(1, 0.764706, 0, 1)
 Button/colors/font_hover_pressed_color = Color(0.986026, 0.753848, 0, 1)
 Button/colors/font_pressed_color = Color(0.984314, 0.752941, 0, 1)

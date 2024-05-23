@@ -43,6 +43,10 @@ transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 
 transform = Transform3D(1.499, 0, -1.19209e-07, 0, 1.499, 0, 1.19209e-07, 0, 1.499, 1.52588e-05, -2.51884, -1.33685)
 input_ray_pickable = true
 
+[node name="Label3D_Outcome_P1" parent="Boardgame_Hotseat/Dice/DiceArea_P1" index="4"]
+transform = Transform3D(-2.98023e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 2.98023e-08, 0, 5.33434, -3.51484, -11.5322)
+font_size = 65
+
 [node name="ClickHitbox_P2" parent="Boardgame_Hotseat/Dice/DiceArea_P2" index="3"]
 transform = Transform3D(1.499, 0, -5.96046e-08, 0, 1.499, 0, 5.96046e-08, 0, 1.499, 0, -2.00383, 0)
 input_ray_pickable = true
@@ -121,6 +125,8 @@ theme = ExtResource("6_56kx8")
 text = "Quit"
 script = ExtResource("7_o7or0")
 
+[connection signal="game_ended" from="Boardgame_Hotseat/GameStateController" to="Main_UI" method="_on_game_ended"]
+[connection signal="no_moves" from="Boardgame_Hotseat/GameStateController" to="Boardgame_Hotseat/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
 [connection signal="pressed" from="Main_UI/Main Menu/MarginContainer/VBoxContainer/Hotseat" to="Main_UI" method="_on_hotseat_pressed"]
 [connection signal="pressed" from="Main_UI/Main Menu/Quit" to="Main_UI/Main Menu/Quit" method="_on_pressed"]
 
