@@ -1,9 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2frxyvssdycg"]
+[gd_scene load_steps=4 format=3 uid="uid://c2frxyvssdycg"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_2ebqo"]
 [ext_resource type="PackedScene" uid="uid://hcad14f7py6i" path="res://scenes/ui/main_menu_ui.tscn" id="6_mefj5"]
 
+[sub_resource type="GDScript" id="GDScript_tc4ph"]
+script/source = "extends Node
+
+func _ready():
+	## For testing and debugging, it is nice to still use a smaller window.
+	## However, we do want the resolution to be 1920x1080, and take that as a base for the UI.
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_size(Vector2(1152, 648))
+	DisplayServer.window_set_position(DisplayServer.screen_get_size()/2 - Vector2i(1152, 648)/2)
+"
+
 [node name="MainMenu" type="Node"]
+script = SubResource("GDScript_tc4ph")
 
 [node name="Menu_UI" parent="." instance=ExtResource("6_mefj5")]
 

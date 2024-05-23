@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bi82twr2yasvy"]
+[gd_scene load_steps=5 format=3 uid="uid://bi82twr2yasvy"]
 
 [ext_resource type="Script" path="res://scripts/ui/fade_panel.gd" id="1_q3ds5"]
+[ext_resource type="Script" path="res://scenes/ui/game_ui.gd" id="1_xl00h"]
+[ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="2_4xeks"]
+[ext_resource type="Theme" uid="uid://doy1wmiu17ppq" path="res://themes/main_menu_theme.tres" id="2_re0fq"]
 
 [node name="Game_UI" type="CanvasLayer"]
 follow_viewport_enabled = true
-script = ExtResource("1_q3ds5")
+script = ExtResource("1_xl00h")
 
 [node name="Fade_Panel" type="ColorRect" parent="."]
 visible = false
@@ -14,3 +17,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
+script = ExtResource("1_q3ds5")
+
+[node name="Pause_Menu" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.505882)
+script = ExtResource("2_4xeks")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause_Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 395
+theme_override_constants/margin_bottom = 325
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause_Menu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Continue" type="Button" parent="Pause_Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_re0fq")
+text = "Continue"
+
+[node name="Return" type="Button" parent="Pause_Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_re0fq")
+text = "Main Menu"
+
+[node name="Restart" type="Button" parent="Pause_Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_re0fq")
+text = "Restart"
+
+[node name="Quit" type="Button" parent="Pause_Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_re0fq")
+text = "Quit"
+
+[connection signal="pressed" from="Pause_Menu/MarginContainer/VBoxContainer/Continue" to="Pause_Menu" method="_on_continue_pressed"]
+[connection signal="pressed" from="Pause_Menu/MarginContainer/VBoxContainer/Return" to="Pause_Menu" method="_on_return_pressed"]
+[connection signal="pressed" from="Pause_Menu/MarginContainer/VBoxContainer/Restart" to="Pause_Menu" method="_on_restart_pressed"]
+[connection signal="pressed" from="Pause_Menu/MarginContainer/VBoxContainer/Quit" to="Pause_Menu" method="_on_quit_pressed"]
