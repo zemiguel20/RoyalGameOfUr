@@ -1,5 +1,5 @@
-class_name MovableComponent extends Node
-## Provides simple movement animations.
+class_name MoveAnimation extends Node
+## Provides simple movement animations. Target positions are in global coordinates.
 
 
 signal movement_finished
@@ -16,20 +16,20 @@ var arc_height: float = 1.0
 var duration: float = 1.0
 
 
-## Moves the target to the target point [param target_pos], in global coordinates.
+## Moves the object to the target point [param target_pos], in global coordinates.
 ## An animation [param anim] can be specified.
-func move(target_pos: Vector3, anim := General.MoveAnim.NONE) -> void:
+func play(target_pos: Vector3, anim := General.MoveAnim.NONE) -> void:
 	match anim:
 		General.MoveAnim.ARC:
-			move_arc(target_pos)
+			play_arc(target_pos)
 		General.MoveAnim.LINE:
-			move_line(target_pos)
+			play_line(target_pos)
 		_:
 			root_parent.global_position = target_pos
 			(func(): movement_finished.emit()).call_deferred()
 
 
-func move_arc(target_pos: Vector3):
+func play_arc(target_pos: Vector3):
 	# Linear translation of X and Z
 	var tween_xz = create_tween()
 	tween_xz.bind_node(self).set_parallel(true)
@@ -51,7 +51,7 @@ func move_arc(target_pos: Vector3):
 	movement_finished.emit()
 
 
-func move_line(target_pos: Vector3):
+func play_line(target_pos: Vector3):
 	var tween = create_tween().bind_node(self)
 	tween.set_trans(Tween.TRANS_QUINT)
 	tween.set_ease(Tween.EASE_OUT)

@@ -4,13 +4,6 @@ extends Node3D
 ## Used as a selection target for the moves. Also has highlight effects.
 
 
-## Emitted when the mouse enters the spot.
-signal mouse_entered
-## Emitted when the mouse leaves the spot.
-signal mouse_exited
-## Emitted when the spot is clicked/selected.
-signal selected
-
 ## If true, the pieces in this spot cannot get knocked out.
 @export var is_safe: bool = false
 
@@ -20,27 +13,10 @@ signal selected
 ## If true, always allows stacking, independent of settings.
 @export var force_allow_stack: bool = false
 
-@onready var _highlighter := $Highlighter as MaterialHighlighterComponent
+var highlight: MaterialHighlight
+var input: SelectionInputReader
 
 
-## Updates the highlight state. [param active] sets the active state of the effect, and
-## [param color] sets the color of the effect.
-func set_highlight(active : bool, color := Color.WHITE) -> void:
-	if not _highlighter:
-		return
-	
-	_highlighter.highlight_color = color
-	_highlighter.active = active
-
-
-func _on_mouse_entered():
-	mouse_entered.emit()
-
-
-func _on_mouse_exited():
-	mouse_exited.emit()
-
-
-func _on_input_event(_camera, event : InputEvent, _position, _normal, _shape_idx):
-	if event.is_action_pressed("game_spot_select"):
-		selected.emit()
+func _ready():
+	highlight = get_node(get_meta("highlight")) as MaterialHighlight
+	input = get_node(get_meta("input")) as SelectionInputReader

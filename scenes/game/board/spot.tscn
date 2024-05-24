@@ -1,18 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjv3ocjvay3hx"]
 
 [ext_resource type="Script" path="res://scripts/game/board/spot.gd" id="1_mlgru"]
-[ext_resource type="Script" path="res://scripts/game/components/material_highlighter.gd" id="2_7basv"]
-[ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_tbfc8"]
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q5ogc"]
-data = PackedVector3Array(0.015, 0, 0.015, -0.015, 0, 0.015, 0.015, 0, -0.015, -0.015, 0, 0.015, -0.015, 0, -0.015, 0.015, 0, -0.015)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdq40"]
-resource_local_to_scene = true
-render_priority = 10
-shader = ExtResource("3_tbfc8")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/alpha = 0.25
+[ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="2_7basv"]
+[ext_resource type="Material" uid="uid://c6p7a2gj4s6bg" path="res://materials/highlight.tres" id="3_om2m3"]
+[ext_resource type="Script" path="res://scripts/game/components/selection_input.gd" id="4_e4p30"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0xytr"]
 size = Vector2(0.03, 0.03)
@@ -21,24 +12,29 @@ size = Vector2(0.03, 0.03)
 transparency = 1
 albedo_color = Color(1, 1, 1, 0)
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q5ogc"]
+data = PackedVector3Array(0.015, 0, 0.015, -0.015, 0, 0.015, 0.015, 0, -0.015, -0.015, 0, 0.015, -0.015, 0, -0.015, 0.015, 0, -0.015)
+
 [node name="Spot" type="Node3D"]
 script = ExtResource("1_mlgru")
+metadata/highlight = NodePath("Highlight")
+metadata/input = NodePath("SelectionInputReader")
 
-[node name="SelectionHitbox" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionHitbox"]
-shape = SubResource("ConcavePolygonShape3D_q5ogc")
-
-[node name="Highlighter" type="Node" parent="." node_paths=PackedStringArray("meshes_to_highlight")]
+[node name="Highlight" type="Node" parent="." node_paths=PackedStringArray("target_meshes")]
 script = ExtResource("2_7basv")
-highlight_material = SubResource("ShaderMaterial_kdq40")
-meshes_to_highlight = [NodePath("../HighlightMesh")]
+material = ExtResource("3_om2m3")
+target_meshes = [NodePath("../HighlightMesh")]
 
 [node name="HighlightMesh" type="MeshInstance3D" parent="."]
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_0xytr")
 surface_material_override/0 = SubResource("StandardMaterial3D_s762x")
 
-[connection signal="input_event" from="SelectionHitbox" to="." method="_on_input_event"]
-[connection signal="mouse_entered" from="SelectionHitbox" to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="SelectionHitbox" to="." method="_on_mouse_exited"]
+[node name="SelectionInputReader" type="Node" parent="." node_paths=PackedStringArray("input_detection_area")]
+script = ExtResource("4_e4p30")
+input_detection_area = NodePath("../SelectionArea")
+
+[node name="SelectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionArea"]
+shape = SubResource("ConcavePolygonShape3D_q5ogc")
