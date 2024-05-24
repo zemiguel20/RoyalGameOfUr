@@ -39,7 +39,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector
 point_count = 4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iof8i"]
-size = Vector3(10.6155, 1, 8.46777)
+size = Vector3(16.4658, 1, 6.01587)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3iugv"]
 size = Vector3(6, 3.83289, 3.69043)
