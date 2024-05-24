@@ -1,6 +1,7 @@
 class_name PauseMenu
 extends Control
 
+## Only load this scene when we need it, to prevent an infinite loop of scenes preloading each other.
 @export var _main_menu: PackedScene = load("res://scenes/game/main_menu.tscn")
 var _is_paused := false
 
