@@ -7,15 +7,16 @@ signal roll_finished(value: int)
 @export_category("Throwing Physics")
 ## Magnitude of the throwing force applied to this die when starting a roll.
 @export var _throwing_force_magnitude: float = 1.0
-@export var _min_reroll_force_multiplier: float = 0.2
+@export var _min_reroll_force_multiplier: float = 0.35
 @export var _max_reroll_force_multiplier: float = 0.5
-
 
 @export_category("Extras")
 @export var _floor_group: String = "Ground"
 @export var _mass_on_ground_multiplier: float = 2
 @export var _down_accuracy_threshold: float = 0.8
-@export var _velocity_threshold: float = 0.05
+## For each roll, dice are not allowed to evaluate their roll before this duration has passed.
+## This makes sure that there will not be any early rerolls
+@export var _min_roll_time: float = 1.0
 #endregion
 
 #region Onready Variables
@@ -30,10 +31,13 @@ var _mass_on_ground
 var _roll_value
 
 var _throwing_position
-var _is_rolling
+var _is_rolling := false
+var _is_grounded := false
 #endregion
 
 func _ready():
+	_rolling_timer.timeout.connect(_on_movement_stopped)
+	
 	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
 	freeze = true
 	gravity_scale *= global_basis.get_scale().y
@@ -65,6 +69,7 @@ func outline_if_one() -> void:
 		
 func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	# Set some local variables
+	_is_rolling = false
 	_throwing_position = throwing_spot
 	
 	# Set position and rotation
@@ -74,33 +79,28 @@ func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	# Unfreeze the body to apply the throwing force.
 	mass = _default_mass
 	freeze = false
+	_is_grounded = false
 	_apply_throwing_force(throwing_spot, is_reroll)
-	
-	# Wait a short while before setting _is_rolling to true.
-	# Immediately setting will trigger _on_movement_stopped with sleeping = false,
-	# but since we set _is_rolling the same frame, the function will not return.
-	await get_tree().create_timer(0.05).timeout
-	_is_rolling = true
 	
 	# A timer specifying a maximum rolling duration.
 	# If the 'rolling' did not stop already, it will stop after the timer and roll again.
 	# Stuck timer prevents infinite waiting for small movements
 	_rolling_timer.start()
 	
+	# Wait a short while before setting _is_rolling to true.
+	# Immediately setting will trigger _on_movement_stopped with sleeping = false,
+	# but since we set _is_rolling the same frame, the function will not return.
 	
-## Changing the collision state should be done in _physics_process.
-func _physics_process(_delta):
-	if linear_velocity.length() < _velocity_threshold * global_basis.get_scale().x \
-		and angular_velocity.length() < _velocity_threshold * global_basis.get_scale().x \
-		and _is_rolling \
-		and mass == _mass_on_ground:
+	await get_tree().create_timer(_min_roll_time).timeout
+	_is_rolling = true
+	if sleeping and _is_grounded:
 		_on_movement_stopped()
 	
 
 ## Triggers when the sleeping state of the rigidbody is changed.
 ## Checks the rolled value, and decides to either reroll or freeze and emit their value.
 func _on_movement_stopped():
-	if not _is_rolling:
+	if not _is_rolling or not _is_grounded:
 		return
 
 	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep.
@@ -113,8 +113,10 @@ func _on_movement_stopped():
 		roll(_throwing_position, true)
 	# Else, reset some values and emit a signal.
 	else:
+		## TODO: Extra
 		_is_rolling = false
-		freeze = true	
+		_is_grounded = false
+		freeze = true
 		mass = _default_mass
 		roll_finished.emit(_roll_value)
 
@@ -122,10 +124,8 @@ func _on_movement_stopped():
 ## Triggers when the rigidbody collides.
 ## Used to increase the mass of a dice when it collides with the floor.
 func _on_body_entered(body):
-	if not _is_rolling:
-		return
-	
 	if body.is_in_group(_floor_group):
+		_is_grounded = true
 		mass = _mass_on_ground
 	
 		
