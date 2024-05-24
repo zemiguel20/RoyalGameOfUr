@@ -32,6 +32,7 @@ var _roll_value
 
 var _throwing_position
 var _is_rolling := false
+var _allow_check_roll := false
 var _is_grounded := false
 #endregion
 
@@ -69,6 +70,8 @@ func outline_if_one() -> void:
 		
 func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	# Set some local variables
+	_is_rolling = true
+	_allow_check_roll = false
 	_throwing_position = throwing_spot
 	
 	# Set position and rotation
@@ -90,22 +93,23 @@ func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	# Immediately setting will trigger _on_movement_stopped with sleeping = false,
 	# but since we set _is_rolling the same frame, the function will not return.
 	
+	# Hier gaat nog steeds iets mis
 	await get_tree().create_timer(_min_roll_time).timeout
-	_is_rolling = true
-	if sleeping and _is_grounded:
+	_allow_check_roll = true
+	if sleeping:
 		_on_movement_stopped()
 	
 
 ## Triggers when the sleeping state of the rigidbody is changed.
 ## Checks the rolled value, and decides to either reroll or freeze and emit their value.
 func _on_movement_stopped():
-	if not _is_rolling or not _is_grounded:
+	if not _is_rolling or not _is_grounded or not _allow_check_roll:
 		return
 
 	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep.
 	
 	# Retrieve roll value,
-	_roll_value = _check_roll_value() 
+	_roll_value = _check_roll_value()
 	
 	# If stuck, roll again.
 	if _roll_value == -1:
