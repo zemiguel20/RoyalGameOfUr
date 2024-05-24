@@ -69,7 +69,6 @@ func outline_if_one() -> void:
 		
 func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	# Set some local variables
-	_is_rolling = false
 	_throwing_position = throwing_spot
 	
 	# Set position and rotation
@@ -113,9 +112,7 @@ func _on_movement_stopped():
 		roll(_throwing_position, true)
 	# Else, reset some values and emit a signal.
 	else:
-		## TODO: Extra
 		_is_rolling = false
-		_is_grounded = false
 		freeze = true
 		mass = _default_mass
 		roll_finished.emit(_roll_value)
@@ -144,12 +141,12 @@ func _get_random_rotation() -> Basis:
 func _apply_throwing_force(dice_spot: DiceSpot, is_reroll: bool = false):
 	var throw_direction = dice_spot.get_direction()
 	var multiplier = dice_spot.throwing_velocity_multiplier
-	var throw_force = throw_direction * _throwing_force_magnitude * global_basis.get_scale().x * multiplier
+	var throw_velocity = throw_direction * _throwing_force_magnitude * global_basis.get_scale().x * multiplier
 	if is_reroll:
-		throw_force *= randf_range(_min_reroll_force_multiplier, _max_reroll_force_multiplier)
+		throw_velocity *= randf_range(_min_reroll_force_multiplier, _max_reroll_force_multiplier)
 	
 	## Setting velocity rather than applying force makes sure that the forces are not additive.
-	linear_velocity = throw_force
+	linear_velocity = throw_velocity
 	
 
 ## Loop through all normals in the dice to check how much they are facing down.

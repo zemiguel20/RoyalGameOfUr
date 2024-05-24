@@ -48,6 +48,7 @@ size = Vector3(6, 3.83289, 3.69043)
 script = ExtResource("1_ka5gv")
 _die_scene = ExtResource("2_66rme")
 _roll_shaking_enabled = true
+_arc_height = 0.1
 
 [node name="DiceArea_P1" type="Node3D" parent="."]
 transform = Transform3D(0.026, 0, 1.54972e-09, 0, 0.026, 0, -1.54972e-09, 0, 0.026, 0, 0.1, 0.21102)
