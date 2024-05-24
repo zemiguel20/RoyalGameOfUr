@@ -101,6 +101,9 @@ _best_move_weight = 15
 _second_move_weight = 4
 _random_move_weight = 1
 
+[node name="MovePicker" parent="Boardgame" index="4"]
+board_surface_y = -0.187
+
 [node name="AIRoller" parent="Boardgame" node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("9_m0jtg")]
 _dice = NodePath("../Dice")
 _move_picker = NodePath("../MovePicker")
@@ -108,6 +111,8 @@ _move_picker = NodePath("../MovePicker")
 [node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
 max_degrees_down = 50.0
+max_degrees_left = 45.0
+max_degrees_right = 45.0
 _board_look_rotation = Vector3(-35, 32, 0)
 _trans_type = 1
 _ease_type = 1
@@ -171,13 +176,21 @@ transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.
 [connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
 [connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
+[connection signal="on_play_dialogue" from="Boardgame/AIMovePicker" to="Opponent_Guard_Animated" method="play_dialog"]
+[connection signal="on_play_tutorial_dialogue" from="Boardgame/AIMovePicker" to="Opponent_Guard_Animated" method="play_tutorial_dialog"]
+[connection signal="on_play_dialogue" from="Boardgame/MovePicker" to="Opponent_Guard_Animated" method="play_dialog"]
+[connection signal="on_play_tutorial_dialogue" from="Boardgame/MovePicker" to="Opponent_Guard_Animated" method="play_tutorial_dialog"]
+[connection signal="on_intro_ended" from="Custom_Camera" to="Boardgame/GameStateController" method="start_game"]
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
-[connection signal="play_pressed" from="Prototype_UI" to="Custom_Camera" method="_on_play_pressed"]
-[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Boardgame/GameStateController" method="start_game"]
+[connection signal="play_pressed" from="Prototype_UI" to="Opponent_Guard_Animated" method="_on_play_pressed"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_play_pressed"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Quit" to="Prototype_UI/Main Menu/Quit" method="_on_pressed"]
+[connection signal="on_opponent_ready" from="Opponent_Guard_Animated" to="Custom_Camera" method="_on_play_pressed"]
+[connection signal="on_prevent_opponent_action" from="Opponent_Guard_Animated/DialogueSystem/DialogueSequencePlayer" to="Boardgame/AIRoller" method="_disable_rolling"]
+[connection signal="on_resume_opponent_action" from="Opponent_Guard_Animated/DialogueSystem/DialogueSequencePlayer" to="Boardgame/AIRoller" method="_enable_rolling"]
 
 [editable path="Boardgame"]
 [editable path="Boardgame/Board"]
 [editable path="Boardgame/Dice"]
+[editable path="Opponent_Guard_Animated"]
