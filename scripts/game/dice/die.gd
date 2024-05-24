@@ -71,7 +71,7 @@ func outline_if_one() -> void:
 func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	# Set some local variables
 	_is_rolling = true
-	_allow_check_roll = false
+	can_sleep = false
 	_throwing_position = throwing_spot
 	
 	# Set position and rotation
@@ -93,17 +93,14 @@ func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 	# Immediately setting will trigger _on_movement_stopped with sleeping = false,
 	# but since we set _is_rolling the same frame, the function will not return.
 	
-	# Hier gaat nog steeds iets mis
 	await get_tree().create_timer(_min_roll_time).timeout
-	_allow_check_roll = true
-	if sleeping:
-		_on_movement_stopped()
+	can_sleep = true
 	
 
 ## Triggers when the sleeping state of the rigidbody is changed.
 ## Checks the rolled value, and decides to either reroll or freeze and emit their value.
 func _on_movement_stopped():
-	if not _is_rolling or not _is_grounded or not _allow_check_roll:
+	if not _is_rolling or not _is_grounded:
 		return
 
 	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep.
@@ -128,8 +125,8 @@ func _on_body_entered(body):
 	if body.is_in_group(_floor_group):
 		_is_grounded = true
 		mass = _mass_on_ground
-	
-		
+
+
 ## Generates a random euler rotation, and return a Basis using this rotation.
 ## NOTE: Move to General if other scripts will use this too.
 func _get_random_rotation() -> Basis:
