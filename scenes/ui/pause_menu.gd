@@ -1,7 +1,7 @@
 class_name PauseMenu
 extends Control
 
-@export var _main_menu: PackedScene = preload("res://scenes/game/main_menu.tscn")
+@export var _main_menu: PackedScene = load("res://scenes/game/main_menu.tscn")
 var _is_paused := false
 
 func toggle():
