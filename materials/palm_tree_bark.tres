@@ -1,0 +1,21 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://74gggyn5naek"]
+
+[ext_resource type="Texture2D" uid="uid://bm3y0cw1vy6u8" path="res://textures/palm_tree/Ur_PalmTreeBark_basecolor.png" id="1_ol7fb"]
+[ext_resource type="Texture2D" uid="uid://87kndw0aowr5" path="res://textures/palm_tree/Ur_PalmTreeBark_ambientocclusion.png" id="2_kqmtw"]
+[ext_resource type="Texture2D" uid="uid://du4axe2s3hbym" path="res://textures/palm_tree/Ur_PalmTreeBark_height.png" id="3_04v5r"]
+[ext_resource type="Texture2D" uid="uid://coblwogdy26vp" path="res://textures/palm_tree/Ur_PalmTreeBark_normal.png" id="4_ulmat"]
+
+[resource]
+cull_mode = 2
+albedo_texture = ExtResource("1_ol7fb")
+emission_enabled = true
+emission = Color(0.215686, 0.117647, 0.0156863, 1)
+emission_energy_multiplier = 0.43
+emission_texture = ExtResource("1_ol7fb")
+normal_enabled = true
+normal_texture = ExtResource("4_ulmat")
+ao_enabled = true
+ao_texture = ExtResource("2_kqmtw")
+heightmap_scale = 3.584
+heightmap_texture = ExtResource("3_04v5r")
+uv1_scale = Vector3(17.885, 13.512, 17.885)
