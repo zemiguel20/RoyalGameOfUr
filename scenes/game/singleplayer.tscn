@@ -50,12 +50,6 @@ script = SubResource("GDScript_fbn4f")
 [node name="Boardgame" parent="." instance=ExtResource("3_xprge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="GameStateController" parent="Boardgame" index="0"]
-_board = null
-p1_move_picker = null
-p2_move_picker = null
-dice = null
-
 [node name="Board" parent="Boardgame" index="1"]
 transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 4.4739, -0.207527, 6.36155)
 
@@ -248,8 +242,6 @@ _random_move_weight = 1
 board_surface_y = -0.187
 
 [node name="AIRoller" parent="Boardgame" instance=ExtResource("9_m0jtg")]
-_dice = null
-_move_picker = null
 
 [node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)

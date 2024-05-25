@@ -821,6 +821,12 @@ transform = Transform3D(8.95425, 0, 0, 0, 8.95425, 0, 0, 0, 8.95425, 0.775986, -
 [node name="Root Scene4" parent="." instance=ExtResource("6_lhkew")]
 transform = Transform3D(8.95425, 0, 0, 0, 8.95425, 0, 0, 0, 8.95425, 0.775986, -0.446341, 0.418504)
 
+[node name="Root Scene9" parent="." instance=ExtResource("6_lhkew")]
+transform = Transform3D(-2.10942e-07, 0, 4.82579, 0, 4.82579, 0, -4.82579, 0, -2.10942e-07, -0.268329, 1.02356, -0.675466)
+
+[node name="Root Scene11" parent="." instance=ExtResource("6_lhkew")]
+transform = Transform3D(4.82579, 0, 0, 0, 4.82579, 0, 0, 0, 4.82579, -1.2064, 1.02356, 0.111351)
+
 [node name="Root Scene7" type="Node3D" parent="."]
 transform = Transform3D(-8.95419, 0, 0.0310998, 0, 8.95425, 0, -0.0310998, 0, -8.95419, 1.02979, -0.446341, 1.17995)
 
@@ -834,4 +840,4 @@ transform = Transform3D(8.95425, 0, 0, 0, 8.95425, 0, 0, 0, 8.95425, 0.775986, -
 transform = Transform3D(-8.9542, 0, 0.0310998, 0, 8.95425, 0, -0.0310998, 0, -8.9542, 1.01317, -0.446341, 1.17419)
 
 [node name="Root Scene10" parent="." instance=ExtResource("7_j7vyo")]
-transform = Transform3D(7.50135, -0.0265939, -0.0230664, 0.0254358, 7.49243, -0.36638, 0.0243377, 0.366298, 7.49244, 1.40941, -0.770684, 1.29751)
+transform = Transform3D(8.05393, -0.0285529, -0.0247656, 0.0273095, 8.04435, -0.393369, 0.0261305, 0.393281, 8.04436, 1.84686, -0.803586, 1.47024)
