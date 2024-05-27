@@ -17,4 +17,7 @@ heightmap_scale = 16.0
 heightmap_texture = ExtResource("2_i7nxc")
 subsurf_scatter_strength = 1.0
 subsurf_scatter_texture = ExtResource("1_7627k")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_7627k")
 disable_receive_shadows = true

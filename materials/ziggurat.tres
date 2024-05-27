@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://b7kttbea1kxco" path="res://textures/ziggurat/ziggurat_walls_Roughness.png" id="4_orfdj"]
 
 [resource]
-cull_mode = 2
 albedo_texture = ExtResource("1_cy2pr")
 roughness_texture = ExtResource("4_orfdj")
 normal_enabled = true
 normal_scale = 0.15
 normal_texture = ExtResource("3_wfkvd")
 ao_enabled = true
+ao_light_affect = 1.0
 ao_texture = ExtResource("2_8hv32")
