@@ -62,6 +62,7 @@ skip_dialogue={
 3d/sleep_threshold_linear=0.001
 3d/sleep_threshold_angular=0.001
 3d/time_before_sleep=0.7
+jolt_3d/sleep/velocity_threshold=0.001
 
 [rendering]
 

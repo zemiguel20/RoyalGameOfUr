@@ -17,6 +17,8 @@ signal roll_finished(value: int)
 ## For each roll, dice are not allowed to evaluate their roll before this duration has passed.
 ## This makes sure that there will not be any early rerolls
 @export var _min_roll_time: float = 1.0
+## If true, dice that have an invalid roll will first try to apply a force on the side closest to the ground.
+@export var _enable_landing_assist := true
 #endregion
 
 #region Onready Variables
@@ -34,9 +36,13 @@ var _throwing_position
 var _is_rolling := false
 var _allow_check_roll := false
 var _is_grounded := false
+
+var _temp_check
 #endregion
 
 func _ready():
+	Engine.time_scale = 3
+	
 	_rolling_timer.timeout.connect(_on_movement_stopped)
 	
 	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
@@ -100,13 +106,17 @@ func roll(throwing_spot: DiceSpot, is_reroll: bool = false) -> void:
 ## Triggers when the sleeping state of the rigidbody is changed.
 ## Checks the rolled value, and decides to either reroll or freeze and emit their value.
 func _on_movement_stopped():
-	if not _is_rolling or not _is_grounded:
+	if not _is_rolling or not _is_grounded or not can_sleep:
 		return
 
+	#print("Movement Stopped with temp_check: ", _temp_check)
+	#print("Movement Stopped with can_sleep: ", can_sleep)
 	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep.
 	
 	# Retrieve roll value,
-	_roll_value = _check_roll_value()
+	_roll_value = -1
+	_roll_value = await _check_roll_value()
+	_temp_check = false
 	
 	# If stuck, roll again.
 	if _roll_value == -1:
@@ -152,18 +162,26 @@ func _apply_throwing_force(dice_spot: DiceSpot, is_reroll: bool = false):
 
 ## Loop through all normals in the dice to check how much they are facing down.
 ## If the most down facing normal is not meeting the requirements of the _down_accuracy_threshold, return -1
-func _check_roll_value():
-	var max_down_accuracy = 0.0
-	var best_value = -1
+func _check_roll_value(is_second_check = false) -> int:
+	var best_down_accuracy = 0.0
+	var best_normal: DiceNormal
 	
 	for normal: DiceNormal in _normal_list:
 		var down_direction = -normal.global_basis.y.normalized() # Get down direction of normal.
 		var down_accuracy = down_direction.dot(Vector3.DOWN) # Use dot product to check if it is facing down in world space.
-		if down_accuracy > max_down_accuracy:
-			max_down_accuracy = down_accuracy
-			best_value = normal.opposite_side_value
+		if down_accuracy > best_down_accuracy:
+			best_down_accuracy = down_accuracy
+			best_normal = normal
 	
-	if max_down_accuracy > _down_accuracy_threshold:
-		return best_value
+	if best_down_accuracy > _down_accuracy_threshold:
+		return best_normal.opposite_side_value
+	elif _enable_landing_assist and not is_second_check:
+		print("Second Chance!")
+		_temp_check = true
+		
+		can_sleep = false
+		apply_impulse(best_normal.global_basis.z * 2 * best_down_accuracy, best_normal.position)
+		await get_tree().create_timer(0.6).timeout
+		return await _check_roll_value(true)
 	else:
 		return -1
