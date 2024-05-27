@@ -59,6 +59,9 @@ skip_dialogue={
 [physics]
 
 3d/physics_engine="JoltPhysics3D"
+3d/sleep_threshold_linear=0.001
+3d/sleep_threshold_angular=0.001
+3d/time_before_sleep=0.7
 
 [rendering]
 

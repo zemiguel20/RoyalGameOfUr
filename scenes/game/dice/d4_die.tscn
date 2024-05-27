@@ -134,8 +134,7 @@ contact_monitor = true
 script = ExtResource("2_snn4w")
 _throwing_force_magnitude = 0.26
 _mass_on_ground_multiplier = 1.4
-_down_accuracy_threshold = 0.87
-_min_roll_time = 1.5
+_min_roll_time = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
