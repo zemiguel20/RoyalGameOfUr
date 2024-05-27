@@ -1,16 +1,17 @@
 [gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://ptaftaqwr37d"]
 
-[ext_resource type="Texture2D" uid="uid://cfg71sp7mp7b2" path="res://textures/main_walls/MainWall2_Base_color.png" id="1_fui0i"]
-[ext_resource type="Texture2D" uid="uid://decsucevojstx" path="res://textures/main_walls/MainWall2_Mixed_AO.png" id="2_b60oo"]
-[ext_resource type="Texture2D" uid="uid://3eg8nxxgvq30" path="res://textures/main_walls/MainWall2_Normal_OpenGL.png" id="3_g78yx"]
-[ext_resource type="Texture2D" uid="uid://dxrqsm28qpovy" path="res://textures/main_walls/MainWall2_Roughness.png" id="4_y0u2v"]
+[ext_resource type="Texture2D" uid="uid://d4fu40sgb25ev" path="res://textures/main_walls/NewMainWallsReal_low_MainWall2_BaseColor.png" id="1_0dclw"]
+[ext_resource type="Texture2D" uid="uid://cpfc46yhe87i0" path="res://textures/main_walls/NewMainWallsReal_low_MainWall2_AO.png" id="2_fql6b"]
+[ext_resource type="Texture2D" uid="uid://br0ru1ugnydw3" path="res://textures/main_walls/NewMainWallsReal_low_MainWall2_Normal.png" id="3_smnd8"]
+[ext_resource type="Texture2D" uid="uid://05hb0n8rxrhv" path="res://textures/main_walls/NewMainWallsReal_low_MainWall2_Roughness.png" id="4_anajw"]
 
 [resource]
 cull_mode = 2
 albedo_color = Color(0.8, 0.792157, 0.811765, 1)
-albedo_texture = ExtResource("1_fui0i")
-roughness_texture = ExtResource("4_y0u2v")
+albedo_texture = ExtResource("1_0dclw")
+roughness_texture = ExtResource("4_anajw")
 normal_enabled = true
-normal_texture = ExtResource("3_g78yx")
+normal_texture = ExtResource("3_smnd8")
 ao_enabled = true
-ao_texture = ExtResource("2_b60oo")
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_fql6b")

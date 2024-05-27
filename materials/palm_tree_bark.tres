@@ -15,6 +15,7 @@ emission_texture = ExtResource("1_ol7fb")
 normal_enabled = true
 normal_texture = ExtResource("4_ulmat")
 ao_enabled = true
+ao_light_affect = 1.0
 ao_texture = ExtResource("2_kqmtw")
 heightmap_scale = 16.0
 heightmap_deep_parallax = true

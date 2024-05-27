@@ -2,7 +2,7 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fq8w5"]
 sky_top_color = Color(0.266667, 0.584314, 0.968627, 1)
-sky_horizon_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(0, 0.600724, 0.940177, 1)
 
 [sub_resource type="Sky" id="Sky_ll8bh"]
 sky_material = SubResource("ProceduralSkyMaterial_fq8w5")
@@ -12,25 +12,22 @@ radiance_size = 1
 background_mode = 2
 sky = SubResource("Sky_ll8bh")
 sky_rotation = Vector3(-0.228638, -0.685914, -0.225147)
-ambient_light_source = 2
-ambient_light_color = Color(0.788235, 0.788235, 0.788235, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.791641, 0.777429, 0.850326, 1)
+ambient_light_energy = 3.89
 tonemap_mode = 2
-tonemap_white = 6.89
+tonemap_white = 6.9
 ssr_max_steps = 128
 ssao_radius = 3.19
 ssil_enabled = true
 sdfgi_enabled = true
-sdfgi_use_occlusion = true
 glow_enabled = true
 glow_bloom = 0.04
-fog_enabled = true
 fog_light_color = Color(0.631373, 0.698039, 0.819608, 1)
 fog_density = 0.001
 fog_sky_affect = 0.0
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.02
-volumetric_fog_albedo = Color(0.498039, 0.615686, 0.701961, 1)
-volumetric_fog_detail_spread = 3.44609
+volumetric_fog_density = 0.01
 volumetric_fog_ambient_inject = 0.45
 volumetric_fog_sky_affect = 0.0
 volumetric_fog_temporal_reprojection_amount = 0.885
