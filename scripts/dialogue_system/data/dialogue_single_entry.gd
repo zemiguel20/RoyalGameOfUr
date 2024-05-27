@@ -5,5 +5,7 @@ extends Resource
 @export var audio: AudioStream
 @export var caption: String
 @export var anim_variations: Array[OpponentAnimationPlayer.Anim_Name]
+@export var fixed_duration: float = -1
+@export var prevents_opponent_action: bool
 
 ## TODO: I could add some simple has_ functions, like has_animations

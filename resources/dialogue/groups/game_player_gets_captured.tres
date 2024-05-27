@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=8 format=3 uid="uid://b31u1blrsob06"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=12 format=3 uid="uid://b31u1blrsob06"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_5inn7"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_a6wi3"]
@@ -8,20 +8,56 @@
 script = ExtResource("1_5inn7")
 caption = "Ha! Got you."
 anim_variations = Array[int]([6])
+fixed_duration = 2.0
+prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_51nnl"]
 script = ExtResource("2_cy317")
+max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_c7dik")])
+requires_click = false
 weight = 5
 
 [sub_resource type="Resource" id="Resource_bbg53"]
 script = ExtResource("1_5inn7")
-caption = "Better luck next time, friend."
-anim_variations = Array[int]([])
+caption = "Not so fast!"
+anim_variations = Array[int]([1])
+fixed_duration = 2.0
+prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_xpd7x"]
 script = ExtResource("2_cy317")
+max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_bbg53")])
+requires_click = false
+weight = 5
+
+[sub_resource type="Resource" id="Resource_1na1r"]
+script = ExtResource("1_5inn7")
+caption = "There goes your stormbird."
+anim_variations = Array[int]([4])
+fixed_duration = 3.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_vu8km"]
+script = ExtResource("2_cy317")
+max_repetitions = 1
+dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_1na1r")])
+requires_click = false
+weight = 5
+
+[sub_resource type="Resource" id="Resource_phv4q"]
+script = ExtResource("1_5inn7")
+caption = "Unlucky."
+anim_variations = Array[int]([])
+fixed_duration = 2.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_khqq6"]
+script = ExtResource("2_cy317")
+max_repetitions = 1
+dialogue_entries = Array[ExtResource("1_5inn7")]([SubResource("Resource_phv4q")])
+requires_click = false
 weight = 5
 
 [resource]
@@ -29,5 +65,6 @@ script = ExtResource("1_a6wi3")
 category = 4
 play_in_order = false
 has_priority = false
-dialogue_sequences = Array[ExtResource("2_cy317")]([SubResource("Resource_51nnl"), SubResource("Resource_xpd7x")])
-weight_for_empty = 5
+initial_delay = 0.5
+dialogue_sequences = Array[ExtResource("2_cy317")]([SubResource("Resource_51nnl"), SubResource("Resource_xpd7x"), SubResource("Resource_vu8km"), SubResource("Resource_khqq6")])
+weight_for_empty = 20

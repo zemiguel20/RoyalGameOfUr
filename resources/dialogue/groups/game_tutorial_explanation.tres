@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=8 format=3 uid="uid://cv0wh68tei5t3"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_ygw3d"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_im31s"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="3_2d1c4"]
+
+[sub_resource type="Resource" id="Resource_7xjpr"]
+script = ExtResource("1_ygw3d")
+caption = "Oh, right."
+anim_variations = Array[int]([1])
+fixed_duration = 2.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_gcifj"]
+script = ExtResource("1_ygw3d")
+caption = "The rules for this board are a little different."
+anim_variations = Array[int]([1])
+fixed_duration = 3.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_itek7"]
+script = ExtResource("1_ygw3d")
+caption = "I will explain them to you as we go."
+anim_variations = Array[int]([])
+fixed_duration = 3.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_r4bmf"]
+script = ExtResource("2_im31s")
+max_repetitions = 1
+dialogue_entries = Array[ExtResource("1_ygw3d")]([SubResource("Resource_7xjpr"), SubResource("Resource_gcifj"), SubResource("Resource_itek7")])
+requires_click = false
+weight = 5
+
+[resource]
+script = ExtResource("3_2d1c4")
+category = 17
+play_in_order = false
+has_priority = false
+initial_delay = 2.0
+dialogue_sequences = Array[ExtResource("2_im31s")]([SubResource("Resource_r4bmf")])
+weight_for_empty = 0

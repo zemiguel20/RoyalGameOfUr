@@ -18,6 +18,8 @@ func play_sequence_from_group(group: DialogueGroup) -> bool:
 	
 	_current_group = group
 	if not is_busy():
+		if (group.initial_delay > 0):
+			await get_tree().create_timer(group.initial_delay).timeout
 		await _sequence_player.play(sequence)
 	else:
 		#TODO improve interruption code.

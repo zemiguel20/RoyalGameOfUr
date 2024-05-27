@@ -7,5 +7,8 @@ extends Resource
 @export var play_in_order: bool
 ## If true, this group will interrupt a group that is currently playing if it does not have priority
 @export var has_priority: bool
+
+@export_range(0, 3, 0.1) var initial_delay: float = 0.5
+
 @export var dialogue_sequences: Array[DialogueSequence]
-@export_range(0, 10) var weight_for_empty: int
+@export var weight_for_empty: int

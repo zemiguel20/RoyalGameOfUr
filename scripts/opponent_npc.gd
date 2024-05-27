@@ -23,6 +23,9 @@ var _time_until_next_dialogue: float
 var _is_timer_active: bool
 
 
+var _tutorial_categories_had: Array[DialogueSystem.Category]
+
+
 func _ready():
 	visible = false
 	
@@ -48,6 +51,10 @@ func _play_story_dialogue():
 
 
 func _play_random_dialogue():
+	if (_tutorial_categories_had.size() < 4):
+		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
+		return
+		
 	var success = await _dialogue_system.play(DialogueSystem.Category.RANDOM_CONVERSATION)
 	## If something went wrong when playing the story dialogues, do not try to trigger a next sequence. 
 	if success:
@@ -56,16 +63,21 @@ func _play_random_dialogue():
 		_is_timer_active = false
 
 
-func play_dialog_mistake():
-	_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
+func play_dialog(category: DialogueSystem.Category):
+	_dialogue_system.play(category)
 
 
-func play_dialog_opponent_piece_captured():
-	_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
-
-
-func play_dialog_player_piece_captured():
-	_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
+func play_tutorial_dialog(category: DialogueSystem.Category):
+	if !_tutorial_categories_had.has(category):
+		_tutorial_categories_had.append(category)
+		
+	if (category == DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED \
+	and _tutorial_categories_had.has(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)) \
+	or (category == DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED \
+	and _tutorial_categories_had.has(DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED)):
+		return
+		
+	_dialogue_system.play(category)
 
 
 func _play_interruption(category):
@@ -75,7 +87,7 @@ func _play_interruption(category):
 
 func _on_play_pressed():
 	visible = true
-	await _animation_player.play_animation(OpponentAnimationPlayer.Anim_Name.WALKIN, true)
+	await _animation_player.play_walkin()
 	## Start first dialogue after a delay.
 	await get_tree().create_timer(starting_dialogue_delay).timeout
 	await _play_story_dialogue()
@@ -87,11 +99,3 @@ func _on_play_pressed():
 func _input(event):
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:
 		_play_interruption(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
-
-
-func _on_ai_move_picker__on_suboptimal_move():
-	pass # Replace with function body.
-
-
-func _on_move_picker__on_opponent_piece_captured():
-	pass # Replace with function body.

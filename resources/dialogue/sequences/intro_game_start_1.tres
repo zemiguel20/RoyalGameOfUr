@@ -7,18 +7,26 @@
 script = ExtResource("1_cqksl")
 caption = "Anyways… look what I brought."
 anim_variations = Array[int]([1])
+fixed_duration = -1.0
+prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_58o8f"]
 script = ExtResource("1_cqksl")
 caption = "That’s right! Can you believe that Šarru-kīn used to play on this? This thing is ancient!"
 anim_variations = Array[int]([7])
+fixed_duration = -1.0
+prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_1tkgn"]
 script = ExtResource("1_cqksl")
 caption = "May the gods be with you, friend. Let's play!"
 anim_variations = Array[int]([])
+fixed_duration = 3.0
+prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_wwdt7")
+max_repetitions = 1
 dialogue_entries = Array[ExtResource("1_cqksl")]([SubResource("Resource_ha7mv"), SubResource("Resource_58o8f"), SubResource("Resource_1tkgn")])
+requires_click = true
 weight = 5
