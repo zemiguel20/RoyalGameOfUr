@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://cch6w4r6da147"]
 
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/board/piece_white.tscn" id="1_20b00"]
-[ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="2_ybdk6"]
-[ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_ui528"]
+[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/entities/piece_white.tscn" id="1_pdywe"]
+[ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="2_xfhdr"]
+[ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_3x68j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ctqb"]
 albedo_color = Color(0.242031, 0.187744, 0.133749, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j0xtv"]
 render_priority = 10
-shader = ExtResource("2_ybdk6")
+shader = ExtResource("2_xfhdr")
 shader_parameter/border_width = 0.1
 shader_parameter/color = Color(1, 1, 1, 1)
 
@@ -17,11 +17,11 @@ shader_parameter/color = Color(1, 1, 1, 1)
 resource_local_to_scene = true
 render_priority = 10
 next_pass = SubResource("ShaderMaterial_j0xtv")
-shader = ExtResource("3_ui528")
+shader = ExtResource("3_3x68j")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/alpha = 0.25
 
-[node name="BlackPiece" instance=ExtResource("1_20b00")]
+[node name="BlackPiece" instance=ExtResource("1_pdywe")]
 
 [node name="Model" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_5ctqb")
