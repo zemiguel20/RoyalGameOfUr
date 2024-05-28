@@ -1,0 +1,364 @@
+<mxfile host="Electron" modified="2024-05-28T23:43:24.975Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="FGym2hnJtwrg0Lcvyju9" version="24.4.8" type="device">
+  <diagram name="Page-1" id="9E7TV8ZL6nedT94QB9dg">
+    <mxGraphModel dx="2643" dy="2144" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="h5NBGUJRAQNvVofVVciI-101" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-13" target="h5NBGUJRAQNvVofVVciI-100" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-111" value="has component" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-101" vertex="1" connectable="0">
+          <mxGeometry x="-0.183" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-107" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-13" target="h5NBGUJRAQNvVofVVciI-106" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-110" value="has component" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-107" vertex="1" connectable="0">
+          <mxGeometry x="0.0948" y="-6" relative="1" as="geometry">
+            <mxPoint x="-14" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-13" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Piece&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Entity that represents a physical piece that a player moves through the tiles of the board.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+          <mxGeometry x="410" y="1205" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-108" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-14" target="h5NBGUJRAQNvVofVVciI-106" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-109" value="has component" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-108" vertex="1" connectable="0">
+          <mxGeometry x="-0.0182" relative="1" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-113" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-14" target="h5NBGUJRAQNvVofVVciI-112" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-114" value="has component" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-113" vertex="1" connectable="0">
+          <mxGeometry x="0.0652" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-14" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Spot&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Entity that represents a spot where the player can place pieces. It also has configurable properties like protecting pieces from knockout.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+          <mxGeometry x="410" y="940" width="180" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-88" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-15" target="h5NBGUJRAQNvVofVVciI-85" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-102" value="has component" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-88" vertex="1" connectable="0">
+          <mxGeometry x="-0.0254" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-89" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-15" target="h5NBGUJRAQNvVofVVciI-86" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-104" value="has component" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-89" vertex="1" connectable="0">
+          <mxGeometry x="-0.1898" y="1" relative="1" as="geometry">
+            <mxPoint x="-1" y="14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-90" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-15" target="h5NBGUJRAQNvVofVVciI-87" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-105" value="has component" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-90" vertex="1" connectable="0">
+          <mxGeometry x="-0.0924" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-15" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Die&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Entity that represents a rollable binary die.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+          <mxGeometry x="-570" y="620" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-32" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="h5NBGUJRAQNvVofVVciI-13" target="h5NBGUJRAQNvVofVVciI-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="310" y="870" as="sourcePoint" />
+            <mxPoint x="470" y="870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-33" value="can be placed in" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" parent="h5NBGUJRAQNvVofVVciI-32" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-35" value="1" style="edgeLabel;resizable=0;html=1;;align=right;verticalAlign=bottom;" parent="h5NBGUJRAQNvVofVVciI-32" connectable="0" vertex="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-10" y="25" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-36" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="h5NBGUJRAQNvVofVVciI-14" target="h5NBGUJRAQNvVofVVciI-13" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="310" y="1190" as="sourcePoint" />
+            <mxPoint x="470" y="1190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-37" value="can contain stack of" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" parent="h5NBGUJRAQNvVofVVciI-36" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="33" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-39" value="0+" style="edgeLabel;resizable=0;html=1;;align=right;verticalAlign=bottom;" parent="h5NBGUJRAQNvVofVVciI-36" connectable="0" vertex="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-40" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Board&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Entity that represents the physical board. It defines the layout of the spots, having 2 tracks, one for each player.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+          <mxGeometry x="420" y="550" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-44" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;StartingArea&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Collection of spots that serve as the starting point for the pieces of a player.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="320" y="755.5" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-46" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" source="h5NBGUJRAQNvVofVVciI-44" target="h5NBGUJRAQNvVofVVciI-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="840" as="sourcePoint" />
+            <mxPoint x="590" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-56" value="group of" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-46" vertex="1" connectable="0">
+          <mxGeometry x="0.5088" y="3" relative="1" as="geometry">
+            <mxPoint x="-11" y="-36" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-66" value="7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-46" vertex="1" connectable="0">
+          <mxGeometry x="0.6373" y="-2" relative="1" as="geometry">
+            <mxPoint x="-8" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-53" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" source="h5NBGUJRAQNvVofVVciI-40" target="h5NBGUJRAQNvVofVVciI-44" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="600" as="sourcePoint" />
+            <mxPoint x="590" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-55" value="&lt;span style=&quot;color: rgb(240, 240, 240); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(24, 20, 29); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;2 (1 p/ player)&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-53" vertex="1" connectable="0">
+          <mxGeometry x="0.5118" y="1" relative="1" as="geometry">
+            <mxPoint x="28" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-58" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Track&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Sequence of spots representing the track the player has to move the pieces through.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="530" y="753" width="150" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-59" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" source="h5NBGUJRAQNvVofVVciI-40" target="h5NBGUJRAQNvVofVVciI-58" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="810" as="sourcePoint" />
+            <mxPoint x="520" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-61" value="&lt;span style=&quot;color: rgb(240, 240, 240); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(24, 20, 29); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;2 (1 p/ player)&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-59" vertex="1" connectable="0">
+          <mxGeometry x="0.6087" relative="1" as="geometry">
+            <mxPoint x="11" y="-4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-63" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" source="h5NBGUJRAQNvVofVVciI-58" target="h5NBGUJRAQNvVofVVciI-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="840" as="sourcePoint" />
+            <mxPoint x="630" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-64" value="sequence of" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" parent="h5NBGUJRAQNvVofVVciI-63" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-65" value="1+" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-63" vertex="1" connectable="0">
+          <mxGeometry x="0.6434" y="3" relative="1" as="geometry">
+            <mxPoint x="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-73" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-67" target="h5NBGUJRAQNvVofVVciI-69" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-74" value="delegates dice rolling to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-73" vertex="1" connectable="0">
+          <mxGeometry x="0.0561" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-75" value="2 (1 p/ player)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-73" vertex="1" connectable="0">
+          <mxGeometry x="0.6482" y="4" relative="1" as="geometry">
+            <mxPoint x="34" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-91" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-67" target="h5NBGUJRAQNvVofVVciI-70" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-92" value="delegates move picking to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-91" vertex="1" connectable="0">
+          <mxGeometry x="-0.3313" y="-4" relative="1" as="geometry">
+            <mxPoint x="15" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-93" value="&lt;span style=&quot;color: rgb(240, 240, 240); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(24, 20, 29); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;2 (1 p/ player)&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-91" vertex="1" connectable="0">
+          <mxGeometry x="0.591" y="-4" relative="1" as="geometry">
+            <mxPoint x="-9" y="18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-97" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-67" target="h5NBGUJRAQNvVofVVciI-95" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-98" value="calculates possible moves" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-97" vertex="1" connectable="0">
+          <mxGeometry x="0.0034" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-130" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-67" target="h5NBGUJRAQNvVofVVciI-68" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-131" value="uses to access entities&lt;div&gt;or spawn them&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-130" vertex="1" connectable="0">
+          <mxGeometry x="0.0077" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-67" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;GameController&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Sets up the game and controls the turns of the game and delegates actions like rolling and picking a move to specialized systems.&lt;br&gt;Works based on game settings / rules.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
+          <mxGeometry x="-240" y="160" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-142" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-68" target="h5NBGUJRAQNvVofVVciI-15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-143" value="spawns" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-142" vertex="1" connectable="0">
+          <mxGeometry x="-0.2585" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-144" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-68" target="h5NBGUJRAQNvVofVVciI-13" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-140" y="1265" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-145" value="spawns" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-144" vertex="1" connectable="0">
+          <mxGeometry x="-0.7224" y="-4" relative="1" as="geometry">
+            <mxPoint x="174" y="378" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-146" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-68" target="h5NBGUJRAQNvVofVVciI-40" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-147" value="uses to access spots" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-146" vertex="1" connectable="0">
+          <mxGeometry x="-0.5238" y="3" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-68" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;EntityManager&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Used for spawning or access entities in the game.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-230" y="600" width="180" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-76" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-69" target="h5NBGUJRAQNvVofVVciI-15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-77" value="rolls" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-76" vertex="1" connectable="0">
+          <mxGeometry x="0.185" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-78" value="1+" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-76" vertex="1" connectable="0">
+          <mxGeometry x="0.7916" y="1" relative="1" as="geometry">
+            <mxPoint x="15" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-69" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;DiceRoller&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Controls the process of rolling the dice and reading their values.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
+          <mxGeometry x="-570" y="400" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-96" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-70" target="h5NBGUJRAQNvVofVVciI-95" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-99" value="picks on from list of" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-96" vertex="1" connectable="0">
+          <mxGeometry x="-0.0677" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-116" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-70" target="h5NBGUJRAQNvVofVVciI-115" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-70" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;MovePicker&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Controls the process of picking a move from a list of possible moves.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
+          <mxGeometry x="150" y="175" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-81" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-71" target="h5NBGUJRAQNvVofVVciI-69" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-84" value="type of" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-81" vertex="1" connectable="0">
+          <mxGeometry x="-0.0113" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-71" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;InteractiveDiceRoller&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Reads player input to roll the dice. Player can click to roll or hold to shake them.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-840" y="520" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-82" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-72" target="h5NBGUJRAQNvVofVVciI-69" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-83" value="type of" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-82" vertex="1" connectable="0">
+          <mxGeometry y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-72" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;AutoDiceRoller&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Automatically rolls the dice, without any interation. Used by bots.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-840" y="330" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-85" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;RollPhysics&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Physics are used to roll the die, by adding a certain force and torque. The value can be read when the die stops moving.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-820" y="810" width="180" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-86" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Highlight&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Highlights the die model. Useful to indicate that the die is rollable, or to clarify the result with a certain color.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-570" y="808.75" width="160" height="147.5" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-87" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;MoveAnimation&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;To pass the die around between player turns, from one side of the table to the other.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="-350" y="817.5" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-123" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" parent="1" source="h5NBGUJRAQNvVofVVciI-95" target="h5NBGUJRAQNvVofVVciI-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="223" y="1015" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-126" value="moves pieces from" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-123" vertex="1" connectable="0">
+          <mxGeometry x="-0.2438" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-124" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" parent="1" source="h5NBGUJRAQNvVofVVciI-95" target="h5NBGUJRAQNvVofVVciI-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-127" value="moves pieces to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-124" vertex="1" connectable="0">
+          <mxGeometry x="-0.0909" y="-5" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-95" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;GameMove&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Represents an action of moving pieces in one spot to another spot. Contains all sort of information about this specific move, such has if it is a direct winning move.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="1" vertex="1">
+          <mxGeometry x="80" y="410" width="190" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-100" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;MoveAnimation&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;To move the pieces around physically, from one spot to another.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="720" y="1260" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-106" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Highlight&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Effects used to indicate that the pieces in a spot are movable, and to indicate results of moving to a certain spot.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="720" y="1060" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-112" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;SelectionArea&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Used for player input selection, when in context of picking pieces in a spot to move.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="720" y="870" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-115" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Highlight&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Shows movable pieces, preview result of a move, and path from the current spot to the target spot.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="370" y="175" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-119" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-117" target="h5NBGUJRAQNvVofVVciI-70" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-122" value="type of" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-119" vertex="1" connectable="0">
+          <mxGeometry x="-0.1911" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-117" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;InteractiveMovePicker&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Allows player to select pieces to move (by selecting spot where they are) and hovering to preview move.&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Also, can use drag and drop to execute a move to the target spot.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="300" y="-80" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-120" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="h5NBGUJRAQNvVofVVciI-118" target="h5NBGUJRAQNvVofVVciI-70" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-121" value="type of" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="h5NBGUJRAQNvVofVVciI-120" vertex="1" connectable="0">
+          <mxGeometry x="-0.1353" y="4" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h5NBGUJRAQNvVofVVciI-118" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;AIMovePicker&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Selects a move automatically by analysing and choosing a move based on a certain algorithm. Used by bots.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="30" y="-77.5" width="180" height="155" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
