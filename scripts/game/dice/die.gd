@@ -36,13 +36,9 @@ var _throwing_position
 var _is_rolling := false
 var _allow_check_roll := false
 var _is_grounded := false
-
-var _temp_check
 #endregion
 
 func _ready():
-	Engine.time_scale = 3
-	
 	_rolling_timer.timeout.connect(_on_movement_stopped)
 	
 	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
@@ -109,16 +105,12 @@ func _on_movement_stopped():
 	if not _is_rolling or not _is_grounded or not can_sleep:
 		return
 
-	#print("Movement Stopped with temp_check: ", _temp_check)
-	#print("Movement Stopped with can_sleep: ", can_sleep)
 	_rolling_timer.stop() # Force timer stop in case triggered by physics sleep.
 	
 	# Retrieve roll value,
-	_roll_value = -1
 	_roll_value = await _check_roll_value()
-	_temp_check = false
 	
-	# If stuck, roll again.
+	# If really stuck, roll again.
 	if _roll_value == -1:
 		roll(_throwing_position, true)
 	# Else, reset some values and emit a signal.
@@ -176,11 +168,9 @@ func _check_roll_value(is_second_check = false) -> int:
 	if best_down_accuracy > _down_accuracy_threshold:
 		return best_normal.opposite_side_value
 	elif _enable_landing_assist and not is_second_check:
-		print("Second Chance!")
-		_temp_check = true
-		
 		can_sleep = false
-		apply_impulse(best_normal.global_basis.z * 2 * best_down_accuracy, best_normal.position)
+		var correction_impulse = best_normal.global_basis.z * 2 * best_down_accuracy
+		apply_impulse(correction_impulse, best_normal.position)
 		await get_tree().create_timer(0.6).timeout
 		return await _check_roll_value(true)
 	else:
