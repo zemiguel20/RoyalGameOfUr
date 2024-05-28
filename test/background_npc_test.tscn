@@ -112,6 +112,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.01313, 0.173757, 5.32889)
 script = ExtResource("7_5dnoq")
 _path = NodePath("../Markers/ToStorage")
 _move_speed = 2.0
+_walk_by_cooldown = 10
 
 [node name="Markers" type="Node3D" parent="NPCSystem"]
 
