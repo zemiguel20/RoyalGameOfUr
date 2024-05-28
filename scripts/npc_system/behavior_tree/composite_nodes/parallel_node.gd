@@ -1,7 +1,7 @@
 class_name ParallelNode
 extends BTNode
 
-## @experimental has not been tested!
+## @experimental
 ## Composite node that runs all its child nodes simultaneously.
 ## Fails when ANY of its children have failed.## Succeeeds when ALL of its children have succeeded.
 
@@ -30,3 +30,9 @@ func on_process(delta):
 		return Status.Running
 	else:
 		return Status.Succeeded
+		
+		
+func set_blackboard(blackboard: Blackboard):
+	super.set_blackboard(blackboard)
+	for child in _child_nodes:
+		child.set_blackboard(blackboard)

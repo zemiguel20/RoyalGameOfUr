@@ -8,6 +8,8 @@ enum Status
 	Succeeded = 1
 }
 
+var _blackboard: Blackboard
+
 func on_start():
 	pass
 	
@@ -20,3 +22,6 @@ func on_physics_process(_delta):
 	
 func on_end():
 	pass
+	
+func set_blackboard(blackboard: Blackboard):
+	_blackboard = blackboard

@@ -7,7 +7,8 @@ extends Node
 var npcs: Array
 
 func _ready():
-	npcs = get_child(0).get_children()
+	npcs = get_children()
 	
 	for npc in npcs:
-		npc.on_ready(self)
+		if npc is AmbientNPCBase:
+			npc.on_ready(self)

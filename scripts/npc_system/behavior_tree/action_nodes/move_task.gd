@@ -5,28 +5,28 @@ extends BTNode
 
 var _target_position: Vector3
 var _threshold = 0.5
-var _npc: AmbientNPC
+var _npc: AmbientNPCBase
 var _nav_agent: NavigationAgent3D
 
 var failed
 
-func _init(position, npc, nav_agent):
+func _init(position):
 	_target_position = position
-	_npc = npc
-	_nav_agent = nav_agent
 	
 	
 func on_start():
+	_npc = _blackboard.read("Base")
+	_nav_agent = _blackboard.read("Agent")
+		
 	_npc.set_material_color(Color.ORANGE)
 	_nav_agent.target_position = _target_position
-		
+	
 	if not _nav_agent.is_target_reachable():
 		return Status.Failed
 	
 	_nav_agent.max_speed = _npc.move_speed
 	
 
-# Get ... from blackboard.
 func on_process(delta) -> Status:
 	if failed:
 		return Status.Failed

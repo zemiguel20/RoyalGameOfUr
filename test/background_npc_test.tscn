@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvs8yqeqllrsc"]
+
+[ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_ifuvb"]
+[ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="2_fi2pv"]
+[ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="3_ml7vr"]
+[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="4_ikgtn"]
+[ext_resource type="Script" path="res://scripts/npc_system/npc_data_manager.gd" id="5_5dtl3"]
+[ext_resource type="PackedScene" uid="uid://4goheq1kyhy1" path="res://test/scenes/test_npc.tscn" id="5_kf3yf"]
+[ext_resource type="Script" path="res://scripts/npc_system/guard_npc.gd" id="7_5dnoq"]
+
+[sub_resource type="GDScript" id="GDScript_fbn4f"]
+script/source = "extends Node
+
+func _input(event):
+	if event is InputEventKey and (event as InputEventKey).keycode == KEY_R:
+		get_tree().reload_current_scene()
+
+
+func _on_prototype_ui_fadeout_finished():
+	get_tree().reload_current_scene()
+"
+
+[node name="Singleplayer" type="Node"]
+script = SubResource("GDScript_fbn4f")
+
+[node name="Environment" parent="." instance=ExtResource("1_ifuvb")]
+
+[node name="Boardgame" parent="." instance=ExtResource("2_fi2pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Board" parent="Boardgame" index="1"]
+transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 4.4739, -0.207527, 6.36155)
+
+[node name="Dice" parent="Boardgame" index="2"]
+transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 4.44211, -0.213149, 6.346)
+
+[node name="DiceArea_P1" parent="Boardgame/Dice" index="0"]
+transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, 0, 0.1, 0.211021)
+
+[node name="DiceBorders_P1" parent="Boardgame/Dice/DiceArea_P1" index="2"]
+transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, 0, -2, 0)
+
+[node name="Floor_Collider_P1" parent="Boardgame/Dice/DiceArea_P1" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.988, 0)
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/Floor_Collider_P1" index="0"]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
+
+[node name="DiceArea_P2" parent="Boardgame/Dice" index="1"]
+transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, -4.76837e-07, -0.0308831, -0.131)
+
+[node name="ThrowingSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="0"]
+transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967, 5.653, 0.71)
+visible = true
+
+[node name="SpawnSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="1"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.253, 2.153, -0.617)
+
+[node name="DiceBorders_P2" parent="Boardgame/Dice/DiceArea_P2" index="2"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 3.153, 0)
+
+[node name="Wall2" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="1"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 7.62939e-06, 2.979, -3.10864)
+
+[node name="Wall3" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="2"]
+transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, -5.24678, 2.979, 0)
+
+[node name="ClickHitbox_P2" parent="Boardgame/Dice/DiceArea_P2" index="3"]
+transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 5.668, 0)
+
+[node name="Floor_Collider_P2" parent="Boardgame/Dice/DiceArea_P2" index="5"]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 1.165, 0)
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/Floor_Collider_P2" index="0"]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
+
+[node name="AIMovePicker" parent="Boardgame" index="3"]
+_best_move_weight = 15
+_second_move_weight = 4
+_random_move_weight = 1
+
+[node name="MovePicker" parent="Boardgame" index="4"]
+board_surface_y = -0.187
+
+[node name="AIRoller" parent="Boardgame" node_paths=PackedStringArray("_dice", "_move_picker") instance=ExtResource("3_ml7vr")]
+_dice = NodePath("../Dice")
+_move_picker = NodePath("../MovePicker")
+
+[node name="Custom_Camera" parent="." instance=ExtResource("4_ikgtn")]
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
+max_degrees_down = 50.0
+max_degrees_left = 45.0
+max_degrees_right = 45.0
+_board_look_rotation = Vector3(-35, 32, 0)
+_trans_type = 1
+_ease_type = 1
+
+[node name="NPCSystem" type="Node3D" parent="."]
+script = ExtResource("5_5dtl3")
+
+[node name="Guard" parent="NPCSystem" node_paths=PackedStringArray("target_position_storage") instance=ExtResource("5_kf3yf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.01313, 0.173757, 5.32889)
+script = ExtResource("7_5dnoq")
+target_position_storage = NodePath("../Markers/Marker_Storage1")
+
+[node name="Markers" type="Node3D" parent="NPCSystem"]
+
+[node name="Marker_Storage1" type="Marker3D" parent="NPCSystem/Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.74653, 4.76837e-07, 3.48282)
+
+[connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
+[connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
+[connection signal="on_intro_ended" from="Custom_Camera" to="Boardgame/GameStateController" method="start_game"]
+
+[editable path="Boardgame"]
+[editable path="Boardgame/Board"]
+[editable path="Boardgame/Dice"]
