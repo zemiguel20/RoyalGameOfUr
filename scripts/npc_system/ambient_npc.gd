@@ -1,26 +1,21 @@
 class_name AmbientNPCBase
 extends PhysicsBody3D
 
-var _current_tree: BTNode
-var blackboard: Blackboard
-var move_speed: float = 2
-
-@onready var _nav_agent = $NavigationAgent3D as NavigationAgent3D
 @onready var _mesh = $Capsule_MeshInstance3D as MeshInstance3D
+var blackboard: Blackboard
 
+var _current_tree: BTNode
 var _material: BaseMaterial3D
 var _npc_manager: NPCDataManager
+var _has_started = false
 
-var original_height
-var has_started = false
 
 func on_ready(manager: NPCDataManager):
 	_npc_manager = manager
-	has_started = true
+	_has_started = true
 	
 	_material = _mesh.material_override.duplicate()
 	_mesh.material_override = _material
-	original_height = global_position.y
 	
 	_initialize_blackboard()
 	_initialize_tree()
@@ -31,7 +26,7 @@ func on_ready(manager: NPCDataManager):
 	
 	
 func _process(delta):
-	if not has_started:
+	if not _has_started:
 		return	
 	
 	var status = _current_tree.on_process(delta)
