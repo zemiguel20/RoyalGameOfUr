@@ -7,12 +7,12 @@
 transparency = 1
 diffuse_mode = 3
 albedo_texture = ExtResource("1_364ti")
-emission_enabled = true
 emission = Color(0.351213, 0.616963, 0.902904, 1)
 emission_texture = ExtResource("1_364ti")
 clearcoat = 0.0
 anisotropy = -1.0
-ao_light_affect = 0.83
+ao_enabled = true
+ao_light_affect = 1.0
 ao_texture = ExtResource("2_4mwkh")
 heightmap_enabled = true
 heightmap_scale = 8.889
