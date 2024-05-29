@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvs8yqeqllrsc"]
+[gd_scene load_steps=11 format=3 uid="uid://cvs8yqeqllrsc"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_ifuvb"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="2_fi2pv"]
@@ -20,13 +20,20 @@ func _on_prototype_ui_fadeout_finished():
 	get_tree().reload_current_scene()
 "
 
-[sub_resource type="Curve3D" id="Curve3D_2meb4"]
+[sub_resource type="Curve3D" id="Curve3D_c38qy"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.594, 0, -0.916, 0, 0, 0, 0, 0, 0, -12.435, 0, -1.558, 0, 0, 0, 0, 0, 0, -13, 0, 0.12),
+"points": PackedVector3Array(0, 0, 0, 0, 0, -0.41, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.594, 0, -0.916, 0, 0, 0, 0, 0, 0, -12.435, 0, -1.558, 0, 0, 0, 0, 0, 0, -13.0017, 0, 0.385633),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
 up_vector_enabled = false
+
+[sub_resource type="Curve3D" id="Curve3D_fbvn3"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -4.26304, 0, 3.57356, 0, 0, 0, 0.865, 0, 0, -1.66072, 0, 3.63232, 0, 0, 0, 0, 0, 0, -0.570264, 0, 3.34847, -0.0239821, 0, 0.897715, 0.0239821, 0, -0.897715, -0.0950817, 0, 2.21868, 0, 0, 0, 0, 0, 0, -0.0173501, 0, -0.513238),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="Singleplayer" type="Node"]
 script = SubResource("GDScript_fbn4f")
@@ -109,7 +116,7 @@ script = ExtResource("5_5dtl3")
 [node name="Guard" parent="NPCSystem" node_paths=PackedStringArray("_path") instance=ExtResource("5_kf3yf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.01313, 0.173757, 5.32889)
 script = ExtResource("7_5dnoq")
-_path = NodePath("../Markers/ToStorage")
+_path = NodePath("../Markers/Storage_To_Kitchen")
 _waiting_point_index = 1
 _move_speed = 2.0
 _walk_by_cooldown = 1
@@ -122,7 +129,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.74653, 4.76837e-07, 3.4828
 
 [node name="ToStorage" type="Path3D" parent="NPCSystem/Markers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0, 5.22195)
-curve = SubResource("Curve3D_2meb4")
+curve = SubResource("Curve3D_c38qy")
+
+[node name="Storage_To_Kitchen" type="Path3D" parent="NPCSystem/Markers"]
+curve = SubResource("Curve3D_fbvn3")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="NPCSystem/Markers/Storage_To_Kitchen"]
+transform = Transform3D(-0.022574, 0, -0.999736, 0, 1, 0, 0.999736, 0, -0.022574, -4.26304, 0, 3.57356)
 
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
 [connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
