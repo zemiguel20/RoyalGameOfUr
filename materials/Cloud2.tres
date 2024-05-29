@@ -6,7 +6,6 @@
 [resource]
 transparency = 1
 albedo_texture = ExtResource("1_7627k")
-emission_enabled = true
 emission = Color(0.352941, 0.615686, 0.901961, 1)
 emission_texture = ExtResource("1_7627k")
 ao_enabled = true
