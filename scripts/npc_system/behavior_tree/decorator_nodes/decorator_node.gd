@@ -11,3 +11,7 @@ func on_start():
 	
 func on_end():
 	_child.on_end()
+	
+func set_blackboard(blackboard: Blackboard):
+	super.set_blackboard(blackboard)
+	_child.set_blackboard(blackboard)

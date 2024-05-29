@@ -14,7 +14,7 @@ func _init(points: Array[Vector3], threshold = 0.1):
 	_points = points
 	_threshold = threshold
 	
-	
+
 func on_start():
 	_owner = _blackboard.read("Base")
 	_move_speed = _blackboard.read("Move Speed")
