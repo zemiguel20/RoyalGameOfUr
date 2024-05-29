@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjv3ocjvay3hx"]
 
-[ext_resource type="Script" path="res://scripts/game/board/spot.gd" id="1_mlgru"]
+[ext_resource type="Script" path="res://scripts/game/entities/spot.gd" id="1_8cupv"]
 [ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="2_7basv"]
 [ext_resource type="Material" uid="uid://c6p7a2gj4s6bg" path="res://materials/highlight.tres" id="3_om2m3"]
 [ext_resource type="Script" path="res://scripts/game/components/selection_input.gd" id="4_e4p30"]
@@ -16,7 +16,7 @@ albedo_color = Color(1, 1, 1, 0)
 data = PackedVector3Array(0.015, 0, 0.015, -0.015, 0, 0.015, 0.015, 0, -0.015, -0.015, 0, 0.015, -0.015, 0, -0.015, 0.015, 0, -0.015)
 
 [node name="Spot" type="Node3D"]
-script = ExtResource("1_mlgru")
+script = ExtResource("1_8cupv")
 metadata/highlight = NodePath("Highlight")
 metadata/input = NodePath("SelectionInputReader")
 
