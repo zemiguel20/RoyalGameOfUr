@@ -1,17 +1,19 @@
 extends Node
-## Contains constants and general utility functions
+## Contains global constants and utility functions.
 
 
-enum Player {ONE = 0, TWO = 1} ## Player IDs
+## Player IDs
+enum Player {
+	ONE,
+	TWO,
+}
 
 ## Types of simple movement animations.
 enum MoveAnim {
-	ARC, ## Moves from point A to B in a arc.
+	ARC, ## Moves from point A to B in an arc.
 	LINE, ## Moves directly from point A to B.
 	NONE, ## No animation. Movement is instantaneous.
 }
-
-const PIECE_OFFSET_Y = 0.15 ## Offset for stacking. Easier than calculating offset using AABB.
 
 
 func get_opponent(player : Player) -> Player:
