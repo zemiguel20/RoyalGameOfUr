@@ -126,6 +126,7 @@ func _on_from_hovered(from : Spot):
 		move.to.set_highlight(true)
 		var path_highlighter = _create_path_highlighter(move)
 		add_child(path_highlighter)
+		_check_for_tutorial_signals(move)
 
 
 func _on_from_dehovered(from : Spot):
@@ -172,7 +173,6 @@ func _finalize_selection():
 	
 	_change_state(State.IDLE)
 	
-	_check_for_tutorial_signals(selected_move)
 	if selected_move.knocks_opo and has_emitted_tutorial_capture_signal:
 		on_play_dialogue.emit(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
 	
