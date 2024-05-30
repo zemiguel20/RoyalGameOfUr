@@ -22,7 +22,7 @@ func _on_prototype_ui_fadeout_finished():
 
 [sub_resource type="Curve3D" id="Curve3D_c38qy"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, -0.41, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.594, 0, -0.916, 0, 0, 0, 0, 0, 0, -12.435, 0, -1.558, 0, 0, 0, 0, 0, 0, -13.0017, 0, 0.385633),
+"points": PackedVector3Array(1.17921, -0.0768166, 0.433843, -1.17921, 0.0768166, -0.433843, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.594, 0, -0.916, 0, 0, 0, 0, 0, 0, -12.435, 0, -1.558, 0, 0, 0, 0, 0, 0, -13.0017, 0, 0.385633),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
@@ -30,7 +30,7 @@ up_vector_enabled = false
 
 [sub_resource type="Curve3D" id="Curve3D_fbvn3"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -4.26304, 0, 3.57356, 0, 0, 0, 0.865, 0, 0, -1.66072, 0, 3.63232, 0, 0, 0, 0, 0, 0, -0.570264, 0, 3.34847, -0.0239821, 0, 0.897715, 0.0239821, 0, -0.897715, -0.0950817, 0, 2.21868, 0, 0, 0, 0, 0, 0, -0.0173501, 0, -0.513238),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -4.26304, 0, 3.57356, -0.865, 0, 0, 0.865, 0, 0, -1.66072, 0, 3.63232, 0, 0, 0, 0, 0, 0, -0.570264, 0, 3.34847, -0.0239821, 0, 0.897715, 0.0239821, 0, -0.897715, -0.0950817, 0, 2.21868, 0, 0, 0, 0, 0, 0, -0.0173501, 0, -0.513238),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
@@ -38,10 +38,10 @@ up_vector_enabled = false
 
 [sub_resource type="Curve3D" id="Curve3D_j1ftd"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0236694, 0, -0.623304, -0.539775, 0, -0.222957, 0.539775, 0, 0.222957, 0.362204, 0, 1.52215, 0, 0, 0, 0, 0, 0, 6.09242, 0, 4.81994, -0.633246, 0, 0.228384, 0.633246, 0, -0.228384, 7.14091, 0, 5.24557),
-"tilts": PackedFloat32Array(0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0236694, 0, -0.623304, 0, 0, 0, 0, 0, 0, 0.0417943, 0, 0.543133, -2.02511, 0, -0.125696, 2.02511, 0, 0.125696, 1.74568, 0, 2.8336, 0, 0, 0, 0, 0, 0, 6.09242, 0, 4.81994, -0.633246, 0, 0.228384, 0.633246, 0, -0.228384, 7.14091, 0, 5.24557),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
-point_count = 4
+point_count = 5
 up_vector_enabled = false
 
 [node name="Singleplayer" type="Node"]
@@ -130,6 +130,7 @@ _path2 = NodePath("../PathsGuard/Storage_To_Kitchen/StorageToKitchen_PathFollow3
 _path3 = NodePath("../PathsGuard/Kitchen_To_Start/KitchenToStart_PathFollow3D")
 _waiting_point_index = 1
 _move_speed = 2.0
+_rotation_speed = 0.9
 _walk_by_cooldown = 1
 _watch_game_probability = 0.0
 
@@ -137,10 +138,11 @@ _watch_game_probability = 0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0, 5.22195)
 
 [node name="ToStorage" type="Path3D" parent="NPCSystem/PathsGuard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0613985, 0, 0)
 curve = SubResource("Curve3D_c38qy")
 
 [node name="ToStorage_PathFollow3D" type="PathFollow3D" parent="NPCSystem/PathsGuard/ToStorage"]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+transform = Transform3D(0.34528, 0.0572691, 0.936743, 3.72526e-09, 0.998136, -0.0610216, -0.938492, 0.0210698, 0.344636, 0, 0, 0)
 loop = false
 
 [node name="Storage_To_Kitchen" type="Path3D" parent="NPCSystem/PathsGuard"]
@@ -156,7 +158,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_j1ftd")
 
 [node name="KitchenToStart_PathFollow3D" type="PathFollow3D" parent="NPCSystem/PathsGuard/Kitchen_To_Start"]
-transform = Transform3D(-0.987777, 0, -0.155863, 0, 1, 0, 0.155863, 0, -0.987777, 0.0236694, 0, -0.623304)
+transform = Transform3D(-0.999808, 0, -0.0195318, 0, 1, 0, 0.0195318, 0, -0.999808, 0.0236694, 0, -0.623304)
 loop = false
 
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]

@@ -6,7 +6,8 @@ extends AmbientNPCBase
 @export var _path3: PathFollow3D
 ## The guard has a random chance to wait at one of the points in the path.
 @export var _waiting_point_index = 1
-@export var _move_speed: float
+@export var _move_speed: float = 2
+@export var _rotation_speed: float = 1
 @export var _walk_by_cooldown = 10
 @export_range(0, 1) var _watch_game_probability = 0.5
 
@@ -18,18 +19,14 @@ var _path_points_after_pause: Array[Vector3]
 
 func on_ready(_npc_manager):
 	_original_position = global_position
-	#for i in _path.curve.point_count:
-		#_all_path_points.append(_path.curve.get_point_position(i) + _path.global_position)
-		#
-	#_path_points_before_pause = _all_path_points.slice(0, _waiting_point_index + 1)
-	#_path_points_after_pause = _all_path_points.slice(_waiting_point_index, _all_path_points.size())
-	#
+	
 	super.on_ready(_npc_manager)
 	
 
 func _initialize_blackboard():
 	super._initialize_blackboard()
 	blackboard.append("Move Speed", _move_speed)
+	blackboard.append("Rotation Speed", _rotation_speed)
 
 
 func _initialize_tree():

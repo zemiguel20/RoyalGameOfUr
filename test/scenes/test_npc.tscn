@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://4goheq1kyhy1"]
+[gd_scene load_steps=7 format=3 uid="uid://4goheq1kyhy1"]
 
 [ext_resource type="Script" path="res://scripts/npc_system/ambient_npc.gd" id="1_otguk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atjh6"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_3jfe0"]
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xmia1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghwuu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3jfe0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vioiw"]
+size = Vector3(0.5, 0.2, 0.2)
 
 [node name="RigidBody3D4" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80288, 1, 0)
@@ -20,20 +23,6 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_otguk")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 0.2
-path_height_offset = -1.0
-path_max_distance = 34.51
-avoidance_enabled = true
-debug_enabled = true
-debug_path_custom_color = Color(0.0705882, 0.529412, 0, 1)
-
-[node name="Box_MeshInstance" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.81487, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_atjh6")
-mesh = SubResource("BoxMesh_3jfe0")
-skeleton = NodePath("../Capsule_MeshInstance3D")
-
 [node name="Capsule_MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 material_override = SubResource("StandardMaterial3D_atjh6")
@@ -41,3 +30,16 @@ mesh = SubResource("CapsuleMesh_xmia1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ghwuu")
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Box_MeshInstance" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1.81487, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_atjh6")
+mesh = SubResource("BoxMesh_3jfe0")
+skeleton = NodePath("../../Capsule_MeshInstance3D")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.604279, 0.506375)
+mesh = SubResource("BoxMesh_vioiw")
