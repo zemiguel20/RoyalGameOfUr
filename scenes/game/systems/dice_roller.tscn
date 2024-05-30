@@ -1,0 +1,298 @@
+[gd_scene load_steps=17 format=3 uid="uid://d4k7dx5sp6itq"]
+
+[ext_resource type="Script" path="res://scripts/game/systems/dice_roller.gd" id="1_e3w3t"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="2_50p6a"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/wireframe_meshes/wire_cube_mesh.gd" id="3_0d7ko"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/mesh_marker.gd" id="4_ymya1"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/wireframe_meshes/wire_arrow_mesh.gd" id="5_rd3go"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1sr8o"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_k25bl"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63)
+}, {
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63)
+}, {
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63)
+}]
+script = ExtResource("3_0d7ko")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ei3qt"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flhr7"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqxfi"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldf3u"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynn55"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qcja"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lnih"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dc0c"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.810582, 0, 0.279774, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_m2st1"]
+_surfaces = [{
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 1, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 8, 0, 8, 0, 5, 0, 5, 0, 9, 0, 6, 0, 10, 0, 7, 0, 11, 0, 8, 0, 12, 0, 9, 0, 10, 0, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 9, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 191, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 189)
+}, {
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 1, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 8, 0, 8, 0, 5, 0, 5, 0, 9, 0, 6, 0, 10, 0, 7, 0, 11, 0, 8, 0, 12, 0, 9, 0, 10, 0, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 9, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 191, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 189)
+}, {
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 1, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 8, 0, 8, 0, 5, 0, 5, 0, 9, 0, 6, 0, 10, 0, 7, 0, 11, 0, 8, 0, 12, 0, 9, 0, 10, 0, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 9, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 191, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 189)
+}]
+script = ExtResource("5_rd3go")
+
+[node name="DiceRoller" type="Node3D"]
+script = ExtResource("1_e3w3t")
+metadata/placing_spots = NodePath("DicePlacingSpots")
+metadata/throw_spots = NodePath("DiceThrowSpots")
+
+[node name="DicePlacingSpots" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108967, 0)
+
+[node name="DicePlacingSpot" type="Marker3D" parent="DicePlacingSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0145289, 0, -0.0104426)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="DicePlacingSpots/DicePlacingSpot"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_1sr8o")
+mesh = SubResource("ArrayMesh_k25bl")
+script = ExtResource("4_ymya1")
+
+[node name="DicePlacingSpot2" type="Marker3D" parent="DicePlacingSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00590235, 0, -0.0367762)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="DicePlacingSpots/DicePlacingSpot2"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ei3qt")
+mesh = SubResource("ArrayMesh_k25bl")
+script = ExtResource("4_ymya1")
+
+[node name="DicePlacingSpot3" type="Marker3D" parent="DicePlacingSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0258795, 0, -0.00908056)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="DicePlacingSpots/DicePlacingSpot3"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_flhr7")
+mesh = SubResource("ArrayMesh_k25bl")
+script = ExtResource("4_ymya1")
+
+[node name="DicePlacingSpot4" type="Marker3D" parent="DicePlacingSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0576615, 0, -0.0195232)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="DicePlacingSpots/DicePlacingSpot4"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_dqxfi")
+mesh = SubResource("ArrayMesh_k25bl")
+script = ExtResource("4_ymya1")
+
+[node name="DicePlacingSpot5" type="Marker3D" parent="DicePlacingSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0131668, 0, 0.0354142)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="DicePlacingSpots/DicePlacingSpot5"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ldf3u")
+mesh = SubResource("ArrayMesh_k25bl")
+script = ExtResource("4_ymya1")
+
+[node name="DicePlacingSpot6" type="Marker3D" parent="DicePlacingSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017707, 0, 0.0190692)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="DicePlacingSpots/DicePlacingSpot6"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ynn55")
+mesh = SubResource("ArrayMesh_k25bl")
+script = ExtResource("4_ymya1")
+
+[node name="DicePlacingSpot7" type="Marker3D" parent="DicePlacingSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049489, 0, 0.0258796)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="DicePlacingSpots/DicePlacingSpot7"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_4qcja")
+mesh = SubResource("ArrayMesh_k25bl")
+script = ExtResource("4_ymya1")
+
+[node name="DicePlacingSpot8" type="Marker3D" parent="DicePlacingSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0440407, 0, 0.0099886)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="DicePlacingSpots/DicePlacingSpot8"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_2lnih")
+mesh = SubResource("ArrayMesh_k25bl")
+script = ExtResource("4_ymya1")
+
+[node name="DiceThrowSpots" type="Node3D" parent="."]
+
+[node name="DiceThrowSpot" type="Marker3D" parent="DiceThrowSpots"]
+transform = Transform3D(-0.307523, -0.951541, 0, 0.951541, -0.307523, 0, 0, 0, 1, 0.113009, 0.0943287, 0.0283378)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="MeshMarkerAddon2" type="MeshInstance3D" parent="DiceThrowSpots/DiceThrowSpot"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6dc0c")
+mesh = SubResource("ArrayMesh_m2st1")
+script = ExtResource("4_ymya1")
+color = Color(0.810582, 0, 0.279774, 1)
+
+[node name="DiceThrowSpot2" type="Marker3D" parent="DiceThrowSpots"]
+transform = Transform3D(-0.295375, -0.913953, -0.278287, 0.951541, -0.307523, 0, -0.0855796, -0.264802, 0.960498, 0.0841778, 0.0943287, 0.0550312)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="MeshMarkerAddon2" type="MeshInstance3D" parent="DiceThrowSpots/DiceThrowSpot2"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6dc0c")
+mesh = SubResource("ArrayMesh_m2st1")
+script = ExtResource("4_ymya1")
+color = Color(0.810582, 0, 0.279774, 1)
+
+[node name="DiceThrowSpot6" type="Marker3D" parent="DiceThrowSpots"]
+transform = Transform3D(-0.295375, -0.913953, -0.278287, 0.951541, -0.307523, 0, -0.0855796, -0.264802, 0.960498, 0.108876, 0.0943287, 0.0533847)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="MeshMarkerAddon2" type="MeshInstance3D" parent="DiceThrowSpots/DiceThrowSpot6"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6dc0c")
+mesh = SubResource("ArrayMesh_m2st1")
+script = ExtResource("4_ymya1")
+color = Color(0.810582, 0, 0.279774, 1)
+
+[node name="DiceThrowSpot3" type="Marker3D" parent="DiceThrowSpots"]
+transform = Transform3D(-0.307517, -0.951522, -0.0063355, 0.951541, -0.307523, 1.54499e-08, -0.00194829, -0.00602844, 0.99998, 0.100226, 0.0943287, 0.00839231)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="MeshMarkerAddon2" type="MeshInstance3D" parent="DiceThrowSpots/DiceThrowSpot3"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6dc0c")
+mesh = SubResource("ArrayMesh_m2st1")
+script = ExtResource("4_ymya1")
+color = Color(0.810582, 0, 0.279774, 1)
+
+[node name="DiceThrowSpot4" type="Marker3D" parent="DiceThrowSpots"]
+transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, 1.55332e-08, 0.0142558, 0.0441104, 0.998925, 0.0997676, 0.0943287, -0.0181738)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="MeshMarkerAddon2" type="MeshInstance3D" parent="DiceThrowSpots/DiceThrowSpot4"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6dc0c")
+mesh = SubResource("ArrayMesh_m2st1")
+script = ExtResource("4_ymya1")
+color = Color(0.810582, 0, 0.279774, 1)
+
+[node name="DiceThrowSpot5" type="Marker3D" parent="DiceThrowSpots"]
+transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, 1.55332e-08, 0.0142558, 0.0441104, 0.998925, 0.0820672, 0.0943287, -0.0342276)
+gizmo_extents = 0.01
+script = ExtResource("2_50p6a")
+gizmo_extends_override = 0.01
+
+[node name="MeshMarkerAddon2" type="MeshInstance3D" parent="DiceThrowSpots/DiceThrowSpot5"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6dc0c")
+mesh = SubResource("ArrayMesh_m2st1")
+script = ExtResource("4_ymya1")
+color = Color(0.810582, 0, 0.279774, 1)
