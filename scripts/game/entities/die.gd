@@ -28,10 +28,9 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 	var offset = Vector3(0.0, 0.005, 0.0)
 	apply_impulse(impulse, offset)
 	
-	# wait for physics process to apply force and update state
-	await get_tree().create_timer(0.05).timeout
-	
-	print(global_position)
+	# Wait for physics wakeup
+	if sleeping:
+		await sleeping_state_changed
 	
 	sleeping_state_changed.connect(_on_movement_stopped)
 
