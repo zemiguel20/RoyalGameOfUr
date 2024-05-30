@@ -3,37 +3,41 @@ class_name MoveAlongPathTask
 extends BTNode
 
 var _owner: Node3D
-var _points: Array[Vector3]
+var _path_follow: PathFollow3D
 var _move_speed: float
-var _current_point_index: int
-var _current_target_pos: Vector3
-var _threshold
+var _threshold: float
+
+var _progression_speed
+var _current_progress
 
 
-func _init(points: Array[Vector3], threshold = 0.1):
-	_points = points
-	_threshold = threshold
-	
+func _init(path_follow: PathFollow3D):
+	_path_follow = path_follow
+
 
 func on_start():
 	_owner = _blackboard.read("Base")
 	_move_speed = _blackboard.read("Move Speed")
-	_current_point_index = 0
-	_current_target_pos = _points[_current_point_index]
 	
+	# Decide progression speed based on length of path.
+	_current_progress = 0
 
+	
 func on_process(delta) -> Status:
-	# Check progression
-	if _owner.global_position.distance_to(_current_target_pos) < _threshold:
-		_current_point_index += 1
-		if _current_point_index < _points.size():
-			_current_target_pos = _points[_current_point_index]
-		else:
-			return Status.Succeeded
-	
 	# Movement
-	var direction = _owner.global_position.direction_to(_current_target_pos)
-	var movement = direction.normalized() * delta * _move_speed
-	_owner.global_position += movement
+	var prev_y_pos = _owner.global_position.y
+	_owner.global_position = _path_follow.global_position
+	_owner.global_position.y = prev_y_pos
+	_owner.global_rotation = _path_follow.global_rotation
 	
-	return Status.Running
+	# Check progression
+	_current_progress += _move_speed * delta
+	_path_follow.progress = _current_progress
+	if _path_follow.progress_ratio >= 0.99:
+		return Status.Succeeded
+	else:
+		return Status.Running
+
+
+func on_end():
+	_path_follow.progress	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvs8yqeqllrsc"]
+[gd_scene load_steps=12 format=3 uid="uid://cvs8yqeqllrsc"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_ifuvb"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="2_fi2pv"]
@@ -34,6 +34,15 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
+up_vector_enabled = false
+
+[sub_resource type="Curve3D" id="Curve3D_j1ftd"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0236694, 0, -0.623304, -0.539775, 0, -0.222957, 0.539775, 0, 0.222957, 0.362204, 0, 1.52215, 0, 0, 0, 0, 0, 0, 6.09242, 0, 4.81994, -0.633246, 0, 0.228384, 0.633246, 0, -0.228384, 7.14091, 0, 5.24557),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+up_vector_enabled = false
 
 [node name="Singleplayer" type="Node"]
 script = SubResource("GDScript_fbn4f")
@@ -106,36 +115,49 @@ transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 
 max_degrees_down = 50.0
 max_degrees_left = 45.0
 max_degrees_right = 45.0
-_board_look_rotation = Vector3(-35, 32, 0)
+_board_look_rotation = Vector3(-36, 32, 0)
 _trans_type = 1
 _ease_type = 1
 
 [node name="NPCSystem" type="Node3D" parent="."]
 script = ExtResource("5_5dtl3")
 
-[node name="Guard" parent="NPCSystem" node_paths=PackedStringArray("_path") instance=ExtResource("5_kf3yf")]
+[node name="Guard" parent="NPCSystem" node_paths=PackedStringArray("_path", "_path2", "_path3") instance=ExtResource("5_kf3yf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.01313, 0.173757, 5.32889)
 script = ExtResource("7_5dnoq")
-_path = NodePath("../Markers/Storage_To_Kitchen")
+_path = NodePath("../PathsGuard/ToStorage/ToStorage_PathFollow3D")
+_path2 = NodePath("../PathsGuard/Storage_To_Kitchen/StorageToKitchen_PathFollow3D")
+_path3 = NodePath("../PathsGuard/Kitchen_To_Start/KitchenToStart_PathFollow3D")
 _waiting_point_index = 1
 _move_speed = 2.0
 _walk_by_cooldown = 1
-_watch_game_probability = 0.2
+_watch_game_probability = 0.0
 
-[node name="Markers" type="Node3D" parent="NPCSystem"]
-
-[node name="Marker_Storage1" type="Marker3D" parent="NPCSystem/Markers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.74653, 4.76837e-07, 3.48282)
-
-[node name="ToStorage" type="Path3D" parent="NPCSystem/Markers"]
+[node name="PathsGuard" type="Node3D" parent="NPCSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0, 5.22195)
+
+[node name="ToStorage" type="Path3D" parent="NPCSystem/PathsGuard"]
 curve = SubResource("Curve3D_c38qy")
 
-[node name="Storage_To_Kitchen" type="Path3D" parent="NPCSystem/Markers"]
+[node name="ToStorage_PathFollow3D" type="PathFollow3D" parent="NPCSystem/PathsGuard/ToStorage"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+loop = false
+
+[node name="Storage_To_Kitchen" type="Path3D" parent="NPCSystem/PathsGuard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_fbvn3")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="NPCSystem/Markers/Storage_To_Kitchen"]
-transform = Transform3D(-0.022574, 0, -0.999736, 0, 1, 0, 0.999736, 0, -0.022574, -4.26304, 0, 3.57356)
+[node name="StorageToKitchen_PathFollow3D" type="PathFollow3D" parent="NPCSystem/PathsGuard/Storage_To_Kitchen"]
+transform = Transform3D(-0.0225741, 0, -0.999744, 0, 1, 0, 0.999744, 0, -0.0225741, -4.26304, 0, 3.57356)
+loop = false
+
+[node name="Kitchen_To_Start" type="Path3D" parent="NPCSystem/PathsGuard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
+curve = SubResource("Curve3D_j1ftd")
+
+[node name="KitchenToStart_PathFollow3D" type="PathFollow3D" parent="NPCSystem/PathsGuard/Kitchen_To_Start"]
+transform = Transform3D(-0.987777, 0, -0.155863, 0, 1, 0, 0.155863, 0, -0.987777, 0.0236694, 0, -0.623304)
+loop = false
 
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
 [connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
