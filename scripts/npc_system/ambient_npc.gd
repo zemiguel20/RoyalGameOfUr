@@ -6,11 +6,11 @@ var blackboard: Blackboard
 
 var _current_tree: BTNode
 var _material: BaseMaterial3D
-var _npc_manager: NPCDataManager
+var _npc_manager
 var _has_started = false
 
 
-func on_ready(manager: NPCDataManager):
+func on_ready(manager):
 	_npc_manager = manager
 	_has_started = true
 	

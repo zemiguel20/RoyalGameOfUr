@@ -1,13 +1,11 @@
-class_name NPCDataManager
+## Class managing npcs and keeping track of shared data for npc, making sure that they do not overlap.
+class_name NPCSystem
 extends Node
-## Experimental name, keeps track of places that are occupied, maybe also has a queue/reserving system.
 
-# Expansion: Dictionary with location type and bool if occupied?
-@export var kitchen: NPCSpot
 var npcs: Array
 
 func _ready():
-	npcs = get_children()
+	npcs = get_node("NPCs").get_children()
 	
 	for npc in npcs:
 		if npc is AmbientNPCBase:

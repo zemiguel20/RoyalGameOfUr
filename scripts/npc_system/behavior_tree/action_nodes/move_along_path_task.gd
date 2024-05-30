@@ -10,20 +10,23 @@ var _rotation_speed: float
 var _progression_speed
 var _current_progress
 var _target_rotation
+var _progress_ratio_start
+var _progress_ratio_goal
 
 
-func _init(path_follow: PathFollow3D):
+func _init(path_follow: PathFollow3D, progress_ratio_start = 0.001, progress_ratio_goal = 1):
 	_path_follow = path_follow
-
+	_progress_ratio_start = progress_ratio_start
+	_progress_ratio_goal = progress_ratio_goal
+	
 
 func on_start():
 	_owner = _blackboard.read("Base")
 	_move_speed = _blackboard.read("Move Speed")
 	_rotation_speed = _blackboard.read("Rotation Speed")
 	
-	# Decide progression speed based on length of path.
-	_current_progress = 0
-	_path_follow.progress = 0.001
+	_path_follow.progress_ratio = _progress_ratio_start
+	_current_progress = _path_follow.progress
 	_owner.global_rotation.y = _path_follow.global_rotation.y
 
 	
@@ -45,11 +48,7 @@ func on_process(delta) -> Status:
 	# Check progression
 	_current_progress += _move_speed * delta
 	_path_follow.progress = _current_progress
-	if _path_follow.progress_ratio >= 0.99:
+	if _path_follow.progress_ratio >= _progress_ratio_goal:
 		return Status.Succeeded
 	else:
 		return Status.Running
-
-
-func on_end():
-	_path_follow.progress = 0

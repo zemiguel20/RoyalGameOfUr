@@ -3,16 +3,17 @@ extends BTNode
 
 var _wait_time: float
 var _status: Status
-var _npc
+var _owner
 
-func _init(time, npc):
+func _init(time):
 	_wait_time = time
-	_npc = npc
 
 
 func on_start():
 	_status = Status.Running
-	await _npc.get_tree().create_timer(_wait_time).timeout
+	# Get the owner, since we need a node to wait
+	_owner = _blackboard.read("Base")
+	await _owner.get_tree().create_timer(_wait_time).timeout
 	_status = Status.Succeeded
 	
 
