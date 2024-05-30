@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvos81xjjq5nl"]
+
+[ext_resource type="PackedScene" uid="uid://dslub3q3xrluo" path="res://models/d4_model.glb" id="1_s565b"]
+[ext_resource type="PhysicsMaterial" uid="uid://cewt4j3gn56bt" path="res://physics_materials/pm_die.tres" id="2_geqe1"]
+[ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="4_nhl43"]
+[ext_resource type="Script" path="res://scripts/game/components/move_animation.gd" id="5_7qqtg"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d8pqd"]
+points = PackedVector3Array(-0.00112825, -0.0341169, -0.099009, -0.00121302, 0.00105237, -0.0740631, 0.0205224, -0.0341169, -0.0615241, -0.0227789, -0.0341169, -0.0615241, -0.00150125, 0.106615, 0.000804044, 0.0202511, 0.0714323, 0.0133431, -0.00139952, 0.0714185, -0.0241566, 0.0637389, 0.00106614, 0.0384358, 0.0854743, -0.0341169, 0.0509749, -0.0660802, -0.0341169, 0.0134752, -0.0661649, 0.00106614, 0.0384358, -0.0877139, -0.0341169, 0.0509749)
+
+[node name="Die" instance=ExtResource("1_s565b")]
+mass = 0.01
+physics_material_override = ExtResource("2_geqe1")
+continuous_cd = true
+max_contacts_reported = 10
+contact_monitor = true
+linear_damp = 0.3
+angular_damp = 0.3
+metadata/normals_root_node = NodePath("Normals")
+metadata/highlight = NodePath("Highlight")
+metadata/move_animation = NodePath("MoveAnimation")
+
+[node name="Dice" parent="." index="0"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_d8pqd")
+
+[node name="Normals" type="Node3D" parent="." index="2"]
+
+[node name="BlackTip1" type="Marker3D" parent="Normals" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0139439, 0)
+gizmo_extents = 0.01
+metadata/value = 1
+
+[node name="BlackTip2" type="Marker3D" parent="Normals" index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.305978, 0.952039, 0, -0.952039, -0.305978, -0.000378739, -0.00391078, -0.0119524)
+gizmo_extents = 0.01
+metadata/value = 1
+
+[node name="WhiteTip1" type="Marker3D" parent="Normals" index="2"]
+transform = Transform3D(-0.520309, 0.81302, 0.261298, 1.82861e-08, -0.305978, 0.952039, 0.853978, 0.495355, 0.159203, 0.0101342, -0.00391078, 0.0058029)
+gizmo_extents = 0.01
+metadata/value = 0
+
+[node name="WhiteTip2" type="Marker3D" parent="Normals" index="3"]
+transform = Transform3D(-0.521277, -0.812457, -0.261118, 3.69721e-08, -0.305978, 0.952039, -0.853387, 0.496276, 0.159499, -0.0112887, -0.00438574, 0.00652722)
+gizmo_extents = 0.01
+metadata/value = 0
+
+[node name="Highlight" type="Node" parent="." index="3"]
+script = ExtResource("4_nhl43")
+
+[node name="MoveAnimation" type="Node" parent="." index="4" node_paths=PackedStringArray("root_parent")]
+script = ExtResource("5_7qqtg")
+root_parent = NodePath("..")
