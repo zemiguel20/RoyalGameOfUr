@@ -1,0 +1,27 @@
+[gd_scene load_steps=9 format=3 uid="uid://kmqj2qdc6bot"]
+
+[ext_resource type="PackedScene" uid="uid://jjl01eifgb7f" path="res://models/Fruit/Assyrian Plum/Half.fbx" id="1_qe6og"]
+[ext_resource type="Texture2D" uid="uid://utfwm5htnhq7" path="res://textures/Fruit/Assyrian Plum/Half/DefaultMaterial_Base_color.png" id="2_e51rh"]
+[ext_resource type="Texture2D" uid="uid://dat2dcqxggv2e" path="res://textures/Fruit/Assyrian Plum/Half/DefaultMaterial_Mixed_AO.png" id="3_mogij"]
+[ext_resource type="Texture2D" uid="uid://bixah40myrptr" path="res://textures/Fruit/Assyrian Plum/Half/DefaultMaterial_Height.png" id="4_42g0a"]
+[ext_resource type="Texture2D" uid="uid://b6ruetjiws2s0" path="res://textures/Fruit/Assyrian Plum/Half/DefaultMaterial_Metallic.png" id="5_wj7ku"]
+[ext_resource type="Texture2D" uid="uid://cfjvk81vsahhn" path="res://textures/Fruit/Assyrian Plum/Half/DefaultMaterial_Normal_OpenGL.png" id="6_aigls"]
+[ext_resource type="Texture2D" uid="uid://ifilf8q652l8" path="res://textures/Fruit/Assyrian Plum/Half/DefaultMaterial_Roughness.png" id="7_0lg5r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02503"]
+albedo_texture = ExtResource("2_e51rh")
+metallic = 1.0
+metallic_texture = ExtResource("5_wj7ku")
+roughness_texture = ExtResource("7_0lg5r")
+normal_enabled = true
+normal_texture = ExtResource("6_aigls")
+ao_enabled = true
+ao_texture = ExtResource("3_mogij")
+heightmap_scale = 0.0
+heightmap_texture = ExtResource("4_42g0a")
+
+[node name="Root Scene" instance=ExtResource("1_qe6og")]
+
+[node name="Sphere_002" parent="RootNode" index="0"]
+transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_02503")
