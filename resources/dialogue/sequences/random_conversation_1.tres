@@ -6,6 +6,7 @@
 [sub_resource type="Resource" id="Resource_l004w"]
 script = ExtResource("1_f1x1r")
 caption = "Hey, wanna hear a joke?"
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 3.0
 prevents_opponent_action = false
@@ -13,6 +14,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_hyjxb"]
 script = ExtResource("1_f1x1r")
 caption = "So, a dog walks into a bar..."
+caption_cuneiform = ""
 anim_variations = Array[int]([6])
 fixed_duration = 3.0
 prevents_opponent_action = true
@@ -20,6 +22,7 @@ prevents_opponent_action = true
 [sub_resource type="Resource" id="Resource_mrw1n"]
 script = ExtResource("1_f1x1r")
 caption = "He walks in, and says: I cannot see a thing..."
+caption_cuneiform = ""
 anim_variations = Array[int]([4])
 fixed_duration = 5.0
 prevents_opponent_action = true
@@ -27,6 +30,7 @@ prevents_opponent_action = true
 [sub_resource type="Resource" id="Resource_m5sdh"]
 script = ExtResource("1_f1x1r")
 caption = "..."
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 2.0
 prevents_opponent_action = true
@@ -34,6 +38,7 @@ prevents_opponent_action = true
 [sub_resource type="Resource" id="Resource_leien"]
 script = ExtResource("1_f1x1r")
 caption = "\"...I'll open this one!\""
+caption_cuneiform = ""
 anim_variations = Array[int]([7])
 fixed_duration = 3.0
 prevents_opponent_action = true

@@ -6,6 +6,7 @@
 [sub_resource type="Resource" id="Resource_ha7mv"]
 script = ExtResource("1_cqksl")
 caption = "Anyways… look what I brought."
+caption_cuneiform = ""
 anim_variations = Array[int]([1])
 fixed_duration = -1.0
 prevents_opponent_action = false
@@ -13,6 +14,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_58o8f"]
 script = ExtResource("1_cqksl")
 caption = "That’s right! Can you believe that Šarru-kīn used to play on this? This thing is ancient!"
+caption_cuneiform = ""
 anim_variations = Array[int]([7])
 fixed_duration = -1.0
 prevents_opponent_action = false
@@ -20,6 +22,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_1tkgn"]
 script = ExtResource("1_cqksl")
 caption = "May the gods be with you, friend. Let's play!"
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 3.0
 prevents_opponent_action = false

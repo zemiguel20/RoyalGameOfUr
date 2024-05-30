@@ -4,7 +4,7 @@ extends CanvasLayer
 
 @onready var panel := $Background_Panel as Panel
 @export var subtitle_label: Label
-@onready var akkadian_label := $Background_Panel/Akkadian_Label as Label
+@onready var cuneiform_label := $Background_Panel/Cuneiform_Label as Label
 @export var skip_icon: Control
 
 ### Text of the opponent npc, which gets saved when another one is shown.
@@ -17,17 +17,19 @@ func _ready():
 	subtitle_label.text = "Waarom doet ie niet?"
 	
 	
-func display_subtitle(text: String, display_skip_icon: bool):
-	subtitle_label.text = text
-	akkadian_label.text = _filter_symbols(text)
+func display_subtitle(entry: DialogueSingleEntry, show_skip_icon: bool):
+	subtitle_label.text = entry.caption
+	if entry.caption_cuneiform.is_empty():
+		cuneiform_label.text = _filter_symbols(entry.caption).to_lower()
+	else:
+		cuneiform_label.text = entry.caption_cuneiform.to_lower()
+		
 	_toggle_subtitles(true)
-	_toggle_skip_icon(display_skip_icon)
+	_toggle_skip_icon(show_skip_icon)
 
 
 func _filter_symbols(text: String) -> String:
-	var result = text
-	
-	result = result.replace(' ', '')
+	var result = text.replace(' ', '')
 	var chars_to_filter = ['(', ')', '!', '?', ',', '.', '\'', '´', '’']
 	for char in chars_to_filter:
 		result = result.replace(char, ' ')

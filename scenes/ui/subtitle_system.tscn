@@ -57,7 +57,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 2
 
-[node name="Akkadian_Label" type="Label" parent="Background_Panel"]
+[node name="Cuneiform_Label" type="Label" parent="Background_Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
