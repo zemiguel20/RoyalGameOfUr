@@ -1,38 +1,48 @@
-[gd_scene load_steps=16 format=3 uid="uid://cvos81xjjq5nl"]
+[gd_scene load_steps=14 format=3 uid="uid://cvos81xjjq5nl"]
 
 [ext_resource type="PackedScene" uid="uid://dslub3q3xrluo" path="res://models/d4_model.glb" id="1_s565b"]
 [ext_resource type="PhysicsMaterial" uid="uid://cewt4j3gn56bt" path="res://physics_materials/pm_die.tres" id="2_geqe1"]
-[ext_resource type="Script" path="res://scripts/game/components/editor/cube_mesh_marker.gd" id="3_1wg2i"]
 [ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="3_7uyog"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/wireframe_meshes/wire_arrow_mesh.gd" id="4_b63wi"]
 [ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="4_nhl43"]
 [ext_resource type="Script" path="res://scripts/game/components/move_animation.gd" id="5_7qqtg"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/mesh_marker.gd" id="5_d0inr"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d8pqd"]
 points = PackedVector3Array(-0.00112825, -0.0341169, -0.099009, -0.00121302, 0.00105237, -0.0740631, 0.0205224, -0.0341169, -0.0615241, -0.0227789, -0.0341169, -0.0615241, -0.00150125, 0.106615, 0.000804044, 0.0202511, 0.0714323, 0.0133431, -0.00139952, 0.0714185, -0.0241566, 0.0637389, 0.00106614, 0.0384358, 0.0854743, -0.0341169, 0.0509749, -0.0660802, -0.0341169, 0.0134752, -0.0661649, 0.00106614, 0.0384358, -0.0877139, -0.0341169, 0.0509749)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8lx6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvskl"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_n0cc3"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_pr2ax"]
+_surfaces = [{
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 1, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 8, 0, 8, 0, 5, 0, 5, 0, 9, 0, 6, 0, 10, 0, 7, 0, 11, 0, 8, 0, 12, 0, 9, 0, 10, 0, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 9, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 191, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 189)
+}]
+script = ExtResource("4_b63wi")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s823u"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnv10"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_t8v7l"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3ooy"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfh2r"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.501961, 0.501961, 1)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_m4f7k"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1h5k"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0ydb"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_38hje"]
+albedo_color = Color(0, 0.501961, 0.501961, 1)
 
 [node name="Die" instance=ExtResource("1_s565b")]
 mass = 0.01
@@ -57,51 +67,55 @@ shape = SubResource("ConvexPolygonShape3D_d8pqd")
 
 [node name="BlackTip1" type="Marker3D" parent="Normals" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000181612, 0.0139439, -0.00035115)
-gizmo_extents = 0.003
+gizmo_extents = 0.005
 script = ExtResource("3_7uyog")
-gizmo_extends_override = 0.003
+gizmo_extends_override = 0.005
 metadata/value = 1
 
 [node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/BlackTip1" index="0"]
-material_override = SubResource("StandardMaterial3D_a8lx6")
-mesh = SubResource("ImmediateMesh_n0cc3")
-script = ExtResource("3_1wg2i")
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_rvskl")
+mesh = SubResource("ArrayMesh_pr2ax")
+script = ExtResource("5_d0inr")
 
 [node name="BlackTip2" type="Marker3D" parent="Normals" index="1"]
 transform = Transform3D(1, 0, 0, 0, -0.305978, 0.952039, 0, -0.952039, -0.305978, -0.000378739, -0.00418571, -0.0128078)
-gizmo_extents = 0.003
+gizmo_extents = 0.005
 script = ExtResource("3_7uyog")
-gizmo_extends_override = 0.003
+gizmo_extends_override = 0.005
 metadata/value = 1
 
 [node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/BlackTip2" index="0"]
-material_override = SubResource("StandardMaterial3D_s823u")
-mesh = SubResource("ImmediateMesh_t8v7l")
-script = ExtResource("3_1wg2i")
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_lnv10")
+mesh = SubResource("ArrayMesh_pr2ax")
+script = ExtResource("5_d0inr")
 
 [node name="WhiteTip1" type="Marker3D" parent="Normals" index="2"]
 transform = Transform3D(-0.520309, 0.81302, 0.261298, 1.82861e-08, -0.305978, 0.952039, 0.853978, 0.495355, 0.159203, 0.0117456, -0.00451721, 0.00678466)
-gizmo_extents = 0.003
+gizmo_extents = 0.005
 script = ExtResource("3_7uyog")
-gizmo_extends_override = 0.003
+gizmo_extends_override = 0.005
 metadata/value = 0
 
 [node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/WhiteTip1" index="0"]
-material_override = SubResource("StandardMaterial3D_f3ooy")
-mesh = SubResource("ImmediateMesh_m4f7k")
-script = ExtResource("3_1wg2i")
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_vfh2r")
+mesh = SubResource("ArrayMesh_pr2ax")
+script = ExtResource("5_d0inr")
 
 [node name="WhiteTip2" type="Marker3D" parent="Normals" index="3"]
 transform = Transform3D(-0.521277, -0.812457, -0.261118, 3.69721e-08, -0.305978, 0.952039, -0.853387, 0.496276, 0.159499, -0.0112887, -0.00438574, 0.00652722)
-gizmo_extents = 0.003
+gizmo_extents = 0.005
 script = ExtResource("3_7uyog")
-gizmo_extends_override = 0.003
+gizmo_extends_override = 0.005
 metadata/value = 0
 
 [node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/WhiteTip2" index="0"]
-material_override = SubResource("StandardMaterial3D_q1h5k")
-mesh = SubResource("ImmediateMesh_38hje")
-script = ExtResource("3_1wg2i")
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_y0ydb")
+mesh = SubResource("ArrayMesh_pr2ax")
+script = ExtResource("5_d0inr")
 
 [node name="Highlight" type="Node" parent="." index="3"]
 script = ExtResource("4_nhl43")
