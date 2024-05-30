@@ -1,14 +1,17 @@
 @tool
 class_name MaterialHighlight extends Node
-## Applies a highlight material to a target mesh as an overlay. Can be turned on or off.
+## Component that highlights a target mesh by applying a material overlay.
 
 
+## Material overlay to apply.
 @export var material: Material
 
+## Color of the highlight.
 @export var color: Color = Color.WHITE:
 	set(new_value):
 		color = new_value
 		_update_color()
+
 
 @export var target_meshes: Array[GeometryInstance3D]:
 	set(new_instance):
