@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DialogueSequence" load_steps=6 format=3 uid="uid://bxhte73s8k1w2"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_xgdgq"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_xgdgq"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_ycmlp"]
 
 [sub_resource type="Resource" id="Resource_lho8x"]
@@ -30,6 +30,6 @@ prevents_opponent_action = false
 [resource]
 script = ExtResource("1_ycmlp")
 max_repetitions = 1
-dialogue_entries = Array[ExtResource("1_xgdgq")]([SubResource("Resource_lho8x"), SubResource("Resource_s7eyw"), SubResource("Resource_eoeho")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_lho8x"), SubResource("Resource_s7eyw"), SubResource("Resource_eoeho")])
 requires_click = false
 weight = 5

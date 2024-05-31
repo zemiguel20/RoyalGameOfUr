@@ -1,5 +1,5 @@
 class_name DialogueEntry
 extends Resource
 
-func execute():
+func execute(dialogue_menu_controller):
 	pass

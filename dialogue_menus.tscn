@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://y4idlfyp1gdh"]
+
+[ext_resource type="Script" path="res://scenes/dialogue_menus.gd" id="1_tinfx"]
+[ext_resource type="Texture2D" uid="uid://bxsgpdgwmftj0" path="res://sprites/right.png" id="2_iy13n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tnjk0"]
+font_size = 38
+
+[node name="Menus_During_Dialogue" type="CanvasLayer"]
+script = ExtResource("1_tinfx")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 650
+theme_override_constants/margin_top = 475
+theme_override_constants/margin_right = 650
+theme_override_constants/margin_bottom = 475
+
+[node name="LookAroundControls" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/LookAroundControls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/LookAroundControls/CenterContainer"]
+layout_mode = 2
+
+[node name="Subtitles_Label" type="Label" parent="MarginContainer/LookAroundControls/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Hold"
+label_settings = SubResource("LabelSettings_tnjk0")
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/LookAroundControls/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_iy13n")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Subtitles_Label2" type="Label" parent="MarginContainer/LookAroundControls/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(280, 100)
+layout_mode = 2
+text = " to look around"
+label_settings = SubResource("LabelSettings_tnjk0")
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2
