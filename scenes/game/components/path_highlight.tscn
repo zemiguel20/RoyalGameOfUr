@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dk6q50tq0w026"]
 
-[ext_resource type="Script" path="res://scripts/game/components/scrolling_texture_path.gd" id="1_k3tgi"]
-[ext_resource type="Texture2D" uid="uid://swh27vy5ypr8" path="res://textures/arrow.svg" id="2_j6vhh"]
+[ext_resource type="Script" path="res://scripts/game/components/scrolling_texture_path.gd" id="1_dh1ws"]
+[ext_resource type="Texture2D" uid="uid://swh27vy5ypr8" path="res://textures/arrow.svg" id="2_gyc4x"]
 
 [sub_resource type="Curve3D" id="Curve3D_ugcqv"]
 resource_local_to_scene = true
@@ -14,8 +14,8 @@ up_vector_enabled = false
 
 [node name="PathHighlight" type="Path3D"]
 curve = SubResource("Curve3D_ugcqv")
-script = ExtResource("1_k3tgi")
-texture = ExtResource("2_j6vhh")
+script = ExtResource("1_dh1ws")
+texture = ExtResource("2_gyc4x")
 sprite_scale = Vector3(0.01, 0.01, 0.01)
 density = 250.0
 velocity = 0.01
