@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4k7dx5sp6itq"]
+[gd_scene load_steps=5 format=3 uid="uid://d4k7dx5sp6itq"]
 
 [ext_resource type="Script" path="res://scripts/game/systems/dice_roller.gd" id="1_e3w3t"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="2_yqe8l"]
 [ext_resource type="PackedScene" uid="uid://8v05523r8lek" path="res://scenes/game/systems/dice_roller/die_throw_spot.tscn" id="3_c1oyf"]
+[ext_resource type="AudioStream" uid="uid://bdsbgnjpv7ic2" path="res://audio/dice_shaking_loop.mp3" id="4_dll26"]
 
 [node name="DiceRoller" type="Node3D"]
 script = ExtResource("1_e3w3t")
 metadata/placing_spots = NodePath("DicePlacingSpots")
 metadata/throw_spots = NodePath("DiceThrowSpots")
+metadata/shake_sfx = NodePath("ShakeSFX")
 
 [node name="DicePlacingSpots" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108967, 0)
@@ -55,3 +57,6 @@ transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, -3
 
 [node name="DieThrowSpot6" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
 transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, -3.23211e-08, 0.0142558, 0.0441104, 0.998925, 0.0820672, 0.0943287, -0.0342276)
+
+[node name="ShakeSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_dll26")

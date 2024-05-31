@@ -46,9 +46,6 @@ func get_current_player_move_picker() -> MovePicker:
 func _start_roll_phase():
 	var roller = get_current_player_dice_roller()
 	
-	roller.place_dice(entity_manager.dice)
-	await roller.dice_placed
-	
 	roller.start(entity_manager.dice)
 	roller.roll_finished.connect(_on_roll_ended)
 	

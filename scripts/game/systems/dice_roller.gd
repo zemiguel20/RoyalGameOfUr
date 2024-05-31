@@ -8,20 +8,32 @@ signal roll_finished(value: int)
 signal dice_placed
 
 @export var automatic: bool = false
+@export var selectable_color := Color.PALE_GREEN
+@export var hovered_color := Color.SKY_BLUE
+@export var value_one_color := Color.DEEP_SKY_BLUE
+@export var value_zero_color := Color.RED
 
 var place_spots: Array[Node3D] = []
 var throw_spots: Array[Node3D] = []
+var shake_sfx: AudioStreamPlayer3D
 
 var last_rolled_value := 0
 
+var _dice: Array[Die] = []
 
 func _ready() -> void:
 	place_spots.assign(get_node(get_meta("placing_spots")).get_children())
 	throw_spots.assign(get_node(get_meta("throw_spots")).get_children())
+	shake_sfx = get_node(get_meta("shake_sfx"))
 
 
 func start(dice: Array[Die]) -> void:
-	push_error("NOT IMPLEMENTED") # TODO: activate rolling or selection
+	_dice.assign(dice)
+	_dehighlight()
+	place_dice(dice)
+	await dice_placed
+	_highlight_selectable()
+	_connect_input_signals()
 
 
 ## Moves the dice to the placing spots.
@@ -40,8 +52,96 @@ func place_dice(dice: Array[Die], skip_animation := false) -> void:
 	for die in dice:
 		if die.move_anim.moving:
 			await die.move_anim.movement_finished
-		
-		if not die.sleeping:
-			await die.sleeping_state_changed
 	
 	dice_placed.emit()
+
+
+func _highlight_hovered() -> void:
+	for die in _dice:
+		die.highlight.active = true
+		die.highlight.color = hovered_color
+
+
+func _highlight_selectable() -> void:
+	for die in _dice:
+		die.highlight.active = true
+		die.highlight.color = selectable_color
+
+
+func _highlight_result() -> void:
+	for die in _dice:
+		die.highlight.active = true
+		die.highlight.color = value_one_color if die.value == 1 else value_zero_color
+
+
+func _dehighlight() -> void:
+	for die in _dice:
+		die.highlight.active = false
+
+
+func _start_shaking() -> void:
+	shake_sfx.play()
+	for die in _dice:
+		die.model.visible = false
+
+
+func _stop_shaking() -> void:
+	shake_sfx.stop()
+	for die in _dice:
+		die.model.visible = true
+	_roll_dice()
+
+
+func _roll_dice() -> void:
+	_disconnect_input_signals()
+	_dehighlight()
+	last_rolled_value = 0
+	
+	# Position and throw dice
+	throw_spots.shuffle()
+	for i in _dice.size():
+		var die = _dice[i]
+		var throw_spot = throw_spots[i]
+		
+		var start_position = throw_spot.global_position
+		var start_rotation = General.get_random_rotation()
+		var impulse = throw_spot.global_basis.y * 0.01
+		die.roll(impulse, start_position, start_rotation)
+	
+	# wait roll finished
+	for die in _dice:
+		if die.rolling:
+			await die.roll_finished
+		last_rolled_value += die.value
+	
+	_highlight_result()
+	
+	roll_finished.emit(last_rolled_value)
+
+
+func _connect_input_signals() -> void:
+	for die in _dice:
+		if not die.input.hovered.is_connected(_highlight_hovered):
+			die.input.hovered.connect(_highlight_hovered)
+		if not die.input.dehovered.is_connected(_highlight_selectable):
+			die.input.dehovered.connect(_highlight_selectable)
+		if not die.input.hold_started.is_connected(_start_shaking):
+			die.input.hold_started.connect(_start_shaking)
+		if not die.input.hold_stopped.is_connected(_stop_shaking):
+			die.input.hold_stopped.connect(_stop_shaking)
+		if not die.input.clicked.is_connected(_roll_dice):
+			die.input.clicked.connect(_roll_dice)
+
+
+func _disconnect_input_signals() -> void:
+	for die in _dice:
+		if die.input.hovered.is_connected(_highlight_hovered):
+			die.input.hovered.disconnect(_highlight_hovered)
+		if die.input.dehovered.is_connected(_highlight_selectable):
+			die.input.dehovered.disconnect(_highlight_selectable)
+		if die.input.hold_started.is_connected(_start_shaking):
+			die.input.hold_started.disconnect(_start_shaking)
+		if die.input.hold_stopped.is_connected(_stop_shaking):
+			die.input.hold_stopped.disconnect(_stop_shaking)
+		if die.input.clicked.is_connected(_roll_dice):
+			die.input.clicked.disconnect(_roll_dice)

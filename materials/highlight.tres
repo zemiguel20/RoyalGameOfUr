@@ -4,6 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="2_773qm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j0xtv"]
+resource_local_to_scene = true
 render_priority = 10
 shader = ExtResource("1_klric")
 shader_parameter/border_width = 0.1
