@@ -23,6 +23,6 @@ func _on_mouse_exited():
 	dehovered.emit()
 
 
-func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int):
+func _on_input_event(_camera: Node, event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int):
 	if event.is_action_pressed("game_select"):
 		selected.emit()

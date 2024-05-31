@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://t6r5hmgp5c1u"]
+[gd_scene load_steps=15 format=3 uid="uid://t6r5hmgp5c1u"]
 
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="1_sto2p"]
 [ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/board.tscn" id="3_3t76i"]
-[ext_resource type="Script" path="res://scripts/game/dice/dice_random.gd" id="4_gbrtq"]
 [ext_resource type="PackedScene" uid="uid://cv3xq2670msr6" path="res://scenes/game/move_picker/move_picker_interactive.tscn" id="4_ks4b5"]
 [ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_random.gd" id="4_mige8"]
 [ext_resource type="PackedScene" uid="uid://d3gx24dw7xjud" path="res://scenes/game/move_picker/move_picker_ai.tscn" id="5_xncr4"]
@@ -10,16 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/entities/piece_white.tscn" id="8_2qfui"]
 [ext_resource type="PackedScene" uid="uid://cvos81xjjq5nl" path="res://scenes/game/entities/d4_die.tscn" id="8_b0vie"]
 [ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/entities/piece_black.tscn" id="9_gh62c"]
-[ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller.tscn" id="11_4yam3"]
-[ext_resource type="Script" path="res://scripts/game/components/editor/wireframe_meshes/wire_cube_mesh.gd" id="12_wbr7h"]
-[ext_resource type="Script" path="res://scripts/game/components/editor/mesh_marker.gd" id="13_s4st8"]
+[ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="11_4yam3"]
+[ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="11_vih10"]
 
 [sub_resource type="GDScript" id="GDScript_b8xbw"]
 script/source = "extends Node
 
-@onready var die: Die = $Die
-
 var started: bool = false
+
+@export var controller: GameController
 
 func _ready():
 	Settings.can_stack_in_safe_spot = true
@@ -28,7 +26,7 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_SPACE and not started:
 		started = true
-		$GameStateController.start_game()
+		controller.start_game()
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmve1"]
@@ -38,46 +36,9 @@ albedo_color = Color(0.303129, 0.303129, 0.303129, 1)
 material = SubResource("StandardMaterial3D_fmve1")
 size = Vector2(100, 100)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjpi2"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.541769, 0.416681, 0.110725, 1)
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_scsn8"]
-_surfaces = [{
-"aabb": AABB(-1, -1, -1, 2, 2, 2),
-"format": 34359742465,
-"index_count": 24,
-"index_data": PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0),
-"primitive": 1,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63)
-}, {
-"aabb": AABB(-1, -1, -1, 2, 2, 2),
-"format": 34359742465,
-"index_count": 24,
-"index_data": PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0),
-"primitive": 1,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63)
-}]
-script = ExtResource("12_wbr7h")
-
-[node name="GamemodeTest" type="Node"]
+[node name="GamemodeTest" type="Node" node_paths=PackedStringArray("controller")]
 script = SubResource("GDScript_b8xbw")
-
-[node name="GameStateController" type="Node" parent="." node_paths=PackedStringArray("p1_move_picker", "p2_move_picker", "p1_dice_roller", "p2_dice_roller", "entity_manager")]
-script = ExtResource("1_sto2p")
-p1_move_picker = NodePath("../MovePickers/InteractiveMovePicker")
-p2_move_picker = NodePath("../MovePickers/AIMovePicker")
-p1_dice_roller = NodePath("../DiceRoller")
-p2_dice_roller = NodePath("../DiceRoller2")
-entity_manager = NodePath("../EntityManager")
-
-[node name="MockDice" type="Node3D" parent="."]
-script = ExtResource("4_gbrtq")
+controller = NodePath("Systems/GameController")
 
 [node name="Board" parent="." instance=ExtResource("3_3t76i")]
 
@@ -95,36 +56,38 @@ transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0,
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.0497542, -0.741031, 0.669625, 0, 0.670456, 0.74195, -0.998762, -0.0369151, 0.033358, 0.30898, 0.342352, 0.0153921)
 
-[node name="MovePickers" type="Node" parent="."]
+[node name="Systems" type="Node" parent="."]
 
-[node name="InteractiveMovePicker" parent="MovePickers" instance=ExtResource("4_ks4b5")]
+[node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("p1_move_picker", "p2_move_picker", "p1_dice_roller", "p2_dice_roller", "entity_manager")]
+script = ExtResource("1_sto2p")
+p1_move_picker = NodePath("../MovePickers/InteractiveMovePicker")
+p2_move_picker = NodePath("../MovePickers/AIMovePicker")
+p1_dice_roller = NodePath("../DiceRoller")
+p2_dice_roller = NodePath("../DiceRoller2")
+entity_manager = NodePath("../EntityManager")
 
-[node name="AIMovePicker" parent="MovePickers" instance=ExtResource("5_xncr4")]
+[node name="MovePickers" type="Node" parent="Systems"]
 
-[node name="RandomMovePicker" type="Node" parent="MovePickers"]
+[node name="InteractiveMovePicker" parent="Systems/MovePickers" instance=ExtResource("4_ks4b5")]
+
+[node name="AIMovePicker" parent="Systems/MovePickers" instance=ExtResource("5_xncr4")]
+
+[node name="RandomMovePicker" type="Node" parent="Systems/MovePickers"]
 script = ExtResource("4_mige8")
 
-[node name="EntityManager" type="Node" parent="." node_paths=PackedStringArray("board", "dice_spawn_spot")]
+[node name="EntityManager" type="Node" parent="Systems" node_paths=PackedStringArray("board", "dice_spawn_spot")]
 script = ExtResource("7_2aqt3")
 p1_piece_prefab = ExtResource("8_2qfui")
 p2_piece_prefab = ExtResource("9_gh62c")
 die_prefab = ExtResource("8_b0vie")
-board = NodePath("../Board")
-dice_spawn_spot = NodePath("../DieSpawn")
+board = NodePath("../../Board")
+dice_spawn_spot = NodePath("../../DieSpawn")
 
-[node name="DiceRoller" parent="." instance=ExtResource("11_4yam3")]
+[node name="DiceRoller" parent="Systems" instance=ExtResource("11_4yam3")]
 transform = Transform3D(0.0849126, 0, 0.996388, 0, 1, 0, -0.996388, 0, 0.0849126, 0.222704, 2.98023e-08, 0.010642)
 
-[node name="DiceRoller2" parent="." instance=ExtResource("11_4yam3")]
+[node name="DiceRoller2" parent="Systems" instance=ExtResource("11_4yam3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.208323, 2.98023e-08, 0.0507007)
 
-[node name="DieSpawn" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0552361, 0.186461)
-gizmo_extents = 0.01
-
-[node name="MeshMarkerAddon" type="MeshInstance3D" parent="DieSpawn"]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_fjpi2")
-mesh = SubResource("ArrayMesh_scsn8")
-script = ExtResource("13_s4st8")
-color = Color(0.541769, 0.416681, 0.110725, 1)
+[node name="DieSpawn" parent="." instance=ExtResource("11_vih10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000428624, 0.0174397, 0.208058)
