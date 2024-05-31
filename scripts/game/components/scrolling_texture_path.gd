@@ -1,6 +1,5 @@
 @tool
-class_name ScrollingTexturePath3D
-extends Path3D
+class_name ScrollingTexturePath3D extends Path3D
 ## Spawns and scrolls a pool of sprites along the path.
 
 
