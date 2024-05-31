@@ -9,12 +9,16 @@ extends AmbientNPCBase
 
 @export_group("Speed")
 @export var _move_speed: float = 2
-@export var _rotation_speed: float = 1
+@export var _walk_rotation_speed: float = 1
+@export var _standing_rotation_speed: float = 1
+
+@export_group("Timings")
 @export var _walk_by_cooldown = 10
 
 @export_group("Special Events")
 ## The guard has a random chance to wait at one of the points in the path.
 @export_range(0, 1) var _watch_game_probability = 0.5
+@export var _watch_point: Marker3D 
 
 var _original_position: Vector3
 
@@ -27,7 +31,8 @@ func on_ready(_npc_manager):
 func _initialize_blackboard():
 	super._initialize_blackboard()
 	blackboard.append("Move Speed", _move_speed)
-	blackboard.append("Rotation Speed", _rotation_speed)
+	blackboard.append("Rotation Speed", _walk_rotation_speed)
+	blackboard.append("Standing Rotation Speed", _standing_rotation_speed)
 
 
 func _initialize_tree():
@@ -36,8 +41,10 @@ func _initialize_tree():
 		
 	var _moving_sequence_with_watching = SequenceNode.new([
 		## TODO: No magic numbers!
-		MoveAlongPathTask.new(_path, 0.001, 0.3),		
+		MoveAlongPathTask.new(_path, 0.001, 0.3),
+		RotateTowardsPointTask.new(_watch_point.global_position),
 		WaitTask.new(5),
+		RotateTowardsPointTask.new(-(_path.global_position - _path.global_basis.z)),
 		MoveAlongPathTask.new(_path, 0.3, 1),
 		])
 		

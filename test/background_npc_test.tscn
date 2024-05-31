@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="3_ml7vr"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="4_ikgtn"]
 [ext_resource type="Script" path="res://scripts/npc_system/npc_data_manager.gd" id="5_5dtl3"]
-[ext_resource type="PackedScene" uid="uid://4goheq1kyhy1" path="res://test/scenes/passenger_npc.tscn" id="6_d8mtd"]
+[ext_resource type="PackedScene" uid="uid://4goheq1kyhy1" path="res://test/scenes/guard_npc.tscn" id="6_d8mtd"]
 [ext_resource type="PackedScene" uid="uid://c2osilgwlxj1y" path="res://test/scenes/kitchen_npc.tscn" id="7_ka0el"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
@@ -128,7 +128,7 @@ _dice = NodePath("../Dice")
 _move_picker = NodePath("../MovePicker")
 
 [node name="Custom_Camera" parent="." instance=ExtResource("4_ikgtn")]
-transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.55187, 0.189247, 7.13678)
 max_degrees_down = 50.0
 max_degrees_left = 45.0
 max_degrees_right = 45.0
@@ -141,13 +141,15 @@ script = ExtResource("5_5dtl3")
 
 [node name="NPCs" type="Node3D" parent="NPCSystem"]
 
-[node name="Passenger_NPC" parent="NPCSystem/NPCs" node_paths=PackedStringArray("_path", "_path2", "_path3") instance=ExtResource("6_d8mtd")]
+[node name="Guard_NPC" parent="NPCSystem/NPCs" node_paths=PackedStringArray("_path", "_path2", "_path3", "_watch_point") instance=ExtResource("6_d8mtd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0.169593, 5.22195)
 _path = NodePath("../../Paths/GuardPaths/ToStorage/ToStorage_PathFollow3D")
 _path2 = NodePath("../../Paths/GuardPaths/Storage_To_Kitchen/StorageToKitchen_PathFollow3D")
 _path3 = NodePath("../../Paths/GuardPaths/Kitchen_To_Start/KitchenToStart_PathFollow3D")
-_rotation_speed = 0.8
-_watch_game_probability = 0.3
+_walk_rotation_speed = 0.8
+_standing_rotation_speed = 2.0
+_watch_game_probability = 1.0
+_watch_point = NodePath("../../Board_Marker")
 
 [node name="Kitchen_NPC" parent="NPCSystem/NPCs" node_paths=PackedStringArray("_path", "_path2") instance=ExtResource("7_ka0el")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.681957, 0.158464, -2.3396)
@@ -174,7 +176,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_fbvn3")
 
 [node name="StorageToKitchen_PathFollow3D" type="PathFollow3D" parent="NPCSystem/Paths/GuardPaths/Storage_To_Kitchen"]
-transform = Transform3D(0.0579448, 0, 0.998319, 0, 1, 0, -0.998319, 0, 0.0579448, -4.264, 0, 3.987)
+transform = Transform3D(0.0579449, 0, 0.998319, 0, 1, 0, -0.998319, 0, 0.0579449, -4.264, 0, 3.987)
 use_model_front = true
 loop = false
 
@@ -196,7 +198,7 @@ visible = false
 curve = SubResource("Curve3D_s5uld")
 
 [node name="Kitchen_To_Storage_PathFollow3D" type="PathFollow3D" parent="NPCSystem/Paths/KitchenPaths/Kitchen_To_Storage"]
-transform = Transform3D(0.999195, -0.000211939, 0.0398621, -1.45518e-11, 0.999986, 0.00531663, -0.0398626, -0.00531246, 0.999181, -0.74496, -0.00807405, -0.924744)
+transform = Transform3D(0.999195, -0.000211939, 0.039862, -7.27588e-12, 0.999986, 0.00531663, -0.0398626, -0.00531246, 0.999181, -0.74496, -0.00807405, -0.924744)
 use_model_front = true
 loop = false
 
@@ -205,9 +207,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_snn0l")
 
 [node name="StorageToKitchen2_PathFollow3D" type="PathFollow3D" parent="NPCSystem/Paths/KitchenPaths/Storage_To_Kitchen2"]
-transform = Transform3D(-0.0128659, 0, 0.999913, 0, 1, 0, -0.999913, 0, -0.0128659, -5.11301, 0, 3.17073)
+transform = Transform3D(-0.0128646, 0, 0.999913, 0, 1, 0, -0.999913, 0, -0.0128646, -5.11301, 0, 3.17073)
 use_model_front = true
 loop = false
+
+[node name="Board_Marker" type="Marker3D" parent="NPCSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24658, -0.290202, 6.55559)
 
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
 [connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]

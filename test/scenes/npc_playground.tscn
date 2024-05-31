@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://q3pj5fh32fg0"]
 
 [ext_resource type="Material" uid="uid://d1ayfngndgaui" path="res://materials/floor.tres" id="1_8m4qk"]
-[ext_resource type="PackedScene" uid="uid://4goheq1kyhy1" path="res://test/scenes/passenger_npc.tscn" id="2_d4i2k"]
+[ext_resource type="PackedScene" uid="uid://4goheq1kyhy1" path="res://test/scenes/guard_npc.tscn" id="2_d4i2k"]
 [ext_resource type="Material" path="res://materials/rosette.tres" id="3_b4v85"]
 [ext_resource type="Script" path="res://scripts/npc_system/npc_data_manager.gd" id="4_t5h3f"]
 [ext_resource type="Script" path="res://scripts/npc_system/npc_spot.gd" id="5_2ihv5"]
