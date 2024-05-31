@@ -1,5 +1,5 @@
 class_name AmbientNPCBase
-extends PhysicsBody3D
+extends Node3D
 
 @onready var _mesh = $Capsule_MeshInstance3D as MeshInstance3D
 var blackboard: Blackboard

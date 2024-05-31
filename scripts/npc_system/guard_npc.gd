@@ -1,3 +1,4 @@
+## The guard is an AmbientNPC, that patrols the area and occasionally watches the game.
 class_name GuardNPC
 extends AmbientNPCBase
 
@@ -14,7 +15,6 @@ extends AmbientNPCBase
 @export_group("Special Events")
 ## The guard has a random chance to wait at one of the points in the path.
 @export_range(0, 1) var _watch_game_probability = 0.5
-@export var _waiting_point_index = 1
 
 var _original_position: Vector3
 
@@ -31,14 +31,11 @@ func _initialize_blackboard():
 
 
 func _initialize_tree():
-	## NOTE: For when the guard commentates, we can make a slightly different behaviour tree, 
-	## that uses another path for example, or only the last few points of the path.	
-	var _moving_sequence_no_wait = SequenceNode.new([
-		DebugTask.new("move no wait"),
+	var _moving_sequence_no_watching = SequenceNode.new([
 		MoveAlongPathTask.new(_path)])
 		
-	var _moving_sequence_with_wait = SequenceNode.new([
-		DebugTask.new("move with wait"),
+	var _moving_sequence_with_watching = SequenceNode.new([
+		## TODO: No magic numbers!
 		MoveAlongPathTask.new(_path, 0.001, 0.3),		
 		WaitTask.new(5),
 		MoveAlongPathTask.new(_path, 0.3, 1),
@@ -47,8 +44,8 @@ func _initialize_tree():
 	_current_tree = SequenceNode.new([
 		## Moving sequence with either watching the game or not stopping
 		SelectorNode.new([
-			RandomNode.new(_moving_sequence_with_wait, _watch_game_probability),
-			_moving_sequence_no_wait
+			RandomNode.new(_moving_sequence_with_watching, _watch_game_probability),
+			_moving_sequence_no_watching
 		]),
 		WaitTask.new(_walk_by_cooldown),
 		MoveAlongPathTask.new(_path2),

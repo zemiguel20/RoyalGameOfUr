@@ -1,37 +1,31 @@
 [gd_scene load_steps=7 format=3 uid="uid://4goheq1kyhy1"]
 
-[ext_resource type="Script" path="res://scripts/npc_system/ambient_npc.gd" id="1_otguk"]
+[ext_resource type="Script" path="res://scripts/npc_system/guard_npc.gd" id="1_wafl7"]
+[ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard_standing.fbx" id="2_v7gqp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atjh6"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xmia1"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghwuu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3jfe0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vioiw"]
 size = Vector3(0.5, 0.2, 0.2)
 
-[node name="RigidBody3D4" type="RigidBody3D"]
+[node name="Passenger_NPC" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80288, 1, 0)
-axis_lock_linear_x = true
-axis_lock_linear_y = true
-axis_lock_linear_z = true
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-script = ExtResource("1_otguk")
+script = ExtResource("1_wafl7")
+
+[node name="Temp_Model" parent="." instance=ExtResource("2_v7gqp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.86673, 0)
 
 [node name="Capsule_MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 material_override = SubResource("StandardMaterial3D_atjh6")
 mesh = SubResource("CapsuleMesh_xmia1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_ghwuu")
-
 [node name="Model" type="Node3D" parent="."]
+visible = false
 
 [node name="Box_MeshInstance" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1.81487, 0, 0, 0, 1, 0, 0, 0)
