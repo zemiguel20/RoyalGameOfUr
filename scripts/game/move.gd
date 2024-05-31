@@ -45,10 +45,11 @@ func _init(board : Board, player : int, from : Spot, to : Spot):
 	var is_almost_win = _board.get_spot_pieces(track.back()).size() == (Settings.num_pieces - 1)
 	wins = is_almost_win and moves_to_end
 	
-	gives_extra_turn = to.give_extra_turn
+	gives_extra_turn = (to.give_extra_turn and Settings.rosettes_grant_extra_turn) \
+	or (knocks_opo and Settings.captures_grant_extra_turn)
 	
-	is_from_central_safe = from.is_safe and not _board.is_spot_exclusive(from)
-	is_to_central_safe = to.is_safe and not _board.is_spot_exclusive(to)
+	is_from_central_safe = from.is_safe and not _board.is_spot_exclusive(from) and Settings.rosettes_are_safe
+	is_to_central_safe = to.is_safe and not _board.is_spot_exclusive(to) and Settings.rosettes_are_safe
 	
 	from_track_pos = float(track.find(from) + 1) / float(track.size())
 
