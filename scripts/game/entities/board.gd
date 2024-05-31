@@ -118,7 +118,20 @@ func get_landing_spots(player: int, ref_spot: Spot, steps: int, forward_only := 
 ## Get the path of spots between (inclusive) [param from] and [param to], in the [param player] track.
 func get_path_between(from: Spot, to: Spot, player: int) -> Array[Spot]:
 	var path: Array[Spot] = []
-	var index_from = get_track(player).find(from)
-	var index_to = get_track(player).find(to)
-	# TODO: IMPLEMENT
+	
+	# Get the slice of track between from and to, exclusive
+	var track = get_track(player)
+	var index_from = track.find(from)
+	var index_to = track.find(to)
+	var begin = mini(index_from, index_to) + 1 # +1 because slice begin inclusive
+	var end = maxi(index_from, index_to)
+	path.assign(track.slice(begin, end))
+	# If backwards, reverse path
+	if index_from > index_to:
+		path.reverse()
+	
+	# Add from at the start and to at the end of path.
+	path.push_front(from)
+	path.push_back(to)
+	
 	return path
