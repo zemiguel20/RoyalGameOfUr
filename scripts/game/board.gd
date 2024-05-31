@@ -110,7 +110,7 @@ func get_possible_moves(player : int, steps : int) -> Array[Move]:
 		# Calculate landing spot (also for backwards movement if enabled)
 		var landing_spots = [] as Array[Spot]
 		landing_spots.append(_get_landing_spot(player, spot, steps))
-		if Settings.can_move_backwards:
+		if Settings.pieces_can_move_backwards:
 			landing_spots.append(_get_landing_spot(player, spot, steps, true))
 		
 		# If landing spot is valid, then create Move entry
@@ -174,7 +174,7 @@ func _can_place(player : int, spot : Spot) -> bool:
 	
 	# Cannot stack in safe spot if force stack or game setting not enabled
 	if is_spot_occupied_by_player(spot, player) and spot.is_safe \
-	and not spot.force_allow_stack and not Settings.can_stack_in_safe_spot:
+	and not spot.force_allow_stack and not Settings.rosettes_allow_stacking:
 		return false
 	
 	# Cannot play in safe spot occupied by opponent

@@ -143,7 +143,7 @@ func _on_from_selected(spot: Spot):
 	
 	_selected_from_spot = spot
 	
-	if not Settings.can_move_backwards and not _allow_dragging:
+	if not Settings.pieces_can_move_backwards and not _allow_dragging:
 		_finalize_selection()
 	else:
 		_change_state(State.TO_SELECT)
