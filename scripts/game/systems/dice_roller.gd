@@ -34,7 +34,7 @@ func place_dice(dice: Array[Die], skip_animation := false) -> void:
 		var spot = place_spots[i]
 		
 		var animation = General.MoveAnim.ARC if not skip_animation else General.MoveAnim.NONE
-		die.move(spot.global_position, animation)
+		die.move_anim.play(spot.global_position, animation)
 	
 	# Make sure dice are completely still
 	for die in dice:
