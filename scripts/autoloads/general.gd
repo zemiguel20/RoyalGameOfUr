@@ -41,3 +41,11 @@ func factorial(n: int):
 		return 1
 		
 	return n * factorial(n - 1)
+
+
+## Generates a random euler rotation.
+func get_random_rotation() -> Vector3:
+	var angle_x = randf_range(-PI, PI)
+	var angle_y = randf_range(-PI, PI)
+	var angle_z = randf_range(-PI, PI)
+	return Vector3(angle_x, angle_y, angle_z)
