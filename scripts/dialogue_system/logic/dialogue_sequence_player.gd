@@ -41,7 +41,11 @@ func continue_dialogue():
 		return
 		
 	is_playing = true
-	var _current_entry = _current_sequence.dialogue_entries[_current_index] as DialogueSingleEntry
+	var _current_entry = _current_sequence.dialogue_entries[_current_index]
+	if not _current_entry is DialogueBundle:
+		return
+		
+	_current_entry = _current_entry as DialogueBundle
 	
 	# Play all the effects
 	if _current_entry.audio != null:
@@ -96,7 +100,7 @@ func finish_sequence():
 		on_resume_opponent_action.emit()
 
 
-func _handle_opponent_action_prevention(entry: DialogueSingleEntry):
+func _handle_opponent_action_prevention(entry: DialogueBundle):
 	if entry.prevents_opponent_action and !_already_prevents_opponent_action:
 		_already_prevents_opponent_action = true
 		on_prevent_opponent_action.emit()
