@@ -37,6 +37,8 @@ func _spawn_piece(player: int, prefab: PackedScene, pieces_array: Array[Piece]):
 	add_child(instance)
 	pieces_array.append(instance)
 	
+	instance.player_owner = player
+	
 	# Place piece in start zone
 	var start_spot = board.get_free_start_spots(player).front() as Spot
 	instance.current_spot = start_spot

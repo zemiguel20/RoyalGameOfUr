@@ -7,7 +7,7 @@ class_name Spot extends Node3D
 
 
 ## If true, the pieces in this spot cannot get knocked out.
-@export var is_safe: bool = false
+@export var safe: bool = false
 
 ## If true, if the player moves to this spot they should get an extra turn.
 @export var give_extra_turn: bool = false
@@ -49,3 +49,12 @@ func get_placing_position_global() -> Vector3:
 	var y: float = stack_height
 	
 	return Vector3(x, y, z)
+
+
+func is_free() -> bool:
+	return pieces.is_empty()
+
+
+func is_occupied_by_player(player: int) -> bool:
+	var filter = func(piece: Piece): return piece.player_owner == player
+	return not pieces.filter(filter).is_empty()

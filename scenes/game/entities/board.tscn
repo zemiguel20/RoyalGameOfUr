@@ -24,7 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036327, 0, 0.0897661)
 
 [node name="P1Tile4Rosette" parent="Tiles" groups=["p1_track"] instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036327, 0, 0.127712)
-is_safe = true
+safe = true
 give_extra_turn = true
 
 [node name="P2Tile1" parent="Tiles" groups=["p2_track"] instance=ExtResource("4_tsucu")]
@@ -38,7 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351095, 0, 0.0896638)
 
 [node name="P2Tile4Rosette" parent="Tiles" groups=["p2_track"] instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0348507, 0, 0.12797)
-is_safe = true
+safe = true
 give_extra_turn = true
 
 [node name="Tile5" parent="Tiles" groups=["p1_track", "p2_track"] instance=ExtResource("4_tsucu")]
@@ -52,7 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0552398)
 
 [node name="Tile8Rosette" parent="Tiles" groups=["p1_track", "p2_track"] instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0187451)
-is_safe = true
+safe = true
 give_extra_turn = true
 
 [node name="Tile9" parent="Tiles" groups=["p1_track", "p2_track"] instance=ExtResource("4_tsucu")]
@@ -72,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0342563, 0, -0.128787)
 
 [node name="P1Tile14Rosette" parent="Tiles" groups=["p1_track"] instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0337387, 0, -0.0935862)
-is_safe = true
+safe = true
 give_extra_turn = true
 
 [node name="P2Tile13" parent="Tiles" groups=["p2_track"] instance=ExtResource("4_tsucu")]
@@ -80,7 +80,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0379566, 0, -0.129046)
 
 [node name="P2Tile14Rosette" parent="Tiles" groups=["p2_track"] instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0384742, 0, -0.0935862)
-is_safe = true
+safe = true
 give_extra_turn = true
 
 [node name="P1StartSpots" type="Node3D" parent="."]

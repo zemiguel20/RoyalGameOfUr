@@ -34,13 +34,15 @@ func get_start_spots(player: int) -> Array[Spot]:
 
 ## Returns a new array with the start spots from [param player] without any pieces.
 func get_free_start_spots(player : int) -> Array[Spot]:
-	var free_spots = get_start_spots(player).filter(is_spot_free)
+	var filter = func(spot: Spot): return spot.is_free()
+	var free_spots = get_start_spots(player).filter(filter)
 	return free_spots
 
 
 ## Returns a new array with the start spots from [param player] with a piece.
 func get_occupied_start_spots(player: int) -> Array[Spot]:
-	var occupied_spots = get_start_spots(player).filter(is_spot_occupied)
+	var filter = func(spot: Spot): return not spot.is_free()
+	var occupied_spots = get_start_spots(player).filter(filter)
 	return occupied_spots
 
 
@@ -52,34 +54,51 @@ func get_track(player : int) -> Array[Spot]:
 		return p2_track.duplicate()
 
 
-## Checks if the [param spot] does not have any piece.
-func is_spot_free(spot: Spot) -> bool:
-	return spot.pieces.is_empty()
-
-
-## Checks if the [param spot] has a piece.
-func is_spot_occupied(spot: Spot) -> bool:
-	return not is_spot_free(spot)
-
-
-## Returns whether the given [param spot] is exclusive to one of the player's track.
+## Returns whether the given [param spot] is exclusive to one of the player's sides.
 func is_spot_exclusive(spot: Spot) -> bool:
-	return (p1_track.has(spot) and not p2_track.has(spot)) or \
-	(not p1_track.has(spot) and p2_track.has(spot))
+	var p1_has = p1_start_spots.has(spot) or p1_track.has(spot)
+	var p2_has = p2_start_spots.has(spot) or p2_track.has(spot)
+	
+	return (p1_has and not p2_has) or (p2_has and not p1_has)
 
 
-func get_landing_spot(player : int, spot: Spot, steps: int, backwards := false) -> Spot:
+## Returns whether the given [param spot] is exclusive to the given [param player] side.
+func is_spot_exclusive_player(spot: Spot, player: int) -> bool:
+	var player_has = get_start_spots(player).has(spot) or get_track(player).has(spot)
+	
+	var opponent = General.get_opponent(player)
+	var opponent_has = get_start_spots(opponent).has(spot) or get_track(opponent).has(spot)
+	
+	return player_has and not opponent_has
+
+
+## On the [param player] side, get the spots where you can land on in [param steps] from
+## [param ref_spot]. The optional flag [param forward_only] locks calculation to
+## forward movement in the track.
+func get_landing_spots(player: int, ref_spot: Spot, steps: int, forward_only := false) -> Array[Spot]:
+	# If ref_spot is exclusive, but its not from the given player, return
+	if is_spot_exclusive_player(ref_spot, General.get_opponent(player)):
+		push_error("Given spot does not exist in the given player side.")
+		return []
+	
 	var track = get_track(player)
-	var index = track.find(spot) # NOTE: In this case, -1 means its a starting spot
+	var index = track.find(ref_spot) # NOTE: In this case, -1 means its a starting spot
 	
-	if not backwards and (index + steps) < track.size():
-		return track[index + steps]
+	var landing_spots: Array[Spot] = []
 	
-	if backwards and (index - steps) >= 0:
-		return track[index - steps]
+	# Forward and within track bounds
+	if (index + steps) < track.size():
+		var spot = track[index + steps]
+		landing_spots.append(spot)
 	
-	var free_start_spots = get_free_start_spots(player)
-	if backwards and (index - steps) == -1 and not free_start_spots.is_empty():
-		return free_start_spots.pick_random()
+	if not forward_only:
+		# Backwards and within track bounds
+		if (index - steps) >= 0:
+			var spot = track[index - steps]
+			landing_spots.append(spot)
+		# Backwards and to starting area
+		elif (index - steps) == -1:
+			var spots = get_free_start_spots(player)
+			landing_spots.append_array(spots)
 	
-	return null
+	return landing_spots

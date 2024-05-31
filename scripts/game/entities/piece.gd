@@ -10,6 +10,7 @@ var move_anim: MoveAnimation
 var model: MeshInstance3D
 
 var current_spot: Spot
+var player_owner: int
 
 
 func _ready():
