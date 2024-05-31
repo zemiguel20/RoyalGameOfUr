@@ -54,6 +54,17 @@ func get_track(player : int) -> Array[Spot]:
 		return p2_track.duplicate()
 
 
+## Returns the spots of the given [param player] track occupied by self.
+func get_track_spots_occupied_by_self(player: int) -> Array[Spot]:
+	var track = get_track(player)
+	var filter = func(spot: Spot): return spot.is_occupied_by_player(player)
+	return track.filter(filter)
+
+
+func is_spot_end_of_player_track(spot: Spot, player: int) -> bool:
+	return spot == get_track(player).back()
+
+
 ## Returns whether the given [param spot] is exclusive to one of the player's sides.
 func is_spot_exclusive(spot: Spot) -> bool:
 	var p1_has = p1_start_spots.has(spot) or p1_track.has(spot)
@@ -102,3 +113,12 @@ func get_landing_spots(player: int, ref_spot: Spot, steps: int, forward_only := 
 			landing_spots.append_array(spots)
 	
 	return landing_spots
+
+
+## Get the path of spots between (inclusive) [param from] and [param to], in the [param player] track.
+func get_path_between(from: Spot, to: Spot, player: int) -> Array[Spot]:
+	var path: Array[Spot] = []
+	var index_from = get_track(player).find(from)
+	var index_to = get_track(player).find(to)
+	# TODO: IMPLEMENT
+	return path
