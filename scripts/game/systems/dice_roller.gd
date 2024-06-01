@@ -1,6 +1,7 @@
 class_name DiceRoller extends Node3D
 ## Controls the process of rolling the dice and reading their values.
 ## Can have automatic throwing, or use input interaction.
+## Player can click to roll or hold to shake them.
 ## Allows moving dice to rolling zone, as if grabbing them.
 
 
