@@ -5,7 +5,7 @@ class_name GameController extends Node
 
 signal game_started
 signal roll_phase_started(player: General.Player)
-signal move_phase_started(player: General.Player, moves: Array[Move])
+signal move_phase_started(player: General.Player, moves: Array[GameMove])
 signal game_ended
 signal no_moves
 
@@ -66,7 +66,7 @@ func _on_roll_ended(roll_value: int):
 func _start_move_phase(roll_value: int):
 	var moves = _calculate_moves(roll_value)
 	
-	var valid_move_filter = func(move: Move): return move.valid
+	var valid_move_filter = func(move: GameMove): return move.valid
 	
 	if not moves.filter(valid_move_filter).is_empty():
 		var move_picker = get_current_player_move_picker()
@@ -77,7 +77,7 @@ func _start_move_phase(roll_value: int):
 		_start_roll_phase()
 
 
-func _on_move_executed(move: Move):
+func _on_move_executed(move: GameMove):
 	if move.wins:
 		_end_game()
 		return
@@ -96,8 +96,8 @@ func _switch_player() -> void:
 	current_player = General.get_opponent(current_player)
 
 
-func _calculate_moves(steps: int) -> Array[Move]:
-	var moves: Array[Move] = []
+func _calculate_moves(steps: int) -> Array[GameMove]:
+	var moves: Array[GameMove] = []
 	
 	if steps <= 0:
 		return moves
@@ -114,7 +114,7 @@ func _calculate_moves(steps: int) -> Array[Move]:
 		var landing_spots = board.get_landing_spots(current_player, spot, steps, not Settings.can_move_backwards)
 		for landing_spot in landing_spots:
 			var valid = _can_place(landing_spot, current_player)
-			var move = Move.new(spot, landing_spot, current_player, valid, entity_manager.board)
+			var move = GameMove.new(spot, landing_spot, current_player, valid, entity_manager.board)
 			moves.append(move)
 	return moves
 

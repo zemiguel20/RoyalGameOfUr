@@ -1,4 +1,4 @@
-class_name Move
+class_name GameMove
 ## Represents an action of moving pieces in one spot to another spot.
 ## Contains specific information, such has if it is a direct winning move.
 ## Can be executed, like the command pattern.
