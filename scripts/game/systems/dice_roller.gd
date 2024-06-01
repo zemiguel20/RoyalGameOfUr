@@ -32,8 +32,16 @@ func start(dice: Array[Die]) -> void:
 	_dehighlight()
 	place_dice(dice)
 	await dice_placed
-	_highlight_selectable()
-	_connect_input_signals()
+	
+	if automatic:
+		await get_tree().create_timer(0.5).timeout
+		_start_shaking()
+		var shaking_duration = randf_range(0.5, 2.0)
+		await get_tree().create_timer(shaking_duration).timeout
+		_stop_shaking()
+	else:
+		_highlight_selectable()
+		_connect_input_signals()
 
 
 ## Moves the dice to the placing spots.
