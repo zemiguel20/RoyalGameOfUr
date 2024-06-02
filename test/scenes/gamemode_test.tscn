@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://t6r5hmgp5c1u"]
+[gd_scene load_steps=15 format=3 uid="uid://t6r5hmgp5c1u"]
 
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="1_sto2p"]
 [ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/board.tscn" id="3_3t76i"]
-[ext_resource type="PackedScene" uid="uid://cv3xq2670msr6" path="res://scenes/game/move_picker/move_picker_interactive.tscn" id="4_ks4b5"]
-[ext_resource type="Script" path="res://scripts/game/move_picker/move_picker_random.gd" id="4_mige8"]
-[ext_resource type="PackedScene" uid="uid://d3gx24dw7xjud" path="res://scenes/game/move_picker/move_picker_ai.tscn" id="5_xncr4"]
+[ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker_interactive.tscn" id="3_yh8qp"]
+[ext_resource type="PackedScene" uid="uid://d3gx24dw7xjud" path="res://scenes/game/systems/move_picker/move_picker_ai.tscn" id="5_xncr4"]
 [ext_resource type="Script" path="res://scripts/game/systems/entity_manager.gd" id="7_2aqt3"]
 [ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/entities/piece_white.tscn" id="8_2qfui"]
 [ext_resource type="PackedScene" uid="uid://cvos81xjjq5nl" path="res://scenes/game/entities/d4_die.tscn" id="8_b0vie"]
@@ -48,6 +47,7 @@ controller = NodePath("Systems/GameController")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.27453, 0.961579, 0, -0.961579, 0.27453, 0, 4.34852, 0)
+shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="Environment"]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -0.0110055, 0)
@@ -68,20 +68,11 @@ transform = Transform3D(0.0497542, -0.741031, 0.669625, 0, 0.670456, 0.74195, -0
 
 [node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("p1_move_picker", "p2_move_picker", "p1_dice_roller", "p2_dice_roller", "entity_manager")]
 script = ExtResource("1_sto2p")
-p1_move_picker = NodePath("../MovePickers/InteractiveMovePicker")
-p2_move_picker = NodePath("../MovePickers/AIMovePicker")
+p1_move_picker = NodePath("../AIMovePicker")
+p2_move_picker = NodePath("../AIMovePicker")
 p1_dice_roller = NodePath("../DiceRoller")
 p2_dice_roller = NodePath("../DiceRoller2")
 entity_manager = NodePath("../EntityManager")
-
-[node name="MovePickers" type="Node" parent="Systems"]
-
-[node name="InteractiveMovePicker" parent="Systems/MovePickers" instance=ExtResource("4_ks4b5")]
-
-[node name="AIMovePicker" parent="Systems/MovePickers" instance=ExtResource("5_xncr4")]
-
-[node name="RandomMovePicker" type="Node" parent="Systems/MovePickers"]
-script = ExtResource("4_mige8")
 
 [node name="EntityManager" type="Node" parent="Systems" node_paths=PackedStringArray("board", "dice_spawn_spot")]
 script = ExtResource("7_2aqt3")
@@ -93,10 +84,15 @@ dice_spawn_spot = NodePath("../../DieSpawn")
 
 [node name="DiceRoller" parent="Systems" instance=ExtResource("11_4yam3")]
 transform = Transform3D(0.0849126, 0, 0.996388, 0, 1, 0, -0.996388, 0, 0.0849126, 0.222704, 2.98023e-08, 0.010642)
+automatic = true
 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("11_4yam3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.208323, 2.98023e-08, 0.0507007)
 automatic = true
+
+[node name="InteractiveMovePicker" parent="Systems" instance=ExtResource("3_yh8qp")]
+
+[node name="AIMovePicker" parent="Systems" instance=ExtResource("5_xncr4")]
 
 [node name="DieSpawn" parent="." instance=ExtResource("11_vih10")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000428624, 0.0174397, 0.208058)

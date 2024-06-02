@@ -16,13 +16,14 @@ signal pieces_moved
 
 var highlight: MaterialHighlight
 var input: SelectionInputReader
-
 var pieces: Array[Piece] = []
-
+var moving_pieces: bool = false
 
 func _ready() -> void:
-	highlight = get_node(get_meta("highlight")) as MaterialHighlight
-	input = get_node(get_meta("input")) as SelectionInputReader
+	if has_meta("highlight"):
+		highlight = get_node(get_meta("highlight")) as MaterialHighlight
+	if has_meta("input"):
+		input = get_node(get_meta("input")) as SelectionInputReader
 
 
 ## Move the pieces in this spot to the target [param spot].
@@ -50,7 +51,7 @@ func get_placing_position_global() -> Vector3:
 	
 	var x: float = global_position.x
 	var z: float = global_position.z
-	var y: float = stack_height
+	var y: float = global_position.y + stack_height
 	
 	return Vector3(x, y, z)
 
@@ -71,17 +72,19 @@ func _move_pieces(spots: Array[Spot], anim: General.MoveAnim) -> void:
 	
 	for i in pieces_copy.size():
 		var piece = pieces_copy[i]
-		# Assume there is only one spot to place, or an equal number of spots to pieces
+		# Assume there is only one spot to place, or an equal number of spots and pieces
 		var spot = spots[i] if spots.size() > 1 else spots[0]
 		
 		# Update data and start animation
 		var stack_pos = spot.get_placing_position_global()
-		piece.move_anim.play(stack_pos, anim)
 		spot.pieces.append(piece)
 		piece.current_spot = spot
+		#piece.reparent(piece.current_spot)
+		piece.move_anim.play(stack_pos, anim)
 	
 	# Wait for movement animation to finish
 	for piece in pieces_copy:
 		if piece.move_anim.moving:
 			await piece.move_anim.movement_finished
+	
 	pieces_moved.emit()

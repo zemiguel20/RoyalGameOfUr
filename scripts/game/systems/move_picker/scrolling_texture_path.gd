@@ -41,6 +41,11 @@ class_name ScrollingTexturePath3D extends Path3D
 		sorting_offset = new_value
 		_update_sprites()
 
+## Modulates the color of the sprites
+@export var color_modulate := Color.WHITE:
+	set(new_value):
+		color_modulate = new_value
+		_update_sprites()
 
 @export_group("Scrolling")
 
@@ -107,6 +112,7 @@ func _update_sprites():
 		sprite.texture = texture
 		sprite.flip_v = flip_v
 		sprite.flip_h = flip_h
+		sprite.modulate = color_modulate
 		sprite.modulate.a = alpha
 		sprite.scale = sprite_scale
 		sprite.sorting_offset = sorting_offset

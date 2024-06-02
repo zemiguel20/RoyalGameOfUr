@@ -8,10 +8,7 @@ class_name MaterialHighlight extends Node
 
 ## Color of the highlight.
 @export var color: Color = Color.WHITE:
-	set(new_value):
-		color = new_value
-		_update_color()
-
+	set = set_color
 
 @export var target_meshes: Array[GeometryInstance3D]:
 	set(new_instance):
@@ -21,9 +18,21 @@ class_name MaterialHighlight extends Node
 		_update_highlight_state(active)
 
 @export var active: bool = false:
-	set(new_value):
-		active = new_value
-		_update_highlight_state(active)
+	set = set_active
+
+
+## Allows chaining
+func set_active(value: bool) -> MaterialHighlight:
+	active = value
+	_update_highlight_state(active)
+	return self
+
+
+## Allows chaining
+func set_color(value: Color) -> MaterialHighlight:
+	color = value
+	_update_color()
+	return self
 
 
 @warning_ignore("shadowed_variable")

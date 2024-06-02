@@ -31,14 +31,16 @@ var safety_score: float ## Higher score means this moves pieces to a more safe s
 
 var _executed: bool = false # Whether move has already been executed
 var _board: Board
+var _entity_manager: EntityManager
 
 
 @warning_ignore("shadowed_variable")
-func _init(from: Spot, to: Spot, player: int, valid: bool, board: Board):
-	_board = board
+func _init(from: Spot, to: Spot, player: int, valid: bool, entity_manager: EntityManager):
+	_entity_manager = entity_manager
+	_board = entity_manager.board
 	
 	# Shared variables for initialization
-	var track = board.get_track(player)
+	var track = _board.get_track(player)
 	
 	# Initialize properties
 	self.from = from
@@ -51,7 +53,8 @@ func _init(from: Spot, to: Spot, player: int, valid: bool, board: Board):
 	pieces_in_to = to.pieces.duplicate()
 	pieces_in_to.make_read_only()
 	
-	full_path = board.get_path_between(from, to, player)
+	full_path = _board.get_path_between(from, to, player)
+	full_path.make_read_only()
 	
 	knocks_opo = to.is_occupied_by_player(General.get_opponent(player)) if valid else false
 	
@@ -61,8 +64,8 @@ func _init(from: Spot, to: Spot, player: int, valid: bool, board: Board):
 	
 	gives_extra_turn = to.give_extra_turn if valid else false
 	
-	is_from_central = not board.is_spot_exclusive(from)
-	is_to_central = not board.is_spot_exclusive(to)
+	is_from_central = not _board.is_spot_exclusive(from)
+	is_to_central = not _board.is_spot_exclusive(to)
 	
 	from_track_pos = float(track.find(from) + 1) / float(track.size())
 	
@@ -93,7 +96,7 @@ func execute(animation := General.MoveAnim.NONE, follow_path := false) -> void:
 		
 		# Create temporary spots and add them to path
 		for spot in between_spots:
-			var temp_spot = Spot.new()
+			var temp_spot = _entity_manager.spawn_temporary_spot()
 			temp_spot.global_position = spot.get_placing_position_global()
 			movement_path.append(temp_spot)
 	
@@ -117,10 +120,15 @@ func execute(animation := General.MoveAnim.NONE, follow_path := false) -> void:
 	
 	# Move pieces to last spot
 	movement_path[-2].move_pieces_to_spot(movement_path[-1], animation)
-	
 	# NOTE: the knockout animation and placing animation in last spot run simultaneously
 	# wait for animations to finish
-	await movement_path[-1].pieces_moved
+	await movement_path[-2].pieces_moved
+	
+	# Cleanup temporary spots
+	movement_path.pop_back()
+	movement_path.pop_front()
+	for temp_spot in movement_path:
+		temp_spot.queue_free()
 	
 	execution_finished.emit()
 

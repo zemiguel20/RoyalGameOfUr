@@ -1,10 +1,14 @@
-class_name AIMovePicker
-extends MovePicker
+class_name AIGameMoveSelector extends Node
 ## Evaluates moves based on different weights, etc., giving them a score.
 ## Picks the best move.
 ##
 ## Keep in mind that the default values are just an estimate of what a difficult AI would have.
 ## Changing these values can greatly impact the behaviour of the AI
+
+
+signal move_selected(move: GameMove)
+
+@export var highlight: GameMoveHighlight
 
 @export_group("Move picking chances")
 ## Chance for the opponent to pick the best move available to them, using a weight system
@@ -31,7 +35,7 @@ extends MovePicker
 ## Turning this bool off, will only check deduct points when ALL of the opponents pieces are past the central rosette.
 @export var decrease_per_passed_opponent_piece: bool = true
 
-@export_group("Moving Behaviour")
+@export_group("Selection Behaviour")
 ## Minimum duration the AI will take to choose a move. 
 ## We simulate thinking time so that the AI feels more humane.
 @export_range(0.1,3.0) var min_moving_duration: float = 0.3
@@ -41,52 +45,42 @@ extends MovePicker
 ## Duration of the highlight of the chosen move
 @export_range(0.1, 5.0) var move_highlight_duration: float = 1.0
 
-@onready var move_highlighter = $MoveHighlighterComponent as MoveHighlighterComponent
 
-
-func start(moves: Array[Move]) -> void:
+func start_selection(moves: Array[GameMove]) -> void:
 	# Simulate thinking
 	var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
 	await get_tree().create_timer(thinking_duration).timeout
+	var selected_move = _determine_next_move(moves)
 	
-	var best_move: Move = _determine_next_move(moves)
-	
-	move_highlighter.highlight_move_preview(best_move)
-	
+	# Highlight selected move for a bit
+	highlight.highlight_selected(selected_move)
 	await get_tree().create_timer(move_highlight_duration).timeout
+	highlight.clear_highlight(selected_move)
 	
-	move_highlighter.clear_highlight(best_move)
-	
-	# Execute move
-	best_move.execute(General.MoveAnim.ARC)
-	await best_move.execution_finished
-	move_executed.emit(best_move)
-	
-	
-func _determine_next_move(moves : Array[Move]) -> Move:
-	if (moves.size() == 1):
-		return moves[0]
+	move_selected.emit(selected_move)
 
-	var ordered_moves = moves.duplicate()
-	ordered_moves.sort_custom(_sort_best_moves)
+
+func _determine_next_move(moves: Array[GameMove]) -> GameMove:
+	var valid_moves = moves.filter(func(move: GameMove): return move.valid)
+	if (valid_moves.size() == 1):
+		return valid_moves[0]
 	
-	var result
+	valid_moves.sort_custom(_sort_best_moves)
+	
 	var rand = randi_range(0, _best_move_weight + _second_move_weight + _random_move_weight)
 	if rand < _best_move_weight:
-		result = ordered_moves[0]
-	elif rand < _best_move_weight + _second_move_weight or moves.size() == 2:
-		result = ordered_moves[1]
+		return valid_moves[0]
+	elif rand < _best_move_weight + _second_move_weight or valid_moves.size() == 2:
+		return valid_moves[1]
 	else:
-		result = ordered_moves[randi_range(2, ordered_moves.size()-1)]
-	
-	return result
+		return valid_moves[2]
 
 
 func _sort_best_moves(a, b):
 	return _evaluate_move(a) > _evaluate_move(b)
 
 
-func _evaluate_move(move: Move) -> float:
+func _evaluate_move(move: GameMove) -> float:
 	var score = _calculate_base_score(move)
 	score += _calculate_safety_modifier(move)
 	score += _calculate_progress_modifier(move)
@@ -94,7 +88,7 @@ func _evaluate_move(move: Move) -> float:
 	return score
 
 
-func _calculate_base_score(move: Move):
+func _calculate_base_score(move: GameMove):
 	if move.knocks_opo:
 		return capture_base_score
 	elif move.gives_extra_turn:
@@ -106,18 +100,18 @@ func _calculate_base_score(move: Move):
 
 
 #region ScoreModifiers
-func _calculate_safety_modifier(move: Move):
+func _calculate_safety_modifier(move: GameMove):
 	return safety_score_weight * move.safety_score
 	
 	
-func _calculate_progress_modifier(move: Move):
+func _calculate_progress_modifier(move: GameMove):
 	var progression = move.from_track_pos
 	return piece_progress_score_weight * progression 
 	
 	
-func _calculate_central_rosette_modifier(move: Move):
-	var is_current_spot_central_rosette = move.is_from_central and move.from.is_safe
-	var is_landing_spot_central_rosette = move.is_to_central and move.to.is_safe
+func _calculate_central_rosette_modifier(move: GameMove):
+	var is_current_spot_central_rosette = move.is_from_central and move.from.safe
+	var is_landing_spot_central_rosette = move.is_to_central and move.to.safe
 	
 	if (not is_current_spot_central_rosette and not is_landing_spot_central_rosette):
 		return 0

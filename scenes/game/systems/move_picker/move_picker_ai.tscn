@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3gx24dw7xjud"]
+
+[ext_resource type="Script" path="res://scripts/game/systems/move_picker/game_move_selector_ai.gd" id="1_1lnec"]
+[ext_resource type="Script" path="res://scripts/game/systems/move_picker/move_picker.gd" id="1_d4vwd"]
+[ext_resource type="PackedScene" uid="uid://dyyakpttumftj" path="res://scenes/game/systems/move_picker/move_highlight.tscn" id="2_bgngg"]
+
+[node name="AIMovePicker" type="Node"]
+script = ExtResource("1_d4vwd")
+metadata/move_highlight = NodePath("MoveHighlight")
+
+[node name="AIGameMoveSelector" type="Node" parent="." node_paths=PackedStringArray("highlight")]
+script = ExtResource("1_1lnec")
+highlight = NodePath("../MoveHighlight")
+move_highlight_duration = 2.0
+
+[node name="MoveHighlight" parent="." instance=ExtResource("2_bgngg")]

@@ -47,15 +47,13 @@ func _start_roll_phase():
 	var roller = get_current_player_dice_roller()
 	
 	roller.start(entity_manager.dice)
-	roller.roll_finished.connect(_on_roll_ended)
-	
 	roll_phase_started.emit(current_player)
+	
+	var roll_value = await roller.roll_finished
+	_on_roll_ended(roll_value)
 
 
 func _on_roll_ended(roll_value: int):
-	var roller = get_current_player_dice_roller()
-	roller.roll_finished.disconnect(_on_roll_ended)
-	
 	if roll_value == 0:
 		_switch_player()
 		_start_roll_phase()
@@ -71,6 +69,8 @@ func _start_move_phase(roll_value: int):
 	if not moves.filter(valid_move_filter).is_empty():
 		var move_picker = get_current_player_move_picker()
 		move_picker.start(moves) # NOTE: pass in all moves, including invalid for display
+		var move = await move_picker.move_executed
+		_on_move_executed(move)
 	else:
 		no_moves.emit()
 		_switch_player()
@@ -114,7 +114,7 @@ func _calculate_moves(steps: int) -> Array[GameMove]:
 		var landing_spots = board.get_landing_spots(current_player, spot, steps, not Settings.can_move_backwards)
 		for landing_spot in landing_spots:
 			var valid = _can_place(landing_spot, current_player)
-			var move = GameMove.new(spot, landing_spot, current_player, valid, entity_manager.board)
+			var move = GameMove.new(spot, landing_spot, current_player, valid, entity_manager)
 			moves.append(move)
 	return moves
 

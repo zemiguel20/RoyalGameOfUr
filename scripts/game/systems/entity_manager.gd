@@ -32,6 +32,12 @@ func spawn_dice(num_die: int) -> void:
 		instance.global_position = dice_spawn_spot.global_position
 
 
+func spawn_temporary_spot() -> Spot:
+	var spot = Spot.new()
+	add_child(spot)
+	return spot
+
+
 func _spawn_piece(player: int, prefab: PackedScene, pieces_array: Array[Piece]):
 	var instance = prefab.instantiate() as Piece
 	add_child(instance)
