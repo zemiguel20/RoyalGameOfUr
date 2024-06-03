@@ -1,3 +1,4 @@
+## Base class for decorators: nodes that execute a child node with a certain condition.
 class_name DecoratorNode
 extends BTNode
 

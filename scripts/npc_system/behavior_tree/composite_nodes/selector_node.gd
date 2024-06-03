@@ -28,12 +28,8 @@ func on_process(_delta):
 		return Status.Running
 		
 	
-func on_physics_process(_delta):
-	current_index = 0
-	
-	
 func on_end():
-	pass
+	current_index = 0
 	
 	
 func set_blackboard(blackboard: Blackboard):

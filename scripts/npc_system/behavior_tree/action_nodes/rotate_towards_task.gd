@@ -18,13 +18,14 @@ func on_start():
 	_owner = _blackboard.read("Base")
 	_rotation_speed = _blackboard.read("Standing Rotation Speed")
 	
+	# HACK: look_at sets immediately instead of returning something,
+	# so set owner rotation, read it and then restore the previous rotation.
 	var owner_rotation = _owner.global_rotation
 	_owner.look_at(_looking_point, Vector3.UP, true)
 	_target_rotation = _owner.global_rotation
 	_owner.global_rotation = owner_rotation
 	
 	_status = Status.Running
-	# Calculate the shortest angle difference for the y-axis
 	var difference_y = _shortest_angle_difference(_owner.global_rotation.y, _target_rotation.y)
 
 	# Create the tween and rotate the object
@@ -39,7 +40,6 @@ func on_process(delta) -> Status:
 	return _status
 
 
-# Function to calculate the shortest angle difference
 func _shortest_angle_difference(from_angle, to_angle):
 	var difference = wrapf(to_angle - from_angle, 0, 2 * PI)
 	if difference > PI:
