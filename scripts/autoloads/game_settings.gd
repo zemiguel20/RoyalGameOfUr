@@ -38,7 +38,7 @@ func on_next_ruleset():
 
 func select_ruleset(delta: int):
 	var current_ruleset_index = selected_ruleset
-	var new_index = (Ruleset.values().size() + current_ruleset_index + delta) % Ruleset.values().size()
+	var new_index = wrapi(current_ruleset_index + delta, 0, Ruleset.values().size())
 	selected_ruleset = Ruleset.values()[new_index]
 	
 	match selected_ruleset:
