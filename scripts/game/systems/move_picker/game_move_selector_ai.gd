@@ -53,7 +53,7 @@ func start_selection(moves: Array[GameMove]) -> void:
 	var selected_move = _determine_next_move(moves)
 	
 	# Highlight selected move for a bit
-	highlight.highlight_selected(selected_move)
+	highlight.highlight(selected_move)
 	await get_tree().create_timer(move_highlight_duration).timeout
 	highlight.clear_highlight(selected_move)
 	
