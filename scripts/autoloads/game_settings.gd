@@ -1,10 +1,10 @@
 extends Node
 
 enum Ruleset { FINKEL = 0, BLITZ = 1, TOURNAMENT = 2 }
-var selected_ruleset: Ruleset
+var selected_ruleset: Ruleset = Ruleset.FINKEL
 
 enum BoardLayout { REGULAR = 0, MASTERS = 1 }
-var board_layout: BoardLayout
+var board_layout: BoardLayout = BoardLayout.REGULAR
 
 ## Whether landing on a rosette should grant an extra turn.
 var rosettes_grant_extra_turn: bool = true
@@ -29,14 +29,14 @@ var num_dice: int = 4:
 
 
 func on_previous_ruleset():
-	select_ruleset(-1)
+	_select_ruleset(-1)
 
 
 func on_next_ruleset():
-	select_ruleset(+1)
+	_select_ruleset(+1)
 
 
-func select_ruleset(delta: int):
+func _select_ruleset(delta: int):
 	var current_ruleset_index = selected_ruleset
 	var new_index = wrapi(current_ruleset_index + delta, 0, Ruleset.values().size())
 	selected_ruleset = Ruleset.values()[new_index]
@@ -71,18 +71,32 @@ func select_ruleset(delta: int):
 			num_dice = 4
 
 
+func on_previous_board_layout():
+	_select_board_layout(-1)
+
+
+func on_next_board_layout():
+	_select_board_layout(+1)
+
+
+func _select_board_layout(delta: int):
+	var current_board_layout_index = board_layout
+	var new_index = wrapi(current_board_layout_index + delta, 0, BoardLayout.values().size())
+	board_layout = BoardLayout.values()[new_index]
+
+
 func try_get_identified_ruleset() -> bool:
 	if board_layout == BoardLayout.REGULAR and rosettes_grant_extra_turn and rosettes_are_safe \
 	and not rosettes_allow_stacking and not captures_grant_extra_turn and not pieces_can_move_backwards \
 	and num_pieces == 7 and num_dice == 4:
 		selected_ruleset = Ruleset.FINKEL
 		return true
-	elif board_layout == BoardLayout.REGULAR and rosettes_grant_extra_turn and not rosettes_are_safe \
+	elif board_layout == BoardLayout.MASTERS and rosettes_grant_extra_turn and not rosettes_are_safe \
 	and not rosettes_allow_stacking and captures_grant_extra_turn and not pieces_can_move_backwards \
 	and num_pieces == 5 and num_dice == 4:
 		selected_ruleset = Ruleset.BLITZ
 		return true
-	elif board_layout == BoardLayout.REGULAR and not rosettes_grant_extra_turn and rosettes_are_safe \
+	elif board_layout == BoardLayout.MASTERS and not rosettes_grant_extra_turn and rosettes_are_safe \
 	and rosettes_allow_stacking and not captures_grant_extra_turn and pieces_can_move_backwards \
 	and num_pieces == 5 and num_dice == 4:
 		selected_ruleset = Ruleset.TOURNAMENT

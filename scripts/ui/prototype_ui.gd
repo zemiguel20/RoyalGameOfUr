@@ -4,12 +4,10 @@ extends CanvasLayer
 signal play_pressed
 signal fadeout_finished
 
-@export var _fading_duration = 2.5
 @onready var _main_menu = $"Main Menu" as Control
 @onready var _rules_menu = $"Settings Menu" as Control
 @onready var _fade_panel = $Fade_Panel as ColorRect
 @onready var _ruleset_label = $"Settings Menu/MarginContainer/VBoxContainer/RulesetSelection/HBoxContainer/Ruleset Label" as Label
-
 @onready var _image_board_layout = $"Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/LayoutSelection/HBoxContainer/BoardLayout Image" as TextureRect
 @onready var _checkbox_rosettes_extra_turn = $"Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/RosetteExtraTurn" as Button
 @onready var _checkbox_rosettes_safe = $"Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/RosetteSafe" as Button
@@ -20,6 +18,9 @@ signal fadeout_finished
 @onready var _slider_dice_amount = $"Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/DiceAmount/HSlider" as Slider
 @onready var _label_piece_amount = $"Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/PieceAmount/Label" as Label
 @onready var _label_dice_amount = $"Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/DiceAmount/Label" as Label
+
+@export var _board_layout_images: Array[BoardLayoutStruct]
+@export var _fading_duration = 2.5
 
 var _delta: float
 
@@ -115,8 +116,21 @@ func _on_next_ruleset_selected():
 	_update_ui_on_ruleset_change()
 
 
+func _on_previous_board_layout_selected():
+	Settings.on_previous_board_layout()
+	_image_board_layout.texture = _board_layout_images[Settings.board_layout].layout_image
+	_handle_custom_ruleset_label()
+
+
+func _on_next_board_layout_selected():
+	Settings.on_next_board_layout()
+	_image_board_layout.texture = _board_layout_images[Settings.board_layout].layout_image
+	_handle_custom_ruleset_label()
+
+
 func _update_ui_on_ruleset_change():
 	_update_ruleset_label()	
+	_image_board_layout.texture = _board_layout_images[Settings.board_layout].layout_image
 	_checkbox_rosettes_extra_turn.set_pressed_no_signal(Settings.rosettes_grant_extra_turn)
 	_checkbox_rosettes_safe.set_pressed_no_signal(Settings.rosettes_are_safe)
 	_checkbox_rosettes_stacking.set_pressed_no_signal(Settings.rosettes_allow_stacking)

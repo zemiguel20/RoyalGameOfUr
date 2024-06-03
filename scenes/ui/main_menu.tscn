@@ -1,8 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://hcad14f7py6i"]
+[gd_scene load_steps=14 format=3 uid="uid://hcad14f7py6i"]
 
 [ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="1_wtptb"]
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="2_s6jec"]
+[ext_resource type="Script" path="res://scripts/ui/board_layout_struct.gd" id="3_jtoap"]
 [ext_resource type="Texture2D" uid="uid://cdrbwti4e26go" path="res://resources/ui/rule_menu/board-layout-prototype.png" id="3_wfd8e"]
+[ext_resource type="Texture2D" uid="uid://cyfxrhra3nxt0" path="res://resources/ui/rule_menu/board-layout-prototype-2.png" id="4_6tkag"]
+
+[sub_resource type="Resource" id="Resource_ex0h4"]
+script = ExtResource("3_jtoap")
+layout_enum = 0
+layout_image = ExtResource("3_wfd8e")
+
+[sub_resource type="Resource" id="Resource_umoj2"]
+script = ExtResource("3_jtoap")
+layout_enum = 1
+layout_image = ExtResource("4_6tkag")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k58kw"]
 
@@ -29,6 +41,7 @@ Button/styles/pressed = SubResource("StyleBoxEmpty_84i4a")
 [node name="Prototype_UI" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_wtptb")
+_board_layout_images = Array[ExtResource("3_jtoap")]([SubResource("Resource_ex0h4"), SubResource("Resource_umoj2")])
 
 [node name="Fade_Panel" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -310,6 +323,8 @@ text = "Confirm"
 [connection signal="pressed" from="Main Menu/Quit" to="Main Menu/Quit" method="_on_pressed"]
 [connection signal="pressed" from="Settings Menu/MarginContainer/VBoxContainer/RulesetSelection/HBoxContainer/ButtonLeft" to="." method="_on_previous_ruleset_selected"]
 [connection signal="pressed" from="Settings Menu/MarginContainer/VBoxContainer/RulesetSelection/HBoxContainer/ButtonRight" to="." method="_on_next_ruleset_selected"]
+[connection signal="pressed" from="Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/LayoutSelection/HBoxContainer/ButtonLeft" to="." method="_on_previous_board_layout_selected"]
+[connection signal="pressed" from="Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/LayoutSelection/HBoxContainer/ButtonRight" to="." method="_on_next_board_layout_selected"]
 [connection signal="toggled" from="Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/RosetteExtraTurn" to="." method="_on_rosettes_extra_move_toggle"]
 [connection signal="toggled" from="Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/RosetteSafe" to="." method="_on_rosettes_safe_toggle"]
 [connection signal="toggled" from="Settings Menu/MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/RosetteStacking" to="." method="_on_rosettes_stacking_toggle"]
