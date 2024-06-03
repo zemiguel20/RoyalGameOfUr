@@ -3,8 +3,9 @@ extends CanvasLayer
 
 
 @onready var panel := $Background_Panel as Panel
-@export var subtitle_label: Label
 @onready var cuneiform_label := $Background_Panel/Cuneiform_Label as Label
+
+@export var subtitle_label: Label
 @export var skip_icon: Control
 
 ### Text of the opponent npc, which gets saved when another one is shown.
