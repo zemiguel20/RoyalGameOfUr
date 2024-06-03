@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://s1siqyyucbcu"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://bgla8xjveol3f"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_1bfsv"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_8mqiv"]
@@ -7,6 +7,7 @@
 [sub_resource type="Resource" id="Resource_wvtl5"]
 script = ExtResource("1_1bfsv")
 caption = "Ah... well played, my friend!"
+caption_cuneiform = ""
 anim_variations = Array[int]([6])
 fixed_duration = 3.0
 prevents_opponent_action = false

@@ -7,6 +7,7 @@
 [sub_resource type="Resource" id="Resource_c7dik"]
 script = ExtResource("1_5inn7")
 caption = "Ha! Got you."
+caption_cuneiform = ""
 anim_variations = Array[int]([6])
 fixed_duration = 2.0
 prevents_opponent_action = false
@@ -21,6 +22,7 @@ weight = 5
 [sub_resource type="Resource" id="Resource_bbg53"]
 script = ExtResource("1_5inn7")
 caption = "Not so fast!"
+caption_cuneiform = ""
 anim_variations = Array[int]([1])
 fixed_duration = 2.0
 prevents_opponent_action = false
@@ -35,6 +37,7 @@ weight = 5
 [sub_resource type="Resource" id="Resource_1na1r"]
 script = ExtResource("1_5inn7")
 caption = "There goes your stormbird."
+caption_cuneiform = ""
 anim_variations = Array[int]([4])
 fixed_duration = 3.0
 prevents_opponent_action = false
@@ -49,6 +52,7 @@ weight = 5
 [sub_resource type="Resource" id="Resource_phv4q"]
 script = ExtResource("1_5inn7")
 caption = "Unlucky."
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 2.0
 prevents_opponent_action = false

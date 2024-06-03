@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=7 format=3 uid="uid://bdab84wtungjw"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=7 format=3 uid="uid://bwb2tdg0bmm0v"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_h3ehk"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_o03fh"]
@@ -7,6 +7,7 @@
 [sub_resource type="Resource" id="Resource_smur6"]
 script = ExtResource("1_h3ehk")
 caption = "When you capture one of my pieces, my piece returns to the start."
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 5.0
 prevents_opponent_action = false
@@ -14,6 +15,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_wukhb"]
 script = ExtResource("1_h3ehk")
 caption = "Of course, this works the other way around, as well."
+caption_cuneiform = ""
 anim_variations = Array[int]([5])
 fixed_duration = 3.0
 prevents_opponent_action = false

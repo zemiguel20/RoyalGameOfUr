@@ -6,6 +6,7 @@
 [sub_resource type="Resource" id="Resource_7k2gv"]
 script = ExtResource("1_3j0ti")
 caption = "(sigh) ...that's better."
+caption_cuneiform = ""
 anim_variations = Array[int]([3])
 fixed_duration = -1.0
 prevents_opponent_action = false
@@ -13,6 +14,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_73wnr"]
 script = ExtResource("1_3j0ti")
 caption = "I swear, these shifts last twice as long on an empty stomach!"
+caption_cuneiform = ""
 anim_variations = Array[int]([5])
 fixed_duration = 4.0
 prevents_opponent_action = false
