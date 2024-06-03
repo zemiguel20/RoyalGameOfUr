@@ -1,0 +1,233 @@
+[gd_scene load_steps=8 format=3 uid="uid://chd4blkarqiwe"]
+
+[ext_resource type="Texture2D" uid="uid://cdrbwti4e26go" path="res://resources/ui/rule_menu/board-layout-prototype.png" id="1_e81sc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k58kw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ttc2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lt74h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6wjab"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_84i4a"]
+
+[sub_resource type="Theme" id="Theme_q1r3c"]
+Button/colors/font_color = Color(1, 0.686275, 0, 1)
+Button/colors/font_hover_color = Color(1, 0.764706, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0.986026, 0.753848, 0, 1)
+Button/colors/font_pressed_color = Color(0.984314, 0.752941, 0, 1)
+Button/font_sizes/font_size = 100
+Button/styles/disabled = SubResource("StyleBoxEmpty_k58kw")
+Button/styles/focus = SubResource("StyleBoxEmpty_3ttc2")
+Button/styles/hover = SubResource("StyleBoxEmpty_lt74h")
+Button/styles/normal = SubResource("StyleBoxEmpty_6wjab")
+Button/styles/pressed = SubResource("StyleBoxEmpty_84i4a")
+
+[node name="Settings Menu" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -400.0
+offset_right = 270.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RulesetSelection" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/RulesetSelection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -25.0
+offset_right = 192.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="ButtonLeft" type="Button" parent="MarginContainer/VBoxContainer/RulesetSelection/HBoxContainer"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "<"
+
+[node name="Ruleset Label" type="Label" parent="MarginContainer/VBoxContainer/RulesetSelection/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Finkel"
+
+[node name="ButtonRight" type="Button" parent="MarginContainer/VBoxContainer/RulesetSelection/HBoxContainer"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = ">"
+
+[node name="Rules" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 528)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Rules"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="LayoutSelection" type="Control" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/LayoutSelection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -64.0
+offset_right = 184.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonLeft" type="Button" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/LayoutSelection/HBoxContainer"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "<"
+
+[node name="BoardLayout Image" type="TextureRect" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/LayoutSelection/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_e81sc")
+
+[node name="ButtonRight" type="Button" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/LayoutSelection/HBoxContainer"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = ">"
+
+[node name="RosetteExtraTurn" type="CheckBox" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+button_pressed = true
+text = "Rosettes grant an extra move"
+
+[node name="RosetteSafe" type="CheckBox" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+button_pressed = true
+text = "Rosettes are safe"
+
+[node name="RosetteStacking" type="CheckBox" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Rosettes allow stacking"
+
+[node name="CaptureExtraTurn" type="CheckBox" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Captures grant an extra move"
+
+[node name="PiecesBackwards" type="CheckBox" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Pieces can move backwards"
+
+[node name="PieceAmount" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/PieceAmount"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/PieceAmount"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Pieces: 7"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/PieceAmount"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+max_value = 7.0
+value = 7.0
+tick_count = 7
+ticks_on_borders = true
+
+[node name="DiceAmount" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/DiceAmount"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/DiceAmount"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Dice: 4"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/DiceAmount"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+max_value = 5.0
+value = 4.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/Rules/ScrollContainer/VBoxContainer/DiceAmount/HSlider"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Confirm" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = SubResource("Theme_q1r3c")
+theme_override_font_sizes/font_size = 48
+text = "Confirm"
