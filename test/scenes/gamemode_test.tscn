@@ -20,14 +20,20 @@ var started: bool = false
 
 func _ready():
 	Settings.can_stack_in_safe_spot = true
-	Settings.can_move_backwards = true
-	#Settings.fast_move_enabled = true
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_SPACE and not started:
 		started = true
 		controller.start_game()
+	
+	if event is InputEventKey:
+		if event.keycode == KEY_1 and event.pressed:
+			Settings.fast_move_enabled = not Settings.fast_move_enabled
+			print(\"Fast Move: %s\" % Settings.fast_move_enabled)
+		if event.keycode == KEY_2 and event.pressed:
+			Settings.can_move_backwards = not Settings.can_move_backwards
+			print(\"Move Backwards: %s\" % Settings.can_move_backwards)
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_suxix"]
@@ -71,7 +77,7 @@ transform = Transform3D(0.0497542, -0.741031, 0.669625, 0, 0.670456, 0.74195, -0
 [node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("p1_move_picker", "p2_move_picker", "p1_dice_roller", "p2_dice_roller", "entity_manager")]
 script = ExtResource("1_sto2p")
 p1_move_picker = NodePath("../InteractiveMovePicker")
-p2_move_picker = NodePath("../InteractiveMovePicker")
+p2_move_picker = NodePath("../AIMovePicker")
 p1_dice_roller = NodePath("../DiceRoller")
 p2_dice_roller = NodePath("../DiceRoller2")
 entity_manager = NodePath("../EntityManager")
@@ -86,7 +92,6 @@ dice_spawn_spot = NodePath("../../DieSpawn")
 
 [node name="DiceRoller" parent="Systems" instance=ExtResource("11_4yam3")]
 transform = Transform3D(0.0849126, 0, 0.996388, 0, 1, 0, -0.996388, 0, 0.0849126, 0.222704, 2.98023e-08, 0.010642)
-automatic = true
 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("11_4yam3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.208323, 2.98023e-08, 0.0507007)
