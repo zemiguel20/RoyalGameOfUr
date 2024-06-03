@@ -9,10 +9,6 @@ signal roll_finished(value: int)
 signal dice_placed
 
 @export var automatic: bool = false
-@export var selectable_color := Color.PALE_GREEN
-@export var hovered_color := Color.SKY_BLUE
-@export var value_one_color := Color.DEEP_SKY_BLUE
-@export var value_zero_color := Color.RED
 
 var place_spots: Array[Node3D] = []
 var throw_spots: Array[Node3D] = []
@@ -67,20 +63,18 @@ func place_dice(dice: Array[Die], skip_animation := false) -> void:
 
 func _highlight_hovered() -> void:
 	for die in _dice:
-		die.highlight.active = true
-		die.highlight.color = hovered_color
+		die.highlight.set_active(true).set_color(General.color_hovered)
 
 
 func _highlight_selectable() -> void:
 	for die in _dice:
-		die.highlight.active = true
-		die.highlight.color = selectable_color
+		die.highlight.set_active(true).set_color(General.color_selectable)
 
 
 func _highlight_result() -> void:
 	for die in _dice:
 		die.highlight.active = true
-		die.highlight.color = value_one_color if die.value == 1 else value_zero_color
+		die.highlight.color = General.color_positive if die.value == 1 else General.color_negative
 
 
 func _dehighlight() -> void:
