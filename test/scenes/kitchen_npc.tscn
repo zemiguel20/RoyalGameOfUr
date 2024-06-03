@@ -13,7 +13,6 @@
 size = Vector3(0.5, 0.2, 0.2)
 
 [node name="Kitchen_NPC" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80288, 1, 0)
 script = ExtResource("1_uj0e5")
 
 [node name="Temp_Model" parent="." instance=ExtResource("2_3b6xn")]

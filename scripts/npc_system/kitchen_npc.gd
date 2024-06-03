@@ -8,6 +8,7 @@ extends AmbientNPCBase
 @export_group("Speed")
 @export var _move_speed: float = 2
 @export var _rotation_speed: float = 1
+@export var _standing_speed: float = 2.5
 
 @export_group("Timing")
 @export var _start_delay: float = 5
@@ -15,6 +16,9 @@ extends AmbientNPCBase
 @export var _max_search_time: float = 70
 @export var _min_kitchen_time: float = 10
 @export var _max_kitchen_time: float = 30
+
+@export_group("Misc")
+@export var _storage_point: Marker3D
 
 var _original_position: Vector3
 
@@ -29,6 +33,7 @@ func _initialize_blackboard():
 	super._initialize_blackboard()
 	blackboard.append("Move Speed", _move_speed)
 	blackboard.append("Rotation Speed", _rotation_speed)
+	blackboard.append("Standing Rotation Speed", _standing_speed)
 
 
 func _initialize_tree():
@@ -36,6 +41,7 @@ func _initialize_tree():
 		RunOnceNode.new(WaitTask.new(_start_delay)),
 		SetVisibilityTask.new(true),
 		MoveAlongPathTask.new(_path),
+		RotateTowardsPointTask.new(_storage_point.global_position),
 		DebugTask.new("Playing animation! Replace me"),
 		WaitRandomTask.new(_min_search_time, _max_search_time),
 		MoveAlongPathTask.new(_path2),

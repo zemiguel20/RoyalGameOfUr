@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=16 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
+[ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="8_ayaro"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
@@ -113,7 +114,7 @@ transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 
 max_degrees_down = 50.0
 max_degrees_left = 45.0
 max_degrees_right = 45.0
-_board_look_rotation = Vector3(-35, 32, 0)
+_board_look_rotation = Vector3(-40, 32, 0)
 _trans_type = 1
 _ease_type = 1
 
@@ -173,6 +174,24 @@ script = ExtResource("6_3dit1")
 [node name="Opponent_Guard_Animated" parent="." instance=ExtResource("7_tegfk")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
 
+[node name="NPCSystem" parent="." instance=ExtResource("8_ayaro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163454, 0.021807, -0.262183)
+
+[node name="ToStorage_PathFollow3D" parent="NPCSystem/Paths/GuardPaths/ToStorage" index="0"]
+transform = Transform3D(-0.34528, 0.0572691, -0.936741, -3.72526e-09, 0.998134, 0.0610216, 0.93849, 0.0210699, -0.344636, 0, 0, 0)
+
+[node name="StorageToKitchen_PathFollow3D" parent="NPCSystem/Paths/GuardPaths/Storage_To_Kitchen" index="0"]
+transform = Transform3D(0.0579449, 0, 0.998319, 0, 1, 0, -0.998319, 0, 0.0579449, -4.264, 0, 3.987)
+
+[node name="KitchenToStart_PathFollow3D" parent="NPCSystem/Paths/GuardPaths/Kitchen_To_Start" index="0"]
+transform = Transform3D(0.992532, 0, -0.12197, 0, 1, 0, 0.12197, 0, 0.992532, -0.203, 0, -0.637)
+
+[node name="Kitchen_To_Storage_PathFollow3D" parent="NPCSystem/Paths/KitchenPaths/Kitchen_To_Storage" index="0"]
+transform = Transform3D(0.999195, -0.000211939, 0.039862, -7.27588e-12, 0.999986, 0.00531663, -0.0398626, -0.00531246, 0.999181, -0.74496, -0.00807405, -0.924744)
+
+[node name="StorageToKitchen2_PathFollow3D" parent="NPCSystem/Paths/KitchenPaths/Storage_To_Kitchen2" index="0"]
+transform = Transform3D(-0.00153056, -0.000330129, 0.999994, -1.45518e-11, 1, 0.000330128, -0.999994, 5.05272e-07, -0.00153056, -4.51176, -0.000873566, 3.133)
+
 [connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
 [connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
@@ -194,3 +213,4 @@ transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.
 [editable path="Boardgame/Board"]
 [editable path="Boardgame/Dice"]
 [editable path="Opponent_Guard_Animated"]
+[editable path="NPCSystem"]
