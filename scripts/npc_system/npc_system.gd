@@ -1,4 +1,6 @@
-## Class managing npcs and keeping track of shared data for npc, making sure that they do not overlap.
+## Class managing npcs and keeping track of shared data for npcs.
+## At this point, this class is not super important, but it would be useful 
+## for when npcs need to interact with each other or use the same space.
 class_name NPCSystem
 extends Node
 

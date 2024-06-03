@@ -1,5 +1,5 @@
 ## A Blackboard is a way to pass references and variables across classes,
-## and is used in this project by owners of a behaviour tree. 
+## and is mostly used in this project by owners of a behaviour tree. 
 ## This ensures that the owner of the tree does not have to pass the same references into multiple nodes.
 class_name Blackboard
 

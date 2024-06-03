@@ -42,10 +42,8 @@ func _initialize_tree():
 		SetVisibilityTask.new(true),
 		MoveAlongPathTask.new(_path),
 		RotateTowardsPointTask.new(_storage_point.global_position),
-		DebugTask.new("Playing animation! Replace me"),
 		WaitRandomTask.new(_min_search_time, _max_search_time),
 		MoveAlongPathTask.new(_path2),
-		DebugTask.new("Waitin in the kitchen"),
 		SetVisibilityTask.new(false),
 		WaitRandomTask.new(_min_kitchen_time, _max_kitchen_time)
 		])

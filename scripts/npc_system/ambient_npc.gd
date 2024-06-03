@@ -14,16 +14,15 @@ func on_ready(manager):
 	_npc_manager = manager
 	_has_started = true
 	
-	_material = _mesh.material_override.duplicate()
-	_mesh.material_override = _material
-	
 	_initialize_blackboard()
 	_initialize_tree()
 	_current_tree.set_blackboard(blackboard)
-
-	await Engine.get_main_loop().process_frame
 	_current_tree.on_start()
 	
+	## TODO: Remove at end of project.
+	_material = _mesh.material_override.duplicate()
+	_mesh.material_override = _material
+
 	
 func _process(delta):
 	if not _has_started:
@@ -41,16 +40,19 @@ func set_tree(tree: BTNode):
 	_current_tree = tree
 	
 
+## Virtual method, used to construct a blackboard.
 func _initialize_blackboard():
 	blackboard = Blackboard.new()
 	blackboard.append("Base", self)
 
 
+## Virtual method, used to construct a behaviour tree and set the [param _current_tree] parameter
 func _initialize_tree():
 	pass
 
 
 # Helper method for showing different actions
+# TODO: Remove at end of project.
 func set_material_color(color: Color):
 	(_mesh.material_override as BaseMaterial3D).albedo_color = color
 	

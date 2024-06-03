@@ -20,7 +20,10 @@ extends AmbientNPCBase
 @export_group("Special Events")
 ## The guard has a random chance to wait at one of the points in the path.
 @export_range(0, 1) var _watch_game_probability = 0.5
+## The point the guard is looking at when watching the game.
 @export var _watch_point: Marker3D
+## The part of the path follow where the guard pauzes.
+@export var _watch_path_progress_ratio = 0.3
 
 var _original_position: Vector3
 
@@ -37,29 +40,39 @@ func _initialize_blackboard():
 
 
 func _initialize_tree():
+	## Subtree for traversing path 1
 	var _moving_sequence_no_watching = SequenceNode.new([
 		MoveAlongPathTask.new(_path)])
 		
+	## Subtree for traversing path 1, but stopping to watch the game.	
 	var _moving_sequence_with_watching = SequenceNode.new([
-		## TODO: No magic numbers!
-		MoveAlongPathTask.new(_path, 0.001, 0.3),
+		MoveAlongPathTask.new(_path, 0.001, _watch_path_progress_ratio),
 		RotateTowardsPointTask.new(_watch_point.global_position),
 		WaitTask.new(5),
-		RotateTowardsPointTask.new(-(_path.global_position - _path.global_basis.z)),
-		MoveAlongPathTask.new(_path, 0.3, 1),
+		RotateTowardsPointTask.new(_path.global_position + _path.global_basis.z),
+		MoveAlongPathTask.new(_path, _watch_path_progress_ratio, 1),
 		])
 		
+	## Main tree of the guard.
 	_current_tree = SequenceNode.new([
-		WaitTask.new(_start_delay),	
-		## Moving sequence with either watching the game or not stopping
+		RunOnceNode.new(WaitTask.new(_start_delay)),	
+		SetVisibilityTask.new(true),
+		## Moving sequence with either watching the game or not stopping.
 		SelectorNode.new([
 			RandomNode.new(_moving_sequence_with_watching, _watch_game_probability),
 			_moving_sequence_no_watching
 		]),
+		SetVisibilityTask.new(false),		
 		WaitRandomTask.new(_min_walk_cooldown, _max_walk_cooldown),
+		## Wait and traverse path 2
+		SetVisibilityTask.new(true),
 		MoveAlongPathTask.new(_path2),
+		SetVisibilityTask.new(false),		
+		## Wait and traverse path 3		
 		WaitRandomTask.new(_min_walk_cooldown, _max_walk_cooldown),
+		SetVisibilityTask.new(true),		
 		MoveAlongPathTask.new(_path3),
+		SetVisibilityTask.new(false),
 		## Warp back to starting position and wait
 		WarpTask.new(_original_position),
 		WaitRandomTask.new(_min_walk_cooldown, _max_walk_cooldown),
