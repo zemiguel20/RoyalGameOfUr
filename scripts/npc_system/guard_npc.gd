@@ -13,18 +13,19 @@ extends AmbientNPCBase
 @export var _standing_rotation_speed: float = 1
 
 @export_group("Timings")
-@export var _walk_by_cooldown = 10
+@export var _start_delay = 20
+@export var _min_walk_cooldown = 5
+@export var _max_walk_cooldown = 20
 
 @export_group("Special Events")
 ## The guard has a random chance to wait at one of the points in the path.
 @export_range(0, 1) var _watch_game_probability = 0.5
-@export var _watch_point: Marker3D 
+@export var _watch_point: Marker3D
 
 var _original_position: Vector3
 
 func on_ready(_npc_manager):
 	_original_position = global_position
-	
 	super.on_ready(_npc_manager)
 	
 
@@ -49,16 +50,17 @@ func _initialize_tree():
 		])
 		
 	_current_tree = SequenceNode.new([
+		WaitTask.new(_start_delay),	
 		## Moving sequence with either watching the game or not stopping
 		SelectorNode.new([
 			RandomNode.new(_moving_sequence_with_watching, _watch_game_probability),
 			_moving_sequence_no_watching
 		]),
-		WaitTask.new(_walk_by_cooldown),
+		WaitRandomTask.new(_min_walk_cooldown, _max_walk_cooldown),
 		MoveAlongPathTask.new(_path2),
-		WaitTask.new(_walk_by_cooldown),
+		WaitRandomTask.new(_min_walk_cooldown, _max_walk_cooldown),
 		MoveAlongPathTask.new(_path3),
 		## Warp back to starting position and wait
 		WarpTask.new(_original_position),
-		WaitRandomTask.new(_walk_by_cooldown, _walk_by_cooldown + 1)
+		WaitRandomTask.new(_min_walk_cooldown, _max_walk_cooldown),
 		])
