@@ -20,14 +20,15 @@ func _ready() -> void:
 func start(moves: Array[GameMove]) -> void:
 	if selector is AIGameMoveSelector:
 		selector.start_selection(moves)
-		var selected_move = await selector.move_selected
+		var selected_move: GameMove = await selector.move_selected
 		selected_move.execute(General.MoveAnim.ARC, true)
 		await selected_move.execution_finished
 		move_executed.emit(selected_move)
 	
 	if selector is InteractiveGameMoveSelector:
 		selector.start_selection(moves)
-		var selected_move = await selector.move_selected
-		selected_move.execute(General.MoveAnim.LINE)
+		var selected_move: GameMove = await selector.move_selected
+		var anim = General.MoveAnim.ARC if Settings.fast_move_enabled else General.MoveAnim.LINE
+		selected_move.execute(anim, Settings.fast_move_enabled)
 		await selected_move.execution_finished
 		move_executed.emit(selected_move)

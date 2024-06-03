@@ -1,19 +1,20 @@
 class_name PieceDragger extends Node
+## Makes the pieces follow the cursor during selection.
 
 
 @export var selector: InteractiveGameMoveSelector
-@export var board_surface_y: float = 0.35
+@export var float_height: float = 0.05
 
 var is_dragging: bool = false
 var pieces_to_drag: Array[Piece] = []
 var original_positions: Array[Vector3] = []
-
+var board_surface_y: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	selector.from_spot_selected.connect(_on_from_spot_selected)
 	selector.selection_canceled.connect(_on_selection_cancel)
-	selector.move_selected.connect(_on_move_selected)
+	selector.move_selected.connect(_on_move_selected.unbind(1))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,8 +30,9 @@ func _process(delta: float) -> void:
 			# Interpolate drag spot position
 			var x = clamp(result.x, -1.5, 2.5)
 			var z = clamp(result.z, -5, 5)
-			for piece in pieces_to_drag:
-				var y = board_surface_y + 1 + piece.position.y
+			for i in pieces_to_drag.size():
+				var piece = pieces_to_drag[i]
+				var y = board_surface_y + float_height + (i * piece.get_height_scaled())
 				var target_pos = Vector3(x,y,z)
 				piece.global_position = lerp(piece.global_position, target_pos, 8 * delta)
 
@@ -42,6 +44,8 @@ func _on_from_spot_selected(spot: Spot) -> void:
 	for piece in pieces_to_drag:
 		original_positions.append(piece.global_position)
 	
+	board_surface_y = spot.global_position.y
+	
 	is_dragging = true
 
 
@@ -51,7 +55,7 @@ func _on_selection_cancel() -> void:
 	is_dragging = false
 
 
-func _on_move_selected(_move: GameMove) -> void:
+func _on_move_selected() -> void:
 	pieces_to_drag.clear()
 	is_dragging = false
 

@@ -20,6 +20,8 @@ var started: bool = false
 
 func _ready():
 	Settings.can_stack_in_safe_spot = true
+	Settings.can_move_backwards = true
+	#Settings.fast_move_enabled = true
 
 
 func _input(event: InputEvent) -> void:
@@ -68,8 +70,8 @@ transform = Transform3D(0.0497542, -0.741031, 0.669625, 0, 0.670456, 0.74195, -0
 
 [node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("p1_move_picker", "p2_move_picker", "p1_dice_roller", "p2_dice_roller", "entity_manager")]
 script = ExtResource("1_sto2p")
-p1_move_picker = NodePath("../AIMovePicker")
-p2_move_picker = NodePath("../AIMovePicker")
+p1_move_picker = NodePath("../InteractiveMovePicker")
+p2_move_picker = NodePath("../InteractiveMovePicker")
 p1_dice_roller = NodePath("../DiceRoller")
 p2_dice_roller = NodePath("../DiceRoller2")
 entity_manager = NodePath("../EntityManager")

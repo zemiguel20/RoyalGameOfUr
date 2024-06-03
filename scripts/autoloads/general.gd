@@ -16,6 +16,13 @@ enum MoveAnim {
 }
 
 
+const color_selectable := Color.SKY_BLUE
+const color_selected := Color.DEEP_SKY_BLUE
+const color_hovered := Color.LIGHT_BLUE
+const color_positive := Color.MEDIUM_SEA_GREEN
+const color_negative := Color.RED
+
+
 func get_opponent(player : Player) -> Player:
 	return Player.ONE if player == Player.TWO else Player.TWO
 

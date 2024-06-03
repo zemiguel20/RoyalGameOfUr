@@ -11,3 +11,4 @@ var num_dice: int = 4:
 	set(value):
 		num_dice = clampi(num_dice, 1, 5)
 var can_move_backwards: bool = false
+var fast_move_enabled: bool = false

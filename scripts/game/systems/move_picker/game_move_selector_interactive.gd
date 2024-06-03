@@ -2,10 +2,8 @@ class_name InteractiveGameMoveSelector extends Node
 ## Allows player to select a move using input. For the available moves, the player can select
 ## a spot where he currently has pieces. Then the player can click a spot to move (corresponding to
 ## the available moves from the chosen starting spot). After both spots are picked, the
-## corresponding move gets executed.
-##
-## Additionaly, it controls the highlighting effects during selection, and also makes the selected
-## pieces follow the cursor.
+## corresponding move gets selected.
+## Additionaly, it controls the highlighting effects during selection.
 
 
 signal from_spot_selected(spot: Spot)
@@ -20,68 +18,119 @@ var is_from_selected: bool = false
 
 
 func _input(event):
-	if is_from_selected and event.is_action_pressed("game_spot_selection_cancel"):
+	if is_from_selected and event.is_action_pressed("game_selection_cancel"):
 		selection_canceled.emit()
-		_clear_state()
 		_start_from_selection()
 
 
-func start_selection(moves: Array[GameMove]):
+func start_selection(moves: Array[GameMove]) -> void:
 	_moves = moves.duplicate()
 	_start_from_selection()
 
 
 func _start_from_selection() -> void:
+	is_from_selected = false
+	
 	for move in _moves:
-		# Connect hover highlight to input, and 'from' selection
-		if not move.from.mouse_entered.is_connected(highlight.highlight_hovered.bind(move)):
-			move.from.mouse_entered.connect(highlight.highlight_hovered.bind(move))
-		if not move.from.mouse_entered.is_connected(highlight.highlight_selectable.bind(move)):
-			move.from.mouse_exited.connect(highlight.highlight_selectable.bind(move))
-		if not move.from.selected.is_connected(_on_from_selected.bind(move.from)):
-			move.from.selected.connect(_on_from_selected.bind(move.from))
+		_clear_connections(move)
+		highlight.clear_highlight(move)
+	
+	for move in _moves:
+		if not move.from.input.hovered.is_connected(_on_from_hovered.bind(move.from)):
+			move.from.input.hovered.connect(_on_from_hovered.bind(move.from))
+		if not move.from.input.dehovered.is_connected(_on_from_dehovered.bind(move.from)):
+			move.from.input.dehovered.connect(_on_from_dehovered.bind(move.from))
 		
-		highlight.highlight_selectable(move)
+		if move.valid:
+			if not move.from.input.clicked.is_connected(_on_from_selected.bind(move.from)):
+				move.from.input.clicked.connect(_on_from_selected.bind(move.from))
+			
+			for piece in move.pieces_in_from:
+				piece.highlight.set_active(true).set_color(General.color_selectable)
 
 
-func _on_from_selected(spot: Spot):
-	_clear_state()
+func _on_from_hovered(spot: Spot) -> void:
+	var moves_from = _filter_moves_with_from(_moves, spot)
+	# Sort invalid moves first, so valid moves are in a "higher layer" for highlighting
+	# NOTE: this is due to overriding because moves share pieces/spots
+	moves_from.sort_custom(func(a: GameMove, _b: GameMove): return not a.valid)
+	for move in moves_from:
+		highlight.highlight(move, General.color_hovered)
+
+
+func _on_from_dehovered(_spot: Spot) -> void:
+	# Make sure all selectable moves are properly highlighted
+	# NOTE: this is due to overriding because moves share pieces/spots
+	for move in _moves:
+		highlight.clear_highlight(move)
+	for move in _moves:
+		if move.valid:
+			for piece in move.pieces_in_from:
+				piece.highlight.set_active(true).set_color(General.color_selectable)
+
+
+func _on_from_selected(spot: Spot) -> void:
+	for move in _moves:
+		_clear_connections(move)
+		highlight.clear_highlight(move)
 	
-	var moves_from = _moves.filter(func(move: GameMove): return move.from == spot)
+	var valid_moves = _filter_valid_moves(_filter_moves_with_from(_moves, spot))
 	
-	if not Settings.can_move_backwards:
-		var selected_move = moves_from.front()
+	if Settings.fast_move_enabled:
+		var selected_move = valid_moves.front()
 		move_selected.emit(selected_move)
 	else:
 		is_from_selected = true
-		_start_to_selection(moves_from)
+		from_spot_selected.emit(spot)
+		_start_to_selection(valid_moves)
 
 
-func _start_to_selection(moves_from: Array[GameMove]) -> void:
-	for move in moves_from:
-		if not move.to.selected.is_connected(_on_to_selected.bind(move)):
-			move.to.selected.connect(_on_to_selected.bind(move))
+func _start_to_selection(filtered_moves: Array[GameMove]) -> void:
+	for move in filtered_moves:
+		if not move.to.input.hovered.is_connected(_on_to_hovered.bind(move)):
+			move.to.input.hovered.connect(_on_to_hovered.bind(move))
+		if not move.to.input.dehovered.is_connected(_on_to_dehovered.bind(move)):
+			move.to.input.dehovered.connect(_on_to_dehovered.bind(move))
+		if not move.to.input.clicked.is_connected(_on_to_selected.bind(move)):
+			move.to.input.clicked.connect(_on_to_selected.bind(move))
 		
-		highlight.highlight_selected(move)
+		highlight.highlight(move, General.color_selected)
 
 
-func _on_to_selected(move: GameMove):
-	_clear_state()
-	move_selected.emit(move)
+func _on_to_hovered(move: GameMove) -> void:
+	move.to.highlight.color = General.color_hovered
 
 
-func _clear_state():
+func _on_to_dehovered(move: GameMove) -> void:
+	move.to.highlight.color = highlight.get_to_spot_color(move)
+
+
+func _on_to_selected(selected_move: GameMove) -> void:
 	for move in _moves:
-		# Disconnect callbacks from all input
-		if move.from.mouse_entered.is_connected(highlight.highlight_hovered.bind(move)):
-			move.from.mouse_entered.disconnect(highlight.highlight_hovered.bind(move))
-		if move.from.mouse_exited.is_connected(highlight.highlight_selectable.bind(move)):
-			move.from.mouse_exited.disconnect(highlight.highlight_selectable.bind(move))
-		if move.from.selected.is_connected(_on_from_selected.bind(move.from)):
-			move.from.selected.disconnect(_on_from_selected.bind(move.from))
-		if move.to.selected.is_connected(_on_to_selected.bind(move.to)):
-			move.to.selected.disconnect(_on_to_selected.bind(move.to))
-		
+		_clear_connections(move)
 		highlight.clear_highlight(move)
 	
-	is_from_selected = false
+	move_selected.emit(selected_move)
+
+
+func _clear_connections(move: GameMove) -> void:
+	if move.from.input.hovered.is_connected(_on_from_hovered.bind(move.from)):
+		move.from.input.hovered.disconnect(_on_from_hovered.bind(move.from))
+	if move.from.input.dehovered.is_connected(_on_from_dehovered.bind(move.from)):
+		move.from.input.dehovered.disconnect(_on_from_dehovered.bind(move.from))
+	if move.from.input.clicked.is_connected(_on_from_selected.bind(move.from)):
+		move.from.input.clicked.disconnect(_on_from_selected.bind(move.from))
+	if move.to.input.hovered.is_connected(_on_to_hovered.bind(move)):
+		move.to.input.hovered.disconnect(_on_to_hovered.bind(move))
+	if move.to.input.dehovered.is_connected(_on_to_dehovered.bind(move)):
+		move.to.input.dehovered.disconnect(_on_to_dehovered.bind(move))
+	if move.to.input.clicked.is_connected(_on_to_selected.bind(move)):
+		move.to.input.clicked.disconnect(_on_to_selected.bind(move))
+
+
+func _filter_moves_with_from(moves: Array[GameMove], spot_from: Spot) -> Array[GameMove]:
+	return moves.filter(func(move: GameMove): return move.from == spot_from)
+
+
+func _filter_valid_moves(moves: Array[GameMove]) -> Array[GameMove]:
+	return moves.filter(func(move: GameMove): return move.valid)
