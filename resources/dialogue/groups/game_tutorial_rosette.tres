@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://dqeyo43p0rrqy"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_3w6r6"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_6cq75"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_6cq75"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_v6yjn"]
 
 [sub_resource type="Resource" id="Resource_jyika"]
@@ -15,7 +15,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_5wm4y"]
 script = ExtResource("2_v6yjn")
 max_repetitions = 1
-dialogue_entries = Array[ExtResource("1_6cq75")]([SubResource("Resource_jyika")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_jyika")])
 requires_click = false
 weight = 5
 

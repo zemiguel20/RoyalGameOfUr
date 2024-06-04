@@ -7,7 +7,6 @@ extends Camera3D
 ## and the camera is positioned to look at the game view.
 signal on_intro_ended
 
-var _can_move_camera: bool
 
 @export var max_degrees_up: float = 35
 @export var max_degrees_down: float = 35
@@ -23,6 +22,11 @@ var _can_move_camera: bool
 ## the camera will switch back to the fixed board camera. 
 ## The higher the value, the more you need to look at the board to switch modes.
 @export_range(0.5, 0.99) var switch_threshold_ratio: float = 0.8 
+@export_group("Camera Tweening")
+@export var _trans_type: int
+@export var _ease_type: int
+@export var _tween_speed: float = 2
+@export var _intro_tween_speed: float = 0.5
 
 ## Upon hovering over this ui element, the camera will switch to the looking around mode.
 @onready var _looking_border = $CanvasLayer_ModeChange/LookingBorder as Control
@@ -34,11 +38,7 @@ var _max_rotation_x: float
 var _min_rotation_y: float
 var _max_rotation_y: float
 
-@export_category("Camera Tweening")
-@export var _trans_type: int
-@export var _ease_type: int
-@export var _tween_speed: float = 2
-@export var _intro_tween_speed: float = 0.5
+var _can_move_camera: bool
 var tween_rot: Tween
 
 ## Bool indicating whether looking around is currently enabled.
@@ -68,17 +68,14 @@ func _process(delta):
 func _input(event):
 	if not _can_move_camera: return
 	
-	if event is InputEventMouseButton:
-		event = event as InputEventMouseButton
-		if event.button_index == MOUSE_BUTTON_RIGHT:
-			if event.is_pressed():
-				_is_looking_around = true
-				if tween_rot and tween_rot.is_running():
-					tween_rot.stop()
-				_switch_mode()
-			elif event.is_released():
-				_is_looking_around = false
-				_switch_mode()
+	if event.is_action_pressed("look_around"):
+		_is_looking_around = true
+		if tween_rot and tween_rot.is_running():
+			tween_rot.stop()
+		_switch_mode()
+	elif event.is_action_released("look_around"):
+		_is_looking_around = false
+		_switch_mode()
 			
 	if not event is InputEventMouseMotion or not _is_looking_around:
 		return

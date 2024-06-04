@@ -18,7 +18,7 @@ func _ready():
 	subtitle_label.text = "Waarom doet ie niet?"
 	
 	
-func display_subtitle(entry: DialogueSingleEntry, show_skip_icon: bool):
+func display_subtitle(entry: DialogueBundle, show_skip_icon: bool):
 	subtitle_label.text = entry.caption
 	if entry.caption_cuneiform.is_empty():
 		cuneiform_label.text = _filter_symbols(entry.caption).to_lower()
