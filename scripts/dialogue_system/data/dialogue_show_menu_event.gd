@@ -2,12 +2,21 @@ class_name ShowMenuEntry
 extends DialogueEntry
 
 @export var menu_to_display: DialogueMenuController.Menu
-@export var wait_time: float = 3
+@export var _input_action: String
+@export var _wait_time: float = 0
 
 func execute(dialogue_menu_controller: DialogueMenuController):
 	dialogue_menu_controller.toggle_menu(menu_to_display, true)
-	
-	## This condition could be changed to wait until the person is holding right mouse.
-	await dialogue_menu_controller.get_tree().create_timer(wait_time).timeout
-	
+	await await_conditions(dialogue_menu_controller)
 	dialogue_menu_controller.toggle_menu(menu_to_display, false)
+
+
+## Await the two optional conditions: Action press and waiting
+func await_conditions(node):
+	if _input_action != null and _input_action != "":
+		while not Input.is_action_just_pressed(_input_action):
+			## Wait a frame when the action is not pressed.
+			await Engine.get_main_loop().process_frame
+	
+	await node.get_tree().create_timer(_wait_time).timeout
+	

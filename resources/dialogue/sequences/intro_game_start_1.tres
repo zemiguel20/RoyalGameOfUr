@@ -30,7 +30,9 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_lm06j"]
 script = ExtResource("2_323na")
-menu_to_display = 0
+menu_to_display = null
+_input_action = "look_around"
+_wait_time = 3.0
 
 [resource]
 script = ExtResource("1_wwdt7")
