@@ -28,8 +28,11 @@ func _process(delta: float) -> void:
 		
 		if result != null:
 			# Interpolate drag spot position
-			var x = clamp(result.x, -1.5, 2.5)
-			var z = clamp(result.z, -5, 5)
+			# BUG: NEEDS TO BE CLAMPED RELATIVE TO THE TABLE IN WORLD SPACE
+			#var x = clamp(result.x, -1.5, 2.5)
+			#var z = clamp(result.z, -5, 5)
+			var x = result.x
+			var z = result.z
 			for i in pieces_to_drag.size():
 				var piece = pieces_to_drag[i]
 				var y = board_surface_y + float_height + (i * piece.get_height_scaled())
