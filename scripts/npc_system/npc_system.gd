@@ -4,6 +4,7 @@
 class_name NPCSystem
 extends Node
 
+@export var dialogue_system: DialogueSystem
 var npcs: Array
 
 func _ready():

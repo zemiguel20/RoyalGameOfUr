@@ -4,8 +4,9 @@ extends Node3D
 
 var talking_animation: Animation
 
-## Amount of seconds after starting the game before the npc begins the starting dialogue. 
+@export var _dialogue_system: DialogueSystem
 @export_group("Dialogue Settings")
+## Amount of seconds after starting the game before the npc begins the starting dialogue. 
 @export var starting_dialogue_delay: float = 2.0
 @export var min_time_between_dialogues: float = 5.0
 @export var max_time_between_dialogues: float = 10.0
@@ -13,7 +14,6 @@ var talking_animation: Animation
 ## to prevent the dialogue interrupting the reaction or the dialogue being skipped.
 @export var reaction_dialogue_delay: float = 5.0
 
-@onready var _dialogue_system = $DialogueSystem as DialogueSystem
 @onready var _animation_player = $AnimationPlayer as OpponentAnimationPlayer
 
 var _time_until_next_dialogue: float
@@ -80,22 +80,13 @@ func play_tutorial_dialog(category: DialogueSystem.Category):
 	_dialogue_system.play(category)
 
 
-func _play_interruption(category):
-	_time_until_next_dialogue += reaction_dialogue_delay
-	await _dialogue_system.play(category)
-
-
 func _on_play_pressed():
 	visible = true
 	await _animation_player.play_walkin()
 	## Start first dialogue after a delay.
+	_dialogue_system.set_animation_player(_animation_player)
 	await get_tree().create_timer(starting_dialogue_delay).timeout
 	await _play_story_dialogue()
 	_is_timer_active = true	
 	GameEvents.intro_finished.emit()
 	
-	
-## Reactions for now: Knockout? Debug Button. No Moves?
-func _input(event):
-	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:
-		_play_interruption(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)

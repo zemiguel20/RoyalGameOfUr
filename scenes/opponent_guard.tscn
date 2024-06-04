@@ -1,29 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://bcjpac1cs0xcy"]
+[gd_scene load_steps=5 format=3 uid="uid://bcjpac1cs0xcy"]
 
 [ext_resource type="PackedScene" uid="uid://it24m6uyqxlk" path="res://models/fbx_guard_animated.fbx" id="1_jat7h"]
 [ext_resource type="Material" uid="uid://dq4qt2h6vrkcj" path="res://materials/guard/guard.tres" id="2_nuktw"]
 [ext_resource type="Script" path="res://scripts/opponent_npc.gd" id="2_pjd45"]
 [ext_resource type="Script" path="res://scripts/opponent/opponent_animation_player.gd" id="4_g1c61"]
-[ext_resource type="PackedScene" uid="uid://y4idlfyp1gdh" path="res://dialogue_menus.tscn" id="5_bvx3e"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_system.gd" id="5_dxxwf"]
-[ext_resource type="PackedScene" uid="uid://b5rqut7t53w0r" path="res://scenes/ui/subtitle_system.tscn" id="5_hwe48"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_random_player.gd" id="6_fvtk2"]
-[ext_resource type="Resource" uid="uid://c4s5ljc8dbt6o" path="res://resources/dialogue/groups/intro_story.tres" id="7_7nwkm"]
-[ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_inorder_player.gd" id="7_fkgtg"]
-[ext_resource type="Resource" uid="uid://dgfe3vpdsmwyf" path="res://resources/dialogue/groups/intro_game_start.tres" id="8_huw5v"]
-[ext_resource type="Resource" uid="uid://bdjtjqb6rugmh" path="res://resources/dialogue/groups/random_conversation.tres" id="9_os1th"]
-[ext_resource type="Resource" uid="uid://cm3tybkthodww" path="res://resources/dialogue/groups/game_opponent_gets_captured.tres" id="10_3fa74"]
-[ext_resource type="PackedScene" uid="uid://bdfdbhwdv6lnb" path="res://scenes/npcs/dialogue_sequence_player.tscn" id="10_mrnxq"]
-[ext_resource type="Resource" uid="uid://b31u1blrsob06" path="res://resources/dialogue/groups/game_player_gets_captured.tres" id="11_d0ho7"]
-[ext_resource type="Resource" uid="uid://bn8skq46su8tj" path="res://resources/dialogue/groups/game_opponent_mistake.tres" id="12_wtttm"]
-[ext_resource type="Resource" uid="uid://dqeyo43p0rrqy" path="res://resources/dialogue/groups/game_tutorial_rosette.tres" id="13_dxg0u"]
-[ext_resource type="Resource" uid="uid://bwb2tdg0bmm0v" path="res://resources/dialogue/groups/game_tutorial_opponent_gets_captured.tres" id="14_cvxdk"]
-[ext_resource type="Resource" uid="uid://gj45b7uqg4hx" path="res://resources/dialogue/groups/game_tutorial_player_gets_captured.tres" id="15_n7lqr"]
-[ext_resource type="Resource" uid="uid://ceiyuaheccrhp" path="res://resources/dialogue/groups/game_tutorial_central_rosette.tres" id="16_04h7n"]
-[ext_resource type="Resource" uid="uid://dsba08jo60k0t" path="res://resources/dialogue/groups/game_tutorial_finish.tres" id="17_ns1ih"]
-[ext_resource type="Resource" uid="uid://cqbqaa2me4isu" path="res://resources/dialogue/groups/game_tutorial_explanation.tres" id="18_jhkgr"]
-[ext_resource type="Resource" uid="uid://bgla8xjveol3f" path="res://resources/dialogue/groups/game_player_win.tres" id="19_radjr"]
-[ext_resource type="Resource" uid="uid://cuwsy7lf7fndj" path="res://resources/dialogue/groups/game_opponent_win.tres" id="20_4k08t"]
 
 [node name="Opponent_Guard_Animated" instance=ExtResource("1_jat7h")]
 script = ExtResource("2_pjd45")
@@ -67,24 +47,3 @@ surface_material_override/0 = ExtResource("2_nuktw")
 
 [node name="AnimationPlayer" parent="." index="1"]
 script = ExtResource("4_g1c61")
-
-[node name="Menus_During_Dialogue" parent="." index="2" instance=ExtResource("5_bvx3e")]
-
-[node name="Subtitle_System" parent="." index="3" instance=ExtResource("5_hwe48")]
-
-[node name="DialogueSystem" type="Node" parent="." index="4"]
-script = ExtResource("5_dxxwf")
-_dialogue_groups = Array[Resource("res://scripts/dialogue_system/data/dialogue_group.gd")]([ExtResource("7_7nwkm"), ExtResource("8_huw5v"), ExtResource("9_os1th"), ExtResource("10_3fa74"), ExtResource("11_d0ho7"), ExtResource("12_wtttm"), ExtResource("13_dxg0u"), ExtResource("14_cvxdk"), ExtResource("15_n7lqr"), ExtResource("16_04h7n"), ExtResource("17_ns1ih"), ExtResource("18_jhkgr"), ExtResource("19_radjr"), ExtResource("20_4k08t")])
-
-[node name="DialogueGroupPlayer_Random" type="Node" parent="DialogueSystem" index="0"]
-script = ExtResource("6_fvtk2")
-
-[node name="DialogueGroupPlayer_InOrder" type="Node" parent="DialogueSystem" index="1"]
-script = ExtResource("7_fkgtg")
-_supports_interruptions = true
-
-[node name="DialogueSequencePlayer" parent="DialogueSystem" index="2" instance=ExtResource("10_mrnxq")]
-_use_subtitles = true
-
-[node name="InterruptionSequencePlayer" parent="DialogueSystem" index="3" instance=ExtResource("10_mrnxq")]
-_use_subtitles = true
