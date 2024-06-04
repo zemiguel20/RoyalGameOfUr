@@ -3,14 +3,23 @@ extends Node
 ## Manages the state of the board. It stores in which spot the pieces of each player are.
 ## It allows queries to the state of the board, and also moves the pieces.
 
-@export_subgroup("Player 1 Data")
+@export_group("Player 1 Data")
 @export var _p1_piece: PackedScene
 @export var _p1_start_spots: Array[Spot]
-@export var _p1_track: Array[Spot]
-@export_subgroup("Player 2 Data")
+@export_subgroup("Paths")
+@export var _p1_path_regular: Array[Spot]
+@export var _p1_path_masters: Array[Spot]
+@export var _p1_path_murray: Array[Spot]
+var _p1_track: Array[Spot]
+
+@export_group("Player 2 Data")
 @export var _p2_piece: PackedScene
 @export var _p2_start_spots: Array[Spot]
-@export var _p2_track: Array[Spot]
+@export_subgroup("Paths")
+@export var _p2_path_regular: Array[Spot]
+@export var _p2_path_masters: Array[Spot]
+@export var _p2_path_murray: Array[Spot]
+var _p2_track: Array[Spot]
 
 var _p1_data : PlayerData
 var _p2_data : PlayerData
@@ -25,9 +34,7 @@ func _ready() -> void:
 	assert(_p2_start_spots.size() >= Settings.num_pieces, \
 		"Player 2 does not have enough starting spots for the specified number of pieces")
 	
-	# Init player data
-	_p1_data = PlayerData.new(_p1_start_spots, _p1_track, _p1_piece)
-	_p2_data = PlayerData.new(_p2_start_spots, _p2_track, _p2_piece)
+	_init_player_data()
 	
 	# Position pieces
 	for piece : Piece in _p1_data.piece_spot_dict:
@@ -39,6 +46,22 @@ func _ready() -> void:
 		add_child(piece)
 		var spot = _p2_data.piece_spot_dict[piece] as Spot
 		piece.move(spot.global_position)
+
+
+func _init_player_data():
+	match Settings.board_layout:
+		Settings.BoardLayout.REGULAR:
+			_p1_track = _p1_path_regular.duplicate()
+			_p2_track = _p2_path_regular.duplicate()
+		Settings.BoardLayout.MASTERS:
+			_p1_track = _p1_path_masters.duplicate()
+			_p2_track = _p2_path_masters.duplicate()
+		Settings.BoardLayout.MURRAY:
+			_p1_track = _p1_path_murray.duplicate()
+			_p2_track = _p2_path_murray.duplicate()
+	
+	_p1_data = PlayerData.new(_p1_start_spots, _p1_track, _p1_piece)
+	_p2_data = PlayerData.new(_p2_start_spots, _p2_track, _p2_piece)
 
 
 ## Returns a copy of the array with all start spots from [param player].

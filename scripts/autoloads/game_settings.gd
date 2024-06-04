@@ -3,7 +3,7 @@ extends Node
 enum Ruleset { FINKEL = 0, BLITZ = 1, TOURNAMENT = 2 }
 var selected_ruleset: Ruleset = Ruleset.FINKEL
 
-enum BoardLayout { REGULAR = 0, MASTERS = 1 }
+enum BoardLayout { REGULAR = 0, MASTERS = 1, MURRAY = 2 }
 var board_layout: BoardLayout = BoardLayout.REGULAR
 
 ## Whether landing on a rosette should grant an extra turn.

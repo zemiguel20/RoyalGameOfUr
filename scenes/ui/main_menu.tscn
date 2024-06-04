@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://hcad14f7py6i"]
+[gd_scene load_steps=16 format=3 uid="uid://hcad14f7py6i"]
 
 [ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="1_wtptb"]
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="2_s6jec"]
 [ext_resource type="Script" path="res://scripts/ui/board_layout_struct.gd" id="3_jtoap"]
 [ext_resource type="Texture2D" uid="uid://cdrbwti4e26go" path="res://resources/ui/rule_menu/board-layout-prototype.png" id="3_wfd8e"]
 [ext_resource type="Texture2D" uid="uid://cyfxrhra3nxt0" path="res://resources/ui/rule_menu/board-layout-prototype-2.png" id="4_6tkag"]
+[ext_resource type="Texture2D" uid="uid://1xmv8c0ehvch" path="res://resources/ui/rule_menu/board-layout-prototype-3.png" id="5_e6y4m"]
 
 [sub_resource type="Resource" id="Resource_ex0h4"]
 script = ExtResource("3_jtoap")
@@ -15,6 +16,11 @@ layout_image = ExtResource("3_wfd8e")
 script = ExtResource("3_jtoap")
 layout_enum = 1
 layout_image = ExtResource("4_6tkag")
+
+[sub_resource type="Resource" id="Resource_r3yjx"]
+script = ExtResource("3_jtoap")
+layout_enum = 2
+layout_image = ExtResource("5_e6y4m")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k58kw"]
 
@@ -41,7 +47,7 @@ Button/styles/pressed = SubResource("StyleBoxEmpty_84i4a")
 [node name="Prototype_UI" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_wtptb")
-_board_layout_images = Array[ExtResource("3_jtoap")]([SubResource("Resource_ex0h4"), SubResource("Resource_umoj2")])
+_board_layout_images = Array[ExtResource("3_jtoap")]([SubResource("Resource_ex0h4"), SubResource("Resource_umoj2"), SubResource("Resource_r3yjx")])
 
 [node name="Fade_Panel" type="ColorRect" parent="."]
 anchors_preset = 15
