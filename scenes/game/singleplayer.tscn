@@ -21,6 +21,9 @@ func _on_prototype_ui_fadeout_finished():
 	get_tree().reload_current_scene()
 "
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_et2q0"]
+size = Vector3(16.4658, 1, 7.87207)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k58kw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ttc2"]
@@ -60,14 +63,35 @@ transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 
 [node name="DiceArea_P1" parent="Boardgame/Dice" index="0"]
 transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, 0, 0.1, 0.211021)
 
+[node name="ThrowSpot1" parent="Boardgame/Dice/DiceArea_P1/ThrowingSpots_P1" index="0"]
+throwing_velocity_multiplier = 1.25
+
+[node name="ThrowSpot2" parent="Boardgame/Dice/DiceArea_P1/ThrowingSpots_P1" index="1"]
+throwing_velocity_multiplier = 0.9
+
+[node name="ThrowSpot3" parent="Boardgame/Dice/DiceArea_P1/ThrowingSpots_P1" index="2"]
+throwing_velocity_multiplier = 0.9
+
 [node name="DiceBorders_P1" parent="Boardgame/Dice/DiceArea_P1" index="2"]
 transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, 0, -2, 0)
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/DiceBorders_P1/Wall" index="0"]
+disabled = true
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/DiceBorders_P1/Wall2" index="0"]
+disabled = true
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/DiceBorders_P1/Wall3" index="0"]
+disabled = true
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/DiceBorders_P1/Wall4" index="0"]
+disabled = true
 
 [node name="Floor_Collider_P1" parent="Boardgame/Dice/DiceArea_P1" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.988, 0)
 
 [node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/Floor_Collider_P1" index="0"]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
+transform = Transform3D(0.999998, 0, -1.78814e-06, 0, 1, 0, 1.78814e-06, 0, 0.999998, -3.05176e-05, 0, -1.04349)
 
 [node name="DiceArea_P2" parent="Boardgame/Dice" index="1"]
 transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, -4.76837e-07, -0.0308831, -0.131)
@@ -76,17 +100,32 @@ transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.0
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967, 5.653, 0.71)
 visible = true
 
+[node name="ThrowSpot1" parent="Boardgame/Dice/DiceArea_P2/ThrowingSpots_P2" index="0"]
+throwing_velocity_multiplier = 1.25
+
 [node name="SpawnSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="1"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.253, 2.153, -0.617)
 
 [node name="DiceBorders_P2" parent="Boardgame/Dice/DiceArea_P2" index="2"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 3.153, 0)
 
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2/Wall" index="0"]
+disabled = true
+
 [node name="Wall2" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="1"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 7.62939e-06, 2.979, -3.10864)
 
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2/Wall2" index="0"]
+disabled = true
+
 [node name="Wall3" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="2"]
 transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, -5.24678, 2.979, 0)
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2/Wall3" index="0"]
+disabled = true
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2/Wall4" index="0"]
+disabled = true
 
 [node name="ClickHitbox_P2" parent="Boardgame/Dice/DiceArea_P2" index="3"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 5.668, 0)
@@ -95,7 +134,8 @@ transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 5.668, 0)
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 1.165, 0)
 
 [node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/Floor_Collider_P2" index="0"]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 5.34058e-05, 0, -0.459961)
+shape = SubResource("BoxShape3D_et2q0")
 
 [node name="AIMovePicker" parent="Boardgame" index="3"]
 _best_move_weight = 15

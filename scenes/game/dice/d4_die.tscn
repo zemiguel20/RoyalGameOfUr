@@ -131,13 +131,11 @@ freeze_mode = 1
 continuous_cd = true
 max_contacts_reported = 10
 contact_monitor = true
-linear_damp = 0.3
-angular_damp = 0.3
 script = ExtResource("2_snn4w")
 _throwing_force_magnitude = 0.26
-_mass_on_ground_multiplier = 7.0
-_down_accuracy_threshold = 0.9
-_velocity_threshold = 0.003
+_mass_on_ground_multiplier = 1.4
+_down_accuracy_threshold = 0.85
+_min_roll_time = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
@@ -182,10 +180,8 @@ highlight_material = SubResource("ShaderMaterial_0rurm")
 meshes_to_highlight = [NodePath("../d4_model_scaled2/Final")]
 
 [node name="RollTimeoutTimer" type="Timer" parent="."]
-wait_time = 3.2
+wait_time = 3.5
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
 [connection signal="sleeping_state_changed" from="." to="." method="_on_movement_stopped"]
-[connection signal="timeout" from="RollTimeoutTimer" to="." method="_on_movement_stopped"]

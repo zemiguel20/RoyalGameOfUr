@@ -58,6 +58,9 @@ func _on_roll_phase_started(player: General.Player):
 	if player == _player_id:
 			if not _dice.is_ready:
 				await _dice.dice_transfer_finished
+				
+			_dice.disable_selection()
+				
 			if _are_actions_enabled:
 				roll()
 			else:
@@ -78,7 +81,6 @@ func _on_move_phase_started(player: General.Player, moves: Array[Move]):
 
 ## Function to signal the dice to start rolling, mocking the 'clicking' behaviour of the player.
 func roll():
-	_dice.disable_selection()
 	# Wait for a moment, Ai should not have inhumane reaction speed.
 	await get_tree().create_timer(rolling_delay).timeout
 	
