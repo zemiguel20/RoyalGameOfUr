@@ -2,6 +2,8 @@ class_name AmbientNPCBase
 extends Node3D
 
 @onready var _mesh = $Capsule_MeshInstance3D as MeshInstance3D
+@onready var _audio_player = $AudioStreamPlayer3D as AudioStreamPlayer3D
+@onready var _animation_player = $AnimationPlayer as AnimationPlayer
 var blackboard: Blackboard
 
 var _current_tree: BTNode
@@ -44,6 +46,8 @@ func set_tree(tree: BTNode):
 func _initialize_blackboard():
 	blackboard = Blackboard.new()
 	blackboard.append("Base", self)
+	blackboard.append("Audio Player", _audio_player)
+	blackboard.append("Animation Player", _animation_player)
 
 
 ## Virtual method, used to construct a behaviour tree and set the [param _current_tree] parameter
