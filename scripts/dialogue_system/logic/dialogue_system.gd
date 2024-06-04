@@ -19,7 +19,8 @@ enum Category {
 	GAME_TUTORIAL_OPPONENT_GETS_CAPTURED = 14,
 	GAME_TUTORIAL_CENTRAL_ROSETTE = 15,
 	GAME_TUTORIAL_FINISH = 16,
-	GAME_TUTORIAL_EXPLANATION = 17
+	GAME_TUTORIAL_EXPLANATION = 17,
+	GUARD_COMMENT_1 = 18,
 }
 
 @export var _dialogue_groups: Array[DialogueGroup]
@@ -30,6 +31,7 @@ enum Category {
 @onready var _interruption_sequence_player = $InterruptionSequencePlayer as DialogueSequencePlayer
 
 var _current_dialogue_player: DialogueGroupPlayerBase
+var _animation_player: AnimationPlayer
 
 
 func _ready():
@@ -59,6 +61,12 @@ func play(category: Category) -> bool:
 			return success
 			
 	return false
+	
+	
+func set_animation_player(animation_player: AnimationPlayer):
+	_animation_player = animation_player
+	_dialogue_sequence_player.set_animation_player(animation_player)
+	_interruption_sequence_player.set_animation_player(animation_player)
 
 	
 func is_busy() -> bool:

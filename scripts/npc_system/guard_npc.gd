@@ -37,6 +37,7 @@ func _initialize_blackboard():
 	blackboard.append("Move Speed", _move_speed)
 	blackboard.append("Rotation Speed", _walk_rotation_speed)
 	blackboard.append("Standing Rotation Speed", _standing_rotation_speed)
+	blackboard.append("Dialogue System", _npc_manager.dialogue_system)
 
 
 func _initialize_tree():
@@ -48,8 +49,10 @@ func _initialize_tree():
 	var _moving_sequence_with_watching = SequenceNode.new([
 		MoveAlongPathTask.new(_path, 0.001, _watch_path_progress_ratio),
 		RotateTowardsPointTask.new(_watch_point.global_position),
-		WaitTask.new(5),
-		RotateTowardsPointTask.new(_path.global_position + _path.global_basis.z),
+		WaitTask.new(2),
+		PlayDialogueTask.new(DialogueSystem.Category.GUARD_COMMENT_1, true),
+		WaitTask.new(2),
+		RotateTowardsPointTask.new(-(_path.global_position + _path.global_basis.z)),
 		MoveAlongPathTask.new(_path, _watch_path_progress_ratio, 1),
 		])
 		

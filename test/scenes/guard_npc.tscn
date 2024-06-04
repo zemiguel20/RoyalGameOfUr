@@ -15,6 +15,12 @@ size = Vector3(0.5, 0.2, 0.2)
 [node name="Passenger_NPC" type="Node3D"]
 rotation_edit_mode = 2
 script = ExtResource("1_wafl7")
+_move_speed = 1.0
+_walk_rotation_speed = 0.7
+_standing_rotation_speed = 2.0
+_start_delay = 1
+_max_walk_cooldown = 5
+_watch_game_probability = 0.3
 
 [node name="Temp_Model" parent="." instance=ExtResource("2_v7gqp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.86673, 0)
