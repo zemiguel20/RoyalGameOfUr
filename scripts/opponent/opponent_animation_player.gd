@@ -26,7 +26,6 @@ var _animation_names = [
 ]
 
 
-
 var thinking_animations: Array
 var knockout_reaction_probability: float = 0.5
 var knockout_animations: Array
