@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=6 format=3 uid="uid://bxhte73s8k1w2"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_xgdgq"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_ycmlp"]
+
+[sub_resource type="Resource" id="Resource_lho8x"]
+script = ExtResource("1_xgdgq")
+caption = "Oh, have you heard?"
+caption_cuneiform = ""
+anim_variations = Array[int]([7])
+fixed_duration = 2.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_s7eyw"]
+script = ExtResource("1_xgdgq")
+caption = "Innana is to visit us next week, all the way from Mari!"
+caption_cuneiform = ""
+anim_variations = Array[int]([])
+fixed_duration = 5.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_eoeho"]
+script = ExtResource("1_xgdgq")
+caption = "Maybe if we wake early that day, we can catch a glimpse of her."
+caption_cuneiform = ""
+anim_variations = Array[int]([1])
+fixed_duration = 4.0
+prevents_opponent_action = false
+
+[resource]
+script = ExtResource("1_ycmlp")
+max_repetitions = 1
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_lho8x"), SubResource("Resource_s7eyw"), SubResource("Resource_eoeho")])
+requires_click = false
+weight = 5

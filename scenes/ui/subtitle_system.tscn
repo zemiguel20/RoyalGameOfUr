@@ -1,0 +1,130 @@
+[gd_scene load_steps=8 format=3 uid="uid://b5rqut7t53w0r"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_subtitles.gd" id="1_7mgri"]
+[ext_resource type="Script" path="res://test/temp_dialogue_option_3.gd" id="2_jk8d0"]
+[ext_resource type="FontFile" uid="uid://cv85ekph4c2og" path="res://resources/EasyCuneiform.ttf" id="2_tucj2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tnjk0"]
+line_spacing = -10.0
+font_size = 38
+
+[sub_resource type="Theme" id="Theme_vimjm"]
+default_font = ExtResource("2_tucj2")
+default_font_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bp3ad"]
+font = ExtResource("2_tucj2")
+font_size = 32
+font_color = Color(0.999999, 0.634527, 0.339289, 0.603922)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vyach"]
+font_size = 40
+
+[node name="Subtitle_System" type="CanvasLayer" node_paths=PackedStringArray("subtitle_label", "skip_icon")]
+script = ExtResource("1_7mgri")
+subtitle_label = NodePath("Background_Panel/Subtitles_Label")
+skip_icon = NodePath("Background_Panel/Skip_Icon")
+
+[node name="Background_Panel" type="Panel" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 285.0
+offset_top = -196.0
+offset_right = -292.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Subtitles_Label" type="Label" parent="Background_Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 67.0
+offset_top = 59.0
+offset_right = -67.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = 440
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+label_settings = SubResource("LabelSettings_tnjk0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2
+
+[node name="Cuneiform_Label" type="Label" parent="Background_Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 6.0
+offset_right = -7.0
+offset_bottom = -131.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vimjm")
+theme_type_variation = &"HeaderSmall"
+theme_override_colors/font_color = Color(0.984397, 1, 0.632341, 1)
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+label_settings = SubResource("LabelSettings_bp3ad")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2
+
+[node name="Skip_Icon" type="Label" parent="Background_Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.229337
+anchor_top = 0.275641
+anchor_right = 0.984363
+anchor_bottom = 0.934859
+offset_left = 1629.0
+offset_top = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "🡫"
+label_settings = SubResource("LabelSettings_vyach")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Cursor_Subtitles" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -411.0
+offset_right = 389.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_jk8d0")
+
+[node name="CursorSubtitles_Label" type="Label" parent="Cursor_Subtitles"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = 22.0
+offset_right = -36.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "This is the final option, where a nice subtitle thing is shown"
+label_settings = SubResource("LabelSettings_tnjk0")
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdfdbhwdv6lnb"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_sequence_player.gd" id="1_yxu6e"]
+
+[node name="DialogueSequencePlayer" type="Node"]
+script = ExtResource("1_yxu6e")
+_use_subtitles = null
+_temp_min_entry_length = null
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

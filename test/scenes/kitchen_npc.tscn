@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2osilgwlxj1y"]
+
+[ext_resource type="Script" path="res://scripts/npc_system/kitchen_npc.gd" id="1_uj0e5"]
+[ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard_standing.fbx" id="2_3b6xn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atjh6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xmia1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3jfe0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vioiw"]
+size = Vector3(0.5, 0.2, 0.2)
+
+[node name="Kitchen_NPC" type="Node3D"]
+script = ExtResource("1_uj0e5")
+
+[node name="Temp_Model" parent="." instance=ExtResource("2_3b6xn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.86673, 0)
+
+[node name="Capsule_MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_atjh6")
+mesh = SubResource("CapsuleMesh_xmia1")
+
+[node name="Model" type="Node3D" parent="."]
+visible = false
+
+[node name="Box_MeshInstance" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1.81487, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_atjh6")
+mesh = SubResource("BoxMesh_3jfe0")
+skeleton = NodePath("../../Capsule_MeshInstance3D")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.604279, 0.506375)
+mesh = SubResource("BoxMesh_vioiw")
