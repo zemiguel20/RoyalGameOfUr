@@ -1,0 +1,207 @@
+[gd_scene load_steps=8 format=3 uid="uid://go7gk7ukrym"]
+
+[ext_resource type="Script" path="res://scripts/ui/endscreen.gd" id="1_4mtl7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ktnrs"]
+font_size = 85
+
+[sub_resource type="LabelSettings" id="LabelSettings_n0hub"]
+font_size = 27
+
+[sub_resource type="Gradient" id="Gradient_0vkg6"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.172549, 0.172549, 0.172549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_01c0v"]
+gradient = SubResource("Gradient_0vkg6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jxl5h"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ufto"]
+font_size = 32
+
+[node name="EndScreen" type="ColorRect"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.290196)
+script = ExtResource("1_4mtl7")
+
+[node name="SurveyScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Result_Text" type="Label" parent="SurveyScreen"]
+layout_mode = 2
+offset_left = 400.0
+offset_top = 94.0
+offset_right = 1519.0
+offset_bottom = 210.0
+text = "You have won!"
+label_settings = SubResource("LabelSettings_ktnrs")
+horizontal_alignment = 1
+
+[node name="Survey_Text" type="Label" parent="SurveyScreen"]
+layout_mode = 2
+offset_left = 719.0
+offset_top = 259.0
+offset_right = 1284.0
+offset_bottom = 796.0
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam phasellus vestibulum lorem. Sed vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Tellus id interdum velit laoreet id. "
+label_settings = SubResource("LabelSettings_n0hub")
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SurveyScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -450.0
+offset_top = -325.0
+offset_right = 489.0
+offset_bottom = -211.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="CancelButton" type="TextureButton" parent="SurveyScreen/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+texture_normal = SubResource("GradientTexture1D_01c0v")
+texture_pressed = SubResource("GradientTexture1D_01c0v")
+texture_hover = SubResource("GradientTexture1D_01c0v")
+texture_disabled = SubResource("GradientTexture1D_01c0v")
+texture_focused = SubResource("GradientTexture1D_01c0v")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SurveyScreen/HBoxContainer/CancelButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Skip"
+label_settings = SubResource("LabelSettings_jxl5h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SurveyButton" type="ColorRect" parent="SurveyScreen/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+color = Color(0.172549, 0.172549, 0.172549, 1)
+
+[node name="LinkButton" type="LinkButton" parent="SurveyScreen/HBoxContainer/SurveyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="SurveyScreen/HBoxContainer/SurveyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Survey"
+label_settings = SubResource("LabelSettings_3ufto")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RematchScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="RematchScreen"]
+layout_mode = 2
+offset_left = 662.0
+offset_top = 94.0
+offset_right = 1257.0
+offset_bottom = 210.0
+text = "You have won!"
+label_settings = SubResource("LabelSettings_ktnrs")
+
+[node name="MarginContainer" type="MarginContainer" parent="RematchScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 500
+theme_override_constants/margin_bottom = 450
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RematchScreen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Rematch" type="TextureButton" parent="RematchScreen/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+texture_normal = SubResource("GradientTexture1D_01c0v")
+texture_pressed = SubResource("GradientTexture1D_01c0v")
+texture_hover = SubResource("GradientTexture1D_01c0v")
+texture_disabled = SubResource("GradientTexture1D_01c0v")
+texture_focused = SubResource("GradientTexture1D_01c0v")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="RematchScreen/MarginContainer/HBoxContainer/Rematch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Rematch"
+label_settings = SubResource("LabelSettings_jxl5h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenu" type="TextureButton" parent="RematchScreen/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+texture_normal = SubResource("GradientTexture1D_01c0v")
+texture_pressed = SubResource("GradientTexture1D_01c0v")
+texture_hover = SubResource("GradientTexture1D_01c0v")
+texture_disabled = SubResource("GradientTexture1D_01c0v")
+texture_focused = SubResource("GradientTexture1D_01c0v")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="RematchScreen/MarginContainer/HBoxContainer/MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_jxl5h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="SurveyScreen/HBoxContainer/CancelButton" to="." method="_on_survey_menu_button_pressed"]
+[connection signal="pressed" from="SurveyScreen/HBoxContainer/SurveyButton/LinkButton" to="." method="_on_survey_menu_button_pressed"]
+[connection signal="pressed" from="RematchScreen/MarginContainer/HBoxContainer/Rematch" to="." method="_on_rematch_pressed"]
+[connection signal="pressed" from="RematchScreen/MarginContainer/HBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
