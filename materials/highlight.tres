@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 render_priority = 10
 shader = ExtResource("1_klric")
-shader_parameter/border_width = 0.1
+shader_parameter/border_width = 0.25
 shader_parameter/color = Color(1, 1, 1, 1)
 
 [resource]
