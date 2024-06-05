@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=18 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
 [ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="5_8sxhn"]
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
+[ext_resource type="PackedScene" uid="uid://go7gk7ukrym" path="res://scenes/ui/end_screen.tscn" id="6_i7ffx"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="8_ayaro"]
@@ -161,6 +162,9 @@ _ease_type = 1
 [node name="Prototype_UI" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 script = ExtResource("5_8sxhn")
+
+[node name="EndScreen" parent="Prototype_UI" instance=ExtResource("6_i7ffx")]
+survey_link = "https://www.universiteitleiden.nl/"
 
 [node name="Fade_Panel" type="ColorRect" parent="Prototype_UI"]
 anchors_preset = 15

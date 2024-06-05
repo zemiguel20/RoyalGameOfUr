@@ -5,7 +5,7 @@ extends Node
 signal game_started
 signal roll_phase_started(player: General.Player)
 signal move_phase_started(player: General.Player, moves: Array[Move])
-signal game_ended
+signal game_ended(player: General.Player)
 signal no_moves
 
 @export var _board: Board
@@ -20,6 +20,9 @@ func _ready():
 	p1_move_picker.move_executed.connect(_on_move_executed)
 	p2_move_picker.move_executed.connect(_on_move_executed)
 	dice.roll_finished.connect(_on_roll_ended)
+	
+	await get_tree().create_timer(3).timeout
+	end_game()
 
 
 func start_game():
@@ -31,7 +34,7 @@ func start_game():
 
 func end_game():
 	print("Game Finished: Player %d won" % (current_player + 1))
-	game_ended.emit()
+	game_ended.emit(current_player + 1)
 
 
 func _on_roll_ended(roll_value: int):

@@ -1,6 +1,11 @@
 extends Node
 
+enum Gamemode {
+	Singleplayer = 0,
+	Hotseat = 1
+}
 
+var current_gamemode = Gamemode.Singleplayer
 var can_stack_in_safe_spot: bool = false
 ## The number of pieces that will be used in the board game.
 var num_pieces: int = 7:
