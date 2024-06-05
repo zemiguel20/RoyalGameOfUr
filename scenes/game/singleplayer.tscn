@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=27 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://d3gx24dw7xjud" path="res://scenes/game/systems/move_picker/move_picker_ai.tscn" id="6_feay8"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
-[ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="8_ayaro"]
 [ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker_interactive.tscn" id="8_g3rsf"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
 [ext_resource type="Script" path="res://scripts/game/systems/entity_manager.gd" id="11_sk4yx"]
@@ -16,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/entities/piece_black.tscn" id="13_leg52"]
 [ext_resource type="PackedScene" uid="uid://cvos81xjjq5nl" path="res://scenes/game/entities/d4_die.tscn" id="14_pakai"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
+[ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="16_eu2sq"]
 
 [sub_resource type="GDScript" id="GDScript_lsuqm"]
 script/source = "extends Node
@@ -208,6 +208,8 @@ transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 
 max_degrees_down = 50.0
 max_degrees_left = 32.0
 _board_look_rotation = Vector3(-35, 32, 0)
+
+[node name="NPCSystem" parent="." instance=ExtResource("16_eu2sq")]
 
 [connection signal="play_pressed" from="Prototype_UI" to="Systems/GameController" method="start_game"]
 [connection signal="play_pressed" from="Prototype_UI" to="Custom_Camera" method="_return_to_board"]
