@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4afu661si3d1"]
+
+[sub_resource type="GDScript" id="GDScript_xduif"]
+resource_name = "CompositeNodesTest"
+script/source = "extends Node
+
+var tree: BTNode
+
+func _ready():
+	tree = _random_test()
+	
+	tree.on_start()
+	
+
+func _process(delta):
+	var status = tree.on_process(delta)
+	# Reset tree if it is done
+	if status != BTNode.Status.Running:
+		tree.on_end()
+		tree.on_start()
+	
+	
+# Seems to work as expected
+func _get_sequence_tree():
+	return SequenceNode.new([
+		DebugTask.new(\"Seqeunce Start -> Sequence will continue\"),
+		WaitTask.new(0.6, self),
+		DebugTask.new(\"Seqeunce Ended\"),
+	])
+
+
+# Seems to work as expected
+func _get_selector_tree():
+	# Since the first task will always be successfull, the second task should not be ticked.
+	return SelectorNode.new([
+		DebugTask.new(\"Selector Start -> Loop, since node is true\"),
+		DebugTask.new(\"Selector Continued -> THIS SHOULD NOT APPEAR!\"),
+	])
+
+
+# Seems to work as expected
+func _runonce_test_tree():
+	return SequenceNode.new([
+		RunOnceNode.new(DebugTask.new(\"Seqeunce Start -> This message should only be seen once\")),
+		WaitTask.new(0.6, self),
+		DebugTask.new(\"Seqeunce Ended\"),
+	])
+	
+	
+# Seems to work as expected	
+func _force_failed_test():
+	return SelectorNode.new([
+		ForceResultNode.new(
+			DebugTask.new(\"Selector 1 -> This task will fail\"), 
+			BTNode.Status.Failed),
+		ForceResultNode.new(
+			DebugTask.new(\"Selector 2 -> We should therefore also see this message\"),
+			BTNode.Status.Succeeded),
+		DebugTask.new(\"Selector 3 -> This message should not be seen!\"),
+	])
+	
+
+# Seems to work as expected		
+func _invert_node_test():
+	return SequenceNode.new([
+		DebugTask.new(\"Seqeunce 1 -> Sequence will continue\"),
+		InvertNode.new(DebugTask.new(\"Sequence 2 -> This will fail\")),
+		DebugTask.new(\"Seqeunce Ended -> This should not be seen!\")
+	])
+	
+
+
+func _random_test():
+	return SequenceNode.new([
+		DebugTask.new(\"Sequence Start\"),
+		RandomNode.new(
+			ForceResultNode.new(
+				DebugTask.new(\"Random surprise\"), 
+				BTNode.Status.Failed),
+			0.5),
+		DebugTask.new(\"Sequence End -> Will not show up when the random thing is printed!\"),		
+	]) 
+"
+
+[node name="BtCompositeNodesTest" type="Node"]
+script = SubResource("GDScript_xduif")

@@ -15,10 +15,11 @@ albedo_color = Color(0.486275, 0.462745, 1, 0.784314)
 script = ExtResource("1_0q1h1")
 
 [node name="Gizmo" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.332201, 0)
 shape = SubResource("ConvexPolygonShape3D_2g03a")
 disabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.407113, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0749115, 0)
 material_override = SubResource("StandardMaterial3D_23jpe")
 mesh = SubResource("SphereMesh_c0u6h")

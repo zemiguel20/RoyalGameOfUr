@@ -4,5 +4,7 @@
 
 [node name="DialogueSequencePlayer" type="Node"]
 script = ExtResource("1_yxu6e")
+_use_subtitles = null
+_temp_min_entry_length = null
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

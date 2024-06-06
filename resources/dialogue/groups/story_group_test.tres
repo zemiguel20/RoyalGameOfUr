@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://blhv56k0dgjw6"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_cwsln"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_cwsln"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_106ab"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="3_h4ujd"]
 

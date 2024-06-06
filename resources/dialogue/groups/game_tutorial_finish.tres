@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://28b3g27e5c4l"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://dsba08jo60k0t"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_2gxhp"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_ngoas"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_stmch"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_hti26"]
 
 [sub_resource type="Resource" id="Resource_0ve0n"]
-script = ExtResource("1_2gxhp")
+script = ExtResource("1_stmch")
 caption = "When a piece is almost at the end, you need to roll the exact amount of steps it has left."
+caption_cuneiform = ""
 anim_variations = Array[int]([5])
 fixed_duration = 5.0
 prevents_opponent_action = false
@@ -14,7 +15,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_i6ft5"]
 script = ExtResource("2_hti26")
 max_repetitions = 1
-dialogue_entries = Array[ExtResource("1_2gxhp")]([SubResource("Resource_0ve0n")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_0ve0n")])
 requires_click = false
 weight = 5
 
