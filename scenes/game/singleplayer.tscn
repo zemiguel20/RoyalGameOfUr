@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=19 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="8_ayaro"]
+[ext_resource type="PackedScene" uid="uid://cjv323qxtgq0i" path="res://models/Pieces/Black_Piece.tscn" id="9_hvvrw"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
+[ext_resource type="PackedScene" uid="uid://5mrn4v05sg8" path="res://models/Pieces/White Piece.tscn" id="10_mffks"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -56,6 +58,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Board" parent="Boardgame" index="1"]
 transform = Transform3D(0.019607, 0, -0.0313778, 0, 0.037, 0, 0.0313778, 0, 0.019607, 4.4739, -0.207527, 6.36155)
+
+[node name="P1RosetteTile1" parent="Boardgame/Board/Tiles" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01044, 0, 3.48987)
 
 [node name="Dice" parent="Boardgame" index="2"]
 transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 4.44211, -0.213149, 6.346)
@@ -216,6 +221,12 @@ transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.
 
 [node name="NPCSystem" parent="." instance=ExtResource("8_ayaro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163454, 0.021807, -0.262183)
+
+[node name="Root Scene2" parent="." instance=ExtResource("9_hvvrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.38372, -0.190117, 6.46108)
+
+[node name="Root Scene" parent="." instance=ExtResource("10_mffks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.41761, -0.189321, 6.44286)
 
 [connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
