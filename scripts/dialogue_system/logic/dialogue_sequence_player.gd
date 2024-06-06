@@ -12,10 +12,10 @@ signal on_resume_opponent_action
 ## NOTE: Since we do not have audio for the playtest, we have a constant waiting time.
 @export var _temp_min_entry_length: float = 5.0
 
-## Giving these through a setup function might be nice.
 @onready var _audio_player = $AudioStreamPlayer3D as AudioStreamPlayer3D
 @onready var _animation_player =  $"../../AnimationPlayer" as OpponentAnimationPlayer
 @onready var _subtitle_displayer = $"../../Subtitle_System" as DialogueSubtitles
+@onready var _dialogue_menu_controller = $"../../Menus_During_Dialogue" as DialogueMenuController
 
 var is_playing: bool
 var _current_sequence: DialogueSequence
@@ -31,9 +31,7 @@ func play(sequence: DialogueSequence):
 	await on_dialogue_finished
 
 
-## TODO: Check this description
-## Used for when the dialogue was interrupted after one of the dialogue entries.
-## Will continue playing the next entry.
+## TODO: Solve with a blackboard.
 func continue_dialogue():
 	_current_index += 1
 	if _current_index >= _current_sequence.dialogue_entries.size():
@@ -41,14 +39,25 @@ func continue_dialogue():
 		return
 		
 	is_playing = true
-	var _current_entry = _current_sequence.dialogue_entries[_current_index] as DialogueSingleEntry
+	var _current_entry = _current_sequence.dialogue_entries[_current_index]
+	
+	## Handle dialogue events
+	if _current_entry is DialogueBundle:
+		await play_dialogue_bundle(_current_entry) 
+	else:
+		await _current_entry.execute(_dialogue_menu_controller)
+		continue_dialogue()
+	
+		
+func play_dialogue_bundle(_current_entry):
+	_current_entry = _current_entry as DialogueBundle
 	
 	# Play all the effects
 	if _current_entry.audio != null:
 		_audio_player.stream = _current_entry.audio
 		_audio_player.play()
 	if _use_subtitles and _current_entry.caption != null:
-		_subtitle_displayer.display_subtitle(_current_entry.caption, _current_sequence.requires_click)
+		_subtitle_displayer.display_subtitle(_current_entry, _current_sequence.requires_click)
 	## TODO: Change, maybe we should give the whole list, and let the whole list play in a random order, 
 	## but dont start a new animation if the 
 	if _current_entry.anim_variations != null and _current_entry.anim_variations.size() > 0:	
@@ -64,11 +73,6 @@ func continue_dialogue():
 		
 		await get_tree().create_timer(maxf(entry_length, 1)).timeout
 		continue_dialogue()
-		
-	#if _is_interrupted:
-		#handle_interruption()
-	#else:
-		#continue_dialogue()
 		
 		
 func skip():
@@ -96,7 +100,7 @@ func finish_sequence():
 		on_resume_opponent_action.emit()
 
 
-func _handle_opponent_action_prevention(entry: DialogueSingleEntry):
+func _handle_opponent_action_prevention(entry: DialogueBundle):
 	if entry.prevents_opponent_action and !_already_prevents_opponent_action:
 		_already_prevents_opponent_action = true
 		on_prevent_opponent_action.emit()

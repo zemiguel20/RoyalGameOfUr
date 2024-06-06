@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=16 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
+[ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="8_ayaro"]
 [ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="9_m0jtg"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
@@ -19,6 +20,9 @@ func _input(event):
 func _on_prototype_ui_fadeout_finished():
 	get_tree().reload_current_scene()
 "
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_et2q0"]
+size = Vector3(16.4658, 1, 7.87207)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k58kw"]
 
@@ -59,14 +63,35 @@ transform = Transform3D(0.848049, 0, 0.529918, 0, 1, 0, -0.529918, 0, 0.848049, 
 [node name="DiceArea_P1" parent="Boardgame/Dice" index="0"]
 transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, 0, 0.1, 0.211021)
 
+[node name="ThrowSpot1" parent="Boardgame/Dice/DiceArea_P1/ThrowingSpots_P1" index="0"]
+throwing_velocity_multiplier = 1.25
+
+[node name="ThrowSpot2" parent="Boardgame/Dice/DiceArea_P1/ThrowingSpots_P1" index="1"]
+throwing_velocity_multiplier = 0.9
+
+[node name="ThrowSpot3" parent="Boardgame/Dice/DiceArea_P1/ThrowingSpots_P1" index="2"]
+throwing_velocity_multiplier = 0.9
+
 [node name="DiceBorders_P1" parent="Boardgame/Dice/DiceArea_P1" index="2"]
 transform = Transform3D(1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, 0, -2, 0)
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/DiceBorders_P1/Wall" index="0"]
+disabled = true
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/DiceBorders_P1/Wall2" index="0"]
+disabled = true
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/DiceBorders_P1/Wall3" index="0"]
+disabled = true
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/DiceBorders_P1/Wall4" index="0"]
+disabled = true
 
 [node name="Floor_Collider_P1" parent="Boardgame/Dice/DiceArea_P1" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.988, 0)
 
 [node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P1/Floor_Collider_P1" index="0"]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
+transform = Transform3D(0.999998, 0, -1.78814e-06, 0, 1, 0, 1.78814e-06, 0, 0.999998, -3.05176e-05, 0, -1.04349)
 
 [node name="DiceArea_P2" parent="Boardgame/Dice" index="1"]
 transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.026, -4.76837e-07, -0.0308831, -0.131)
@@ -75,17 +100,32 @@ transform = Transform3D(0.026, 0, 3.72529e-09, 0, 0.026, 0, -3.72529e-09, 0, 0.0
 transform = Transform3D(-5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, -3.967, 5.653, 0.71)
 visible = true
 
+[node name="ThrowSpot1" parent="Boardgame/Dice/DiceArea_P2/ThrowingSpots_P2" index="0"]
+throwing_velocity_multiplier = 1.25
+
 [node name="SpawnSpots_P2" parent="Boardgame/Dice/DiceArea_P2" index="1"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.253, 2.153, -0.617)
 
 [node name="DiceBorders_P2" parent="Boardgame/Dice/DiceArea_P2" index="2"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 3.153, 0)
 
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2/Wall" index="0"]
+disabled = true
+
 [node name="Wall2" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="1"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 7.62939e-06, 2.979, -3.10864)
 
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2/Wall2" index="0"]
+disabled = true
+
 [node name="Wall3" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2" index="2"]
 transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, -5.24678, 2.979, 0)
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2/Wall3" index="0"]
+disabled = true
+
+[node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/DiceBorders_P2/Wall4" index="0"]
+disabled = true
 
 [node name="ClickHitbox_P2" parent="Boardgame/Dice/DiceArea_P2" index="3"]
 transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 5.668, 0)
@@ -94,7 +134,8 @@ transform = Transform3D(1.499, 0, 0, 0, 1.499, 0, 0, 0, 1.499, 0, 5.668, 0)
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 1.165, 0)
 
 [node name="CollisionShape3D" parent="Boardgame/Dice/DiceArea_P2/Floor_Collider_P2" index="0"]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, -0.46)
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 5.34058e-05, 0, -0.459961)
+shape = SubResource("BoxShape3D_et2q0")
 
 [node name="AIMovePicker" parent="Boardgame" index="3"]
 _best_move_weight = 15
@@ -113,7 +154,7 @@ transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 
 max_degrees_down = 50.0
 max_degrees_left = 45.0
 max_degrees_right = 45.0
-_board_look_rotation = Vector3(-35, 32, 0)
+_board_look_rotation = Vector3(-40, 32, 0)
 _trans_type = 1
 _ease_type = 1
 
@@ -172,6 +213,9 @@ script = ExtResource("6_3dit1")
 
 [node name="Opponent_Guard_Animated" parent="." instance=ExtResource("7_tegfk")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
+
+[node name="NPCSystem" parent="." instance=ExtResource("8_ayaro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163454, 0.021807, -0.262183)
 
 [connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]

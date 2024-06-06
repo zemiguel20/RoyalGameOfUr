@@ -167,7 +167,6 @@ func _initialize_dice() -> void:
 		
 		instance.roll_finished.connect(_on_die_finished_rolling)
 		instance.global_transform.origin = available_spots[_i].global_position
-		instance.global_basis = available_spots[_i].global_basis
 	
 	_current_click_hitbox = _click_hitbox
 	_click_hitbox.input_event.connect(_on_die_input_event)
@@ -200,7 +199,6 @@ func _anim_move_dice_to_position(move_vector: Vector3, duration: float):
 		var high_point = die.global_position.y + _arc_height * global_basis.get_scale().y
 		var tween_y = create_tween().set_trans(Tween.TRANS_CUBIC)
 		tween_y.tween_property(die, "global_position:y", high_point, duration/2).set_ease(Tween.EASE_OUT)
-		## NOTE Tbh no clue why here I should suddenly do - move_vector instead of plus, but ill take it...
 		tween_y.tween_property(die, "global_position:y", die.global_position.y + move_vector.y * _dice_area_p1.global_basis.get_scale().y, duration/2).set_ease(Tween.EASE_IN)
 	
 	

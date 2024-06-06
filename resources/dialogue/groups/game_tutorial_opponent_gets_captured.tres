@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=7 format=3 uid="uid://bdab84wtungjw"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=7 format=3 uid="uid://bwb2tdg0bmm0v"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_h3ehk"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_h3ehk"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_o03fh"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_gs0te"]
 
 [sub_resource type="Resource" id="Resource_smur6"]
 script = ExtResource("1_h3ehk")
 caption = "When you capture one of my pieces, my piece returns to the start."
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 5.0
 prevents_opponent_action = false
@@ -14,6 +15,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_wukhb"]
 script = ExtResource("1_h3ehk")
 caption = "Of course, this works the other way around, as well."
+caption_cuneiform = ""
 anim_variations = Array[int]([5])
 fixed_duration = 3.0
 prevents_opponent_action = false
@@ -21,7 +23,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_w3qad"]
 script = ExtResource("2_gs0te")
 max_repetitions = 1
-dialogue_entries = Array[ExtResource("1_h3ehk")]([SubResource("Resource_smur6"), SubResource("Resource_wukhb")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_smur6"), SubResource("Resource_wukhb")])
 requires_click = false
 weight = 5
 
