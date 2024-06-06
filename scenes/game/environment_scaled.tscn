@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cgkfm7n305bgj"]
+[gd_scene load_steps=45 format=3 uid="uid://cgkfm7n305bgj"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_3nkie"]
 [ext_resource type="PackedScene" uid="uid://mowvg73f88gq" path="res://models/pots/bowl_1.fbx" id="2_7xpms"]
@@ -28,6 +28,19 @@
 [ext_resource type="PackedScene" uid="uid://bpu6ui4uu46qi" path="res://models/Beam2.fbx" id="25_vg6fc"]
 [ext_resource type="PackedScene" uid="uid://btuu86npkmh8b" path="res://models/basket_1.fbx" id="26_uwooy"]
 [ext_resource type="PackedScene" uid="uid://tpsijve8x55u" path="res://models/basket_2.fbx" id="27_jww3d"]
+[ext_resource type="PackedScene" uid="uid://8r1qy1fu02a5" path="res://models/pots/Pot4Lid.fbx" id="29_5sf2p"]
+[ext_resource type="ArrayMesh" uid="uid://cawrfj1r4m2kn" path="res://textures/lids/Pot4Lid.obj" id="29_bgyix"]
+[ext_resource type="Material" uid="uid://dcjhsxpvfpb8y" path="res://materials/Cloth_Blue.tres" id="29_kscmd"]
+[ext_resource type="ArrayMesh" uid="uid://4cfsnhs1eku2" path="res://textures/lids/Pot5Lid.obj" id="30_bv7r3"]
+[ext_resource type="Material" uid="uid://brkpw80bc5gf1" path="res://materials/Cloth_Yellow.tres" id="31_gs6us"]
+[ext_resource type="ArrayMesh" uid="uid://cy2ra3vaq1omo" path="res://textures/lids/Pot6Lid.obj" id="31_tci1r"]
+[ext_resource type="ArrayMesh" uid="uid://dfaehhix3i25x" path="res://textures/lids/Pot8Lid.obj" id="32_cmsr6"]
+[ext_resource type="Material" uid="uid://n17xiew50a2l" path="res://materials/Cloth_Green.tres" id="33_1nhet"]
+[ext_resource type="Material" uid="uid://l1ermpe7rsjw" path="res://materials/Cloth_Red.tres" id="33_igrux"]
+[ext_resource type="PackedScene" uid="uid://bfqmjsl4qb4v3" path="res://models/mat.fbx" id="38_b67ms"]
+[ext_resource type="PackedScene" uid="uid://dknuwbh6rgh5h" path="res://models/fruit/assyrian_plum/topped_plum_prefab.tscn" id="39_d4073"]
+[ext_resource type="PackedScene" uid="uid://ca5p2q6x11bcd" path="res://models/fruit/assyrian_plum/full_plum_prefab.tscn" id="40_3vphn"]
+[ext_resource type="PackedScene" uid="uid://kmqj2qdc6bot" path="res://models/fruit/assyrian_plum/half Plum_prefab.tscn" id="41_2lal6"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]
 script/source = "extends Node
@@ -53,7 +66,7 @@ script = SubResource("GDScript_fbn4f")
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="DirectionalLight3D" parent="Environment" index="1"]
-transform = Transform3D(0.233657, -0.0476866, 0.0750356, -0.0816059, -0.0313021, 0.234224, -0.0352822, -0.243405, -0.0448218, 0.636619, 0.759146, 1.46667)
+transform = Transform3D(0.233657, -0.0476866, 0.0750356, -0.0816059, -0.0313022, 0.234224, -0.0352822, -0.243405, -0.0448219, 0.636619, 0.759146, 1.46667)
 light_color = Color(0.890196, 0.890196, 0.878431, 1)
 shadow_bias = 0.1
 shadow_normal_bias = 0.0
@@ -125,6 +138,12 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 [node name="bowl_1" parent="Environment/Pots" instance=ExtResource("2_7xpms")]
 transform = Transform3D(14.9829, 0, 0, 0, 14.9829, 0, 0, 0, 14.9829, 4.1069, -0.235306, 6.5048)
 
+[node name="bowl_10" parent="Environment/Pots" instance=ExtResource("2_7xpms")]
+transform = Transform3D(14.9829, 0, 0, 0, 14.9829, 0, 0, 0, 14.9829, 3.23892, -0.711666, 2.46284)
+
+[node name="bowl_11" parent="Environment/Pots" instance=ExtResource("2_7xpms")]
+transform = Transform3D(14.9829, 0, 0, 0, 14.9829, 0, 0, 0, 14.9829, 3.3056, -0.711666, 2.70159)
+
 [node name="bowl_4" parent="Environment/Pots" instance=ExtResource("2_7xpms")]
 transform = Transform3D(14.9829, 0, 0, 0, 14.9829, 0, 0, 0, 14.9829, 4.81361, -0.235306, 6.34625)
 
@@ -153,7 +172,7 @@ transform = Transform3D(-9.63769, -3.2064, 19.3324, -2.19058, 21.5851, 2.48797, 
 transform = Transform3D(2.16157, 0.693316, 21.7199, -5.86227, 21.0364, -0.0880872, -20.9253, -5.8218, 2.26837, 5.73963, -0.666669, 2.56851)
 
 [node name="pot_3" parent="Environment/Pots" instance=ExtResource("8_hmotn")]
-transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 4.84284, -0.695386, 5.19222)
+transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 5.03613, -0.514632, 5.60318)
 
 [node name="pot_28" parent="Environment/Pots" instance=ExtResource("8_hmotn")]
 transform = Transform3D(0.466107, -25.7502, -1.01505, -25.7702, -0.466469, 0, -0.0183705, 1.01488, -25.7544, -6.01039, -0.0222402, 2.89642)
@@ -514,8 +533,8 @@ size = Vector3(13.76, 20, 20)
 enable_shadows = true
 
 [node name="ReflectionProbe2" type="ReflectionProbe" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1094, 0.931943, 3.83636)
-size = Vector3(7.025, 20, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48396, 1.31736, 3.83636)
+size = Vector3(5.72606, 20, 20)
 enable_shadows = true
 
 [node name="LightmapProbe" type="LightmapProbe" parent="."]
@@ -608,6 +627,9 @@ omni_range = 7.61
 [node name="Root Scene" parent="." instance=ExtResource("26_uwooy")]
 transform = Transform3D(2.5207, 0, 0, 0, 2.5207, 0, 0, 0, 2.5207, 1.33493, -0.104332, 2.11521)
 
+[node name="Root Scene6" parent="." instance=ExtResource("26_uwooy")]
+transform = Transform3D(2.5207, 0, 0, 0, 2.5207, 0, 0, 0, 2.5207, 2.93612, -0.621222, 2.42521)
+
 [node name="Root Scene3" parent="." instance=ExtResource("26_uwooy")]
 transform = Transform3D(2.49531, 0, -0.356824, 0, 2.5207, 0, 0.356824, 0, 2.49531, 0.719563, 0.351971, 6.07903)
 
@@ -616,5 +638,109 @@ transform = Transform3D(2.1029, 0, 1.38987, 0, 2.5207, 0, -1.38987, 0, 2.1029, 1
 
 [node name="Root Scene4" parent="." instance=ExtResource("27_jww3d")]
 transform = Transform3D(3.17649, 0, 0.687767, 0, 3.25009, 0, -0.687767, 0, 3.17649, 2.45116, -0.593778, 6.12125)
+
+[node name="Pot4Lid" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.140877, 0, 0, 0, 0.140877, 0, 0, 0, 0.140877, 3.15901, -0.620326, 6.29542)
+material_override = ExtResource("29_kscmd")
+mesh = ExtResource("29_bgyix")
+
+[node name="Pot4Lid2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 5.97547, -0.686713, 2.86474)
+material_override = ExtResource("31_gs6us")
+mesh = ExtResource("29_bgyix")
+
+[node name="Pot5Lid" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0323175, 0, -0.157746, 0, 0.161022, 0, 0.157746, 0, -0.0323175, 2.81719, -0.727835, 6.2163)
+material_override = ExtResource("31_gs6us")
+mesh = ExtResource("30_bv7r3")
+
+[node name="Pot5Lid2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.21171, 0, 0, 0, 0.21171, 0, 0, 0, 0.21171, -1.28955, -0.746265, 1.03417)
+material_override = ExtResource("29_kscmd")
+mesh = ExtResource("30_bv7r3")
+
+[node name="Pot6Lid" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.148488, 0, 0.0588024, 0, 0.192528, 0, -0.0588024, 0, 0.148488, 3.20356, -0.772894, 6.6387)
+material_override = ExtResource("33_1nhet")
+mesh = ExtResource("31_tci1r")
+
+[node name="Pot6Lid3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.44204, 0, 0.175052, 0, 0.573146, 0, -0.175052, 0, 0.44204, 3.35342, -2.14455, 7.44492)
+material_override = ExtResource("33_igrux")
+mesh = ExtResource("31_tci1r")
+
+[node name="Pot6Lid2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0727803, 0, -0.186287, 0, 0.2, 0, 0.186287, 0, 0.0727803, 2.69145, -0.699151, 0.962199)
+material_override = ExtResource("33_1nhet")
+mesh = ExtResource("31_tci1r")
+
+[node name="Pot8Lid" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.208405, 0, 0, 0, 0.208405, 0, 0, 0, 0.208405, 2.48121, -0.734215, 1.69205)
+material_override = ExtResource("33_igrux")
+mesh = ExtResource("32_cmsr6")
+
+[node name="Pot8Lid2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.134294, 0, 0.0948362, 0, 0.164405, 0, -0.0948362, 0, -0.134294, 5.23404, -0.581353, 5.64913)
+material_override = ExtResource("29_kscmd")
+mesh = ExtResource("32_cmsr6")
+
+[node name="Pot8Lid3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.134437, 0, -0.0251834, 0, 0.136775, 0, 0.0251834, 0, 0.134437, 5.04625, -0.732607, 5.606)
+material_override = ExtResource("33_1nhet")
+mesh = ExtResource("32_cmsr6")
+
+[node name="Root Scene5" parent="." instance=ExtResource("29_5sf2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.98725, 2.9916, 4.57158)
+
+[node name="mat" parent="." instance=ExtResource("38_b67ms")]
+transform = Transform3D(4.8148, 0, 1.2425, 0, 4.97253, 0, -1.2425, 0, 4.8148, 4.17275, -0.700879, 2.53482)
+
+[node name="mat2" parent="." instance=ExtResource("38_b67ms")]
+transform = Transform3D(5.11026, 0, -1.76969, 0, 5.40801, 0, 1.76969, 0, 5.11026, 3.01203, -0.700879, 2.8217)
+
+[node name="Root Scene7" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(1.24851, -0.281946, 0.53906, 0.423527, 1.28628, -0.308159, -0.436696, 0.441411, 1.2423, 2.87065, -0.582953, 2.5369)
+
+[node name="Root Scene8" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(1.2869, 0.518377, 0.0635, -0.474347, 1.23083, -0.434621, -0.218497, 0.381033, 1.31754, 2.93499, -0.568084, 2.56872)
+
+[node name="Root Scene9" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(1.28919, -0.0336436, 0.515464, -0.0343394, 1.37723, 0.175774, -0.515418, -0.175909, 1.2776, 2.97517, -0.584119, 2.52495)
+
+[node name="Root Scene10" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(1.28919, -0.0336436, 0.515464, -0.0343394, 1.37723, 0.175774, -0.515418, -0.175909, 1.2776, 2.92598, -0.555052, 2.50077)
+
+[node name="Root Scene14" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(1.20928, 0.486901, 0.478973, -0.37351, 1.28686, -0.365143, -0.57182, 0.189122, 1.25144, 2.96236, -0.568012, 2.46921)
+
+[node name="Root Scene15" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(0.812382, 1.12621, 0.0229519, -1.1118, 0.806199, -0.206888, -0.18109, 0.102643, 1.37314, 3.02904, -0.585248, 2.49429)
+
+[node name="Root Scene16" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(0.996966, 0.653338, 0.71278, -0.788559, 1.14186, 0.0563211, -0.559536, -0.445137, 1.19064, 3.04838, -0.626298, 2.45272)
+
+[node name="Root Scene17" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(0.996966, 0.653338, 0.71278, -0.788559, 1.14186, 0.0563211, -0.559536, -0.445137, 1.19064, 3.01819, -0.579354, 2.42562)
+
+[node name="Root Scene18" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(0.987483, -0.137499, 0.966861, 0.837791, 0.825827, -0.738218, -0.501829, 1.10813, 0.670121, 2.93045, -0.640267, 2.55446)
+
+[node name="Root Scene19" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(1.12973, 0.585818, 0.55621, -0.0233786, 0.97958, -0.984239, -0.807469, 0.791258, 0.806692, 3.00151, -0.62889, 2.56837)
+
+[node name="Root Scene20" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(1.00979, -0.136351, 0.943712, 0.49365, 1.25076, -0.347498, -0.815777, 0.588093, 0.957864, 3.02323, -0.613072, 2.513)
+
+[node name="Root Scene21" parent="." instance=ExtResource("39_d4073")]
+transform = Transform3D(1.00979, -0.136351, 0.943712, 0.49365, 1.25076, -0.347498, -0.815777, 0.588093, 0.957864, 2.96777, -0.587366, 2.52359)
+
+[node name="Root Scene11" parent="." instance=ExtResource("40_3vphn")]
+transform = Transform3D(0.0324029, 0.0029985, -0.00426171, -0.00419866, 0.0309206, -0.0101682, 0.00308615, 0.0105844, 0.030912, 3.20836, -0.668441, 2.43562)
+
+[node name="Root Scene12" parent="." instance=ExtResource("40_3vphn")]
+transform = Transform3D(0.00109474, -0.0101125, -0.0312033, -0.00419866, 0.0309206, -0.0101682, 0.0325312, 0.0043311, -0.00026231, 3.2435, -0.668441, 2.50002)
+
+[node name="Root Scene13" parent="." instance=ExtResource("41_2lal6")]
+transform = Transform3D(0.308123, 0.749243, -0.586256, -0.233867, 0.656981, 0.716716, 0.922153, -0.0837306, 0.377654, 3.26757, -0.666435, 2.44906)
 
 [editable path="Environment"]
