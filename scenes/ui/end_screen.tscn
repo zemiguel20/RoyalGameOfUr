@@ -28,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.290196)
+color = Color(0, 0, 0, 0.552941)
 script = ExtResource("1_4mtl7")
 
 [node name="SurveyScreen" type="Control" parent="."]

@@ -14,10 +14,12 @@ func _process(delta):
 	_delta = delta
 
 
-func _on_game_ended():
+func _on_game_ended(_player):
 	visible = true
-	await _fadeout(_fading_duration)
-	fadeout_finished.emit()
+	
+	## TODO: Fadeout should be triggered by Endscreen now.
+	#await _fadeout(_fading_duration)
+	#fadeout_finished.emit()
 	
 
 func _fadeout(duration: float):

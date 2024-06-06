@@ -163,9 +163,6 @@ _ease_type = 1
 follow_viewport_enabled = true
 script = ExtResource("5_8sxhn")
 
-[node name="EndScreen" parent="Prototype_UI" instance=ExtResource("6_i7ffx")]
-survey_link = "https://www.universiteitleiden.nl/"
-
 [node name="Fade_Panel" type="ColorRect" parent="Prototype_UI"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -173,6 +170,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
+
+[node name="EndScreen" parent="Prototype_UI" instance=ExtResource("6_i7ffx")]
 
 [node name="Main Menu" type="Control" parent="Prototype_UI"]
 layout_mode = 3
@@ -222,6 +221,7 @@ transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163454, 0.021807, -0.262183)
 
 [connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI" method="_on_game_ended"]
+[connection signal="game_ended" from="Boardgame/GameStateController" to="Prototype_UI/EndScreen" method="_on_game_ended"]
 [connection signal="no_moves" from="Boardgame/GameStateController" to="Boardgame/Dice/DiceArea_P1/Label3D_Outcome_P1" method="_on_no_moves"]
 [connection signal="roll_phase_started" from="Boardgame/GameStateController" to="Boardgame/AIRoller" method="_on_roll_phase_started"]
 [connection signal="on_play_dialogue" from="Boardgame/AIMovePicker" to="Opponent_Guard_Animated" method="play_dialog"]
