@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cx3mru75mqba8"
-path.bptc="res://.godot/imported/defaultmaterial_base_color.png-a787211f4452dcdb7854f02ec51e847d.bptc.ctex"
+path.bptc="res://.godot/imported/DefaultMaterial_Base_color.png-cc5f1d9a59b2917f0d8781966a9a5432.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/dice/black/defaultmaterial_base_color.png"
-dest_files=["res://.godot/imported/defaultmaterial_base_color.png-a787211f4452dcdb7854f02ec51e847d.bptc.ctex"]
+source_file="res://materials/Dice/Black/DefaultMaterial_Base_color.png"
+dest_files=["res://.godot/imported/DefaultMaterial_Base_color.png-cc5f1d9a59b2917f0d8781966a9a5432.bptc.ctex"]
 
 [params]
 

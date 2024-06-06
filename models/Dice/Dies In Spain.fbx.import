@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://celd7lcvl0fyj"
-path="res://.godot/imported/Dies In Spain.fbx-9ace0e70e7616939f7e1abaacad40dfc.scn"
+path="res://.godot/imported/Dies In Spain.fbx-5fb61dff99a8ea6dc1b2664c67d663c0.scn"
 
 [deps]
 
-source_file="res://models/dice/Dies In Spain.fbx"
-dest_files=["res://.godot/imported/Dies In Spain.fbx-9ace0e70e7616939f7e1abaacad40dfc.scn"]
+source_file="res://models/Dice/Dies In Spain.fbx"
+dest_files=["res://.godot/imported/Dies In Spain.fbx-5fb61dff99a8ea6dc1b2664c67d663c0.scn"]
 
 [params]
 

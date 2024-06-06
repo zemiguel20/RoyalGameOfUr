@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://k2m5qsecstmp"]
+
+[ext_resource type="Texture2D" uid="uid://ci3o83fi8rdcq" path="res://textures/mat/mat_Mat_BaseColor.png" id="1_mb43h"]
+[ext_resource type="Texture2D" uid="uid://dwpry7dttstmm" path="res://textures/mat/mat_Mat_Normal.png" id="2_tg4al"]
+
+[resource]
+albedo_color = Color(0.934623, 0.818608, 0.73676, 1)
+albedo_texture = ExtResource("1_mb43h")
+normal_enabled = true
+normal_texture = ExtResource("2_tg4al")

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cawrfj1r4m2kn"
+path="res://.godot/imported/Pot4Lid.obj-5927ccca18b7845cbc8146540bd70dfc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Pot4Lid.obj-5927ccca18b7845cbc8146540bd70dfc.mesh"]
+
+source_file="res://textures/lids/Pot4Lid.obj"
+dest_files=["res://.godot/imported/Pot4Lid.obj-5927ccca18b7845cbc8146540bd70dfc.mesh", "res://.godot/imported/Pot4Lid.obj-5927ccca18b7845cbc8146540bd70dfc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

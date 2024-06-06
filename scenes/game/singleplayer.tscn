@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ty6eqqsipbbi"]
+[gd_scene load_steps=17 format=3 uid="uid://ty6eqqsipbbi"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="3_xprge"]
@@ -227,8 +227,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163454, 0.021807, -0.262183
 [connection signal="on_intro_ended" from="Custom_Camera" to="Boardgame/GameStateController" method="start_game"]
 [connection signal="fadeout_finished" from="Prototype_UI" to="." method="_on_prototype_ui_fadeout_finished"]
 [connection signal="play_pressed" from="Prototype_UI" to="Opponent_Guard_Animated" method="_on_play_pressed"]
-[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_play_pressed"]
+[connection signal="pressed" from="Prototype_UI/Main Menu/Play" to="Prototype_UI" method="_on_game_started"]
 [connection signal="pressed" from="Prototype_UI/Main Menu/Quit" to="Prototype_UI/Main Menu/Quit" method="_on_pressed"]
 [connection signal="on_opponent_ready" from="Opponent_Guard_Animated" to="Custom_Camera" method="_on_play_pressed"]
 [connection signal="on_prevent_opponent_action" from="Opponent_Guard_Animated/DialogueSystem/DialogueSequencePlayer" to="Boardgame/AIRoller" method="_disable_rolling"]
