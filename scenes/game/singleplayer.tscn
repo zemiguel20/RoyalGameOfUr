@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=23 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
@@ -10,10 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker_interactive.tscn" id="8_g3rsf"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
-[ext_resource type="Script" path="res://scripts/game/systems/entity_manager.gd" id="11_sk4yx"]
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/entities/piece_white.tscn" id="12_hehr8"]
-[ext_resource type="PackedScene" uid="uid://cch6w4r6da147" path="res://scenes/game/entities/piece_black.tscn" id="13_leg52"]
-[ext_resource type="PackedScene" uid="uid://cvos81xjjq5nl" path="res://scenes/game/entities/d4_die.tscn" id="14_pakai"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="16_eu2sq"]
 
@@ -120,13 +116,9 @@ transform = Transform3D(0.794096, 0, 0.607792, 0, 1, 0, -0.607792, 0, 0.794096, 
 
 [node name="Systems" type="Node" parent="."]
 
-[node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("p1_move_picker", "p2_move_picker", "p1_dice_roller", "p2_dice_roller", "entity_manager")]
+[node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("die_spawn_point")]
 script = ExtResource("2_ldghm")
-p1_move_picker = NodePath("../InteractiveMovePicker")
-p2_move_picker = NodePath("../AIMovePicker")
-p1_dice_roller = NodePath("../DiceRoller")
-p2_dice_roller = NodePath("../DiceRoller2")
-entity_manager = NodePath("../EntityManager")
+die_spawn_point = NodePath("../../DieSpawn")
 
 [node name="InteractiveMovePicker" parent="Systems" instance=ExtResource("8_g3rsf")]
 
@@ -138,14 +130,6 @@ transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("9_m0jtg")]
 transform = Transform3D(-0.847122, 0, -0.531399, 0, 1, 0, 0.531399, 0, -0.847122, 4.33739, -0.212933, 6.20021)
 automatic = true
-
-[node name="EntityManager" type="Node" parent="Systems" node_paths=PackedStringArray("board", "dice_spawn_spot")]
-script = ExtResource("11_sk4yx")
-p1_piece_prefab = ExtResource("12_hehr8")
-p2_piece_prefab = ExtResource("13_leg52")
-die_prefab = ExtResource("14_pakai")
-board = NodePath("../../Board")
-dice_spawn_spot = NodePath("../../DieSpawn")
 
 [node name="Prototype_UI" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

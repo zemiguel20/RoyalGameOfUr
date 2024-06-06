@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/entities/spot.tscn" id="4_tsucu"]
 [ext_resource type="PackedScene" uid="uid://bimn0tu6hs0nw" path="res://models/board_with_decals.tscn" id="8_h5eyh"]
 
-[node name="Board" type="Node3D"]
+[node name="Board" type="Node3D" groups=["board"]]
 script = ExtResource("1_tmmtp")
 
 [node name="BoardModel" parent="." instance=ExtResource("8_h5eyh")]
