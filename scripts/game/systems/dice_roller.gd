@@ -14,8 +14,6 @@ var place_spots: Array[Node3D] = []
 var throw_spots: Array[Node3D] = []
 var shake_sfx: AudioStreamPlayer3D
 
-var last_rolled_value := 0
-
 var dice: Array[Die] = []
 
 func _ready() -> void:
@@ -129,7 +127,7 @@ func _stop_shaking() -> void:
 func _roll_dice() -> void:
 	_disconnect_input_signals()
 	_dehighlight()
-	last_rolled_value = 0
+	var value = 0
 	
 	# Position and throw dice
 	throw_spots.shuffle()
@@ -146,8 +144,8 @@ func _roll_dice() -> void:
 	for die in dice:
 		if die.rolling:
 			await die.roll_finished
-		last_rolled_value += die.value
+		value += die.value
 	
 	_highlight_result()
 	
-	GameEvents.rolled.emit(last_rolled_value)
+	GameEvents.rolled.emit(value)

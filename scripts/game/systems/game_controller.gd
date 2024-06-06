@@ -4,6 +4,8 @@ class_name GameController extends Node
 
 @export var die_spawn_point: Node3D
 
+var current_player: General.Player
+
 
 func _ready():
 	for i in Settings.num_dice:
@@ -18,17 +20,17 @@ func _ready():
 
 
 func start_game():
-	GameState.current_player = randi_range(General.Player.ONE, General.Player.TWO) as General.Player
+	current_player = randi_range(General.Player.ONE, General.Player.TWO) as General.Player
 	GameEvents.game_started.emit()
-	GameEvents.roll_phase_started.emit()
+	GameEvents.roll_phase_started.emit(current_player)
 
 
 func _on_rolled(roll_value: int) -> void:
 	if roll_value == 0:
 		_switch_player()
-		GameEvents.roll_phase_started.emit()
+		GameEvents.roll_phase_started.emit(current_player)
 	else:
-		GameEvents.move_phase_started.emit()
+		GameEvents.move_phase_started.emit(current_player, roll_value)
 
 
 func _on_move_executed(move: GameMove):
@@ -39,18 +41,18 @@ func _on_move_executed(move: GameMove):
 	if not move.gives_extra_turn:
 		_switch_player()
 	
-	GameEvents.roll_phase_started.emit()
+	GameEvents.roll_phase_started.emit(current_player)
 
 
 func _on_no_moves() -> void:
 	_switch_player()
-	GameEvents.roll_phase_started.emit()
+	GameEvents.roll_phase_started.emit(current_player)
 
 
 func _end_game():
-	print("Game Finished: Player %d won" % (GameState.current_player + 1))
+	print("Game Finished: Player %d won" % (current_player + 1))
 	GameEvents.game_ended.emit()
 
 
 func _switch_player() -> void:
-	GameState.current_player = General.get_opponent(GameState.current_player)
+	current_player = General.get_opponent(current_player)

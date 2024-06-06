@@ -13,14 +13,13 @@ func _ready() -> void:
 	
 	GameEvents.rolled.connect(_on_rolled)
 	
-	GameState.current_player = General.Player.ONE
-	GameEvents.roll_phase_started.emit()
+	GameEvents.roll_phase_started.emit(General.Player.ONE)
 
 
 func _on_rolled(value: int) -> void:
 	print(value)
 	await get_tree().create_timer(1.0).timeout
-	GameEvents.roll_phase_started.emit()
+	GameEvents.roll_phase_started.emit(General.Player.ONE)
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_sb076"]
