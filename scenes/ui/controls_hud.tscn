@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://c57dwifgqb7o0"]
+
+[ext_resource type="Texture2D" uid="uid://1tku2lwhe5b6" path="res://sprites/1_light.png" id="1_u7ox2"]
+[ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://sprites/left_mouse_button_light.png" id="2_ikyqn"]
+[ext_resource type="Texture2D" uid="uid://oclm41ujoyav" path="res://sprites/right_mouse_button_light.png" id="3_v050y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vmj3c"]
+line_spacing = -2.0
+font_size = 15
+
+[node name="ControlsHUD" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.01875
+anchor_top = 0.912963
+anchor_right = 0.169271
+anchor_bottom = 0.97037
+offset_left = -30.0
+offset_top = 22.0
+offset_right = -30.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="LeftMouse" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_ikyqn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Interact" type="Label" parent="HBoxContainer/LeftMouse"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.0
+offset_top = -44.5
+offset_right = 57.0
+offset_bottom = -2.5
+grow_horizontal = 2
+text = "Interact"
+label_settings = SubResource("LabelSettings_vmj3c")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="RightMouse" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_v050y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LookAround" type="Label" parent="HBoxContainer/RightMouse"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.5
+offset_top = -44.5
+offset_right = 92.5
+offset_bottom = -2.5
+grow_horizontal = 2
+text = "Look Around"
+label_settings = SubResource("LabelSettings_vmj3c")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="OneKey" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_u7ox2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LookAround" type="Label" parent="HBoxContainer/OneKey"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.5
+offset_top = -44.5
+offset_right = 92.5
+offset_bottom = -2.5
+grow_horizontal = 2
+text = "Piece Mode:
+Drag"
+label_settings = SubResource("LabelSettings_vmj3c")
+horizontal_alignment = 1
+vertical_alignment = 2
