@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://jjl01eifgb7f"
-path="res://.godot/imported/Half.fbx-dae750e31bb15cadea66641bec6c4595.scn"
+uid="uid://ccdjsevfyeqky"
+path="res://.godot/imported/plum.fbx-a17975b019f06d4f8e7a60e805b6331f.scn"
 
 [deps]
 
-source_file="res://models/Fruit/Assyrian Plum/Half.fbx"
-dest_files=["res://.godot/imported/Half.fbx-dae750e31bb15cadea66641bec6c4595.scn"]
+source_file="res://models/fruit/assyrian_plum/plum.fbx"
+dest_files=["res://.godot/imported/plum.fbx-a17975b019f06d4f8e7a60e805b6331f.scn"]
 
 [params]
 

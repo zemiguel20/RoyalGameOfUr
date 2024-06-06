@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwm14063papxn"
-path.bptc="res://.godot/imported/DefaultMaterial_Mixed_AO.png-447f7bb8e2dc9245e01894e7a951b5c6.bptc.ctex"
+path.bptc="res://.godot/imported/defaultmaterial_mixed_ao.png-5c02eb99c0d2602d9970f39597a390e7.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/Dice/Black/DefaultMaterial_Mixed_AO.png"
-dest_files=["res://.godot/imported/DefaultMaterial_Mixed_AO.png-447f7bb8e2dc9245e01894e7a951b5c6.bptc.ctex"]
+source_file="res://materials/dice/black/defaultmaterial_mixed_ao.png"
+dest_files=["res://.godot/imported/defaultmaterial_mixed_ao.png-5c02eb99c0d2602d9970f39597a390e7.bptc.ctex"]
 
 [params]
 

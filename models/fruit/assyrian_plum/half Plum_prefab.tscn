@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://kmqj2qdc6bot"]
 
-[ext_resource type="PackedScene" uid="uid://jjl01eifgb7f" path="res://models/Fruit/Assyrian Plum/Half.fbx" id="1_qe6og"]
+[ext_resource type="PackedScene" uid="uid://jjl01eifgb7f" path="res://models/fruit/assyrian_plum/half.fbx" id="1_qe6og"]
 [ext_resource type="Texture2D" uid="uid://utfwm5htnhq7" path="res://textures/Fruit/Assyrian Plum/Half/DefaultMaterial_Base_color.png" id="2_e51rh"]
 [ext_resource type="Texture2D" uid="uid://dat2dcqxggv2e" path="res://textures/Fruit/Assyrian Plum/Half/DefaultMaterial_Mixed_AO.png" id="3_mogij"]
 [ext_resource type="Texture2D" uid="uid://bixah40myrptr" path="res://textures/Fruit/Assyrian Plum/Half/DefaultMaterial_Height.png" id="4_42g0a"]

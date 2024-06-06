@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dk535jhoeotvw"
-path.s3tc="res://.godot/imported/DefaultMaterial_Roughness.png-4a7b42f80b72882af81df88112c635d2.s3tc.ctex"
+path.s3tc="res://.godot/imported/defaultmaterial_roughness.png-c583faee58972a2a93451f27146cc984.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/Dice/Yellow/DefaultMaterial_Roughness.png"
-dest_files=["res://.godot/imported/DefaultMaterial_Roughness.png-4a7b42f80b72882af81df88112c635d2.s3tc.ctex"]
+source_file="res://materials/dice/yellow/defaultmaterial_roughness.png"
+dest_files=["res://.godot/imported/defaultmaterial_roughness.png-c583faee58972a2a93451f27146cc984.s3tc.ctex"]
 
 [params]
 
