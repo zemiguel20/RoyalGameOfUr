@@ -1,7 +1,6 @@
 extends Control
 
 ## Question: How does this class get the session id?
-
 @export var survey_link: String = "https://www.universiteitleiden.nl/"
 
 @onready var survey_menu = $SurveyScreen as Control
@@ -13,9 +12,8 @@ const win_singleplayer_text = "You have won!"
 const lose_singleplayer_text = "You have lost!"
 const hotseat_text = "Player %d won the game"
 
+
 func _on_game_ended(player: General.Player):
-	## TODO: Set win text! This should change depending on Singleplayer/Hotseat
-	## TODO: switch statement
 	if Settings.current_gamemode == Settings.Gamemode.Hotseat:
 		result_text.text = hotseat_text % player
 	elif player == General.Player.ONE:
@@ -23,8 +21,8 @@ func _on_game_ended(player: General.Player):
 	else: 
 		result_text.text = lose_singleplayer_text
 	
-	## NOTE: This would also be the place to alter the link, something like survey_link + session_id
 	## TODO: Get session id
+	## NOTE: This would also be the place to alter the link, something like survey_link + session_id
 	survey_button.uri = survey_link
 	visible = true
 	survey_menu.visible = true
@@ -38,10 +36,11 @@ func _on_survey_menu_button_pressed():
 
 
 func _on_rematch_pressed():
-	## Restart the scene -> Send global signal 
+	## Restart the scene -> Send global signal?
 	get_tree().reload_current_scene()
 
 
 func _on_main_menu_pressed():
-	## Load Main Menu -> Send global signal
+	## Load Main Menu -> Send global signal?
 	print("To Main Menu")
+	push_warning("Endscreen Main Menu Button: Not Implemented")

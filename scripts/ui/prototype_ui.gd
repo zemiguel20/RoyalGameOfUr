@@ -19,6 +19,15 @@ func _fadeout():
 	var tween = create_tween().tween_property(fade_panel, "color:a", 1.0, _fading_duration)
 	await tween.finished
 	get_tree().reload_current_scene()
+	
+	
+func _on_game_ended(_player):
+	visible = true
+	
+	## TODO: Fadeout should be triggered by Endscreen now.
+	#await _fadeout(_fading_duration)
+	#fadeout_finished.emit()
+	
 
 
 func _on_play_pressed():
