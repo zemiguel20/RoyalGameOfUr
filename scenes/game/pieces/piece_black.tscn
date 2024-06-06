@@ -1,11 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cch6w4r6da147"]
+[gd_scene load_steps=11 format=3 uid="uid://cch6w4r6da147"]
 
 [ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/pieces/piece_white.tscn" id="1_seyrh"]
+[ext_resource type="Texture2D" uid="uid://dutxljsmf5dju" path="res://materials/pieces/black/defaultmaterial_base_color.png" id="2_3eolm"]
 [ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="2_502rx"]
+[ext_resource type="Texture2D" uid="uid://cl5lbxdgvrfw1" path="res://materials/pieces/black/defaultmaterial_metallic.png" id="3_o56ae"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_onlo5"]
+[ext_resource type="Texture2D" uid="uid://bytk1s6sbahm4" path="res://materials/pieces/black/defaultmaterial_normal_opengl.png" id="4_pjf7a"]
+[ext_resource type="Texture2D" uid="uid://vl1ek8yk8efr" path="res://materials/pieces/black/defaultmaterial_roughness.png" id="5_mnmcf"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ctqb"]
-albedo_color = Color(0.242031, 0.187744, 0.133749, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1lms"]
+albedo_texture = ExtResource("2_3eolm")
+metallic = 1.0
+metallic_texture = ExtResource("3_o56ae")
+roughness_texture = ExtResource("5_mnmcf")
+normal_enabled = true
+normal_texture = ExtResource("4_pjf7a")
+ao_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_skcqw"]
 resource_local_to_scene = true
@@ -24,8 +34,8 @@ shader_parameter/alpha = 0.25
 
 [node name="BlackPiece" instance=ExtResource("1_seyrh")]
 
-[node name="Model" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_5ctqb")
+[node name="Cylinder_001" parent="White Piece/RootNode" index="0"]
+material_override = SubResource("StandardMaterial3D_t1lms")
 
 [node name="Highlighter" parent="." index="1"]
 highlight_material = SubResource("ShaderMaterial_lm0ks")
