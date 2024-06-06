@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cl5lbxdgvrfw1"
-path.s3tc="res://.godot/imported/DefaultMaterial_Metallic.png-b20e9f5cb1b54bac53443ff28faa5855.s3tc.ctex"
+path.s3tc="res://.godot/imported/defaultmaterial_metallic.png-7691eff7f4b0b8104aa97449dc78bb73.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/Pieces/Black/DefaultMaterial_Metallic.png"
-dest_files=["res://.godot/imported/DefaultMaterial_Metallic.png-b20e9f5cb1b54bac53443ff28faa5855.s3tc.ctex"]
+source_file="res://materials/pieces/black/defaultmaterial_metallic.png"
+dest_files=["res://.godot/imported/defaultmaterial_metallic.png-7691eff7f4b0b8104aa97449dc78bb73.s3tc.ctex"]
 
 [params]
 

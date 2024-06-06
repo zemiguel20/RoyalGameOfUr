@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjv323qxtgq0i"]
 
-[ext_resource type="PackedScene" uid="uid://d1fumyjj76fll" path="res://models/Pieces/Base Model.fbx" id="1_rnwvr"]
-[ext_resource type="Texture2D" uid="uid://dutxljsmf5dju" path="res://materials/Pieces/Black/DefaultMaterial_Base_color.png" id="2_lmn4s"]
-[ext_resource type="Texture2D" uid="uid://ca867p25ypfcb" path="res://materials/Pieces/Black/DefaultMaterial_Mixed_AO.png" id="3_63i2y"]
-[ext_resource type="Texture2D" uid="uid://cl5lbxdgvrfw1" path="res://materials/Pieces/Black/DefaultMaterial_Metallic.png" id="4_4yfmt"]
-[ext_resource type="Texture2D" uid="uid://bytk1s6sbahm4" path="res://materials/Pieces/Black/DefaultMaterial_Normal_OpenGL.png" id="5_pa1pd"]
-[ext_resource type="Texture2D" uid="uid://vl1ek8yk8efr" path="res://materials/Pieces/Black/DefaultMaterial_Roughness.png" id="6_pyw7m"]
+[ext_resource type="PackedScene" uid="uid://b7h8cnviuvrwt" path="res://models/pieces/base_model.fbx" id="1_rnwvr"]
+[ext_resource type="Texture2D" uid="uid://dutxljsmf5dju" path="res://materials/pieces/black/defaultmaterial_base_color.png" id="2_lmn4s"]
+[ext_resource type="Texture2D" uid="uid://ca867p25ypfcb" path="res://materials/pieces/black/defaultmaterial_mixed_ao.png" id="3_63i2y"]
+[ext_resource type="Texture2D" uid="uid://cl5lbxdgvrfw1" path="res://materials/pieces/black/defaultmaterial_metallic.png" id="4_4yfmt"]
+[ext_resource type="Texture2D" uid="uid://bytk1s6sbahm4" path="res://materials/pieces/black/defaultmaterial_normal_opengl.png" id="5_pa1pd"]
+[ext_resource type="Texture2D" uid="uid://vl1ek8yk8efr" path="res://materials/pieces/black/defaultmaterial_roughness.png" id="6_pyw7m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilh6l"]
 albedo_texture = ExtResource("2_lmn4s")

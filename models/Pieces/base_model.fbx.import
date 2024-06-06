@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b7h8cnviuvrwt"
-path="res://.godot/imported/Base Model.fbx-4a4e07225726f065f6dac096243c0794.scn"
+path="res://.godot/imported/base_model.fbx-5849d5b54e734d29db3c4768748e37c4.scn"
 
 [deps]
 
-source_file="res://models/Pieces/Base Model.fbx"
-dest_files=["res://.godot/imported/Base Model.fbx-4a4e07225726f065f6dac096243c0794.scn"]
+source_file="res://models/pieces/base_model.fbx"
+dest_files=["res://.godot/imported/base_model.fbx-5849d5b54e734d29db3c4768748e37c4.scn"]
 
 [params]
 
