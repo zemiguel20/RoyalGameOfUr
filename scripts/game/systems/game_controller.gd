@@ -18,7 +18,7 @@ func _ready():
 
 
 func start_game():
-	GameState.current_player = randi_range(General.Player.ONE, General.Player.TWO)
+	GameState.current_player = randi_range(General.Player.ONE, General.Player.TWO) as General.Player
 	GameEvents.game_started.emit()
 	GameEvents.roll_phase_started.emit()
 
