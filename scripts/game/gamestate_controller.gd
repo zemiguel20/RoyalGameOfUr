@@ -20,9 +20,6 @@ func _ready():
 	p1_move_picker.move_executed.connect(_on_move_executed)
 	p2_move_picker.move_executed.connect(_on_move_executed)
 	dice.roll_finished.connect(_on_roll_ended)
-	
-	await get_tree().create_timer(3).timeout
-	end_game()
 
 
 func start_game():
