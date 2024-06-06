@@ -37,7 +37,7 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 	global_position = start_position
 	rotation = start_rotation
 	
-	var offset = Vector3(0.0, 0.005, 0.0)
+	var offset = Vector3(0.0, 1.0, 0.0)
 	apply_impulse(impulse, offset)
 	
 	rolling = true

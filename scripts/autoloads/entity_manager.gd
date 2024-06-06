@@ -54,7 +54,8 @@ func get_board() -> Board:
 ## Get all spawned dice.
 func get_dice() -> Array[Die]:
 	var filter = func(node: Node): return node is Die
-	var dice = get_children().filter(filter)
+	var dice: Array[Die] = []
+	dice.assign(get_children().filter(filter))
 	return dice
 
 
