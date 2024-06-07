@@ -18,7 +18,7 @@ metadata/highlight = NodePath("Highlight")
 metadata/move = NodePath("MoveAnimation")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.017, 0, 0, 0, 0.017, 0, 0, 0, 0.017, 0, 0.002, 0)
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0.002, 0)
 mesh = SubResource("CylinderMesh_lftn1")
 surface_material_override/0 = SubResource("StandardMaterial3D_tlg37")
 

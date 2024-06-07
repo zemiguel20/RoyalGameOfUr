@@ -87,52 +87,52 @@ give_extra_turn = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00221904, 0)
 
 [node name="P1StartSpot1" parent="P1StartSpots" groups=["p1_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102707, 0, 0.148716)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0956012, 0, 0.133605)
 
 [node name="P1StartSpot2" parent="P1StartSpots" groups=["p1_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102707, 0, 0.11632)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129302, 0, 0.130697)
 
 [node name="P1StartSpot3" parent="P1StartSpots" groups=["p1_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.103763, 0, 0.0828673)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.078751, 0, 0.101035)
 
 [node name="P1StartSpot4" parent="P1StartSpots" groups=["p1_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.103763, 0, 0.0490625)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.114136, 0, 0.0988247)
 
 [node name="P1StartSpot5" parent="P1StartSpots" groups=["p1_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.104115, 0, 0.0138493)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0888612, 0, 0.0690879)
 
 [node name="P1StartSpot6" parent="P1StartSpots" groups=["p1_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105876, 0, -0.0217161)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.121298, 0, 0.0575341)
 
 [node name="P1StartSpot7" parent="P1StartSpots" groups=["p1_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106082, 0, -0.0569293)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0875974, 0, 0.0362223)
 
 [node name="P2StartSpots" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00221904, 0)
 
 [node name="P2StartSpot1" parent="P2StartSpots" groups=["p2_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111597, 0, 0.141436)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0905342, 0, 0.125007)
 
 [node name="P2StartSpot2" parent="P2StartSpots" groups=["p2_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111597, 0, 0.10904)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12592, 0, 0.122941)
 
 [node name="P2StartSpot3" parent="P2StartSpots" groups=["p2_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.110541, 0, 0.0755872)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.129919, 0, 0.0840123)
 
 [node name="P2StartSpot4" parent="P2StartSpots" groups=["p2_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.110541, 0, 0.0417824)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0911633, 0, 0.0927543)
 
 [node name="P2StartSpot5" parent="P2StartSpots" groups=["p2_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.110189, 0, 0.00656919)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0828075, 0, 0.0596474)
 
 [node name="P2StartSpot6" parent="P2StartSpots" groups=["p2_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108428, 0, -0.0289962)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124857, 0, 0.0518849)
 
 [node name="P2StartSpot7" parent="P2StartSpots" groups=["p2_start_spots"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108222, 0, -0.0642094)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0888443, 0, 0.0272031)
 
 [node name="P1EndSpot" parent="." groups=["p1_end_spot"] instance=ExtResource("4_tsucu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057042, 0.00221904, -0.0369505)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0558958, 0.00221904, -0.0409623)
 
 [node name="P2EndSpot" parent="." groups=["p2_end_spot"] instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.053572, 0.00221904, -0.0369505)
