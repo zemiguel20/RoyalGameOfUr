@@ -1,8 +1,6 @@
 extends CanvasLayer
 
 
-signal play_pressed
-
 @export var _fading_duration = 2.5
 @onready var play: Button = $"Main Menu/Play"
 @onready var quit: Button = $"Main Menu/Quit"
@@ -26,7 +24,7 @@ func _fadeout():
 func _on_play_pressed():
 	visible = false
 	main_menu.visible = false
-	play_pressed.emit()
+	GameEvents.play_pressed.emit()
 
 
 func _on_quit_pressed():

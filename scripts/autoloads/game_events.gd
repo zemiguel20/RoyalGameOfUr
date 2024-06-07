@@ -10,3 +10,6 @@ signal move_executed(move: GameMove)
 signal game_ended
 signal no_moves
 signal zero_rolled
+
+signal play_pressed
+signal intro_finished

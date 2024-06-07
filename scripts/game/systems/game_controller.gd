@@ -11,6 +11,7 @@ func _ready():
 	for i in Settings.num_dice:
 		EntityManager.spawn_die(die_spawn_point.global_position)
 	
+	GameEvents.intro_finished.connect(start_game)
 	GameEvents.rolled.connect(_on_rolled)
 	GameEvents.move_executed.connect(_on_move_executed)
 	GameEvents.no_moves.connect(_on_no_moves)

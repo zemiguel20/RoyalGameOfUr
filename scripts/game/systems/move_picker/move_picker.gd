@@ -34,8 +34,7 @@ func start(current_player: General.Player, last_rolled_value: int) -> void:
 		selected_move.execute(General.MoveAnim.ARC, true)
 		await selected_move.execution_finished
 		GameEvents.move_executed.emit(selected_move)
-	
-	if selector is InteractiveGameMoveSelector:
+	elif selector is InteractiveGameMoveSelector:
 		selector.start_selection(moves)
 		var selected_move: GameMove = await selector.move_selected
 		var anim = General.MoveAnim.ARC if Settings.fast_move_enabled else General.MoveAnim.LINE
