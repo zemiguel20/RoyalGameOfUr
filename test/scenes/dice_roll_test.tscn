@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://oeeehwmoqri4"]
+[gd_scene load_steps=6 format=3 uid="uid://oeeehwmoqri4"]
 
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="1_wqqlu"]
+[ext_resource type="PackedScene" uid="uid://cvos81xjjq5nl" path="res://scenes/game/entities/d4_die.tscn" id="2_llxii"]
 
 [sub_resource type="GDScript" id="GDScript_d86xg"]
 script/source = "extends Node3D
@@ -53,3 +54,7 @@ gizmo_extents = 0.01
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.264243, 0.964456, 0, -0.964456, 0.264243, 0, 1.46312, 0)
 shadow_enabled = true
+
+[node name="Die" parent="." instance=ExtResource("2_llxii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.223064, 0)
+gravity_scale = 6.231

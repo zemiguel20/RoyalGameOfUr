@@ -7,6 +7,7 @@
 
 [node name="DiceRoller" type="Node3D"]
 script = ExtResource("1_e3w3t")
+impulse_strength = 0.002
 metadata/placing_spots = NodePath("DicePlacingSpots")
 metadata/throw_spots = NodePath("DiceThrowSpots")
 metadata/shake_sfx = NodePath("ShakeSFX")
@@ -41,22 +42,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00569373, 0, -0.0365846)
 [node name="DiceThrowSpots" type="Node3D" parent="."]
 
 [node name="DieThrowSpot" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
-transform = Transform3D(-0.307523, -0.951541, 0, 0.951541, -0.307523, 0, 0, 0, 1, 0.113009, 0.0943287, 0.0283378)
+transform = Transform3D(-0.307523, -0.951541, 0, 0.951541, -0.307523, 0, 0, 0, 1, 0.128307, 0.0943287, 0.0260287)
 
 [node name="DieThrowSpot2" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
-transform = Transform3D(-0.295375, -0.913953, -0.278288, 0.951541, -0.307523, -1.67043e-07, -0.0855796, -0.264802, 0.960498, 0.0841778, 0.0943287, 0.0550312)
+transform = Transform3D(-0.305795, -0.946194, -0.105866, 0.951541, -0.307523, -1.68354e-07, -0.0325558, -0.100735, 0.994381, 0.0608419, 0.0943287, 0.0459217)
 
 [node name="DieThrowSpot3" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
-transform = Transform3D(-0.295375, -0.913953, -0.278288, 0.951541, -0.307523, -1.67043e-07, -0.0855796, -0.264802, 0.960498, 0.108876, 0.0943287, 0.0533847)
+transform = Transform3D(-0.306537, -0.948492, -0.0799911, 0.951541, -0.307523, -1.7121e-07, -0.0245988, -0.0761144, 0.996796, 0.10808, 0.0943287, 0.068977)
 
 [node name="DieThrowSpot4" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
-transform = Transform3D(-0.307517, -0.951522, -0.00633545, 0.951541, -0.307523, -6.75835e-09, -0.00194829, -0.00602844, 0.99998, 0.100226, 0.0943287, 0.00839231)
+transform = Transform3D(-0.307517, -0.951522, -0.00633545, 0.951541, -0.307523, -6.75835e-09, -0.00194829, -0.00602844, 0.99998, 0.074591, 0.101819, 0.00826257)
 
 [node name="DieThrowSpot5" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
-transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, -3.23211e-08, 0.0142558, 0.0441104, 0.998925, 0.0997676, 0.0943287, -0.0181738)
+transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, -3.23211e-08, 0.0142558, 0.0441104, 0.998925, 0.118917, 0.101566, -0.0174811)
 
 [node name="DieThrowSpot6" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
-transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, -3.23211e-08, 0.0142558, 0.0441104, 0.998925, 0.0820672, 0.0943287, -0.0342276)
+transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, -3.23211e-08, 0.0142558, 0.0441104, 0.998925, 0.0849712, 0.0943287, -0.0505497)
 
 [node name="ShakeSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_dll26")

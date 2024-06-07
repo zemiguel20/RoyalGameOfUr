@@ -9,6 +9,7 @@ signal dice_placed
 
 @export var assigned_player: General.Player
 @export var automatic: bool = false
+@export var impulse_strength: float = 0.01 
 
 var place_spots: Array[Node3D] = []
 var throw_spots: Array[Node3D] = []
@@ -137,7 +138,7 @@ func _roll_dice() -> void:
 		
 		var start_position = throw_spot.global_position
 		var start_rotation = General.get_random_rotation()
-		var impulse = throw_spot.global_basis.y * 0.01
+		var impulse = throw_spot.global_basis.y * impulse_strength
 		die.roll(impulse, start_position, start_rotation)
 	
 	# wait roll finished
