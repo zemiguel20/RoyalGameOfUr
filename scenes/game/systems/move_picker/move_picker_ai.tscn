@@ -6,7 +6,8 @@
 
 [node name="AIMovePicker" type="Node"]
 script = ExtResource("1_d4vwd")
-metadata/move_highlight = NodePath("MoveHighlight")
+assigned_player = 1
+metadata/selector = NodePath("AIGameMoveSelector")
 
 [node name="AIGameMoveSelector" type="Node" parent="." node_paths=PackedStringArray("highlight")]
 script = ExtResource("1_1lnec")

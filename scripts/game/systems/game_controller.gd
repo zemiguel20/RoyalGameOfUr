@@ -10,9 +10,6 @@ var current_player: General.Player
 func _ready():
 	for i in Settings.num_dice:
 		EntityManager.spawn_die(die_spawn_point.global_position)
-	for i in Settings.num_pieces:
-		EntityManager.spawn_player_piece(General.Player.ONE)
-		EntityManager.spawn_player_piece(General.Player.TWO)
 	
 	GameEvents.rolled.connect(_on_rolled)
 	GameEvents.move_executed.connect(_on_move_executed)
@@ -20,6 +17,11 @@ func _ready():
 
 
 func start_game():
+	EntityManager.clear_pieces()
+	for i in Settings.num_pieces:
+		EntityManager.spawn_player_piece(General.Player.ONE)
+		EntityManager.spawn_player_piece(General.Player.TWO)
+	
 	current_player = randi_range(General.Player.ONE, General.Player.TWO) as General.Player
 	GameEvents.game_started.emit()
 	GameEvents.roll_phase_started.emit(current_player)

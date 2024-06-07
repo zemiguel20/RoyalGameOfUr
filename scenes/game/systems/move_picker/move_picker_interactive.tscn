@@ -7,6 +7,7 @@
 
 [node name="InteractiveMovePicker" type="Node"]
 script = ExtResource("1_77xby")
+metadata/selector = NodePath("InteractiveGameMoveSelector")
 
 [node name="InteractiveGameMoveSelector" type="Node" parent="." node_paths=PackedStringArray("highlight")]
 script = ExtResource("2_o7efh")

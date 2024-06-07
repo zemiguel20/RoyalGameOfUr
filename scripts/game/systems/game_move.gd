@@ -3,7 +3,7 @@ class_name GameMove
 ## Contains specific information, such has if it is a direct winning move.
 ## Can be executed, like the command pattern.
 ##
-## If tagged as invalid, cannot be executed. Invalid moves can still be displayed as such to the
+## If tagged as invalid, cannot be executed. Invalid moves can still be displayed to the
 ## player for clarity purposes.
 
 
@@ -31,13 +31,11 @@ var safety_score: float ## Higher score means this moves pieces to a more safe s
 
 var _executed: bool = false # Whether move has already been executed
 var _board: Board
-var _entity_manager: EntityManager
 
 
 @warning_ignore("shadowed_variable")
-func _init(from: Spot, to: Spot, player: int, valid: bool, entity_manager: EntityManager):
-	_entity_manager = entity_manager
-	_board = entity_manager.board
+func _init(from: Spot, to: Spot, player: int, valid: bool):
+	_board = EntityManager.get_board()
 	
 	# Shared variables for initialization
 	var track = _board.get_track(player)
@@ -96,7 +94,7 @@ func execute(animation := General.MoveAnim.NONE, follow_path := false) -> void:
 		
 		# Create temporary spots and add them to path
 		for spot in between_spots:
-			var temp_spot = _entity_manager.spawn_temporary_spot()
+			var temp_spot = EntityManager.spawn_temporary_spot()
 			temp_spot.global_position = spot.get_placing_position_global()
 			movement_path.append(temp_spot)
 	

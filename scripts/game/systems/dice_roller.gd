@@ -24,8 +24,8 @@ func _ready() -> void:
 	GameEvents.roll_phase_started.connect(start)
 
 
-func start() -> void:
-	if GameState.current_player != assigned_player:
+func start(current_player: General.Player) -> void:
+	if current_player != assigned_player:
 		return
 	
 	dice.assign(EntityManager.get_dice())

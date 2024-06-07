@@ -16,6 +16,7 @@ var started: bool = false
 
 func _ready():
 	Settings.can_stack_in_safe_spot = true
+	Settings.num_pieces = 4
 
 
 func _input(event: InputEvent) -> void:

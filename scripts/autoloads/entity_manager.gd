@@ -64,3 +64,10 @@ func get_player_pieces(player: int) -> Array[Piece]:
 	var filter = func(node: Node): return node is Piece and (node as Piece).player_owner == player
 	var pieces = get_children().filter(filter)
 	return pieces
+
+
+func clear_pieces() -> void:
+	for node in get_children():
+		if node is Piece:
+			node.current_spot.pieces.erase(node)
+			node.queue_free()
