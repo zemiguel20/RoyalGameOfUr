@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1l4ef265ffb7"]
+
+[ext_resource type="PackedScene" uid="uid://dmvbii2ft2yi1" path="res://models/fbx_bgchar1_animated.fbx" id="1_4q7w5"]
+
+[node name="Root Scene" instance=ExtResource("1_4q7w5")]
