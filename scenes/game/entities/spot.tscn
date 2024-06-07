@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://cjv3ocjvay3hx"]
+
+[ext_resource type="Script" path="res://scripts/game/entities/spot.gd" id="1_8cupv"]
+[ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="2_7basv"]
+[ext_resource type="Material" uid="uid://c6p7a2gj4s6bg" path="res://materials/highlight.tres" id="3_om2m3"]
+[ext_resource type="Script" path="res://scripts/game/components/selection_input.gd" id="4_e4p30"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="5_kd6q8"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/wireframe_meshes/wire_cube_mesh.gd" id="6_2lcmo"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/mesh_marker.gd" id="7_1vm33"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0xytr"]
+size = Vector2(0.03, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s762x"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q5ogc"]
+data = PackedVector3Array(0.015, 0, 0.015, -0.015, 0, 0.015, 0.015, 0, -0.015, -0.015, 0, 0.015, -0.015, 0, -0.015, 0.015, 0, -0.015)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqxd1"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.292175, 0.801917, 0, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o67xw"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63)
+}, {
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63)
+}]
+script = ExtResource("6_2lcmo")
+
+[node name="Spot" type="Node3D"]
+script = ExtResource("1_8cupv")
+metadata/highlight = NodePath("Highlight")
+metadata/input = NodePath("SelectionInputReader")
+
+[node name="Highlight" type="Node" parent="." node_paths=PackedStringArray("target_meshes")]
+script = ExtResource("2_7basv")
+material = ExtResource("3_om2m3")
+target_meshes = [NodePath("../HighlightMesh")]
+
+[node name="HighlightMesh" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_0xytr")
+surface_material_override/0 = SubResource("StandardMaterial3D_s762x")
+
+[node name="SelectionInputReader" type="Node" parent="." node_paths=PackedStringArray("input_detection_area")]
+script = ExtResource("4_e4p30")
+input_detection_area = NodePath("../SelectionArea")
+
+[node name="SelectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionArea"]
+shape = SubResource("ConcavePolygonShape3D_q5ogc")
+
+[node name="EditorVisualizer" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+gizmo_extents = 0.015
+script = ExtResource("5_kd6q8")
+gizmo_extends_override = 0.015
+
+[node name="MeshMarkerAddon" type="MeshInstance3D" parent="EditorVisualizer"]
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_bqxd1")
+mesh = SubResource("ArrayMesh_o67xw")
+script = ExtResource("7_1vm33")
+color = Color(0.292175, 0.801917, 0, 1)

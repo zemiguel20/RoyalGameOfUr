@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://oeeehwmoqri4"]
+
+[ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="1_wqqlu"]
+[ext_resource type="PackedScene" uid="uid://cvos81xjjq5nl" path="res://scenes/game/entities/d4_die.tscn" id="2_llxii"]
+
+[sub_resource type="GDScript" id="GDScript_d86xg"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	for i in 4:
+		EntityManager.spawn_die($Spawn.global_position)
+	
+	GameEvents.rolled.connect(_on_rolled)
+	
+	GameEvents.roll_phase_started.emit(General.Player.ONE)
+
+
+func _on_rolled(value: int) -> void:
+	print(value)
+	await get_tree().create_timer(1.0).timeout
+	GameEvents.roll_phase_started.emit(General.Player.ONE)
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_sb076"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_o1yqh"]
+data = PackedVector3Array(-0.5, 0.05, 0.5, 0.5, 0.05, 0.5, -0.5, -0.05, 0.5, 0.5, 0.05, 0.5, 0.5, -0.05, 0.5, -0.5, -0.05, 0.5, 0.5, 0.05, -0.5, -0.5, 0.05, -0.5, 0.5, -0.05, -0.5, -0.5, 0.05, -0.5, -0.5, -0.05, -0.5, 0.5, -0.05, -0.5, 0.5, 0.05, 0.5, 0.5, 0.05, -0.5, 0.5, -0.05, 0.5, 0.5, 0.05, -0.5, 0.5, -0.05, -0.5, 0.5, -0.05, 0.5, -0.5, 0.05, -0.5, -0.5, 0.05, 0.5, -0.5, -0.05, -0.5, -0.5, 0.05, 0.5, -0.5, -0.05, 0.5, -0.5, -0.05, -0.5, 0.5, 0.05, 0.5, -0.5, 0.05, 0.5, 0.5, 0.05, -0.5, -0.5, 0.05, 0.5, -0.5, 0.05, -0.5, 0.5, 0.05, -0.5, -0.5, -0.05, 0.5, 0.5, -0.05, 0.5, -0.5, -0.05, -0.5, 0.5, -0.05, 0.5, 0.5, -0.05, -0.5, -0.5, -0.05, -0.5)
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_d86xg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0508769, 0)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_sb076")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_o1yqh")
+
+[node name="DiceRoller" parent="." instance=ExtResource("1_wqqlu")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999157, 0.0274075, -0.0305484, 0, 0.744336, 0.667806, 0.0410411, -0.667243, 0.743709, -0.00975824, 0.213321, 0.237567)
+
+[node name="Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.210596, 0.0889501, 0)
+gizmo_extents = 0.01
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.264243, 0.964456, 0, -0.964456, 0.264243, 0, 1.46312, 0)
+shadow_enabled = true
+
+[node name="Die" parent="." instance=ExtResource("2_llxii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.223064, 0)
+gravity_scale = 6.231
