@@ -16,12 +16,12 @@ var rosettes_allow_stacking: bool = false
 var captures_grant_extra_turn: bool = false
 ## Whether pieces may be moved backwards.
 var pieces_can_move_backwards: bool = false
+var fast_move_enabled: bool = false
 
 ## The number of pieces that will be used in the board game.
 var num_pieces: int = 7:
 	set(value):
 		num_pieces = clampi(value, 1, 7)
-
 ## The number of dice that will be used in the board game.
 var num_dice: int = 4:
 	set(value):

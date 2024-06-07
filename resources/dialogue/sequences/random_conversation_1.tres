@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="DialogueSequence" load_steps=8 format=3 uid="uid://b1mcaftl0frsa"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_f1x1r"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_f1x1r"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_yfia4"]
 
 [sub_resource type="Resource" id="Resource_l004w"]
 script = ExtResource("1_f1x1r")
 caption = "Hey, wanna hear a joke?"
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 3.0
 prevents_opponent_action = false
@@ -13,6 +14,7 @@ prevents_opponent_action = false
 [sub_resource type="Resource" id="Resource_hyjxb"]
 script = ExtResource("1_f1x1r")
 caption = "So, a dog walks into a bar..."
+caption_cuneiform = ""
 anim_variations = Array[int]([6])
 fixed_duration = 3.0
 prevents_opponent_action = true
@@ -20,6 +22,7 @@ prevents_opponent_action = true
 [sub_resource type="Resource" id="Resource_mrw1n"]
 script = ExtResource("1_f1x1r")
 caption = "He walks in, and says: I cannot see a thing..."
+caption_cuneiform = ""
 anim_variations = Array[int]([4])
 fixed_duration = 5.0
 prevents_opponent_action = true
@@ -27,6 +30,7 @@ prevents_opponent_action = true
 [sub_resource type="Resource" id="Resource_m5sdh"]
 script = ExtResource("1_f1x1r")
 caption = "..."
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 2.0
 prevents_opponent_action = true
@@ -34,6 +38,7 @@ prevents_opponent_action = true
 [sub_resource type="Resource" id="Resource_leien"]
 script = ExtResource("1_f1x1r")
 caption = "\"...I'll open this one!\""
+caption_cuneiform = ""
 anim_variations = Array[int]([7])
 fixed_duration = 3.0
 prevents_opponent_action = true
@@ -41,6 +46,6 @@ prevents_opponent_action = true
 [resource]
 script = ExtResource("1_yfia4")
 max_repetitions = 1
-dialogue_entries = Array[ExtResource("1_f1x1r")]([SubResource("Resource_l004w"), SubResource("Resource_hyjxb"), SubResource("Resource_mrw1n"), SubResource("Resource_m5sdh"), SubResource("Resource_leien")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_l004w"), SubResource("Resource_hyjxb"), SubResource("Resource_mrw1n"), SubResource("Resource_m5sdh"), SubResource("Resource_leien")])
 requires_click = false
 weight = 5

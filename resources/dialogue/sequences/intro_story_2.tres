@@ -1,39 +1,44 @@
 [gd_resource type="Resource" script_class="DialogueSequence" load_steps=8 format=3 uid="uid://qf6gyjt7j251"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_single_entry.gd" id="1_gsgn5"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_136wl"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_k243e"]
 
 [sub_resource type="Resource" id="Resource_7k2gv"]
-script = ExtResource("1_gsgn5")
+script = ExtResource("1_136wl")
 caption = "(sigh) ...that's better."
+caption_cuneiform = ""
 anim_variations = Array[int]([3])
 fixed_duration = 5.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_73wnr"]
-script = ExtResource("1_gsgn5")
+script = ExtResource("1_136wl")
 caption = "You heard? Sennacherib wants Ninos in the city of Tušḫan."
+caption_cuneiform = ""
 anim_variations = Array[int]([1])
 fixed_duration = 5.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_vtih1"]
-script = ExtResource("1_gsgn5")
+script = ExtResource("1_136wl")
 caption = "He’s grown to be strong, that is for sure."
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 3.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_eg8la"]
-script = ExtResource("1_gsgn5")
+script = ExtResource("1_136wl")
 caption = "Still, I would be relieved if this is just a march. He has no interest in battle."
+caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = 5.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_sv3oo"]
-script = ExtResource("1_gsgn5")
+script = ExtResource("1_136wl")
 caption = "May Assur be merciful. There’s little more for me to fear than seeing my daughter widowed so young."
+caption_cuneiform = ""
 anim_variations = Array[int]([2])
 fixed_duration = 5.0
 prevents_opponent_action = false
@@ -41,6 +46,6 @@ prevents_opponent_action = false
 [resource]
 script = ExtResource("2_k243e")
 max_repetitions = 1
-dialogue_entries = Array[ExtResource("1_gsgn5")]([SubResource("Resource_7k2gv"), SubResource("Resource_73wnr"), SubResource("Resource_vtih1"), SubResource("Resource_eg8la"), SubResource("Resource_sv3oo")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_7k2gv"), SubResource("Resource_73wnr"), SubResource("Resource_vtih1"), SubResource("Resource_eg8la"), SubResource("Resource_sv3oo")])
 requires_click = true
 weight = 5
