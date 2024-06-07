@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4k7dx5sp6itq"]
+
+[ext_resource type="Script" path="res://scripts/game/systems/dice_roller.gd" id="1_e3w3t"]
+[ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="2_yqe8l"]
+[ext_resource type="PackedScene" uid="uid://8v05523r8lek" path="res://scenes/game/systems/dice_roller/die_throw_spot.tscn" id="3_c1oyf"]
+[ext_resource type="AudioStream" uid="uid://bdsbgnjpv7ic2" path="res://audio/dice_shaking_loop.mp3" id="4_dll26"]
+
+[node name="DiceRoller" type="Node3D"]
+script = ExtResource("1_e3w3t")
+impulse_strength = 0.002
+metadata/placing_spots = NodePath("DicePlacingSpots")
+metadata/throw_spots = NodePath("DiceThrowSpots")
+metadata/shake_sfx = NodePath("ShakeSFX")
+
+[node name="DicePlacingSpots" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108967, 0)
+
+[node name="DiePlacingSpot" parent="DicePlacingSpots" instance=ExtResource("2_yqe8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015, 0, -0.01)
+
+[node name="DiePlacingSpot2" parent="DicePlacingSpots" instance=ExtResource("2_yqe8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0440014, 0, 0.0102406)
+
+[node name="DiePlacingSpot3" parent="DicePlacingSpots" instance=ExtResource("2_yqe8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0130364, 0, 0.0356168)
+
+[node name="DiePlacingSpot4" parent="DicePlacingSpots" instance=ExtResource("2_yqe8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0174755, 0, 0.0183972)
+
+[node name="DiePlacingSpot5" parent="DicePlacingSpots" instance=ExtResource("2_yqe8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0498, 0, 0.0261007)
+
+[node name="DiePlacingSpot6" parent="DicePlacingSpots" instance=ExtResource("2_yqe8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0584098, 0, -0.019365)
+
+[node name="DiePlacingSpot7" parent="DicePlacingSpots" instance=ExtResource("2_yqe8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0265385, 0, -0.00924475)
+
+[node name="DiePlacingSpot8" parent="DicePlacingSpots" instance=ExtResource("2_yqe8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00569373, 0, -0.0365846)
+
+[node name="DiceThrowSpots" type="Node3D" parent="."]
+
+[node name="DieThrowSpot" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
+transform = Transform3D(-0.307523, -0.951541, 0, 0.951541, -0.307523, 0, 0, 0, 1, 0.128307, 0.0943287, 0.0260287)
+
+[node name="DieThrowSpot2" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
+transform = Transform3D(-0.305795, -0.946194, -0.105866, 0.951541, -0.307523, -1.68354e-07, -0.0325558, -0.100735, 0.994381, 0.0608419, 0.0943287, 0.0459217)
+
+[node name="DieThrowSpot3" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
+transform = Transform3D(-0.306537, -0.948492, -0.0799911, 0.951541, -0.307523, -1.7121e-07, -0.0245988, -0.0761144, 0.996796, 0.10808, 0.0943287, 0.068977)
+
+[node name="DieThrowSpot4" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
+transform = Transform3D(-0.307517, -0.951522, -0.00633545, 0.951541, -0.307523, -6.75835e-09, -0.00194829, -0.00602844, 0.99998, 0.074591, 0.101819, 0.00826257)
+
+[node name="DieThrowSpot5" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
+transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, -3.23211e-08, 0.0142558, 0.0441104, 0.998925, 0.118917, 0.101566, -0.0174811)
+
+[node name="DieThrowSpot6" parent="DiceThrowSpots" instance=ExtResource("3_c1oyf")]
+transform = Transform3D(-0.307192, -0.950518, 0.0463568, 0.951541, -0.307523, -3.23211e-08, 0.0142558, 0.0441104, 0.998925, 0.0849712, 0.0943287, -0.0505497)
+
+[node name="ShakeSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_dll26")

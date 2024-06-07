@@ -1,7 +1,6 @@
 class_name OpponentNPC
 extends Node3D
 
-signal on_opponent_ready
 
 var talking_animation: Animation
 
@@ -28,7 +27,8 @@ var _tutorial_categories_had: Array[DialogueSystem.Category]
 
 func _ready():
 	visible = false
-	
+	GameEvents.play_pressed.connect(_on_play_pressed)
+
 
 func _process(delta):
 	if not _is_timer_active or _dialogue_system.is_busy():
@@ -92,7 +92,7 @@ func _on_play_pressed():
 	await get_tree().create_timer(starting_dialogue_delay).timeout
 	await _play_story_dialogue()
 	_is_timer_active = true	
-	on_opponent_ready.emit()
+	GameEvents.intro_finished.emit()
 	
 	
 ## Reactions for now: Knockout? Debug Button. No Moves?
