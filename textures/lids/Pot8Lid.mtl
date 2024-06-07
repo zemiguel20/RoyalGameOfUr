@@ -1,0 +1,154 @@
+newmtl PM3D_Plane3D1SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl PM3D_Plane3D2SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl PM3D_Plane3D3SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl PM3D_Plane3D4SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl lambert3SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert4SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert6SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pots_blockout1SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout2SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout3SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout4SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout5SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout6SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout7SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout8SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout10SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout12SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout14SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockout15SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pots_blockoutSG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.50 0.50 0.50
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
