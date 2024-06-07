@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cgkfm7n305bgj"]
+[gd_scene load_steps=46 format=3 uid="uid://cgkfm7n305bgj"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_3nkie"]
 [ext_resource type="PackedScene" uid="uid://mowvg73f88gq" path="res://models/pots/bowl_1.fbx" id="2_7xpms"]
@@ -34,6 +34,7 @@
 [ext_resource type="Material" uid="uid://n17xiew50a2l" path="res://materials/Cloth_Green.tres" id="33_1nhet"]
 [ext_resource type="Material" uid="uid://l1ermpe7rsjw" path="res://materials/Cloth_Red.tres" id="33_igrux"]
 [ext_resource type="PackedScene" uid="uid://bfqmjsl4qb4v3" path="res://models/mat.fbx" id="38_b67ms"]
+[ext_resource type="PackedScene" uid="uid://crquhirpcdkq5" path="res://models/dagger_low.fbx" id="38_sqcf8"]
 [ext_resource type="PackedScene" uid="uid://dknuwbh6rgh5h" path="res://models/fruit/assyrian_plum/topped_plum_prefab.tscn" id="39_d4073"]
 [ext_resource type="PackedScene" uid="uid://ca5p2q6x11bcd" path="res://models/fruit/assyrian_plum/full_plum_prefab.tscn" id="40_3vphn"]
 [ext_resource type="PackedScene" uid="uid://kmqj2qdc6bot" path="res://models/fruit/assyrian_plum/half Plum_prefab.tscn" id="41_2lal6"]
@@ -577,6 +578,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78765, 0.199943, 6.73219)
 size = Vector3(13.76, 20, 20)
 enable_shadows = true
 
+[node name="ReflectionProbe8" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.27239, -0.110799, 6.616)
+size = Vector3(13.76, 20, 20)
+enable_shadows = true
+
 [node name="ReflectionProbe7" type="ReflectionProbe" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0334, 0.199943, 4.15762)
 size = Vector3(6.415, 9.58, 7.31)
@@ -798,5 +804,8 @@ transform = Transform3D(0.00109474, -0.0101125, -0.0312033, -0.00419866, 0.03092
 
 [node name="Root Scene13" parent="." instance=ExtResource("41_2lal6")]
 transform = Transform3D(0.308123, 0.749243, -0.586256, -0.233867, 0.656981, 0.716716, 0.922153, -0.0837306, 0.377654, 3.26757, -0.666435, 2.44906)
+
+[node name="Root Scene22" parent="." instance=ExtResource("38_sqcf8")]
+transform = Transform3D(-2.27799, -0.00268946, -0.0834257, 0.0834381, -0.0112297, -2.27797, 0.00227665, -2.27949, 0.0113206, 4.26019, -0.210025, 6.69046)
 
 [editable path="Environment"]
