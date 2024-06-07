@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1tq6q0rpnopw"
-path.s3tc="res://.godot/imported/defaultmaterial_base_color.png-dfafc18112656d12ba388c6c8bafa9ae.s3tc.ctex"
+uid="uid://q1a0bqhbtpl2"
+path.s3tc="res://.godot/imported/DefaultMaterial_Normal_OpenGL.png-87b1247ed37849efc642efb2f925bee9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/pieces/white/defaultmaterial_base_color.png"
-dest_files=["res://.godot/imported/defaultmaterial_base_color.png-dfafc18112656d12ba388c6c8bafa9ae.s3tc.ctex"]
+source_file="res://textures/pieces/white/DefaultMaterial_Normal_OpenGL.png"
+dest_files=["res://.godot/imported/DefaultMaterial_Normal_OpenGL.png-87b1247ed37849efc642efb2f925bee9.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +20,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://materials/Pieces/White/DefaultMaterial_Normal_OpenGL.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b7h8cnviuvrwt"
-path="res://.godot/imported/base_model.fbx-5849d5b54e734d29db3c4768748e37c4.scn"
+uid="uid://ctrxgamva8tn6"
+path="res://.godot/imported/piece_model.glb-a764f648b48aeba1b92349613a761037.scn"
 
 [deps]
 
-source_file="res://models/pieces/base_model.fbx"
-dest_files=["res://.godot/imported/base_model.fbx-5849d5b54e734d29db3c4768748e37c4.scn"]
+source_file="res://models/piece_model.glb"
+dest_files=["res://.godot/imported/piece_model.glb-a764f648b48aeba1b92349613a761037.scn"]
 
 [params]
 
@@ -31,4 +31,4 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={}
 gltf/naming_version=1
-gltf/embedded_image_handling=1
+gltf/embedded_image_handling=0
