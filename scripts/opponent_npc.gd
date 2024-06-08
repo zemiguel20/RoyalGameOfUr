@@ -6,28 +6,30 @@ var talking_animation: Animation
 
 ## Amount of seconds after starting the game before the npc begins the starting dialogue. 
 @export_group("Dialogue Settings")
+@export var skip_intro: bool
 @export var starting_dialogue_delay: float = 2.0
 @export var min_time_between_dialogues: float = 5.0
 @export var max_time_between_dialogues: float = 10.0
 ## When a reaction plays, we delay the next dialogue, 
 ## to prevent the dialogue interrupting the reaction or the dialogue being skipped.
 @export var reaction_dialogue_delay: float = 5.0
+@export var rematch_start_delay: float = 0.5
 
 @onready var _dialogue_system = $DialogueSystem as DialogueSystem
 @onready var _animation_player = $AnimationPlayer as OpponentAnimationPlayer
 
 var _time_until_next_dialogue: float
-## Reconsider timer vs awaiting
-## Pros: More control over the time
 var _is_timer_active: bool
-
 
 var _tutorial_categories_had: Array[DialogueSystem.Category]
 
 
 func _ready():
-	visible = false
-	GameEvents.play_pressed.connect(_on_play_pressed)
+	if GameState.is_rematch:
+		_on_rematch()
+	else:
+		visible = false
+		GameEvents.play_pressed.connect(_on_play_pressed)
 
 
 func _process(delta):
@@ -86,16 +88,21 @@ func _play_interruption(category):
 
 
 func _on_play_pressed():
+	## Play walking animation and intro dialogue
 	visible = true
-	await _animation_player.play_walkin()
-	## Start first dialogue after a delay.
-	await get_tree().create_timer(starting_dialogue_delay).timeout
-	await _play_story_dialogue()
+	if not skip_intro:
+		await _animation_player.play_walkin()
+		## Start first dialogue after a delay.
+		await get_tree().create_timer(starting_dialogue_delay).timeout
+		await _play_story_dialogue()
+	else:
+		await get_tree().create_timer(0.5).timeout
+		
 	_is_timer_active = true	
 	GameEvents.intro_finished.emit()
 	
 	
-## Reactions for now: Knockout? Debug Button. No Moves?
-func _input(event):
-	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:
-		_play_interruption(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
+func _on_rematch():
+	skip_intro = true
+	_animation_player.play_default_animation()
+	_on_play_pressed()
