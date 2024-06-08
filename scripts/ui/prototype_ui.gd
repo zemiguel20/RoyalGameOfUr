@@ -6,19 +6,19 @@ extends CanvasLayer
 @onready var quit: Button = $"Main Menu/Quit"
 @onready var fade_panel: ColorRect = $Fade_Panel
 @onready var main_menu: Control = $"Main Menu"
+@onready var endscreen: Control = $EndScreen as Endscreen
 
 
 func _ready() -> void:
 	play.pressed.connect(_on_play_pressed)
 	quit.pressed.connect(_on_quit_pressed)
+	GameEvents.game_ended.connect(_on_game_ended)
+	GameEvents.rematch_triggered.connect(_on_play_pressed)
 
 
 func _on_game_ended(_player):
 	visible = true
-	
-	## TODO: Fadeout should be triggered by Endscreen now.
-	#await _fadeout(_fading_duration)
-	#fadeout_finished.emit()
+	endscreen.display(_player)
 	
 
 # When someone wins the game, we will fadeout and then reload the scene.

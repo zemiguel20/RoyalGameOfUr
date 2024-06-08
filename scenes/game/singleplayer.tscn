@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker_interactive.tscn" id="8_g3rsf"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
-[ext_resource type="PackedScene" uid="uid://go7gk7ukrym" path="res://scenes/ui/end_screen.tscn" id="9_po88d"]
+[ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="9_po88d"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="16_eu2sq"]
 
@@ -143,8 +143,6 @@ automatic = true
 follow_viewport_enabled = true
 script = ExtResource("5_8sxhn")
 
-[node name="EndScreen" parent="Prototype_UI" instance=ExtResource("9_po88d")]
-
 [node name="Fade_Panel" type="ColorRect" parent="Prototype_UI"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -152,6 +150,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
+
+[node name="EndScreen" parent="Prototype_UI" instance=ExtResource("9_po88d")]
 
 [node name="Main Menu" type="Control" parent="Prototype_UI"]
 layout_mode = 3
