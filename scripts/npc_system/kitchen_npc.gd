@@ -40,9 +40,13 @@ func _initialize_tree():
 	_current_tree = SequenceNode.new([
 		RunOnceNode.new(WaitTask.new(_start_delay)),
 		SetVisibilityTask.new(true),
+		PlayAnimationTask.new("Walk", false, 0),
 		MoveAlongPathTask.new(_path),
-		RotateTowardsPointTask.new(_storage_point.global_position),
+		PlayAnimationTask.new("TurnRight", true),
+		RotateYTask.new(-0.5 * PI),
+		PlayAnimationTask.new("Browse", false, 0),
 		WaitRandomTask.new(_min_search_time, _max_search_time),
+		PlayAnimationTask.new("Walk", false, 0.15),		
 		MoveAlongPathTask.new(_path2),
 		SetVisibilityTask.new(false),
 		WaitRandomTask.new(_min_kitchen_time, _max_kitchen_time)

@@ -10,10 +10,8 @@ _move_speed = 1.0
 _walk_rotation_speed = 0.7
 _standing_rotation_speed = 200000.0
 _start_delay = 1
-_min_walk_cooldown = null
 _max_walk_cooldown = 5
-_watch_game_probability = 1.0
-_watch_path_progress_ratio = null
+_watch_game_probability = 0.3
 metadata/animation_player = NodePath("Model_BGCharacter1/AnimationPlayer")
 
 [node name="Model_BGCharacter1" parent="." instance=ExtResource("3_np6oq")]

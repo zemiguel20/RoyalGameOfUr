@@ -54,7 +54,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0.106368, 5.22195)
 _path = NodePath("../../Paths/GuardPaths/ToStorage/ToStorage_PathFollow3D")
 _path2 = NodePath("../../Paths/GuardPaths/Storage_To_Kitchen/StorageToKitchen_PathFollow3D")
 _path3 = NodePath("../../Paths/GuardPaths/Kitchen_To_Start/KitchenToStart_PathFollow3D")
+_min_walk_cooldown = 5
 _watch_point = NodePath("../../Board_Marker")
+_watch_path_progress_ratio = 0.3
 
 [node name="Kitchen_NPC" parent="NPCs" node_paths=PackedStringArray("_path", "_path2", "_storage_point") instance=ExtResource("3_lqpm5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.681957, 0.127295, -2.3396)

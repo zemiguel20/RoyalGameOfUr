@@ -49,10 +49,10 @@ func _initialize_tree():
 	var _moving_sequence_with_watching = SequenceNode.new([
 		MoveAlongPathTask.new(_path, 0.001, _watch_path_progress_ratio),
 		PlayAnimationTask.new("TurnLeft", true),
-		DebugTask.new("Turned"),
 		RotateYTask.new(0.5*PI),
+		DebugTask.new("Turned"),
+		## Not sure how to fix the obvious transitions
 		PlayAnimationTask.new("Idle", false, 0),
-		## Does not work because it takes global_position from start!!!
 		WaitTask.new(5),
 		PlayAnimationTask.new("TurnRight", true),
 		RotateYTask.new(-0.5*PI),
