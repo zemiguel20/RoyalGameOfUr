@@ -66,13 +66,8 @@ func get_player_pieces(player: int) -> Array[Piece]:
 	return pieces
 
 
-func clear_pieces() -> void: 
+func clear_pieces() -> void:
 	for node in get_children():
 		if node is Piece:
-			#node.current_spot.pieces.erase(node)
+			node.current_spot.pieces.erase(node)
 			node.queue_free()
-
-
-func clear_dice() -> void:
-	for die in get_dice():
-		die.queue_free()

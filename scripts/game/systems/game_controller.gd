@@ -8,7 +8,6 @@ var current_player: General.Player
 
 
 func _ready():
-	EntityManager.clear_dice()
 	for i in Settings.num_dice:
 		EntityManager.spawn_die(die_spawn_point.global_position)
 	
@@ -55,7 +54,7 @@ func _on_no_moves() -> void:
 
 func _end_game():
 	print("Game Finished: Player %d won" % (current_player + 1))
-	GameEvents.game_ended.emit(current_player + 1)
+	GameEvents.game_ended.emit()
 
 
 func _switch_player() -> void:
