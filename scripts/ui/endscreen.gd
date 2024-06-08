@@ -14,10 +14,6 @@ const lose_singleplayer_text = "You have lost!"
 const hotseat_text = "Player %d won the game"
 
 
-func _ready():
-	pass
-	
-	
 func display(player: General.Player):
 	## TODO: Get session id
 	## NOTE: This would also be the place to alter the link, something like survey_link + session_id
