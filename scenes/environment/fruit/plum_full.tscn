@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca5p2q6x11bcd"]
+
+[ext_resource type="PackedScene" uid="uid://csrwc78btv3cu" path="res://models/fruit/plum_full.fbx" id="1_5vjj5"]
+[ext_resource type="Material" uid="uid://be6fu6d5onee5" path="res://materials/fruit/plum_full.tres" id="2_5gek1"]
+
+[node name="FullPlum" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("1_5vjj5")]
+transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, 0)
+
+[node name="Sphere" parent="Model/RootNode" index="0"]
+surface_material_override/0 = ExtResource("2_5gek1")
+
+[editable path="Model"]
