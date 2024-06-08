@@ -2,6 +2,7 @@ class_name Endscreen extends Control
 
 ## Question: How does this class get the session id?
 @export_multiline var survey_link: String = "https://www.universiteitleiden.nl/"
+@export var fading_duration = 1.5
 
 @onready var survey_menu = $SurveyScreen as Control
 @onready var rematch_menu = $RematchScreen as Control
@@ -36,7 +37,7 @@ func set_result_text(player: General.Player):
 		result_text.text = lose_singleplayer_text
 	
 
-## Triggers when any of the buttons on the survey menu is pressed
+## Triggers when any of the two buttons on the survey menu is pressed.
 func _on_survey_menu_button_pressed():
 	## Go to next screen
 	survey_menu.visible = false
@@ -44,12 +45,25 @@ func _on_survey_menu_button_pressed():
 
 
 func _on_rematch_pressed():
-	Engine.time_scale = 1	
-	get_tree().reload_current_scene()
-	print("Does this execute?")
-	GameEvents.rematch_triggered.emit()
-
-
+	GameState.is_rematch = true
+	_reload_scene()
+	
+	
 func _on_main_menu_pressed():
-	Engine.time_scale = 1		
+	GameState.is_rematch = false
+	_reload_scene()
+
+
+## Triggered when To Main Menu pressed or called from [code] _on_rematch_pressed() [/code]
+func _reload_scene():
+	Engine.time_scale = 1
+	rematch_menu.visible = false
+	await _fadeout()
 	get_tree().reload_current_scene()
+	
+	
+# When someone wins the game, we will fadeout and then reload the scene.
+func _fadeout():
+	visible = true
+	var tween = create_tween().tween_property(self, "color:a", 1.0, fading_duration)
+	await tween.finished

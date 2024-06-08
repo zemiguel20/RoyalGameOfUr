@@ -27,9 +27,6 @@ func start_game():
 	current_player = randi_range(General.Player.ONE, General.Player.TWO) as General.Player
 	GameEvents.game_started.emit()
 	GameEvents.roll_phase_started.emit(current_player)
-	
-	await get_tree().create_timer(5.0).timeout
-	_end_game()
 
 
 func _on_rolled(roll_value: int) -> void:

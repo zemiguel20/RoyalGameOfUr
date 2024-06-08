@@ -56,7 +56,7 @@ offset_left = 719.0
 offset_top = 259.0
 offset_right = 1284.0
 offset_bottom = 796.0
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam phasellus vestibulum lorem. Sed vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Tellus id interdum velit laoreet id. "
+text = "Thank you so much for playing the beta version of our game about the boardgame known as The Royal Game of Ur! There will be a survey coming soon, but in the meantime you can use the survey button to visit the beautiful website of Leiden University. "
 label_settings = SubResource("LabelSettings_n0hub")
 autowrap_mode = 2
 

@@ -60,8 +60,9 @@ func play_default_animation():
 func play_walkin():
 	play_animation(Anim_Name.WALKIN, true, 0.0)
 	seek(1.7)
-	await  _wait_until_animation_end(-2)
+	await _wait_until_animation_end(-2)
 
 
 func _wait_until_animation_end(extra_delay: float = 0):
-	await get_tree().create_timer(current_animation_length + extra_delay).timeout
+	if get_tree():
+		await get_tree().create_timer(current_animation_length + extra_delay).timeout
