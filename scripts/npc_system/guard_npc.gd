@@ -48,18 +48,23 @@ func _initialize_tree():
 	## Subtree for traversing path 1, but stopping to watch the game.	
 	var _moving_sequence_with_watching = SequenceNode.new([
 		MoveAlongPathTask.new(_path, 0.001, _watch_path_progress_ratio),
-		RotateTowardsPointTask.new(_watch_point.global_position),
-		WaitTask.new(2),
-		PlayDialogueTask.new(DialogueSystem.Category.GUARD_COMMENT_1, true),
-		WaitTask.new(2),
-		RotateTowardsPointTask.new(-(_path.global_position + _path.global_basis.z)),
+		PlayAnimationTask.new("TurnLeft", true),
+		DebugTask.new("Turned"),
+		RotateYTask.new(0.5*PI),
+		PlayAnimationTask.new("Idle", false, 0),
+		## Does not work because it takes global_position from start!!!
+		WaitTask.new(5),
+		PlayAnimationTask.new("TurnRight", true),
+		RotateYTask.new(-0.5*PI),
+		PlayAnimationTask.new("Walk", false, 0),
 		MoveAlongPathTask.new(_path, _watch_path_progress_ratio, 1),
 		])
 		
 	## Main tree of the guard.
 	_current_tree = SequenceNode.new([
-		RunOnceNode.new(WaitTask.new(_start_delay)),	
+		RunOnceNode.new(WaitTask.new(_start_delay)),
 		SetVisibilityTask.new(true),
+		PlayAnimationTask.new("Walk"),
 		## Moving sequence with either watching the game or not stopping.
 		SelectorNode.new([
 			RandomNode.new(_moving_sequence_with_watching, _watch_game_probability),

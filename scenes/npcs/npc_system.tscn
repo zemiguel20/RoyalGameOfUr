@@ -76,7 +76,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0613985, 0, 0)
 curve = SubResource("Curve3D_c38qy")
 
 [node name="ToStorage_PathFollow3D" type="PathFollow3D" parent="Paths/GuardPaths/ToStorage"]
-transform = Transform3D(-0.34528, 0.0572691, -0.936741, -3.72526e-09, 0.998134, 0.0610216, 0.93849, 0.0210699, -0.344636, 0, 0, 0)
+transform = Transform3D(-0.34528, 0.057269, -0.936741, -3.72526e-09, 0.998133, 0.0610216, 0.93849, 0.0210698, -0.344636, 0, 0, 0)
 use_model_front = true
 loop = false
 
@@ -116,7 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_snn0l")
 
 [node name="StorageToKitchen2_PathFollow3D" type="PathFollow3D" parent="Paths/KitchenPaths/Storage_To_Kitchen2"]
-transform = Transform3D(-0.00153056, -0.000330129, 0.999994, -1.45518e-11, 1, 0.000330128, -0.999994, 5.05272e-07, -0.00153056, -4.51176, -0.000873566, 3.133)
+transform = Transform3D(-0.00153056, -0.000330129, 0.999993, -1.45518e-11, 1, 0.000330127, -0.999993, 5.05272e-07, -0.00153056, -4.51176, -0.000873566, 3.133)
 use_model_front = true
 loop = false
 

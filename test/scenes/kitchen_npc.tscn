@@ -5,8 +5,17 @@
 
 [node name="Kitchen_NPC" type="Node3D"]
 script = ExtResource("1_uj0e5")
+metadata/animation_player = NodePath("Model_BGCharacter2/AnimationPlayer")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 
-[node name="Root Scene" parent="." instance=ExtResource("3_0runw")]
+[node name="Model_BGCharacter2" parent="." instance=ExtResource("3_0runw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0240891, -0.815915, -0.0708195)
+
+[node name="Skeleton3D" parent="Model_BGCharacter2/RootNode" index="0"]
+bones/3/rotation = Quaternion(0.0471663, -0.00596452, 0.00319624, 0.998864)
+bones/5/rotation = Quaternion(-0.161359, -0.00710567, 0.00712651, 0.986844)
+bones/23/rotation = Quaternion(0.214915, -0.0823258, -0.164063, 0.959227)
+bones/32/rotation = Quaternion(-0.31694, -0.0442038, -0.00400913, 0.947406)
+
+[editable path="Model_BGCharacter2"]

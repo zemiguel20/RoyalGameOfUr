@@ -1,11 +1,11 @@
 class_name AmbientNPCBase
 extends Node3D
 
-@onready var _mesh = $Capsule_MeshInstance3D as MeshInstance3D
 @onready var _audio_player = $AudioStreamPlayer3D as AudioStreamPlayer3D
-@onready var _animation_player = $AnimationPlayer as AnimationPlayer
+
 var blackboard: Blackboard
 
+var _animation_player
 var _current_tree: BTNode
 var _material: BaseMaterial3D
 var _npc_manager: NPCSystem
@@ -15,6 +15,7 @@ var _has_started = false
 func on_ready(manager):
 	_npc_manager = manager
 	_has_started = true
+	_animation_player = get_node(get_meta("animation_player")) as AnimationPlayer
 	
 	_initialize_blackboard()
 	_initialize_tree()
