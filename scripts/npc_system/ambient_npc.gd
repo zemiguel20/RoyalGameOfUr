@@ -20,10 +20,6 @@ func on_ready(manager):
 	_initialize_tree()
 	_current_tree.set_blackboard(blackboard)
 	_current_tree.on_start()
-	
-	## TODO: Remove at end of project.
-	_material = _mesh.material_override.duplicate()
-	_mesh.material_override = _material
 
 	
 func _process(delta):
@@ -53,10 +49,3 @@ func _initialize_blackboard():
 ## Virtual method, used to construct a behaviour tree and set the [param _current_tree] parameter
 func _initialize_tree():
 	pass
-
-
-# Helper method for showing different actions
-# TODO: Remove at end of project.
-func set_material_color(color: Color):
-	(_mesh.material_override as BaseMaterial3D).albedo_color = color
-	

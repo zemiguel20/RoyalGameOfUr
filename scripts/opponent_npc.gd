@@ -6,6 +6,7 @@ var talking_animation: Animation
 
 @export var _dialogue_system: DialogueSystem
 @export_group("Dialogue Settings")
+@export var skip_intro: bool
 ## Amount of seconds after starting the game before the npc begins the starting dialogue. 
 @export var starting_dialogue_delay: float = 2.0
 @export var min_time_between_dialogues: float = 5.0
@@ -82,11 +83,13 @@ func play_tutorial_dialog(category: DialogueSystem.Category):
 
 func _on_play_pressed():
 	visible = true
-	await _animation_player.play_walkin()
-	## Start first dialogue after a delay.
-	_dialogue_system.set_animation_player(_animation_player)
-	await get_tree().create_timer(starting_dialogue_delay).timeout
-	await _play_story_dialogue()
+	
+	if not skip_intro:
+		await _animation_player.play_walkin()
+		## Start first dialogue after a delay.
+		_dialogue_system.set_animation_player(_animation_player)
+		await get_tree().create_timer(starting_dialogue_delay).timeout
+		await _play_story_dialogue()
 	_is_timer_active = true	
 	GameEvents.intro_finished.emit()
 	
