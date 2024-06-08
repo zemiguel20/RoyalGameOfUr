@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyyakpttumftj"]
+
+[ext_resource type="Script" path="res://scripts/game/systems/move_picker/game_move_highlight.gd" id="1_a3k07"]
+[ext_resource type="PackedScene" uid="uid://dk6q50tq0w026" path="res://scenes/game/systems/move_picker/path_highlight.tscn" id="2_2u6bb"]
+
+[node name="GameMoveHighlight" type="Node"]
+script = ExtResource("1_a3k07")
+path_highlight_prefab = ExtResource("2_2u6bb")

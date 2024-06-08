@@ -51,6 +51,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	_define_main_orientations()
 	_define_constraints()
+	GameEvents.intro_finished.connect(_on_play_pressed)
 
 
 func _on_play_pressed():
