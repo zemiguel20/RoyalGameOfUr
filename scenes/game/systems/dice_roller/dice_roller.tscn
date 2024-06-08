@@ -7,7 +7,6 @@
 
 [node name="DiceRoller" type="Node3D"]
 script = ExtResource("1_e3w3t")
-impulse_strength = 0.002
 metadata/placing_spots = NodePath("DicePlacingSpots")
 metadata/throw_spots = NodePath("DiceThrowSpots")
 metadata/shake_sfx = NodePath("ShakeSFX")
