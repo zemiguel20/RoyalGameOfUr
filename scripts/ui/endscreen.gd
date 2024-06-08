@@ -13,13 +13,21 @@ const lose_singleplayer_text = "You have lost!"
 const hotseat_text = "Player %d won the game"
 
 
-func _on_game_ended(player: General.Player):
+func _ready():
+	GameEvents.game_ended.connect(_on_game_ended)
+	
+	
+func set_result_text(player: General.Player):
 	if Settings.current_gamemode == Settings.Gamemode.Hotseat:
 		result_text.text = hotseat_text % player
 	elif player == General.Player.ONE:
 		result_text.text = win_singleplayer_text
 	else: 
 		result_text.text = lose_singleplayer_text
+	
+
+func _on_game_ended(player: General.Player):
+	set_result_text(player)
 	
 	## TODO: Get session id
 	## NOTE: This would also be the place to alter the link, something like survey_link + session_id

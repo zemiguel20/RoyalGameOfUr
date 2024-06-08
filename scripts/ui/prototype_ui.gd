@@ -8,6 +8,11 @@ extends CanvasLayer
 @onready var main_menu: Control = $"Main Menu"
 
 
+func _ready() -> void:
+	play.pressed.connect(_on_play_pressed)
+	quit.pressed.connect(_on_quit_pressed)
+
+
 func _on_game_ended(_player):
 	visible = true
 	
@@ -15,12 +20,6 @@ func _on_game_ended(_player):
 	#await _fadeout(_fading_duration)
 	#fadeout_finished.emit()
 	
-
-
-func _ready() -> void:
-	play.pressed.connect(_on_play_pressed)
-	quit.pressed.connect(_on_quit_pressed)
-
 
 # When someone wins the game, we will fadeout and then reload the scene.
 func _fadeout():
