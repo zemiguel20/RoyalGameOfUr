@@ -8,6 +8,7 @@ var current_player: General.Player
 
 
 func _ready():
+	EntityManager.clear_dice()
 	for i in Settings.num_dice:
 		EntityManager.spawn_die(die_spawn_point.global_position)
 	

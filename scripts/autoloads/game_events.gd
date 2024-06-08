@@ -13,3 +13,4 @@ signal zero_rolled
 
 signal play_pressed
 signal intro_finished
+signal rematch_triggered
