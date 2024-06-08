@@ -1,16 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://4goheq1kyhy1"]
+[gd_scene load_steps=3 format=3 uid="uid://4goheq1kyhy1"]
 
 [ext_resource type="Script" path="res://scripts/npc_system/guard_npc.gd" id="1_wafl7"]
-[ext_resource type="PackedScene" uid="uid://bp8xl8edam6p7" path="res://models/fbx-guard_standing.fbx" id="2_v7gqp"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atjh6"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xmia1"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_3jfe0"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_vioiw"]
-size = Vector3(0.5, 0.2, 0.2)
+[ext_resource type="PackedScene" uid="uid://d1l4ef265ffb7" path="res://scenes/npcs/background_npc_1.tscn" id="3_np6oq"]
 
 [node name="Passenger_NPC" type="Node3D"]
 rotation_edit_mode = 2
@@ -22,27 +13,7 @@ _start_delay = 1
 _max_walk_cooldown = 5
 _watch_game_probability = 0.3
 
-[node name="Temp_Model" parent="." instance=ExtResource("2_v7gqp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.86673, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Model_BGCharacter1" parent="." instance=ExtResource("3_np6oq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0240891, -0.815915, -0.0708195)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-
-[node name="Capsule_MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-material_override = SubResource("StandardMaterial3D_atjh6")
-mesh = SubResource("CapsuleMesh_xmia1")
-
-[node name="Model" type="Node3D" parent="."]
-visible = false
-
-[node name="Box_MeshInstance" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1.81487, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_atjh6")
-mesh = SubResource("BoxMesh_3jfe0")
-skeleton = NodePath("../../Capsule_MeshInstance3D")
-
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.604279, 0.506375)
-mesh = SubResource("BoxMesh_vioiw")
