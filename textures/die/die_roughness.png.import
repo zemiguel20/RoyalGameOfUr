@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk535jhoeotvw"
-path.s3tc="res://.godot/imported/defaultmaterial_roughness.png-c583faee58972a2a93451f27146cc984.s3tc.ctex"
+uid="uid://dx13ml3djyuw7"
+path.bptc="res://.godot/imported/die_roughness.png-0211f15976fce99fec6ecac0dc9802ae.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,13 +11,13 @@ metadata={
 
 [deps]
 
-source_file="res://materials/dice/yellow/defaultmaterial_roughness.png"
-dest_files=["res://.godot/imported/defaultmaterial_roughness.png-c583faee58972a2a93451f27146cc984.s3tc.ctex"]
+source_file="res://textures/die/die_roughness.png"
+dest_files=["res://.godot/imported/die_roughness.png-0211f15976fce99fec6ecac0dc9802ae.bptc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

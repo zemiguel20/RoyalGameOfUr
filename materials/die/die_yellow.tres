@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://67rfsxgxj87x"]
+
+[ext_resource type="Texture2D" uid="uid://cuhuy7lagmbje" path="res://textures/die/die_color_yellow.png" id="1_utpyk"]
+[ext_resource type="Texture2D" uid="uid://bwm14063papxn" path="res://textures/die/die_AO.png" id="2_mi7ny"]
+[ext_resource type="Texture2D" uid="uid://ctje4muxeshvg" path="res://textures/die/die_normal.png" id="3_msa48"]
+[ext_resource type="Texture2D" uid="uid://dx13ml3djyuw7" path="res://textures/die/die_roughness.png" id="4_ujew8"]
+
+[resource]
+albedo_texture = ExtResource("1_utpyk")
+roughness_texture = ExtResource("4_ujew8")
+normal_enabled = true
+normal_texture = ExtResource("3_msa48")
+ao_enabled = true
+ao_texture = ExtResource("2_mi7ny")
