@@ -1,15 +1,18 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://ceiyuaheccrhp"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=8 format=3 uid="uid://ceiyuaheccrhp"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_7e1rc"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_b6alj"]
+[ext_resource type="AudioStream" uid="uid://jpishr73xboe" path="res://resources/dialogue/explain-rosette-safe-1.mp3" id="1_orxgm"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_00tpo"]
+[ext_resource type="AudioStream" uid="uid://c8beypgyvcef8" path="res://resources/dialogue/explain-rosette-safe-2.mp3" id="2_e4xyk"]
 
 [sub_resource type="Resource" id="Resource_fjq4e"]
 script = ExtResource("1_b6alj")
-caption = "When you land on this central rosette, your piece is also protected from being knocked out."
+audio_variations = Array[AudioStream]([ExtResource("1_orxgm"), ExtResource("2_e4xyk")])
+caption = "Pieces standing on a rosette cannot be captured."
 caption_cuneiform = ""
 anim_variations = Array[int]([7])
-fixed_duration = 5.0
+fixed_duration = -1.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_y3sno"]

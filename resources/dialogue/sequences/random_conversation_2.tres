@@ -5,6 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_lho8x"]
 script = ExtResource("1_xgdgq")
+audio_variations = Array[AudioStream]([])
 caption = "Oh, have you heard?"
 caption_cuneiform = ""
 anim_variations = Array[int]([7])
@@ -13,6 +14,7 @@ prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_s7eyw"]
 script = ExtResource("1_xgdgq")
+audio_variations = Array[AudioStream]([])
 caption = "Innana is to visit us next week, all the way from Mari!"
 caption_cuneiform = ""
 anim_variations = Array[int]([])
@@ -21,6 +23,7 @@ prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_eoeho"]
 script = ExtResource("1_xgdgq")
+audio_variations = Array[AudioStream]([])
 caption = "Maybe if we wake early that day, we can catch a glimpse of her."
 caption_cuneiform = ""
 anim_variations = Array[int]([1])

@@ -5,6 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_7k2gv"]
 script = ExtResource("1_gyn8e")
+audio_variations = Array[AudioStream]([])
 caption = "(sigh) ...that's better."
 caption_cuneiform = ""
 anim_variations = Array[int]([3])
@@ -13,6 +14,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_73wnr"]
 script = ExtResource("1_gyn8e")
+audio_variations = Array[AudioStream]([])
 caption = "I swear, these shifts last twice as long on an empty stomach!"
 caption_cuneiform = ""
 anim_variations = Array[int]([5])

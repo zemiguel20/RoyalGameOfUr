@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_0y3bl"]
 script = ExtResource("1_l2v3u")
+audio_variations = Array[AudioStream]([])
 caption = "Ahh..."
 caption_cuneiform = ""
 anim_variations = Array[int]([2])
@@ -21,6 +22,7 @@ weight = 5
 
 [sub_resource type="Resource" id="Resource_ym3t7"]
 script = ExtResource("1_l2v3u")
+audio_variations = Array[AudioStream]([])
 caption = "Hmmm..."
 caption_cuneiform = ""
 anim_variations = Array[int]([2])
@@ -36,6 +38,7 @@ weight = 5
 
 [sub_resource type="Resource" id="Resource_41o34"]
 script = ExtResource("1_l2v3u")
+audio_variations = Array[AudioStream]([])
 caption = "Hmm. That wasn't smart..."
 caption_cuneiform = ""
 anim_variations = Array[int]([6])

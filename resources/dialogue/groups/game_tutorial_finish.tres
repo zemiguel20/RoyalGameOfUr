@@ -1,21 +1,35 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://dsba08jo60k0t"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=11 format=3 uid="uid://dsba08jo60k0t"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_ngoas"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_stmch"]
+[ext_resource type="AudioStream" uid="uid://cykbmre5ru5r4" path="res://resources/dialogue/explain-secure-a-piece-1.mp3" id="1_vidqm"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_hti26"]
+[ext_resource type="AudioStream" uid="uid://bfym8i2aucoe3" path="res://resources/dialogue/explain-secure-a-piece-2.mp3" id="2_rr3md"]
+[ext_resource type="AudioStream" uid="uid://ckkd4eydcl143" path="res://resources/dialogue/explain-secure-a-piece-3.mp3" id="3_q1xj7"]
+[ext_resource type="AudioStream" uid="uid://dnhsjys2ekt2o" path="res://resources/dialogue/explain-win-condition.mp3" id="5_rnke2"]
 
 [sub_resource type="Resource" id="Resource_0ve0n"]
 script = ExtResource("1_stmch")
-caption = "When a piece is almost at the end, you need to roll the exact amount of steps it has left."
+audio_variations = Array[AudioStream]([ExtResource("1_vidqm"), ExtResource("2_rr3md"), ExtResource("3_q1xj7")])
+caption = "To secure a piece, you must roll the exact number of steps it has left on the board."
 caption_cuneiform = ""
 anim_variations = Array[int]([5])
 fixed_duration = 5.0
 prevents_opponent_action = false
 
+[sub_resource type="Resource" id="Resource_4svvn"]
+script = ExtResource("1_stmch")
+audio_variations = Array[AudioStream]([ExtResource("5_rnke2")])
+caption = "Once all of your pieces are secured, you win the game."
+caption_cuneiform = ""
+anim_variations = Array[int]([])
+fixed_duration = -1.0
+prevents_opponent_action = false
+
 [sub_resource type="Resource" id="Resource_i6ft5"]
 script = ExtResource("2_hti26")
 max_repetitions = 1
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_0ve0n")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_0ve0n"), SubResource("Resource_4svvn")])
 requires_click = false
 weight = 5
 

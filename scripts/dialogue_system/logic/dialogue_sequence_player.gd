@@ -53,8 +53,9 @@ func play_dialogue_bundle(_current_entry):
 	_current_entry = _current_entry as DialogueBundle
 	
 	# Play all the effects
-	if _current_entry.audio != null:
-		_audio_player.stream = _current_entry.audio
+	if _current_entry.audio_variations != null and _current_entry.audio_variations.size() > 0:
+		var audios = _current_entry.audio_variations
+		_audio_player.stream = audios[randi_range(0, audios.size()-1)]
 		_audio_player.play()
 	if _use_subtitles and _current_entry.caption != null:
 		_subtitle_displayer.display_subtitle(_current_entry, _current_sequence.requires_click)
@@ -69,12 +70,13 @@ func play_dialogue_bundle(_current_entry):
 		## TODO: Revert back when audio is actually there.
 		var entry_length = _current_entry.fixed_duration
 		if entry_length == -1:
-			entry_length = maxf(_temp_min_entry_length, _animation_player.current_animation_length)
-		
-		await get_tree().create_timer(maxf(entry_length, 1)).timeout
+			await get_tree().create_timer(maxf(entry_length, 1)).timeout
+		else:
+			await _audio_player.finished
+			
 		continue_dialogue()
-		
-		
+
+
 func skip():
 	if not is_busy() or not _current_sequence.requires_click:
 		return
