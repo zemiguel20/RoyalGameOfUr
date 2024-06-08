@@ -1,6 +1,5 @@
-[gd_scene load_steps=19 format=3 uid="uid://cvos81xjjq5nl"]
+[gd_scene load_steps=20 format=3 uid="uid://cvos81xjjq5nl"]
 
-[ext_resource type="PackedScene" uid="uid://dslub3q3xrluo" path="res://models/d4_model.glb" id="1_s565b"]
 [ext_resource type="PhysicsMaterial" uid="uid://cewt4j3gn56bt" path="res://physics_materials/pm_die.tres" id="2_geqe1"]
 [ext_resource type="Script" path="res://scripts/game/entities/die.gd" id="2_yl61n"]
 [ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="3_7uyog"]
@@ -8,12 +7,14 @@
 [ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="4_nhl43"]
 [ext_resource type="Script" path="res://scripts/game/components/move_animation.gd" id="5_7qqtg"]
 [ext_resource type="Script" path="res://scripts/game/components/editor/mesh_marker.gd" id="5_d0inr"]
-[ext_resource type="Material" uid="uid://c6p7a2gj4s6bg" path="res://materials/highlight.tres" id="7_cl6p3"]
+[ext_resource type="Material" uid="uid://cspiva85eoo3" path="res://materials/highlight.tres" id="7_cl6p3"]
 [ext_resource type="Script" path="res://scripts/game/components/selection_input.gd" id="8_kxirt"]
 [ext_resource type="AudioStream" uid="uid://dv5nxtgrtwn6q" path="res://audio/test_dice_roll.mp3" id="10_cgkb7"]
+[ext_resource type="PackedScene" uid="uid://bmkdsd8x5va6j" path="res://models/board_game/d4_die.glb" id="12_kusva"]
+[ext_resource type="Material" uid="uid://lc6rnvl5jhxi" path="res://materials/die/die_black.tres" id="13_bqubf"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d8pqd"]
-points = PackedVector3Array(-0.00112825, -0.0341169, -0.099009, -0.00121302, 0.00105237, -0.0740631, 0.0205224, -0.0341169, -0.0615241, -0.0227789, -0.0341169, -0.0615241, -0.00150125, 0.106615, 0.000804044, 0.0202511, 0.0714323, 0.0133431, -0.00139952, 0.0714185, -0.0241566, 0.0637389, 0.00106614, 0.0384358, 0.0854743, -0.0341169, 0.0509749, -0.0660802, -0.0341169, 0.0134752, -0.0661649, 0.00106614, 0.0384358, -0.0877139, -0.0341169, 0.0509749)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3llvo"]
+points = PackedVector3Array(0, 1, 0, 0, -0.333, -0.943, 0.816, -0.333, 0.471, -0.816, -0.333, 0.471)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvskl"]
 shading_mode = 0
@@ -22,6 +23,24 @@ albedo_color = Color(0, 0.501961, 0.501961, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pr2ax"]
 _surfaces = [{
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 1, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 8, 0, 8, 0, 5, 0, 5, 0, 9, 0, 6, 0, 10, 0, 7, 0, 11, 0, 8, 0, 12, 0, 9, 0, 10, 0, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 9, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 191, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 189)
+}, {
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 1, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 8, 0, 8, 0, 5, 0, 5, 0, 9, 0, 6, 0, 10, 0, 7, 0, 11, 0, 8, 0, 12, 0, 9, 0, 10, 0, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 9, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 191, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 189)
+}, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
@@ -183,7 +202,7 @@ shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(0, 0.501961, 0.501961, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_48uib"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_1v3fx"]
 
 [node name="Die" type="RigidBody3D"]
 mass = 0.01
@@ -195,67 +214,68 @@ metadata/normals_root_node = NodePath("Normals")
 metadata/highlight = NodePath("Highlight")
 metadata/move_animation = NodePath("MoveAnimation")
 metadata/input_reader = NodePath("SelectionInputReader")
-metadata/model = NodePath("d4_model/Dice")
+metadata/model = NodePath("Model/D4")
 metadata/roll_sfx = NodePath("RollSFX")
 
-[node name="d4_model" parent="." instance=ExtResource("1_s565b")]
+[node name="Model" parent="." instance=ExtResource("12_kusva")]
+transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, 0, 0, 0)
 
-[node name="Dice" parent="d4_model" index="0"]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+[node name="D4" parent="Model" index="0"]
+surface_material_override/0 = ExtResource("13_bqubf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_d8pqd")
+transform = Transform3D(0.022, 0, 0, 0, 0.022, 0, 0, 0, 0.022, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_3llvo")
 
 [node name="Normals" type="Node3D" parent="."]
 
-[node name="BlackTip1" type="Marker3D" parent="Normals"]
+[node name="Tip1" type="Marker3D" parent="Normals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000181612, 0.0139439, -0.00035115)
 gizmo_extents = 0.005
 script = ExtResource("3_7uyog")
 gizmo_extends_override = 0.005
 metadata/value = 1
 
-[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/BlackTip1"]
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/Tip1"]
 transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_rvskl")
 mesh = SubResource("ArrayMesh_pr2ax")
 script = ExtResource("5_d0inr")
 
-[node name="BlackTip2" type="Marker3D" parent="Normals"]
+[node name="Tip2" type="Marker3D" parent="Normals"]
 transform = Transform3D(1, 0, 0, 0, -0.305978, 0.952039, 0, -0.952039, -0.305978, -0.000378739, -0.00418571, -0.0128078)
-gizmo_extents = 0.005
-script = ExtResource("3_7uyog")
-gizmo_extends_override = 0.005
-metadata/value = 1
-
-[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/BlackTip2"]
-transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_lnv10")
-mesh = SubResource("ArrayMesh_pr2ax")
-script = ExtResource("5_d0inr")
-
-[node name="WhiteTip1" type="Marker3D" parent="Normals"]
-transform = Transform3D(-0.520309, 0.81302, 0.261298, 1.82861e-08, -0.305978, 0.952039, 0.853978, 0.495355, 0.159203, 0.0117456, -0.00451721, 0.00678466)
 gizmo_extents = 0.005
 script = ExtResource("3_7uyog")
 gizmo_extends_override = 0.005
 metadata/value = 0
 
-[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/WhiteTip1"]
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/Tip2"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_lnv10")
+mesh = SubResource("ArrayMesh_pr2ax")
+script = ExtResource("5_d0inr")
+
+[node name="Tip3" type="Marker3D" parent="Normals"]
+transform = Transform3D(-0.520309, 0.81302, 0.261298, 1.82861e-08, -0.305978, 0.952039, 0.853978, 0.495355, 0.159203, 0.0117456, -0.00451721, 0.00678466)
+gizmo_extents = 0.005
+script = ExtResource("3_7uyog")
+gizmo_extends_override = 0.005
+metadata/value = 1
+
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/Tip3"]
 transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_vfh2r")
 mesh = SubResource("ArrayMesh_pr2ax")
 script = ExtResource("5_d0inr")
 
-[node name="WhiteTip2" type="Marker3D" parent="Normals"]
+[node name="Tip4" type="Marker3D" parent="Normals"]
 transform = Transform3D(-0.521277, -0.812457, -0.261118, 3.69721e-08, -0.305978, 0.952039, -0.853387, 0.496276, 0.159499, -0.0112887, -0.00438574, 0.00652722)
 gizmo_extents = 0.005
 script = ExtResource("3_7uyog")
 gizmo_extends_override = 0.005
 metadata/value = 0
 
-[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/WhiteTip2"]
+[node name="CubeMeshMarkerAddon" type="MeshInstance3D" parent="Normals/Tip4"]
 transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_y0ydb")
 mesh = SubResource("ArrayMesh_pr2ax")
@@ -264,7 +284,7 @@ script = ExtResource("5_d0inr")
 [node name="Highlight" type="Node" parent="." node_paths=PackedStringArray("target_meshes")]
 script = ExtResource("4_nhl43")
 material = ExtResource("7_cl6p3")
-target_meshes = [NodePath("../d4_model/Dice")]
+target_meshes = [NodePath("../Model/D4")]
 
 [node name="MoveAnimation" type="Node" parent="." node_paths=PackedStringArray("root_parent")]
 script = ExtResource("5_7qqtg")
@@ -275,8 +295,8 @@ duration = 0.4
 [node name="SelectionArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionArea"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
-shape = SubResource("BoxShape3D_48uib")
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
+shape = SubResource("SphereShape3D_1v3fx")
 
 [node name="SelectionInputReader" type="Node" parent="." node_paths=PackedStringArray("input_detection_area")]
 script = ExtResource("8_kxirt")
@@ -285,4 +305,4 @@ input_detection_area = NodePath("../SelectionArea")
 [node name="RollSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("10_cgkb7")
 
-[editable path="d4_model"]
+[editable path="Model"]

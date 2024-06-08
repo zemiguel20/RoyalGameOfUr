@@ -1,6 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dq4qt2h6vrkcj"]
-
-[ext_resource type="Texture2D" uid="uid://uh1splic8sw2" path="res://textures/character_texture/opponent/fbx-guard_Mat_Guard_BaseColor.png" id="1_07kqc"]
-
-[resource]
-albedo_texture = ExtResource("1_07kqc")
