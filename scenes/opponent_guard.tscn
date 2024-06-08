@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://bcjpac1cs0xcy"]
 
 [ext_resource type="PackedScene" uid="uid://it24m6uyqxlk" path="res://models/fbx_guard_animated.fbx" id="1_jat7h"]
-[ext_resource type="Material" uid="uid://dq4qt2h6vrkcj" path="res://materials/guard/mat_guard_colors.tres" id="2_nuktw"]
+[ext_resource type="Material" uid="uid://dq4qt2h6vrkcj" path="res://materials/guard/guard.tres" id="2_nuktw"]
 [ext_resource type="Script" path="res://scripts/opponent_npc.gd" id="2_pjd45"]
 [ext_resource type="Script" path="res://scripts/opponent/opponent_animation_player.gd" id="4_g1c61"]
 [ext_resource type="PackedScene" uid="uid://y4idlfyp1gdh" path="res://dialogue_menus.tscn" id="5_bvx3e"]

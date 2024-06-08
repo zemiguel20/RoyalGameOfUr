@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://dq4qt2h6vrkcj"]
+
+[ext_resource type="Texture2D" uid="uid://nkggvbsyrr48" path="res://textures/character_texture/opponent/guard_color.png" id="1_w3wg2"]
+[ext_resource type="Texture2D" uid="uid://dfo4qlkkc84sb" path="res://textures/character_texture/opponent/guard_height.png" id="2_wujc2"]
+[ext_resource type="Texture2D" uid="uid://cnxw6ly8mrwux" path="res://textures/character_texture/opponent/guard_metallic.png" id="3_uws70"]
+[ext_resource type="Texture2D" uid="uid://dsxucqemff1mf" path="res://textures/character_texture/opponent/guard_normal.png" id="4_jewr8"]
+
+[resource]
+albedo_texture = ExtResource("1_w3wg2")
+metallic = 1.0
+metallic_texture = ExtResource("3_uws70")
+normal_enabled = true
+normal_texture = ExtResource("4_jewr8")
+heightmap_scale = 0.0
+heightmap_texture = ExtResource("2_wujc2")
