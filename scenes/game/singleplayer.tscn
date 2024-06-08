@@ -135,8 +135,8 @@ transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 
 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("9_m0jtg")]
 transform = Transform3D(0.847122, 0, 0.531399, 0, 1, 0, -0.531399, 0, 0.847122, 4.46447, -0.212933, 6.17279)
-assigned_player = 1
-automatic = true
+_assigned_player = 1
+_automatic = true
 
 [node name="Prototype_UI" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
