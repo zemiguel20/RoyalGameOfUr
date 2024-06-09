@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsxucqemff1mf"
+uid="uid://0lw7l60h8ih1"
 path.s3tc="res://.godot/imported/guard_normal.png-bd3bbd4915bc2e45c6fd26c530c97db2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
@@ -25,7 +25,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://materials/guard/Guard 2.0/fbx-guard_Mat_Guard_Normal.png"
+roughness/src_normal="res://textures/character_texture/opponent/Tex_Guard_Normal_DirectX.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
