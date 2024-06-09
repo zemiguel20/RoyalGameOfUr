@@ -1,33 +1,38 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=8 format=3 uid="uid://b1mcaftl0frsa"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=14 format=3 uid="uid://b1mcaftl0frsa"]
 
+[ext_resource type="AudioStream" uid="uid://0gerfc3yrjh2" path="res://resources/dialogue/random-joke-1-1-wanna-hear.mp3" id="1_4wc80"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_f1x1r"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_yfia4"]
+[ext_resource type="AudioStream" uid="uid://bvc8gh12pu2iw" path="res://resources/dialogue/random-joke-1-2-dog-walks-in.mp3" id="3_fs5es"]
+[ext_resource type="AudioStream" uid="uid://duelkayxsrc33" path="res://resources/dialogue/random-joke-1-3-walks-in-cannot-see.mp3" id="4_g8vwc"]
+[ext_resource type="AudioStream" uid="uid://t6rt2wsss64i" path="res://resources/dialogue/random-joke-1-5-punchline.mp3" id="5_eeo1g"]
+[ext_resource type="AudioStream" uid="uid://e80gkopq4b7o" path="res://resources/dialogue/random-joke-1-6-ah-come-on.mp3" id="6_suakn"]
 
 [sub_resource type="Resource" id="Resource_l004w"]
 script = ExtResource("1_f1x1r")
-audio_variations = Array[AudioStream]([])
+audio_variations = Array[AudioStream]([ExtResource("1_4wc80")])
 caption = "Hey, wanna hear a joke?"
 caption_cuneiform = ""
 anim_variations = Array[int]([])
-fixed_duration = 3.0
+fixed_duration = -1.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_hyjxb"]
 script = ExtResource("1_f1x1r")
-audio_variations = Array[AudioStream]([])
+audio_variations = Array[AudioStream]([ExtResource("3_fs5es")])
 caption = "So, a dog walks into a bar..."
 caption_cuneiform = ""
 anim_variations = Array[int]([6])
-fixed_duration = 3.0
+fixed_duration = -1.0
 prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_mrw1n"]
 script = ExtResource("1_f1x1r")
-audio_variations = Array[AudioStream]([])
+audio_variations = Array[AudioStream]([ExtResource("4_g8vwc")])
 caption = "He walks in, and says: I cannot see a thing..."
 caption_cuneiform = ""
 anim_variations = Array[int]([4])
-fixed_duration = 5.0
+fixed_duration = -1.0
 prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_m5sdh"]
@@ -36,21 +41,30 @@ audio_variations = Array[AudioStream]([])
 caption = "..."
 caption_cuneiform = ""
 anim_variations = Array[int]([])
-fixed_duration = 2.0
+fixed_duration = 1.5
 prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_leien"]
 script = ExtResource("1_f1x1r")
-audio_variations = Array[AudioStream]([])
+audio_variations = Array[AudioStream]([ExtResource("5_eeo1g")])
 caption = "\"...I'll open this one!\""
 caption_cuneiform = ""
 anim_variations = Array[int]([7])
-fixed_duration = 3.0
+fixed_duration = -1.0
 prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_wy7fm"]
+script = ExtResource("1_f1x1r")
+audio_variations = Array[AudioStream]([ExtResource("6_suakn")])
+caption = "...no? Ah, come on... that was a good one!"
+caption_cuneiform = ""
+anim_variations = Array[int]([2])
+fixed_duration = -1.0
+prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_yfia4")
 max_repetitions = 1
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_l004w"), SubResource("Resource_hyjxb"), SubResource("Resource_mrw1n"), SubResource("Resource_m5sdh"), SubResource("Resource_leien")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_l004w"), SubResource("Resource_hyjxb"), SubResource("Resource_mrw1n"), SubResource("Resource_m5sdh"), SubResource("Resource_leien"), SubResource("Resource_wy7fm")])
 requires_click = false
 weight = 5

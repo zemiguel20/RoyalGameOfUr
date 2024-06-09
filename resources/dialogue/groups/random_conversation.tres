@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=4 format=3 uid="uid://bdjtjqb6rugmh"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://bdjtjqb6rugmh"]
 
 [ext_resource type="Resource" uid="uid://b1mcaftl0frsa" path="res://resources/dialogue/sequences/random_conversation_1.tres" id="1_cuvik"]
+[ext_resource type="Resource" uid="uid://if7cdu6pkce3" path="res://resources/dialogue/sequences/random_convo_ziggurat.tres" id="1_p7rj7"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_rg4u4"]
 [ext_resource type="Resource" uid="uid://bxhte73s8k1w2" path="res://resources/dialogue/sequences/random_conversation_2.tres" id="2_3plon"]
+[ext_resource type="Resource" uid="uid://bkqs6ri4pjcou" path="res://resources/dialogue/sequences/random_convo_ea-nasir.tres" id="3_gjwcg"]
 
 [resource]
 script = ExtResource("1_rg4u4")
 category = 11
-play_in_order = false
+play_in_order = true
 has_priority = false
 initial_delay = 0.5
-dialogue_sequences = Array[Resource("res://scripts/dialogue_system/data/dialogue_sequence.gd")]([ExtResource("2_3plon"), ExtResource("1_cuvik")])
+dialogue_sequences = Array[Resource("res://scripts/dialogue_system/data/dialogue_sequence.gd")]([ExtResource("1_p7rj7"), ExtResource("2_3plon"), ExtResource("1_cuvik"), ExtResource("3_gjwcg")])
 weight_for_empty = 10

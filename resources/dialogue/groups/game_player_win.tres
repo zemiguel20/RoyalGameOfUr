@@ -29,14 +29,12 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_kg23r"]
 script = ExtResource("2_8mqiv")
-max_repetitions = 3
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_wvtl5"), SubResource("Resource_xnqmf")])
 requires_click = false
 weight = 5
 
 [sub_resource type="Resource" id="Resource_v6ul5"]
 script = ExtResource("2_8mqiv")
-max_repetitions = 1
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([])
 requires_click = false
 weight = 5

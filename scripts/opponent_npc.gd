@@ -35,6 +35,7 @@ func _ready():
 	visible = false
 	GameEvents.play_pressed.connect(_on_play_pressed)
 	GameEvents.try_play_tutorial_dialog.connect(_on_try_play_tutorial_dialog)
+	GameEvents.reaction_piece_captured.connect(_on_piece_captured)
 
 
 func _process(delta):
@@ -59,7 +60,8 @@ func _play_story_dialogue():
 
 func _play_random_dialogue():
 	if not explained_everything:
-		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
+		_time_until_next_dialogue = 10
+		## Try again after 10 seconds.
 		return
 		
 	var success = await _dialogue_system.play(DialogueSystem.Category.RANDOM_CONVERSATION)
@@ -124,8 +126,17 @@ func _on_play_pressed():
 	await _play_story_dialogue()
 	_is_timer_active = true	
 	GameEvents.intro_finished.emit()
+
+
+func _on_piece_captured(move: GameMove):
+	if not has_explained_everything: return
 	
-	
+	if move.player == General.Player.TWO:
+		_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
+	else:
+		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
+
+
 ## Reactions for now: Knockout? Debug Button. No Moves?
 func _input(event):
 	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:

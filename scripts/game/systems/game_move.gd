@@ -115,6 +115,7 @@ func execute(animation := General.MoveAnim.NONE, follow_path := false) -> void:
 	if knocks_opo:
 		var opponent_start_spots = _board.get_free_start_spots(General.get_opponent(player))
 		movement_path[-1].move_pieces_split_to_spots(opponent_start_spots, General.MoveAnim.ARC)
+		GameEvents.reaction_piece_captured.emit(self)
 	
 	# Move pieces to last spot
 	movement_path[-2].move_pieces_to_spot(movement_path[-1], animation)
