@@ -2,6 +2,12 @@ class_name OpponentNPC
 extends Node3D
 
 
+var explained_rosettes_extra_roll: bool
+var explained_rosettes_are_safe: bool
+var explained_capturing: bool
+var explained_securing: bool
+var explained_everything: bool
+
 var talking_animation: Animation
 
 ## Amount of seconds after starting the game before the npc begins the starting dialogue. 
@@ -28,6 +34,7 @@ var _tutorial_categories_had: Array[DialogueSystem.Category]
 func _ready():
 	visible = false
 	GameEvents.play_pressed.connect(_on_play_pressed)
+	GameEvents.try_play_tutorial_dialog.connect(_on_try_play_tutorial_dialog)
 
 
 func _process(delta):
@@ -51,7 +58,7 @@ func _play_story_dialogue():
 
 
 func _play_random_dialogue():
-	if (_tutorial_categories_had.size() < 4):
+	if not explained_everything:
 		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
 		return
 		
@@ -63,20 +70,44 @@ func _play_random_dialogue():
 		_is_timer_active = false
 
 
-func play_dialog(category: DialogueSystem.Category):
-	_dialogue_system.play(category)
-
-
-func play_tutorial_dialog(category: DialogueSystem.Category):
-	if !_tutorial_categories_had.has(category):
-		_tutorial_categories_had.append(category)
+func _on_try_play_tutorial_dialog(move: GameMove):
+	#if Settings.check_ruleset(Settings.Ruleset.FINKEL): return
+	if explained_everything: return
 		
-	if (category == DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED \
-	and _tutorial_categories_had.has(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)) \
-	or (category == DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED \
-	and _tutorial_categories_had.has(DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED)):
+	if not explained_capturing and move.knocks_opo:
+		if move.player == General.Player.TWO:
+			play_dialog(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)
+		else:
+			play_dialog(DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED)
+		explained_capturing = true
 		return
-		
+	
+	if not explained_rosettes_extra_roll and move.to.give_extra_turn:
+		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
+		explained_rosettes_extra_roll = true
+		return
+	
+	if not explained_rosettes_are_safe and move.to.safe and move.is_to_central:
+		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
+		explained_rosettes_are_safe = true
+		return
+	
+	if not explained_securing and move.moves_to_end:
+		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
+		explained_securing = true
+		return
+	
+	if has_explained_everything():
+		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_THATS_ALL)
+		explained_everything = true
+
+
+func has_explained_everything() -> bool:
+	return explained_rosettes_extra_roll and explained_capturing \
+	and explained_rosettes_are_safe and explained_securing
+
+
+func play_dialog(category: DialogueSystem.Category):
 	_dialogue_system.play(category)
 
 

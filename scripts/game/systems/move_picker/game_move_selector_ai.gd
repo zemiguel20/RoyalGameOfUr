@@ -54,6 +54,7 @@ func start_selection(moves: Array[GameMove]) -> void:
 	
 	# Highlight selected move for a bit
 	highlight.highlight(selected_move)
+	GameEvents.try_play_tutorial_dialog.emit(selected_move)
 	await get_tree().create_timer(move_highlight_duration).timeout
 	highlight.clear_highlight(selected_move)
 	
@@ -74,25 +75,6 @@ func _determine_next_move(moves: Array[GameMove]) -> GameMove:
 		return valid_moves[1]
 	else:
 		return valid_moves[2]
-
-
-# TODO: PORT THIS TO OPPONENT LOGIC, BY CHECKING GAME STATE
-#func _check_for_tutorial_signals(move: Move):
-	## TODO: Only run this method when playing with default rules
-	#on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_EXPLANATION)
-	#
-	#if move.knocks_opo:
-		#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)
-		#has_emitted_tutorial_capture_signal = true
-	#
-	#if move.to.is_safe:
-		#if move.is_to_central_safe:
-			#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
-		#else:
-			#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
-	#
-	#if move.to.force_allow_stack:
-		#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
 
 
 func _sort_best_moves(a, b):

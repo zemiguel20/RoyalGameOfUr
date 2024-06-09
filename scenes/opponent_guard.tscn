@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bcjpac1cs0xcy"]
+[gd_scene load_steps=25 format=3 uid="uid://bcjpac1cs0xcy"]
 
 [ext_resource type="PackedScene" uid="uid://it24m6uyqxlk" path="res://models/fbx_guard_animated.fbx" id="1_jat7h"]
 [ext_resource type="Material" uid="uid://dq4qt2h6vrkcj" path="res://materials/guard/guard.tres" id="2_nuktw"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://b31u1blrsob06" path="res://resources/dialogue/groups/game_player_gets_captured.tres" id="11_d0ho7"]
 [ext_resource type="Resource" uid="uid://bn8skq46su8tj" path="res://resources/dialogue/groups/game_opponent_mistake.tres" id="12_wtttm"]
 [ext_resource type="Resource" uid="uid://bwb2tdg0bmm0v" path="res://resources/dialogue/groups/game_tutorial_opponent_gets_captured.tres" id="14_cvxdk"]
+[ext_resource type="Resource" uid="uid://d0cplrwbxokxy" path="res://resources/dialogue/groups/game_tutorial_rosette_extra_turn.tres" id="14_qp63w"]
 [ext_resource type="Resource" uid="uid://gj45b7uqg4hx" path="res://resources/dialogue/groups/game_tutorial_player_gets_captured.tres" id="15_n7lqr"]
 [ext_resource type="Resource" uid="uid://ceiyuaheccrhp" path="res://resources/dialogue/groups/game_tutorial_central_rosette.tres" id="16_04h7n"]
 [ext_resource type="Resource" uid="uid://dsba08jo60k0t" path="res://resources/dialogue/groups/game_tutorial_finish.tres" id="17_ns1ih"]
@@ -73,7 +74,7 @@ script = ExtResource("4_g1c61")
 
 [node name="DialogueSystem" type="Node" parent="." index="4"]
 script = ExtResource("5_dxxwf")
-_dialogue_groups = Array[Resource("res://scripts/dialogue_system/data/dialogue_group.gd")]([ExtResource("7_7nwkm"), ExtResource("8_huw5v"), ExtResource("9_os1th"), ExtResource("10_3fa74"), ExtResource("11_d0ho7"), ExtResource("12_wtttm"), ExtResource("14_cvxdk"), ExtResource("15_n7lqr"), ExtResource("16_04h7n"), ExtResource("17_ns1ih"), ExtResource("18_jhkgr"), ExtResource("19_radjr"), ExtResource("20_4k08t")])
+_dialogue_groups = Array[Resource("res://scripts/dialogue_system/data/dialogue_group.gd")]([ExtResource("7_7nwkm"), ExtResource("8_huw5v"), ExtResource("9_os1th"), ExtResource("10_3fa74"), ExtResource("11_d0ho7"), ExtResource("12_wtttm"), ExtResource("14_qp63w"), ExtResource("14_cvxdk"), ExtResource("15_n7lqr"), ExtResource("16_04h7n"), ExtResource("17_ns1ih"), ExtResource("18_jhkgr"), ExtResource("19_radjr"), ExtResource("20_4k08t")])
 
 [node name="DialogueGroupPlayer_Random" type="Node" parent="DialogueSystem" index="0"]
 script = ExtResource("6_fvtk2")

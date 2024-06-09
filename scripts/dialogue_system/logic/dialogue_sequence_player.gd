@@ -70,9 +70,9 @@ func play_dialogue_bundle(_current_entry):
 		## TODO: Revert back when audio is actually there.
 		var entry_length = _current_entry.fixed_duration
 		if entry_length == -1:
-			await get_tree().create_timer(maxf(entry_length, 1)).timeout
-		else:
 			await _audio_player.finished
+		else:
+			await get_tree().create_timer(entry_length).timeout
 			
 		continue_dialogue()
 
