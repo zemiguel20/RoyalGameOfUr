@@ -86,8 +86,8 @@ func _play_interruption(category):
 
 
 func _on_play_pressed():
-	visible = true
 	if not Settings.is_hotseat_mode:
+		visible = true
 		await _animation_player.play_walkin()
 		## Start first dialogue after a delay.
 		await get_tree().create_timer(starting_dialogue_delay).timeout
