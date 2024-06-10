@@ -6,6 +6,7 @@ signal roll_finished(value: int)
 
 @export var roll_rotation_speed: float = 1.0
 @export var min_roll_time: float = 0.7
+@export var correction_impulse_strength: float = 3
 
 var highlight: MaterialHighlight
 var move_anim: MoveAnimation
@@ -101,7 +102,7 @@ func _read_roll_value(is_second_check) -> int:
 
 func _apply_dice_correction(closest_normal, smallest_angle):
 	## Apply a correction impulse that scales with the smallest angle
-	var correction_impulse = -closest_normal.global_basis.y * smallest_angle * 0.5
+	var correction_impulse = -closest_normal.global_basis.y * smallest_angle * correction_impulse_strength
 	apply_impulse(correction_impulse, closest_normal.position)
 	await get_tree().create_timer(0.5).timeout
 	return await _read_roll_value(true)
