@@ -73,7 +73,7 @@ func _on_movement_stopped() -> void:
 	if sleeping_state_changed.is_connected(_on_movement_stopped):
 		sleeping_state_changed.disconnect(_on_movement_stopped)
 	
-	value = await _read_roll_value(false)
+	value = await _read_roll_value()
 	roll_finished.emit(value)
 
 
@@ -82,7 +82,7 @@ func _force_movement_stop() -> void:
 		_on_movement_stopped()
 
 
-func _read_roll_value(is_second_check) -> int:
+func _read_roll_value() -> int:
 	# Check which normal is closest (smallest angle) to the UP vector.
 	var closest_normal = normals.front() as Node3D
 	var smallest_angle = closest_normal.global_basis.y.angle_to(Vector3.UP)
@@ -92,17 +92,13 @@ func _read_roll_value(is_second_check) -> int:
 			closest_normal = normal
 			smallest_angle = angle
 			
-	if not is_second_check and smallest_angle > 0.1 * PI:
-		print("Correction!")
-		return await _apply_dice_correction(closest_normal, smallest_angle)
+	if smallest_angle > 0.1 * PI:
+		## Apply a correction impulse that scales with the smallest angle
+		print("Correction")
+		var correction_impulse = -closest_normal.global_basis.y * smallest_angle * correction_impulse_strength
+		apply_impulse(correction_impulse, closest_normal.position)
+		await get_tree().create_timer(0.5).timeout
 	
 	var value = closest_normal.get_meta("value") as int
 	return value
 
-
-func _apply_dice_correction(closest_normal, smallest_angle):
-	## Apply a correction impulse that scales with the smallest angle
-	var correction_impulse = -closest_normal.global_basis.y * smallest_angle * correction_impulse_strength
-	apply_impulse(correction_impulse, closest_normal.position)
-	await get_tree().create_timer(0.5).timeout
-	return await _read_roll_value(true)
