@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BoardLayout" load_steps=4 format=3 uid="uid://obhxhkyeogwd"]
+
+[ext_resource type="Texture2D" uid="uid://dbpbhcrrdu3lb" path="res://icon.svg" id="1_gbq02"]
+[ext_resource type="Script" path="res://scripts/game/ruleset/board_layout.gd" id="1_iby3p"]
+[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/boards/board_finkel.tscn" id="2_hjuhs"]
+
+[resource]
+script = ExtResource("1_iby3p")
+name = "Finkel (Common)"
+preview = ExtResource("1_gbq02")
+scene = ExtResource("2_hjuhs")
