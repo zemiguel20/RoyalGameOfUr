@@ -1,5 +1,6 @@
 extends Node
 
+var is_hotseat_mode: bool = true
 
 var can_stack_in_safe_spot: bool = false
 ## The number of pieces that will be used in the board game.
