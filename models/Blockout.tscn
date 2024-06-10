@@ -793,6 +793,3 @@ transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 2.46699, -0
 
 [node name="Root Scene" parent="." index="2" instance=ExtResource("5_w6xu6")]
 transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, 0.761333, -0.423434, 0.386459)
-
-[node name="NewMainWallsLow" type="MeshInstance3D" parent="." index="3"]
-transform = Transform3D(0.0897738, 0, 0, 0, 0.0897738, 0, 0, 0, 0.0897738, 0.782075, -0.431345, 0.390692)

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://utfwm5htnhq7"
-path.bptc="res://.godot/imported/DefaultMaterial_Base_color.png-088401f8d13c72c6e27b3180e3452895.bptc.ctex"
+uid="uid://cxhe083hj211n"
+path.s3tc="res://.godot/imported/940-normal.jpg-0819f78c3a6935bb3fa41316e90cd89a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,21 +11,21 @@ metadata={
 
 [deps]
 
-source_file="res://textures/Fruit/plum_half/DefaultMaterial_Base_color.png"
-dest_files=["res://.godot/imported/DefaultMaterial_Base_color.png-088401f8d13c72c6e27b3180e3452895.bptc.ctex"]
+source_file="res://textures/cup/940-normal.jpg"
+dest_files=["res://.godot/imported/940-normal.jpg-0819f78c3a6935bb3fa41316e90cd89a.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://textures/cup/940-normal.jpg"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

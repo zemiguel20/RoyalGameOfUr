@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3x408qf8jahc"
-path="res://.godot/imported/DefaultMaterial_Normal.png-918d2cc8cd12a0a094b2bc9d2bfc35b0.ctex"
+path="res://.godot/imported/DefaultMaterial_Normal.png-48e51c03217da01e7cdd3176f4006cf6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/fruit/plum_half/DefaultMaterial_Normal.png"
-dest_files=["res://.godot/imported/DefaultMaterial_Normal.png-918d2cc8cd12a0a094b2bc9d2bfc35b0.ctex"]
+source_file="res://textures/Fruit/plum_half/DefaultMaterial_Normal.png"
+dest_files=["res://.godot/imported/DefaultMaterial_Normal.png-48e51c03217da01e7cdd3176f4006cf6.ctex"]
 
 [params]
 

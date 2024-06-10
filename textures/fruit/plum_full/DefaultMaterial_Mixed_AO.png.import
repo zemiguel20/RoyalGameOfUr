@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccgf3ohfyo6sk"
-path.s3tc="res://.godot/imported/DefaultMaterial_Mixed_AO.png-a1cb5f7c3b61aac5653886b02b50f218.s3tc.ctex"
+path.s3tc="res://.godot/imported/DefaultMaterial_Mixed_AO.png-4a4372240511a3cfd17d47d53b4cbe3c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/fruit/plum_full/DefaultMaterial_Mixed_AO.png"
-dest_files=["res://.godot/imported/DefaultMaterial_Mixed_AO.png-a1cb5f7c3b61aac5653886b02b50f218.s3tc.ctex"]
+source_file="res://textures/Fruit/plum_full/DefaultMaterial_Mixed_AO.png"
+dest_files=["res://.godot/imported/DefaultMaterial_Mixed_AO.png-4a4372240511a3cfd17d47d53b4cbe3c.s3tc.ctex"]
 
 [params]
 
