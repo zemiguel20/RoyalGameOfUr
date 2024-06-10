@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr0l750ofrajc"]
+
+[ext_resource type="Script" path="res://scripts/game/systems/move_picker/move_picker_spawner.gd" id="1_lal17"]
+[ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker_interactive.tscn" id="2_56eq4"]
+[ext_resource type="PackedScene" uid="uid://d3gx24dw7xjud" path="res://scenes/game/systems/move_picker/move_picker_ai.tscn" id="3_eky3b"]
+
+[node name="MovePickerSpawner" type="Node"]
+script = ExtResource("1_lal17")
+move_picker_interactive = ExtResource("2_56eq4")
+move_picker_ai = ExtResource("3_eky3b")
