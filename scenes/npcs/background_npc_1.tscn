@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1l4ef265ffb7"]
+
+[ext_resource type="PackedScene" uid="uid://dmvbii2ft2yi1" path="res://models/fbx_bgchar1_animated.fbx" id="1_4q7w5"]
+[ext_resource type="Material" uid="uid://c6p6slp5krtu0" path="res://materials/bgchar1/bgchar1.tres" id="2_luyvx"]
+
+[node name="Root Scene" instance=ExtResource("1_4q7w5")]
+
+[node name="MESH_BGChar1_autorig" parent="RootNode/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_luyvx")
