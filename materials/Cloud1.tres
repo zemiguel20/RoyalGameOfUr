@@ -21,6 +21,5 @@ heightmap_min_layers = 8
 heightmap_max_layers = 32
 heightmap_texture = ExtResource("1_364ti")
 backlight_enabled = true
-backlight = Color(1, 1, 1, 1)
 backlight_texture = ExtResource("1_364ti")
 disable_receive_shadows = true

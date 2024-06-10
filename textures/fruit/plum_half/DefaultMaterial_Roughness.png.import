@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ifilf8q652l8"
-path.bptc="res://.godot/imported/DefaultMaterial_Roughness.png-c0f092007de080624777e2b194b8f021.bptc.ctex"
+path.bptc="res://.godot/imported/DefaultMaterial_Roughness.png-a23e3a150b3183ff7155b9826d2b59d3.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/fruit/plum_half/DefaultMaterial_Roughness.png"
-dest_files=["res://.godot/imported/DefaultMaterial_Roughness.png-c0f092007de080624777e2b194b8f021.bptc.ctex"]
+source_file="res://textures/Fruit/plum_half/DefaultMaterial_Roughness.png"
+dest_files=["res://.godot/imported/DefaultMaterial_Roughness.png-a23e3a150b3183ff7155b9826d2b59d3.bptc.ctex"]
 
 [params]
 

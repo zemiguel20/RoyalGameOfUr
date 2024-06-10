@@ -689,7 +689,7 @@ mesh = SubResource("ArrayMesh_oevdk")
 skeleton = NodePath("")
 
 [node name="pCube9" type="MeshInstance3D" parent="."]
-transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.25664, -0.424362, 0.379476)
+transform = Transform3D(8.82187, 0, 0, 0, 8.82187, 0, 0, 0, 8.82187, -1.26424, -0.424, 0.98042)
 material_override = ExtResource("1_0uabv")
 mesh = SubResource("ArrayMesh_hrjqt")
 skeleton = NodePath("")
