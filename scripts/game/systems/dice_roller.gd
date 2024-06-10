@@ -6,7 +6,7 @@ class_name DiceRoller extends Node3D
 
 
 @export var _assigned_player: General.Player
-@export var _impulse_strength: float = 0.002 
+@export var _impulse_strength: float = 0.2
 @export var _automatic: bool = false
 @export_range(0.0, 1.0, 0.1, "or_greater") var _show_result_duration: float = 0.5
 @export_range(0.0, 1.0, 0.1, "or_greater") var _auto_delay_grab_dice: float = 0.5
@@ -141,7 +141,7 @@ func _roll_dice() -> void:
 		
 		var start_position = throw_spot.global_position
 		var start_rotation = General.get_random_rotation()
-		var impulse = throw_spot.global_basis.y * _impulse_strength
+		var impulse = throw_spot.global_basis.y * _impulse_strength / 100
 		die.roll(impulse, start_position, start_rotation)
 	
 	# wait roll finished
