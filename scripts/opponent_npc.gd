@@ -95,14 +95,14 @@ func _on_play_pressed():
 		## Start first dialogue after a delay.
 		await get_tree().create_timer(starting_dialogue_delay).timeout
 		await _play_story_dialogue()
-	else:
-		await get_tree().create_timer(0.5).timeout
 		
 	_is_timer_active = true	
 	GameEvents.intro_finished.emit()
 	
 	
 func _on_rematch():
-	skip_intro = true
-	_animation_player.play_default_animation()
-	_on_play_pressed()
+	visible = true
+	_is_timer_active = true
+	## Add delay before starting the game.
+	await get_tree().create_timer(0.5).timeout
+	GameEvents.intro_finished.emit()

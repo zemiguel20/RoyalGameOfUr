@@ -1,6 +1,5 @@
 class_name Endscreen extends Control
 
-## Question: How does this class get the session id?
 @export_multiline var survey_link: String = "https://www.universiteitleiden.nl/"
 @export var fading_duration = 1.5
 
@@ -14,29 +13,23 @@ const lose_singleplayer_text = "You have lost!"
 const hotseat_text = "Player %d won the game"
 
 
-func display(player: General.Player):
+func display(winner: General.Player):
 	## TODO: Get session id
 	## NOTE: This would also be the place to alter the link, something like survey_link + session_id
 	survey_button.uri = survey_link
-	set_result_text(player)
+	set_result_text(winner + 1)
 	visible = true
 	survey_menu.visible = true
 	Engine.time_scale = 0
 	
 
-func set_result_text(player: General.Player):
-	if Settings.current_gamemode == Settings.Gamemode.Hotseat:
-		result_text.text = hotseat_text % player
-	elif player == General.Player.ONE:
+func set_result_text(winner: General.Player):
+	if Settings.is_hotseat_mode:
+		result_text.text = hotseat_text % winner
+	elif winner == General.Player.ONE:
 		result_text.text = win_singleplayer_text
 	else: 
 		result_text.text = lose_singleplayer_text
-	
-	## TODO: Get session id
-	## NOTE: This would also be the place to alter the link, something like survey_link + session_id
-	survey_button.uri = survey_link
-	visible = true
-	survey_menu.visible = true
 	
 
 ## Triggers when any of the two buttons on the survey menu is pressed.
@@ -61,11 +54,12 @@ func _reload_scene():
 	Engine.time_scale = 1
 	rematch_menu.visible = false
 	await _fadeout()
+	
+	## TODO: Replace with loading logic
 	get_tree().reload_current_scene()
 	
 	
 # When someone wins the game, we will fadeout and then reload the scene.
 func _fadeout():
-	visible = true
 	var tween = create_tween().tween_property(self, "color:a", 1.0, fading_duration)
 	await tween.finished

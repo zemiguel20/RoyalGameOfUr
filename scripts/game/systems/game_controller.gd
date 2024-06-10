@@ -55,7 +55,7 @@ func _on_no_moves() -> void:
 
 func _end_game():
 	print("Game Finished: Player %d won" % (current_player + 1))
-	GameEvents.game_ended.emit()
+	GameEvents.game_ended.emit(current_player)
 
 
 func _switch_player() -> void:

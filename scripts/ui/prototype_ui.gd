@@ -16,9 +16,9 @@ func _ready() -> void:
 		quit.pressed.connect(_on_quit_pressed)
 
 
-func _on_game_ended(_player):
+func _on_game_ended(winner):
 	visible = true
-	endscreen.display(_player)
+	endscreen.display(winner)
 	
 	
 func _hide_menu():
