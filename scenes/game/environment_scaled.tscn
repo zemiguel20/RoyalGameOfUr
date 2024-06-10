@@ -130,9 +130,10 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 transform = Transform3D(0.516401, -0.805229, 0.291438, -0.248673, 0.184656, 0.950823, -0.819446, -0.563479, -0.104882, 0.636619, 0.759146, 1.46667)
 light_color = Color(0.890196, 0.890196, 0.878431, 1)
 shadow_bias = 0.1
+shadow_blur = 1.476
 directional_shadow_mode = 2
-directional_shadow_split_1 = 0.059
-directional_shadow_split_2 = 0.637
+directional_shadow_split_1 = 0.1
+directional_shadow_split_2 = 0.437
 directional_shadow_split_3 = 1.0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 14.2
@@ -155,6 +156,12 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Table/StaticBody3D_Table" groups=["Ground"]]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.871, -0.0423534, 1.379)
 shape = SubResource("BoxShape3D_080q8")
+
+[node name="TablePlank6" parent="Environment/Table" index="4" instance=ExtResource("2_mq51f")]
+transform = Transform3D(-2.18691, -1.85687e-07, -0.662298, -9.21432e-09, -2.53536, 1.97601e-07, 1.28275, -3.34781e-07, -1.12913, 1.03992, 0.0164161, 1.25593)
+
+[node name="TablePlank7" parent="Environment/Table" index="5" instance=ExtResource("2_mq51f")]
+transform = Transform3D(-2.18691, -1.85687e-07, -0.662298, -9.21432e-09, -2.53536, 1.97601e-07, 1.28275, -3.34781e-07, -1.12913, 0.793043, 0.0164161, 1.41279)
 
 [node name="cloth" parent="Environment" index="5"]
 transform = Transform3D(4.79902, 0, -8.16304, 0, 9.52308, 0, 7.98754, 0, 4.90446, 1.12564, -0.0535423, 1.60522)
@@ -221,6 +228,18 @@ transform = Transform3D(-10.2517, 0, -6.93752, 0, 12.3785, 0, 6.93752, 0, -10.25
 
 [node name="pot_1" parent="Environment/Pots" instance=ExtResource("6_jnxdo")]
 transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 3.47139, -0.690172, 6.54804)
+
+[node name="pot_59" parent="Environment/Pots" instance=ExtResource("6_jnxdo")]
+transform = Transform3D(19.8916, 0, 0, 0, 19.8916, 0, 0, 0, 19.8916, 5.18473, -0.697743, 6.17814)
+
+[node name="pot_60" parent="Environment/Pots" instance=ExtResource("6_jnxdo")]
+transform = Transform3D(19.8916, 0, 0, 0, 19.8916, 0, 0, 0, 19.8916, 4.89831, -0.697743, 5.67375)
+
+[node name="pot_61" parent="Environment/Pots" instance=ExtResource("6_jnxdo")]
+transform = Transform3D(19.8916, 0, 0, 0, 19.8916, 0, 0, 0, 19.8916, 4.1589, -0.697743, 6.78013)
+
+[node name="pot_62" parent="Environment/Pots" instance=ExtResource("6_jnxdo")]
+transform = Transform3D(19.8916, 0, 0, 0, 19.8916, 0, 0, 0, 19.8916, 3.88645, -0.697743, 6.3118)
 
 [node name="pot_58" parent="Environment/Pots" instance=ExtResource("6_jnxdo")]
 transform = Transform3D(18.0703, 0, 0, 0, 18.0703, 0, 0, 0, 18.0703, 5.70644, -0.690172, 2.80906)
