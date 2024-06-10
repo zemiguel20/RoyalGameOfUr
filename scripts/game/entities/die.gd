@@ -5,6 +5,7 @@ class_name Die extends RigidBody3D
 signal roll_finished(value: int)
 
 @export var roll_rotation_speed: float = 1.0
+@export var min_roll_time: float = 1.0
 
 var highlight: MaterialHighlight
 var move_anim: MoveAnimation
@@ -48,18 +49,24 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 	if sleeping:
 		await sleeping_state_changed
 	
-	roll_sfx.play()
-	
-	sleeping_state_changed.connect(_on_movement_stopped)
-	
 	get_tree().create_timer(5.0).timeout.connect(_force_movement_stop)
+	
+	roll_sfx.play()
+	await get_tree().create_timer(min_roll_time).timeout
+	if sleeping:
+		_on_movement_stopped()
+	else:	
+		sleeping_state_changed.connect(_on_movement_stopped)
+	
 
 
 func _on_movement_stopped() -> void:
 	freeze = true
 	rolling = false
-	sleeping_state_changed.disconnect(_on_movement_stopped)
 	roll_sfx.stop()
+	
+	if sleeping_state_changed.is_connected(_on_movement_stopped):
+		sleeping_state_changed.disconnect(_on_movement_stopped)
 	
 	value = _read_roll_value()
 	roll_finished.emit(value)
