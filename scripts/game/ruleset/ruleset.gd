@@ -11,4 +11,4 @@ class_name Ruleset extends Resource
 @export_range(1, 7, 1) var num_pieces: int = 7
 @export_range(1, 4, 1) var num_dice: int = 4
 
-@export var board_layout: BoardLayout
+@export var board_layout: BoardLayout = preload("res://resources/rulesets/board_layouts/layout_finkel.tres")
