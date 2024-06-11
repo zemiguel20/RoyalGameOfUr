@@ -2,7 +2,7 @@ extends CanvasLayer
 
 
 @export var _fading_duration = 2.5
-@onready var play: Button = $"Main Menu/Play"
+@onready var play: Button = $"Main Menu/Single Player"
 @onready var quit: Button = $"Main Menu/Quit"
 @onready var fade_panel: ColorRect = $Fade_Panel
 @onready var main_menu: Control = $"Main Menu"
