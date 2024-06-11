@@ -20,8 +20,6 @@ extends AmbientNPCBase
 @export_group("Special Events")
 ## The guard has a random chance to wait at one of the points in the path.
 @export_range(0, 1) var _watch_game_probability = 0.5
-## The point the guard is looking at when watching the game.
-@export var _watch_point: Marker3D
 ## The part of the path follow where the guard pauzes.
 @export var _watch_path_progress_ratio = 0.3
 
@@ -37,7 +35,6 @@ func _initialize_blackboard():
 	blackboard.append("Move Speed", _move_speed)
 	blackboard.append("Rotation Speed", _walk_rotation_speed)
 	blackboard.append("Standing Rotation Speed", _standing_rotation_speed)
-	blackboard.append("Dialogue System", _npc_manager.dialogue_system)
 
 
 func _initialize_tree():

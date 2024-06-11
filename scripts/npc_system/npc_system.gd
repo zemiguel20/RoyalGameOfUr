@@ -9,7 +9,10 @@ var npcs: Array
 
 func _ready():
 	npcs = get_node("NPCs").get_children()
+	GameEvents.play_pressed.connect(_on_play_pressed)
 	
+
+func _on_play_pressed():
 	for npc in npcs:
 		if npc is AmbientNPCBase:
 			npc.on_ready(self)
