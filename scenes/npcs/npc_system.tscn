@@ -49,23 +49,18 @@ script = ExtResource("1_3oufk")
 
 [node name="NPCs" type="Node3D" parent="."]
 
-[node name="Guard_NPC" parent="NPCs" node_paths=PackedStringArray("_path", "_path2", "_path3", "_watch_point") instance=ExtResource("2_6rgek")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0.106368, 5.22195)
+[node name="Guard_NPC" parent="NPCs" node_paths=PackedStringArray("_path", "_path2", "_path3") instance=ExtResource("2_6rgek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5644, 0.106368, 5.32111)
+visible = false
 _path = NodePath("../../Paths/GuardPaths/ToStorage/ToStorage_PathFollow3D")
 _path2 = NodePath("../../Paths/GuardPaths/Storage_To_Kitchen/StorageToKitchen_PathFollow3D")
 _path3 = NodePath("../../Paths/GuardPaths/Kitchen_To_Start/KitchenToStart_PathFollow3D")
-_min_walk_cooldown = 5
-_watch_point = NodePath("../../Board_Marker")
-_watch_path_progress_ratio = 0.3
 
-[node name="Kitchen_NPC" parent="NPCs" node_paths=PackedStringArray("_path", "_path2", "_storage_point") instance=ExtResource("3_lqpm5")]
+[node name="Kitchen_NPC" parent="NPCs" node_paths=PackedStringArray("_path", "_path2") instance=ExtResource("3_lqpm5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.681957, 0.127295, -2.3396)
+visible = false
 _path = NodePath("../../Paths/KitchenPaths/Kitchen_To_Storage/Kitchen_To_Storage_PathFollow3D")
 _path2 = NodePath("../../Paths/KitchenPaths/Storage_To_Kitchen2/StorageToKitchen2_PathFollow3D")
-_move_speed = 1.2
-_rotation_speed = 0.7
-_start_delay = 10.0
-_storage_point = NodePath("../../Storage_Marker")
 
 [node name="Paths" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.662207, 0)
