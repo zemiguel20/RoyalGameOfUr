@@ -20,6 +20,13 @@ script/source = "extends Node
 
 func _ready() -> void:
 	Settings.is_hotseat_mode = true
+	Settings.ruleset = load(\"res://resources/rulesets/ruleset_russian_rosette.tres\")
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.keycode == KEY_1 and event.pressed:
+			Settings.fast_move_enabled = not Settings.fast_move_enabled
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wg4la"]

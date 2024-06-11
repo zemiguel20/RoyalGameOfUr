@@ -6,6 +6,7 @@ extends CanvasLayer
 
 @onready var fast_move_rect = $ControlsRegular/OneKey as TextureRect
 @onready var fast_move_label = $ControlsRegular/OneKey/PieceMode as Label
+@onready var look_around: TextureRect = $ControlsRegular/RightMouse
 
 
 func _ready():
@@ -16,9 +17,10 @@ func _ready():
 	GameEvents.fast_move_toggled.connect(_toggle_fast_move_label)
 
 
-func _show_controls_regular():	
+func _show_controls_regular():
 	controls_regular.visible = true
 	controls_in_move.visible = false
+	look_around.visible = not Settings.is_hotseat_mode
 
 
 func _show_controls_in_move():
