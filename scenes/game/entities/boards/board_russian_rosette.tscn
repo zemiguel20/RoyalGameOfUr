@@ -28,8 +28,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036327, 0, 0.0897661)
 
 [node name="P1Tile4Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036327, 0, 0.127712)
-safe = true
-give_extra_turn = true
 
 [node name="P2Tile1Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351095, 0, 0.018745)
@@ -42,8 +40,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351095, 0, 0.0896638)
 
 [node name="P2Tile4Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0348507, 0, 0.12797)
-safe = true
-give_extra_turn = true
 
 [node name="Tile5Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000867553, 0, 0.127194)
@@ -56,8 +52,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0552398)
 
 [node name="Tile8Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0187451)
-safe = true
-give_extra_turn = true
 
 [node name="Tile9Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00319701, 0, -0.0182673)
@@ -76,16 +70,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0342563, 0, -0.128787)
 
 [node name="P1Tile14Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0337387, 0, -0.0935862)
-safe = true
-give_extra_turn = true
 
 [node name="P2Tile13Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0379566, 0, -0.129046)
 
 [node name="P2Tile14Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0384742, 0, -0.0935862)
-safe = true
-give_extra_turn = true
 
 [node name="P1StartSpots" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00221904, 0)
