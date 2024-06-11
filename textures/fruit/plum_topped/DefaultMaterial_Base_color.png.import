@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bc6qndadhxp3h"
-path.bptc="res://.godot/imported/DefaultMaterial_Base_color.png-d75e822646debff240f9917aba6a41a8.bptc.ctex"
+path.bptc="res://.godot/imported/DefaultMaterial_Base_color.png-0c491948eef637b67d3a279c46f4bf74.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/Fruit/plum_topped/DefaultMaterial_Base_color.png"
-dest_files=["res://.godot/imported/DefaultMaterial_Base_color.png-d75e822646debff240f9917aba6a41a8.bptc.ctex"]
+source_file="res://textures/fruit/plum_topped/DefaultMaterial_Base_color.png"
+dest_files=["res://.godot/imported/DefaultMaterial_Base_color.png-0c491948eef637b67d3a279c46f4bf74.bptc.ctex"]
 
 [params]
 

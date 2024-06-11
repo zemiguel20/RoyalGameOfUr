@@ -1,20 +1,20 @@
 [gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://byvy4icpen48g"]
 
-[ext_resource type="Texture2D" uid="uid://utfwm5htnhq7" path="res://textures/Fruit/plum_half/DefaultMaterial_Base_color.png" id="1_f7d2j"]
-[ext_resource type="Texture2D" uid="uid://dat2dcqxggv2e" path="res://textures/Fruit/plum_half/DefaultMaterial_Mixed_AO.png" id="2_dpche"]
-[ext_resource type="Texture2D" uid="uid://bixah40myrptr" path="res://textures/Fruit/plum_half/DefaultMaterial_Height.png" id="3_4cjk6"]
-[ext_resource type="Texture2D" uid="uid://b6ruetjiws2s0" path="res://textures/Fruit/plum_half/DefaultMaterial_Metallic.png" id="4_uerk7"]
-[ext_resource type="Texture2D" uid="uid://cfjvk81vsahhn" path="res://textures/Fruit/plum_half/DefaultMaterial_Normal_OpenGL.png" id="5_lpjtq"]
-[ext_resource type="Texture2D" uid="uid://ifilf8q652l8" path="res://textures/Fruit/plum_half/DefaultMaterial_Roughness.png" id="6_07q1i"]
+[ext_resource type="Texture2D" uid="uid://utfwm5htnhq7" path="res://textures/fruit/plum_half/DefaultMaterial_Base_color.png" id="1_axi1j"]
+[ext_resource type="Texture2D" uid="uid://dat2dcqxggv2e" path="res://textures/fruit/plum_half/DefaultMaterial_Mixed_AO.png" id="2_nn66l"]
+[ext_resource type="Texture2D" uid="uid://bixah40myrptr" path="res://textures/fruit/plum_half/DefaultMaterial_Height.png" id="3_6yrqk"]
+[ext_resource type="Texture2D" uid="uid://b6ruetjiws2s0" path="res://textures/fruit/plum_half/DefaultMaterial_Metallic.png" id="4_i1u27"]
+[ext_resource type="Texture2D" uid="uid://cfjvk81vsahhn" path="res://textures/fruit/plum_half/DefaultMaterial_Normal_OpenGL.png" id="5_x7toy"]
+[ext_resource type="Texture2D" uid="uid://ifilf8q652l8" path="res://textures/fruit/plum_half/DefaultMaterial_Roughness.png" id="6_0f3p3"]
 
 [resource]
-albedo_texture = ExtResource("1_f7d2j")
-metallic_texture = ExtResource("4_uerk7")
-roughness_texture = ExtResource("6_07q1i")
+albedo_texture = ExtResource("1_axi1j")
+metallic_texture = ExtResource("4_i1u27")
+roughness_texture = ExtResource("6_0f3p3")
 normal_enabled = true
-normal_texture = ExtResource("5_lpjtq")
+normal_texture = ExtResource("5_x7toy")
 ao_enabled = true
 ao_light_affect = 1.0
-ao_texture = ExtResource("2_dpche")
+ao_texture = ExtResource("2_nn66l")
 heightmap_scale = 0.0
-heightmap_texture = ExtResource("3_4cjk6")
+heightmap_texture = ExtResource("3_6yrqk")
