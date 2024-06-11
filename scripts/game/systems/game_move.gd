@@ -32,7 +32,6 @@ var backwards: bool ## Whether its moving backwards in the board.
 
 # Move info
 var valid: bool ## Whether this move is valid and can be executed.
-var knocks_opo: bool ## Whether knocks out opponent.
 var wins: bool ## Whether move wins the game.
 var gives_extra_turn: bool ## Whether move gives player an extra turn
 
@@ -74,14 +73,12 @@ func _init(from: Spot, to: Spot, player: int):
 	
 	valid = _check_valid()
 	
-	knocks_opo = is_to_occupied_by_opponent and is_to_safe
-	
 	wins = is_to_end_of_track and \
 		pieces_in_to.size() + pieces_in_from.size() == Settings.ruleset.num_pieces
 	
 	if Settings.ruleset.rosettes_give_extra_turn and to.is_in_group("rosettes"):
 		gives_extra_turn = true
-	elif Settings.ruleset.captures_give_extra_turn and knocks_opo:
+	elif Settings.ruleset.captures_give_extra_turn and is_to_occupied_by_opponent:
 		gives_extra_turn = true
 	else:
 		gives_extra_turn = false
@@ -127,7 +124,7 @@ func execute(animation := General.MoveAnim.NONE, follow_path := false) -> void:
 		await current_spot.pieces_moved
 	
 	# Move knockout pieces to starting zone
-	if knocks_opo:
+	if is_to_occupied_by_opponent:
 		var opponent_start_spots = _board.get_free_start_spots(General.get_opponent(player))
 		movement_path[-1].move_pieces_split_to_spots(opponent_start_spots, General.MoveAnim.ARC)
 	

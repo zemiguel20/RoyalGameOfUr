@@ -111,7 +111,7 @@ func _evaluate_move(move: GameMove) -> float:
 
 
 func _calculate_base_score(move: GameMove):
-	if move.knocks_opo:
+	if move.is_to_occupied_by_opponent:
 		return capture_base_score
 	elif move.gives_extra_turn:
 		return grants_roll_base_score

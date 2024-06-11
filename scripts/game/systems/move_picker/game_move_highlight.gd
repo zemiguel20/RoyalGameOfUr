@@ -32,7 +32,7 @@ func highlight(move: GameMove, base_color := color_neutral) -> void:
 	# Highlight pieces TO
 	for piece in move.pieces_in_to:
 		piece.highlight.active = true
-		piece.highlight.color = color_knock_out if move.knocks_opo else color_rosette
+		piece.highlight.color = color_knock_out if move.is_to_occupied_by_opponent else color_rosette
 	
 	# Highlight PATH
 	var path = get_path_highlighter(move)
@@ -58,7 +58,7 @@ func get_to_spot_color(move: GameMove) -> Color:
 		return General.color_negative
 	elif move.is_to_end_of_track:
 		return color_end
-	elif move.knocks_opo:
+	elif move.is_to_occupied_by_opponent:
 		return color_knock_out
 	elif move.to.is_in_group("rosettes"):
 		return color_rosette
