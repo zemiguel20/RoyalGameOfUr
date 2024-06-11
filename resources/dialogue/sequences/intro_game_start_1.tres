@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_1citi"]
 [ext_resource type="AudioStream" uid="uid://b57unqwumu506" path="res://resources/dialogue/intro-2-1-brought-something.mp3" id="1_2deht"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_wwdt7"]
-[ext_resource type="AudioStream" uid="uid://0chyonf6l0ir" path="res://resources/dialogue/intro-2-2-sarrugi.mp3" id="3_14gmu"]
+[ext_resource type="AudioStream" uid="uid://dxki7cmwkw83l" path="res://resources/dialogue/intro-2-2-original.mp3" id="3_kucw0"]
 [ext_resource type="AudioStream" uid="uid://y324n6ui8s5a" path="res://resources/dialogue/intro-2-3-sarrugi-ancient.mp3" id="4_v4303"]
 [ext_resource type="AudioStream" uid="uid://djfv16i4f8pj6" path="res://resources/dialogue/intro-2-4-racing-game.mp3" id="5_hiaiu"]
 [ext_resource type="AudioStream" uid="uid://cqarmmr2kkl5i" path="res://resources/dialogue/intro-2-4-racing-game-2.mp3" id="6_whag6"]
