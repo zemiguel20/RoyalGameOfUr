@@ -53,9 +53,9 @@ func play_dialogue_bundle(_current_entry):
 	_current_entry = _current_entry as DialogueBundle
 	
 	# Play all the effects
-	if _current_entry.audio_variations != null and _current_entry.audio_variations.size() > 0:
-		var audios = _current_entry.audio_variations
-		_audio_player.stream = audios[randi_range(0, audios.size()-1)]
+	var audios = _current_entry.audio_variations
+	if audios != null and audios.size() > 0:
+		_audio_player.stream = audios.pick_random()
 		_audio_player.play()
 	if _use_subtitles and _current_entry.caption != null:
 		_subtitle_displayer.display_subtitle(_current_entry, _current_sequence.requires_click)

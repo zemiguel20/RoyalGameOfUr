@@ -26,7 +26,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_58o8f"]
 script = ExtResource("1_1citi")
-audio_variations = Array[AudioStream]([ExtResource("3_14gmu")])
+audio_variations = Array[AudioStream]([ExtResource("3_kucw0")])
 caption = "That’s right, I finally have the original!"
 caption_cuneiform = ""
 anim_variations = Array[int]([7])
