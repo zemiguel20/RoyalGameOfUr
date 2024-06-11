@@ -16,3 +16,4 @@ signal intro_finished
 
 signal try_play_tutorial_dialog(category: DialogueSystem.Category)
 signal reaction_piece_captured(move: GameMove)
+signal rolled_by_player(value: int, player: General.Player)

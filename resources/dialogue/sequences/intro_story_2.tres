@@ -57,7 +57,7 @@ script = ExtResource("1_136wl")
 audio_variations = Array[AudioStream]([ExtResource("9_pfji7")])
 caption = "I would be relieved if this is just one of those marches, you know? To intimidate with a show of power."
 caption_cuneiform = ""
-anim_variations = Array[int]([])
+anim_variations = Array[int]([2])
 fixed_duration = -1.0
 prevents_opponent_action = false
 
@@ -66,7 +66,7 @@ script = ExtResource("1_136wl")
 audio_variations = Array[AudioStream]([ExtResource("10_7s187"), ExtResource("11_w8lqg")])
 caption = "Ninos has no interest in battle. And I can’t stand the thought of seeing my daughter widowed so young."
 caption_cuneiform = ""
-anim_variations = Array[int]([2])
+anim_variations = Array[int]([5])
 fixed_duration = -1.0
 prevents_opponent_action = false
 
@@ -90,7 +90,6 @@ prevents_opponent_action = false
 
 [resource]
 script = ExtResource("2_k243e")
-max_repetitions = 1
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_7k2gv"), SubResource("Resource_eyp5x"), SubResource("Resource_73wnr"), SubResource("Resource_vtih1"), SubResource("Resource_eg8la"), SubResource("Resource_sv3oo"), SubResource("Resource_wslfo"), SubResource("Resource_an47l")])
 requires_click = true
 weight = 5

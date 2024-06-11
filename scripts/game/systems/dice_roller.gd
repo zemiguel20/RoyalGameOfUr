@@ -155,3 +155,4 @@ func _roll_dice() -> void:
 	await get_tree().create_timer(_show_result_duration).timeout
 	
 	GameEvents.rolled.emit(value)
+	GameEvents.rolled_by_player.emit(value, _assigned_player)

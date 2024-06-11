@@ -28,14 +28,12 @@ var _time_until_next_dialogue: float
 var _is_timer_active: bool
 
 
-var _tutorial_categories_had: Array[DialogueSystem.Category]
-
-
 func _ready():
 	visible = false
 	GameEvents.play_pressed.connect(_on_play_pressed)
 	GameEvents.try_play_tutorial_dialog.connect(_on_try_play_tutorial_dialog)
 	GameEvents.reaction_piece_captured.connect(_on_piece_captured)
+	GameEvents.rolled_by_player.connect(_on_try_play_unfair_dialog)
 
 
 func _process(delta):
@@ -45,6 +43,7 @@ func _process(delta):
 	_time_until_next_dialogue -= delta
 	if _time_until_next_dialogue <= 0:
 		_play_random_dialogue()
+		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
 
 
 func _play_story_dialogue():
@@ -72,6 +71,14 @@ func _play_random_dialogue():
 		_is_timer_active = false
 
 
+func _on_try_play_unfair_dialog(roll_result: int, player: General.Player):
+	if not explained_everything:
+		return
+		
+	if roll_result == 0 and player == General.Player.TWO:
+		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLLED_0)
+
+
 func _on_try_play_tutorial_dialog(move: GameMove):
 	#if Settings.check_ruleset(Settings.Ruleset.FINKEL): return
 	if explained_everything: return
@@ -94,12 +101,12 @@ func _on_try_play_tutorial_dialog(move: GameMove):
 		explained_rosettes_are_safe = true
 		return
 	
-	if not explained_securing and move.moves_to_end:
+	if not explained_securing and EntityManager.get_from_index_on_board(move) > 7:
 		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
 		explained_securing = true
 		return
 	
-	if has_explained_everything():
+	if has_explained_everything() and not _dialogue_system.is_busy():
 		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_THATS_ALL)
 		explained_everything = true
 
@@ -131,10 +138,21 @@ func _on_play_pressed():
 func _on_piece_captured(move: GameMove):
 	if not has_explained_everything: return
 	
+	# Play a stronger reaction if the piece was further ahead,
+	# or if the roll was high (i.e. someone got lucky)
+	var was_piece_far = EntityManager.get_to_index_on_board(move) >= 8
+	var rolled_3_plus = move.full_path.size()-1 >= 3
+	var rolled_4 = move.full_path.size()-1 >= 4
 	if move.player == General.Player.TWO:
-		_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
+		if (was_piece_far and rolled_3_plus) or move.pieces_in_to.size() > 1:
+			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
+		elif was_piece_far or rolled_4:
+			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_MISTAKE)
 	else:
-		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
+		if (was_piece_far and rolled_3_plus) or move.pieces_in_to.size() > 1:
+			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
+		elif was_piece_far or rolled_4:
+			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
 
 
 ## Reactions for now: Knockout? Debug Button. No Moves?

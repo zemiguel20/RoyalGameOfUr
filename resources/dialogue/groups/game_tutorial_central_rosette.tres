@@ -17,7 +17,6 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_y3sno"]
 script = ExtResource("2_00tpo")
-max_repetitions = 1
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_fjq4e")])
 requires_click = false
 weight = 5
@@ -27,6 +26,7 @@ script = ExtResource("1_7e1rc")
 category = 15
 play_in_order = false
 has_priority = false
+reset_after_all_played = false
 initial_delay = 0.5
 dialogue_sequences = Array[ExtResource("2_00tpo")]([SubResource("Resource_y3sno")])
 weight_for_empty = 0

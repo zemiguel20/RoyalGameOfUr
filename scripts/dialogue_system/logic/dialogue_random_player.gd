@@ -7,7 +7,7 @@ func _pick_sequence(group: DialogueGroup) -> DialogueSequence:
 		if sequence.was_played and available_sequences.has(sequence):
 			available_sequences.erase(sequence)
 	## If all sequences have been played, reset the list
-	if available_sequences.is_empty():
+	if available_sequences.is_empty() and group.reset_after_all_played:
 		for sequence in group.dialogue_sequences:
 			sequence.was_played = false
 		available_sequences = group.dialogue_sequences.duplicate()

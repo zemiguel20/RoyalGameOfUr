@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=13 format=3 uid="uid://cgu6todksvkan"]
+
+[ext_resource type="AudioStream" uid="uid://dty7mdeyojuar" path="res://resources/dialogue/reaction-hmmm-1.mp3" id="1_5eg02"]
+[ext_resource type="AudioStream" uid="uid://41vb4uw2g324" path="res://resources/dialogue/reaction-hmmm-2.mp3" id="2_4aal8"]
+[ext_resource type="AudioStream" uid="uid://7o4daldyfh0n" path="res://resources/dialogue/reaction-hmmm-3.mp3" id="3_yj4vu"]
+[ext_resource type="AudioStream" uid="uid://cpthjfa61new1" path="res://resources/dialogue/reaction-hmmm-4.mp3" id="4_t1jcr"]
+[ext_resource type="AudioStream" uid="uid://b58ln7lwxs3kg" path="res://resources/dialogue/reaction-hmmm-5.mp3" id="5_74dsv"]
+[ext_resource type="AudioStream" uid="uid://c6p1r0tjbo5st" path="res://resources/dialogue/reaction-hmmm-6.mp3" id="6_dhhgh"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="7_0dabc"]
+[ext_resource type="AudioStream" uid="uid://cltj4u6ota2h8" path="res://resources/dialogue/reaction-grunt-4.mp3" id="7_g2tkg"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="8_7fc65"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="9_cy6s2"]
+
+[sub_resource type="Resource" id="Resource_b4ee2"]
+script = ExtResource("7_0dabc")
+audio_variations = Array[AudioStream]([ExtResource("1_5eg02"), ExtResource("2_4aal8"), ExtResource("3_yj4vu"), ExtResource("4_t1jcr"), ExtResource("5_74dsv"), ExtResource("6_dhhgh"), ExtResource("7_g2tkg")])
+caption = ""
+caption_cuneiform = ""
+anim_variations = Array[int]([6])
+fixed_duration = -1.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_tkhll"]
+script = ExtResource("8_7fc65")
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_b4ee2")])
+requires_click = false
+weight = 5
+
+[resource]
+script = ExtResource("9_cy6s2")
+category = 10
+play_in_order = false
+has_priority = false
+reset_after_all_played = true
+initial_delay = 0.5
+dialogue_sequences = Array[ExtResource("8_7fc65")]([SubResource("Resource_tkhll")])
+weight_for_empty = 10

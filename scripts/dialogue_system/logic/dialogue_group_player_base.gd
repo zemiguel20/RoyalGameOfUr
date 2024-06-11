@@ -29,13 +29,13 @@ func play_sequence_from_group(group: DialogueGroup) -> bool:
 		await _sequence_player.continue_dialogue()
 		
 	return true
-		
-		
+
+
 func assign_sequence_player(sequence_player: DialogueSequencePlayer, interruption_sequence_player: DialogueSequencePlayer):
 	_sequence_player = sequence_player
 	_interruption_sequence_player = interruption_sequence_player
-	
-	
+
+
 func check_priority(new_group: DialogueGroup):
 	if _current_group == null: return true
 	return not _current_group.has_priority and new_group.has_priority 

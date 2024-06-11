@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://d0cplrwbxokxy"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://cl6u4u42jn5ow"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_cq14v"]
 [ext_resource type="AudioStream" uid="uid://cse2ibi6o1tjf" path="res://resources/dialogue/explain-rosette-1.mp3" id="1_r121a"]
@@ -18,7 +18,6 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_jaa6i"]
 script = ExtResource("5_yvjgn")
-max_repetitions = 1
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_ofq4g")])
 requires_click = false
 weight = 5
@@ -28,6 +27,7 @@ script = ExtResource("1_cq14v")
 category = 12
 play_in_order = false
 has_priority = false
+reset_after_all_played = false
 initial_delay = 0.5
 dialogue_sequences = Array[ExtResource("5_yvjgn")]([SubResource("Resource_jaa6i")])
 weight_for_empty = 0

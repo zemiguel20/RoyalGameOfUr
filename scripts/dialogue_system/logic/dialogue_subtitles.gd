@@ -25,7 +25,7 @@ func display_subtitle(entry: DialogueBundle, show_skip_icon: bool):
 	else:
 		cuneiform_label.text = entry.caption_cuneiform.to_lower()
 		
-	_toggle_subtitles(true)
+	_toggle_subtitles(entry.caption.length() > 0)
 	_toggle_skip_icon(show_skip_icon)
 
 

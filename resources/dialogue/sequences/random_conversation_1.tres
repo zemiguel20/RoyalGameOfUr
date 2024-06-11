@@ -64,7 +64,6 @@ prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_yfia4")
-max_repetitions = 1
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_l004w"), SubResource("Resource_hyjxb"), SubResource("Resource_mrw1n"), SubResource("Resource_m5sdh"), SubResource("Resource_leien"), SubResource("Resource_wy7fm")])
 requires_click = false
 weight = 5

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://if7cdu6pkce3"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://dc4r308tmdd85"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_0hgud"]
 [ext_resource type="AudioStream" uid="uid://0cjtroofnp1b" path="res://resources/dialogue/random-ziggurat-1-full.mp3" id="1_8tvaa"]
@@ -27,7 +27,6 @@ prevents_opponent_action = true
 
 [resource]
 script = ExtResource("1_0hgud")
-max_repetitions = 1
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_d136f"), SubResource("Resource_6ejn3")])
 requires_click = false
 weight = 5

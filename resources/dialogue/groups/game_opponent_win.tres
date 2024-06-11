@@ -22,7 +22,6 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_6obr2"]
 script = ExtResource("2_jihle")
-max_repetitions = 3
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_s5wm3")])
 requires_click = false
 weight = 5
@@ -38,7 +37,6 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_jfs04"]
 script = ExtResource("2_jihle")
-max_repetitions = 1
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_be80l")])
 requires_click = false
 weight = 5
