@@ -1,16 +1,16 @@
 extends CanvasLayer
 
 
+@onready var main_menu: Control = $MainMenu
+@onready var ruleset_menu: Control = $RulesetMenu
+
+@onready var ruleset_name_label: Label = $RulesetMenu/TabletFrame/RulesetPicker/RulesetNameLabel
+
+
 @export var _fading_duration = 2.5
-@onready var play: Button = $"Main Menu/Single Player"
-@onready var quit: Button = $"Main Menu/Quit"
+
+
 @onready var fade_panel: ColorRect = $Fade_Panel
-@onready var main_menu: Control = $"Main Menu"
-
-
-func _ready() -> void:
-	play.pressed.connect(_on_play_pressed)
-	quit.pressed.connect(_on_quit_pressed)
 
 
 # When someone wins the game, we will fadeout and then reload the scene.
@@ -27,5 +27,25 @@ func _on_play_pressed():
 	GameEvents.play_pressed.emit()
 
 
-func _on_quit_pressed():
+func _on_singleplayer_button_pressed() -> void:
+	visible = false
+	Settings.is_hotseat_mode = false
+	Settings.ruleset = General.RULESET_FINKEL
+	GameEvents.play_pressed.emit()
+
+
+func _on_multiplayer_button_pressed() -> void:
+	main_menu.visible = false
+	ruleset_menu.visible = true
+
+
+func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_switch_ruleset_left_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_switch_ruleset_right_button_pressed() -> void:
+	pass # Replace with function body.
