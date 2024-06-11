@@ -1,13 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bw5k0hcse4y5h"]
+[gd_scene load_steps=5 format=3 uid="uid://bw5k0hcse4y5h"]
 
 [ext_resource type="Environment" uid="uid://hs0xfuy4e64r" path="res://shaders/WorldLightingSettings.tres" id="2_n3whl"]
 [ext_resource type="PackedScene" uid="uid://b48u4dl4lewgu" path="res://models/Blockout.tscn" id="3_2uh8l"]
 [ext_resource type="PackedScene" uid="uid://b01ccjwqwqwr1" path="res://models/Plank.tscn" id="4_a4r5x"]
-[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/boards/board_finkel.tscn" id="4_b6l14"]
-[ext_resource type="PackedScene" uid="uid://c2mjvc4x0vfuu" path="res://models/test_die_d4.glb" id="5_cwawq"]
 [ext_resource type="PackedScene" uid="uid://cycvsdricr17j" path="res://models/TableCloth.fbx" id="6_qnkt8"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_agkbu"]
 
 [node name="Blockout" type="Node3D"]
 transform = Transform3D(8.22, 0, 0, 0, 8.22, 0, 0, 0, 8.22, 0, 0, 0)
@@ -56,51 +52,3 @@ transform = Transform3D(-1.27637, 0, 2.19064, 0, -2.53536, 0, -2.19064, 0, -1.27
 
 [node name="cloth" parent="." instance=ExtResource("6_qnkt8")]
 transform = Transform3D(4.79902, 0, -8.16304, 0, 9.52308, 0, 7.98754, 0, 4.90446, 0.850561, 0.0196978, 1.41003)
-
-[node name="game_for_scale" type="Node" parent="."]
-
-[node name="Board2" parent="game_for_scale" instance=ExtResource("4_b6l14")]
-transform = Transform3D(-0.00359479, 0, 0.00600645, 0, 0.007, 0, -0.00600645, 0, -0.00359479, 0.82518, 0.0203158, 1.40125)
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="game_for_scale"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.826951, 0.0195771, 1.41728)
-mesh = SubResource("CylinderMesh_agkbu")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="game_for_scale"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.832609, 0.0195771, 1.41387)
-mesh = SubResource("CylinderMesh_agkbu")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="game_for_scale"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.838566, 0.0195771, 1.41029)
-mesh = SubResource("CylinderMesh_agkbu")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="game_for_scale"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.822374, 0.0195771, 1.38422)
-mesh = SubResource("CylinderMesh_agkbu")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="game_for_scale"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.816095, 0.0195771, 1.38674)
-mesh = SubResource("CylinderMesh_agkbu")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="game_for_scale"]
-transform = Transform3D(0.00498031, 0, 0.00299638, 0, 0.00172712, 0, -0.00299638, 0, 0.00498031, 0.809821, 0.0195771, 1.39079)
-mesh = SubResource("CylinderMesh_agkbu")
-skeleton = NodePath("../..")
-
-[node name="test_die_d4" parent="game_for_scale" instance=ExtResource("5_cwawq")]
-transform = Transform3D(0.00531238, 0, 0, 0, 0.00531238, 0, 0, 0, 0.00531238, 0.841974, 0.0246928, 1.42573)
-
-[node name="test_die_d5" parent="game_for_scale" instance=ExtResource("5_cwawq")]
-transform = Transform3D(0.00146269, 0, 0.00510705, 0, 0.00531238, 0, -0.00510705, 0, 0.00146269, 0.855461, 0.0246928, 1.4217)
-
-[node name="test_die_d6" parent="game_for_scale" instance=ExtResource("5_cwawq")]
-transform = Transform3D(0.00511323, 0, 0.00144092, 0, 0.00531238, 0, -0.00144092, 0, 0.00511323, 0.860551, 0.0276422, 1.41178)
-
-[node name="test_die_d7" parent="game_for_scale" instance=ExtResource("5_cwawq")]
-transform = Transform3D(0.00511323, 0, 0.00144092, 0, 0.00531238, 0, -0.00144092, 0, 0.00511323, 0.873239, 0.0276422, 1.41441)

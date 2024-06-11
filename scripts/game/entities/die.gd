@@ -5,6 +5,8 @@ class_name Die extends RigidBody3D
 signal roll_finished(value: int)
 
 @export var roll_rotation_speed: float = 1.0
+@export var min_roll_time: float = 0.7
+@export var correction_impulse_strength: float = 3
 
 var highlight: MaterialHighlight
 var move_anim: MoveAnimation
@@ -12,6 +14,7 @@ var input: SelectionInputReader
 var model: MeshInstance3D
 var normals: Array[Node3D] = [] ## Normals for each face/tip
 var roll_sfx: AudioStreamPlayer3D
+var roll_timer: Timer
 
 var rolling: bool = false
 var value: int = 0
@@ -24,6 +27,8 @@ func _ready():
 	model = get_node(get_meta("model")) as MeshInstance3D
 	normals.assign(get_node(get_meta("normals_root_node")).get_children())
 	roll_sfx = get_node(get_meta("roll_sfx")) as AudioStreamPlayer3D
+	roll_timer = get_node(get_meta("timer")) as Timer
+	roll_timer.timeout.connect(_force_movement_stop)
 	
 	freeze = true
 
@@ -48,20 +53,27 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 	if sleeping:
 		await sleeping_state_changed
 	
+	roll_timer.start()
 	roll_sfx.play()
 	
-	sleeping_state_changed.connect(_on_movement_stopped)
+	## Extra security measure ensuring that dice do not stop rolling immediately.
+	await get_tree().create_timer(min_roll_time).timeout
+	if sleeping:
+		_on_movement_stopped()
+	else:	
+		sleeping_state_changed.connect(_on_movement_stopped)
 	
-	get_tree().create_timer(5.0).timeout.connect(_force_movement_stop)
-
 
 func _on_movement_stopped() -> void:
 	freeze = true
 	rolling = false
-	sleeping_state_changed.disconnect(_on_movement_stopped)
 	roll_sfx.stop()
+	roll_timer.stop()
 	
-	value = _read_roll_value()
+	if sleeping_state_changed.is_connected(_on_movement_stopped):
+		sleeping_state_changed.disconnect(_on_movement_stopped)
+	
+	value = await _read_roll_value()
 	roll_finished.emit(value)
 
 
@@ -79,6 +91,14 @@ func _read_roll_value() -> int:
 		if angle < smallest_angle:
 			closest_normal = normal
 			smallest_angle = angle
+			
+	if smallest_angle > 0.1 * PI:
+		## Apply a correction impulse that scales with the smallest angle
+		print("Correction")
+		var correction_impulse = -closest_normal.global_basis.y * smallest_angle * correction_impulse_strength
+		apply_impulse(correction_impulse, closest_normal.position)
+		await get_tree().create_timer(0.5).timeout
 	
 	var value = closest_normal.get_meta("value") as int
 	return value
+
