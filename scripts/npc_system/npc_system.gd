@@ -4,7 +4,12 @@ extends Node
 ## At this point, this class is not super important, but it would be useful 
 ## for when npcs need to interact with each other or use the same space.
 
-@export var dialogue_system: DialogueSystem
+@export var path_follow_guard_1: PathFollow3D
+@export var path_follow_guard_2: PathFollow3D
+@export var path_follow_guard_3: PathFollow3D
+@export var path_follow_kitchen_1: PathFollow3D
+@export var path_follow_kitchen_2: PathFollow3D
+
 var npcs: Array
 
 

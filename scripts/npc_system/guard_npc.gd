@@ -2,11 +2,6 @@
 class_name GuardNPC
 extends AmbientNPCBase
 
-@export_group("Paths & Routes")
-@export var _path: PathFollow3D
-@export var _path2: PathFollow3D
-@export var _path3: PathFollow3D
-
 @export_group("Speed")
 @export var _move_speed: float = 2
 @export var _walk_rotation_speed: float = 1
@@ -23,10 +18,17 @@ extends AmbientNPCBase
 ## The part of the path follow where the guard pauzes.
 @export var _watch_path_progress_ratio = 0.3
 
+var _path1: PathFollow3D
+var _path2: PathFollow3D
+var _path3: PathFollow3D
 var _original_position: Vector3
 
 func on_ready(_npc_manager):
 	_original_position = global_position
+	_path1 = _npc_manager.path_follow_guard_1
+	_path2 = _npc_manager.path_follow_guard_2
+	_path3 = _npc_manager.path_follow_guard_3
+	
 	super.on_ready(_npc_manager)
 	
 
@@ -40,11 +42,11 @@ func _initialize_blackboard():
 func _initialize_tree():
 	## Subtree for traversing path 1
 	var _moving_sequence_no_watching = SequenceNode.new([
-		MoveAlongPathTask.new(_path)])
+		MoveAlongPathTask.new(_path1)])
 		
 	## Subtree for traversing path 1, but stopping to watch the game.	
 	var _moving_sequence_with_watching = SequenceNode.new([
-		MoveAlongPathTask.new(_path, 0.001, _watch_path_progress_ratio),
+		MoveAlongPathTask.new(_path1, 0.001, _watch_path_progress_ratio),
 		PlayAnimationTask.new("TurnLeft", true),
 		RotateYTask.new(0.5*PI),
 		DebugTask.new("Turned"),
@@ -54,7 +56,7 @@ func _initialize_tree():
 		PlayAnimationTask.new("TurnRight", true),
 		RotateYTask.new(-0.5*PI),
 		PlayAnimationTask.new("Walk", false, 0),
-		MoveAlongPathTask.new(_path, _watch_path_progress_ratio, 1),
+		MoveAlongPathTask.new(_path1, _watch_path_progress_ratio, 1),
 		])
 		
 	## Main tree of the guard.

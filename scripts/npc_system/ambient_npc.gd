@@ -20,7 +20,7 @@ func on_ready(manager):
 	_initialize_blackboard()
 	_initialize_tree()
 	_current_tree.set_blackboard(blackboard)
-	_current_tree.on_start()
+	_current_tree.on_start()	
 
 	
 func _process(delta):
