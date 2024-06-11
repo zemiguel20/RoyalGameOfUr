@@ -41,6 +41,7 @@ func start(current_player: General.Player, last_rolled_value: int) -> void:
 		selected_move.execute(anim, Settings.fast_move_enabled)
 		await selected_move.execution_finished
 		GameEvents.move_executed.emit(selected_move)
+		GameState.player_turns_made += 1
 
 
 func _calculate_moves(steps: int) -> Array[GameMove]:

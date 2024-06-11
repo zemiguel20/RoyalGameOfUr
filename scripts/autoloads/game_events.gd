@@ -13,3 +13,5 @@ signal zero_rolled
 
 signal play_pressed
 signal intro_finished
+
+signal fast_move_toggled(enabled: bool)
