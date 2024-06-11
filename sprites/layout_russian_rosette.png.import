@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ohraps7ua2pc"
-path="res://.godot/imported/769040841813000223.webp-bfebaa20b0cd24daedc320f843d03df9.ctex"
+uid="uid://iybrriyi70xh"
+path="res://.godot/imported/layout_russian_rosette.png-c55301451b23873378536fde0f95ba74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://769040841813000223.webp"
-dest_files=["res://.godot/imported/769040841813000223.webp-bfebaa20b0cd24daedc320f843d03df9.ctex"]
+source_file="res://sprites/layout_russian_rosette.png"
+dest_files=["res://.godot/imported/layout_russian_rosette.png-c55301451b23873378536fde0f95ba74.ctex"]
 
 [params]
 
