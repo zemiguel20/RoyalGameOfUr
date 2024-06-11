@@ -68,8 +68,11 @@ func spawn_temporary_spot() -> Spot:
 ## Searches for the board in the scene tree.
 func get_board() -> Board:
 	var filter = func(node: Node): return node is Board
-	var board = get_children().filter(filter).front()
-	return board
+	var boards = get_children().filter(filter)
+	if boards.is_empty():
+		return null
+	else:
+		return boards.front() as Board
 
 
 ## Get all spawned dice.
