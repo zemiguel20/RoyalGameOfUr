@@ -50,9 +50,10 @@ const BASE_SHARED_SPOT_DANGER_SCORE: float = 0.1
 
 
 func start_selection(moves: Array[GameMove]) -> void:
-	# Simulate thinking
-	var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
-	await get_tree().create_timer(thinking_duration).timeout
+	if not Settings.fast_move_enabled:
+		# Simulate thinking
+		var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
+		await get_tree().create_timer(thinking_duration).timeout
 	var selected_move = _determine_next_move(moves)
 	
 	# Highlight selected move for a bit
