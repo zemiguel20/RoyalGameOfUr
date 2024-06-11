@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="BoardLayout" load_steps=4 format=3 uid="uid://bqgbny642y1ny"]
 
 [ext_resource type="Script" path="res://scripts/game/ruleset/board_layout.gd" id="1_2bc35"]
-[ext_resource type="Texture2D" uid="uid://c5677q0o5hg14" path="res://textures/decals/UrSymbol_3.png" id="1_6gfnl"]
+[ext_resource type="Texture2D" uid="uid://iybrriyi70xh" path="res://sprites/layout_russian_rosette.png" id="1_2vfuo"]
 [ext_resource type="PackedScene" uid="uid://cee5m8kjtfiyy" path="res://scenes/game/entities/boards/board_russian_rosette.tscn" id="2_6bdup"]
 
 [resource]
 script = ExtResource("1_2bc35")
 name = "Russian Rosette"
-preview = ExtResource("1_6gfnl")
+preview = ExtResource("1_2vfuo")
 scene = ExtResource("2_6bdup")
