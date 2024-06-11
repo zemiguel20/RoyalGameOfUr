@@ -1,9 +1,9 @@
 [gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bsxodi4fcwvj7"]
 
-[ext_resource type="Texture2D" uid="uid://bth67107m6wjh" path="res://textures/character_texture/opponent/fbx-guard_Mat_Guard_Height.png" id="1_yoolq"]
-[ext_resource type="Texture2D" uid="uid://dc4o60mwjdvo5" path="res://textures/character_texture/opponent/fbx-guard_Mat_Guard_Metallic.png" id="2_ueil0"]
-[ext_resource type="Texture2D" uid="uid://ba8d5ssm2q8js" path="res://textures/character_texture/opponent/fbx-guard_Mat_Guard_Normal.png" id="3_icm5e"]
-[ext_resource type="Texture2D" uid="uid://dwwm0bljm2y81" path="res://textures/character_texture/opponent/fbx-guard_Mat_Guard_Roughness.png" id="4_0drop"]
+[ext_resource type="Texture2D" uid="uid://dfo4qlkkc84sb" path="res://textures/character_texture/opponent/guard_height.png" id="1_yoolq"]
+[ext_resource type="Texture2D" uid="uid://cnxw6ly8mrwux" path="res://textures/character_texture/opponent/guard_metallic.png" id="2_ueil0"]
+[ext_resource type="Texture2D" uid="uid://dsxucqemff1mf" path="res://textures/character_texture/opponent/guard_normal.png" id="3_icm5e"]
+[ext_resource type="Texture2D" uid="uid://dnrmg0dt820w8" path="res://textures/character_texture/opponent/guard_roughness.png" id="4_0drop"]
 
 [resource]
 metallic = 1.0

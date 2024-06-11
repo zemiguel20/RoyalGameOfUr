@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://droa0bwfr3ed8"]
+
+[ext_resource type="PackedScene" uid="uid://d1lqpn22jvp7f" path="res://models/ziggurat.fbx" id="1_v3qe0"]
+[ext_resource type="Material" uid="uid://ervp2chp2epv" path="res://materials/ziggurat.tres" id="2_7wh5v"]
+[ext_resource type="Material" uid="uid://bvla47aw27i22" path="res://materials/ziggurat_pointy_things.tres" id="3_4gygr"]
+
+[node name="Root Scene" instance=ExtResource("1_v3qe0")]
+
+[node name="Ziggurat3" parent="RootNode" index="0"]
+material_override = ExtResource("2_7wh5v")
+
+[node name="group13_polySurface2" parent="RootNode" index="1"]
+material_override = ExtResource("3_4gygr")

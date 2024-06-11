@@ -4,31 +4,30 @@
 [ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="2_qanmy"]
 [ext_resource type="Material" uid="uid://c6p7a2gj4s6bg" path="res://materials/highlight.tres" id="3_af3ig"]
 [ext_resource type="Script" path="res://scripts/game/components/move_animation.gd" id="4_7srpi"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_lftn1"]
-height = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlg37"]
-albedo_color = Color(0.778335, 0.647139, 0.573442, 1)
+[ext_resource type="PackedScene" uid="uid://ctrxgamva8tn6" path="res://models/piece_model.glb" id="5_5j51m"]
+[ext_resource type="Material" uid="uid://c4xcvomvc2exe" path="res://materials/piece_white.tres" id="6_h4ix0"]
 
 [node name="WhitePiece" type="Node3D"]
 script = ExtResource("1_0kiv2")
-metadata/model = NodePath("Model")
+metadata/model = NodePath("Model/Piece")
 metadata/highlight = NodePath("Highlight")
 metadata/move = NodePath("MoveAnimation")
-
-[node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0.002, 0)
-mesh = SubResource("CylinderMesh_lftn1")
-surface_material_override/0 = SubResource("StandardMaterial3D_tlg37")
 
 [node name="Highlight" type="Node" parent="." node_paths=PackedStringArray("target_meshes")]
 script = ExtResource("2_qanmy")
 material = ExtResource("3_af3ig")
-target_meshes = [NodePath("../Model")]
+target_meshes = [NodePath("../Model/Piece")]
 
 [node name="MoveAnimation" type="Node" parent="." node_paths=PackedStringArray("root_parent")]
 script = ExtResource("4_7srpi")
 root_parent = NodePath("..")
 arc_height = 0.04
 duration = 0.4
+
+[node name="Model" parent="." instance=ExtResource("5_5j51m")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.000982706, 0)
+
+[node name="Piece" parent="Model" index="0"]
+surface_material_override/0 = ExtResource("6_h4ix0")
+
+[editable path="Model"]

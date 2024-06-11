@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BoardLayout" load_steps=4 format=3 uid="uid://i6nacm4r0wwe"]
+
+[ext_resource type="Script" path="res://scripts/game/ruleset/board_layout.gd" id="1_d45rm"]
+[ext_resource type="Texture2D" uid="uid://dbpbhcrrdu3lb" path="res://icon.svg" id="1_y80vt"]
+[ext_resource type="PackedScene" uid="uid://dele71qdpa6i1" path="res://scenes/game/entities/boards/board_masters.tscn" id="2_lnjql"]
+
+[resource]
+script = ExtResource("1_d45rm")
+name = "Masters"
+preview = ExtResource("1_y80vt")
+scene = ExtResource("2_lnjql")

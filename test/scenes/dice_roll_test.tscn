@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://oeeehwmoqri4"]
+[gd_scene load_steps=6 format=3 uid="uid://butkf5wj2ud4i"]
 
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="1_wqqlu"]
 [ext_resource type="PackedScene" uid="uid://cvos81xjjq5nl" path="res://scenes/game/entities/d4_die.tscn" id="2_llxii"]

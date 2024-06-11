@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ruleset" load_steps=3 format=3 uid="uid://dti8r5x27lj0b"]
+
+[ext_resource type="Resource" uid="uid://i6nacm4r0wwe" path="res://resources/rulesets/board_layouts/layout_masters.tres" id="1_ifxxt"]
+[ext_resource type="Script" path="res://scripts/game/ruleset/ruleset.gd" id="1_jiojp"]
+
+[resource]
+script = ExtResource("1_jiojp")
+name = "Tournament"
+rosettes_are_safe = true
+rosettes_give_extra_turn = false
+rosettes_allow_stacking = true
+captures_give_extra_turn = false
+can_move_backwards = true
+allow_skip_if_only_backwards = true
+num_pieces = 5
+num_dice = 4
+board_layout = ExtResource("1_ifxxt")

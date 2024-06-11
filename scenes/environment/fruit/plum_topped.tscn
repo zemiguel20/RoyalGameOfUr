@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dknuwbh6rgh5h"]
+
+[ext_resource type="PackedScene" uid="uid://ccdjsevfyeqky" path="res://models/fruit/plum_topped.fbx" id="1_22mls"]
+[ext_resource type="Material" uid="uid://0glwc2ya0ot1" path="res://materials/fruit/plum_topped.tres" id="2_d5hcj"]
+
+[node name="ToppedPlum" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("1_22mls")]
+
+[node name="Sphere_001" parent="Model/RootNode" index="0"]
+surface_material_override/0 = ExtResource("2_d5hcj")
+
+[editable path="Model"]

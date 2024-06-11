@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
-[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/board.tscn" id="3_vwo4y"]
 [ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="5_8sxhn"]
 [ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
 [ext_resource type="PackedScene" uid="uid://d3gx24dw7xjud" path="res://scenes/game/systems/move_picker/move_picker_ai.tscn" id="6_feay8"]
@@ -18,13 +17,6 @@
 script/source = "extends Node
 
 @onready var board: Board = $Board
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if not board.is_node_ready():
-		await board.ready
-	print(board.global_position)
-	print(board.p1_start_spots[0].global_position)
 
 
 func _input(event: InputEvent) -> void:
@@ -72,9 +64,6 @@ Button/styles/pressed = SubResource("StyleBoxEmpty_c5vbi")
 [node name="Node" type="Node3D"]
 script = SubResource("GDScript_lsuqm")
 
-[node name="Board" parent="." instance=ExtResource("3_vwo4y")]
-transform = Transform3D(0.531783, 0, -0.846881, 0, 1, 0, 0.846881, 0, 0.531783, 4.47124, -0.21066, 6.34732)
-
 [node name="Environment" parent="." instance=ExtResource("1_i3yx6")]
 
 [node name="TableFloor" type="StaticBody3D" parent="Environment"]
@@ -117,14 +106,17 @@ metadata/_edit_group_ = true
 transform = Transform3D(0.498594, 0, -0.866836, 0, 1, 0, 0.866836, 0, 0.498594, 0, 0, 0)
 shape = SubResource("BoxShape3D_8qwsb")
 
-[node name="DieSpawn" parent="." instance=ExtResource("15_c61lh")]
+[node name="BoardSpawn" type="Marker3D" parent="." groups=["board_spawn"]]
+transform = Transform3D(0.531783, 0, -0.846881, 0, 1, 0, 0.846881, 0, 0.531783, 4.47124, -0.21066, 6.34732)
+gizmo_extents = 0.01
+
+[node name="DieSpawn" parent="." groups=["dice_spawn"] instance=ExtResource("15_c61lh")]
 transform = Transform3D(0.794096, 0, 0.607792, 0, 1, 0, -0.607792, 0, 0.794096, 4.28436, -0.179411, 6.44236)
 
 [node name="Systems" type="Node" parent="."]
 
-[node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("die_spawn_point")]
+[node name="GameController" type="Node" parent="Systems"]
 script = ExtResource("2_ldghm")
-die_spawn_point = NodePath("../../DieSpawn")
 
 [node name="InteractiveMovePicker" parent="Systems" instance=ExtResource("8_g3rsf")]
 
@@ -135,8 +127,7 @@ transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 
 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("9_m0jtg")]
 transform = Transform3D(0.847122, 0, 0.531399, 0, 1, 0, -0.531399, 0, 0.847122, 4.46447, -0.212933, 6.17279)
-assigned_player = 1
-automatic = true
+_assigned_player = 1
 
 [node name="ControlsHUD" parent="." instance=ExtResource("8_wjnj8")]
 
