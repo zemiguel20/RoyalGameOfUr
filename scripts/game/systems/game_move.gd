@@ -62,7 +62,7 @@ func _init(from: Spot, to: Spot, player: int):
 	pieces_in_to = to.pieces.duplicate()
 	pieces_in_to.make_read_only()
 	is_to_shared = not _board.is_spot_exclusive(to)
-	is_to_safe = _is_spot_safe(from)
+	is_to_safe = _is_spot_safe(to)
 	is_to_end_of_track = to == track.back()
 	is_to_occupied_by_opponent = to.is_occupied_by_player(General.get_opponent(player))
 	
