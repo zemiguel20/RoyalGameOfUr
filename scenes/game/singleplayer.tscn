@@ -122,9 +122,8 @@ transform = Transform3D(0.794096, 0, 0.607792, 0, 1, 0, -0.607792, 0, 0.794096, 
 
 [node name="Systems" type="Node" parent="."]
 
-[node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("die_spawn_point")]
+[node name="GameController" type="Node" parent="Systems"]
 script = ExtResource("2_ldghm")
-die_spawn_point = NodePath("../../DieSpawn")
 
 [node name="InteractiveMovePicker" parent="Systems" instance=ExtResource("8_g3rsf")]
 

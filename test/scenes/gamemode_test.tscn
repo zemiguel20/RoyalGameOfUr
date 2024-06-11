@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://t6r5hmgp5c1u"]
+[gd_scene load_steps=10 format=3 uid="uid://t6r5hmgp5c1u"]
 
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="1_sto2p"]
-[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/boards/board_finkel.tscn" id="3_3t76i"]
 [ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker_interactive.tscn" id="3_yh8qp"]
 [ext_resource type="PackedScene" uid="uid://d3gx24dw7xjud" path="res://scenes/game/systems/move_picker/move_picker_ai.tscn" id="5_xncr4"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="11_4yam3"]
@@ -15,8 +14,9 @@ var started: bool = false
 @export var controller: GameController
 
 func _ready():
-	Settings.can_stack_in_safe_spot = true
-	Settings.num_pieces = 4
+	Settings.ruleset = load(\"res://resources/rulesets/ruleset_russian_rosette.tres\")
+	Settings.ruleset.rosettes_allow_stacking = true
+	Settings.ruleset.num_pieces = 4
 
 
 func _input(event: InputEvent) -> void:
@@ -46,8 +46,6 @@ size = Vector3(1, 0.1, 1)
 script = SubResource("GDScript_b8xbw")
 controller = NodePath("Systems/GameController")
 
-[node name="Board" parent="." instance=ExtResource("3_3t76i")]
-
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
@@ -71,21 +69,22 @@ transform = Transform3D(0.0497542, -0.741031, 0.669625, 0, 0.670456, 0.74195, -0
 
 [node name="Systems" type="Node" parent="."]
 
-[node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("die_spawn_point")]
+[node name="GameController" type="Node" parent="Systems"]
 script = ExtResource("1_sto2p")
-die_spawn_point = NodePath("../../DieSpawn")
 
 [node name="DiceRoller" parent="Systems" instance=ExtResource("11_4yam3")]
 transform = Transform3D(0.0849126, 0, 0.996388, 0, 1, 0, -0.996388, 0, 0.0849126, 0.222704, 2.98023e-08, 0.010642)
 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("11_4yam3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.208323, 2.98023e-08, 0.0507007)
-assigned_player = 1
-automatic = true
 
 [node name="InteractiveMovePicker" parent="Systems" instance=ExtResource("3_yh8qp")]
 
 [node name="AIMovePicker" parent="Systems" instance=ExtResource("5_xncr4")]
 
-[node name="DieSpawn" parent="." instance=ExtResource("11_vih10")]
+[node name="DieSpawn" parent="." groups=["dice_spawn"] instance=ExtResource("11_vih10")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000428624, 0.0174397, 0.208058)
+
+[node name="BoardSpawn" type="Marker3D" parent="." groups=["board_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0766106)
+gizmo_extents = 0.01

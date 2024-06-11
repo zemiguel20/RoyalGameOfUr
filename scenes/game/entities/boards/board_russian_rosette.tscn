@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c7lavotp1mbhv" path="res://models/board_with_decals_only_rosettes.tscn" id="2_dcp20"]
 [ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/entities/spot.tscn" id="3_5uqqm"]
 
-[node name="Board" type="Node3D" node_paths=PackedStringArray("p1_start_spots", "p1_track", "p2_start_spots", "p2_track") groups=["board"]]
+[node name="Board" type="Node3D" node_paths=PackedStringArray("p1_start_spots", "p1_track", "p2_start_spots", "p2_track")]
 script = ExtResource("1_mqh3h")
 p1_start_spots = [NodePath("P1StartSpots/P1StartSpot1"), NodePath("P1StartSpots/P1StartSpot2"), NodePath("P1StartSpots/P1StartSpot3"), NodePath("P1StartSpots/P1StartSpot4"), NodePath("P1StartSpots/P1StartSpot5"), NodePath("P1StartSpots/P1StartSpot6"), NodePath("P1StartSpots/P1StartSpot7")]
 p1_track = [NodePath("Tiles/P1Tile1Rosette"), NodePath("Tiles/P1Tile2Rosette"), NodePath("Tiles/P1Tile3Rosette"), NodePath("Tiles/P1Tile4Rosette"), NodePath("Tiles/Tile5Rosette"), NodePath("Tiles/Tile6Rosette"), NodePath("Tiles/Tile7Rosette"), NodePath("Tiles/Tile8Rosette"), NodePath("Tiles/Tile9Rosette"), NodePath("Tiles/Tile10Rosette"), NodePath("Tiles/Tile11Rosette"), NodePath("Tiles/Tile12Rosette"), NodePath("Tiles/P1Tile13Rosette"), NodePath("Tiles/P1Tile14Rosette"), NodePath("P1EndSpot")]
@@ -17,13 +17,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108967, 0)
 [node name="Tiles" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022, 0)
 
-[node name="P1Tile1Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="P1Tile1Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0358832, 0, 0.0187571)
 
-[node name="P1Tile2Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="P1Tile2Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0361051, 0, 0.0544835)
 
-[node name="P1Tile3Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="P1Tile3Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036327, 0, 0.0897661)
 
 [node name="P1Tile4Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
@@ -31,13 +31,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036327, 0, 0.127712)
 safe = true
 give_extra_turn = true
 
-[node name="P2Tile1Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="P2Tile1Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351095, 0, 0.018745)
 
-[node name="P2Tile2Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="P2Tile2Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0353683, 0, 0.0552398)
 
-[node name="P2Tile3Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="P2Tile3Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351095, 0, 0.0896638)
 
 [node name="P2Tile4Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
@@ -45,13 +45,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0348507, 0, 0.12797)
 safe = true
 give_extra_turn = true
 
-[node name="Tile5Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="Tile5Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000867553, 0, 0.127194)
 
-[node name="Tile6Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="Tile6Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0891462)
 
-[node name="Tile7Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="Tile7Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0552398)
 
 [node name="Tile8Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
@@ -59,19 +59,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0187451)
 safe = true
 give_extra_turn = true
 
-[node name="Tile9Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="Tile9Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00319701, 0, -0.0182673)
 
-[node name="Tile10Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="Tile10Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00242052, 0, -0.056315)
 
-[node name="Tile11Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="Tile11Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00146189, 0, -0.0933274)
 
-[node name="Tile12Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="Tile12Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00120305, 0, -0.128787)
 
-[node name="P1Tile13Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="P1Tile13Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0342563, 0, -0.128787)
 
 [node name="P1Tile14Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
@@ -79,7 +79,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0337387, 0, -0.0935862)
 safe = true
 give_extra_turn = true
 
-[node name="P2Tile13Rosette" parent="Tiles" groups=["rosette"] instance=ExtResource("3_5uqqm")]
+[node name="P2Tile13Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0379566, 0, -0.129046)
 
 [node name="P2Tile14Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("3_5uqqm")]

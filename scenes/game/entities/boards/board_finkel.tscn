@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/entities/spot.tscn" id="4_tsucu"]
 [ext_resource type="PackedScene" uid="uid://bimn0tu6hs0nw" path="res://models/board_with_decals.tscn" id="8_h5eyh"]
 
-[node name="Board" type="Node3D" node_paths=PackedStringArray("p1_start_spots", "p1_track", "p2_start_spots", "p2_track") groups=["board"]]
+[node name="Board" type="Node3D" node_paths=PackedStringArray("p1_start_spots", "p1_track", "p2_start_spots", "p2_track")]
 script = ExtResource("1_tmmtp")
 p1_start_spots = [NodePath("P1StartSpots/P1StartSpot1"), NodePath("P1StartSpots/P1StartSpot2"), NodePath("P1StartSpots/P1StartSpot3"), NodePath("P1StartSpots/P1StartSpot4"), NodePath("P1StartSpots/P1StartSpot5"), NodePath("P1StartSpots/P1StartSpot6"), NodePath("P1StartSpots/P1StartSpot7")]
 p1_track = [NodePath("Tiles/P1Tile1"), NodePath("Tiles/P1Tile2"), NodePath("Tiles/P1Tile3"), NodePath("Tiles/P1Tile4Rosette"), NodePath("Tiles/Tile5"), NodePath("Tiles/Tile6"), NodePath("Tiles/Tile7"), NodePath("Tiles/Tile8Rosette"), NodePath("Tiles/Tile9"), NodePath("Tiles/Tile10"), NodePath("Tiles/Tile11"), NodePath("Tiles/Tile12"), NodePath("Tiles/P1Tile13"), NodePath("Tiles/P1Tile14Rosette"), NodePath("P1EndSpot")]
