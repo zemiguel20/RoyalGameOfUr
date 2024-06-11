@@ -75,7 +75,8 @@ func _on_try_play_unfair_dialog(roll_result: int, player: General.Player):
 	if not explained_everything:
 		return
 		
-	if roll_result == 0 and player == General.Player.TWO:
+	if roll_result == 0 and player == General.Player.TWO \
+	and GameState.player_turns_made >= 5:
 		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLLED_0)
 
 
