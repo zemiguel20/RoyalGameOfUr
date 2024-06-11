@@ -2,7 +2,7 @@ class_name GameMoveHighlight extends Node
 
 
 @export var color_neutral := Color.WHITE
-@export var color_safe := Color.AQUAMARINE
+@export var color_rosette := Color.AQUAMARINE
 @export var color_end := Color.YELLOW
 @export var color_knock_out := Color.ORANGE
 
@@ -32,7 +32,7 @@ func highlight(move: GameMove, base_color := color_neutral) -> void:
 	# Highlight pieces TO
 	for piece in move.pieces_in_to:
 		piece.highlight.active = true
-		piece.highlight.color = color_knock_out if move.knocks_opo else color_safe
+		piece.highlight.color = color_knock_out if move.is_to_occupied_by_opponent else color_rosette
 	
 	# Highlight PATH
 	var path = get_path_highlighter(move)
@@ -56,12 +56,12 @@ func clear_highlight(move: GameMove) -> void:
 func get_to_spot_color(move: GameMove) -> Color:
 	if not move.valid:
 		return General.color_negative
-	elif move.moves_to_end:
+	elif move.is_to_end_of_track:
 		return color_end
-	elif move.knocks_opo:
+	elif move.is_to_occupied_by_opponent:
 		return color_knock_out
-	elif move.to.safe:
-		return color_safe
+	elif move.to.is_in_group("rosettes"):
+		return color_rosette
 	else:
 		return color_neutral
 
