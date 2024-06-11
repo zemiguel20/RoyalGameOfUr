@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_jiojp")
+name = "Tournament"
 rosettes_are_safe = true
 rosettes_give_extra_turn = false
 rosettes_allow_stacking = true

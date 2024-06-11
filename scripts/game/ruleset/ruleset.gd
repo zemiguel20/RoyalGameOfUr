@@ -1,6 +1,8 @@
 class_name Ruleset extends Resource
 
 
+@export var name: String = "Default"
+
 @export var rosettes_are_safe: bool = false
 @export var rosettes_give_extra_turn: bool = false
 @export var rosettes_allow_stacking: bool = false

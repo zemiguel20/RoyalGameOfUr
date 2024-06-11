@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_4snn7")
+name = "Finkel (Common)"
 rosettes_are_safe = true
 rosettes_give_extra_turn = true
 rosettes_allow_stacking = false
