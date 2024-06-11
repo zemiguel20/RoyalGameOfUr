@@ -7,6 +7,10 @@ extends Node
 var npcs: Array
 
 func _ready():
+	## Disable background NPCs when in hotseat mode
+	if Settings.is_hotseat_mode:
+		return
+	
 	npcs = get_node("NPCs").get_children()
 	
 	for npc in npcs:

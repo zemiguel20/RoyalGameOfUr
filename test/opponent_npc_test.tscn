@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://bsule7qsp6of1"]
 
 [ext_resource type="Script" path="res://scripts/game/gamestate_controller.gd" id="1_txfd6"]
-[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="2_lnlvq"]
-[ext_resource type="PackedScene" uid="uid://b7wqojt2nphja" path="res://scenes/game/dice/dice_controller.tscn" id="3_sxu04"]
+[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/boards/board_finkel.tscn" id="2_lnlvq"]
+[ext_resource type="PackedScene" path="res://scenes/game/dice/dice_controller.tscn" id="3_sxu04"]
 [ext_resource type="Script" path="res://scripts/ai/ai_player_advanced.gd" id="4_mih40"]
 [ext_resource type="PackedScene" uid="uid://d0hgcfga28omq" path="res://scenes/npcs/opponent_npc_dev.tscn" id="5_n1h8f"]
 [ext_resource type="PackedScene" uid="uid://b5rqut7t53w0r" path="res://scenes/ui/subtitle_system.tscn" id="6_11yjt"]

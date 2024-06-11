@@ -42,6 +42,7 @@ func start(current_player: General.Player, last_rolled_value: int) -> void:
 		selected_move.execute(anim, Settings.fast_move_enabled)
 		await selected_move.execution_finished
 		GameEvents.move_executed.emit(selected_move)
+		GameState.player_turns_made += 1
 
 
 func _calculate_moves(steps: int) -> Array[GameMove]:
@@ -60,28 +61,9 @@ func _calculate_moves(steps: int) -> Array[GameMove]:
 	# Calculate all moves and whether they are valid
 	for spot in occupied_spots:
 		var landing_spots = board.get_landing_spots(assigned_player, spot, steps, \
-			not Settings.can_move_backwards)
+			not Settings.ruleset.can_move_backwards)
 		
 		for landing_spot in landing_spots:
-			var valid = _can_place(landing_spot)
-			var move = GameMove.new(spot, landing_spot, assigned_player, valid)
+			var move = GameMove.new(spot, landing_spot, assigned_player)
 			moves.append(move)
 	return moves
-
-
-# Check if any rules are violated, or return true.
-func _can_place(spot: Spot) -> bool:
-	var result = true
-	
-	if spot.is_occupied_by_player(assigned_player) and not spot.safe \
-	and not EntityManager.get_board().is_spot_end_of_player_track(spot, assigned_player):
-		result = false
-	
-	if spot.is_occupied_by_player(assigned_player) and spot.safe and \
-	not Settings.can_stack_in_safe_spot:
-		result = false
-	
-	if spot.is_occupied_by_player(General.get_opponent(assigned_player)) and spot.safe:
-		result = false
-	
-	return result

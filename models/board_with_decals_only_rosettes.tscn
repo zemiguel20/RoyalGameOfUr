@@ -1,0 +1,173 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7lavotp1mbhv"]
+
+[ext_resource type="PackedScene" uid="uid://dbj3goom4nkop" path="res://models/board.glb" id="1_2imhv"]
+[ext_resource type="Texture2D" uid="uid://c5677q0o5hg14" path="res://textures/decals/UrSymbol_3.png" id="2_bkd8i"]
+
+[node name="BoardModel" instance=ExtResource("1_2imhv")]
+
+[node name="Board" parent="." index="0"]
+transform = Transform3D(0.031, 0, 0, 0, 0.031, 0, 0, 0, 0.031, 0, 0, 0)
+layers = 4
+
+[node name="TileDecals" type="Node3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00542983, 0)
+
+[node name="RosetteDecal" type="Decal" parent="TileDecals" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000410821, 0, 0.0186231)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal2" type="Decal" parent="TileDecals" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036293, 0, 0.127421)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal3" type="Decal" parent="TileDecals" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0353696, 0, 0.128063)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal4" type="Decal" parent="TileDecals" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0381223, 0, -0.0934486)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal5" type="Decal" parent="TileDecals" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0340825, 0, -0.093461)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal6" type="Decal" parent="TileDecals" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0334739, 0, -0.129349)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal7" type="Decal" parent="TileDecals" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013063, 0, -0.128885)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal8" type="Decal" parent="TileDecals" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0379414, 0, -0.128576)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal9" type="Decal" parent="TileDecals" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00177004, 0, -0.0931772)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal10" type="Decal" parent="TileDecals" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00215473, 0, -0.0561373)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal11" type="Decal" parent="TileDecals" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00289064, 0, -0.0190975)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal12" type="Decal" parent="TileDecals" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035621, 0, 0.0194141)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal13" type="Decal" parent="TileDecals" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351304, 0, 0.0552275)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal14" type="Decal" parent="TileDecals" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0353757, 0, 0.0905503)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal15" type="Decal" parent="TileDecals" index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000682976, 0, 0.128817)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal16" type="Decal" parent="TileDecals" index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.24207e-05, 0, 0.0909084)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal17" type="Decal" parent="TileDecals" index="16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000437688, 0, 0.0547287)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal18" type="Decal" parent="TileDecals" index="17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0366781, 0, 0.0192094)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal19" type="Decal" parent="TileDecals" index="18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0361372, 0, 0.054909)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
+
+[node name="RosetteDecal20" type="Decal" parent="TileDecals" index="19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0359569, 0, 0.0904282)
+size = Vector3(0.025, 0.01, 0.025)
+texture_albedo = ExtResource("2_bkd8i")
+modulate = Color(1, 1, 1, 0.87451)
+upper_fade = 0.000168266
+cull_mask = 4
