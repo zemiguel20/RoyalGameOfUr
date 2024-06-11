@@ -3,14 +3,13 @@
 [ext_resource type="Script" path="res://scripts/npc_system/guard_npc.gd" id="1_wafl7"]
 [ext_resource type="PackedScene" uid="uid://d1l4ef265ffb7" path="res://scenes/npcs/background_npc_1.tscn" id="3_np6oq"]
 
-[node name="Passenger_NPC" type="Node3D"]
+[node name="Guard_NPC" type="Node3D"]
 rotation_edit_mode = 2
 script = ExtResource("1_wafl7")
 _move_speed = 1.0
 _walk_rotation_speed = 0.7
 _standing_rotation_speed = 200000.0
-_start_delay = 1
-_max_walk_cooldown = 5
+_start_delay = 2
 _watch_game_probability = 0.0
 metadata/animation_player = NodePath("Model_BGCharacter1/AnimationPlayer")
 

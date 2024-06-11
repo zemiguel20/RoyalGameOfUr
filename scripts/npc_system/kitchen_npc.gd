@@ -17,9 +17,6 @@ extends AmbientNPCBase
 @export var _min_kitchen_time: float = 10
 @export var _max_kitchen_time: float = 30
 
-@export_group("Misc")
-@export var _storage_point: Marker3D
-
 var _original_position: Vector3
 
 
