@@ -12,6 +12,7 @@ func spawn_board(board_prefab: PackedScene) -> Board:
 	# Get spawn point
 	var spawn_point = get_tree().get_first_node_in_group("board_spawn")
 	if not spawn_point or not spawn_point is Node3D:
+		push_warning("No board spawn point found. Using origin.")
 		spawn_point = Node3D.new()
 	
 	var instance = board_prefab.instantiate() as Board
@@ -49,6 +50,7 @@ func spawn_die() -> Die:
 	# Get spawn point
 	var spawn_point = get_tree().get_first_node_in_group("dice_spawn")
 	if not spawn_point or not spawn_point is Node3D:
+		push_warning("No dice spawn point found. Using origin.")
 		spawn_point = Node3D.new()
 	
 	var instance = DIE_PREFAB.instantiate() as Die
