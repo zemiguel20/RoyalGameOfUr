@@ -24,7 +24,8 @@ func start(current_player: General.Player, last_rolled_value: int) -> void:
 	
 	var moves = _calculate_moves(last_rolled_value)
 	
-	if moves.is_empty():
+	# Check if there is any valid move
+	if moves.filter(func(move: GameMove): return move.valid).is_empty():
 		GameEvents.no_moves.emit()
 		return
 	
