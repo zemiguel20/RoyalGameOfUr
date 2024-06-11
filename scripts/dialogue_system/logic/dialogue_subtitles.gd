@@ -8,6 +8,8 @@ extends CanvasLayer
 @export var subtitle_label: Label
 @export var skip_icon: Control
 
+var _is_skippable: bool
+
 ### Text of the opponent npc, which gets saved when another one is shown.
 #var unfocussed_text
 ### Focussed on the main character or not.
@@ -18,7 +20,7 @@ func _ready():
 	subtitle_label.text = "Waarom doet ie niet?"
 	
 	
-func display_subtitle(entry: DialogueBundle, show_skip_icon: bool):
+func display_subtitle(entry: DialogueBundle, is_skippable: bool):
 	subtitle_label.text = entry.caption
 	if entry.caption_cuneiform.is_empty():
 		cuneiform_label.text = _filter_symbols(entry.caption).to_lower()
@@ -26,12 +28,13 @@ func display_subtitle(entry: DialogueBundle, show_skip_icon: bool):
 		cuneiform_label.text = entry.caption_cuneiform.to_lower()
 		
 	_toggle_subtitles(entry.caption.length() > 0)
-	_toggle_skip_icon(show_skip_icon)
+	_toggle_skip_icon(is_skippable)
+	_is_skippable = is_skippable
 
 
 func _filter_symbols(text: String) -> String:
 	var result = text.replace(' ', '')
-	var chars_to_filter = ['(', ')', '!', '?', ',', '.', '\'', '´', '’']
+	var chars_to_filter = ['(', ')', '!', '?', ',', '.', '\'', '´', '’', '\"']
 	for char in chars_to_filter:
 		result = result.replace(char, ' ')
 	
@@ -63,3 +66,8 @@ func _toggle_skip_icon(toggle: bool):
 #func _on_option_1_mouse_exited():
 	#focussed = true
 	#subtitle_label.text = unfocussed_text
+
+
+func _on_subtitle_panel_clicked(event):
+	if _is_skippable and event.is_action_pressed("ui_skip_dialogue"):
+		GameEvents.subtitle_panel_clicked.emit()

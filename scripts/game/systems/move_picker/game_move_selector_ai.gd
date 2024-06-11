@@ -50,8 +50,9 @@ const BASE_SHARED_SPOT_DANGER_SCORE: float = 0.1
 
 
 func start_selection(moves: Array[GameMove]) -> void:
-	if not Settings.fast_move_enabled:
+	if _is_shared_path_crowded():
 		# Simulate thinking
+		GameEvents.opponent_thinking.emit()
 		var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
 		await get_tree().create_timer(thinking_duration).timeout
 	var selected_move = _determine_next_move(moves)
@@ -63,6 +64,11 @@ func start_selection(moves: Array[GameMove]) -> void:
 	highlight.clear_highlight(selected_move)
 	
 	move_selected.emit(selected_move)
+
+
+func _is_shared_path_crowded() -> int:
+	var board = EntityManager.get_board() as Board
+	return board.get_occupied_spots_in_shared_path().size() >= 3
 
 
 func _determine_next_move(moves: Array[GameMove]) -> GameMove:

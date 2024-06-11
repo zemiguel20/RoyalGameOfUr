@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=13 format=3 uid="uid://bgla8xjveol3f"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=12 format=3 uid="uid://bgla8xjveol3f"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_1bfsv"]
 [ext_resource type="AudioStream" uid="uid://bxgc88v1m6fvo" path="res://resources/dialogue/gameplay-reaction-well-played-2.mp3" id="1_yesbt"]
@@ -33,17 +33,12 @@ dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_e
 requires_click = false
 weight = 5
 
-[sub_resource type="Resource" id="Resource_v6ul5"]
-script = ExtResource("2_8mqiv")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([])
-requires_click = false
-weight = 5
-
 [resource]
 script = ExtResource("3_k5hok")
 category = 8
 play_in_order = true
 has_priority = false
+reset_after_all_played = true
 initial_delay = 0.5
-dialogue_sequences = Array[ExtResource("2_8mqiv")]([SubResource("Resource_kg23r"), SubResource("Resource_v6ul5")])
+dialogue_sequences = Array[ExtResource("2_8mqiv")]([SubResource("Resource_kg23r")])
 weight_for_empty = 0

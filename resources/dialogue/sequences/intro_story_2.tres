@@ -1,20 +1,10 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=24 format=3 uid="uid://qf6gyjt7j251"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://qf6gyjt7j251"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_136wl"]
 [ext_resource type="AudioStream" uid="uid://chkxk7vexxl1v" path="res://resources/dialogue/intro-1-1-ah-thats-better.mp3" id="1_n4wmi"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_k243e"]
 [ext_resource type="AudioStream" uid="uid://dbsofthjntkp4" path="res://resources/dialogue/intro-1-2-empty-stomach.mp3" id="3_nir2p"]
-[ext_resource type="AudioStream" uid="uid://dlah5d5pgywmq" path="res://resources/dialogue/intro-1-3-ninos-tushan-2.mp3" id="4_b08bw"]
-[ext_resource type="AudioStream" uid="uid://rxmj7fyoce7b" path="res://resources/dialogue/intro-1-3-ninos-tushan.mp3" id="5_2awjp"]
-[ext_resource type="AudioStream" uid="uid://dqks4cb0pibqf" path="res://resources/dialogue/intro-1-4-grown-strong-2.mp3" id="6_jggcp"]
-[ext_resource type="AudioStream" uid="uid://boirnhe2jm4m7" path="res://resources/dialogue/intro-1-4-grown-strong-3.mp3" id="7_i275g"]
-[ext_resource type="AudioStream" uid="uid://eqyw23yk7auu" path="res://resources/dialogue/intro-1-4-grown-strong.mp3" id="8_yk8s8"]
-[ext_resource type="AudioStream" uid="uid://ddxmy5a2tpvkm" path="res://resources/dialogue/intro-1-5-march.mp3" id="9_pfji7"]
-[ext_resource type="AudioStream" uid="uid://ces7k50ug138r" path="res://resources/dialogue/intro-1-6-no-interest.mp3" id="10_7s187"]
-[ext_resource type="AudioStream" uid="uid://dvjtilanrolwp" path="res://resources/dialogue/intro-1-6-no-interest-2.mp3" id="11_w8lqg"]
-[ext_resource type="AudioStream" uid="uid://b6aasjq8l6usv" path="res://resources/dialogue/intro-1-7-enough-about-that.mp3" id="12_vlc31"]
-[ext_resource type="AudioStream" uid="uid://b884gt7j6cetd" path="res://resources/dialogue/intro-1-8-assur-merciful.mp3" id="13_bq5ng"]
-[ext_resource type="AudioStream" uid="uid://c3io7qex3dpic" path="res://resources/dialogue/intro-1-8-assur-merciful-2.mp3" id="14_norhl"]
+[ext_resource type="AudioStream" uid="uid://b57unqwumu506" path="res://resources/dialogue/intro-2-1-brought-something.mp3" id="15_a0xw6"]
 
 [sub_resource type="Resource" id="Resource_7k2gv"]
 script = ExtResource("1_136wl")
@@ -34,62 +24,17 @@ anim_variations = Array[int]([])
 fixed_duration = -1.0
 prevents_opponent_action = false
 
-[sub_resource type="Resource" id="Resource_73wnr"]
+[sub_resource type="Resource" id="Resource_ha7mv"]
 script = ExtResource("1_136wl")
-audio_variations = Array[AudioStream]([ExtResource("4_b08bw"), ExtResource("5_2awjp")])
-caption = "Have you heard? Sennacherib wants Ninos in the city of Tušḫan."
+audio_variations = Array[AudioStream]([ExtResource("15_a0xw6")])
+caption = "So, my friend, I brought something special today..."
 caption_cuneiform = ""
 anim_variations = Array[int]([1])
 fixed_duration = -1.0
 prevents_opponent_action = false
 
-[sub_resource type="Resource" id="Resource_vtih1"]
-script = ExtResource("1_136wl")
-audio_variations = Array[AudioStream]([ExtResource("6_jggcp"), ExtResource("7_i275g"), ExtResource("8_yk8s8")])
-caption = "He’s grown to be strong, of course. But still..."
-caption_cuneiform = ""
-anim_variations = Array[int]([])
-fixed_duration = -1.0
-prevents_opponent_action = false
-
-[sub_resource type="Resource" id="Resource_eg8la"]
-script = ExtResource("1_136wl")
-audio_variations = Array[AudioStream]([ExtResource("9_pfji7")])
-caption = "I would be relieved if this is just one of those marches, you know? To intimidate with a show of power."
-caption_cuneiform = ""
-anim_variations = Array[int]([2])
-fixed_duration = -1.0
-prevents_opponent_action = false
-
-[sub_resource type="Resource" id="Resource_sv3oo"]
-script = ExtResource("1_136wl")
-audio_variations = Array[AudioStream]([ExtResource("10_7s187"), ExtResource("11_w8lqg")])
-caption = "Ninos has no interest in battle. And I can’t stand the thought of seeing my daughter widowed so young."
-caption_cuneiform = ""
-anim_variations = Array[int]([5])
-fixed_duration = -1.0
-prevents_opponent_action = false
-
-[sub_resource type="Resource" id="Resource_wslfo"]
-script = ExtResource("1_136wl")
-audio_variations = Array[AudioStream]([ExtResource("12_vlc31")])
-caption = "But enough about that. After all, fate cannot be changed."
-caption_cuneiform = ""
-anim_variations = Array[int]([])
-fixed_duration = -1.0
-prevents_opponent_action = false
-
-[sub_resource type="Resource" id="Resource_an47l"]
-script = ExtResource("1_136wl")
-audio_variations = Array[AudioStream]([ExtResource("13_bq5ng"), ExtResource("14_norhl")])
-caption = "I just pray Aššur will be merciful."
-caption_cuneiform = ""
-anim_variations = Array[int]([])
-fixed_duration = -1.0
-prevents_opponent_action = false
-
 [resource]
 script = ExtResource("2_k243e")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_7k2gv"), SubResource("Resource_eyp5x"), SubResource("Resource_73wnr"), SubResource("Resource_vtih1"), SubResource("Resource_eg8la"), SubResource("Resource_sv3oo"), SubResource("Resource_wslfo"), SubResource("Resource_an47l")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_7k2gv"), SubResource("Resource_eyp5x"), SubResource("Resource_ha7mv")])
 requires_click = true
 weight = 5

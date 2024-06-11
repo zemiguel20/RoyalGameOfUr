@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=22 format=3 uid="uid://bh10uvg330tej"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=13 format=3 uid="uid://bh10uvg330tej"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_1citi"]
-[ext_resource type="AudioStream" uid="uid://b57unqwumu506" path="res://resources/dialogue/intro-2-1-brought-something.mp3" id="1_2deht"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_wwdt7"]
 [ext_resource type="AudioStream" uid="uid://dxki7cmwkw83l" path="res://resources/dialogue/intro-2-2-original.mp3" id="3_kucw0"]
 [ext_resource type="AudioStream" uid="uid://y324n6ui8s5a" path="res://resources/dialogue/intro-2-3-sarrugi-ancient.mp3" id="4_v4303"]
@@ -9,20 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://cqarmmr2kkl5i" path="res://resources/dialogue/intro-2-4-racing-game-2.mp3" id="6_whag6"]
 [ext_resource type="AudioStream" uid="uid://cetu3yl7jum80" path="res://resources/dialogue/intro-2-5-explain-them-2.mp3" id="7_2dpbt"]
 [ext_resource type="AudioStream" uid="uid://bryqufo0wgm4e" path="res://resources/dialogue/intro-2-5-explain-them.mp3" id="8_bdouc"]
-[ext_resource type="AudioStream" uid="uid://djslhup8tw57c" path="res://resources/dialogue/intro-2-6-good-luck.mp3" id="9_tvxx0"]
-[ext_resource type="AudioStream" uid="uid://467y2wr7l7ty" path="res://resources/dialogue/intro-2-6-good-luck-2.mp3" id="10_ojrgq"]
-[ext_resource type="AudioStream" uid="uid://cik4oe4lnxojh" path="res://resources/dialogue/intro-2-6-good-luck-3.mp3" id="11_t2y83"]
-[ext_resource type="AudioStream" uid="uid://bs40ox5uxe0p7" path="res://resources/dialogue/intro-2-7-damrina.mp3" id="12_jaidg"]
-[ext_resource type="AudioStream" uid="uid://chi81eqj44gsj" path="res://resources/dialogue/intro-2-7-damrina-2.mp3" id="13_vj264"]
-
-[sub_resource type="Resource" id="Resource_ha7mv"]
-script = ExtResource("1_1citi")
-audio_variations = Array[AudioStream]([ExtResource("1_2deht")])
-caption = "So, my friend, I brought something special today..."
-caption_cuneiform = ""
-anim_variations = Array[int]([1])
-fixed_duration = -1.0
-prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_58o8f"]
 script = ExtResource("1_1citi")
@@ -60,26 +45,8 @@ anim_variations = Array[int]([7])
 fixed_duration = -1.0
 prevents_opponent_action = false
 
-[sub_resource type="Resource" id="Resource_ede7p"]
-script = ExtResource("1_1citi")
-audio_variations = Array[AudioStream]([ExtResource("9_tvxx0"), ExtResource("10_ojrgq"), ExtResource("11_t2y83")])
-caption = "Good luck, my friend! May you find the insights you seek today."
-caption_cuneiform = ""
-anim_variations = Array[int]([])
-fixed_duration = -1.0
-prevents_opponent_action = false
-
-[sub_resource type="Resource" id="Resource_7bexq"]
-script = ExtResource("1_1citi")
-audio_variations = Array[AudioStream]([ExtResource("12_jaidg"), ExtResource("13_vj264")])
-caption = "This one’s for Damrina."
-caption_cuneiform = ""
-anim_variations = Array[int]([1])
-fixed_duration = -1.0
-prevents_opponent_action = false
-
 [resource]
 script = ExtResource("1_wwdt7")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_ha7mv"), SubResource("Resource_58o8f"), SubResource("Resource_1tkgn"), SubResource("Resource_nm3au"), SubResource("Resource_30xwj"), SubResource("Resource_ede7p"), SubResource("Resource_7bexq")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_58o8f"), SubResource("Resource_1tkgn"), SubResource("Resource_nm3au"), SubResource("Resource_30xwj")])
 requires_click = true
 weight = 5

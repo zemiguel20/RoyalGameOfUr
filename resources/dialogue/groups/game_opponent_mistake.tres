@@ -28,6 +28,7 @@ script = ExtResource("1_7q7ij")
 category = 5
 play_in_order = false
 has_priority = false
+reset_after_all_played = true
 initial_delay = 0.5
 dialogue_sequences = Array[ExtResource("2_4dm5i")]([SubResource("Resource_gdu4m")])
 weight_for_empty = 15

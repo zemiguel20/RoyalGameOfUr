@@ -7,6 +7,7 @@ var explained_rosettes_are_safe: bool
 var explained_capturing: bool
 var explained_securing: bool
 var explained_everything: bool
+var first_random_dialog_had: bool
 
 var talking_animation: Animation
 
@@ -34,6 +35,8 @@ func _ready():
 	GameEvents.try_play_tutorial_dialog.connect(_on_try_play_tutorial_dialog)
 	GameEvents.reaction_piece_captured.connect(_on_piece_captured)
 	GameEvents.rolled_by_player.connect(_on_try_play_unfair_dialog)
+	GameEvents.opponent_thinking.connect(_try_play_thinking_sound)
+	GameEvents.first_turn_dice_shake.connect(_on_first_turn_dice_shaked)
 
 
 func _process(delta):
@@ -48,7 +51,7 @@ func _process(delta):
 
 func _play_story_dialogue():
 	var success = await _dialogue_system.play(DialogueSystem.Category.INTRO_STORY)
-	success = await _dialogue_system.play(DialogueSystem.Category.INTRO_RULES_QUESTION)
+	GameEvents.intro_tilt_camera.emit()
 	success = await _dialogue_system.play(DialogueSystem.Category.INTRO_GAME_START)
 	## If something went wrong when playing the story dialogues, do not try to trigger a next sequence.
 	if success:
@@ -66,9 +69,17 @@ func _play_random_dialogue():
 	var success = await _dialogue_system.play(DialogueSystem.Category.RANDOM_CONVERSATION)
 	## If something went wrong when playing the story dialogues, do not try to trigger a next sequence. 
 	if success:
+		first_random_dialog_had = true
 		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
 	else: 
 		_is_timer_active = false
+
+
+func _on_first_turn_dice_shaked():
+	_dialogue_system.play(DialogueSystem.Category.INTRO_GOOD_LUCK_WISH)
+	
+	if first_random_dialog_had:
+		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLL_FOR_HOPE)
 
 
 func _on_try_play_unfair_dialog(roll_result: int, player: General.Player):
@@ -84,31 +95,31 @@ func _on_try_play_tutorial_dialog(move: GameMove):
 	#if Settings.check_ruleset(Settings.Ruleset.FINKEL): return
 	if explained_everything: return
 		
-	if not explained_capturing and move.knocks_opo:
+	if not explained_capturing and move.captures_opponent():
 		if move.player == General.Player.TWO:
-			play_dialog(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)
+			play_dialog(DialogueSystem.Category.TUTORIAL_PLAYER_GETS_CAPTURED)
 		else:
-			play_dialog(DialogueSystem.Category.GAME_TUTORIAL_OPPONENT_GETS_CAPTURED)
+			play_dialog(DialogueSystem.Category.TUTORIAL_OPPONENT_GETS_CAPTURED)
 		explained_capturing = true
 		return
 	
-	if not explained_rosettes_extra_roll and move.to.give_extra_turn:
-		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
+	if not explained_rosettes_extra_roll and move.gives_extra_turn:
+		play_dialog(DialogueSystem.Category.TUTORIAL_ROSETTE)
 		explained_rosettes_extra_roll = true
 		return
 	
-	if not explained_rosettes_are_safe and move.to.safe and move.is_to_central:
-		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
+	if not explained_rosettes_are_safe and move.is_to_safe and move.is_to_shared:
+		play_dialog(DialogueSystem.Category.TUTORIAL_CENTRAL_ROSETTE)
 		explained_rosettes_are_safe = true
 		return
 	
 	if not explained_securing and EntityManager.get_from_index_on_board(move) > 7:
-		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
+		play_dialog(DialogueSystem.Category.TUTORIAL_FINISH)
 		explained_securing = true
 		return
 	
 	if has_explained_everything() and not _dialogue_system.is_busy():
-		play_dialog(DialogueSystem.Category.GAME_TUTORIAL_THATS_ALL)
+		play_dialog(DialogueSystem.Category.TUTORIAL_THATS_ALL)
 		explained_everything = true
 
 
@@ -124,6 +135,10 @@ func play_dialog(category: DialogueSystem.Category):
 func _play_interruption(category):
 	_time_until_next_dialogue += reaction_dialogue_delay
 	await _dialogue_system.play(category)
+
+
+func _try_play_thinking_sound():
+	_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_THINKING)
 
 
 func _on_play_pressed():

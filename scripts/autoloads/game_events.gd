@@ -12,8 +12,10 @@ signal no_moves
 signal zero_rolled
 
 signal play_pressed
+signal intro_tilt_camera
 signal intro_finished
 
+signal first_turn_dice_shake
 signal try_play_tutorial_dialog(category: DialogueSystem.Category)
 signal reaction_piece_captured(move: GameMove)
 signal rolled_by_player(value: int, player: General.Player)
@@ -21,3 +23,6 @@ signal rolled_by_player(value: int, player: General.Player)
 signal fast_move_toggled(enabled: bool)
 signal drag_move_start
 signal drag_move_end
+signal opponent_thinking
+
+signal subtitle_panel_clicked

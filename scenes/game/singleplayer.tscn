@@ -15,12 +15,11 @@
 [sub_resource type="GDScript" id="GDScript_lsuqm"]
 script/source = "extends Node
 
-@onready var board: Board = $Board
-
 
 func _ready() -> void:
-	Settings.is_hotseat_mode = true
-	Settings.ruleset = load(\"res://resources/rulesets/ruleset_russian_rosette.tres\")
+	pass
+	# Settings.is_hotseat_mode = true
+	# Settings.ruleset = load(\"res://resources/rulesets/ruleset_russian_rosette.tres\")
 
 
 func _input(event: InputEvent) -> void:
@@ -90,7 +89,7 @@ transform = Transform3D(0.498594, 0, -0.866836, 0, 1, 0, 0.866836, 0, 0.498594, 
 shape = SubResource("BoxShape3D_qcwgi")
 
 [node name="Wall3" type="StaticBody3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.56603, -0.201724, 6.64917)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55345, -0.201724, 6.62311)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall3"]
@@ -181,13 +180,17 @@ script = ExtResource("6_3dit1")
 
 [node name="Opponent_Guard_Animated" parent="." instance=ExtResource("7_tegfk")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
+starting_dialogue_delay = 2.0
 
 [node name="Custom_Camera" parent="." node_paths=PackedStringArray("_hotseat_rotation") instance=ExtResource("7_w116q")]
-transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.677, 0.167, 6.671)
+fov = 65.0
 max_degrees_down = 50.0
 max_degrees_left = 32.0
 _hotseat_rotation = NodePath("../HotseatCameraMarker")
 _board_look_rotation = Vector3(-35, 32, 0)
+_trans_type = 1
+_ease_type = 1
 
 [node name="HotseatCameraMarker" type="Marker3D" parent="."]
 transform = Transform3D(-0.529919, -0.844821, 0.073912, 0, 0.0871554, 0.996195, -0.848048, 0.527903, -0.0461853, 4.49162, 0.111622, 6.32288)

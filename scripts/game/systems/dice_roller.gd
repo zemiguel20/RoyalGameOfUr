@@ -120,6 +120,8 @@ func _dehighlight() -> void:
 
 
 func _start_shaking() -> void:
+	GameEvents.first_turn_dice_shake.emit()
+	
 	_shake_sfx.play()
 	for die in _dice:
 		die.model.visible = false

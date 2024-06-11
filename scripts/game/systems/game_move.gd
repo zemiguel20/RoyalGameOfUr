@@ -175,4 +175,8 @@ func _check_valid() -> bool:
 
 func _is_spot_safe(spot: Spot) -> bool:
 	return _board.is_spot_exclusive(spot) or \
-		(from.is_in_group("rosettes") and Settings.ruleset.rosettes_are_safe)
+		(spot.is_in_group("rosettes") and Settings.ruleset.rosettes_are_safe)
+
+
+func captures_opponent() -> bool:
+	return is_to_occupied_by_opponent and _check_valid()

@@ -9,6 +9,6 @@ category = 2
 play_in_order = false
 has_priority = true
 reset_after_all_played = false
-initial_delay = 0.5
+initial_delay = 1.0
 dialogue_sequences = Array[Resource("res://scripts/dialogue_system/data/dialogue_sequence.gd")]([ExtResource("1_juche")])
 weight_for_empty = 0
