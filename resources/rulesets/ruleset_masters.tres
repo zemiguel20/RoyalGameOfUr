@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ruleset" load_steps=3 format=3 uid="uid://b7ytq4ahs62yu"]
+
+[ext_resource type="Resource" uid="uid://i6nacm4r0wwe" path="res://resources/rulesets/board_layouts/layout_masters.tres" id="1_53k45"]
+[ext_resource type="Script" path="res://scripts/game/ruleset/ruleset.gd" id="1_juc44"]
+
+[resource]
+script = ExtResource("1_juc44")
+name = "Masters"
+rosettes_are_safe = false
+rosettes_give_extra_turn = true
+rosettes_allow_stacking = false
+captures_give_extra_turn = false
+can_move_backwards = false
+allow_skip_if_only_backwards = false
+num_pieces = 7
+num_dice = 4
+board_layout = ExtResource("1_53k45")

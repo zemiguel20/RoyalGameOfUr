@@ -106,6 +106,7 @@ func _on_to_dehovered(move: GameMove) -> void:
 
 
 func _on_to_selected(selected_move: GameMove) -> void:
+	is_from_selected = false
 	for move in _moves:
 		_clear_connections(move)
 		highlight.clear_highlight(move)

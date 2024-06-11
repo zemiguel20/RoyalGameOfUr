@@ -1,18 +1,11 @@
 class_name Spot extends Node3D
 ## Entity that represents a spot where the player can place pieces.
 ## Holds a list of placed pieces, and can move pieces to another spot.
-## It also has configurable game properties like protecting pieces from knockout.
 ## Has an input reading component for player move selection.
 ## Has a highlight component for highlight effects during move phase.
 
 
 signal pieces_moved
-
-## If true, the pieces in this spot cannot get knocked out.
-@export var safe: bool = false
-
-## If true, if the player moves to this spot they should get an extra turn.
-@export var give_extra_turn: bool = false
 
 var highlight: MaterialHighlight
 var input: SelectionInputReader

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://wqcqoxpojsis" path="res://textures/floor_tiles/Ur_FloorBricks_roughness.png" id="5_cm2ls"]
 
 [resource]
-albedo_color = Color(0.858824, 0.776471, 0.74902, 1)
+albedo_color = Color(0.819573, 0.666954, 0.646189, 1)
 albedo_texture = ExtResource("1_gektt")
 roughness_texture = ExtResource("5_cm2ls")
 normal_enabled = true
@@ -20,4 +20,4 @@ heightmap_deep_parallax = true
 heightmap_min_layers = 64
 heightmap_max_layers = 64
 heightmap_texture = ExtResource("3_x7hhs")
-uv1_scale = Vector3(19.675, 19.675, 19.675)
+uv1_scale = Vector3(26.425, 26.425, 26.425)

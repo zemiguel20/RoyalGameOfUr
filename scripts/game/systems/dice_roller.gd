@@ -6,8 +6,7 @@ class_name DiceRoller extends Node3D
 
 
 @export var _assigned_player: General.Player
-@export var _impulse_strength: float = 0.002 
-@export var _automatic: bool = false
+@export var _impulse_strength: float = 0.2
 @export_range(0.0, 1.0, 0.1, "or_greater") var _show_result_duration: float = 0.5
 @export_range(0.0, 1.0, 0.1, "or_greater") var _auto_delay_grab_dice: float = 0.5
 @export_range(0.5, 1.0, 0.1) var _auto_min_shake_duration: float = 0.5
@@ -17,6 +16,7 @@ var _place_spots: Array[Node3D] = []
 var _throw_spots: Array[Node3D] = []
 var _shake_sfx: AudioStreamPlayer3D
 var _dice: Array[Die] = []
+var _automatic: bool = false
 
 
 func _ready() -> void:
@@ -30,6 +30,10 @@ func _ready() -> void:
 func _start(current_player: General.Player) -> void:
 	if current_player != _assigned_player:
 		return
+	
+	# Adjust second player automatic depending if its hotseat or not
+	if current_player == General.Player.TWO:
+		_automatic = not Settings.is_hotseat_mode
 	
 	_dice.assign(EntityManager.get_dice())
 	_dehighlight()
@@ -141,7 +145,7 @@ func _roll_dice() -> void:
 		
 		var start_position = throw_spot.global_position
 		var start_rotation = General.get_random_rotation()
-		var impulse = throw_spot.global_basis.y * _impulse_strength
+		var impulse = throw_spot.global_basis.y * _impulse_strength / 100
 		die.roll(impulse, start_position, start_rotation)
 	
 	# wait roll finished
