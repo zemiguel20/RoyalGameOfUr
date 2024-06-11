@@ -49,9 +49,7 @@ signal move_selected(move: GameMove)
 func start_selection(moves: Array[GameMove]) -> void:
 	if not Settings.fast_move_enabled:
 		# Simulate thinking
-		var thinking_duration = fixed_moving_duration
-		if fixed_moving_duration == -1:
-			thinking_duration = randf_range(min_moving_duration, max_moving_duration)
+		var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
 		await get_tree().create_timer(thinking_duration).timeout
 	var selected_move = _determine_next_move(moves)
 	
