@@ -15,10 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://ylslyt8vdm8y" path="res://UI/Button Left Release.png" id="12_e4ogx"]
 [ext_resource type="Texture2D" uid="uid://cmohjpb6kmjrq" path="res://UI/Button Left.png" id="13_svews"]
 [ext_resource type="Texture2D" uid="uid://dxfismcshmkmb" path="res://UI/Button Right Release.png" id="14_6uyg4"]
-[ext_resource type="Texture2D" uid="uid://bbrcysbci6fde" path="res://20230228_160908.jpg" id="14_si53m"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
 [ext_resource type="Texture2D" uid="uid://d05tsy2jj1xmi" path="res://UI/Button Right.png" id="15_scvf3"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="16_eu2sq"]
+[ext_resource type="Texture2D" uid="uid://dfaxh3jt6mjag" path="res://UI/Board instructions.png" id="16_nnhen"]
 
 [sub_resource type="GDScript" id="GDScript_lsuqm"]
 script/source = "extends Node
@@ -89,7 +89,7 @@ Button/styles/normal = SubResource("StyleBoxTexture_cudxt")
 Button/styles/pressed = SubResource("StyleBoxTexture_7xnd5")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v3ets"]
-texture = ExtResource("14_si53m")
+texture = ExtResource("16_nnhen")
 
 [sub_resource type="Theme" id="Theme_28n0u"]
 Panel/styles/panel = SubResource("StyleBoxTexture_v3ets")
@@ -176,6 +176,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
 [node name="Main Menu" type="Control" parent="Prototype_UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,7 +237,6 @@ flat = true
 script = ExtResource("6_3dit1")
 
 [node name="Rule Set Menu" type="Control" parent="Prototype_UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -293,49 +293,49 @@ theme = SubResource("Theme_npdws")
 [node name="Map Image" type="Panel" parent="Prototype_UI/Rule Set Menu/Background"]
 layout_mode = 0
 offset_left = 142.0
-offset_top = 144.0
+offset_top = 179.0
 offset_right = 561.0
-offset_bottom = 399.0
+offset_bottom = 364.0
 theme = SubResource("Theme_28n0u")
+
+[node name="CheckBox" type="CheckBox" parent="Prototype_UI/Rule Set Menu/Background/Map Image"]
+layout_mode = 0
+offset_left = -92.0
+offset_top = 296.0
+offset_right = 191.0
+offset_bottom = 337.0
+theme = ExtResource("11_3eeoo")
+text = "Rosettes grant extra role"
+flat = true
 
 [node name="Button Left" type="Button" parent="Prototype_UI/Rule Set Menu/Background/Map Image"]
 layout_mode = 0
 offset_left = -91.0
-offset_top = 83.0
+offset_top = 48.0
 offset_right = -27.0
-offset_bottom = 152.0
+offset_bottom = 117.0
 scale = Vector2(1.25, 1.25)
 theme = SubResource("Theme_2vafe")
 
-[node name="Button Right2" type="Button" parent="Prototype_UI/Rule Set Menu/Background/Map Image"]
+[node name="Button Right" type="Button" parent="Prototype_UI/Rule Set Menu/Background/Map Image"]
 layout_mode = 0
 offset_left = 428.0
-offset_top = 83.0
+offset_top = 48.0
 offset_right = 492.0
-offset_bottom = 152.0
+offset_bottom = 117.0
 scale = Vector2(1.25, 1.25)
 theme = SubResource("Theme_npdws")
 
-[node name="Label" type="Label" parent="Prototype_UI/Rule Set Menu/Background/Map Image"]
+[node name="Label" type="Label" parent="Prototype_UI/Rule Set Menu/Background"]
 layout_mode = 0
-offset_left = 142.0
-offset_top = 266.0
-offset_right = 290.0
-offset_bottom = 307.0
+offset_left = 284.0
+offset_top = 410.0
+offset_right = 432.0
+offset_bottom = 451.0
 theme = ExtResource("11_3eeoo")
 theme_override_font_sizes/font_size = 32
 text = "Map Name"
 horizontal_alignment = 1
-
-[node name="CheckBox" type="CheckBox" parent="Prototype_UI/Rule Set Menu/Background"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 475.0
-offset_right = 333.0
-offset_bottom = 516.0
-theme = ExtResource("11_3eeoo")
-text = "Rosettes grant extra role"
-flat = true
 
 [node name="CheckBox2" type="CheckBox" parent="Prototype_UI/Rule Set Menu/Background"]
 layout_mode = 0
