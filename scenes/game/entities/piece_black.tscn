@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bw8xtdrj5rh2k"]
+[gd_scene load_steps=8 format=3 uid="uid://bw8xtdrj5rh2k"]
 
 [ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/entities/piece_white.tscn" id="1_5kctl"]
 [ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="2_1brpp"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_8qpgr"]
-[ext_resource type="Material" uid="uid://ct7vu3eh4o8x2" path="res://materials/piece_black.tres" id="4_u02te"]
+[ext_resource type="Material" uid="uid://bvw0a30k3ge3b" path="res://materials/piece_black.tres" id="4_u02te"]
+[ext_resource type="AudioStream" uid="uid://dp32gon40n8jk" path="res://audio/piece_placed_2.mp3" id="5_mh2um"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_784fw"]
 resource_local_to_scene = true
@@ -20,12 +21,15 @@ shader = ExtResource("3_8qpgr")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/alpha = 0.25
 
-[node name="WhitePiece" instance=ExtResource("1_5kctl")]
+[node name="BlackPiece" instance=ExtResource("1_5kctl")]
 
 [node name="Highlight" parent="." index="0"]
 material = SubResource("ShaderMaterial_vf2qu")
 
 [node name="Piece" parent="Model" index="0"]
 surface_material_override/0 = ExtResource("4_u02te")
+
+[node name="SfxPlace" parent="." index="3"]
+stream = ExtResource("5_mh2um")
 
 [editable path="Model"]
