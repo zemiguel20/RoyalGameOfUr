@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ruleset" load_steps=3 format=3 uid="uid://d4d5x640c15n1"]
+
+[ext_resource type="Resource" uid="uid://bqgbny642y1ny" path="res://resources/rulesets/board_layouts/layout_russian_rosette.tres" id="1_tp6dk"]
+[ext_resource type="Script" path="res://scripts/game/ruleset/ruleset.gd" id="1_x1w6b"]
+
+[resource]
+script = ExtResource("1_x1w6b")
+name = "Russian Rosette"
+rosettes_are_safe = false
+rosettes_give_extra_turn = true
+rosettes_allow_stacking = false
+captures_give_extra_turn = false
+can_move_backwards = false
+allow_skip_if_only_backwards = false
+num_pieces = 1
+num_dice = 1
+board_layout = ExtResource("1_tp6dk")

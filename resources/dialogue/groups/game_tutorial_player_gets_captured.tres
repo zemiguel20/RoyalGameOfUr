@@ -1,29 +1,33 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=7 format=3 uid="uid://gj45b7uqg4hx"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=10 format=3 uid="uid://gj45b7uqg4hx"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_0kb3u"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_a76kb"]
+[ext_resource type="AudioStream" uid="uid://38sqdbxi7wgv" path="res://resources/dialogue/explain-capture-yours.mp3" id="1_extvq"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_64vhm"]
+[ext_resource type="AudioStream" uid="uid://bjpe3ii5bj2uk" path="res://resources/dialogue/explain-capture-other-way-1.mp3" id="3_kppna"]
+[ext_resource type="AudioStream" uid="uid://bpumuqhuyvji6" path="res://resources/dialogue/explain-capture-other-way-2.mp3" id="4_a6xp7"]
 
 [sub_resource type="Resource" id="Resource_qs37h"]
 script = ExtResource("1_0kb3u")
-caption = "When I capture one of your pieces, your piece returns to the start."
+audio_variations = Array[AudioStream]([ExtResource("1_extvq")])
+caption = "When I capture one of your pieces, it returns to the start."
 caption_cuneiform = ""
 anim_variations = Array[int]([])
-fixed_duration = 5.0
-prevents_opponent_action = false
+fixed_duration = -1.0
+prevents_opponent_action = true
 
-[sub_resource type="Resource" id="Resource_yetf4"]
+[sub_resource type="Resource" id="Resource_wukhb"]
 script = ExtResource("1_0kb3u")
+audio_variations = Array[AudioStream]([ExtResource("3_kppna"), ExtResource("4_a6xp7")])
 caption = "Of course, this works the other way around, as well."
 caption_cuneiform = ""
-anim_variations = Array[int]([])
-fixed_duration = 3.0
+anim_variations = Array[int]([5])
+fixed_duration = -1.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_g5rth"]
 script = ExtResource("2_64vhm")
-max_repetitions = 1
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_qs37h"), SubResource("Resource_yetf4")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_qs37h"), SubResource("Resource_wukhb")])
 requires_click = false
 weight = 5
 
@@ -32,6 +36,7 @@ script = ExtResource("1_a76kb")
 category = 13
 play_in_order = false
 has_priority = false
+reset_after_all_played = false
 initial_delay = 0.5
 dialogue_sequences = Array[ExtResource("2_64vhm")]([SubResource("Resource_g5rth")])
 weight_for_empty = 0

@@ -50,17 +50,20 @@ func _on_from_spot_selected(spot: Spot) -> void:
 	board_surface_y = spot.global_position.y
 	
 	is_dragging = true
+	GameEvents.drag_move_start.emit()
 
 
 func _on_selection_cancel() -> void:
 	_reset_pieces_positions()
 	pieces_to_drag.clear()
 	is_dragging = false
+	GameEvents.drag_move_end.emit()
 
 
 func _on_move_selected() -> void:
 	pieces_to_drag.clear()
 	is_dragging = false
+	GameEvents.drag_move_end.emit()
 
 
 func _reset_pieces_positions() -> void:

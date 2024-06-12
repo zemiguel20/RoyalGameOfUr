@@ -1,37 +1,23 @@
 [gd_resource type="Resource" script_class="DialogueGroup" load_steps=8 format=3 uid="uid://cqbqaa2me4isu"]
 
+[ext_resource type="AudioStream" uid="uid://d2067sq6pm00" path="res://resources/dialogue/explain-so-thats-all-2.mp3" id="1_o8a4d"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_ygw3d"]
+[ext_resource type="AudioStream" uid="uid://btg6wiqyft43o" path="res://resources/dialogue/explain-so-thats-all.mp3" id="2_f8s7i"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_im31s"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="3_2d1c4"]
 
 [sub_resource type="Resource" id="Resource_7xjpr"]
 script = ExtResource("1_ygw3d")
-caption = "Oh, right."
+audio_variations = Array[AudioStream]([ExtResource("1_o8a4d"), ExtResource("2_f8s7i")])
+caption = "So, that’s all of the rules! Pretty simple, right?"
 caption_cuneiform = ""
 anim_variations = Array[int]([1])
-fixed_duration = 2.0
-prevents_opponent_action = true
-
-[sub_resource type="Resource" id="Resource_gcifj"]
-script = ExtResource("1_ygw3d")
-caption = "The rules for this board are a little different."
-caption_cuneiform = ""
-anim_variations = Array[int]([1])
-fixed_duration = 3.0
-prevents_opponent_action = true
-
-[sub_resource type="Resource" id="Resource_itek7"]
-script = ExtResource("1_ygw3d")
-caption = "I will explain them to you as we go."
-caption_cuneiform = ""
-anim_variations = Array[int]([])
-fixed_duration = 3.0
-prevents_opponent_action = true
+fixed_duration = -1.0
+prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_r4bmf"]
 script = ExtResource("2_im31s")
-max_repetitions = 1
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_7xjpr"), SubResource("Resource_gcifj"), SubResource("Resource_itek7")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_7xjpr")])
 requires_click = false
 weight = 5
 
@@ -40,6 +26,7 @@ script = ExtResource("3_2d1c4")
 category = 17
 play_in_order = false
 has_priority = false
-initial_delay = 2.0
+reset_after_all_played = false
+initial_delay = 0.5
 dialogue_sequences = Array[ExtResource("2_im31s")]([SubResource("Resource_r4bmf")])
 weight_for_empty = 0

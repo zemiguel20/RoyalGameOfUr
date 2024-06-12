@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://degtl55tja377"]
+
+[ext_resource type="Texture2D" uid="uid://bqfdf3icyyt2t" path="res://textures/cup/Cup_lambert1_BaseColor.png" id="1_4vo7i"]
+[ext_resource type="Texture2D" uid="uid://l2oeyc64any5" path="res://textures/cup/Cup_lambert1_AO.png" id="2_72c3a"]
+[ext_resource type="Texture2D" uid="uid://4e4ls72t6bc3" path="res://textures/cup/Cup_lambert1_Normal.png" id="3_3vr1y"]
+
+[resource]
+albedo_texture = ExtResource("1_4vo7i")
+normal_enabled = true
+normal_texture = ExtResource("3_3vr1y")
+ao_enabled = true
+ao_texture = ExtResource("2_72c3a")

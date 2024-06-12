@@ -1,0 +1,75 @@
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=20 format=3 uid="uid://qajhmqposnn1"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_0nns6"]
+[ext_resource type="AudioStream" uid="uid://dlah5d5pgywmq" path="res://resources/dialogue/intro-1-3-ninos-tushan-2.mp3" id="1_je43s"]
+[ext_resource type="AudioStream" uid="uid://rxmj7fyoce7b" path="res://resources/dialogue/intro-1-3-ninos-tushan.mp3" id="2_tjcri"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="3_6bh1s"]
+[ext_resource type="AudioStream" uid="uid://dqks4cb0pibqf" path="res://resources/dialogue/intro-1-4-grown-strong-2.mp3" id="4_e6fcg"]
+[ext_resource type="AudioStream" uid="uid://boirnhe2jm4m7" path="res://resources/dialogue/intro-1-4-grown-strong-3.mp3" id="5_k6h7c"]
+[ext_resource type="AudioStream" uid="uid://eqyw23yk7auu" path="res://resources/dialogue/intro-1-4-grown-strong.mp3" id="6_1gloc"]
+[ext_resource type="AudioStream" uid="uid://ddxmy5a2tpvkm" path="res://resources/dialogue/intro-1-5-march.mp3" id="7_mt5wf"]
+[ext_resource type="AudioStream" uid="uid://ces7k50ug138r" path="res://resources/dialogue/intro-1-6-no-interest.mp3" id="8_i1u8l"]
+[ext_resource type="AudioStream" uid="uid://dvjtilanrolwp" path="res://resources/dialogue/intro-1-6-no-interest-2.mp3" id="9_irb64"]
+[ext_resource type="AudioStream" uid="uid://b6aasjq8l6usv" path="res://resources/dialogue/intro-1-7-enough-about-that.mp3" id="10_hbkor"]
+[ext_resource type="AudioStream" uid="uid://b884gt7j6cetd" path="res://resources/dialogue/intro-1-8-assur-merciful.mp3" id="11_qysl8"]
+[ext_resource type="AudioStream" uid="uid://c3io7qex3dpic" path="res://resources/dialogue/intro-1-8-assur-merciful-2.mp3" id="12_jw0n7"]
+
+[sub_resource type="Resource" id="Resource_73wnr"]
+script = ExtResource("3_6bh1s")
+audio_variations = Array[AudioStream]([ExtResource("1_je43s"), ExtResource("2_tjcri")])
+caption = "Have you heard? Sennacherib wants Ninos in the city of Tušḫan."
+caption_cuneiform = ""
+anim_variations = Array[int]([1])
+fixed_duration = -1.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_vtih1"]
+script = ExtResource("3_6bh1s")
+audio_variations = Array[AudioStream]([ExtResource("4_e6fcg"), ExtResource("5_k6h7c"), ExtResource("6_1gloc")])
+caption = "He’s grown to be strong, of course. But still..."
+caption_cuneiform = ""
+anim_variations = Array[int]([])
+fixed_duration = -1.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_eg8la"]
+script = ExtResource("3_6bh1s")
+audio_variations = Array[AudioStream]([ExtResource("7_mt5wf")])
+caption = "I would be relieved if this is just one of those marches, you know? To intimidate with a show of power."
+caption_cuneiform = ""
+anim_variations = Array[int]([2])
+fixed_duration = -1.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_sv3oo"]
+script = ExtResource("3_6bh1s")
+audio_variations = Array[AudioStream]([ExtResource("8_i1u8l"), ExtResource("9_irb64")])
+caption = "Ninos has no interest in battle. And I can’t stand the thought of seeing my daughter widowed so young."
+caption_cuneiform = ""
+anim_variations = Array[int]([5])
+fixed_duration = -1.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_wslfo"]
+script = ExtResource("3_6bh1s")
+audio_variations = Array[AudioStream]([ExtResource("10_hbkor")])
+caption = "But enough about that. After all, fate cannot be changed."
+caption_cuneiform = ""
+anim_variations = Array[int]([])
+fixed_duration = -1.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_an47l"]
+script = ExtResource("3_6bh1s")
+audio_variations = Array[AudioStream]([ExtResource("11_qysl8"), ExtResource("12_jw0n7")])
+caption = "I just pray Aššur will be merciful."
+caption_cuneiform = ""
+anim_variations = Array[int]([])
+fixed_duration = -1.0
+prevents_opponent_action = true
+
+[resource]
+script = ExtResource("1_0nns6")
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_73wnr"), SubResource("Resource_vtih1"), SubResource("Resource_eg8la"), SubResource("Resource_sv3oo"), SubResource("Resource_wslfo"), SubResource("Resource_an47l")])
+requires_click = false
+weight = 5

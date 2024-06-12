@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dk6q50tq0w026"]
 
 [ext_resource type="Script" path="res://scripts/game/systems/move_picker/scrolling_texture_path.gd" id="1_dh1ws"]
-[ext_resource type="Texture2D" uid="uid://swh27vy5ypr8" path="res://textures/arrow.svg" id="2_gyc4x"]
+[ext_resource type="Texture2D" uid="uid://swh27vy5ypr8" path="res://sprites/arrow.svg" id="2_gyc4x"]
 
 [sub_resource type="Curve3D" id="Curve3D_ugcqv"]
 resource_local_to_scene = true

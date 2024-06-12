@@ -36,7 +36,7 @@ offset_right = -292.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 0
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="Subtitles_Label" type="Label" parent="Background_Panel"]
 layout_mode = 1
@@ -128,3 +128,5 @@ label_settings = SubResource("LabelSettings_tnjk0")
 vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 2
+
+[connection signal="gui_input" from="Background_Panel" to="." method="_on_subtitle_panel_clicked"]

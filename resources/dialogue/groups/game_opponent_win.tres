@@ -1,29 +1,52 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://cuwsy7lf7fndj"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=15 format=3 uid="uid://cuwsy7lf7fndj"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_2exyj"]
+[ext_resource type="AudioStream" uid="uid://eg0o7qpxo5b2" path="res://resources/dialogue/gameplay-reaction-assur-blessing-2.mp3" id="1_81w8f"]
+[ext_resource type="AudioStream" uid="uid://fh004e4uouj" path="res://resources/dialogue/gameplay-reaction-assur-blessing-3.mp3" id="2_1nd8s"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_jihle"]
+[ext_resource type="AudioStream" uid="uid://drqdbxjx6n5t7" path="res://resources/dialogue/gameplay-reaction-assur-blessing.mp3" id="3_4wsri"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="3_vwmxw"]
+[ext_resource type="AudioStream" uid="uid://tpo5o47ps3x0" path="res://resources/dialogue/gameplay-reaction-better-luck-next-time-2.mp3" id="6_3vcqk"]
+[ext_resource type="AudioStream" uid="uid://bdhupatgs114" path="res://resources/dialogue/gameplay-reaction-better-luck-next-time-3.mp3" id="7_ysdfv"]
+[ext_resource type="AudioStream" uid="uid://pkw0motnteo6" path="res://resources/dialogue/gameplay-reaction-better-luck-next-time-4.mp3" id="8_5uvfh"]
+[ext_resource type="AudioStream" uid="uid://dgws4x2se7mi3" path="res://resources/dialogue/gameplay-reaction-better-luck-next-time.mp3" id="9_0jcws"]
 
 [sub_resource type="Resource" id="Resource_s5wm3"]
 script = ExtResource("1_2exyj")
-caption = "Better luck next time, friend. Well played!"
+audio_variations = Array[AudioStream]([ExtResource("1_81w8f"), ExtResource("2_1nd8s"), ExtResource("3_4wsri")])
+caption = "Not bad my friend, but today Aššur’s blessing is on my side!"
 caption_cuneiform = ""
 anim_variations = Array[int]([5])
-fixed_duration = 3.0
+fixed_duration = -1.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_6obr2"]
 script = ExtResource("2_jihle")
-max_repetitions = 3
 dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_s5wm3")])
+requires_click = false
+weight = 5
+
+[sub_resource type="Resource" id="Resource_be80l"]
+script = ExtResource("1_2exyj")
+audio_variations = Array[AudioStream]([ExtResource("6_3vcqk"), ExtResource("7_ysdfv"), ExtResource("8_5uvfh"), ExtResource("9_0jcws")])
+caption = "Better luck next time, my friend."
+caption_cuneiform = ""
+anim_variations = Array[int]([5])
+fixed_duration = -1.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_jfs04"]
+script = ExtResource("2_jihle")
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_be80l")])
 requires_click = false
 weight = 5
 
 [resource]
 script = ExtResource("3_vwmxw")
 category = 7
-play_in_order = false
+play_in_order = true
 has_priority = false
+reset_after_all_played = true
 initial_delay = 0.5
-dialogue_sequences = Array[ExtResource("2_jihle")]([SubResource("Resource_6obr2")])
+dialogue_sequences = Array[ExtResource("2_jihle")]([SubResource("Resource_6obr2"), SubResource("Resource_jfs04")])
 weight_for_empty = 0

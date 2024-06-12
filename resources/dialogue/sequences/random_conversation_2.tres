@@ -1,35 +1,33 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=6 format=3 uid="uid://bxhte73s8k1w2"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=10 format=3 uid="uid://bxhte73s8k1w2"]
 
+[ext_resource type="AudioStream" uid="uid://d12t5ni1cl4uq" path="res://resources/dialogue/random-ishtar-1.mp3" id="1_vtiaf"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_xgdgq"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_ycmlp"]
+[ext_resource type="AudioStream" uid="uid://bmwjyveevd655" path="res://resources/dialogue/random-ishtar-2.mp3" id="2_o8e1m"]
+[ext_resource type="AudioStream" uid="uid://bcl7l1glbl3xf" path="res://resources/dialogue/random-ishtar-3.mp3" id="3_50ohg"]
+[ext_resource type="AudioStream" uid="uid://b8d1n0fl0do76" path="res://resources/dialogue/random-ishtar-4.mp3" id="4_vplpk"]
+[ext_resource type="AudioStream" uid="uid://b6jj8gnp4equw" path="res://resources/dialogue/random-glimpse.mp3" id="6_h6dsd"]
 
 [sub_resource type="Resource" id="Resource_lho8x"]
 script = ExtResource("1_xgdgq")
-caption = "Oh, have you heard?"
+audio_variations = Array[AudioStream]([ExtResource("1_vtiaf"), ExtResource("2_o8e1m"), ExtResource("3_50ohg"), ExtResource("4_vplpk")])
+caption = "Oh, have you heard? Ishtar is to visit us next week, all the way from Mari!"
 caption_cuneiform = ""
 anim_variations = Array[int]([7])
-fixed_duration = 2.0
-prevents_opponent_action = true
-
-[sub_resource type="Resource" id="Resource_s7eyw"]
-script = ExtResource("1_xgdgq")
-caption = "Innana is to visit us next week, all the way from Mari!"
-caption_cuneiform = ""
-anim_variations = Array[int]([])
-fixed_duration = 5.0
+fixed_duration = -1.0
 prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_eoeho"]
 script = ExtResource("1_xgdgq")
-caption = "Maybe if we wake early that day, we can catch a glimpse of her."
+audio_variations = Array[AudioStream]([ExtResource("6_h6dsd")])
+caption = "Maybe if we wake early that day, we can catch a glimpse of her..."
 caption_cuneiform = ""
 anim_variations = Array[int]([1])
-fixed_duration = 4.0
+fixed_duration = -1.0
 prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_ycmlp")
-max_repetitions = 1
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_lho8x"), SubResource("Resource_s7eyw"), SubResource("Resource_eoeho")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_lho8x"), SubResource("Resource_eoeho")])
 requires_click = false
 weight = 5

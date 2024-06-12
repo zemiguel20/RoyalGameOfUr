@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://b7mi7vk04yhcp"]
+
+[ext_resource type="AudioStream" uid="uid://cgjyn7red2jyo" path="res://resources/dialogue/random-ea-nasir-markets-2.mp3" id="1_eixp7"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_mv4h8"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="2_t8w3d"]
+[ext_resource type="AudioStream" uid="uid://dhd31qn2pq3y" path="res://resources/dialogue/random-ea-nasir-copper.mp3" id="3_aar3e"]
+[ext_resource type="AudioStream" uid="uid://c3mb8cs1vnfto" path="res://resources/dialogue/random-ea-nasir-coward.mp3" id="4_75und"]
+
+[sub_resource type="Resource" id="Resource_0a3h8"]
+script = ExtResource("2_t8w3d")
+audio_variations = Array[AudioStream]([ExtResource("1_eixp7")])
+caption = "Hey, by the way, have you seen Ea-nāṣir on the markets lately?"
+caption_cuneiform = ""
+anim_variations = Array[int]([6])
+fixed_duration = -1.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_kel2s"]
+script = ExtResource("2_t8w3d")
+audio_variations = Array[AudioStream]([ExtResource("3_aar3e")])
+caption = "That dog still owes me some copper!"
+caption_cuneiform = ""
+anim_variations = Array[int]([])
+fixed_duration = -1.0
+prevents_opponent_action = true
+
+[sub_resource type="Resource" id="Resource_bwpfk"]
+script = ExtResource("2_t8w3d")
+audio_variations = Array[AudioStream]([ExtResource("4_75und")])
+caption = "Hm... I’m guessing he has gone into hiding again, the coward."
+caption_cuneiform = ""
+anim_variations = Array[int]([2])
+fixed_duration = -1.0
+prevents_opponent_action = false
+
+[resource]
+script = ExtResource("1_mv4h8")
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_0a3h8"), SubResource("Resource_kel2s"), SubResource("Resource_bwpfk")])
+requires_click = false
+weight = 5
