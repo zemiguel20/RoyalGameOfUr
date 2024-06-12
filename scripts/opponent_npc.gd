@@ -109,7 +109,8 @@ func _on_try_play_tutorial_dialog(move: GameMove):
 		explained_rosettes_are_safe = true
 		return
 	
-	if not explained_securing and EntityManager.get_from_index_on_board(move) > 7:
+	var from_index = EntityManager.get_board().get_track(move.player).find(move.from)
+	if not explained_securing and from_index > 7:
 		play_dialog(DialogueSystem.Category.TUTORIAL_FINISH)
 		explained_securing = true
 		return
@@ -161,7 +162,8 @@ func _on_piece_captured(move: GameMove):
 	
 	# Play a stronger reaction if the piece was further ahead,
 	# or if the roll was high (i.e. someone got lucky)
-	var was_piece_far = EntityManager.get_to_index_on_board(move) >= 8
+	var to_index = EntityManager.get_board().get_track(move.player).find(move.to)
+	var was_piece_far = to_index >= 8
 	var rolled_3_plus = move.full_path.size()-1 >= 3
 	var rolled_4 = move.full_path.size()-1 >= 4
 	if move.player == General.Player.TWO:

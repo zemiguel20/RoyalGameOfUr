@@ -99,14 +99,6 @@ func despawn_pieces() -> void:
 			node.queue_free()
 
 
-func get_from_index_on_board(move: GameMove) -> int:
-	return get_board().get_track(move.player).find(move.from)
-
-
-func get_to_index_on_board(move: GameMove) -> int:
-	return get_board().get_track(move.player).find(move.to)
-
-
 func despawn_board() -> void:
 	var board = get_board()
 	if board:
