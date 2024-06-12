@@ -127,4 +127,5 @@ script = ExtResource("11_5mxbb")
 
 [node name="AmbienceAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_rlqq6")
+volume_db = 3.0
 autoplay = true
