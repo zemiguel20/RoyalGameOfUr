@@ -119,4 +119,4 @@ script = ExtResource("11_5mxbb")
 
 [node name="ControlsHUD" parent="." instance=ExtResource("8_wjnj8")]
 
-[node name="Prototype_UI" parent="." instance=ExtResource("10_2dq8v")]
+[node name="MainMenu" parent="." instance=ExtResource("10_2dq8v")]

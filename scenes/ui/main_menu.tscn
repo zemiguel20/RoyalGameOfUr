@@ -44,7 +44,6 @@ Button/styles/normal = SubResource("StyleBoxTexture_cudxt")
 Button/styles/pressed = SubResource("StyleBoxTexture_7xnd5")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xiyug"]
-load_path = "res://.godot/imported/20230228_160908.jpg-f1676dc2d5056e92c904e0f8cf3aea79.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v3ets"]
 texture = SubResource("CompressedTexture2D_xiyug")
@@ -54,15 +53,6 @@ Panel/styles/panel = SubResource("StyleBoxTexture_v3ets")
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_qebbr")
-
-[node name="Fade_Panel" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-metadata/_edit_use_anchors_ = true
 
 [node name="MainMenu" type="Control" parent="."]
 visible = false
@@ -159,14 +149,28 @@ grow_vertical = 2
 
 [node name="RulesetPicker" type="Control" parent="RulesetMenu/TabletFrame"]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 75.0
-offset_top = 35.0
-offset_right = -56.0
-offset_bottom = 142.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -265.0
+offset_top = 77.0
+offset_right = 289.0
+offset_bottom = 159.0
 grow_horizontal = 2
 metadata/_edit_group_ = true
+
+[node name="SwitchRulesetLeftButton" type="Button" parent="RulesetMenu/TabletFrame/RulesetPicker"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -35.0
+offset_right = 70.0
+offset_bottom = 35.0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_2vafe")
 
 [node name="RulesetNameLabel" type="Label" parent="RulesetMenu/TabletFrame/RulesetPicker"]
 layout_mode = 1
@@ -182,11 +186,41 @@ offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_xqa0v")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 55
 text = "Rule Set Name"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="SwitchRulesetLeftButton" type="Button" parent="RulesetMenu/TabletFrame/RulesetPicker"]
+[node name="SwitchRulesetRightButton" type="Button" parent="RulesetMenu/TabletFrame/RulesetPicker"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -35.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = SubResource("Theme_npdws")
+
+[node name="BoardPicker" type="Control" parent="RulesetMenu/TabletFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -291.0
+offset_top = -344.0
+offset_right = 292.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="SwitchBoardLeftButton" type="Button" parent="RulesetMenu/TabletFrame/BoardPicker"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -195,9 +229,28 @@ offset_top = -34.5
 offset_right = 64.0
 offset_bottom = 34.5
 grow_vertical = 2
+scale = Vector2(1.25, 1.25)
 theme = SubResource("Theme_2vafe")
 
-[node name="SwitchRulesetRightButton" type="Button" parent="RulesetMenu/TabletFrame/RulesetPicker"]
+[node name="BoardLayoutImage" type="TextureRect" parent="RulesetMenu/TabletFrame/BoardPicker"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.5
+offset_top = -90.0
+offset_right = 197.5
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_28n0u")
+texture = ExtResource("9_2jkn4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SwitchBoardRightButton" type="Button" parent="RulesetMenu/TabletFrame/BoardPicker"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -209,109 +262,93 @@ offset_top = -34.5
 offset_bottom = 34.5
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_npdws")
-
-[node name="BoardPicker" type="Control" parent="RulesetMenu/TabletFrame"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Map Image" type="TextureRect" parent="RulesetMenu/TabletFrame"]
-layout_mode = 0
-offset_left = 142.0
-offset_top = 144.0
-offset_right = 561.0
-offset_bottom = 399.0
-theme = SubResource("Theme_28n0u")
-texture = ExtResource("9_2jkn4")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="Button Left" type="Button" parent="RulesetMenu/TabletFrame/Map Image"]
-layout_mode = 0
-offset_left = -91.0
-offset_top = 83.0
-offset_right = -27.0
-offset_bottom = 152.0
-scale = Vector2(1.25, 1.25)
-theme = SubResource("Theme_2vafe")
-
-[node name="Button Right2" type="Button" parent="RulesetMenu/TabletFrame/Map Image"]
-layout_mode = 0
-offset_left = 428.0
-offset_top = 83.0
-offset_right = 492.0
-offset_bottom = 152.0
 scale = Vector2(1.25, 1.25)
 theme = SubResource("Theme_npdws")
 
-[node name="Label" type="Label" parent="RulesetMenu/TabletFrame/Map Image"]
-layout_mode = 0
-offset_left = 142.0
-offset_top = 266.0
-offset_right = 290.0
-offset_bottom = 307.0
+[node name="BoardNameLabel" type="Label" parent="RulesetMenu/TabletFrame/BoardPicker"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -74.0
+offset_top = -41.0
+offset_right = 74.0
+grow_horizontal = 2
+grow_vertical = 0
 theme = ExtResource("4_xqa0v")
 theme_override_font_sizes/font_size = 32
 text = "Map Name"
 horizontal_alignment = 1
 
-[node name="CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 475.0
-offset_right = 333.0
-offset_bottom = 516.0
+[node name="RulesList" type="VBoxContainer" parent="RulesetMenu/TabletFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -291.0
+offset_top = -62.0
+offset_right = 2.0
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Rule1CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]
+layout_mode = 2
 theme = ExtResource("4_xqa0v")
 text = "Rosettes grant extra role"
 flat = true
 
-[node name="CheckBox2" type="CheckBox" parent="RulesetMenu/TabletFrame"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 515.0
-offset_right = 333.0
-offset_bottom = 556.0
+[node name="Rule2CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]
+layout_mode = 2
 theme = ExtResource("4_xqa0v")
 text = "Rosettes are safe"
 flat = true
 
-[node name="CheckBox3" type="CheckBox" parent="RulesetMenu/TabletFrame"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 555.0
-offset_right = 333.0
-offset_bottom = 596.0
+[node name="Rule3CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]
+layout_mode = 2
 theme = ExtResource("4_xqa0v")
 text = "Rosettes allow stacking"
 flat = true
 
-[node name="CheckBox4" type="CheckBox" parent="RulesetMenu/TabletFrame"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 595.0
-offset_right = 333.0
-offset_bottom = 636.0
+[node name="Rule4CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]
+layout_mode = 2
 theme = ExtResource("4_xqa0v")
 text = "Capture grants an extra role"
 flat = true
 
-[node name="CheckBox5" type="CheckBox" parent="RulesetMenu/TabletFrame"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 635.0
-offset_right = 333.0
-offset_bottom = 676.0
+[node name="Rule5CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]
+layout_mode = 2
 theme = ExtResource("4_xqa0v")
 text = "Pieces can move backwards"
 flat = true
 
-[node name="Pieces Slider" type="HSlider" parent="RulesetMenu/TabletFrame"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 675.0
-offset_right = 350.0
-offset_bottom = 715.0
+[node name="VBoxContainer" type="VBoxContainer" parent="RulesetMenu/TabletFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -297.0
+offset_top = 166.0
+offset_right = 120.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RulesetMenu/TabletFrame/VBoxContainer"]
+layout_mode = 2
+
+[node name="PieceNumberSlider" type="HSlider" parent="RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+focus_mode = 0
 theme = ExtResource("4_xqa0v")
 min_value = 1.0
 max_value = 7.0
@@ -320,62 +357,42 @@ rounded = true
 tick_count = 7
 ticks_on_borders = true
 
-[node name="Number" type="Label" parent="RulesetMenu/TabletFrame/Pieces Slider"]
-layout_mode = 0
-offset_left = 310.0
-offset_top = -2.5
-offset_right = 322.0
-offset_bottom = 38.5
+[node name="PieceNumberLabel" type="Label" parent="RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 theme = ExtResource("4_xqa0v")
-text = "1"
+text = "1 Total pices"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Type" type="Label" parent="RulesetMenu/TabletFrame/Pieces Slider"]
-layout_mode = 0
-offset_left = 335.0
-offset_top = -2.5
-offset_right = 496.0
-offset_bottom = 38.5
-theme = ExtResource("4_xqa0v")
-text = "Total Pieces"
+[node name="HBoxContainer2" type="HBoxContainer" parent="RulesetMenu/TabletFrame/VBoxContainer"]
+layout_mode = 2
 
-[node name="Dice Slider" type="HSlider" parent="RulesetMenu/TabletFrame"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 725.0
-offset_right = 350.0
-offset_bottom = 765.0
+[node name="DiceNumberSlider" type="HSlider" parent="RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+focus_mode = 0
 theme = ExtResource("4_xqa0v")
 min_value = 1.0
-max_value = 4.0
-value = 4.0
+max_value = 5.0
+value = 1.0
 rounded = true
-tick_count = 7
+tick_count = 5
 ticks_on_borders = true
 
-[node name="Number" type="Label" parent="RulesetMenu/TabletFrame/Dice Slider"]
-layout_mode = 0
-offset_left = 310.0
-offset_top = -2.5
-offset_right = 322.0
-offset_bottom = 38.5
+[node name="DiceNumberLabel" type="Label" parent="RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
 theme = ExtResource("4_xqa0v")
-text = "1"
+text = "1 Total dice
+"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Type" type="Label" parent="RulesetMenu/TabletFrame/Dice Slider"]
+[node name="ResetButton" type="Button" parent="RulesetMenu/TabletFrame"]
 layout_mode = 0
-offset_left = 335.0
-offset_top = -2.5
-offset_right = 496.0
-offset_bottom = 38.5
-theme = ExtResource("4_xqa0v")
-text = "Total Pieces"
-
-[node name="Reset" type="Button" parent="RulesetMenu/TabletFrame"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 765.0
-offset_right = 126.0
-offset_bottom = 816.0
+offset_left = 74.0
+offset_top = 790.0
+offset_right = 150.0
+offset_bottom = 841.0
 theme = ExtResource("4_xqa0v")
 theme_override_colors/font_color = Color(0.717647, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.466667, 0, 0, 1)
@@ -387,7 +404,7 @@ theme_override_font_sizes/font_size = 32
 text = "Reset"
 flat = true
 
-[node name="Confirm" type="Button" parent="RulesetMenu/TabletFrame"]
+[node name="ConfirmButton" type="Button" parent="RulesetMenu/TabletFrame"]
 layout_mode = 0
 offset_left = 411.0
 offset_top = 844.0
@@ -396,6 +413,17 @@ offset_bottom = 936.0
 theme = ExtResource("4_xqa0v")
 theme_override_font_sizes/font_size = 48
 text = "Confirm"
+flat = true
+
+[node name="BackButton" type="Button" parent="RulesetMenu/TabletFrame"]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 859.0
+offset_right = 403.0
+offset_bottom = 914.0
+theme = ExtResource("4_xqa0v")
+theme_override_font_sizes/font_size = 35
+text = "Back"
 flat = true
 
 [node name="End Screen Menu" type="Control" parent="."]
@@ -494,3 +522,15 @@ flat = true
 [connection signal="pressed" from="MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="RulesetMenu/TabletFrame/RulesetPicker/SwitchRulesetLeftButton" to="." method="_on_switch_ruleset_left_button_pressed"]
 [connection signal="pressed" from="RulesetMenu/TabletFrame/RulesetPicker/SwitchRulesetRightButton" to="." method="_on_switch_ruleset_right_button_pressed"]
+[connection signal="pressed" from="RulesetMenu/TabletFrame/BoardPicker/SwitchBoardLeftButton" to="." method="_on_switch_board_left_button_pressed"]
+[connection signal="pressed" from="RulesetMenu/TabletFrame/BoardPicker/SwitchBoardRightButton" to="." method="_on_switch_board_right_button_pressed"]
+[connection signal="toggled" from="RulesetMenu/TabletFrame/RulesList/Rule1CheckBox" to="." method="_on_rule_1_check_box_toggled"]
+[connection signal="toggled" from="RulesetMenu/TabletFrame/RulesList/Rule2CheckBox" to="." method="_on_rule_2_check_box_toggled"]
+[connection signal="toggled" from="RulesetMenu/TabletFrame/RulesList/Rule3CheckBox" to="." method="_on_rule_3_check_box_toggled"]
+[connection signal="toggled" from="RulesetMenu/TabletFrame/RulesList/Rule4CheckBox" to="." method="_on_rule_4_check_box_toggled"]
+[connection signal="toggled" from="RulesetMenu/TabletFrame/RulesList/Rule5CheckBox" to="." method="_on_rule_5_check_box_toggled"]
+[connection signal="value_changed" from="RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer/PieceNumberSlider" to="." method="_on_piece_number_slider_value_changed"]
+[connection signal="value_changed" from="RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer2/DiceNumberSlider" to="." method="_on_dice_number_slider_value_changed"]
+[connection signal="pressed" from="RulesetMenu/TabletFrame/ResetButton" to="." method="_update_ruleset"]
+[connection signal="pressed" from="RulesetMenu/TabletFrame/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="RulesetMenu/TabletFrame/BackButton" to="." method="_on_back_button_pressed"]
