@@ -32,8 +32,8 @@ var _is_timer_active: bool
 
 func _ready():
 	visible = false
-	
 	GameEvents.play_pressed.connect(_on_play_pressed)
+	
 
 func _process(delta):
 	if not _is_timer_active or _dialogue_system.is_busy():
@@ -140,6 +140,9 @@ func _try_play_thinking_sound():
 
 func _on_play_pressed():
 	if not Settings.is_hotseat_mode:
+		## DialogueSystem should play opponent animations.
+		_dialogue_system.set_animation_player(_animation_player)
+		
 		GameEvents.rolled_by_player.connect(_on_try_play_unfair_dialog)
 		GameEvents.first_turn_dice_shake.connect(_on_first_turn_dice_shaked)
 		GameEvents.opponent_thinking.connect(_try_play_thinking_sound)

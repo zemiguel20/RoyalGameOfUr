@@ -14,15 +14,19 @@ var npcs: Array
 
 
 func _ready():
-	## Disable background NPCs when in hotseat mode
-	if Settings.is_hotseat_mode:
-		return
-	
 	npcs = get_node("NPCs").get_children()
+	enable_npcs()
 	GameEvents.play_pressed.connect(_on_play_pressed)
 	
-
-func _on_play_pressed():
+	
+func enable_npcs():
 	for npc in npcs:
 		if npc is AmbientNPCBase:
 			npc.on_ready(self)
+
+
+func _on_play_pressed():
+	if Settings.is_hotseat_mode:
+		for npc in npcs:
+			npc.set_process(false)
+			npc.visible = false
