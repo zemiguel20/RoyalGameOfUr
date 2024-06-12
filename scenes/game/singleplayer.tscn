@@ -227,4 +227,5 @@ loop = false
 
 [node name="AmbienceAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_rlqq6")
+volume_db = 8.5
 autoplay = true
