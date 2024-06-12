@@ -45,7 +45,7 @@ var _delta: float
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-	GameEvents.intro_tilt_camera.connect(_on_intro_tilt_camera)
+	GameEvents.init_board.connect(_on_init_board)
 	GameEvents.intro_finished.connect(_on_intro_finished)
 	
 	if not Settings.is_hotseat_mode:
@@ -69,7 +69,8 @@ func _on_intro_finished():
 		_can_move_camera = true
 
 
-func _on_intro_tilt_camera():
+func _on_init_board():
+	if not Settings.is_hotseat_mode:
 		await _return_to_board(_intro_tween_speed)
 
 

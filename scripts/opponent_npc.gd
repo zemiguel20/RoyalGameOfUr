@@ -51,7 +51,7 @@ func _process(delta):
 
 func _play_story_dialogue():
 	var success = await _dialogue_system.play(DialogueSystem.Category.INTRO_STORY)
-	GameEvents.intro_tilt_camera.emit()
+	GameEvents.init_board.emit()
 	success = await _dialogue_system.play(DialogueSystem.Category.INTRO_GAME_START)
 	## If something went wrong when playing the story dialogues, do not try to trigger a next sequence.
 	if success:
@@ -76,8 +76,9 @@ func _play_random_dialogue():
 
 
 func _on_first_turn_dice_shaked():
-	_dialogue_system.play(DialogueSystem.Category.INTRO_GOOD_LUCK_WISH)
+	if not explained_everything: return
 	
+	_dialogue_system.play(DialogueSystem.Category.INTRO_GOOD_LUCK_WISH)
 	if first_random_dialog_had:
 		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLL_FOR_HOPE)
 
@@ -148,7 +149,9 @@ func _on_play_pressed():
 		## Start first dialogue after a delay.
 		await get_tree().create_timer(starting_dialogue_delay).timeout
 		await _play_story_dialogue()
-		_is_timer_active = true	
+		_is_timer_active = true
+	else:
+		GameEvents.init_board.emit()
 	GameEvents.intro_finished.emit()
 
 

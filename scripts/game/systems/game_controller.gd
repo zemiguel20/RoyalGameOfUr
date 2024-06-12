@@ -9,7 +9,7 @@ var current_player: General.Player
 
 
 func _ready():
-	GameEvents.intro_tilt_camera.connect(prepare_game)
+	GameEvents.init_board.connect(prepare_game)
 	GameEvents.intro_finished.connect(start_game)
 	GameEvents.rolled.connect(_on_rolled)
 	GameEvents.move_executed.connect(_on_move_executed)

@@ -12,7 +12,7 @@ signal no_moves
 signal zero_rolled
 
 signal play_pressed
-signal intro_tilt_camera
+signal init_board
 signal intro_finished
 
 signal first_turn_dice_shake
