@@ -17,7 +17,7 @@ var _is_skippable: bool
 
 func _ready():
 	hide_subtitles()
-	subtitle_label.text = "Waarom doet ie niet?"
+	subtitle_label.text = ""
 	
 	
 func display_subtitle(entry: DialogueBundle, is_skippable: bool):

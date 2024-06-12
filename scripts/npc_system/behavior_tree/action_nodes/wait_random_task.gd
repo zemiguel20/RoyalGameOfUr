@@ -6,7 +6,7 @@ var _max_wait_time: float
 var _status: Status
 var _owner
 
-func _init(min_wait_time, max_wait_time):
+func _init(min_wait_time: float, max_wait_time: float):
 	_min_wait_time = min_wait_time
 	_max_wait_time = max_wait_time
 	

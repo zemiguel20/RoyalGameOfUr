@@ -1,0 +1,45 @@
+[gd_scene load_steps=21 format=3 uid="uid://bp7n22v23accq"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_system.gd" id="1_o8m8u"]
+[ext_resource type="Resource" uid="uid://c4s5ljc8dbt6o" path="res://resources/dialogue/groups/intro_story.tres" id="2_mrne0"]
+[ext_resource type="Resource" uid="uid://dgfe3vpdsmwyf" path="res://resources/dialogue/groups/intro_game_start.tres" id="3_14vd1"]
+[ext_resource type="Resource" uid="uid://bdjtjqb6rugmh" path="res://resources/dialogue/groups/random_conversation.tres" id="4_h20pq"]
+[ext_resource type="Resource" uid="uid://cm3tybkthodww" path="res://resources/dialogue/groups/game_opponent_gets_captured.tres" id="5_311ly"]
+[ext_resource type="Resource" uid="uid://b31u1blrsob06" path="res://resources/dialogue/groups/game_player_gets_captured.tres" id="6_6lubb"]
+[ext_resource type="Resource" uid="uid://bn8skq46su8tj" path="res://resources/dialogue/groups/game_opponent_mistake.tres" id="7_b66vo"]
+[ext_resource type="Resource" uid="uid://dqeyo43p0rrqy" path="res://resources/dialogue/groups/game_tutorial_rosette.tres" id="8_27ik2"]
+[ext_resource type="Resource" uid="uid://bwb2tdg0bmm0v" path="res://resources/dialogue/groups/game_tutorial_opponent_gets_captured.tres" id="9_xtso7"]
+[ext_resource type="Resource" uid="uid://gj45b7uqg4hx" path="res://resources/dialogue/groups/game_tutorial_player_gets_captured.tres" id="10_gwqjh"]
+[ext_resource type="Resource" uid="uid://ceiyuaheccrhp" path="res://resources/dialogue/groups/game_tutorial_central_rosette.tres" id="11_ab6cb"]
+[ext_resource type="Resource" uid="uid://dsba08jo60k0t" path="res://resources/dialogue/groups/game_tutorial_finish.tres" id="12_q437e"]
+[ext_resource type="Resource" uid="uid://cqbqaa2me4isu" path="res://resources/dialogue/groups/game_tutorial_explanation.tres" id="13_ctluc"]
+[ext_resource type="Resource" uid="uid://bgla8xjveol3f" path="res://resources/dialogue/groups/game_player_win.tres" id="14_w1j6k"]
+[ext_resource type="Resource" uid="uid://cuwsy7lf7fndj" path="res://resources/dialogue/groups/game_opponent_win.tres" id="15_0l4gu"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_random_player.gd" id="16_hu4yg"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_inorder_player.gd" id="17_b38l2"]
+[ext_resource type="PackedScene" uid="uid://bdfdbhwdv6lnb" path="res://scenes/npcs/dialogue_sequence_player.tscn" id="18_b41tt"]
+[ext_resource type="PackedScene" uid="uid://y4idlfyp1gdh" path="res://dialogue_menus.tscn" id="19_l1o03"]
+[ext_resource type="PackedScene" uid="uid://b5rqut7t53w0r" path="res://scenes/ui/subtitle_system.tscn" id="20_cuvl8"]
+
+[node name="DialogueSystem" type="Node"]
+script = ExtResource("1_o8m8u")
+_dialogue_groups = Array[Resource("res://scripts/dialogue_system/data/dialogue_group.gd")]([ExtResource("2_mrne0"), ExtResource("3_14vd1"), ExtResource("4_h20pq"), ExtResource("5_311ly"), ExtResource("6_6lubb"), ExtResource("7_b66vo"), ExtResource("8_27ik2"), ExtResource("9_xtso7"), ExtResource("10_gwqjh"), ExtResource("11_ab6cb"), ExtResource("12_q437e"), ExtResource("13_ctluc"), ExtResource("14_w1j6k"), ExtResource("15_0l4gu")])
+
+[node name="DialogueGroupPlayer_Random" type="Node" parent="."]
+script = ExtResource("16_hu4yg")
+
+[node name="DialogueGroupPlayer_InOrder" type="Node" parent="."]
+script = ExtResource("17_b38l2")
+_supports_interruptions = true
+
+[node name="DialogueSequencePlayer" parent="." instance=ExtResource("18_b41tt")]
+_use_subtitles = true
+_temp_min_entry_length = 5.0
+
+[node name="InterruptionSequencePlayer" parent="." instance=ExtResource("18_b41tt")]
+_use_subtitles = true
+_temp_min_entry_length = 5.0
+
+[node name="Menus_During_Dialogue" parent="." instance=ExtResource("19_l1o03")]
+
+[node name="Subtitle_System" parent="." instance=ExtResource("20_cuvl8")]
