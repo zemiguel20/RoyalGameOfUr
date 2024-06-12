@@ -17,23 +17,30 @@ func _setup_game():
 	for move_picker in get_children():
 		move_picker.queue_free()
 	
-	# Spawn stuff according to settings
+	# Spawn board according to settings
 	var board = EntityManager.spawn_board(Settings.ruleset.board_layout.scene)
 	
+	# Spawn pieces for each player
 	for i in Settings.ruleset.num_pieces:
 		EntityManager.spawn_player_piece(General.Player.ONE, board)
 		EntityManager.spawn_player_piece(General.Player.TWO, board)
 	
+	# Spawn dice
 	for i in Settings.ruleset.num_dice:
 		EntityManager.spawn_die()
 	
+	# Create move picker for P1
 	var p1_move_picker = INTERACTIVE_MOVE_PICKER.instantiate()
+	p1_move_picker.assigned_player = General.Player.ONE
 	add_child(p1_move_picker)
+	
+	# Create move picker for P2
 	var p2_move_picker = INTERACTIVE_MOVE_PICKER.instantiate() if Settings.is_hotseat_mode \
 			else AI_MOVE_PICKER.instantiate()
 	p2_move_picker.assigned_player = General.Player.TWO
 	add_child(p2_move_picker)
 	
+	# Start game
 	if Settings.is_hotseat_mode:
 		_start_game()
 	else:
