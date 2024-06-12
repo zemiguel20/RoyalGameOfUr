@@ -36,12 +36,6 @@ var current_board_index: int = 0
 @onready var dice_number_label: Label = $RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer2/DiceNumberLabel
 
 
-@export var _fading_duration = 2.5
-
-
-@onready var fade_panel: ColorRect = $Fade_Panel
-
-
 func _ready() -> void:
 	main_menu.visible = true
 	ruleset_menu.visible = false

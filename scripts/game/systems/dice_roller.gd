@@ -112,6 +112,7 @@ func _highlight_result(total_value: int) -> void:
 	else:
 		for die in _dice:
 			die.highlight.set_active(die.value == 1).set_color(General.color_positive)
+			await get_tree().create_timer(0.1).timeout
 
 
 func _dehighlight() -> void:
@@ -120,6 +121,8 @@ func _dehighlight() -> void:
 
 
 func _start_shaking() -> void:
+	GameEvents.first_turn_dice_shake.emit()
+	
 	_shake_sfx.play()
 	for die in _dice:
 		die.model.visible = false
@@ -159,3 +162,4 @@ func _roll_dice() -> void:
 	await get_tree().create_timer(_show_result_duration).timeout
 	
 	GameEvents.rolled.emit(value)
+	GameEvents.rolled_by_player.emit(value, _assigned_player)

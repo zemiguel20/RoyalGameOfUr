@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=11 format=3 uid="uid://dp78ph4re3xjm"]
+
+[ext_resource type="AudioStream" uid="uid://b24nsmupgohav" path="res://resources/dialogue/gameplay-reaction-mm-mm-2.mp3" id="1_p44kv"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_yguox"]
+[ext_resource type="AudioStream" uid="uid://dhyn7ma25x06j" path="res://resources/dialogue/gameplay-reaction-mm-mm-3.mp3" id="2_eiybd"]
+[ext_resource type="AudioStream" uid="uid://bjoqh6t10iics" path="res://resources/dialogue/gameplay-reaction-mm-mm-4.mp3" id="3_og4wd"]
+[ext_resource type="AudioStream" uid="uid://pg008jjqk7ej" path="res://resources/dialogue/gameplay-reaction-mm-mm-5.mp3" id="4_itrtn"]
+[ext_resource type="AudioStream" uid="uid://2vcv6tb4rrp8" path="res://resources/dialogue/gameplay-reaction-mm-mm.mp3" id="5_xuy0v"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="6_rm8kn"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="7_6bdx8"]
+
+[sub_resource type="Resource" id="Resource_40aar"]
+script = ExtResource("6_rm8kn")
+audio_variations = Array[AudioStream]([ExtResource("1_p44kv"), ExtResource("2_eiybd"), ExtResource("3_og4wd"), ExtResource("4_itrtn"), ExtResource("5_xuy0v")])
+caption = ""
+caption_cuneiform = ""
+anim_variations = Array[int]([5])
+fixed_duration = -1.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_e5lsu"]
+script = ExtResource("7_6bdx8")
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_40aar")])
+requires_click = false
+weight = 5
+
+[resource]
+script = ExtResource("1_yguox")
+category = 6
+play_in_order = false
+has_priority = false
+reset_after_all_played = true
+initial_delay = 0.5
+dialogue_sequences = Array[ExtResource("7_6bdx8")]([SubResource("Resource_e5lsu")])
+weight_for_empty = 0

@@ -14,12 +14,15 @@ enum Category {
 	GAME_OPPONENT_WAITING = 9,
 	GAME_OPPONENT_THINKING = 10,
 	RANDOM_CONVERSATION = 11,
-	GAME_TUTORIAL_ROSETTE = 12,
-	GAME_TUTORIAL_PLAYER_GETS_CAPTURED = 13,
-	GAME_TUTORIAL_OPPONENT_GETS_CAPTURED = 14,
-	GAME_TUTORIAL_CENTRAL_ROSETTE = 15,
-	GAME_TUTORIAL_FINISH = 16,
-	GAME_TUTORIAL_EXPLANATION = 17
+	TUTORIAL_ROSETTE = 12,
+	TUTORIAL_PLAYER_GETS_CAPTURED = 13,
+	TUTORIAL_OPPONENT_GETS_CAPTURED = 14,
+	TUTORIAL_CENTRAL_ROSETTE = 15,
+	TUTORIAL_FINISH = 16,
+	TUTORIAL_THATS_ALL = 17,
+	GAME_OPPONENT_ROLLED_0 = 18,
+	INTRO_GOOD_LUCK_WISH = 19,
+	GAME_OPPONENT_ROLL_FOR_HOPE = 20
 }
 
 @export var _dialogue_groups: Array[DialogueGroup]
@@ -35,15 +38,20 @@ var _current_dialogue_player: DialogueGroupPlayerBase
 func _ready():
 	_player_inorder.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
 	_player_random.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
+	GameEvents.subtitle_panel_clicked.connect(continue_dialogue)
 	
 	
 func _input(event):
 	if event.is_action_pressed("skip_dialogue"):
-		if _interruption_sequence_player.is_busy():
-			_interruption_sequence_player.skip()
-		elif _dialogue_sequence_player.is_busy():
-			_dialogue_sequence_player.skip()
-			
+		continue_dialogue()
+
+
+func continue_dialogue():
+	if _interruption_sequence_player.is_busy():
+		_interruption_sequence_player.skip()
+	elif _dialogue_sequence_player.is_busy():
+		_dialogue_sequence_player.skip()
+
 
 ## Tries to play a DialogueSequence in the correct category. Returns whether the operation was successfull.
 func play(category: Category) -> bool:

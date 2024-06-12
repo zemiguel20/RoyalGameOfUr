@@ -1,25 +1,25 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=16 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
-[ext_resource type="PackedScene" path="res://scenes/ui/controls_hud.tscn" id="8_wjnj8"]
+[ext_resource type="PackedScene" uid="uid://bvkfyp4kdef5w" path="res://scenes/ui/controls_hud.tscn" id="8_wjnj8"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
 [ext_resource type="PackedScene" uid="uid://cuw4r8ubsaba3" path="res://scenes/ui/main_menu.tscn" id="10_2dq8v"]
 [ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="11_5mxbb"]
+[ext_resource type="AudioStream" uid="uid://dsymj0eaades6" path="res://audio/ambience.mp3" id="12_rlqq6"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="16_eu2sq"]
 
 [sub_resource type="GDScript" id="GDScript_lsuqm"]
 script/source = "extends Node
 
-@onready var board: Board = $Board
-
 
 func _ready() -> void:
-	Settings.is_hotseat_mode = true
-	Settings.ruleset = load(\"res://resources/rulesets/ruleset_russian_rosette.tres\")
+	pass
+	# Settings.is_hotseat_mode = true
+	# Settings.ruleset = load(\"res://resources/rulesets/ruleset_russian_rosette.tres\")
 
 
 func _input(event: InputEvent) -> void:
@@ -42,7 +42,7 @@ script = SubResource("GDScript_lsuqm")
 
 [node name="Environment" parent="." instance=ExtResource("1_i3yx6")]
 
-[node name="TableFloor" type="StaticBody3D" parent="Environment"]
+[node name="TableFloor" type="StaticBody3D" parent="Environment" groups=["table"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45152, -0.264447, 6.36289)
 metadata/_edit_group_ = true
 
@@ -67,7 +67,7 @@ transform = Transform3D(0.498594, 0, -0.866836, 0, 1, 0, 0.866836, 0, 0.498594, 
 shape = SubResource("BoxShape3D_qcwgi")
 
 [node name="Wall3" type="StaticBody3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.56603, -0.201724, 6.64917)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55345, -0.201724, 6.62311)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall3"]
@@ -103,13 +103,17 @@ _assigned_player = 1
 
 [node name="Opponent_Guard_Animated" parent="." instance=ExtResource("7_tegfk")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
+starting_dialogue_delay = 2.0
 
 [node name="Custom_Camera" parent="." node_paths=PackedStringArray("_hotseat_rotation") instance=ExtResource("7_w116q")]
-transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.677, 0.167, 6.671)
+fov = 65.0
 max_degrees_down = 50.0
 max_degrees_left = 32.0
 _hotseat_rotation = NodePath("../HotseatCameraMarker")
 _board_look_rotation = Vector3(-35, 32, 0)
+_trans_type = 1
+_ease_type = 1
 
 [node name="HotseatCameraMarker" type="Marker3D" parent="."]
 transform = Transform3D(-0.529919, -0.844821, 0.073912, 0, 0.0871554, 0.996195, -0.848048, 0.527903, -0.0461853, 4.49162, 0.111622, 6.32288)
@@ -120,3 +124,7 @@ script = ExtResource("11_5mxbb")
 [node name="ControlsHUD" parent="." instance=ExtResource("8_wjnj8")]
 
 [node name="MainMenu" parent="." instance=ExtResource("10_2dq8v")]
+
+[node name="AmbienceAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_rlqq6")
+autoplay = true

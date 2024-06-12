@@ -9,13 +9,14 @@ var current_player: General.Player
 
 
 func _ready():
+	GameEvents.init_board.connect(prepare_game)
 	GameEvents.intro_finished.connect(start_game)
 	GameEvents.rolled.connect(_on_rolled)
 	GameEvents.move_executed.connect(_on_move_executed)
 	GameEvents.no_moves.connect(_on_no_moves)
 
 
-func start_game():
+func prepare_game():
 	# Despawn stuff
 	EntityManager.despawn_board()
 	EntityManager.despawn_dice()
@@ -38,8 +39,9 @@ func start_game():
 			else AI_MOVE_PICKER.instantiate()
 	p2_move_picker.assigned_player = General.Player.TWO
 	add_child(p2_move_picker)
-	
-	# Start game
+
+
+func start_game():
 	current_player = randi_range(General.Player.ONE, General.Player.TWO) as General.Player
 	GameEvents.game_started.emit()
 	GameEvents.roll_phase_started.emit(current_player)

@@ -1,29 +1,44 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://bgla8xjveol3f"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=12 format=3 uid="uid://bgla8xjveol3f"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_1bfsv"]
+[ext_resource type="AudioStream" uid="uid://bxgc88v1m6fvo" path="res://resources/dialogue/gameplay-reaction-well-played-2.mp3" id="1_yesbt"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_8mqiv"]
+[ext_resource type="AudioStream" uid="uid://dd0l56hyp7gs" path="res://resources/dialogue/gameplay-reaction-well-played.mp3" id="2_hwuye"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="3_k5hok"]
+[ext_resource type="AudioStream" uid="uid://c0lv0friuo6mb" path="res://resources/dialogue/gameplay-reaction-may-assur-be-pleased-2.mp3" id="4_v7whe"]
+[ext_resource type="AudioStream" uid="uid://b6ba21xfv45ie" path="res://resources/dialogue/gameplay-reaction-may-assur-be-pleased-3.mp3" id="5_ncfpb"]
+[ext_resource type="AudioStream" uid="uid://b3cpvykf40lpf" path="res://resources/dialogue/gameplay-reaction-may-assur-be-pleased.mp3" id="6_s7hge"]
 
 [sub_resource type="Resource" id="Resource_wvtl5"]
 script = ExtResource("1_1bfsv")
-caption = "Ah... well played, my friend!"
+audio_variations = Array[AudioStream]([ExtResource("1_yesbt"), ExtResource("2_hwuye")])
+caption = "Well played, my friend!"
 caption_cuneiform = ""
 anim_variations = Array[int]([6])
-fixed_duration = 3.0
+fixed_duration = -1.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_xnqmf"]
+script = ExtResource("1_1bfsv")
+audio_variations = Array[AudioStream]([ExtResource("4_v7whe"), ExtResource("5_ncfpb"), ExtResource("6_s7hge")])
+caption = "May Aššur be pleased with your victory."
+caption_cuneiform = ""
+anim_variations = Array[int]([5])
+fixed_duration = -1.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_kg23r"]
 script = ExtResource("2_8mqiv")
-max_repetitions = 3
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_wvtl5")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_wvtl5"), SubResource("Resource_xnqmf")])
 requires_click = false
 weight = 5
 
 [resource]
 script = ExtResource("3_k5hok")
 category = 8
-play_in_order = false
+play_in_order = true
 has_priority = false
+reset_after_all_played = true
 initial_delay = 0.5
 dialogue_sequences = Array[ExtResource("2_8mqiv")]([SubResource("Resource_kg23r")])
 weight_for_empty = 0

@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://cmda6h84liw1v"]
+
+[ext_resource type="AudioStream" uid="uid://djslhup8tw57c" path="res://resources/dialogue/intro-2-6-good-luck.mp3" id="1_3vx0s"]
+[ext_resource type="AudioStream" uid="uid://467y2wr7l7ty" path="res://resources/dialogue/intro-2-6-good-luck-2.mp3" id="2_w7fcj"]
+[ext_resource type="AudioStream" uid="uid://cik4oe4lnxojh" path="res://resources/dialogue/intro-2-6-good-luck-3.mp3" id="3_mpgwn"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="4_57jvu"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="5_n53fr"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="6_173t0"]
+
+[sub_resource type="Resource" id="Resource_ede7p"]
+script = ExtResource("4_57jvu")
+audio_variations = Array[AudioStream]([ExtResource("1_3vx0s"), ExtResource("2_w7fcj"), ExtResource("3_mpgwn")])
+caption = "Good luck, my friend! May you find the insights you seek today."
+caption_cuneiform = ""
+anim_variations = Array[int]([])
+fixed_duration = -1.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_akvjd"]
+script = ExtResource("5_n53fr")
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_ede7p")])
+requires_click = false
+weight = 5
+
+[resource]
+script = ExtResource("6_173t0")
+category = 19
+play_in_order = false
+has_priority = false
+reset_after_all_played = false
+initial_delay = 0.5
+dialogue_sequences = Array[ExtResource("5_n53fr")]([SubResource("Resource_akvjd")])
+weight_for_empty = 0

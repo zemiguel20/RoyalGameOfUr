@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk03upbyn04nu"]
+[gd_scene load_steps=8 format=3 uid="uid://dk03upbyn04nu"]
 
 [ext_resource type="Script" path="res://scripts/game/entities/piece.gd" id="1_0kiv2"]
 [ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="2_qanmy"]
@@ -6,12 +6,14 @@
 [ext_resource type="Script" path="res://scripts/game/components/move_animation.gd" id="4_7srpi"]
 [ext_resource type="PackedScene" uid="uid://ctrxgamva8tn6" path="res://models/piece_model.glb" id="5_5j51m"]
 [ext_resource type="Material" uid="uid://c4xcvomvc2exe" path="res://materials/piece_white.tres" id="6_h4ix0"]
+[ext_resource type="AudioStream" uid="uid://d1b4gouwqcaja" path="res://audio/sfx_mastered/piece-placement.mp3" id="7_73j2l"]
 
 [node name="WhitePiece" type="Node3D"]
 script = ExtResource("1_0kiv2")
 metadata/model = NodePath("Model/Piece")
 metadata/highlight = NodePath("Highlight")
 metadata/move = NodePath("MoveAnimation")
+metadata/sfx_place = NodePath("SfxPlace")
 
 [node name="Highlight" type="Node" parent="." node_paths=PackedStringArray("target_meshes")]
 script = ExtResource("2_qanmy")
@@ -29,5 +31,8 @@ transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.000982706, 0)
 
 [node name="Piece" parent="Model" index="0"]
 surface_material_override/0 = ExtResource("6_h4ix0")
+
+[node name="SfxPlace" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_73j2l")
 
 [editable path="Model"]

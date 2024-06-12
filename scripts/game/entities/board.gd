@@ -48,6 +48,18 @@ func get_track_spots_occupied_by_self(player: int) -> Array[Spot]:
 	return track.filter(filter)
 
 
+## Returns occupied spots in the players' shared path.
+func get_occupied_spots_in_shared_path() -> Array[Spot]:
+	var track = get_track(General.Player.TWO)
+	# Only count spots that are on the shared path and occupied by the player
+	var filter = func(spot: Spot):
+		return spot.is_occupied_by_player(General.Player.ONE) \
+		or spot.is_occupied_by_player(General.Player.TWO) \
+		and not EntityManager.get_board().is_spot_exclusive(spot)
+	
+	return track.filter(filter)
+
+
 func is_spot_end_of_player_track(spot: Spot, player: int) -> bool:
 	return spot == get_track(player).back()
 

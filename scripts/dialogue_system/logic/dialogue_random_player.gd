@@ -1,17 +1,16 @@
 class_name DialogueGroupPlayerRandom
 extends DialogueGroupPlayerBase
 
-var last_picked_sequence
-
 func _pick_sequence(group: DialogueGroup) -> DialogueSequence:
 	var available_sequences = group.dialogue_sequences.duplicate()
 	for sequence in group.dialogue_sequences:
-		if sequence.times_played >= sequence.max_repetitions or sequence == last_picked_sequence:
-			if available_sequences.is_empty():
-				return null
-			if available_sequences.has(sequence):
-				available_sequences.erase(sequence)
-			return
+		if sequence.was_played and available_sequences.has(sequence):
+			available_sequences.erase(sequence)
+	## If all sequences have been played, reset the list
+	if available_sequences.is_empty() and group.reset_after_all_played:
+		for sequence in group.dialogue_sequences:
+			sequence.was_played = false
+		available_sequences = group.dialogue_sequences.duplicate()
 	
 	var total_weight = 0
 	for sequence in available_sequences:
@@ -22,9 +21,7 @@ func _pick_sequence(group: DialogueGroup) -> DialogueSequence:
 	for sequence in available_sequences:
 		current_weight += sequence.weight
 		if random_num < current_weight:
-			sequence.times_played += 1
-			
-			last_picked_sequence = sequence
+			sequence.was_played = true
 			return sequence
 			
 	push_error("DialogueGroupPlayerRandom: Expected to have picked a sequence by now...")

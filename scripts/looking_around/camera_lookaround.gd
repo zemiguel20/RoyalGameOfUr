@@ -45,6 +45,7 @@ var _delta: float
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	GameEvents.init_board.connect(_on_init_board)
 	GameEvents.intro_finished.connect(_on_intro_finished)
 	
 	if not Settings.is_hotseat_mode:
@@ -64,9 +65,13 @@ func _on_intro_finished():
 		set_process_input(false)
 		set_process(false)
 	else:
-		await _return_to_board(_intro_tween_speed)
 		_looking_border.mouse_entered.connect(_enter_looking_mode)
 		_can_move_camera = true
+
+
+func _on_init_board():
+	if not Settings.is_hotseat_mode:
+		await _return_to_board(_intro_tween_speed)
 
 
 func _input(event):

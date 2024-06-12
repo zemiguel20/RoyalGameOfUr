@@ -48,20 +48,46 @@ const BASE_SHARED_SPOT_DANGER_SCORE: float = 0.1
 ## Duration of the highlight of the chosen move
 @export_range(0.1, 5.0) var move_highlight_duration: float = 1.0
 
+var _is_busy_talking: bool
+
+
+func _ready():
+	GameEvents.opponent_action_prevented.connect(_on_prevent_opponent_action)
+	GameEvents.opponent_action_resumed.connect(_on_resume_opponent_action)
+
+
+func _on_prevent_opponent_action():
+	_is_busy_talking = true
+
+
+func _on_resume_opponent_action():
+	_is_busy_talking = false
+
 
 func start_selection(moves: Array[GameMove]) -> void:
-	if not Settings.fast_move_enabled:
+	if _is_shared_path_crowded():
 		# Simulate thinking
+		GameEvents.opponent_thinking.emit()
 		var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
 		await get_tree().create_timer(thinking_duration).timeout
+		
+		if _is_busy_talking:
+			await GameEvents.opponent_action_resumed
+	
 	var selected_move = _determine_next_move(moves)
 	
 	# Highlight selected move for a bit
 	highlight.highlight(selected_move)
+	GameEvents.try_play_tutorial_dialog.emit(selected_move)
 	await get_tree().create_timer(move_highlight_duration).timeout
 	highlight.clear_highlight(selected_move)
 	
 	move_selected.emit(selected_move)
+
+
+func _is_shared_path_crowded() -> int:
+	var board = EntityManager.get_board() as Board
+	return board.get_occupied_spots_in_shared_path().size() >= 3
 
 
 func _determine_next_move(moves: Array[GameMove]) -> GameMove:
@@ -78,25 +104,6 @@ func _determine_next_move(moves: Array[GameMove]) -> GameMove:
 		return valid_moves[1]
 	else:
 		return valid_moves[2]
-
-
-# TODO: PORT THIS TO OPPONENT LOGIC, BY CHECKING GAME STATE
-#func _check_for_tutorial_signals(move: Move):
-	## TODO: Only run this method when playing with default rules
-	#on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_EXPLANATION)
-	#
-	#if move.knocks_opo:
-		#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)
-		#has_emitted_tutorial_capture_signal = true
-	#
-	#if move.to.is_safe:
-		#if move.is_to_central_safe:
-			#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
-		#else:
-			#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
-	#
-	#if move.to.force_allow_stack:
-		#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
 
 
 func _sort_best_moves(a, b):
