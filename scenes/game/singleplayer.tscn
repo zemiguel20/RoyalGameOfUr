@@ -1,13 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=17 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
-[ext_resource type="PackedScene" uid="uid://bvkfyp4kdef5w" path="res://scenes/ui/controls_hud.tscn" id="8_wjnj8"]
+[ext_resource type="PackedScene" path="res://scenes/ui/controls_hud.tscn" id="8_wjnj8"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
 [ext_resource type="PackedScene" uid="uid://cuw4r8ubsaba3" path="res://scenes/ui/main_menu.tscn" id="10_2dq8v"]
 [ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="11_5mxbb"]
+[ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="11_b3pbs"]
 [ext_resource type="AudioStream" uid="uid://dsymj0eaades6" path="res://audio/ambience.mp3" id="12_rlqq6"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="16_eu2sq"]
@@ -26,6 +27,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.keycode == KEY_1 and event.pressed:
 			Settings.fast_move_enabled = not Settings.fast_move_enabled
+		if event.keycode == KEY_R and event.pressed:
+			GameEvents.play_pressed.emit()
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wg4la"]
@@ -124,6 +127,8 @@ script = ExtResource("11_5mxbb")
 [node name="ControlsHUD" parent="." instance=ExtResource("8_wjnj8")]
 
 [node name="MainMenu" parent="." instance=ExtResource("10_2dq8v")]
+
+[node name="EndScreen" parent="." instance=ExtResource("11_b3pbs")]
 
 [node name="AmbienceAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_rlqq6")

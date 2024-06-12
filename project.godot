@@ -35,6 +35,11 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Royal Game Of Ur"
 
+[gui]
+
+theme/custom="res://UI/test_theme.tres"
+theme/custom_font="res://UI/IMFeENrm29P.ttf"
+
 [input]
 
 game_select={
