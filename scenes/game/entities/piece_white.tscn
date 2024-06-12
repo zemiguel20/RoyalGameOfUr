@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/game/entities/piece.gd" id="1_0kiv2"]
 [ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="2_qanmy"]
-[ext_resource type="Material" uid="uid://c6p7a2gj4s6bg" path="res://materials/highlight.tres" id="3_af3ig"]
+[ext_resource type="Material" uid="uid://purj1r6adduf" path="res://materials/highlight.tres" id="3_af3ig"]
 [ext_resource type="Script" path="res://scripts/game/components/move_animation.gd" id="4_7srpi"]
 [ext_resource type="PackedScene" uid="uid://ctrxgamva8tn6" path="res://models/piece_model.glb" id="5_5j51m"]
 [ext_resource type="Material" uid="uid://c4xcvomvc2exe" path="res://materials/piece_white.tres" id="6_h4ix0"]
