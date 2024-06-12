@@ -35,6 +35,8 @@ const color_negative := Color.RED
 func get_opponent(player : Player) -> Player:
 	return Player.ONE if player == Player.TWO else Player.TWO
 
+func get_random_player() -> Player:
+	return randi_range(Player.ONE, Player.TWO) as Player
 
 ## This is a quick helper function for converting an euler rotation from degrees to radians.
 func deg_to_rad(vector: Vector3):

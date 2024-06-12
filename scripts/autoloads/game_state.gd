@@ -1,4 +1,5 @@
 extends Node
 
-## Currently only used to determine when to show the 'Fast movement' control label
-var player_turns_made: int
+
+var current_player: General.Player = General.Player.ONE
+var turn_number: int = 0

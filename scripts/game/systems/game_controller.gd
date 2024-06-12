@@ -5,18 +5,12 @@ class_name GameController extends Node
 const INTERACTIVE_MOVE_PICKER: PackedScene = preload("res://scenes/game/systems/move_picker/move_picker_interactive.tscn")
 const AI_MOVE_PICKER: PackedScene = preload("res://scenes/game/systems/move_picker/move_picker_ai.tscn")
 
-var current_player: General.Player
-
 
 func _ready():
-	GameEvents.init_board.connect(prepare_game)
-	GameEvents.intro_finished.connect(start_game)
-	GameEvents.rolled.connect(_on_rolled)
-	GameEvents.move_executed.connect(_on_move_executed)
-	GameEvents.no_moves.connect(_on_no_moves)
+	GameEvents.play_pressed.connect(_setup_game)
 
 
-func prepare_game():
+func _setup_game():
 	# Despawn stuff
 	EntityManager.despawn_board()
 	EntityManager.despawn_dice()
@@ -39,42 +33,14 @@ func prepare_game():
 			else AI_MOVE_PICKER.instantiate()
 	p2_move_picker.assigned_player = General.Player.TWO
 	add_child(p2_move_picker)
-
-
-func start_game():
-	current_player = randi_range(General.Player.ONE, General.Player.TWO) as General.Player
-	GameEvents.game_started.emit()
-	GameEvents.roll_phase_started.emit(current_player)
-
-
-func _on_rolled(roll_value: int) -> void:
-	if roll_value == 0:
-		_switch_player()
-		GameEvents.roll_phase_started.emit(current_player)
+	
+	if Settings.is_hotseat_mode:
+		_start_game()
 	else:
-		GameEvents.move_phase_started.emit(current_player, roll_value)
+		GameEvents.opponent_ready.connect(_start_game)
 
 
-func _on_move_executed(move: GameMove):
-	if move.wins:
-		_end_game()
-		return
-	
-	if not move.gives_extra_turn:
-		_switch_player()
-	
-	GameEvents.roll_phase_started.emit(current_player)
-
-
-func _on_no_moves() -> void:
-	_switch_player()
-	GameEvents.roll_phase_started.emit(current_player)
-
-
-func _end_game():
-	print("Game Finished: Player %d won" % (current_player + 1))
-	GameEvents.game_ended.emit(current_player)
-
-
-func _switch_player() -> void:
-	current_player = General.get_opponent(current_player)
+func _start_game():
+	GameState.current_player = General.get_random_player()
+	GameState.turn_number = 1
+	GameEvents.game_started.emit()
