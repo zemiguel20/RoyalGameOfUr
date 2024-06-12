@@ -133,7 +133,7 @@ func _calculate_base_score(move: GameMove):
 func _calculate_safety_modifier(move: GameMove):
 	var opponent = General.get_opponent(move.player)
 	var from_danger_score = _calculate_danger_score(move.from, move.is_from_safe, opponent)
-	var to_danger_score = _calculate_danger_score(move.from, move.is_to_safe, opponent)
+	var to_danger_score = _calculate_danger_score(move.to, move.is_to_safe, opponent)
 	var safety_score =  from_danger_score - to_danger_score 
 	return safety_score_weight * safety_score
 

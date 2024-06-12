@@ -31,13 +31,8 @@ var _is_timer_active: bool
 
 func _ready():
 	visible = false
+	
 	GameEvents.play_pressed.connect(_on_play_pressed)
-	GameEvents.try_play_tutorial_dialog.connect(_on_try_play_tutorial_dialog)
-	GameEvents.reaction_piece_captured.connect(_on_piece_captured)
-	GameEvents.rolled_by_player.connect(_on_try_play_unfair_dialog)
-	GameEvents.opponent_thinking.connect(_try_play_thinking_sound)
-	GameEvents.first_turn_dice_shake.connect(_on_first_turn_dice_shaked)
-
 
 func _process(delta):
 	if not _is_timer_active or _dialogue_system.is_busy():
@@ -144,6 +139,12 @@ func _try_play_thinking_sound():
 
 func _on_play_pressed():
 	if not Settings.is_hotseat_mode:
+		GameEvents.rolled_by_player.connect(_on_try_play_unfair_dialog)
+		GameEvents.first_turn_dice_shake.connect(_on_first_turn_dice_shaked)
+		GameEvents.opponent_thinking.connect(_try_play_thinking_sound)
+		GameEvents.try_play_tutorial_dialog.connect(_on_try_play_tutorial_dialog)
+		GameEvents.reaction_piece_captured.connect(_on_piece_captured)
+		
 		visible = true
 		await _animation_player.play_walkin()
 		## Start first dialogue after a delay.
@@ -173,9 +174,3 @@ func _on_piece_captured(move: GameMove):
 			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
 		elif was_piece_far or rolled_4:
 			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
-
-
-## Reactions for now: Knockout? Debug Button. No Moves?
-func _input(event):
-	if event is InputEventKey and (event as InputEventKey).keycode == KEY_5:
-		_play_interruption(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
