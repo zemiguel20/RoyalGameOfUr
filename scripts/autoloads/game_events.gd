@@ -25,4 +25,7 @@ signal drag_move_start
 signal drag_move_end
 signal opponent_thinking
 
+signal opponent_action_prevented
+signal opponent_action_resumed
+
 signal subtitle_panel_clicked

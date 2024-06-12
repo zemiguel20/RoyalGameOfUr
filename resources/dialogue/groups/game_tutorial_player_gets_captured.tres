@@ -14,7 +14,7 @@ caption = "When I capture one of your pieces, it returns to the start."
 caption_cuneiform = ""
 anim_variations = Array[int]([])
 fixed_duration = -1.0
-prevents_opponent_action = false
+prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_wukhb"]
 script = ExtResource("1_0kb3u")

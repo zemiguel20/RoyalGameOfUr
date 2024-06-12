@@ -5,8 +5,6 @@ extends Node
 ## Signal that emits when the current sequence of dialogue has been finished.
 signal on_dialogue_finished
 signal on_interruption_ready
-signal on_prevent_opponent_action
-signal on_resume_opponent_action
 
 @export var _use_subtitles: bool
 ## NOTE: Since we do not have audio for the playtest, we have a constant waiting time.
@@ -99,16 +97,16 @@ func finish_sequence():
 	
 	if _already_prevents_opponent_action:
 		_already_prevents_opponent_action = false
-		on_resume_opponent_action.emit()
+		GameEvents.opponent_action_resumed.emit()
 
 
 func _handle_opponent_action_prevention(entry: DialogueBundle):
 	if entry.prevents_opponent_action and !_already_prevents_opponent_action:
 		_already_prevents_opponent_action = true
-		on_prevent_opponent_action.emit()
+		GameEvents.opponent_action_prevented.emit()
 	elif !entry.prevents_opponent_action and _already_prevents_opponent_action:
 		_already_prevents_opponent_action = false
-		on_resume_opponent_action.emit()
+		GameEvents.opponent_action_resumed.emit()
 
 
 func handle_interruption():

@@ -48,6 +48,21 @@ const BASE_SHARED_SPOT_DANGER_SCORE: float = 0.1
 ## Duration of the highlight of the chosen move
 @export_range(0.1, 5.0) var move_highlight_duration: float = 1.0
 
+var _is_busy_talking: bool
+
+
+func _ready():
+	GameEvents.opponent_action_prevented.connect(_on_prevent_opponent_action)
+	GameEvents.opponent_action_resumed.connect(_on_resume_opponent_action)
+
+
+func _on_prevent_opponent_action():
+	_is_busy_talking = true
+
+
+func _on_resume_opponent_action():
+	_is_busy_talking = false
+
 
 func start_selection(moves: Array[GameMove]) -> void:
 	if _is_shared_path_crowded():
@@ -55,6 +70,10 @@ func start_selection(moves: Array[GameMove]) -> void:
 		GameEvents.opponent_thinking.emit()
 		var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
 		await get_tree().create_timer(thinking_duration).timeout
+		
+		if _is_busy_talking:
+			await GameEvents.opponent_action_resumed
+	
 	var selected_move = _determine_next_move(moves)
 	
 	# Highlight selected move for a bit

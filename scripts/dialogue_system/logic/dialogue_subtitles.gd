@@ -53,21 +53,6 @@ func _toggle_skip_icon(toggle: bool):
 	skip_icon.visible = toggle
 
 
-### TODO: Change Names
-#func _on_area_3d_mouse_entered():
-	#_toggle_subtitles(true)
-	#
-	#unfocussed_text = subtitle_label.text
-	#focussed = false
-	#subtitle_label.text = "KitchenStaff: Je moeder"
-#
-#
-### TODO: Change Names
-#func _on_option_1_mouse_exited():
-	#focussed = true
-	#subtitle_label.text = unfocussed_text
-
-
 func _on_subtitle_panel_clicked(event):
 	if _is_skippable and event.is_action_pressed("ui_skip_dialogue"):
 		GameEvents.subtitle_panel_clicked.emit()

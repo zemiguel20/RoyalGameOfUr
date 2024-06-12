@@ -14,7 +14,7 @@ caption = "So, when you land on a rosette, you get to roll the dice again."
 caption_cuneiform = ""
 anim_variations = Array[int]([5])
 fixed_duration = -1.0
-prevents_opponent_action = false
+prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_jaa6i"]
 script = ExtResource("5_yvjgn")

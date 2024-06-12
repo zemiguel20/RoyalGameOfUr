@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://bcjpac1cs0xcy"]
 
 [ext_resource type="PackedScene" uid="uid://it24m6uyqxlk" path="res://models/fbx_guard_animated.fbx" id="1_jat7h"]
-[ext_resource type="Material" uid="uid://dwdtaw0ds34wj" path="res://materials/guard/guard.tres" id="2_nuktw"]
+[ext_resource type="Material" uid="uid://dq4qt2h6vrkcj" path="res://materials/guard/guard.tres" id="2_nuktw"]
 [ext_resource type="Script" path="res://scripts/opponent_npc.gd" id="2_pjd45"]
 [ext_resource type="Script" path="res://scripts/opponent/opponent_animation_player.gd" id="4_g1c61"]
 [ext_resource type="PackedScene" uid="uid://y4idlfyp1gdh" path="res://dialogue_menus.tscn" id="5_bvx3e"]
@@ -27,9 +27,9 @@
 [ext_resource type="Resource" uid="uid://cuwsy7lf7fndj" path="res://resources/dialogue/groups/game_opponent_win.tres" id="20_4k08t"]
 [ext_resource type="Resource" uid="uid://cgu6todksvkan" path="res://resources/dialogue/groups/game_opponent_thinking.tres" id="22_hnutr"]
 [ext_resource type="Resource" uid="uid://bwvv3ckwpl1ws" path="res://resources/dialogue/groups/game_opponent_rolled_0.tres" id="24_2ul7u"]
-[ext_resource type="Resource" uid="uid://b7lvb016r6c5i" path="res://resources/dialogue/groups/game_first_turn_player.tres" id="25_lqn7d"]
-[ext_resource type="Resource" uid="uid://ufl5w5vrferh" path="res://resources/dialogue/groups/game_first_turn_opponent.tres" id="26_age42"]
-[ext_resource type="Resource" uid="uid://d4anack0i00ec" path="res://resources/dialogue/groups/game_opponent_waiting.tres" id="27_htahf"]
+[ext_resource type="Resource" uid="uid://bd5dthydsqyr5" path="res://resources/dialogue/groups/game_first_turn_player.tres" id="25_lqn7d"]
+[ext_resource type="Resource" uid="uid://ct4jb5hbaqvm6" path="res://resources/dialogue/groups/game_first_turn_opponent.tres" id="26_age42"]
+[ext_resource type="Resource" uid="uid://300qhag888qt" path="res://resources/dialogue/groups/game_opponent_waiting.tres" id="27_htahf"]
 
 [node name="Opponent_Guard_Animated" instance=ExtResource("1_jat7h")]
 script = ExtResource("2_pjd45")
