@@ -7,7 +7,6 @@ class_name DiceRoller extends Node3D
 
 @export var _assigned_player: General.Player
 @export var _impulse_strength: float = 0.2
-@export var _automatic: bool = false
 @export_range(0.0, 1.0, 0.1, "or_greater") var _show_result_duration: float = 0.5
 @export_range(0.0, 1.0, 0.1, "or_greater") var _auto_delay_grab_dice: float = 0.5
 @export_range(0.5, 1.0, 0.1) var _auto_min_shake_duration: float = 0.5
@@ -17,6 +16,7 @@ var _place_spots: Array[Node3D] = []
 var _throw_spots: Array[Node3D] = []
 var _shake_sfx: AudioStreamPlayer3D
 var _dice: Array[Die] = []
+var _automatic: bool = false
 
 
 func _ready() -> void:
@@ -30,6 +30,10 @@ func _ready() -> void:
 func _start(current_player: General.Player) -> void:
 	if current_player != _assigned_player:
 		return
+	
+	# Adjust second player automatic depending if its hotseat or not
+	if current_player == General.Player.TWO:
+		_automatic = not Settings.is_hotseat_mode
 	
 	_dice.assign(EntityManager.get_dice())
 	_dehighlight()
@@ -108,6 +112,7 @@ func _highlight_result(total_value: int) -> void:
 	else:
 		for die in _dice:
 			die.highlight.set_active(die.value == 1).set_color(General.color_positive)
+			await get_tree().create_timer(0.1).timeout
 
 
 func _dehighlight() -> void:
@@ -116,6 +121,8 @@ func _dehighlight() -> void:
 
 
 func _start_shaking() -> void:
+	GameEvents.first_turn_dice_shake.emit()
+	
 	_shake_sfx.play()
 	for die in _dice:
 		die.model.visible = false
@@ -155,3 +162,4 @@ func _roll_dice() -> void:
 	await get_tree().create_timer(_show_result_duration).timeout
 	
 	GameEvents.rolled.emit(value)
+	GameEvents.rolled_by_player.emit(value, _assigned_player)

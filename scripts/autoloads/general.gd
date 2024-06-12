@@ -15,6 +15,15 @@ enum MoveAnim {
 	NONE, ## No animation. Movement is instantaneous.
 }
 
+const RULESET_FINKEL = preload("res://resources/rulesets/ruleset_finkel.tres")
+const RULESET_MASTERS = preload("res://resources/rulesets/ruleset_masters.tres")
+const RULESET_BLITZ = preload("res://resources/rulesets/ruleset_blitz.tres")
+const RULESET_TOURNAMENT = preload("res://resources/rulesets/ruleset_tournament.tres")
+const RULESET_RR = preload("res://resources/rulesets/ruleset_russian_rosette.tres")
+
+const BOARD_FINKEL = preload("res://resources/rulesets/board_layouts/layout_finkel.tres")
+const BOARD_MASTERS = preload("res://resources/rulesets/board_layouts/layout_masters.tres")
+const BOARD_RR = preload("res://resources/rulesets/board_layouts/layout_russian_rosette.tres")
 
 const color_selectable := Color.SKY_BLUE
 const color_selected := Color.DEEP_SKY_BLUE

@@ -55,6 +55,7 @@ func _on_from_hovered(spot: Spot) -> void:
 	# NOTE: this is due to overriding because moves share pieces/spots
 	moves_from.sort_custom(func(a: GameMove, _b: GameMove): return not a.valid)
 	for move in moves_from:
+		GameEvents.try_play_tutorial_dialog.emit(move)
 		highlight.highlight(move, General.color_hovered)
 
 
@@ -106,6 +107,7 @@ func _on_to_dehovered(move: GameMove) -> void:
 
 
 func _on_to_selected(selected_move: GameMove) -> void:
+	is_from_selected = false
 	for move in _moves:
 		_clear_connections(move)
 		highlight.clear_highlight(move)

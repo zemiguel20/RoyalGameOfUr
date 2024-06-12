@@ -1,15 +1,19 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=6 format=3 uid="uid://dqeyo43p0rrqy"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://dqeyo43p0rrqy"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_3w6r6"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_6cq75"]
+[ext_resource type="AudioStream" uid="uid://cse2ibi6o1tjf" path="res://resources/dialogue/explain-rosette-1.mp3" id="1_vmrpt"]
+[ext_resource type="AudioStream" uid="uid://683ggbeeiue6" path="res://resources/dialogue/explain-rosette-2.mp3" id="2_qr1gw"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_v6yjn"]
+[ext_resource type="AudioStream" uid="uid://d1n1wrjdw2vwl" path="res://resources/dialogue/explain-rosette-3.mp3" id="3_oab24"]
 
 [sub_resource type="Resource" id="Resource_jyika"]
 script = ExtResource("1_6cq75")
-caption = "So when you land on a rosette, you get another turn."
+audio_variations = Array[AudioStream]([ExtResource("1_vmrpt"), ExtResource("2_qr1gw"), ExtResource("3_oab24")])
+caption = "So, when you land on a rosette, you get to roll the dice again."
 caption_cuneiform = ""
 anim_variations = Array[int]([5])
-fixed_duration = 5.0
+fixed_duration = -1.0
 prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_5wm4y"]

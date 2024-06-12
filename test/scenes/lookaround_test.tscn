@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyv4h7haakr1c"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_xbdh3"]
-[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/board.tscn" id="2_esi8y"]
+[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/boards/board_finkel.tscn" id="2_esi8y"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="3_4a2hg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_080q8"]

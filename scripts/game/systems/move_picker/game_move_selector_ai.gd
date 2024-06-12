@@ -8,6 +8,9 @@ class_name AIGameMoveSelector extends Node
 
 signal move_selected(move: GameMove)
 
+## Base danger value for spots that are shared between both players' paths, and are not 100% safe.
+const BASE_SHARED_SPOT_DANGER_SCORE: float = 0.1
+
 @export var highlight: GameMoveHighlight
 
 @export_group("Move picking chances")
@@ -45,19 +48,46 @@ signal move_selected(move: GameMove)
 ## Duration of the highlight of the chosen move
 @export_range(0.1, 5.0) var move_highlight_duration: float = 1.0
 
+var _is_busy_talking: bool
+
+
+func _ready():
+	GameEvents.opponent_action_prevented.connect(_on_prevent_opponent_action)
+	GameEvents.opponent_action_resumed.connect(_on_resume_opponent_action)
+
+
+func _on_prevent_opponent_action():
+	_is_busy_talking = true
+
+
+func _on_resume_opponent_action():
+	_is_busy_talking = false
+
 
 func start_selection(moves: Array[GameMove]) -> void:
-	# Simulate thinking
-	var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
-	await get_tree().create_timer(thinking_duration).timeout
+	if _is_shared_path_crowded():
+		# Simulate thinking
+		GameEvents.opponent_thinking.emit()
+		var thinking_duration = randf_range(min_moving_duration, max_moving_duration)
+		await get_tree().create_timer(thinking_duration).timeout
+		
+		if _is_busy_talking:
+			await GameEvents.opponent_action_resumed
+	
 	var selected_move = _determine_next_move(moves)
 	
 	# Highlight selected move for a bit
 	highlight.highlight(selected_move)
+	GameEvents.try_play_tutorial_dialog.emit(selected_move)
 	await get_tree().create_timer(move_highlight_duration).timeout
 	highlight.clear_highlight(selected_move)
 	
 	move_selected.emit(selected_move)
+
+
+func _is_shared_path_crowded() -> int:
+	var board = EntityManager.get_board() as Board
+	return board.get_occupied_spots_in_shared_path().size() >= 3
 
 
 func _determine_next_move(moves: Array[GameMove]) -> GameMove:
@@ -76,25 +106,6 @@ func _determine_next_move(moves: Array[GameMove]) -> GameMove:
 		return valid_moves[2]
 
 
-# TODO: PORT THIS TO OPPONENT LOGIC, BY CHECKING GAME STATE
-#func _check_for_tutorial_signals(move: Move):
-	## TODO: Only run this method when playing with default rules
-	#on_play_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_EXPLANATION)
-	#
-	#if move.knocks_opo:
-		#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_PLAYER_GETS_CAPTURED)
-		#has_emitted_tutorial_capture_signal = true
-	#
-	#if move.to.is_safe:
-		#if move.is_to_central_safe:
-			#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_CENTRAL_ROSETTE)
-		#else:
-			#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_ROSETTE)
-	#
-	#if move.to.force_allow_stack:
-		#on_play_tutorial_dialogue.emit(DialogueSystem.Category.GAME_TUTORIAL_FINISH)
-
-
 func _sort_best_moves(a, b):
 	return _evaluate_move(a) > _evaluate_move(b)
 
@@ -108,11 +119,11 @@ func _evaluate_move(move: GameMove) -> float:
 
 
 func _calculate_base_score(move: GameMove):
-	if move.knocks_opo:
+	if move.is_to_occupied_by_opponent:
 		return capture_base_score
 	elif move.gives_extra_turn:
 		return grants_roll_base_score
-	elif move.moves_to_end:
+	elif move.is_to_end_of_track:
 		return end_move_base_score
 	else:
 		return regular_base_score
@@ -120,17 +131,43 @@ func _calculate_base_score(move: GameMove):
 
 #region ScoreModifiers
 func _calculate_safety_modifier(move: GameMove):
-	return safety_score_weight * move.safety_score
+	var opponent = General.get_opponent(move.player)
+	var from_danger_score = _calculate_danger_score(move.from, move.is_from_safe, opponent)
+	var to_danger_score = _calculate_danger_score(move.to, move.is_to_safe, opponent)
+	var safety_score =  from_danger_score - to_danger_score 
+	return safety_score_weight * safety_score
+
+
+# 0 -> safe spot, higher means more danger
+func _calculate_danger_score(spot: Spot, spot_safe: bool, opponent: int) -> float:
+	# Give score of 0 when landing_spot is 100% safe. 
+	if spot_safe:
+		return 0
 	
+	var danger_score = 0.0
 	
+	# Check the tiles before this spot for opponent pieces
+	for i in range(1, Settings.ruleset.num_dice + 1):
+		var nearby_spots = EntityManager.get_board().get_landing_spots(opponent, spot, i, \
+			not Settings.ruleset.can_move_backwards)
+		for near_spot in nearby_spots:
+			if spot.is_occupied_by_player(opponent):
+				danger_score += General.get_probability_of_value(i, Settings.ruleset.num_dice)
+	
+	# BASE_DANGER_SCORE is a simplified way of saying that even if direct chance of capture is 0,
+	# the opponent might get an extra roll, instead of actually calculating the chances
+	# of getting an extra roll.
+	return BASE_SHARED_SPOT_DANGER_SCORE + danger_score
+
+
 func _calculate_progress_modifier(move: GameMove):
 	var progression = move.from_track_pos
 	return piece_progress_score_weight * progression 
 	
 	
 func _calculate_central_rosette_modifier(move: GameMove):
-	var is_current_spot_central_rosette = move.is_from_central and move.from.safe
-	var is_landing_spot_central_rosette = move.is_to_central and move.to.safe
+	var is_current_spot_central_rosette = move.is_from_shared and move.is_from_safe
+	var is_landing_spot_central_rosette = move.is_to_shared and move.is_to_safe
 	
 	if (not is_current_spot_central_rosette and not is_landing_spot_central_rosette):
 		return 0
@@ -138,8 +175,8 @@ func _calculate_central_rosette_modifier(move: GameMove):
 	var score = 1
 	# Extra rule: the more pieces are already past the from tile, the less efficient this strategy is.
 	if decrease_per_passed_opponent_piece:
-		var num_of_passed_pieces = move.num_opo_pieces_ahead
-		var num_of_total_pieces = Settings.num_pieces
+		var num_of_passed_pieces = _get_num_opponent_pieces_ahead(move)
+		var num_of_total_pieces = Settings.ruleset.num_pieces
 		var passed_pieces_rate: float = (num_of_passed_pieces as float / num_of_total_pieces)	# Value between 0 and 1
 		score = 1 - passed_pieces_rate	# Value between 0 and 1
 	
@@ -150,4 +187,18 @@ func _calculate_central_rosette_modifier(move: GameMove):
 		final_score -= score
 	
 	return central_rosette_score_weight * final_score
+
+
+func _get_num_opponent_pieces_ahead(move: GameMove) -> int:
+	var board = EntityManager.get_board()
+	var from_index = board.get_track(move.player).find(move.from)
+	
+	var num_pieces_ahead = 0
+	var opponent = General.get_opponent(move.player)
+	for occupied_spot in board.get_track_spots_occupied_by_self(opponent):
+		var index = board.get_track(opponent).find(occupied_spot)
+		if index > from_index:
+			num_pieces_ahead += occupied_spot.pieces.size()
+	
+	return num_pieces_ahead
 #endregion

@@ -1,8 +1,8 @@
 class_name DialogueBundle
 extends DialogueEntry
 
-## A DialogueBundle is one (part of a) sentence: 1 audioclip and 1 subtitle string, multiple animations to choose from.
-@export var audio: AudioStream
+## A DialogueBundle is one (part of a) sentence: 1+ audio variations, 1 subtitle string, 1 (optional) cuneiform subtitle string, 1+ animation variations.
+@export var audio_variations: Array[AudioStream]
 @export var caption: String
 @export var caption_cuneiform: String
 @export var anim_variations: Array[OpponentAnimationPlayer.Anim_Name]

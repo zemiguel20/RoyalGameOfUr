@@ -5,8 +5,6 @@ extends Node
 ## Signal that emits when the current sequence of dialogue has been finished.
 signal on_dialogue_finished
 signal on_interruption_ready
-signal on_prevent_opponent_action
-signal on_resume_opponent_action
 
 @export var _use_subtitles: bool
 ## NOTE: Since we do not have audio for the playtest, we have a constant waiting time.
@@ -53,8 +51,9 @@ func play_dialogue_bundle(_current_entry):
 	_current_entry = _current_entry as DialogueBundle
 	
 	# Play all the effects
-	if _current_entry.audio != null:
-		_audio_player.stream = _current_entry.audio
+	var audios = _current_entry.audio_variations
+	if audios != null and audios.size() > 0:
+		_audio_player.stream = audios.pick_random()
 		_audio_player.play()
 	if _use_subtitles and _current_entry.caption != null:
 		_subtitle_displayer.display_subtitle(_current_entry, _current_sequence.requires_click)
@@ -68,12 +67,13 @@ func play_dialogue_bundle(_current_entry):
 		## TODO: Revert back when audio is actually there.
 		var entry_length = _current_entry.fixed_duration
 		if entry_length == -1:
-			entry_length = maxf(_temp_min_entry_length, _animation_player.current_animation_length)
-		
-		await get_tree().create_timer(maxf(entry_length, 1)).timeout
+			await _audio_player.finished
+		else:
+			await get_tree().create_timer(entry_length).timeout
+			
 		continue_dialogue()
-		
-		
+
+
 func skip():
 	if not is_busy() or not _current_sequence.requires_click:
 		return
@@ -96,20 +96,20 @@ func finish_sequence():
 	
 	if _already_prevents_opponent_action:
 		_already_prevents_opponent_action = false
-		on_resume_opponent_action.emit()
-		
-		
+		GameEvents.opponent_action_resumed.emit()
+
+
 func set_animation_player(animation_player: AnimationPlayer):
 	_animation_player = animation_player
-
+	
 
 func _handle_opponent_action_prevention(entry: DialogueBundle):
 	if entry.prevents_opponent_action and !_already_prevents_opponent_action:
 		_already_prevents_opponent_action = true
-		on_prevent_opponent_action.emit()
+		GameEvents.opponent_action_prevented.emit()
 	elif !entry.prevents_opponent_action and _already_prevents_opponent_action:
 		_already_prevents_opponent_action = false
-		on_resume_opponent_action.emit()
+		GameEvents.opponent_action_resumed.emit()
 
 
 func handle_interruption():

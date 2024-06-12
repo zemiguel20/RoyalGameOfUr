@@ -1,19 +1,18 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=6 format=3 uid="uid://bh10uvg330tej"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=13 format=3 uid="uid://bh10uvg330tej"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_1citi"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_wwdt7"]
-
-[sub_resource type="Resource" id="Resource_ha7mv"]
-script = ExtResource("1_1citi")
-caption = "Anyways… look what I brought."
-caption_cuneiform = ""
-anim_variations = Array[int]([1])
-fixed_duration = -1.0
-prevents_opponent_action = false
+[ext_resource type="AudioStream" uid="uid://dxki7cmwkw83l" path="res://resources/dialogue/intro-2-2-original.mp3" id="3_kucw0"]
+[ext_resource type="AudioStream" uid="uid://y324n6ui8s5a" path="res://resources/dialogue/intro-2-3-sarrugi-ancient.mp3" id="4_v4303"]
+[ext_resource type="AudioStream" uid="uid://djfv16i4f8pj6" path="res://resources/dialogue/intro-2-4-racing-game.mp3" id="5_hiaiu"]
+[ext_resource type="AudioStream" uid="uid://cqarmmr2kkl5i" path="res://resources/dialogue/intro-2-4-racing-game-2.mp3" id="6_whag6"]
+[ext_resource type="AudioStream" uid="uid://cetu3yl7jum80" path="res://resources/dialogue/intro-2-5-explain-them-2.mp3" id="7_2dpbt"]
+[ext_resource type="AudioStream" uid="uid://bryqufo0wgm4e" path="res://resources/dialogue/intro-2-5-explain-them.mp3" id="8_bdouc"]
 
 [sub_resource type="Resource" id="Resource_58o8f"]
 script = ExtResource("1_1citi")
-caption = "That’s right! Can you believe that Šarru-kīn used to play on this? This thing is ancient!"
+audio_variations = Array[AudioStream]([ExtResource("3_kucw0")])
+caption = "That’s right, I finally have the original!"
 caption_cuneiform = ""
 anim_variations = Array[int]([7])
 fixed_duration = -1.0
@@ -21,15 +20,33 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_1tkgn"]
 script = ExtResource("1_1citi")
-caption = "May the gods be with you, friend. Let's play!"
+audio_variations = Array[AudioStream]([ExtResource("4_v4303")])
+caption = "Can you believe that Sargon used to play on this? This thing is ancient!"
+caption_cuneiform = ""
+anim_variations = Array[int]([5])
+fixed_duration = -1.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_nm3au"]
+script = ExtResource("1_1citi")
+audio_variations = Array[AudioStream]([ExtResource("5_hiaiu"), ExtResource("6_whag6")])
+caption = "So, the rules are a little bit different, but it is still a racing game."
 caption_cuneiform = ""
 anim_variations = Array[int]([])
-fixed_duration = 3.0
+fixed_duration = -1.0
+prevents_opponent_action = false
+
+[sub_resource type="Resource" id="Resource_30xwj"]
+script = ExtResource("1_1citi")
+audio_variations = Array[AudioStream]([ExtResource("7_2dpbt"), ExtResource("8_bdouc")])
+caption = "I will explain them to you as we go."
+caption_cuneiform = ""
+anim_variations = Array[int]([7])
+fixed_duration = -1.0
 prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_wwdt7")
-max_repetitions = 1
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_ha7mv"), SubResource("Resource_58o8f"), SubResource("Resource_1tkgn")])
+dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_58o8f"), SubResource("Resource_1tkgn"), SubResource("Resource_nm3au"), SubResource("Resource_30xwj")])
 requires_click = true
 weight = 5

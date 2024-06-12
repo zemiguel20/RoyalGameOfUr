@@ -18,6 +18,7 @@ var roll_timer: Timer
 
 var rolling: bool = false
 var value: int = 0
+var _sound_played: bool = false
 
 
 func _ready():
@@ -45,7 +46,7 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 	rotation = start_rotation
 	
 	var offset = Vector3(0.0, roll_rotation_speed, 0.0)
-	apply_impulse(impulse, offset)
+	apply_impulse(impulse * randf_range(0.85, 1.15), offset)
 	
 	rolling = true
 	
@@ -54,7 +55,7 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 		await sleeping_state_changed
 	
 	roll_timer.start()
-	roll_sfx.play()
+	_sound_played = false
 	
 	## Extra security measure ensuring that dice do not stop rolling immediately.
 	await get_tree().create_timer(min_roll_time).timeout
@@ -62,7 +63,7 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 		_on_movement_stopped()
 	else:	
 		sleeping_state_changed.connect(_on_movement_stopped)
-	
+
 
 func _on_movement_stopped() -> void:
 	freeze = true
@@ -102,3 +103,9 @@ func _read_roll_value() -> int:
 	var value = closest_normal.get_meta("value") as int
 	return value
 
+
+
+func _on_collided_with_table(body):
+	if not _sound_played and body.is_in_group("table"):
+		roll_sfx.play()
+		_sound_played = true

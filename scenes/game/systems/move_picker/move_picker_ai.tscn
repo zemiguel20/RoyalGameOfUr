@@ -12,6 +12,5 @@ metadata/selector = NodePath("AIGameMoveSelector")
 [node name="AIGameMoveSelector" type="Node" parent="." node_paths=PackedStringArray("highlight")]
 script = ExtResource("1_1lnec")
 highlight = NodePath("../MoveHighlight")
-move_highlight_duration = 2.0
 
 [node name="MoveHighlight" parent="." instance=ExtResource("2_bgngg")]

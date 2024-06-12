@@ -3,11 +3,6 @@
 class_name CameraLookAround
 extends Camera3D
 
-## Sends a signal when the intro cinematic is finsihed 
-## and the camera is positioned to look at the game view.
-signal on_intro_ended
-
-
 @export var max_degrees_up: float = 35
 @export var max_degrees_down: float = 35
 @export var max_degrees_left: float = 35
@@ -17,6 +12,7 @@ signal on_intro_ended
 @export var _looking_sensitivity: float = 0.1
 ## Euler rotation in degrees of the fixed camera orientation used when looking at the board.
 ## The current orientation of the camera will be used as a default for the looking orientation.
+@export var _hotseat_rotation: Node3D
 @export var _board_look_rotation := Vector3(-30, 32, 0)
 ## When the camera nearly matches the board look rotation rather than the default looking around rotation,
 ## the camera will switch back to the fixed board camera. 
@@ -49,21 +45,33 @@ var _delta: float
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-	_define_main_orientations()
-	_define_constraints()
-	GameEvents.intro_finished.connect(_on_play_pressed)
-
-
-func _on_play_pressed():
-	await _return_to_board(_intro_tween_speed)
-	on_intro_ended.emit()
-	_looking_border.mouse_entered.connect(_enter_looking_mode)
-	_can_move_camera = true
+	GameEvents.init_board.connect(_on_init_board)
+	GameEvents.intro_finished.connect(_on_intro_finished)
+	
+	if not Settings.is_hotseat_mode:
+		_define_main_orientations()
+		_define_constraints()
 
 
 func _process(delta):
 	# Cache the delta: time between this and previous frame.
 	_delta = delta	
+	
+
+func _on_intro_finished():
+	if Settings.is_hotseat_mode:
+		global_rotation = _hotseat_rotation.global_rotation
+		global_position = _hotseat_rotation.global_position
+		set_process_input(false)
+		set_process(false)
+	else:
+		_looking_border.mouse_entered.connect(_enter_looking_mode)
+		_can_move_camera = true
+
+
+func _on_init_board():
+	if not Settings.is_hotseat_mode:
+		await _return_to_board(_intro_tween_speed)
 
 
 func _input(event):
@@ -110,11 +118,12 @@ func _switch_mode():
 	else:
 		_return_to_board(_tween_speed)
 
+
 func _return_to_board(tween_speed: float):
 	await _rotate_with_speed(_board_look_rotation, tween_speed)
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-
-
+	
+	
 ## Triggered when hovering over the looking around border.
 func _enter_looking_mode():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

@@ -9,8 +9,8 @@
 [ext_resource type="Script" path="res://scripts/game/components/editor/mesh_marker.gd" id="5_d0inr"]
 [ext_resource type="Material" uid="uid://cspiva85eoo3" path="res://materials/highlight.tres" id="7_cl6p3"]
 [ext_resource type="Script" path="res://scripts/game/components/selection_input.gd" id="8_kxirt"]
-[ext_resource type="AudioStream" uid="uid://dv5nxtgrtwn6q" path="res://audio/test_dice_roll.mp3" id="10_cgkb7"]
 [ext_resource type="PackedScene" uid="uid://bmkdsd8x5va6j" path="res://models/board_game/d4_die.glb" id="12_kusva"]
+[ext_resource type="AudioStream" uid="uid://2yapgc7u1w10" path="res://audio/sfx_mastered/d4-on-table.mp3" id="12_uiiy4"]
 [ext_resource type="Material" uid="uid://lc6rnvl5jhxi" path="res://materials/die/die_black.tres" id="13_bqubf"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3llvo"]
@@ -23,6 +23,24 @@ albedo_color = Color(0, 0.501961, 0.501961, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pr2ax"]
 _surfaces = [{
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 1, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 8, 0, 8, 0, 5, 0, 5, 0, 9, 0, 6, 0, 10, 0, 7, 0, 11, 0, 8, 0, 12, 0, 9, 0, 10, 0, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 9, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 191, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 189)
+}, {
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 1, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 8, 0, 8, 0, 5, 0, 5, 0, 9, 0, 6, 0, 10, 0, 7, 0, 11, 0, 8, 0, 12, 0, 9, 0, 10, 0, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 9, 0),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 191, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 0, 0, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 61, 205, 204, 204, 61, 0, 0, 128, 191, 205, 204, 204, 189, 205, 204, 204, 189, 0, 0, 128, 191, 205, 204, 204, 189)
+}, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
@@ -208,6 +226,8 @@ albedo_color = Color(0, 0.501961, 0.501961, 1)
 mass = 0.01
 physics_material_override = ExtResource("2_geqe1")
 gravity_scale = 0.078
+max_contacts_reported = 3
+contact_monitor = true
 script = ExtResource("2_yl61n")
 roll_rotation_speed = 0.005
 metadata/normals_root_node = NodePath("Normals")
@@ -304,9 +324,11 @@ script = ExtResource("8_kxirt")
 input_detection_area = NodePath("../SelectionArea")
 
 [node name="RollSFX" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("10_cgkb7")
+stream = ExtResource("12_uiiy4")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.5
+
+[connection signal="body_entered" from="." to="." method="_on_collided_with_table"]
 
 [editable path="Model"]

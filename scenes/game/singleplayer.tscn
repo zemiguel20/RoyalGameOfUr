@@ -1,16 +1,14 @@
-[gd_scene load_steps=29 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=16 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
-[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/board.tscn" id="3_vwo4y"]
-[ext_resource type="Script" path="res://scripts/ui/prototype_ui.gd" id="5_8sxhn"]
-[ext_resource type="Script" path="res://scripts/ui/quit_button.gd" id="6_3dit1"]
-[ext_resource type="PackedScene" uid="uid://d3gx24dw7xjud" path="res://scenes/game/systems/move_picker/move_picker_ai.tscn" id="6_feay8"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
-[ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker_interactive.tscn" id="8_g3rsf"]
+[ext_resource type="PackedScene" uid="uid://bvkfyp4kdef5w" path="res://scenes/ui/controls_hud.tscn" id="8_wjnj8"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
-[ext_resource type="PackedScene" uid="uid://bp7n22v23accq" path="res://scenes/npcs/dialogue_system.tscn" id="13_18npp"]
+[ext_resource type="PackedScene" uid="uid://cuw4r8ubsaba3" path="res://scenes/ui/main_menu.tscn" id="10_2dq8v"]
+[ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="11_5mxbb"]
+[ext_resource type="AudioStream" uid="uid://dsymj0eaades6" path="res://audio/ambience.mp3" id="12_rlqq6"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="16_eu2sq"]
 
@@ -18,25 +16,16 @@
 script/source = "extends Node
 
 
-@onready var board: Board = $Board
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if not board.is_node_ready():
-		await board.ready
-	print(board.global_position)
-	print(board.p1_start_spots[0].global_position)
+	pass
+	# Settings.is_hotseat_mode = true
+	# Settings.ruleset = load(\"res://resources/rulesets/ruleset_russian_rosette.tres\")
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.keycode == KEY_1 and event.pressed:
 			Settings.fast_move_enabled = not Settings.fast_move_enabled
-			print(\"Fast Move: %s\" % Settings.fast_move_enabled)
-		if event.keycode == KEY_2 and event.pressed:
-			Settings.can_move_backwards = not Settings.can_move_backwards
-			print(\"Move Backwards: %s\" % Settings.can_move_backwards)
-
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wg4la"]
@@ -48,77 +37,12 @@ size = Vector3(1, 0.05, 0.1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8qwsb"]
 size = Vector3(0.1, 0.05, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_unbph"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ty58a"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r8rtf"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1dm1j"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c5vbi"]
-
-[sub_resource type="Theme" id="Theme_jo3wm"]
-Button/colors/font_color = Color(1, 0.686275, 0, 1)
-Button/colors/font_hover_color = Color(1, 0.764706, 0, 1)
-Button/colors/font_hover_pressed_color = Color(0.986026, 0.753848, 0, 1)
-Button/colors/font_pressed_color = Color(0.984314, 0.752941, 0, 1)
-Button/font_sizes/font_size = 100
-Button/styles/disabled = SubResource("StyleBoxEmpty_unbph")
-Button/styles/focus = SubResource("StyleBoxEmpty_ty58a")
-Button/styles/hover = SubResource("StyleBoxEmpty_r8rtf")
-Button/styles/normal = SubResource("StyleBoxEmpty_1dm1j")
-Button/styles/pressed = SubResource("StyleBoxEmpty_c5vbi")
-
-[sub_resource type="Curve3D" id="Curve3D_gel6c"]
-_data = {
-"points": PackedVector3Array(1.17921, -0.0768166, 0.433843, -1.17921, 0.0768166, -0.433843, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.594, 0, -0.916, 0, 0, 0, 0, 0, 0, -12.414, 0, -1.165, 0, 0, 0, 0, 0, 0, -13.0017, 0, 0.385633),
-"tilts": PackedFloat32Array(0, 0, 0, 0)
-}
-point_count = 4
-up_vector_enabled = false
-
-[sub_resource type="Curve3D" id="Curve3D_utdk4"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -4.264, 0, 3.987, -0.865, 0, 0, 0.865, 0, 0, -1.628, 0, 4.14, -0.0239821, 0, 0.897715, 0.0239821, 0, -0.897715, -0.254, 0, 2.214, 0, 0, 0, 0, 0, 0, -0.215, 0, -0.554),
-"tilts": PackedFloat32Array(0, 0, 0, 0)
-}
-point_count = 4
-up_vector_enabled = false
-
-[sub_resource type="Curve3D" id="Curve3D_w0vht"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.203, 0, -0.637, 0, 0, 0, 0, 0, 0, -0.363, 0, 0.665, -2.02511, 0, -0.125696, 2.02511, 0, 0.125696, 1.74568, 0, 2.8336, 0, 0, 0, 0, 0, 0, 6.09242, 0, 4.81994, -0.633246, 0, 0.228384, 0.633246, 0, -0.228384, 7.14091, 0, 5.24557),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
-}
-point_count = 5
-up_vector_enabled = false
-
-[sub_resource type="Curve3D" id="Curve3D_ag4c4"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.74496, -0.00807405, -0.924744, -0.024, 0, -0.898, 0.024, 0, 0.898, -0.639858, 0.00594401, 1.70974, 0.865, 0, 0, -0.865, 0, 0, -1.86563, 0, 3.12895, -0.865, 0, 0, 0, 0, 0, -4.51176, -0.000873566, 3.133),
-"tilts": PackedFloat32Array(0, 0, 0, 0)
-}
-point_count = 4
-up_vector_enabled = false
-
-[sub_resource type="Curve3D" id="Curve3D_ma8g4"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -4.51176, -0.000873566, 3.133, -0.865, 0, 0, 0.865, 0, 0, -1.86563, 0, 3.12895, -0.0239821, 0, 0.897715, 0.0239821, 0, -0.897715, -0.703071, 0.0052011, 1.71327, 0, 0, 0, 0, 0, 0, -0.624147, -0.0158007, -0.897799),
-"tilts": PackedFloat32Array(0, 0, 0, 0)
-}
-point_count = 4
-up_vector_enabled = false
-
 [node name="Node" type="Node3D"]
 script = SubResource("GDScript_lsuqm")
 
-[node name="Board" parent="." instance=ExtResource("3_vwo4y")]
-transform = Transform3D(0.531783, 0, -0.846881, 0, 1, 0, 0.846881, 0, 0.531783, 4.47124, -0.21066, 6.34732)
-
 [node name="Environment" parent="." instance=ExtResource("1_i3yx6")]
 
-[node name="TableFloor" type="StaticBody3D" parent="Environment"]
+[node name="TableFloor" type="StaticBody3D" parent="Environment" groups=["table"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45152, -0.264447, 6.36289)
 metadata/_edit_group_ = true
 
@@ -143,7 +67,7 @@ transform = Transform3D(0.498594, 0, -0.866836, 0, 1, 0, 0.866836, 0, 0.498594, 
 shape = SubResource("BoxShape3D_qcwgi")
 
 [node name="Wall3" type="StaticBody3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.56603, -0.201724, 6.64917)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55345, -0.201724, 6.62311)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall3"]
@@ -158,18 +82,17 @@ metadata/_edit_group_ = true
 transform = Transform3D(0.498594, 0, -0.866836, 0, 1, 0, 0.866836, 0, 0.498594, 0, 0, 0)
 shape = SubResource("BoxShape3D_8qwsb")
 
-[node name="DieSpawn" parent="." instance=ExtResource("15_c61lh")]
+[node name="BoardSpawn" type="Marker3D" parent="." groups=["board_spawn"]]
+transform = Transform3D(0.531783, 0, -0.846881, 0, 1, 0, 0.846881, 0, 0.531783, 4.47124, -0.21066, 6.34732)
+gizmo_extents = 0.01
+
+[node name="DieSpawn" parent="." groups=["dice_spawn"] instance=ExtResource("15_c61lh")]
 transform = Transform3D(0.794096, 0, 0.607792, 0, 1, 0, -0.607792, 0, 0.794096, 4.28436, -0.179411, 6.44236)
 
 [node name="Systems" type="Node" parent="."]
 
-[node name="GameController" type="Node" parent="Systems" node_paths=PackedStringArray("die_spawn_point")]
+[node name="GameController" type="Node" parent="Systems"]
 script = ExtResource("2_ldghm")
-die_spawn_point = NodePath("../../DieSpawn")
-
-[node name="InteractiveMovePicker" parent="Systems" instance=ExtResource("8_g3rsf")]
-
-[node name="AIMovePicker" parent="Systems" instance=ExtResource("6_feay8")]
 
 [node name="DiceRoller" parent="Systems" instance=ExtResource("9_m0jtg")]
 transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 4.6143, -0.212933, 6.44044)
@@ -177,132 +100,31 @@ transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("9_m0jtg")]
 transform = Transform3D(0.847122, 0, 0.531399, 0, 1, 0, -0.531399, 0, 0.847122, 4.46447, -0.212933, 6.17279)
 _assigned_player = 1
-_automatic = true
 
-[node name="Prototype_UI" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
-script = ExtResource("5_8sxhn")
-
-[node name="Fade_Panel" type="ColorRect" parent="Prototype_UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-
-[node name="Main Menu" type="Control" parent="Prototype_UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Play" type="Button" parent="Prototype_UI/Main Menu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -205.0
-offset_top = -75.0
-offset_right = 197.0
-offset_bottom = 89.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_jo3wm")
-text = "Play"
-
-[node name="Quit" type="Button" parent="Prototype_UI/Main Menu"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -229.0
-offset_top = -154.0
-offset_right = -20.0
-offset_bottom = -17.0
-grow_horizontal = 0
-grow_vertical = 0
-theme = SubResource("Theme_jo3wm")
-text = "Quit"
-script = ExtResource("6_3dit1")
-
-[node name="Opponent_Guard_Animated" parent="." node_paths=PackedStringArray("_dialogue_system") instance=ExtResource("7_tegfk")]
+[node name="Opponent_Guard_Animated" parent="." instance=ExtResource("7_tegfk")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
-_dialogue_system = NodePath("../DialogueSystem")
-skip_intro = false
+starting_dialogue_delay = 2.0
 
-[node name="Custom_Camera" parent="." instance=ExtResource("7_w116q")]
-transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.67672, 0.189247, 6.67064)
+[node name="Custom_Camera" parent="." node_paths=PackedStringArray("_hotseat_rotation") instance=ExtResource("7_w116q")]
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.677, 0.167, 6.671)
+fov = 65.0
 max_degrees_down = 50.0
 max_degrees_left = 32.0
+_hotseat_rotation = NodePath("../HotseatCameraMarker")
 _board_look_rotation = Vector3(-35, 32, 0)
+_trans_type = 1
+_ease_type = 1
 
-[node name="NPCSystem" parent="." node_paths=PackedStringArray("path_follow_guard_1", "path_follow_guard_2", "path_follow_guard_3", "path_follow_kitchen_1", "path_follow_kitchen_2") instance=ExtResource("16_eu2sq")]
-path_follow_guard_1 = NodePath("")
-path_follow_guard_2 = NodePath("")
-path_follow_guard_3 = NodePath("")
-path_follow_kitchen_1 = NodePath("")
-path_follow_kitchen_2 = NodePath("")
+[node name="HotseatCameraMarker" type="Marker3D" parent="."]
+transform = Transform3D(-0.529919, -0.844821, 0.073912, 0, 0.0871554, 0.996195, -0.848048, 0.527903, -0.0461853, 4.49162, 0.111622, 6.32288)
+script = ExtResource("11_5mxbb")
 
-[node name="NPC_Paths" type="Node3D" parent="NPCSystem"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.662207, 0)
+[node name="NPCSystem" parent="." instance=ExtResource("16_eu2sq")]
 
-[node name="GuardPaths" type="Node3D" parent="NPCSystem/NPC_Paths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0, 5.22195)
+[node name="ControlsHUD" parent="." instance=ExtResource("8_wjnj8")]
 
-[node name="ToStorage" type="Path3D" parent="NPCSystem/NPC_Paths/GuardPaths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0613985, 0, 0)
-curve = SubResource("Curve3D_gel6c")
+[node name="MainMenu" parent="." instance=ExtResource("10_2dq8v")]
 
-[node name="ToStorage_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/GuardPaths/ToStorage"]
-transform = Transform3D(-0.34528, 0.057269, -0.936741, -3.72526e-09, 0.998133, 0.0610216, 0.93849, 0.0210698, -0.344636, 0, 0, 0)
-use_model_front = true
-loop = false
-
-[node name="Storage_To_Kitchen" type="Path3D" parent="NPCSystem/NPC_Paths/GuardPaths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
-curve = SubResource("Curve3D_utdk4")
-
-[node name="StorageToKitchen_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/GuardPaths/Storage_To_Kitchen"]
-transform = Transform3D(0.0579449, 0, 0.998319, 0, 1, 0, -0.998319, 0, 0.0579449, -4.264, 0, 3.987)
-use_model_front = true
-loop = false
-
-[node name="Kitchen_To_Start" type="Path3D" parent="NPCSystem/NPC_Paths/GuardPaths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
-curve = SubResource("Curve3D_w0vht")
-
-[node name="KitchenToStart_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/GuardPaths/Kitchen_To_Start"]
-transform = Transform3D(0.992532, 0, -0.12197, 0, 1, 0, 0.12197, 0, 0.992532, -0.203, 0, -0.637)
-use_model_front = true
-loop = false
-
-[node name="KitchenPaths" type="Node3D" parent="NPCSystem/NPC_Paths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0, 5.22195)
-
-[node name="Kitchen_To_Storage" type="Path3D" parent="NPCSystem/NPC_Paths/KitchenPaths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
-visible = false
-curve = SubResource("Curve3D_ag4c4")
-
-[node name="Kitchen_To_Storage_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/KitchenPaths/Kitchen_To_Storage"]
-transform = Transform3D(0.999195, -0.000211939, 0.039862, -7.27588e-12, 0.999986, 0.00531663, -0.0398626, -0.00531246, 0.999181, -0.74496, -0.00807405, -0.924744)
-use_model_front = true
-loop = false
-
-[node name="Storage_To_Kitchen2" type="Path3D" parent="NPCSystem/NPC_Paths/KitchenPaths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
-curve = SubResource("Curve3D_ma8g4")
-
-[node name="StorageToKitchen2_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/KitchenPaths/Storage_To_Kitchen2"]
-transform = Transform3D(-0.00153056, -0.000330129, 0.999992, -1.45518e-11, 1, 0.000330127, -0.999992, 5.05272e-07, -0.00153056, -4.51176, -0.000873566, 3.133)
-use_model_front = true
-loop = false
-
-[node name="DialogueSystem" parent="." instance=ExtResource("13_18npp")]
+[node name="AmbienceAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_rlqq6")
+autoplay = true

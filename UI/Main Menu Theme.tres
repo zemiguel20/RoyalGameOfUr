@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cnti5slvm4lm3"]
+
+[ext_resource type="FontFile" uid="uid://c2qd4kfup264a" path="res://UI/IMFeENrm29P.ttf" id="1_0mfuw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jfqmb"]
+
+[resource]
+Button/colors/font_color = Color(0.835294, 0.666667, 0.411765, 1)
+Button/colors/font_focus_color = Color(0.835294, 0.666667, 0.411765, 1)
+Button/colors/font_hover_color = Color(0.929412, 0.807843, 0.623529, 1)
+Button/colors/font_hover_pressed_color = Color(0.835294, 0.666667, 0.411765, 1)
+Button/colors/font_outline_color = Color(0.309804, 0.211765, 0.12549, 1)
+Button/colors/font_pressed_color = Color(0.309804, 0.211765, 0.12549, 1)
+Button/constants/outline_size = 7
+Button/font_sizes/font_size = 96
+Button/fonts/font = ExtResource("1_0mfuw")
+Button/styles/focus = SubResource("StyleBoxEmpty_jfqmb")

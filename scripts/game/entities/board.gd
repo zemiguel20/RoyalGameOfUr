@@ -4,24 +4,11 @@ class_name Board extends Node3D
 ## It provides queries about the spots and layout.
 
 
-var p1_start_spots: Array[Spot] = []
-var p1_track: Array[Spot] = []
+@export var p1_start_spots: Array[Spot] = []
+@export var p1_track: Array[Spot] = []
 
-var p2_start_spots: Array[Spot] = []
-var p2_track: Array[Spot] = []
-
-
-func _ready():
-	p1_start_spots.assign(get_tree().get_nodes_in_group("p1_start_spots"))
-	p2_start_spots.assign(get_tree().get_nodes_in_group("p2_start_spots"))
-	
-	p1_track.assign(get_tree().get_nodes_in_group("p1_track"))
-	var p1_end_spot = get_tree().get_first_node_in_group("p1_end_spot") as Spot
-	p1_track.append(p1_end_spot)
-	
-	p2_track.assign(get_tree().get_nodes_in_group("p2_track"))
-	var p2_end_spot = get_tree().get_first_node_in_group("p2_end_spot") as Spot
-	p2_track.append(p2_end_spot)
+@export var p2_start_spots: Array[Spot] = []
+@export var p2_track: Array[Spot] = []
 
 
 ## Returns a copy of the array with all start spots from [param player].
@@ -58,6 +45,18 @@ func get_track(player : int) -> Array[Spot]:
 func get_track_spots_occupied_by_self(player: int) -> Array[Spot]:
 	var track = get_track(player)
 	var filter = func(spot: Spot): return spot.is_occupied_by_player(player)
+	return track.filter(filter)
+
+
+## Returns occupied spots in the players' shared path.
+func get_occupied_spots_in_shared_path() -> Array[Spot]:
+	var track = get_track(General.Player.TWO)
+	# Only count spots that are on the shared path and occupied by the player
+	var filter = func(spot: Spot):
+		return spot.is_occupied_by_player(General.Player.ONE) \
+		or spot.is_occupied_by_player(General.Player.TWO) \
+		and not EntityManager.get_board().is_spot_exclusive(spot)
+	
 	return track.filter(filter)
 
 
