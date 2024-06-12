@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=13 format=3 uid="uid://cgu6todksvkan"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=13 format=3 uid="uid://ceolk438dvaxb"]
 
 [ext_resource type="AudioStream" uid="uid://dty7mdeyojuar" path="res://resources/dialogue/reaction-hmmm-1.mp3" id="1_5eg02"]
 [ext_resource type="AudioStream" uid="uid://41vb4uw2g324" path="res://resources/dialogue/reaction-hmmm-2.mp3" id="2_4aal8"]

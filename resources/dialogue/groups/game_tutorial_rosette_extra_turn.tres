@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://cl6u4u42jn5ow"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://cxg1nn876bnk5"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_cq14v"]
 [ext_resource type="AudioStream" uid="uid://cse2ibi6o1tjf" path="res://resources/dialogue/explain-rosette-1.mp3" id="1_r121a"]

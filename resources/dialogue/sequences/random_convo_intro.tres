@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=20 format=3 uid="uid://cvvh2hnj5kuyi"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=20 format=3 uid="uid://qajhmqposnn1"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_0nns6"]
 [ext_resource type="AudioStream" uid="uid://dlah5d5pgywmq" path="res://resources/dialogue/intro-1-3-ninos-tushan-2.mp3" id="1_je43s"]
