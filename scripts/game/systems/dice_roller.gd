@@ -112,6 +112,7 @@ func _highlight_result(total_value: int) -> void:
 	else:
 		for die in _dice:
 			die.highlight.set_active(die.value == 1).set_color(General.color_positive)
+			await get_tree().create_timer(0.1).timeout
 
 
 func _dehighlight() -> void:
