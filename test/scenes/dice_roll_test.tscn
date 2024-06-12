@@ -10,17 +10,23 @@ script/source = "extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in 4:
-		EntityManager.spawn_die($Spawn.global_position)
+		EntityManager.spawn_die()
+	
+	GameState.current_player = General.Player.ONE
 	
 	GameEvents.rolled.connect(_on_rolled)
+	GameEvents.new_turn_started.connect(_on_new_turn_started)
 	
-	GameEvents.roll_phase_started.emit(General.Player.ONE)
+	GameEvents.game_started.emit()
 
 
-func _on_rolled(value: int) -> void:
-	print(value)
-	await get_tree().create_timer(1.0).timeout
-	GameEvents.roll_phase_started.emit(General.Player.ONE)
+func _on_rolled(_player, value: int) -> void:
+	GameEvents.new_turn_started.emit(General.Player.ONE)
+
+
+func _on_new_turn_started(_player) -> void:
+	# Force player one
+	GameState.current_player = General.Player.ONE
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_sb076"]

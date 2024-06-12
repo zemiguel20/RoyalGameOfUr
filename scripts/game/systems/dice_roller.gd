@@ -5,74 +5,83 @@ class_name DiceRoller extends Node3D
 ## Dice are moved to rolling zone first, as if grabbing them.
 
 
-@export var _assigned_player: General.Player
-@export var _impulse_strength: float = 0.2
-@export_range(0.0, 1.0, 0.1, "or_greater") var _show_result_duration: float = 0.5
-@export_range(0.0, 1.0, 0.1, "or_greater") var _auto_delay_grab_dice: float = 0.5
-@export_range(0.5, 1.0, 0.1) var _auto_min_shake_duration: float = 0.5
-@export_range(1.0, 2.0, 0.1) var _auto_max_shake_duration: float = 2.0
+@export var assigned_player: General.Player
+@export var impulse_strength: float = 0.2
+@export_range(0.0, 1.0, 0.1, "or_greater") var show_result_duration: float = 0.5
+@export_range(0.0, 1.0, 0.1, "or_greater") var auto_delay_grab_dice: float = 0.5
+@export_range(0.5, 1.0, 0.1) var auto_min_shake_duration: float = 0.5
+@export_range(1.0, 2.0, 0.1) var auto_max_shake_duration: float = 2.0
+@export var color_dice_selectable := Color.MEDIUM_AQUAMARINE
+@export var color_dice_hovered := Color.AQUAMARINE
+@export var color_dice_positive_result := Color.LIME_GREEN
+@export var color_dice_negative_result := Color.CRIMSON
 
-var _place_spots: Array[Node3D] = []
-var _throw_spots: Array[Node3D] = []
-var _shake_sfx: AudioStreamPlayer3D
-var _dice: Array[Die] = []
-var _automatic: bool = false
+var place_spots: Array[Node3D] = []
+var throw_spots: Array[Node3D] = []
+var shake_sfx: AudioStreamPlayer3D
+var dice: Array[Die] = []
+var automatic: bool = false
 
 
 func _ready() -> void:
-	_place_spots.assign(get_node(get_meta("placing_spots")).get_children())
-	_throw_spots.assign(get_node(get_meta("throw_spots")).get_children())
-	_shake_sfx = get_node(get_meta("shake_sfx"))
+	place_spots.assign(get_node(get_meta("placing_spots")).get_children())
+	throw_spots.assign(get_node(get_meta("throw_spots")).get_children())
+	shake_sfx = get_node(get_meta("shake_sfx"))
 	
-	GameEvents.roll_phase_started.connect(_start)
+	GameEvents.game_started.connect(_on_game_start)
+	GameEvents.new_turn_started.connect(_on_new_turn_started)
 
 
-func _start(current_player: General.Player) -> void:
-	if current_player != _assigned_player:
+func _on_game_start() -> void:
+	_on_new_turn_started(GameState.current_player)
+
+
+func _on_new_turn_started(player: General.Player) -> void:
+	# Do nothing if not assigned player's turn
+	if player != assigned_player:
 		return
 	
-	# Adjust second player automatic depending if its hotseat or not
-	if current_player == General.Player.TWO:
-		_automatic = not Settings.is_hotseat_mode
+	# Set second player automatic in singleplayer mode
+	automatic = not Settings.is_hotseat_mode and player == General.Player.TWO
 	
-	_dice.assign(EntityManager.get_dice())
-	_dehighlight()
+	dice.assign(EntityManager.get_dice())
+	_dehighlight_dice()
 	await _place_dice()
 	
-	if _automatic:
-		await get_tree().create_timer(_auto_delay_grab_dice).timeout
+	if automatic:
+		await get_tree().create_timer(auto_delay_grab_dice).timeout
 		_start_shaking()
-		var shaking_duration = randf_range(_auto_min_shake_duration, _auto_max_shake_duration)
+		var shaking_duration = randf_range(auto_min_shake_duration, auto_max_shake_duration)
 		await get_tree().create_timer(shaking_duration).timeout
 		_stop_shaking()
 	else:
-		_highlight_selectable()
+		_highlight_dice_selectable()
 		_connect_input_signals()
 
 
 # Moves the dice to the placing spots.
 func _place_dice(skip_animation := false) -> void:
 	# Move dice to random spots
-	_place_spots.shuffle()
-	for i in _dice.size():
-		var die = _dice[i]
-		var spot = _place_spots[i]
+	place_spots.shuffle()
+	for i in dice.size():
+		var die = dice[i]
+		var spot = place_spots[i]
 		
 		var animation = General.MoveAnim.ARC if not skip_animation else General.MoveAnim.NONE
 		die.move_anim.play(spot.global_position, animation)
 	
 	# Make sure dice are completely still
-	for die in _dice:
+	for die in dice:
 		if die.move_anim.moving:
 			await die.move_anim.movement_finished
 
 
 func _connect_input_signals() -> void:
-	for die in _dice:
-		if not die.input.hovered.is_connected(_highlight_hovered):
-			die.input.hovered.connect(_highlight_hovered)
-		if not die.input.dehovered.is_connected(_highlight_selectable):
-			die.input.dehovered.connect(_highlight_selectable)
+	for die in dice:
+		if not die.input.hovered.is_connected(_highlight_dice_hovered):
+			die.input.hovered.connect(_highlight_dice_hovered)
+		if not die.input.dehovered.is_connected(_highlight_dice_selectable):
+			die.input.dehovered.connect(_highlight_dice_selectable)
 		if not die.input.hold_started.is_connected(_start_shaking):
 			die.input.hold_started.connect(_start_shaking)
 		if not die.input.hold_stopped.is_connected(_stop_shaking):
@@ -82,11 +91,11 @@ func _connect_input_signals() -> void:
 
 
 func _disconnect_input_signals() -> void:
-	for die in _dice:
-		if die.input.hovered.is_connected(_highlight_hovered):
-			die.input.hovered.disconnect(_highlight_hovered)
-		if die.input.dehovered.is_connected(_highlight_selectable):
-			die.input.dehovered.disconnect(_highlight_selectable)
+	for die in dice:
+		if die.input.hovered.is_connected(_highlight_dice_hovered):
+			die.input.hovered.disconnect(_highlight_dice_hovered)
+		if die.input.dehovered.is_connected(_highlight_dice_selectable):
+			die.input.dehovered.disconnect(_highlight_dice_selectable)
 		if die.input.hold_started.is_connected(_start_shaking):
 			die.input.hold_started.disconnect(_start_shaking)
 		if die.input.hold_stopped.is_connected(_stop_shaking):
@@ -95,71 +104,71 @@ func _disconnect_input_signals() -> void:
 			die.input.clicked.disconnect(_roll_dice)
 
 
-func _highlight_hovered() -> void:
-	for die in _dice:
-		die.highlight.set_active(true).set_color(General.color_hovered)
+func _highlight_dice_selectable() -> void:
+	for die in dice:
+		die.highlight.set_active(true).set_color(color_dice_selectable)
 
 
-func _highlight_selectable() -> void:
-	for die in _dice:
-		die.highlight.set_active(true).set_color(General.color_selectable)
+func _highlight_dice_hovered() -> void:
+	for die in dice:
+		die.highlight.set_active(true).set_color(color_dice_hovered)
 
 
-func _highlight_result(total_value: int) -> void:
+func _highlight_dice_result(total_value: int) -> void:
 	if total_value == 0:
-		for die in _dice:
-			die.highlight.set_active(true).set_color(General.color_negative)
+		for die in dice:
+			die.highlight.set_active(true).set_color(color_dice_negative_result)
 	else:
-		for die in _dice:
-			die.highlight.set_active(die.value == 1).set_color(General.color_positive)
-			await get_tree().create_timer(0.1).timeout
+		for die in dice:
+			# Only highlight dice that rolled 1
+			die.highlight.set_active(die.value == 1).set_color(color_dice_positive_result)
 
 
-func _dehighlight() -> void:
-	for die in _dice:
+func _dehighlight_dice() -> void:
+	for die in dice:
 		die.highlight.active = false
 
 
 func _start_shaking() -> void:
-	GameEvents.first_turn_dice_shake.emit()
-	
-	_shake_sfx.play()
-	for die in _dice:
+	shake_sfx.play()
+	for die in dice:
 		die.model.visible = false
 
 
 func _stop_shaking() -> void:
-	_shake_sfx.stop()
-	for die in _dice:
+	shake_sfx.stop()
+	for die in dice:
 		die.model.visible = true
 	_roll_dice()
 
 
 func _roll_dice() -> void:
 	_disconnect_input_signals()
-	_dehighlight()
+	_dehighlight_dice()
 	var value = 0
 	
 	# Position and throw dice
-	_throw_spots.shuffle()
-	for i in _dice.size():
-		var die = _dice[i]
-		var throw_spot = _throw_spots[i]
+	throw_spots.shuffle()
+	for i in dice.size():
+		var die = dice[i]
+		var throw_spot = throw_spots[i]
 		
 		var start_position = throw_spot.global_position
 		var start_rotation = General.get_random_rotation()
-		var impulse = throw_spot.global_basis.y * _impulse_strength / 100
+		var impulse = throw_spot.global_basis.y * impulse_strength / 100
 		die.roll(impulse, start_position, start_rotation)
 	
 	# wait roll finished
-	for die in _dice:
+	for die in dice:
 		if die.rolling:
 			await die.roll_finished
 		value += die.value
 	
-	_highlight_result(value)
+	_highlight_dice_result(value)
 	
-	await get_tree().create_timer(_show_result_duration).timeout
+	await get_tree().create_timer(show_result_duration).timeout
 	
-	GameEvents.rolled.emit(value)
-	GameEvents.rolled_by_player.emit(value, _assigned_player)
+	GameEvents.rolled.emit(assigned_player, value)
+	
+	if value == 0:
+		GameState.advance_turn_switch_player()

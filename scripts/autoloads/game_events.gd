@@ -2,14 +2,16 @@ extends Node
 # Global event bus
 
 
+## Start of game, after initialization.
 signal game_started
+## Emited at the start of a new turn. Has the current player.
 signal new_turn_started(player: General.Player)
-signal rolled(value: int)
-signal move_phase_started(player: General.Player, rolled_value: int)
+## Emited after dice finished rolling, and has the total value and the player that rolled.
+signal rolled(player: General.Player, value: int)
+
 signal move_executed(move: GameMove)
 signal game_ended(winner: General.Player)
 signal no_moves
-signal zero_rolled
 
 signal play_pressed
 signal init_board
