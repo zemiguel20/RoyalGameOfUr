@@ -6,13 +6,17 @@ extends Node
 signal game_started
 ## Emited at the start of a new turn. Has the current player.
 signal new_turn_started(player: General.Player)
-## Emited after dice finished rolling, and has the total value and the player that rolled.
-signal rolled(player: General.Player, value: int)
-
+## Emited after dice finished rolling, and has the total value.
+signal rolled(value: int)
+## Emited after the entire sequence of rolling and highlighting the dice is finished.
+signal roll_sequence_finished
+## Emited when there are no available moves for the current player.
+signal no_moves
 signal move_executed(move: GameMove)
 signal game_ended(winner: General.Player)
-signal no_moves
 
+
+## Emited when game start is issued through UI or input
 signal play_pressed
 signal init_board
 signal intro_finished

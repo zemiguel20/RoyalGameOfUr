@@ -6,6 +6,8 @@ class_name MovePicker extends Node
 
 var selector # Can be of different types
 
+var moves: Array[GameMove] = []
+
 
 func _ready() -> void:
 	for node in get_children():
@@ -14,35 +16,21 @@ func _ready() -> void:
 	if not selector:
 		push_error("MovePicker: Could not find selector child node.")
 	else:
-		GameEvents.move_phase_started.connect(start)
+		GameEvents.rolled.connect(_on_dice_rolled)
+		GameEvents.roll_sequence_finished.connect(_on_roll_sequence_finished)
 
+# NOTE: calculation of moves is separate to give feedback to other systems before changing turn
+# Namely the dice and rolling label glowing red.
 
-## Starts the selection system for the given list of [param moves].entity_manager
-func start(current_player: General.Player, last_rolled_value: int) -> void:
-	if assigned_player != current_player:
+func _on_dice_rolled(value: int) -> void:
+	if GameState.current_player != assigned_player:
 		return
 	
-	var moves = _calculate_moves(last_rolled_value)
+	moves.assign(_calculate_moves(value))
 	
 	# Check if there is any valid move
 	if moves.filter(func(move: GameMove): return move.valid).is_empty():
 		GameEvents.no_moves.emit()
-		return
-	
-	if selector is AIGameMoveSelector:
-		selector.start_selection(moves)
-		var selected_move: GameMove = await selector.move_selected
-		selected_move.execute(General.MoveAnim.ARC, true)
-		await selected_move.execution_finished
-		GameEvents.move_executed.emit(selected_move)
-	elif selector is InteractiveGameMoveSelector:
-		selector.start_selection(moves)
-		var selected_move: GameMove = await selector.move_selected
-		var anim = General.MoveAnim.ARC if Settings.fast_move_enabled else General.MoveAnim.LINE
-		selected_move.execute(anim, Settings.fast_move_enabled)
-		await selected_move.execution_finished
-		GameEvents.move_executed.emit(selected_move)
-		GameState.player_turns_made += 1
 
 
 func _calculate_moves(steps: int) -> Array[GameMove]:
@@ -67,3 +55,28 @@ func _calculate_moves(steps: int) -> Array[GameMove]:
 			var move = GameMove.new(spot, landing_spot, assigned_player)
 			moves.append(move)
 	return moves
+
+
+func _on_roll_sequence_finished() -> void:
+	if GameState.current_player != assigned_player:
+		return
+	
+	if moves.is_empty():
+		GameState.advance_turn_switch_player()
+		return
+	
+	selector.start_selection(moves)
+	var selected_move: GameMove = await selector.move_selected
+	var anim = General.MoveAnim.ARC if (selector is AIGameMoveSelector or Settings.fast_move_enabled) \
+		else General.MoveAnim.LINE
+	var follow_path = true if (selector is AIGameMoveSelector or Settings.fast_move_enabled) else false
+	selected_move.execute(anim, follow_path)
+	await selected_move.execution_finished
+	GameEvents.move_executed.emit(selected_move)
+	
+	if selected_move.wins:
+		GameEvents.game_ended.emit(assigned_player)
+	elif selected_move.gives_extra_turn:
+		GameState.advance_turn_same_player()
+	else:
+		GameState.advance_turn_switch_player()

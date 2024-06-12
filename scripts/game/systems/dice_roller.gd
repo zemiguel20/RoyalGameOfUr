@@ -8,6 +8,7 @@ class_name DiceRoller extends Node3D
 @export var assigned_player: General.Player
 @export var impulse_strength: float = 0.2
 @export_range(0.0, 1.0, 0.1, "or_greater") var show_result_duration: float = 0.5
+@export_range(0.0, 1.0, 0.1, "or_greater") var delay_after_roll: float = 0.5
 @export_range(0.0, 1.0, 0.1, "or_greater") var auto_delay_grab_dice: float = 0.5
 @export_range(0.5, 1.0, 0.1) var auto_min_shake_duration: float = 0.5
 @export_range(1.0, 2.0, 0.1) var auto_max_shake_duration: float = 2.0
@@ -22,6 +23,8 @@ var shake_sfx: AudioStreamPlayer3D
 var dice: Array[Die] = []
 var automatic: bool = false
 
+var no_moves_flag: bool = false
+
 
 func _ready() -> void:
 	place_spots.assign(get_node(get_meta("placing_spots")).get_children())
@@ -30,6 +33,7 @@ func _ready() -> void:
 	
 	GameEvents.game_started.connect(_on_game_start)
 	GameEvents.new_turn_started.connect(_on_new_turn_started)
+	GameEvents.no_moves.connect(_on_no_moves)
 
 
 func _on_game_start() -> void:
@@ -37,6 +41,8 @@ func _on_game_start() -> void:
 
 
 func _on_new_turn_started(player: General.Player) -> void:
+	no_moves_flag = false
+	
 	# Do nothing if not assigned player's turn
 	if player != assigned_player:
 		return
@@ -121,7 +127,9 @@ func _highlight_dice_result(total_value: int) -> void:
 	else:
 		for die in dice:
 			# Only highlight dice that rolled 1
-			die.highlight.set_active(die.value == 1).set_color(color_dice_positive_result)
+			die.highlight.active = die.value == 1
+			die.highlight.color = color_dice_negative_result if no_moves_flag \
+				else color_dice_positive_result
 
 
 func _dehighlight_dice() -> void:
@@ -164,11 +172,15 @@ func _roll_dice() -> void:
 			await die.roll_finished
 		value += die.value
 	
-	_highlight_dice_result(value)
+	await get_tree().create_timer(delay_after_roll).timeout
 	
+	GameEvents.rolled.emit(value)
+	
+	_highlight_dice_result(value)
 	await get_tree().create_timer(show_result_duration).timeout
 	
-	GameEvents.rolled.emit(assigned_player, value)
-	
-	if value == 0:
-		GameState.advance_turn_switch_player()
+	GameEvents.roll_sequence_finished.emit()
+
+
+func _on_no_moves() -> void:
+	no_moves_flag = true
