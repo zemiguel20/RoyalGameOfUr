@@ -20,7 +20,6 @@ class_name DiceRoller extends Node3D
 var place_spots: Array[Node3D] = []
 var throw_spots: Array[Node3D] = []
 var shake_sfx: AudioStreamPlayer3D
-var dice: Array[Die] = []
 var automatic: bool = false
 
 var no_moves_flag: bool = false
@@ -47,7 +46,6 @@ func _on_new_turn_started() -> void:
 	if GameState.is_bot_playing():
 		automatic = true
 	
-	dice.assign(EntityManager.get_dice())
 	_dehighlight_dice()
 	await _place_dice()
 	
@@ -62,8 +60,18 @@ func _on_new_turn_started() -> void:
 		_connect_input_signals()
 
 
+func _on_no_moves() -> void:
+	no_moves_flag = true
+
+
+func _on_game_ended() -> void:
+	_dehighlight_dice()
+	_disconnect_input_signals()
+
+
 # Moves the dice to the placing spots.
 func _place_dice(skip_animation := false) -> void:
+	var dice = EntityManager.get_dice()
 	# Move dice to random spots
 	place_spots.shuffle()
 	for i in dice.size():
@@ -80,6 +88,7 @@ func _place_dice(skip_animation := false) -> void:
 
 
 func _connect_input_signals() -> void:
+	var dice = EntityManager.get_dice()
 	for die in dice:
 		if not die.input.hovered.is_connected(_highlight_dice_hovered):
 			die.input.hovered.connect(_highlight_dice_hovered)
@@ -94,6 +103,7 @@ func _connect_input_signals() -> void:
 
 
 func _disconnect_input_signals() -> void:
+	var dice = EntityManager.get_dice()
 	for die in dice:
 		if die.input.hovered.is_connected(_highlight_dice_hovered):
 			die.input.hovered.disconnect(_highlight_dice_hovered)
@@ -108,16 +118,19 @@ func _disconnect_input_signals() -> void:
 
 
 func _highlight_dice_selectable() -> void:
+	var dice = EntityManager.get_dice()
 	for die in dice:
 		die.highlight.set_active(true).set_color(color_dice_selectable)
 
 
 func _highlight_dice_hovered() -> void:
+	var dice = EntityManager.get_dice()
 	for die in dice:
 		die.highlight.set_active(true).set_color(color_dice_hovered)
 
 
 func _highlight_dice_result(total_value: int) -> void:
+	var dice = EntityManager.get_dice()
 	if total_value == 0:
 		for die in dice:
 			die.highlight.set_active(true).set_color(color_dice_negative_result)
@@ -130,17 +143,20 @@ func _highlight_dice_result(total_value: int) -> void:
 
 
 func _dehighlight_dice() -> void:
+	var dice = EntityManager.get_dice()
 	for die in dice:
 		die.highlight.active = false
 
 
 func _start_shaking() -> void:
+	var dice = EntityManager.get_dice()
 	shake_sfx.play()
 	for die in dice:
 		die.model.visible = false
 
 
 func _stop_shaking() -> void:
+	var dice = EntityManager.get_dice()
 	shake_sfx.stop()
 	for die in dice:
 		die.model.visible = true
@@ -148,6 +164,7 @@ func _stop_shaking() -> void:
 
 
 func _roll_dice() -> void:
+	var dice = EntityManager.get_dice()
 	_disconnect_input_signals()
 	_dehighlight_dice()
 	var value = 0
@@ -177,12 +194,3 @@ func _roll_dice() -> void:
 	await get_tree().create_timer(show_result_duration).timeout
 	
 	GameEvents.roll_sequence_finished.emit()
-
-
-func _on_no_moves() -> void:
-	no_moves_flag = true
-
-
-func _on_game_ended() -> void:
-	_dehighlight_dice()
-	_disconnect_input_signals()
