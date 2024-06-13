@@ -120,13 +120,13 @@ func _on_rule_5_check_box_toggled(toggled_on: bool) -> void:
 
 
 func _on_piece_number_slider_value_changed(value: float) -> void:
-	Settings.ruleset.num_pieces = value
+	Settings.ruleset.num_pieces = int(value)
 	piece_number_label.text = "%d Total pieces" % piece_number_slider.value
 	ruleset_name_label.text = "Custom"
 
 
 func _on_dice_number_slider_value_changed(value: float) -> void:
-	Settings.ruleset.num_dice = value
+	Settings.ruleset.num_dice = int(value)
 	dice_number_label.text = "%d Total dice" % dice_number_slider.value
 	ruleset_name_label.text = "Custom"
 
