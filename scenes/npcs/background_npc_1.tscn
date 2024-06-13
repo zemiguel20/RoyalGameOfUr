@@ -1,9 +1,78 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1l4ef265ffb7"]
+[gd_scene load_steps=15 format=3 uid="uid://d1l4ef265ffb7"]
 
 [ext_resource type="PackedScene" uid="uid://dmvbii2ft2yi1" path="res://models/fbx_bgchar1_animated.fbx" id="1_4q7w5"]
 [ext_resource type="Material" uid="uid://c6p6slp5krtu0" path="res://materials/bgchar1/bgchar1.tres" id="2_luyvx"]
+[ext_resource type="Script" path="res://scripts/audio/footstep_audio_player.gd" id="3_0vhyv"]
+[ext_resource type="AudioStream" uid="uid://8b1wuec7eveg" path="res://audio/sfx_mastered/footstep-01.mp3" id="4_kkm6i"]
+[ext_resource type="AudioStream" uid="uid://xn0efeoauji3" path="res://audio/sfx_mastered/footstep-02.mp3" id="5_urlqw"]
+[ext_resource type="AudioStream" uid="uid://bowwjb7q1e7ts" path="res://audio/sfx_mastered/footstep-03.mp3" id="6_mxyp8"]
+[ext_resource type="AudioStream" uid="uid://b258bcy6vvppu" path="res://audio/sfx_mastered/footstep-04.mp3" id="7_bf0fx"]
+[ext_resource type="AudioStream" uid="uid://ci0hgwiwq67ef" path="res://audio/sfx_mastered/footstep-05.mp3" id="8_fkglr"]
+[ext_resource type="AudioStream" uid="uid://nktuykg8o647" path="res://audio/sfx_mastered/footstep-06.mp3" id="9_k8gy6"]
+[ext_resource type="AudioStream" uid="uid://dyeecqryn6ne4" path="res://audio/sfx_mastered/footstep-07.mp3" id="10_dfdfd"]
+[ext_resource type="AudioStream" uid="uid://bh51fdo4g48uo" path="res://audio/sfx_mastered/footstep-08.mp3" id="11_f1bqd"]
+[ext_resource type="AudioStream" uid="uid://bs65gdfyxedev" path="res://audio/sfx_mastered/footstep-09.mp3" id="12_0bxkc"]
+[ext_resource type="AudioStream" uid="uid://cjva3odhveytg" path="res://audio/sfx_mastered/footstep-10.mp3" id="13_5yoau"]
+[ext_resource type="AudioStream" uid="uid://njcx4jtec2au" path="res://audio/sfx_mastered/footstep-11.mp3" id="14_f7rsf"]
 
-[node name="Root Scene" instance=ExtResource("1_4q7w5")]
+[node name="Root Scene2" instance=ExtResource("1_4q7w5")]
+
+[node name="Skeleton3D" parent="RootNode" index="0"]
+bones/0/position = Vector3(0.00266528, 0.910506, -0.00579178)
+bones/0/rotation = Quaternion(-0.0455, 0.66675, -0.00217158, 0.743888)
+bones/0/scale = Vector3(100, 100, 100)
+bones/1/rotation = Quaternion(0.021562, 0.0118366, 0.0266149, 0.999343)
+bones/2/rotation = Quaternion(0.0102385, 0.00204719, 0.015497, 0.999825)
+bones/3/rotation = Quaternion(0.0100017, 0.00231983, 0.0155502, 0.999826)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(0.0568233, -0.000862346, 0.00393119, 0.998376)
+bones/5/rotation = Quaternion(-0.0657211, 0.0126222, -0.00198468, 0.997756)
+bones/7/rotation = Quaternion(0.671088, 0.335611, -0.512761, 0.417231)
+bones/8/rotation = Quaternion(0.398839, 0.112923, 0.115332, 0.902704)
+bones/9/rotation = Quaternion(0.00130404, -0.0039764, 0.0143706, 0.999888)
+bones/10/rotation = Quaternion(0.0429515, -0.216601, -0.0187958, 0.975134)
+bones/11/rotation = Quaternion(0.174541, 0.0842944, 0.0774898, 0.97797)
+bones/12/rotation = Quaternion(-0.0847104, 0.0883797, -0.0838659, 0.988929)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(-0.135984, -0.0718747, 0.142793, 0.977728)
+bones/13/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(0.0675324, 0.0039934, 0.0293142, 0.997278)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(0.151904, -0.00169287, -0.0123943, 0.988316)
+bones/17/rotation = Quaternion(0.0705986, 0.000608349, -0.0381513, 0.996775)
+bones/19/rotation = Quaternion(0.690641, -0.312499, 0.50487, 0.412876)
+bones/19/scale = Vector3(1, 1, 1)
+bones/20/rotation = Quaternion(0.311638, -0.300146, -0.163595, 0.886584)
+bones/20/scale = Vector3(1, 1, 1)
+bones/21/rotation = Quaternion(-0.0112728, 0.0146482, -0.0564561, 0.998234)
+bones/22/rotation = Quaternion(0.0583923, 0.240832, 0.0107977, 0.968748)
+bones/22/scale = Vector3(1, 1, 1)
+bones/23/rotation = Quaternion(0.170075, -0.0822933, -0.119353, 0.974709)
+bones/24/rotation = Quaternion(-0.0618354, -0.0912814, 0.12357, 0.986192)
+bones/24/scale = Vector3(1, 1, 1)
+bones/25/rotation = Quaternion(-0.171249, 0.0758471, -0.0509777, 0.98098)
+bones/25/scale = Vector3(1, 1, 1)
+bones/27/rotation = Quaternion(0.0612871, -0.00301319, -0.0263416, 0.997768)
+bones/27/scale = Vector3(1, 1, 1)
+bones/28/rotation = Quaternion(0.151818, 0.000651438, 0.0102431, 0.988355)
+bones/29/rotation = Quaternion(0.0704845, 0.000196673, 0.0206876, 0.997298)
+bones/29/scale = Vector3(1, 1, 1)
+bones/31/rotation = Quaternion(0.29454, 0.109597, 0.945117, -0.0893842)
+bones/31/scale = Vector3(1, 1, 1)
+bones/32/rotation = Quaternion(-0.180852, 0.0726399, 0.0388866, 0.980053)
+bones/33/rotation = Quaternion(0.483082, 0.121259, -0.112741, 0.859778)
+bones/34/rotation = Quaternion(0.335955, -0.0387508, 0.0143052, 0.940972)
+bones/36/rotation = Quaternion(-0.0908474, -0.0197058, 0.995176, -0.0313528)
+bones/36/scale = Vector3(1, 1, 1)
+bones/37/rotation = Quaternion(-0.087837, 0.0827921, -0.0322177, 0.992165)
+bones/38/rotation = Quaternion(0.501705, -0.0508294, 0.0601171, 0.861449)
+bones/39/rotation = Quaternion(0.357285, 0.0362364, -0.0147681, 0.933175)
+bones/39/scale = Vector3(1, 1, 1)
 
 [node name="MESH_BGChar1_autorig" parent="RootNode/Skeleton3D" index="0"]
 surface_material_override/0 = ExtResource("2_luyvx")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="RootNode" index="1"]
+volume_db = -10.0
+script = ExtResource("3_0vhyv")
+audio_variations = Array[AudioStream]([ExtResource("4_kkm6i"), ExtResource("5_urlqw"), ExtResource("6_mxyp8"), ExtResource("7_bf0fx"), ExtResource("8_fkglr"), ExtResource("9_k8gy6"), ExtResource("10_dfdfd"), ExtResource("11_f1bqd"), ExtResource("12_0bxkc"), ExtResource("13_5yoau"), ExtResource("14_f7rsf")])
