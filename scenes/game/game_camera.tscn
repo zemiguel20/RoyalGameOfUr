@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8o1oiumwk2ow"]
+
+[ext_resource type="Script" path="res://scripts/game/game_camera.gd" id="1_ojtcq"]
+
+[node name="GameCamera" type="Camera3D"]
+current = true
+fov = 65.0
+script = ExtResource("1_ojtcq")
+transition_duration = 1.0
+max_angle_up = 1.0472
+max_angle_left = 1.0472
+max_angle_right = 1.0472

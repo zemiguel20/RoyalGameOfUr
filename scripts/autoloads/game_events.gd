@@ -18,7 +18,13 @@ signal game_ended(winner: General.Player)
 
 ## Emited when game start is issued through UI or input
 signal play_pressed
-signal init_board
+
+## Emited when the camera look around mode is activated
+signal camera_look_around_started
+## Emited when the camera look around mode is turned off
+signal camera_look_around_stopped
+
+
 signal intro_finished
 
 signal first_turn_dice_shake

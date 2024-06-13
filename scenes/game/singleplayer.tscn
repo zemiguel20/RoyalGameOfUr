@@ -1,13 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=16 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
-[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
+[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/game_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" path="res://scenes/ui/controls_hud.tscn" id="8_wjnj8"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
 [ext_resource type="PackedScene" uid="uid://cuw4r8ubsaba3" path="res://scenes/ui/main_menu.tscn" id="10_2dq8v"]
-[ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="11_5mxbb"]
 [ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="11_b3pbs"]
 [ext_resource type="AudioStream" uid="uid://dsymj0eaades6" path="res://audio/ambience.mp3" id="12_rlqq6"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
@@ -108,19 +107,32 @@ assigned_player = 1
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
 starting_dialogue_delay = 2.0
 
-[node name="Custom_Camera" parent="." node_paths=PackedStringArray("_hotseat_rotation") instance=ExtResource("7_w116q")]
+[node name="GameCamera" parent="." node_paths=PackedStringArray("pov_start", "pov_intro", "pov_singleplayer", "pov_hotseat") instance=ExtResource("7_w116q")]
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.677, 0.167, 6.671)
+pov_start = NodePath("../StartPOV")
+pov_intro = NodePath("../SingleplayerIntroPOV")
+pov_singleplayer = NodePath("../SingleplayerGamePOV")
+pov_hotseat = NodePath("../HotseatPOV")
+
+[node name="StartPOV" type="Camera3D" parent="."]
+process_mode = 4
+transform = Transform3D(0.848048, 0.181651, 0.497812, 1.11759e-08, 0.939412, -0.342791, -0.529919, 0.290703, 0.796666, 4.75128, 0.356789, 6.78987)
+fov = 65.0
+
+[node name="SingleplayerIntroPOV" type="Camera3D" parent="."]
+process_mode = 4
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.677, 0.167, 6.671)
 fov = 65.0
-max_degrees_down = 50.0
-max_degrees_left = 32.0
-_hotseat_rotation = NodePath("../HotseatCameraMarker")
-_board_look_rotation = Vector3(-35, 32, 0)
-_trans_type = 1
-_ease_type = 1
 
-[node name="HotseatCameraMarker" type="Marker3D" parent="."]
-transform = Transform3D(-0.529919, -0.844821, 0.073912, 0, 0.0871554, 0.996195, -0.848048, 0.527903, -0.0461853, 4.49162, 0.111622, 6.32288)
-script = ExtResource("11_5mxbb")
+[node name="SingleplayerGamePOV" type="Camera3D" parent="."]
+process_mode = 4
+transform = Transform3D(0.848048, -0.306316, 0.432418, 0, 0.816006, 0.578043, -0.529919, -0.490208, 0.692013, 4.68321, 0.20134, 6.68615)
+fov = 65.0
+
+[node name="HotseatPOV" type="Camera3D" parent="."]
+process_mode = 4
+transform = Transform3D(-0.5, -0.828184, 0.253201, 0, 0.292372, 0.956305, -0.866025, 0.478152, -0.146186, 4.54606, 0.110736, 6.29259)
+fov = 65.0
 
 [node name="NPCSystem" parent="." instance=ExtResource("16_eu2sq")]
 
