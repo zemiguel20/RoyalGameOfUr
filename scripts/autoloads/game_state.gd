@@ -16,3 +16,7 @@ func advance_turn_switch_player() -> void:
 func advance_turn_same_player() -> void:
 	turn_number += 1
 	GameEvents.new_turn_started.emit()
+
+
+func is_bot_playing() -> bool:
+	return current_player == General.Player.TWO and not Settings.is_hotseat_mode

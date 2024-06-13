@@ -44,8 +44,8 @@ func _on_new_turn_started() -> void:
 	if GameState.current_player != assigned_player:
 		return
 	
-	# Set second player automatic in singleplayer mode
-	automatic = not Settings.is_hotseat_mode and GameState.current_player == General.Player.TWO
+	if GameState.is_bot_playing():
+		automatic = true
 	
 	dice.assign(EntityManager.get_dice())
 	_dehighlight_dice()
