@@ -38,14 +38,14 @@ func _initialize_tree():
 		RunOnceNode.new(WaitTask.new(_start_delay)),
 		SetVisibilityTask.new(true),
 		## Walk from kitchen to storage
-		PlayAnimationTask.new("Walk", false, 0),
+		PlayAnimationTask.new("Walk", false, 0, 0.5),
 		MoveAlongPathTask.new(_path1),
 		PlayAnimationTask.new("TurnRight", true),
 		RotateYTask.new(-0.5 * PI),
 		PlayAnimationTask.new("Browse", false, 0),
 		WaitRandomTask.new(_min_search_time, _max_search_time),
 		## Walk from storage to kitchen
-		PlayAnimationTask.new("Walk", false, 0.15),		
+		PlayAnimationTask.new("Walk", false, 0.15, 0.5),		
 		MoveAlongPathTask.new(_path2),
 		SetVisibilityTask.new(false),
 		WaitRandomTask.new(_min_kitchen_time, _max_kitchen_time)
