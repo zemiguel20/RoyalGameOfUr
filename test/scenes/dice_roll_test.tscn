@@ -13,20 +13,12 @@ func _ready() -> void:
 		EntityManager.spawn_die()
 	
 	GameState.current_player = General.Player.ONE
+	GameEvents.roll_sequence_finished.connect(_on_roll_sequence_finished)
+	GameEvents.new_turn_started.emit()
 	
-	GameEvents.rolled.connect(_on_rolled)
-	GameEvents.new_turn_started.connect(_on_new_turn_started)
-	
-	GameEvents.game_started.emit()
 
-
-func _on_rolled(_player, value: int) -> void:
-	GameEvents.new_turn_started.emit(General.Player.ONE)
-
-
-func _on_new_turn_started(_player) -> void:
-	# Force player one
-	GameState.current_player = General.Player.ONE
+func _on_roll_sequence_finished() -> void:
+	GameEvents.new_turn_started.emit()
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_sb076"]
