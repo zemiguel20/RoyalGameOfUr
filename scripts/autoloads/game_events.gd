@@ -12,12 +12,16 @@ signal rolled(value: int)
 signal roll_sequence_finished
 ## Emited when there are no available moves for the current player.
 signal no_moves
+## Emited after a move finished execution.
 signal move_executed(move: GameMove)
+## Emited when a player wins and the game ends.
 signal game_ended()
 
 
 ## Emited when game start is issued through UI or input
 signal play_pressed
+## Emited when returning to main menu, by UI or input
+signal back_to_main_menu_pressed
 
 ## Emited when the camera look around mode is activated
 signal camera_look_around_started

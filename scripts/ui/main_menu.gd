@@ -37,6 +37,17 @@ var current_board_index: int = 0
 
 
 func _ready() -> void:
+	_start_menu()
+	
+	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
+
+
+func _on_back_to_main_menu() -> void:
+	_start_menu()
+
+
+func _start_menu() -> void:
+	visible = true
 	main_menu.visible = true
 	ruleset_menu.visible = false
 

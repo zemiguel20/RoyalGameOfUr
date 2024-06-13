@@ -42,4 +42,5 @@ func _on_rematch_button_pressed() -> void:
 
 
 func _on_main_menu_button_pressed() -> void:
-	pass # Replace with function body.
+	visible = false
+	GameEvents.back_to_main_menu_pressed.emit()

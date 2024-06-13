@@ -42,6 +42,7 @@ func _ready():
 	GameEvents.opponent_seated.connect(_on_opponent_seated)
 	GameEvents.game_started.connect(_on_game_started)
 	GameEvents.game_ended.connect(_on_game_ended)
+	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
 
 
 #region Look Around logic
@@ -114,6 +115,10 @@ func _on_play_pressed() -> void:
 
 func _on_opponent_seated() -> void:
 	_tween_to_pov(pov_singleplayer)
+
+
+func _on_back_to_main_menu() -> void:
+	_tween_to_pov(pov_start)
 
 
 func _on_game_started() -> void:
