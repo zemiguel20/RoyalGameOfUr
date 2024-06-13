@@ -37,22 +37,6 @@ label_settings = ExtResource("3_b80ow")
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="LookAround" type="HBoxContainer" parent="Controls"]
-layout_mode = 2
-
-[node name="LookAroundIcon" type="TextureRect" parent="Controls/LookAround"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-texture = ExtResource("3_v050y")
-stretch_mode = 5
-
-[node name="LookAroundLabel" type="Label" parent="Controls/LookAround"]
-layout_mode = 2
-text = "(Hold)  Look Around"
-label_settings = ExtResource("3_b80ow")
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="Cancel" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -66,6 +50,22 @@ stretch_mode = 5
 [node name="CancelLabel" type="Label" parent="Controls/Cancel"]
 layout_mode = 2
 text = "Cancel Move"
+label_settings = ExtResource("3_b80ow")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LookAround" type="HBoxContainer" parent="Controls"]
+layout_mode = 2
+
+[node name="LookAroundIcon" type="TextureRect" parent="Controls/LookAround"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("3_v050y")
+stretch_mode = 5
+
+[node name="LookAroundLabel" type="Label" parent="Controls/LookAround"]
+layout_mode = 2
+text = "(Hold)  Look Around"
 label_settings = ExtResource("3_b80ow")
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
