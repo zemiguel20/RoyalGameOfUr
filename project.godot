@@ -35,6 +35,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Royal Game Of Ur"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
+
 [gui]
 
 theme/custom="res://UI/test_theme.tres"
