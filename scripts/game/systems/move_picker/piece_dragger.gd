@@ -57,13 +57,13 @@ func _on_selection_cancel() -> void:
 	_reset_pieces_positions()
 	pieces_to_drag.clear()
 	is_dragging = false
-	GameEvents.drag_move_end.emit()
+	GameEvents.drag_move_stopped.emit()
 
 
 func _on_move_selected() -> void:
 	pieces_to_drag.clear()
 	is_dragging = false
-	GameEvents.drag_move_end.emit()
+	GameEvents.drag_move_stopped.emit()
 
 
 func _reset_pieces_positions() -> void:

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://w7yb2efymxa0"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://w7yb2efymxa0"]
 
 [ext_resource type="FontFile" uid="uid://c2qd4kfup264a" path="res://UI/IMFeENrm29P.ttf" id="1_tn56q"]
 [ext_resource type="Texture2D" uid="uid://bprysgby4cbvh" path="res://UI/Icon.png" id="2_bdmfk"]
@@ -38,6 +38,18 @@ corner_radius_bottom_right = 5
 shadow_size = 5
 shadow_offset = Vector2(0, 5)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kg8x3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rnkah"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6btr1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g7j3b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rs07"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8tdc2"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mi2im"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2ofr"]
@@ -58,6 +70,12 @@ Button/styles/focus = SubResource("StyleBoxEmpty_6hgxt")
 Button/styles/hover = SubResource("StyleBoxFlat_e8fs3")
 Button/styles/normal = SubResource("StyleBoxFlat_lm8gb")
 Button/styles/pressed = SubResource("StyleBoxFlat_i6u6v")
+CheckBox/styles/disabled = SubResource("StyleBoxEmpty_kg8x3")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_rnkah")
+CheckBox/styles/hover = SubResource("StyleBoxEmpty_6btr1")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxEmpty_g7j3b")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_1rs07")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_8tdc2")
 HSlider/icons/grabber = ExtResource("2_bdmfk")
 HSlider/icons/grabber_disabled = ExtResource("3_l3d0t")
 HSlider/icons/grabber_highlight = ExtResource("3_l3d0t")
