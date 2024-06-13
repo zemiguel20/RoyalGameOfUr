@@ -7,7 +7,7 @@ const hotseat_text = "Player %d won the game"
 
 @export_multiline var survey_link: String = "https://www.universiteitleiden.nl/"
 
-@onready var header_label: Label = $"End Screen Menu/TabletPanel/HeaderLabel"
+@onready var header_label: Label = $TabletPanel/HeaderLabel
 @onready var survey_menu: VBoxContainer = $TabletPanel/SurveyMenu
 @onready var end_menu: VBoxContainer = $TabletPanel/EndMenu
 @onready var survey_button: LinkButton = $TabletPanel/SurveyMenu/HBoxContainer/SurveyButton
@@ -18,8 +18,9 @@ func _ready() -> void:
 	GameEvents.game_ended.connect(_on_game_ended)
 
 
-func _on_game_ended(winner: General.Player) -> void:
+func _on_game_ended() -> void:
 	visible = true
+	var winner = GameState.current_player
 	
 	# Set title
 	if Settings.is_hotseat_mode:

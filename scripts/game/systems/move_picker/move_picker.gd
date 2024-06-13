@@ -80,7 +80,7 @@ func _on_roll_sequence_finished() -> void:
 	GameEvents.move_executed.emit(selected_move)
 	
 	if selected_move.wins:
-		GameEvents.game_ended.emit(assigned_player)
+		GameEvents.game_ended.emit()
 	elif selected_move.gives_extra_turn:
 		GameState.advance_turn_same_player()
 	else:

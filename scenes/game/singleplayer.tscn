@@ -28,6 +28,8 @@ func _input(event: InputEvent) -> void:
 			Settings.fast_move_enabled = not Settings.fast_move_enabled
 		if event.keycode == KEY_R and event.pressed:
 			GameEvents.play_pressed.emit()
+		if event.keycode == KEY_0 and event.pressed:
+			GameEvents.game_ended.emit()
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wg4la"]

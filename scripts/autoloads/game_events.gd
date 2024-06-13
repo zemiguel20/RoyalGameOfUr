@@ -13,7 +13,7 @@ signal roll_sequence_finished
 ## Emited when there are no available moves for the current player.
 signal no_moves
 signal move_executed(move: GameMove)
-signal game_ended(winner: General.Player)
+signal game_ended()
 
 
 ## Emited when game start is issued through UI or input
