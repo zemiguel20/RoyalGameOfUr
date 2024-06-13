@@ -32,8 +32,6 @@ stretch_mode = 5
 
 [node name="InteractLabel" type="Label" parent="Controls/Interact"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
 text = "Interact"
 label_settings = ExtResource("3_b80ow")
 vertical_alignment = 1

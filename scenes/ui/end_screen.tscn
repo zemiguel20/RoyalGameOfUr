@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwnjc775ngbs4"]
 
 [ext_resource type="Script" path="res://scripts/ui/end_screen.gd" id="1_awi2m"]
-[ext_resource type="Theme" uid="uid://w7yb2efymxa0" path="res://UI/test_theme.tres" id="2_xuqdq"]
+[ext_resource type="Theme" uid="uid://w7yb2efymxa0" path="res://UI/main_theme.tres" id="2_xuqdq"]
 
 [node name="EndScreen" type="CanvasLayer"]
 script = ExtResource("1_awi2m")
