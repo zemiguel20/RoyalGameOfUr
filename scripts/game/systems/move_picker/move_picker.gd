@@ -35,7 +35,7 @@ func _calculate_moves(steps: int) -> void:
 		return
 	
 	var board = EntityManager.get_board()
-	var player = GameState.current_player
+	var player = GameManager.current_player
 	
 	# Get all spots where the current player has pieces
 	var occupied_start_spots = board.get_occupied_start_spots(player)
@@ -45,7 +45,7 @@ func _calculate_moves(steps: int) -> void:
 	# Calculate all moves and whether they are valid
 	for spot in occupied_spots:
 		var landing_spots = board.get_landing_spots(player, spot, steps, \
-			not Settings.ruleset.can_move_backwards)
+			not GameManager.ruleset.can_move_backwards)
 		
 		for landing_spot in landing_spots:
 			var move = GameMove.new(spot, landing_spot, player)
@@ -54,19 +54,19 @@ func _calculate_moves(steps: int) -> void:
 
 func _on_roll_sequence_finished() -> void:
 	if moves.filter(valid_moves_filter).is_empty():
-		GameState.advance_turn_switch_player()
+		GameManager.advance_turn_switch_player()
 		return
 	
 	var selected_move: GameMove
 	
-	if GameState.is_bot_playing():
+	if GameManager.is_bot_playing():
 		selector_ai.start_selection(moves)
 		selected_move = await selector_ai.move_selected
 		selected_move.execute(General.MoveAnim.ARC, true)
 	else:
 		selector_interactive.start_selection(moves)
 		selected_move = await selector_interactive.move_selected
-		if Settings.fast_move_enabled:
+		if GameManager.fast_move_enabled:
 			selected_move.execute(General.MoveAnim.ARC, true)
 		else:
 			selected_move.execute(General.MoveAnim.LINE, false)
@@ -77,6 +77,6 @@ func _on_roll_sequence_finished() -> void:
 	if selected_move.wins:
 		GameEvents.game_ended.emit()
 	elif selected_move.gives_extra_turn:
-		GameState.advance_turn_same_player()
+		GameManager.advance_turn_same_player()
 	else:
-		GameState.advance_turn_switch_player()
+		GameManager.advance_turn_switch_player()

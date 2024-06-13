@@ -8,7 +8,7 @@ var npcs: Array
 
 func _ready():
 	## Disable background NPCs when in hotseat mode
-	if Settings.is_hotseat_mode:
+	if GameManager.is_hotseat:
 		return
 	
 	npcs = get_node("NPCs").get_children()

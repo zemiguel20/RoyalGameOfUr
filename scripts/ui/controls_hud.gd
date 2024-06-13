@@ -47,14 +47,14 @@ func _on_drag_move_stopped() -> void:
 
 func _on_new_turn_started() -> void:
 	# In singleplayer, show fast mode option after some turns
-	if not Settings.is_hotseat_mode and GameState.turn_number >= 4:
+	if not GameManager.is_hotseat and GameManager.turn_number >= 4:
 		fast_move.visible = true
 
 
 func _show_controls_regular() -> void:
 	interact.visible = true
 	cancel.visible = false
-	look_around.visible = not Settings.is_hotseat_mode
+	look_around.visible = not GameManager.is_hotseat
 
 
 func _show_controls_in_move():
@@ -63,5 +63,4 @@ func _show_controls_in_move():
 
 
 func _on_fast_move_toggled(toggled_on: bool) -> void:
-	Settings.fast_move_enabled = toggled_on
-	print(Settings.fast_move_enabled)
+	GameManager.fast_move_enabled = toggled_on

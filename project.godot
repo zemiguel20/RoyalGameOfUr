@@ -20,9 +20,8 @@ config/icon="res://icon.svg"
 
 General="*res://scripts/autoloads/general.gd"
 GameEvents="*res://scripts/autoloads/game_events.gd"
-GameState="*res://scripts/autoloads/game_state.gd"
+GameManager="*res://scripts/autoloads/game_manager.gd"
 EntityManager="*res://scripts/autoloads/entity_manager.gd"
-Settings="*res://scripts/autoloads/game_settings.gd"
 
 [display]
 

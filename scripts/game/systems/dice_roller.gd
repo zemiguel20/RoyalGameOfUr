@@ -40,10 +40,10 @@ func _on_new_turn_started() -> void:
 	no_moves_flag = false
 	
 	# Do nothing if not assigned player's turn
-	if GameState.current_player != assigned_player:
+	if GameManager.current_player != assigned_player:
 		return
 	
-	if GameState.is_bot_playing():
+	if GameManager.is_bot_playing():
 		automatic = true
 	
 	_dehighlight_dice()

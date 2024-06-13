@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=16 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
-[ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
 [ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker.tscn" id="5_omrkq"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/game_camera.tscn" id="7_w116q"]
@@ -93,9 +92,6 @@ gizmo_extents = 0.01
 transform = Transform3D(0.794096, 0, 0.607792, 0, 1, 0, -0.607792, 0, 0.794096, 4.28436, -0.179411, 6.44236)
 
 [node name="Systems" type="Node" parent="."]
-
-[node name="GameController" type="Node" parent="Systems"]
-script = ExtResource("2_ldghm")
 
 [node name="DiceRoller" parent="Systems" instance=ExtResource("9_m0jtg")]
 transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 4.6143, -0.212933, 6.44044)

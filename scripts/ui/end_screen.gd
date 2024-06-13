@@ -20,10 +20,10 @@ func _ready() -> void:
 
 func _on_game_ended() -> void:
 	visible = true
-	var winner = GameState.current_player
+	var winner = GameManager.current_player
 	
 	# Set title
-	if Settings.is_hotseat_mode:
+	if GameManager.is_hotseat:
 		header_label.text = hotseat_text % (winner + 1)
 	else:
 		if winner == General.Player.ONE:
@@ -39,6 +39,8 @@ func _on_game_ended() -> void:
 func _on_rematch_button_pressed() -> void:
 	visible = false
 	GameEvents.play_pressed.emit()
+	GameManager.is_rematch = true
+	GameManager.start_new_game()
 
 
 func _on_main_menu_button_pressed() -> void:

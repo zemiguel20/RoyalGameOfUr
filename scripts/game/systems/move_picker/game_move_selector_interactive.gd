@@ -77,7 +77,7 @@ func _on_from_selected(spot: Spot) -> void:
 	
 	var valid_moves = _filter_valid_moves(_filter_moves_with_from(_moves, spot))
 	
-	if Settings.fast_move_enabled:
+	if GameManager.fast_move_enabled:
 		var selected_move = valid_moves.front()
 		move_selected.emit(selected_move)
 	else:

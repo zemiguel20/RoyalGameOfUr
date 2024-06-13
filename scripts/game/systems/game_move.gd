@@ -74,11 +74,11 @@ func _init(from: Spot, to: Spot, player: int):
 	valid = _check_valid()
 	
 	wins = is_to_end_of_track and \
-		pieces_in_to.size() + pieces_in_from.size() == Settings.ruleset.num_pieces
+		pieces_in_to.size() + pieces_in_from.size() == GameManager.ruleset.num_pieces
 	
-	if Settings.ruleset.rosettes_give_extra_turn and to.is_in_group("rosettes"):
+	if GameManager.ruleset.rosettes_give_extra_turn and to.is_in_group("rosettes"):
 		gives_extra_turn = true
-	elif Settings.ruleset.captures_give_extra_turn and is_to_occupied_by_opponent:
+	elif GameManager.ruleset.captures_give_extra_turn and is_to_occupied_by_opponent:
 		gives_extra_turn = true
 	else:
 		gives_extra_turn = false
@@ -153,7 +153,7 @@ func _check_valid() -> bool:
 		result = false
 	
 	# Cannot stack in rosettes if setting not enabled
-	if not Settings.ruleset.rosettes_allow_stacking \
+	if not GameManager.ruleset.rosettes_allow_stacking \
 	and to.is_in_group("rosettes") \
 	and to.is_occupied_by_player(player):
 		result = false
@@ -163,11 +163,11 @@ func _check_valid() -> bool:
 		result = false
 	
 	# Cannot stack in starting spots
-	if Settings.ruleset.can_move_backwards and _board.get_occupied_start_spots(player).has(to):
+	if GameManager.ruleset.can_move_backwards and _board.get_occupied_start_spots(player).has(to):
 		result = false
 	
 	# Cannot move pieces already in finish line
-	if Settings.ruleset.can_move_backwards and from == _board.get_track(player).back():
+	if GameManager.ruleset.can_move_backwards and from == _board.get_track(player).back():
 		result = false
 	
 	return result
@@ -175,7 +175,7 @@ func _check_valid() -> bool:
 
 func _is_spot_safe(spot: Spot) -> bool:
 	return _board.is_spot_exclusive(spot) or \
-		(spot.is_in_group("rosettes") and Settings.ruleset.rosettes_are_safe)
+		(spot.is_in_group("rosettes") and GameManager.ruleset.rosettes_are_safe)
 
 
 func captures_opponent() -> bool:

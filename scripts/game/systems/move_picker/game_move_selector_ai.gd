@@ -147,12 +147,12 @@ func _calculate_danger_score(spot: Spot, spot_safe: bool, opponent: int) -> floa
 	var danger_score = 0.0
 	
 	# Check the tiles before this spot for opponent pieces
-	for i in range(1, Settings.ruleset.num_dice + 1):
+	for i in range(1, GameManager.ruleset.num_dice + 1):
 		var nearby_spots = EntityManager.get_board().get_landing_spots(opponent, spot, i, \
-			not Settings.ruleset.can_move_backwards)
+			not GameManager.ruleset.can_move_backwards)
 		for near_spot in nearby_spots:
 			if spot.is_occupied_by_player(opponent):
-				danger_score += General.get_probability_of_value(i, Settings.ruleset.num_dice)
+				danger_score += General.get_probability_of_value(i, GameManager.ruleset.num_dice)
 	
 	# BASE_DANGER_SCORE is a simplified way of saying that even if direct chance of capture is 0,
 	# the opponent might get an extra roll, instead of actually calculating the chances
@@ -176,7 +176,7 @@ func _calculate_central_rosette_modifier(move: GameMove):
 	# Extra rule: the more pieces are already past the from tile, the less efficient this strategy is.
 	if decrease_per_passed_opponent_piece:
 		var num_of_passed_pieces = _get_num_opponent_pieces_ahead(move)
-		var num_of_total_pieces = Settings.ruleset.num_pieces
+		var num_of_total_pieces = GameManager.ruleset.num_pieces
 		var passed_pieces_rate: float = (num_of_passed_pieces as float / num_of_total_pieces)	# Value between 0 and 1
 		score = 1 - passed_pieces_rate	# Value between 0 and 1
 	

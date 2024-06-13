@@ -65,7 +65,7 @@ func _move_pieces(spots: Array[Spot], anim: General.MoveAnim) -> void:
 	
 	for i in pieces_copy.size():
 		var piece = pieces_copy[i]
-		# Assume there is only one spot to place, or an equal number of spots and pieces
+		# Assume there is only one spot to place, or enough number of spots
 		var spot = spots[i] if spots.size() > 1 else spots[0]
 		
 		# Update data and start animation

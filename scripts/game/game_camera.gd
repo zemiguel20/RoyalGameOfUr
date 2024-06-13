@@ -105,7 +105,7 @@ func _update_look_around(mouse_delta: Vector2) -> void:
 
 func _on_play_pressed() -> void:
 	var target_pov: Node3D
-	if Settings.is_hotseat_mode:
+	if GameManager.is_hotseat:
 		target_pov = pov_hotseat
 	else:
 		target_pov = pov_intro
@@ -122,7 +122,7 @@ func _on_back_to_main_menu() -> void:
 
 
 func _on_game_started() -> void:
-	if not Settings.is_hotseat_mode:
+	if not GameManager.is_hotseat:
 		can_look_around = true
 
 
