@@ -4,8 +4,8 @@ extends Node
 
 ## Start of game, after initialization.
 signal game_started
-## Emited at the start of a new turn. Has the current player.
-signal new_turn_started(player: General.Player)
+## Emited at the start of a new turn.
+signal new_turn_started()
 ## Emited after dice finished rolling, and has the total value.
 signal rolled(value: int)
 ## Emited after the entire sequence of rolling and highlighting the dice is finished.

@@ -31,24 +31,19 @@ func _ready() -> void:
 	throw_spots.assign(get_node(get_meta("throw_spots")).get_children())
 	shake_sfx = get_node(get_meta("shake_sfx"))
 	
-	GameEvents.game_started.connect(_on_game_start)
 	GameEvents.new_turn_started.connect(_on_new_turn_started)
 	GameEvents.no_moves.connect(_on_no_moves)
 
 
-func _on_game_start() -> void:
-	_on_new_turn_started(GameState.current_player)
-
-
-func _on_new_turn_started(player: General.Player) -> void:
+func _on_new_turn_started() -> void:
 	no_moves_flag = false
 	
 	# Do nothing if not assigned player's turn
-	if player != assigned_player:
+	if GameState.current_player != assigned_player:
 		return
 	
 	# Set second player automatic in singleplayer mode
-	automatic = not Settings.is_hotseat_mode and player == General.Player.TWO
+	automatic = not Settings.is_hotseat_mode and GameState.current_player == General.Player.TWO
 	
 	dice.assign(EntityManager.get_dice())
 	_dehighlight_dice()

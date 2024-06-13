@@ -1,9 +1,11 @@
 class_name GameController extends Node
-## Sets up the game and controls the flow of the turns.
+## Sets up the game.
 
 
-const INTERACTIVE_MOVE_PICKER: PackedScene = preload("res://scenes/game/systems/move_picker/move_picker_interactive.tscn")
-const AI_MOVE_PICKER: PackedScene = preload("res://scenes/game/systems/move_picker/move_picker_ai.tscn")
+const INTERACTIVE_MOVE_PICKER: PackedScene = \
+	preload("res://scenes/game/systems/move_picker/move_picker_interactive.tscn")
+const AI_MOVE_PICKER: PackedScene = \
+	preload("res://scenes/game/systems/move_picker/move_picker_ai.tscn")
 
 
 func _ready():
@@ -49,5 +51,6 @@ func _setup_game():
 
 func _start_game():
 	GameState.current_player = General.get_random_player()
-	GameState.turn_number = 1
+	GameState.turn_number = 0
 	GameEvents.game_started.emit()
+	GameEvents.new_turn_started.emit()

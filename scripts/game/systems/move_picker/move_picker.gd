@@ -1,12 +1,14 @@
 class_name MovePicker extends Node
 ## Calculates possible moves and selects one of the moves to execute.
-
+# NOTE: calculation of moves is separated from the actual move picking phase
+# to give feedback to other systems before changing turn, namely the dice
+# and roll result label glowing red.
 
 @export var assigned_player: General.Player
 
 var selector # Can be of different types
-
 var moves: Array[GameMove] = []
+var valid_moves_filter = func(move: GameMove): return move.valid
 
 
 func _ready() -> void:
@@ -16,28 +18,35 @@ func _ready() -> void:
 	if not selector:
 		push_error("MovePicker: Could not find selector child node.")
 	else:
-		GameEvents.rolled.connect(_on_dice_rolled)
-		GameEvents.roll_sequence_finished.connect(_on_roll_sequence_finished)
+		GameEvents.new_turn_started.connect(_on_new_turn_started)
 
-# NOTE: calculation of moves is separate to give feedback to other systems before changing turn
-# Namely the dice and rolling label glowing red.
+
+func _on_new_turn_started() -> void:
+	if GameState.current_player == assigned_player:
+		if not GameEvents.rolled.is_connected(_on_dice_rolled):
+			GameEvents.rolled.connect(_on_dice_rolled)
+		if not GameEvents.roll_sequence_finished.is_connected(_on_roll_sequence_finished):
+			GameEvents.roll_sequence_finished.connect(_on_roll_sequence_finished)
+	else:
+		if GameEvents.rolled.is_connected(_on_dice_rolled):
+			GameEvents.rolled.disconnect(_on_dice_rolled)
+		if GameEvents.roll_sequence_finished.is_connected(_on_roll_sequence_finished):
+			GameEvents.roll_sequence_finished.disconnect(_on_roll_sequence_finished)
+
 
 func _on_dice_rolled(value: int) -> void:
-	if GameState.current_player != assigned_player:
-		return
-	
-	moves.assign(_calculate_moves(value))
+	_calculate_moves(value)
 	
 	# Check if there is any valid move
-	if moves.filter(func(move: GameMove): return move.valid).is_empty():
+	if moves.filter(valid_moves_filter).is_empty():
 		GameEvents.no_moves.emit()
 
 
-func _calculate_moves(steps: int) -> Array[GameMove]:
-	var moves: Array[GameMove] = []
+func _calculate_moves(steps: int) -> void:
+	moves.clear()
 	
 	if steps <= 0:
-		return moves
+		return
 	
 	var board = EntityManager.get_board()
 	
@@ -54,14 +63,10 @@ func _calculate_moves(steps: int) -> Array[GameMove]:
 		for landing_spot in landing_spots:
 			var move = GameMove.new(spot, landing_spot, assigned_player)
 			moves.append(move)
-	return moves
 
 
 func _on_roll_sequence_finished() -> void:
-	if GameState.current_player != assigned_player:
-		return
-	
-	if moves.is_empty():
+	if moves.filter(valid_moves_filter).is_empty():
 		GameState.advance_turn_switch_player()
 		return
 	
