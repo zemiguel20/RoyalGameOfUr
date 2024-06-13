@@ -49,7 +49,6 @@ func _on_new_turn_started() -> void:
 	# In singleplayer, show fast mode option after some turns
 	if not Settings.is_hotseat_mode and GameState.turn_number >= 4:
 		fast_move.visible = true
-		fast_move_check_box.button_pressed = not fast_move_check_box.button_pressed
 
 
 func _show_controls_regular() -> void:
