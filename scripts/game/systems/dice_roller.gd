@@ -33,6 +33,8 @@ func _ready() -> void:
 	
 	GameEvents.new_turn_started.connect(_on_new_turn_started)
 	GameEvents.no_moves.connect(_on_no_moves)
+	GameEvents.game_ended.connect(_on_game_ended)
+	GameEvents.back_to_main_menu_pressed.connect(_on_game_ended) # Reuse game ended for canceling game
 
 
 func _on_new_turn_started() -> void:
@@ -179,3 +181,8 @@ func _roll_dice() -> void:
 
 func _on_no_moves() -> void:
 	no_moves_flag = true
+
+
+func _on_game_ended() -> void:
+	_dehighlight_dice()
+	_disconnect_input_signals()
