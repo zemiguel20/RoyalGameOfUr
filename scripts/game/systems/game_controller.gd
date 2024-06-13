@@ -3,7 +3,16 @@ class_name GameController extends Node
 
 
 func _ready():
-	GameEvents.play_pressed.connect(_setup_game)
+	GameEvents.play_pressed.connect(_on_play_pressed)
+
+
+func _on_play_pressed() -> void:
+	_setup_game()
+	
+	if Settings.is_hotseat_mode:
+		_start_game()
+	else:
+		GameEvents.opponent_ready.connect(_start_game)
 
 
 func _setup_game():
@@ -20,14 +29,11 @@ func _setup_game():
 		EntityManager.spawn_player_piece(General.Player.TWO, board)
 	
 	# Spawn dice
+	var placing_spots: Array[Node3D] = []
+	placing_spots.assign(get_tree().get_nodes_in_group("dice_placing_spots"))
+	placing_spots.shuffle()
 	for i in Settings.ruleset.num_dice:
-		EntityManager.spawn_die()
-	
-	# Start game
-	if Settings.is_hotseat_mode:
-		_start_game()
-	else:
-		GameEvents.opponent_ready.connect(_start_game)
+		EntityManager.spawn_die(placing_spots[i].global_position)
 
 
 func _start_game():

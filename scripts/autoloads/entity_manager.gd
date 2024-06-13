@@ -48,17 +48,11 @@ func spawn_player_piece(player: int, board: Board) -> Piece:
 
 
 ## Spawns a die in the given position in the world.
-func spawn_die() -> Die:
-	# Get spawn point
-	var spawn_point = get_tree().get_first_node_in_group("dice_spawn")
-	if not spawn_point or not spawn_point is Node3D:
-		push_warning("No dice spawn point found. Using origin.")
-		spawn_point = Node3D.new()
-	
+func spawn_die(global_position := Vector3.ZERO) -> Die:
 	var instance = DIE_PREFAB.instantiate() as Die
 	instance.name = "Die_%d" % instance.get_instance_id()
 	add_child(instance)
-	instance.global_position = spawn_point.global_position
+	instance.global_position = global_position
 	return instance
 
 
