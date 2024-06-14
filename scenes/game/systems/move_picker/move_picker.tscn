@@ -27,3 +27,4 @@ path_highlight_prefab = ExtResource("5_h77ps")
 [node name="PieceDragger" type="Node" parent="." node_paths=PackedStringArray("selector")]
 script = ExtResource("6_eb2x5")
 selector = NodePath("../InteractiveGameMoveSelector")
+bounds = Vector2(0.2, 0.2)
