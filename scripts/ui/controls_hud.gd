@@ -55,6 +55,9 @@ func _show_controls_regular() -> void:
 	interact.visible = true
 	cancel.visible = false
 	look_around.visible = not GameManager.is_hotseat
+	
+	if GameManager.is_hotseat:
+		fast_move.visible = true
 
 
 func _show_controls_in_move():
