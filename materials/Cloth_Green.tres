@@ -6,7 +6,7 @@
 
 [resource]
 cull_mode = 2
-albedo_color = Color(0.533289, 0.666424, 0, 1)
+albedo_color = Color(0.962255, 0.412571, 0.183707, 1)
 albedo_texture = ExtResource("1_y3luv")
 normal_enabled = true
 normal_texture = ExtResource("3_c7u04")
