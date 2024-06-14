@@ -300,13 +300,14 @@ metadata/_edit_group_ = true
 [node name="Rule1CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]
 layout_mode = 2
 theme = ExtResource("4_xqa0v")
-text = "Rosettes grant extra role"
+text = "Rosettes are safe
+"
 flat = true
 
 [node name="Rule2CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]
 layout_mode = 2
 theme = ExtResource("4_xqa0v")
-text = "Rosettes are safe"
+text = "Rosettes grant extra roll"
 flat = true
 
 [node name="Rule3CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]
@@ -318,7 +319,7 @@ flat = true
 [node name="Rule4CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]
 layout_mode = 2
 theme = ExtResource("4_xqa0v")
-text = "Capture grants an extra role"
+text = "Capture grants an extra roll"
 flat = true
 
 [node name="Rule5CheckBox" type="CheckBox" parent="RulesetMenu/TabletFrame/RulesList"]

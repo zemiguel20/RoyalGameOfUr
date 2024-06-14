@@ -49,7 +49,7 @@ func highlight(move: GameMove, base_color := color_neutral) -> void:
 			piece.highlight.color = color_knock_out
 		elif move.is_to_end_of_track:
 			piece.highlight.color = color_end
-		elif move.is_in_group("rosettes"):
+		elif move.to.is_in_group("rosettes"):
 			piece.highlight.color = color_rosette 
 		else:
 			piece.highlight.color = base_color
