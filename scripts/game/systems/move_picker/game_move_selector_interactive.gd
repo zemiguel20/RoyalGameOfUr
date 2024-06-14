@@ -12,6 +12,10 @@ signal selection_canceled
 
 @export var highlight: GameMoveHighlight
 
+@export var color_selectable := Color.MEDIUM_AQUAMARINE
+@export var color_hovered := Color.AQUAMARINE
+@export var color_selected := Color.DARK_TURQUOISE
+
 var _moves: Array[GameMove] = []
 
 var is_from_selected: bool = false
@@ -46,7 +50,7 @@ func _start_from_selection() -> void:
 				move.from.input.clicked.connect(_on_from_selected.bind(move.from))
 			
 			for piece in move.pieces_in_from:
-				piece.highlight.set_active(true).set_color(General.color_selectable)
+				piece.highlight.set_active(true).set_color(color_selectable)
 
 
 func _on_from_hovered(spot: Spot) -> void:
@@ -56,7 +60,7 @@ func _on_from_hovered(spot: Spot) -> void:
 	moves_from.sort_custom(func(a: GameMove, _b: GameMove): return not a.valid)
 	for move in moves_from:
 		GameEvents.try_play_tutorial_dialog.emit(move)
-		highlight.highlight(move, General.color_hovered)
+		highlight.highlight(move, color_hovered)
 
 
 func _on_from_dehovered(_spot: Spot) -> void:
@@ -67,7 +71,7 @@ func _on_from_dehovered(_spot: Spot) -> void:
 	for move in _moves:
 		if move.valid:
 			for piece in move.pieces_in_from:
-				piece.highlight.set_active(true).set_color(General.color_selectable)
+				piece.highlight.set_active(true).set_color(color_selectable)
 
 
 func _on_from_selected(spot: Spot) -> void:
@@ -95,15 +99,15 @@ func _start_to_selection(filtered_moves: Array[GameMove]) -> void:
 		if not move.to.input.clicked.is_connected(_on_to_selected.bind(move)):
 			move.to.input.clicked.connect(_on_to_selected.bind(move))
 		
-		highlight.highlight(move, General.color_selected)
+		highlight.highlight(move, color_selected)
 
 
 func _on_to_hovered(move: GameMove) -> void:
-	move.to.highlight.color = General.color_hovered
+	move.to.highlight.color = color_hovered
 
 
 func _on_to_dehovered(move: GameMove) -> void:
-	move.to.highlight.color = highlight.get_to_spot_color(move)
+	highlight.highlight(move, color_selected)
 
 
 func _on_to_selected(selected_move: GameMove) -> void:

@@ -2,9 +2,11 @@ class_name GameMoveHighlight extends Node
 
 
 @export var color_neutral := Color.WHITE
-@export var color_rosette := Color.AQUAMARINE
-@export var color_end := Color.YELLOW
+@export var color_rosette := Color.GREEN_YELLOW
+@export var color_end := Color.GOLD
 @export var color_knock_out := Color.ORANGE
+@export var color_invalid := Color.CRIMSON
+@export var color_invalid_pieces := Color.YELLOW
 
 @export var path_highlight_prefab: PackedScene
 
@@ -18,7 +20,7 @@ func highlight(move: GameMove, base_color := color_neutral) -> void:
 	
 	# Highlight spot FROM
 	move.from.highlight.active = true
-	move.from.highlight.color = base_color if move.valid else General.color_negative
+	move.from.highlight.color = base_color if move.valid else color_invalid
 	
 	# Highlight pieces FROM
 	if move.valid:
@@ -27,16 +29,40 @@ func highlight(move: GameMove, base_color := color_neutral) -> void:
 	
 	# Highlight spot TO
 	move.to.highlight.active = true
-	move.to.highlight.color = get_to_spot_color(move)
+	if not move.valid:
+		move.to.highlight.color = color_invalid
+	elif move.is_to_end_of_track:
+		move.to.highlight.color = color_end
+	elif move.is_to_occupied_by_opponent:
+		move.to.highlight.color = color_knock_out
+	elif move.to.is_in_group("rosettes"):
+		move.to.highlight.color = color_rosette
+	else:
+		move.to.highlight.color = base_color
 	
 	# Highlight pieces TO
 	for piece in move.pieces_in_to:
 		piece.highlight.active = true
-		piece.highlight.color = color_knock_out if move.is_to_occupied_by_opponent else color_rosette
+		if not move.valid:
+			piece.highlight.color = color_invalid_pieces
+		elif move.is_to_occupied_by_opponent:
+			piece.highlight.color = color_knock_out
+		elif move.is_to_end_of_track:
+			piece.highlight.color = color_end
+		elif move.is_in_group("rosettes"):
+			piece.highlight.color = color_rosette 
+		else:
+			piece.highlight.color = base_color
 	
 	# Highlight PATH
 	var path = get_path_highlighter(move)
-	path.color_modulate = base_color if move.valid else General.color_negative
+	var path_color
+	if not move.valid:
+		path.color_modulate = color_invalid
+	elif move.is_to_end_of_track:
+		path.color_modulate = color_end
+	else:
+		path.color_modulate = base_color
 
 
 func clear_highlight(move: GameMove) -> void:
@@ -51,19 +77,6 @@ func clear_highlight(move: GameMove) -> void:
 		var path = move_path_highlighter_dict[move]
 		path.queue_free()
 		move_path_highlighter_dict.erase(move)
-
-
-func get_to_spot_color(move: GameMove) -> Color:
-	if not move.valid:
-		return General.color_negative
-	elif move.is_to_end_of_track:
-		return color_end
-	elif move.is_to_occupied_by_opponent:
-		return color_knock_out
-	elif move.to.is_in_group("rosettes"):
-		return color_rosette
-	else:
-		return color_neutral
 
 
 # Creates a path highlighter for the given move. If the move already has an associated

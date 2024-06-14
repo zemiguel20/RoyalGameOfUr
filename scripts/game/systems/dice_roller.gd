@@ -14,7 +14,7 @@ class_name DiceRoller extends Node3D
 @export_range(1.0, 2.0, 0.1) var auto_max_shake_duration: float = 2.0
 @export var color_dice_selectable := Color.MEDIUM_AQUAMARINE
 @export var color_dice_hovered := Color.AQUAMARINE
-@export var color_dice_positive_result := Color.LIME_GREEN
+@export var color_dice_positive_result := Color.LAWN_GREEN
 @export var color_dice_negative_result := Color.CRIMSON
 
 var place_spots: Array[Node3D] = []
