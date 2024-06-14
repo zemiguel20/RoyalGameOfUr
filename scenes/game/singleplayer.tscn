@@ -142,7 +142,6 @@ assigned_player = 1
 
 [node name="Opponent_Guard_Animated" parent="." instance=ExtResource("7_tegfk")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
-skip_intro = true
 
 [node name="GameCamera" parent="." node_paths=PackedStringArray("pov_start", "pov_intro", "pov_singleplayer", "pov_hotseat") instance=ExtResource("7_w116q")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.677, 0.167, 6.671)
