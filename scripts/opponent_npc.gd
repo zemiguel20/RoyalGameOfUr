@@ -12,15 +12,18 @@ var explained_capturing: bool
 var explained_securing: bool
 var explained_everything: bool
 
-@onready var _dialogue_system = $DialogueSystem as DialogueSystem
+@export var _dialogue_system: DialogueSystem
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var dialogue_cooldown_timer: Timer = $DialogueCooldownTimer
 
 
 func _ready():
 	visible = false
-	
 	GameEvents.play_pressed.connect(_on_play_pressed)
+	# DialogueSystem should play opponent animations.
+	# NOTE: Actually not, they should stay separate and this script should coordinate
+	# between animations and dialogue, but whatever...
+	_dialogue_system.set_animation_player(animation_player)
 
 
 func _on_play_pressed() -> void:

@@ -2,11 +2,6 @@
 class_name GuardNPC
 extends AmbientNPCBase
 
-@export_group("Paths & Routes")
-@export var _path: PathFollow3D
-@export var _path2: PathFollow3D
-@export var _path3: PathFollow3D
-
 @export_group("Speed")
 @export var _move_speed: float = 2
 @export var _walk_rotation_speed: float = 1
@@ -20,15 +15,20 @@ extends AmbientNPCBase
 @export_group("Special Events")
 ## The guard has a random chance to wait at one of the points in the path.
 @export_range(0, 1) var _watch_game_probability = 0.5
-## The point the guard is looking at when watching the game.
-@export var _watch_point: Marker3D
 ## The part of the path follow where the guard pauzes.
 @export var _watch_path_progress_ratio = 0.3
 
+var _path1: PathFollow3D
+var _path2: PathFollow3D
+var _path3: PathFollow3D
 var _original_position: Vector3
 
 func on_ready(_npc_manager):
 	_original_position = global_position
+	_path1 = _npc_manager.path_follow_guard_1
+	_path2 = _npc_manager.path_follow_guard_2
+	_path3 = _npc_manager.path_follow_guard_3
+	
 	super.on_ready(_npc_manager)
 	
 
@@ -42,21 +42,28 @@ func _initialize_blackboard():
 func _initialize_tree():
 	## Subtree for traversing path 1
 	var _moving_sequence_no_watching = SequenceNode.new([
-		MoveAlongPathTask.new(_path)])
+		MoveAlongPathTask.new(_path1)])
 		
 	## Subtree for traversing path 1, but stopping to watch the game.	
 	var _moving_sequence_with_watching = SequenceNode.new([
-		MoveAlongPathTask.new(_path, 0.001, _watch_path_progress_ratio),
-		RotateTowardsPointTask.new(_watch_point.global_position),
+		MoveAlongPathTask.new(_path1, 0.001, _watch_path_progress_ratio),
+		PlayAnimationTask.new("TurnLeft", true),
+		RotateYTask.new(0.5*PI),
+		DebugTask.new("Turned"),
+		## Not sure how to fix the obvious transitions
+		PlayAnimationTask.new("Idle", false, 0),
 		WaitTask.new(5),
-		RotateTowardsPointTask.new(_path.global_position + _path.global_basis.z),
-		MoveAlongPathTask.new(_path, _watch_path_progress_ratio, 1),
+		PlayAnimationTask.new("TurnRight", true),
+		RotateYTask.new(-0.5*PI),
+		PlayAnimationTask.new("Walk", false, 0),
+		MoveAlongPathTask.new(_path1, _watch_path_progress_ratio, 1),
 		])
 		
 	## Main tree of the guard.
 	_current_tree = SequenceNode.new([
-		RunOnceNode.new(WaitTask.new(_start_delay)),	
+		RunOnceNode.new(WaitTask.new(_start_delay)),
 		SetVisibilityTask.new(true),
+		PlayAnimationTask.new("Walk"),
 		## Moving sequence with either watching the game or not stopping.
 		SelectorNode.new([
 			RandomNode.new(_moving_sequence_with_watching, _watch_game_probability),

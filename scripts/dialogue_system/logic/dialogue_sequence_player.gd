@@ -11,9 +11,9 @@ signal on_interruption_ready
 @export var _temp_min_entry_length: float = 5.0
 
 @onready var _audio_player = $AudioStreamPlayer3D as AudioStreamPlayer3D
-@onready var _animation_player =  $"../../AnimationPlayer" as OpponentAnimationPlayer
-@onready var _subtitle_displayer = $"../../Subtitle_System" as DialogueSubtitles
-@onready var _dialogue_menu_controller = $"../../Menus_During_Dialogue" as DialogueMenuController
+@onready var _subtitle_displayer = $"../Subtitle_System" as DialogueSubtitles
+@onready var _dialogue_menu_controller = $"../Menus_During_Dialogue" as DialogueMenuController
+var _animation_player: AnimationPlayer
 
 var is_playing: bool
 var _current_sequence: DialogueSequence
@@ -58,7 +58,6 @@ func play_dialogue_bundle(_current_entry):
 	if _use_subtitles and _current_entry.caption != null:
 		_subtitle_displayer.display_subtitle(_current_entry, _current_sequence.requires_click)
 	## TODO: Change, maybe we should give the whole list, and let the whole list play in a random order, 
-	## but dont start a new animation if the 
 	if _current_entry.anim_variations != null and _current_entry.anim_variations.size() > 0:	
 		_animation_player.play_animation(_current_entry.anim_variations[0], false)
 		
@@ -99,6 +98,10 @@ func finish_sequence():
 		_already_prevents_opponent_action = false
 		GameEvents.opponent_action_resumed.emit()
 
+
+func set_animation_player(animation_player: AnimationPlayer):
+	_animation_player = animation_player
+	
 
 func _handle_opponent_action_prevention(entry: DialogueBundle):
 	if entry.prevents_opponent_action and !_already_prevents_opponent_action:
