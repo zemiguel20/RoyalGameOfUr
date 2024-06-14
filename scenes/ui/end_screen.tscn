@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwnjc775ngbs4"]
+
+[ext_resource type="Script" path="res://scripts/ui/end_screen.gd" id="1_awi2m"]
+[ext_resource type="Theme" uid="uid://w7yb2efymxa0" path="res://UI/main_theme.tres" id="2_xuqdq"]
+
+[node name="EndScreen" type="CanvasLayer"]
+script = ExtResource("1_awi2m")
+
+[node name="TabletPanel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -500.0
+offset_right = 350.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeaderLabel" type="Label" parent="TabletPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -291.0
+offset_top = 40.0
+offset_right = 304.0
+offset_bottom = 122.0
+grow_horizontal = 2
+theme = ExtResource("2_xuqdq")
+theme_override_font_sizes/font_size = 64
+text = "Placeholder text"
+horizontal_alignment = 1
+
+[node name="SurveyMenu" type="VBoxContainer" parent="TabletPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.0
+offset_top = -354.0
+offset_right = 207.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+metadata/_edit_group_ = true
+
+[node name="TextLabel" type="Label" parent="TabletPanel/SurveyMenu"]
+custom_minimum_size = Vector2(7.79, 0)
+layout_mode = 2
+text = "Thank you so much for playing the beta version of our game about the boardgame known as The Royal Game of Ur! There will be a survey coming soon, but in the meantime you can use the survey button to visit the beautiful website of Leiden University. "
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabletPanel/SurveyMenu"]
+layout_mode = 2
+theme_override_constants/separation = 120
+alignment = 1
+
+[node name="SurveyButton" type="LinkButton" parent="TabletPanel/SurveyMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Survey"
+
+[node name="SkipButton" type="Button" parent="TabletPanel/SurveyMenu/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xuqdq")
+theme_override_font_sizes/font_size = 32
+text = "Skip"
+flat = true
+
+[node name="EndMenu" type="VBoxContainer" parent="TabletPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 200
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="RematchButton" type="Button" parent="TabletPanel/EndMenu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Rematch"
+flat = true
+
+[node name="MainMenuButton" type="Button" parent="TabletPanel/EndMenu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Back to main menu"
+flat = true
+
+[connection signal="pressed" from="TabletPanel/EndMenu/RematchButton" to="." method="_on_rematch_button_pressed"]
+[connection signal="pressed" from="TabletPanel/EndMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

@@ -1,38 +1,69 @@
 extends CanvasLayer
 
 
-@onready var controls_regular = $ControlsRegular as BoxContainer
-@onready var controls_in_move = $ControlsInMove as BoxContainer
-
-@onready var fast_move_rect = $ControlsRegular/OneKey as TextureRect
-@onready var fast_move_label = $ControlsRegular/OneKey/PieceMode as Label
-@onready var look_around: TextureRect = $ControlsRegular/RightMouse
+@onready var interact: HBoxContainer = $Controls/Interact
+@onready var look_around: HBoxContainer = $Controls/LookAround
+@onready var cancel: HBoxContainer = $Controls/Cancel
+@onready var fast_move: HBoxContainer = $Controls/FastMove
+@onready var fast_move_check_box: CheckBox = $Controls/FastMove/FastMoveCheckBox
 
 
 func _ready():
-	GameEvents.game_started.connect(_show_controls_regular)
-	GameEvents.drag_move_start.connect(_show_controls_in_move)
-	GameEvents.drag_move_end.connect(_show_controls_regular)
-	GameEvents.move_phase_started.connect(_show_fast_mode_label)
-	GameEvents.fast_move_toggled.connect(_toggle_fast_move_label)
+	visible = false
+	fast_move.visible = false
+	
+	GameEvents.game_started.connect(_on_game_started)
+	GameEvents.game_ended.connect(_on_game_ended)
+	GameEvents.drag_move_start.connect(_on_drag_move_started)
+	GameEvents.drag_move_stopped.connect(_on_drag_move_stopped)
+	GameEvents.new_turn_started.connect(_on_new_turn_started)
+	
+	fast_move_check_box.toggled.connect(_on_fast_move_toggled)
 
 
-func _show_controls_regular():
-	controls_regular.visible = true
-	controls_in_move.visible = false
-	look_around.visible = not Settings.is_hotseat_mode
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.keycode == KEY_1 and event.pressed:
+			fast_move.visible = true
+			fast_move_check_box.button_pressed = not fast_move_check_box.button_pressed
+
+
+func _on_game_started() -> void:
+	visible = true
+	_show_controls_regular()
+
+
+func _on_game_ended() -> void:
+	visible = false
+
+
+func _on_drag_move_started() -> void:
+	_show_controls_in_move()
+
+
+func _on_drag_move_stopped() -> void:
+	_show_controls_regular()
+
+
+func _on_new_turn_started() -> void:
+	# In singleplayer, show fast mode option after some turns
+	if not GameManager.is_hotseat and GameManager.turn_number >= 4:
+		fast_move.visible = true
+
+
+func _show_controls_regular() -> void:
+	interact.visible = true
+	cancel.visible = false
+	look_around.visible = not GameManager.is_hotseat
+	
+	if GameManager.is_hotseat:
+		fast_move.visible = true
 
 
 func _show_controls_in_move():
-	controls_regular.visible = false
-	controls_in_move.visible = true
+	interact.visible = false
+	cancel.visible = true
 
 
-func _show_fast_mode_label(player: General.Player, x: int):
-	if player == General.Player.ONE and GameState.player_turns_made == 2:
-		fast_move_rect.visible = true
-
-
-func _toggle_fast_move_label(enabled: bool):
-	fast_move_label.text = "🗹 Fast movement" if enabled else "☐ Fast movement"
-	fast_move_rect.visible = true
+func _on_fast_move_toggled(toggled_on: bool) -> void:
+	GameManager.fast_move_enabled = toggled_on

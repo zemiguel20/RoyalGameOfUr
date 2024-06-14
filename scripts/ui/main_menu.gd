@@ -37,14 +37,27 @@ var current_board_index: int = 0
 
 
 func _ready() -> void:
+	_start_menu()
+	
+	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
+
+
+func _on_back_to_main_menu() -> void:
+	_start_menu()
+
+
+func _start_menu() -> void:
+	visible = true
 	main_menu.visible = true
 	ruleset_menu.visible = false
 
 
 func _on_singleplayer_button_pressed() -> void:
 	visible = false
-	Settings.is_hotseat_mode = false
-	Settings.ruleset = General.RULESET_FINKEL
+	GameManager.is_hotseat = false
+	GameManager.is_rematch = false
+	GameManager.ruleset = General.RULESET_FINKEL
+	GameManager.start_new_game()
 	GameEvents.play_pressed.emit()
 
 
@@ -95,71 +108,73 @@ func _on_switch_board_right_button_pressed() -> void:
 
 
 func _on_rule_1_check_box_toggled(toggled_on: bool) -> void:
-	Settings.ruleset.rosettes_are_safe = toggled_on
+	GameManager.ruleset.rosettes_are_safe = toggled_on
 	ruleset_name_label.text = "Custom"
 
 
 func _on_rule_2_check_box_toggled(toggled_on: bool) -> void:
-	Settings.ruleset.rosettes_give_extra_turn = toggled_on
+	GameManager.ruleset.rosettes_give_extra_turn = toggled_on
 	ruleset_name_label.text = "Custom"
 
 
 func _on_rule_3_check_box_toggled(toggled_on: bool) -> void:
-	Settings.ruleset.rosettes_allow_stacking = toggled_on
+	GameManager.ruleset.rosettes_allow_stacking = toggled_on
 	ruleset_name_label.text = "Custom"
 
 
 func _on_rule_4_check_box_toggled(toggled_on: bool) -> void:
-	Settings.ruleset.captures_give_extra_turn = toggled_on
+	GameManager.ruleset.captures_give_extra_turn = toggled_on
 	ruleset_name_label.text = "Custom"
 
 
 func _on_rule_5_check_box_toggled(toggled_on: bool) -> void:
-	Settings.ruleset.can_move_backwards = toggled_on
+	GameManager.ruleset.can_move_backwards = toggled_on
 	ruleset_name_label.text = "Custom"
 
 
 func _on_piece_number_slider_value_changed(value: float) -> void:
-	Settings.ruleset.num_pieces = value
+	GameManager.ruleset.num_pieces = int(value)
 	piece_number_label.text = "%d Total pieces" % piece_number_slider.value
 	ruleset_name_label.text = "Custom"
 
 
 func _on_dice_number_slider_value_changed(value: float) -> void:
-	Settings.ruleset.num_dice = value
+	GameManager.ruleset.num_dice = int(value)
 	dice_number_label.text = "%d Total dice" % dice_number_slider.value
 	ruleset_name_label.text = "Custom"
 
 
 func _update_ruleset() -> void:
-	Settings.ruleset = ruleset_list[current_ruleset_index].duplicate()
-	current_board_index = board_list.find(Settings.ruleset.board_layout)
+	GameManager.ruleset = ruleset_list[current_ruleset_index].duplicate()
+	current_board_index = board_list.find(GameManager.ruleset.board_layout)
 	
-	ruleset_name_label.text = Settings.ruleset.name
-	board_layout_image.texture = Settings.ruleset.board_layout.preview
-	board_name_label.text = Settings.ruleset.board_layout.name
+	ruleset_name_label.text = GameManager.ruleset.name
+	board_layout_image.texture = GameManager.ruleset.board_layout.preview
+	board_name_label.text = GameManager.ruleset.board_layout.name
 	
-	rule_1_check_box.set_pressed_no_signal(Settings.ruleset.rosettes_are_safe)
-	rule_2_check_box.set_pressed_no_signal(Settings.ruleset.rosettes_give_extra_turn)
-	rule_3_check_box.set_pressed_no_signal(Settings.ruleset.rosettes_allow_stacking)
-	rule_4_check_box.set_pressed_no_signal(Settings.ruleset.captures_give_extra_turn)
-	rule_5_check_box.set_pressed_no_signal(Settings.ruleset.can_move_backwards)
+	rule_1_check_box.set_pressed_no_signal(GameManager.ruleset.rosettes_are_safe)
+	rule_2_check_box.set_pressed_no_signal(GameManager.ruleset.rosettes_give_extra_turn)
+	rule_3_check_box.set_pressed_no_signal(GameManager.ruleset.rosettes_allow_stacking)
+	rule_4_check_box.set_pressed_no_signal(GameManager.ruleset.captures_give_extra_turn)
+	rule_5_check_box.set_pressed_no_signal(GameManager.ruleset.can_move_backwards)
 	
-	piece_number_slider.set_value_no_signal(Settings.ruleset.num_pieces)
+	piece_number_slider.set_value_no_signal(GameManager.ruleset.num_pieces)
 	piece_number_label.text = "%d Total pieces" % piece_number_slider.value
-	dice_number_slider.set_value_no_signal(Settings.ruleset.num_dice)
+	dice_number_slider.set_value_no_signal(GameManager.ruleset.num_dice)
 	dice_number_label.text = "%d Total dice" % dice_number_slider.value
 
 
 func _update_board() -> void:
-	Settings.ruleset.board_layout = board_list[current_board_index]
-	board_layout_image.texture = Settings.ruleset.board_layout.preview
-	board_name_label.text = Settings.ruleset.board_layout.name
+	GameManager.ruleset.board_layout = board_list[current_board_index]
+	board_layout_image.texture = GameManager.ruleset.board_layout.preview
+	board_name_label.text = GameManager.ruleset.board_layout.name
 
 
 func _on_confirm_button_pressed() -> void:
 	visible = false
-	Settings.is_hotseat_mode = true
+	GameManager.is_hotseat = true
+	GameManager.is_rematch = false
+	GameManager.start_new_game()
 	GameEvents.play_pressed.emit()
 
 

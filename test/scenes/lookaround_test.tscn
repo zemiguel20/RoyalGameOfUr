@@ -1,36 +1,51 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyv4h7haakr1c"]
+[gd_scene load_steps=6 format=3 uid="uid://dyv4h7haakr1c"]
 
-[ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_xbdh3"]
-[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/boards/board_finkel.tscn" id="2_esi8y"]
-[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="3_4a2hg"]
+[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/game_camera.tscn" id="3_4a2hg"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_080q8"]
-size = Vector3(0.358398, 0.001, 0.125)
+[sub_resource type="GDScript" id="GDScript_g331i"]
+script/source = "extends Node
+
+@onready var camera_lookaround: CameraLookAround = $Camera_Lookaround
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	if not camera_lookaround.is_node_ready():
+		await camera_lookaround.ready
+	
+	GameEvents.game_started.emit()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_00jcn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bg3h5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywntv"]
+albedo_color = Color(0.696871, 0.203067, 0.0872055, 1)
 
 [node name="CameraTest" type="Node"]
+script = SubResource("GDScript_g331i")
 
-[node name="Environment" parent="." instance=ExtResource("1_xbdh3")]
+[node name="Camera_Lookaround" parent="." node_paths=PackedStringArray("pov_start", "pov_intro", "pov_singleplayer", "pov_hotseat") instance=ExtResource("3_4a2hg")]
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 1.01463, 0.497661, 1.59693)
+pov_start = NodePath("../MockPOV")
+pov_intro = NodePath("../MockPOV")
+pov_singleplayer = NodePath("../MockPOV")
+pov_hotseat = NodePath("../MockPOV")
 
-[node name="Camera3D" parent="Environment" index="3"]
-current = false
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_00jcn")
+skeleton = NodePath("../Camera_Lookaround")
 
-[node name="Area3D" type="Area3D" parent="Environment/Table" index="0" groups=["Ground"]]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.857886, 0.0185585, 1.3861)
-collision_layer = 3
-collision_mask = 3
+[node name="CSGMesh3D" type="CSGMesh3D" parent="MeshInstance3D"]
+transform = Transform3D(0.262711, 0, 7.45058e-09, 0, 0.262711, 0, -7.45058e-09, 0, 0.262711, 4.78259e-08, 0.814741, -0.743193)
+mesh = SubResource("BoxMesh_bg3h5")
+material = SubResource("StandardMaterial3D_ywntv")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Table/Area3D"]
-shape = SubResource("BoxShape3D_080q8")
-
-[node name="Board" parent="." instance=ExtResource("2_esi8y")]
-transform = Transform3D(0.00529919, 0, -0.00848048, 0, 0.01, 0, 0.00848048, 0, 0.00529919, 0.862239, 0.0260538, 1.38567)
-
-[node name="P1StartSpot1" parent="Board/StartAndEndSpots" index="0"]
-transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 3.10344, 0, 4.29707)
-
-[node name="Camera_Lookaround" parent="." instance=ExtResource("3_4a2hg")]
-transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 0.919994, 0.109034, 1.44549)
-switch_threshold_ratio = 0.75
-
-[editable path="Environment"]
-[editable path="Board"]
+[node name="MockPOV" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.890417, 0)
+gizmo_extents = 0.2

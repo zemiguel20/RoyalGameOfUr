@@ -1,150 +1,92 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvkfyp4kdef5w"]
+[gd_scene load_steps=6 format=3 uid="uid://bksmfg8gvpyso"]
 
 [ext_resource type="Script" path="res://scripts/ui/controls_hud.gd" id="1_6ffc1"]
 [ext_resource type="Texture2D" uid="uid://1tku2lwhe5b6" path="res://sprites/1_light.png" id="1_u7ox2"]
 [ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://sprites/left_mouse_button_light.png" id="2_ikyqn"]
+[ext_resource type="LabelSettings" uid="uid://b1fl8fm68m0hf" path="res://UI/hud_label_settings.tres" id="3_b80ow"]
 [ext_resource type="Texture2D" uid="uid://oclm41ujoyav" path="res://sprites/right_mouse_button_light.png" id="3_v050y"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_xbp4f"]
-line_spacing = -2.0
-font_size = 18
-
-[sub_resource type="LabelSettings" id="LabelSettings_nqo0a"]
-line_spacing = -2.0
-font_size = 18
-
-[sub_resource type="LabelSettings" id="LabelSettings_lofih"]
-line_spacing = -2.0
-font_size = 18
 
 [node name="ControlsHUD" type="CanvasLayer"]
 script = ExtResource("1_6ffc1")
 
-[node name="ControlsRegular" type="VBoxContainer" parent="."]
-visible = false
-anchors_preset = -1
-anchor_left = 0.00104167
-anchor_top = 0.850926
-anchor_right = 0.0270833
-anchor_bottom = 0.989815
+[node name="Controls" type="VBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -261.0
+offset_right = 469.0
+offset_bottom = -31.0
 grow_vertical = 0
 theme_override_constants/separation = 15
 alignment = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="LeftMouse" type="TextureRect" parent="ControlsRegular"]
-custom_minimum_size = Vector2(40, 40)
+[node name="Interact" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
-size_flags_horizontal = 3
+
+[node name="InteractIcon" type="TextureRect" parent="Controls/Interact"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
 texture = ExtResource("2_ikyqn")
-expand_mode = 1
 stretch_mode = 5
 
-[node name="Interact" type="Label" parent="ControlsRegular/LeftMouse"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.17143
-anchor_top = 0.0285721
-anchor_right = 5.35143
-anchor_bottom = 0.828572
-offset_left = -3.5715
-offset_top = -1.14288
-offset_right = -3.5715
-offset_bottom = 6.85712
-grow_horizontal = 2
+[node name="InteractLabel" type="Label" parent="Controls/Interact"]
+layout_mode = 2
 text = "Interact"
-label_settings = SubResource("LabelSettings_xbp4f")
+label_settings = ExtResource("3_b80ow")
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="RightMouse" type="TextureRect" parent="ControlsRegular"]
-custom_minimum_size = Vector2(40, 40)
+[node name="Cancel" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
+
+[node name="CancelIcon" type="TextureRect" parent="Controls/Cancel"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
 texture = ExtResource("3_v050y")
-expand_mode = 1
 stretch_mode = 5
 
-[node name="LookAround" type="Label" parent="ControlsRegular/RightMouse"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.19143
-anchor_top = 0.0285721
-anchor_right = 6.87143
-anchor_bottom = 0.868572
-offset_left = -4.5715
-offset_top = -1.14288
-offset_right = -4.5715
-offset_bottom = 5.25712
-grow_horizontal = 2
-text = "Look Around"
-label_settings = SubResource("LabelSettings_nqo0a")
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="OneKey" type="TextureRect" parent="ControlsRegular"]
-visible = false
-custom_minimum_size = Vector2(40, 40)
+[node name="CancelLabel" type="Label" parent="Controls/Cancel"]
 layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("1_u7ox2")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="PieceMode" type="Label" parent="ControlsRegular/OneKey"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.24
-anchor_top = 0.0250006
-anchor_right = 8.3
-anchor_bottom = 0.865001
-offset_left = -7.0
-offset_top = -1.00003
-offset_right = -7.00003
-offset_bottom = 5.39998
-grow_horizontal = 2
-text = "☐ Fast movement"
-label_settings = SubResource("LabelSettings_lofih")
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="ControlsInMove" type="VBoxContainer" parent="."]
-visible = false
-anchors_preset = -1
-anchor_left = 0.00104167
-anchor_top = 0.850926
-anchor_right = 0.0270833
-anchor_bottom = 0.989815
-grow_vertical = 0
-theme_override_constants/separation = 15
-alignment = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="RightMouse" type="TextureRect" parent="ControlsInMove"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("3_v050y")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Cancel" type="Label" parent="ControlsInMove/RightMouse"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.19143
-anchor_top = 0.0285721
-anchor_right = 6.87143
-anchor_bottom = 0.868572
-offset_left = -4.5715
-offset_top = -1.14288
-offset_right = -4.5715
-offset_bottom = 5.25712
-grow_horizontal = 2
 text = "Cancel Move"
-label_settings = SubResource("LabelSettings_nqo0a")
+label_settings = ExtResource("3_b80ow")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LookAround" type="HBoxContainer" parent="Controls"]
+layout_mode = 2
+
+[node name="LookAroundIcon" type="TextureRect" parent="Controls/LookAround"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("3_v050y")
+stretch_mode = 5
+
+[node name="LookAroundLabel" type="Label" parent="Controls/LookAround"]
+layout_mode = 2
+text = "(Hold)  Look Around"
+label_settings = ExtResource("3_b80ow")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="FastMove" type="HBoxContainer" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="FastMoveIcon" type="TextureRect" parent="Controls/FastMove"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("1_u7ox2")
+stretch_mode = 5
+
+[node name="FastMoveCheckBox" type="CheckBox" parent="Controls/FastMove"]
+layout_mode = 2
+flat = true
+
+[node name="CancelLabel" type="Label" parent="Controls/FastMove"]
+layout_mode = 2
+text = "Fast Move Mode"
+label_settings = ExtResource("3_b80ow")
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true

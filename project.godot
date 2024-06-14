@@ -20,9 +20,8 @@ config/icon="res://icon.svg"
 
 General="*res://scripts/autoloads/general.gd"
 GameEvents="*res://scripts/autoloads/game_events.gd"
-GameState="*res://scripts/autoloads/game_state.gd"
+GameManager="*res://scripts/autoloads/game_manager.gd"
 EntityManager="*res://scripts/autoloads/entity_manager.gd"
-Settings="*res://scripts/autoloads/game_settings.gd"
 
 [display]
 
@@ -34,6 +33,15 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="Royal Game Of Ur"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
+
+[gui]
+
+theme/custom="res://UI/main_theme.tres"
+theme/custom_font="res://UI/IMFeENrm29P.ttf"
 
 [input]
 

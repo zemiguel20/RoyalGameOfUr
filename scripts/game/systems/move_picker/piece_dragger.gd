@@ -4,11 +4,12 @@ class_name PieceDragger extends Node
 
 @export var selector: InteractiveGameMoveSelector
 @export var float_height: float = 0.05
+@export var bounds: Vector2
 
 var is_dragging: bool = false
 var pieces_to_drag: Array[Piece] = []
 var original_positions: Array[Vector3] = []
-var board_surface_y: float
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,20 +24,25 @@ func _process(delta: float) -> void:
 		# Get intersection point projection from screen to world
 		var cam = get_viewport().get_camera_3d()
 		var mouse_pos = get_viewport().get_mouse_position()
+		
+		var board = EntityManager.get_board() as Board
+		var board_surface_y = board.global_position.y
+		
 		var plane = Plane(Vector3.UP, Vector3(0, board_surface_y, 0))
 		var result = plane.intersects_ray(cam.project_ray_origin(mouse_pos), cam.project_ray_normal(mouse_pos))
 		
 		if result != null:
-			# Interpolate drag spot position
-			# BUG: NEEDS TO BE CLAMPED RELATIVE TO THE TABLE IN WORLD SPACE
-			#var x = clamp(result.x, -1.5, 2.5)
-			#var z = clamp(result.z, -5, 5)
-			var x = result.x
-			var z = result.z
+			# Clamp intersection point within bounds around the board
+			var result_local = board.to_local(Vector3(result.x, result.y, result.z))
+			result_local.x = clampf(result_local.x, -bounds.x, bounds.x)
+			result_local.z = clampf(result_local.z, -bounds.y, bounds.y)
+			var clamped_result = board.to_global(result_local)
+			
+			# Update dragged pieces position
 			for i in pieces_to_drag.size():
 				var piece = pieces_to_drag[i]
-				var y = board_surface_y + float_height + (i * piece.get_height_scaled())
-				var target_pos = Vector3(x,y,z)
+				var target_pos = clamped_result
+				target_pos.y += float_height + (i * piece.get_height_scaled())
 				piece.global_position = lerp(piece.global_position, target_pos, 8 * delta)
 
 
@@ -47,8 +53,6 @@ func _on_from_spot_selected(spot: Spot) -> void:
 	for piece in pieces_to_drag:
 		original_positions.append(piece.global_position)
 	
-	board_surface_y = spot.global_position.y
-	
 	is_dragging = true
 	GameEvents.drag_move_start.emit()
 
@@ -57,13 +61,13 @@ func _on_selection_cancel() -> void:
 	_reset_pieces_positions()
 	pieces_to_drag.clear()
 	is_dragging = false
-	GameEvents.drag_move_end.emit()
+	GameEvents.drag_move_stopped.emit()
 
 
 func _on_move_selected() -> void:
 	pieces_to_drag.clear()
 	is_dragging = false
-	GameEvents.drag_move_end.emit()
+	GameEvents.drag_move_stopped.emit()
 
 
 func _reset_pieces_positions() -> void:

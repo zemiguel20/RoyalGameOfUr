@@ -26,7 +26,7 @@ func enable_npcs():
 
 
 func _on_play_pressed():
-	if Settings.is_hotseat_mode:
+	if GameManager.is_hotseat:
 		for npc in npcs:
 			npc.set_process(false)
 			npc.visible = false

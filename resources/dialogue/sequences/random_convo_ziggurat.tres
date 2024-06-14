@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://vv4vjihyovpn"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://bkpo10nmw865j"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_0hgud"]
 [ext_resource type="AudioStream" uid="uid://0cjtroofnp1b" path="res://resources/dialogue/random-ziggurat-1-full.mp3" id="1_8tvaa"]

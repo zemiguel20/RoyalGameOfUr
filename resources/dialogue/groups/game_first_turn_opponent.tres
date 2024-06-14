@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=8 format=3 uid="uid://rxqyntmgme8f"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=8 format=3 uid="uid://dr1kf71fk3tp3"]
 
 [ext_resource type="AudioStream" uid="uid://bs40ox5uxe0p7" path="res://resources/dialogue/intro-2-7-damrina.mp3" id="1_ia77a"]
 [ext_resource type="AudioStream" uid="uid://chi81eqj44gsj" path="res://resources/dialogue/intro-2-7-damrina-2.mp3" id="2_1r5hb"]

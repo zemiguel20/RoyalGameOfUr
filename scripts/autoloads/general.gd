@@ -25,16 +25,12 @@ const BOARD_FINKEL = preload("res://resources/rulesets/board_layouts/layout_fink
 const BOARD_MASTERS = preload("res://resources/rulesets/board_layouts/layout_masters.tres")
 const BOARD_RR = preload("res://resources/rulesets/board_layouts/layout_russian_rosette.tres")
 
-const color_selectable := Color.SKY_BLUE
-const color_selected := Color.DEEP_SKY_BLUE
-const color_hovered := Color.LIGHT_BLUE
-const color_positive := Color.MEDIUM_SEA_GREEN
-const color_negative := Color.RED
-
 
 func get_opponent(player : Player) -> Player:
 	return Player.ONE if player == Player.TWO else Player.TWO
 
+func get_random_player() -> Player:
+	return randi_range(Player.ONE, Player.TWO) as Player
 
 ## This is a quick helper function for converting an euler rotation from degrees to radians.
 func deg_to_rad(vector: Vector3):

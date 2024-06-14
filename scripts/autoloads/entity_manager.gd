@@ -16,6 +16,7 @@ func spawn_board(board_prefab: PackedScene) -> Board:
 		spawn_point = Node3D.new()
 	
 	var instance = board_prefab.instantiate() as Board
+	instance.name = "Board_%d" % instance.get_instance_id()
 	add_child(instance)
 	instance.global_position = spawn_point.global_position
 	instance.global_rotation = spawn_point.global_rotation
@@ -31,6 +32,7 @@ func spawn_player_piece(player: int, board: Board) -> Piece:
 	# Create instance
 	var prefab = P1_PIECE_PREFAB if player == General.Player.ONE else P2_PIECE_PREFAB
 	var instance = prefab.instantiate() as Piece
+	instance.name = "Piece_%d_%d" % [player, instance.get_instance_id()]
 	add_child(instance)
 	
 	# Place piece in start zone
@@ -46,16 +48,11 @@ func spawn_player_piece(player: int, board: Board) -> Piece:
 
 
 ## Spawns a die in the given position in the world.
-func spawn_die() -> Die:
-	# Get spawn point
-	var spawn_point = get_tree().get_first_node_in_group("dice_spawn")
-	if not spawn_point or not spawn_point is Node3D:
-		push_warning("No dice spawn point found. Using origin.")
-		spawn_point = Node3D.new()
-	
+func spawn_die(global_position := Vector3.ZERO) -> Die:
 	var instance = DIE_PREFAB.instantiate() as Die
+	instance.name = "Die_%d" % instance.get_instance_id()
 	add_child(instance)
-	instance.global_position = spawn_point.global_position
+	instance.global_position = global_position
 	return instance
 
 
@@ -63,13 +60,14 @@ func spawn_die() -> Die:
 ## without affecting the spots of the board.
 func spawn_temporary_spot() -> Spot:
 	var spot = SPOT_PREFAB.instantiate() as Spot
+	spot.name = "TempSpot_%d" % spot.get_instance_id()
 	add_child(spot)
 	return spot
 
 
 ## Searches for the board in the scene tree.
 func get_board() -> Board:
-	var filter = func(node: Node): return node is Board
+	var filter = func(node: Node): return node is Board and not node.is_queued_for_deletion()
 	var boards = get_children().filter(filter)
 	if boards.is_empty():
 		return null
@@ -79,7 +77,7 @@ func get_board() -> Board:
 
 ## Get all spawned dice.
 func get_dice() -> Array[Die]:
-	var filter = func(node: Node): return node is Die
+	var filter = func(node: Node): return node is Die and not node.is_queued_for_deletion()
 	var dice: Array[Die] = []
 	dice.assign(get_children().filter(filter))
 	return dice
@@ -87,27 +85,18 @@ func get_dice() -> Array[Die]:
 
 ## Get all spawned pieces of the given player.
 func get_player_pieces(player: int) -> Array[Piece]:
-	var filter = func(node: Node): return node is Piece and (node as Piece).player_owner == player
+	var filter = func(node: Node): return node is Piece and (node as Piece).player_owner == player \
+									and not node.is_queued_for_deletion()
 	var pieces = get_children().filter(filter)
 	return pieces
 
 
-func despawn_pieces() -> void:
+func despawn_board() -> void:
 	for node in get_children():
 		if node is Piece:
 			node.current_spot.pieces.erase(node)
 			node.queue_free()
-
-
-func get_from_index_on_board(move: GameMove) -> int:
-	return get_board().get_track(move.player).find(move.from)
-
-
-func get_to_index_on_board(move: GameMove) -> int:
-	return get_board().get_track(move.player).find(move.to)
-
-
-func despawn_board() -> void:
+	
 	var board = get_board()
 	if board:
 		board.queue_free()

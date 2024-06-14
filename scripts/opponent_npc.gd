@@ -1,122 +1,153 @@
-class_name OpponentNPC
-extends Node3D
+class_name OpponentNPC extends Node3D
 
+
+@export var skip_intro: bool
+@export var starting_dialogue_delay: float = 1.0
+@export var min_time_between_dialogues: float = 5.0
+@export var max_time_between_dialogues: float = 10.0
 
 var explained_rosettes_extra_roll: bool
 var explained_rosettes_are_safe: bool
 var explained_capturing: bool
 var explained_securing: bool
 var explained_everything: bool
-var first_random_dialog_had: bool
-
-var talking_animation: Animation
 
 @export var _dialogue_system: DialogueSystem
-@export_group("Dialogue Settings")
-@export var skip_intro: bool
-## Amount of seconds after starting the game before the npc begins the starting dialogue. 
-@export var starting_dialogue_delay: float = 2.0
-@export var min_time_between_dialogues: float = 5.0
-@export var max_time_between_dialogues: float = 10.0
-## When a reaction plays, we delay the next dialogue, 
-## to prevent the dialogue interrupting the reaction or the dialogue being skipped.
-@export var reaction_dialogue_delay: float = 5.0
-
-@onready var _animation_player = $AnimationPlayer as OpponentAnimationPlayer
-
-var _time_until_next_dialogue: float
-## Reconsider timer vs awaiting
-## Pros: More control over the time
-var _is_timer_active: bool
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var dialogue_cooldown_timer: Timer = $DialogueCooldownTimer
 
 
 func _ready():
 	visible = false
 	GameEvents.play_pressed.connect(_on_play_pressed)
+	# DialogueSystem should play opponent animations.
+	# NOTE: Actually not, they should stay separate and this script should coordinate
+	# between animations and dialogue, but whatever...
+	_dialogue_system.set_animation_player(animation_player)
+
+
+func _on_play_pressed() -> void:
+	# TODO: Disconnect ALL SIGNALS
 	
-
-func _process(delta):
-	if not _is_timer_active or _dialogue_system.is_busy():
-		return 
-		
-	_time_until_next_dialogue -= delta
-	if _time_until_next_dialogue <= 0:
-		_play_random_dialogue()
-		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
-
-
-func _play_story_dialogue():
-	var success = await _dialogue_system.play(DialogueSystem.Category.INTRO_STORY)
-	GameEvents.init_board.emit()
-	success = await _dialogue_system.play(DialogueSystem.Category.INTRO_GAME_START)
-	## If something went wrong when playing the story dialogues, do not try to trigger a next sequence.
-	if success:
-		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
-	else: 
-		_is_timer_active = false
-
-
-func _play_random_dialogue():
-	if not explained_everything:
-		_time_until_next_dialogue = 10
-		## Try again after 10 seconds.
+	# Opponent only
+	if GameManager.is_hotseat:
+		visible = false
 		return
-		
-	var success = await _dialogue_system.play(DialogueSystem.Category.RANDOM_CONVERSATION)
-	## If something went wrong when playing the story dialogues, do not try to trigger a next sequence. 
-	if success:
-		first_random_dialog_had = true
-		_time_until_next_dialogue = randf_range(min_time_between_dialogues, max_time_between_dialogues)
-	else: 
-		_is_timer_active = false
+	
+	visible = true
+	
+	GameEvents.rolled.connect(_on_dice_rolled)
+	GameEvents.first_turn_dice_shake.connect(_on_first_turn_dice_shaked)
+	GameEvents.npc_selected_move.connect(_on_npc_selected_move)
+	GameEvents.move_hovered.connect(_on_move_hovered)
+	GameEvents.move_executed.connect(_on_move_executed)
+	GameEvents.opponent_thinking.connect(_try_play_thinking_sound)
+	dialogue_cooldown_timer.timeout.connect(_on_dialogue_cooldown_timer_timeout)
+	
+	if not GameManager.is_rematch:
+		_play_walk_in_sequence()
+		await GameEvents.intro_sequence_finished
+	
+	GameEvents.opponent_ready.emit()
+
+
+func _on_dice_rolled(value: int) -> void:
+	if explained_everything and value == 0 and GameManager.current_player == General.Player.TWO \
+	and GameManager.turn_number > 5:
+		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLLED_0)
 
 
 func _on_first_turn_dice_shaked():
 	if not explained_everything: return
 	
 	_dialogue_system.play(DialogueSystem.Category.INTRO_GOOD_LUCK_WISH)
-	if first_random_dialog_had:
+	if GameManager.is_rematch:
 		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLL_FOR_HOPE)
 
 
-func _on_try_play_unfair_dialog(roll_result: int, player: General.Player):
+func _on_npc_selected_move(move: GameMove) -> void:
+	if not GameManager.is_rematch:
+		_try_play_tutorial_dialog(move)
+
+
+func _on_move_hovered(move: GameMove) -> void:
+	if not GameManager.is_rematch:
+		_try_play_tutorial_dialog(move)
+
+
+func _on_move_executed(move: GameMove) -> void:
+	if move.is_to_occupied_by_opponent:
+		_try_play_capture_reaction_dialogue(move)
+
+
+func _on_dialogue_cooldown_timer_timeout() -> void:
+	_play_random_dialogue()
+
+
+func _play_walk_in_sequence() -> void:
+	GameEvents.intro_sequence_started.emit()
+	
+	if skip_intro:
+		animation_player.play("clip_walkIn", 0)
+		animation_player.seek(30)
+		await Engine.get_main_loop().process_frame
+		GameEvents.opponent_seated.emit()
+		await Engine.get_main_loop().process_frame
+	else:
+		animation_player.play("clip_walkIn", 0)
+		await animation_player.animation_finished
+		await get_tree().create_timer(starting_dialogue_delay).timeout
+		await _dialogue_system.play(DialogueSystem.Category.INTRO_STORY)
+		GameEvents.opponent_seated.emit()
+		await _dialogue_system.play(DialogueSystem.Category.INTRO_GAME_START)
+	
+	GameEvents.intro_sequence_finished.emit()
+	
+	var dialogue_cd_time = randf_range(min_time_between_dialogues, max_time_between_dialogues)
+	dialogue_cooldown_timer.start(dialogue_cd_time)
+
+
+func _play_random_dialogue():
 	if not explained_everything:
+		## Try again after 10 seconds.
+		dialogue_cooldown_timer.start(10)
 		return
 		
-	if roll_result == 0 and player == General.Player.TWO \
-	and GameState.player_turns_made >= 5:
-		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLLED_0)
+	await _dialogue_system.play(DialogueSystem.Category.RANDOM_CONVERSATION)
+	var dialogue_cd_time = randf_range(min_time_between_dialogues, max_time_between_dialogues)
+	dialogue_cooldown_timer.start(dialogue_cd_time)
 
 
-func _on_try_play_tutorial_dialog(move: GameMove):
+func _try_play_tutorial_dialog(move: GameMove):
 	#if Settings.check_ruleset(Settings.Ruleset.FINKEL): return
 	if explained_everything: return
 		
-	if not explained_capturing and move.captures_opponent():
+	if not explained_capturing and move.is_to_occupied_by_opponent:
 		if move.player == General.Player.TWO:
-			play_dialog(DialogueSystem.Category.TUTORIAL_PLAYER_GETS_CAPTURED)
+			_dialogue_system.play(DialogueSystem.Category.TUTORIAL_PLAYER_GETS_CAPTURED)
 		else:
-			play_dialog(DialogueSystem.Category.TUTORIAL_OPPONENT_GETS_CAPTURED)
+			_dialogue_system.play(DialogueSystem.Category.TUTORIAL_OPPONENT_GETS_CAPTURED)
 		explained_capturing = true
 		return
 	
 	if not explained_rosettes_extra_roll and move.gives_extra_turn:
-		play_dialog(DialogueSystem.Category.TUTORIAL_ROSETTE)
+		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_ROSETTE)
 		explained_rosettes_extra_roll = true
 		return
 	
 	if not explained_rosettes_are_safe and move.is_to_safe and move.is_to_shared:
-		play_dialog(DialogueSystem.Category.TUTORIAL_CENTRAL_ROSETTE)
+		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_CENTRAL_ROSETTE)
 		explained_rosettes_are_safe = true
 		return
 	
-	if not explained_securing and EntityManager.get_from_index_on_board(move) > 7:
-		play_dialog(DialogueSystem.Category.TUTORIAL_FINISH)
+	var from_index = EntityManager.get_board().get_track(move.player).find(move.from)
+	if not explained_securing and from_index > 7:
+		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_FINISH)
 		explained_securing = true
 		return
 	
 	if has_explained_everything() and not _dialogue_system.is_busy():
-		play_dialog(DialogueSystem.Category.TUTORIAL_THATS_ALL)
+		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_THATS_ALL)
 		explained_everything = true
 
 
@@ -125,47 +156,17 @@ func has_explained_everything() -> bool:
 	and explained_rosettes_are_safe and explained_securing
 
 
-func play_dialog(category: DialogueSystem.Category):
-	_dialogue_system.play(category)
-
-
-func _play_interruption(category):
-	_time_until_next_dialogue += reaction_dialogue_delay
-	await _dialogue_system.play(category)
-
-
 func _try_play_thinking_sound():
 	_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_THINKING)
 
 
-func _on_play_pressed():
-	if not Settings.is_hotseat_mode:
-		## DialogueSystem should play opponent animations.
-		_dialogue_system.set_animation_player(_animation_player)
-		
-		GameEvents.rolled_by_player.connect(_on_try_play_unfair_dialog)
-		GameEvents.first_turn_dice_shake.connect(_on_first_turn_dice_shaked)
-		GameEvents.opponent_thinking.connect(_try_play_thinking_sound)
-		GameEvents.try_play_tutorial_dialog.connect(_on_try_play_tutorial_dialog)
-		GameEvents.reaction_piece_captured.connect(_on_piece_captured)
-		
-		visible = true
-		await _animation_player.play_walkin()
-		## Start first dialogue after a delay.
-		await get_tree().create_timer(starting_dialogue_delay).timeout
-		await _play_story_dialogue()
-		_is_timer_active = true
-	else:
-		GameEvents.init_board.emit()
-	GameEvents.intro_finished.emit()
-
-
-func _on_piece_captured(move: GameMove):
+func _try_play_capture_reaction_dialogue(move: GameMove):
 	if not has_explained_everything: return
 	
 	# Play a stronger reaction if the piece was further ahead,
 	# or if the roll was high (i.e. someone got lucky)
-	var was_piece_far = EntityManager.get_to_index_on_board(move) >= 8
+	var to_index = EntityManager.get_board().get_track(move.player).find(move.to)
+	var was_piece_far = to_index >= 8
 	var rolled_3_plus = move.full_path.size()-1 >= 3
 	var rolled_4 = move.full_path.size()-1 >= 4
 	if move.player == General.Player.TWO:

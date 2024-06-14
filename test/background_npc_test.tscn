@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cvs8yqeqllrsc"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_ifuvb"]
-[ext_resource type="PackedScene" uid="uid://cbdwwx2xsmnky" path="res://scenes/boardgame.tscn" id="2_fi2pv"]
-[ext_resource type="PackedScene" uid="uid://b8730xnkhhion" path="res://scenes/ai_players/ai_player_hard.tscn" id="3_ml7vr"]
-[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="4_ikgtn"]
+[ext_resource type="PackedScene" path="res://scenes/boardgame.tscn" id="2_fi2pv"]
+[ext_resource type="PackedScene" path="res://scenes/ai_players/ai_player_hard.tscn" id="3_ml7vr"]
+[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/game_camera.tscn" id="4_ikgtn"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="5_j508s"]
 
 [sub_resource type="GDScript" id="GDScript_fbn4f"]

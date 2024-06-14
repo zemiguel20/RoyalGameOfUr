@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=11 format=3 uid="uid://dp78ph4re3xjm"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=11 format=3 uid="uid://c4s7am46wxos2"]
 
 [ext_resource type="AudioStream" uid="uid://b24nsmupgohav" path="res://resources/dialogue/gameplay-reaction-mm-mm-2.mp3" id="1_p44kv"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_yguox"]

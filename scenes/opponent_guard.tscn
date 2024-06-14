@@ -8,10 +8,9 @@
 
 [node name="Opponent_Guard_Animated" node_paths=PackedStringArray("_dialogue_system") instance=ExtResource("1_jat7h")]
 script = ExtResource("2_pjd45")
-_dialogue_system = NodePath("DialogueSystem")
-starting_dialogue_delay = 1.0
 min_time_between_dialogues = 45.0
 max_time_between_dialogues = 90.0
+_dialogue_system = NodePath("DialogueSystem")
 
 [node name="Skeleton3D" parent="RootNode" index="1"]
 bones/1/rotation = Quaternion(0.111435, -0.005218, 0.0464822, 0.99267)
@@ -52,3 +51,5 @@ surface_material_override/0 = ExtResource("2_nuktw")
 script = ExtResource("4_g1c61")
 
 [node name="DialogueSystem" parent="." index="2" instance=ExtResource("5_bwyai")]
+
+[node name="DialogueCooldownTimer" type="Timer" parent="." index="3"]

@@ -1,17 +1,16 @@
-[gd_scene load_steps=23 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=22 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
-[ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
+[ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker.tscn" id="5_omrkq"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
-[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/looking_around/lookaround_camera.tscn" id="7_w116q"]
-[ext_resource type="PackedScene" uid="uid://bvkfyp4kdef5w" path="res://scenes/ui/controls_hud.tscn" id="8_wjnj8"]
+[ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/game_camera.tscn" id="7_w116q"]
+[ext_resource type="PackedScene" uid="uid://bksmfg8gvpyso" path="res://scenes/ui/controls_hud.tscn" id="8_wjnj8"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
 [ext_resource type="PackedScene" uid="uid://cuw4r8ubsaba3" path="res://scenes/ui/main_menu.tscn" id="10_2dq8v"]
-[ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="11_5mxbb"]
+[ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="11_b3pbs"]
 [ext_resource type="AudioStream" uid="uid://cypkb6b2st6b1" path="res://audio/sfx_mastered/ambience-birds-and-crickets.mp3" id="12_6m1n2"]
 [ext_resource type="Script" path="res://scripts/audio/ambient_audio_player.gd" id="13_056ba"]
 [ext_resource type="AudioStream" uid="uid://bn3jyvfxklhdo" path="res://audio/sfx_mastered/ambience-kitchen-sounds.mp3" id="14_raq75"]
-[ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="16_eu2sq"]
 
 [sub_resource type="GDScript" id="GDScript_lsuqm"]
@@ -26,8 +25,10 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if event.keycode == KEY_1 and event.pressed:
-			Settings.fast_move_enabled = not Settings.fast_move_enabled
+		if event.keycode == KEY_R and event.pressed:
+			GameEvents.play_pressed.emit()
+		if event.keycode == KEY_0 and event.pressed:
+			GameEvents.game_ended.emit()
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wg4la"]
@@ -128,38 +129,46 @@ shape = SubResource("BoxShape3D_8qwsb")
 transform = Transform3D(0.531783, 0, -0.846881, 0, 1, 0, 0.846881, 0, 0.531783, 4.47124, -0.21066, 6.34732)
 gizmo_extents = 0.01
 
-[node name="DieSpawn" parent="." groups=["dice_spawn"] instance=ExtResource("15_c61lh")]
-transform = Transform3D(0.794096, 0, 0.607792, 0, 1, 0, -0.607792, 0, 0.794096, 4.28436, -0.179411, 6.44236)
-
 [node name="Systems" type="Node" parent="."]
 
-[node name="GameController" type="Node" parent="Systems"]
-script = ExtResource("2_ldghm")
+[node name="MovePicker" parent="Systems" instance=ExtResource("5_omrkq")]
 
 [node name="DiceRoller" parent="Systems" instance=ExtResource("9_m0jtg")]
 transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 4.6143, -0.212933, 6.44044)
 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("9_m0jtg")]
 transform = Transform3D(0.847122, 0, 0.531399, 0, 1, 0, -0.531399, 0, 0.847122, 4.46447, -0.212933, 6.17279)
-_assigned_player = 1
+assigned_player = 1
 
 [node name="Opponent_Guard_Animated" parent="." instance=ExtResource("7_tegfk")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
-starting_dialogue_delay = 2.0
 
-[node name="Custom_Camera" parent="." node_paths=PackedStringArray("_hotseat_rotation") instance=ExtResource("7_w116q")]
+[node name="GameCamera" parent="." node_paths=PackedStringArray("pov_start", "pov_intro", "pov_singleplayer", "pov_hotseat") instance=ExtResource("7_w116q")]
+transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.677, 0.167, 6.671)
+pov_start = NodePath("../StartPOV")
+pov_intro = NodePath("../SingleplayerIntroPOV")
+pov_singleplayer = NodePath("../SingleplayerGamePOV")
+pov_hotseat = NodePath("../HotseatPOV")
+
+[node name="StartPOV" type="Camera3D" parent="."]
+process_mode = 4
+transform = Transform3D(0.848048, 0.181651, 0.497812, 1.11759e-08, 0.939412, -0.342791, -0.529919, 0.290703, 0.796666, 4.75128, 0.356789, 6.78987)
+fov = 65.0
+
+[node name="SingleplayerIntroPOV" type="Camera3D" parent="."]
+process_mode = 4
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.677, 0.167, 6.671)
 fov = 65.0
-max_degrees_down = 50.0
-max_degrees_left = 32.0
-_hotseat_rotation = NodePath("../HotseatCameraMarker")
-_board_look_rotation = Vector3(-35, 32, 0)
-_trans_type = 1
-_ease_type = 1
 
-[node name="HotseatCameraMarker" type="Marker3D" parent="."]
-transform = Transform3D(-0.529919, -0.844821, 0.073912, 0, 0.0871554, 0.996195, -0.848048, 0.527903, -0.0461853, 4.49162, 0.111622, 6.32288)
-script = ExtResource("11_5mxbb")
+[node name="SingleplayerGamePOV" type="Camera3D" parent="."]
+process_mode = 4
+transform = Transform3D(0.848048, -0.306316, 0.432418, 0, 0.816006, 0.578043, -0.529919, -0.490208, 0.692013, 4.68321, 0.20134, 6.68615)
+fov = 65.0
+
+[node name="HotseatPOV" type="Camera3D" parent="."]
+process_mode = 4
+transform = Transform3D(-0.5, -0.828184, 0.253201, 0, 0.292372, 0.956305, -0.866025, 0.478152, -0.146186, 4.54606, 0.110736, 6.29259)
+fov = 65.0
 
 [node name="NPCSystem" parent="." node_paths=PackedStringArray("path_follow_guard_1", "path_follow_guard_2", "path_follow_guard_3", "path_follow_kitchen_1", "path_follow_kitchen_2") instance=ExtResource("16_eu2sq")]
 path_follow_guard_1 = NodePath("../NPC_Paths/GuardPaths/ToStorage/ToStorage_PathFollow3D")
@@ -226,6 +235,8 @@ loop = false
 [node name="ControlsHUD" parent="." instance=ExtResource("8_wjnj8")]
 
 [node name="MainMenu" parent="." instance=ExtResource("10_2dq8v")]
+
+[node name="EndScreen" parent="." instance=ExtResource("11_b3pbs")]
 
 [node name="AmbientAudio" type="Node3D" parent="."]
 
