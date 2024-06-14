@@ -78,10 +78,14 @@ func start_selection(moves: Array[GameMove]) -> void:
 	var selected_move = _determine_next_move(moves)
 	
 	GameEvents.npc_selected_move.emit(selected_move)
-	# Highlight selected move for a bit
-	highlight.highlight(selected_move)
-	await get_tree().create_timer(move_highlight_duration).timeout
-	highlight.clear_highlight(selected_move)
+	
+	if GameManager.fast_move_enabled:
+		await Engine.get_main_loop().process_frame
+	else:
+		# Highlight selected move for a bit
+		highlight.highlight(selected_move)
+		await get_tree().create_timer(move_highlight_duration).timeout
+		highlight.clear_highlight(selected_move)
 	
 	move_selected.emit(selected_move)
 
