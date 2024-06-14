@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=23 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="Script" path="res://scripts/game/systems/game_controller.gd" id="2_ldghm"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
 [ext_resource type="PackedScene" uid="uid://cuw4r8ubsaba3" path="res://scenes/ui/main_menu.tscn" id="10_2dq8v"]
 [ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="11_5mxbb"]
-[ext_resource type="AudioStream" uid="uid://dsymj0eaades6" path="res://audio/ambience.mp3" id="12_rlqq6"]
+[ext_resource type="AudioStream" uid="uid://cypkb6b2st6b1" path="res://audio/sfx_mastered/ambience-birds-and-crickets.mp3" id="12_6m1n2"]
+[ext_resource type="Script" path="res://scripts/audio/ambient_audio_player.gd" id="13_056ba"]
+[ext_resource type="AudioStream" uid="uid://bn3jyvfxklhdo" path="res://audio/sfx_mastered/ambience-kitchen-sounds.mp3" id="14_raq75"]
 [ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="15_c61lh"]
 [ext_resource type="PackedScene" uid="uid://drllx28djyai7" path="res://scenes/npcs/npc_system.tscn" id="16_eu2sq"]
 
@@ -225,7 +227,30 @@ loop = false
 
 [node name="MainMenu" parent="." instance=ExtResource("10_2dq8v")]
 
-[node name="AmbienceAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_rlqq6")
-volume_db = 8.5
+[node name="AmbientAudio" type="Node3D" parent="."]
+
+[node name="KitchenSounds" type="AudioStreamPlayer3D" parent="AmbientAudio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25614, -1.01644, 6.51755)
+stream = ExtResource("14_raq75")
 autoplay = true
+script = ExtResource("13_056ba")
+
+[node name="BirdsAndCrickets1" type="AudioStreamPlayer3D" parent="AmbientAudio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95781, 2.98356, -2.50387)
+stream = ExtResource("12_6m1n2")
+autoplay = true
+script = ExtResource("13_056ba")
+
+[node name="BirdsAndCrickets2" type="AudioStreamPlayer3D" parent="AmbientAudio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48208, 5.04287, 12.2205)
+stream = ExtResource("12_6m1n2")
+autoplay = true
+script = ExtResource("13_056ba")
+playback_offset = 34
+
+[node name="BirdsAndCrickets3" type="AudioStreamPlayer3D" parent="AmbientAudio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.17094, 5.04287, 8.10376)
+stream = ExtResource("12_6m1n2")
+autoplay = true
+script = ExtResource("13_056ba")
+playback_offset = 68
