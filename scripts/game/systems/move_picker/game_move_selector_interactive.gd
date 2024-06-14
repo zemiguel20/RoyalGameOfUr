@@ -32,12 +32,15 @@ func start_selection(moves: Array[GameMove]) -> void:
 	_start_from_selection()
 
 
-func _start_from_selection() -> void:
+func stop_selection() -> void:
 	is_from_selected = false
-	
 	for move in _moves:
 		_clear_connections(move)
 		highlight.clear_highlight(move)
+
+
+func _start_from_selection() -> void:
+	stop_selection() # cleanup before starting selection
 	
 	for move in _moves:
 		if not move.from.input.hovered.is_connected(_on_from_hovered.bind(move.from)):
@@ -111,11 +114,7 @@ func _on_to_dehovered(move: GameMove) -> void:
 
 
 func _on_to_selected(selected_move: GameMove) -> void:
-	is_from_selected = false
-	for move in _moves:
-		_clear_connections(move)
-		highlight.clear_highlight(move)
-	
+	stop_selection()
 	move_selected.emit(selected_move)
 
 

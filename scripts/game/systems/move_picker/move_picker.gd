@@ -18,6 +18,7 @@ func _ready() -> void:
 	
 	GameEvents.rolled.connect(_on_dice_rolled)
 	GameEvents.roll_sequence_finished.connect(_on_roll_sequence_finished)
+	GameEvents.game_ended.connect(_on_game_ended)
 
 
 func _on_dice_rolled(value: int) -> void:
@@ -80,3 +81,7 @@ func _on_roll_sequence_finished() -> void:
 		GameManager.advance_turn_same_player()
 	else:
 		GameManager.advance_turn_switch_player()
+
+
+func _on_game_ended() -> void:
+	selector_interactive.stop_selection()
