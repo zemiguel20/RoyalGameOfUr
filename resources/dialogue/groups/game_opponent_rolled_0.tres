@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=15 format=3 uid="uid://cgbrm8b2dsb2n"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=15 format=3 uid="uid://clw5f00a8fycn"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_e60qh"]
 [ext_resource type="AudioStream" uid="uid://brgmh8oaqhv72" path="res://resources/dialogue/gameplay-reaction-unfair-1.mp3" id="1_rbugr"]

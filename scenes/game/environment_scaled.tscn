@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cgkfm7n305bgj"]
+[gd_scene load_steps=48 format=3 uid="uid://cgkfm7n305bgj"]
 
 [ext_resource type="PackedScene" uid="uid://bw5k0hcse4y5h" path="res://scenes/Blockout.tscn" id="1_3nkie"]
 [ext_resource type="PackedScene" uid="uid://mowvg73f88gq" path="res://models/pots/bowl_1.fbx" id="2_7xpms"]
@@ -20,38 +20,26 @@
 [ext_resource type="PackedScene" uid="uid://dyy5yhl1vyj6f" path="res://models/RockSeat.tscn" id="17_ts4fo"]
 [ext_resource type="PackedScene" uid="uid://bc0dgjlpis5or" path="res://models/Chest_low.fbx" id="18_piu6a"]
 [ext_resource type="PackedScene" uid="uid://bi2njpxjf27tm" path="res://models/palm_tree.fbx" id="19_kkd6y"]
-[ext_resource type="Material" uid="uid://8xdtvg4vuqjt" path="res://materials/Cloud1.tres" id="21_376d2"]
-[ext_resource type="Material" uid="uid://b27fvy642h28y" path="res://materials/Cloud2.tres" id="22_5m768"]
+[ext_resource type="Material" path="res://materials/Cloud1.tres" id="21_376d2"]
+[ext_resource type="Material" path="res://materials/Cloud2.tres" id="22_5m768"]
 [ext_resource type="PackedScene" uid="uid://cyqyx7rat4v1a" path="res://models/Door_low.fbx" id="23_1jq3g"]
 [ext_resource type="PackedScene" uid="uid://cyg7hn3cqj7pw" path="res://models/Beam1.fbx" id="24_rsmp4"]
 [ext_resource type="PackedScene" uid="uid://bpu6ui4uu46qi" path="res://models/Beam2.fbx" id="25_vg6fc"]
 [ext_resource type="PackedScene" uid="uid://btuu86npkmh8b" path="res://models/basket_1.fbx" id="26_uwooy"]
 [ext_resource type="PackedScene" uid="uid://tpsijve8x55u" path="res://models/basket_2.fbx" id="27_jww3d"]
 [ext_resource type="PackedScene" uid="uid://8r1qy1fu02a5" path="res://models/pots/Pot4Lid.fbx" id="29_5sf2p"]
-[ext_resource type="Material" uid="uid://dcjhsxpvfpb8y" path="res://materials/Cloth_Blue.tres" id="29_kscmd"]
-[ext_resource type="Material" uid="uid://brkpw80bc5gf1" path="res://materials/Cloth_Yellow.tres" id="31_gs6us"]
-[ext_resource type="Material" uid="uid://n17xiew50a2l" path="res://materials/Cloth_Green.tres" id="33_1nhet"]
-[ext_resource type="Material" uid="uid://l1ermpe7rsjw" path="res://materials/Cloth_Red.tres" id="33_igrux"]
+[ext_resource type="Material" path="res://materials/Cloth_Blue.tres" id="29_kscmd"]
+[ext_resource type="Material" path="res://materials/Cloth_Yellow.tres" id="31_gs6us"]
+[ext_resource type="Material" path="res://materials/Cloth_Green.tres" id="33_1nhet"]
+[ext_resource type="Material" path="res://materials/Cloth_Red.tres" id="33_igrux"]
 [ext_resource type="PackedScene" uid="uid://bfqmjsl4qb4v3" path="res://models/mat.fbx" id="38_b67ms"]
 [ext_resource type="PackedScene" uid="uid://crquhirpcdkq5" path="res://models/dagger_low.fbx" id="38_sqcf8"]
 [ext_resource type="PackedScene" uid="uid://ca5p2q6x11bcd" path="res://scenes/environment/fruit/plum_full.tscn" id="38_x80jn"]
 [ext_resource type="PackedScene" uid="uid://dknuwbh6rgh5h" path="res://scenes/environment/fruit/plum_topped.tscn" id="39_d4073"]
 [ext_resource type="PackedScene" uid="uid://dew1uf5bc6wf3" path="res://models/Cup.fbx" id="39_kv7fe"]
-[ext_resource type="Material" uid="uid://bd1362pcomonc" path="res://materials/drink.tres" id="40_kvie6"]
+[ext_resource type="Material" path="res://materials/drink.tres" id="40_kvie6"]
 [ext_resource type="PackedScene" uid="uid://kmqj2qdc6bot" path="res://scenes/environment/fruit/plum_half.tscn" id="41_2lal6"]
 [ext_resource type="PackedScene" uid="uid://i3tfldqq1rj1" path="res://models/SandHeap_low.fbx" id="41_ud4mm"]
-
-[sub_resource type="GDScript" id="GDScript_fbn4f"]
-script/source = "extends Node
-
-func _input(event):
-	if event is InputEventKey and (event as InputEventKey).keycode == KEY_R:
-		get_tree().reload_current_scene()
-
-
-func _on_prototype_ui_fadeout_finished():
-	get_tree().reload_current_scene()
-"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_080q8"]
 size = Vector3(0.358398, 0.125857, 0.125)
@@ -121,7 +109,6 @@ blend_shape_mode = 0
 [sub_resource type="CylinderMesh" id="CylinderMesh_dd1nb"]
 
 [node name="Environment_Scaled" type="Node3D"]
-script = SubResource("GDScript_fbn4f")
 
 [node name="Environment" parent="." instance=ExtResource("1_3nkie")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
