@@ -53,11 +53,16 @@ var _is_busy_talking: bool
 
 func _ready():
 	GameEvents.opponent_action_prevented.connect(_on_prevent_opponent_action)
+	GameEvents.opponent_action_resumed.connect(_on_resume_opponent_action)
 
 
 func _on_prevent_opponent_action():
 	_is_busy_talking = true
 
+
+func _on_resume_opponent_action():
+	_is_busy_talking = false
+	
 
 func start_selection(moves: Array[GameMove]) -> void:
 	if _is_shared_path_crowded():
