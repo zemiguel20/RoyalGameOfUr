@@ -127,7 +127,6 @@ func execute(animation := General.MoveAnim.NONE, follow_path := false) -> void:
 	if is_to_occupied_by_opponent:
 		var opponent_start_spots = _board.get_free_start_spots(General.get_opponent(player))
 		movement_path[-1].move_pieces_split_to_spots(opponent_start_spots, General.MoveAnim.ARC)
-		GameEvents.reaction_piece_captured.emit(self)
 	
 	# Move pieces to last spot
 	movement_path[-2].move_pieces_to_spot(movement_path[-1], animation)
@@ -176,7 +175,3 @@ func _check_valid() -> bool:
 func _is_spot_safe(spot: Spot) -> bool:
 	return _board.is_spot_exclusive(spot) or \
 		(spot.is_in_group("rosettes") and GameManager.ruleset.rosettes_are_safe)
-
-
-func captures_opponent() -> bool:
-	return is_to_occupied_by_opponent and _check_valid()

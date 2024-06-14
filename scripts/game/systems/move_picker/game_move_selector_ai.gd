@@ -53,15 +53,10 @@ var _is_busy_talking: bool
 
 func _ready():
 	GameEvents.opponent_action_prevented.connect(_on_prevent_opponent_action)
-	GameEvents.opponent_action_resumed.connect(_on_resume_opponent_action)
 
 
 func _on_prevent_opponent_action():
 	_is_busy_talking = true
-
-
-func _on_resume_opponent_action():
-	_is_busy_talking = false
 
 
 func start_selection(moves: Array[GameMove]) -> void:
@@ -73,12 +68,13 @@ func start_selection(moves: Array[GameMove]) -> void:
 		
 		if _is_busy_talking:
 			await GameEvents.opponent_action_resumed
+			_is_busy_talking = false
 	
 	var selected_move = _determine_next_move(moves)
 	
+	GameEvents.npc_selected_move.emit(selected_move)
 	# Highlight selected move for a bit
 	highlight.highlight(selected_move)
-	GameEvents.try_play_tutorial_dialog.emit(selected_move)
 	await get_tree().create_timer(move_highlight_duration).timeout
 	highlight.clear_highlight(selected_move)
 	

@@ -149,6 +149,9 @@ func _dehighlight_dice() -> void:
 
 
 func _start_shaking() -> void:
+	if GameManager.turn_number == 1:
+		GameEvents.first_turn_dice_shake.emit()
+	
 	var dice = EntityManager.get_dice()
 	shake_sfx.play()
 	for die in dice:

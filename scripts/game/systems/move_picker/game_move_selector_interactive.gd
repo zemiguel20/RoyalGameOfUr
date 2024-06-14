@@ -59,7 +59,7 @@ func _on_from_hovered(spot: Spot) -> void:
 	# NOTE: this is due to overriding because moves share pieces/spots
 	moves_from.sort_custom(func(a: GameMove, _b: GameMove): return not a.valid)
 	for move in moves_from:
-		GameEvents.try_play_tutorial_dialog.emit(move)
+		GameEvents.move_hovered.emit(move)
 		highlight.highlight(move, color_hovered)
 
 

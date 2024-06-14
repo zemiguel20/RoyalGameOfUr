@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://bcjpac1cs0xcy"]
 
 [ext_resource type="PackedScene" uid="uid://it24m6uyqxlk" path="res://models/fbx_guard_animated.fbx" id="1_jat7h"]
-[ext_resource type="Material" uid="uid://dq4qt2h6vrkcj" path="res://materials/guard/guard.tres" id="2_nuktw"]
+[ext_resource type="Material" path="res://materials/guard/guard.tres" id="2_nuktw"]
 [ext_resource type="Script" path="res://scripts/opponent_npc.gd" id="2_pjd45"]
 [ext_resource type="Script" path="res://scripts/opponent/opponent_animation_player.gd" id="4_g1c61"]
 [ext_resource type="PackedScene" uid="uid://y4idlfyp1gdh" path="res://dialogue_menus.tscn" id="5_bvx3e"]
@@ -16,24 +16,23 @@
 [ext_resource type="PackedScene" uid="uid://bdfdbhwdv6lnb" path="res://scenes/npcs/dialogue_sequence_player.tscn" id="10_mrnxq"]
 [ext_resource type="Resource" uid="uid://b31u1blrsob06" path="res://resources/dialogue/groups/game_player_gets_captured.tres" id="11_d0ho7"]
 [ext_resource type="Resource" uid="uid://bn8skq46su8tj" path="res://resources/dialogue/groups/game_opponent_mistake.tres" id="12_wtttm"]
-[ext_resource type="Resource" uid="uid://c45oju12cx13" path="res://resources/dialogue/groups/game_player_mistake.tres" id="14_0oars"]
+[ext_resource type="Resource" uid="uid://c4s7am46wxos2" path="res://resources/dialogue/groups/game_player_mistake.tres" id="14_0oars"]
 [ext_resource type="Resource" uid="uid://bwb2tdg0bmm0v" path="res://resources/dialogue/groups/game_tutorial_opponent_gets_captured.tres" id="14_cvxdk"]
-[ext_resource type="Resource" uid="uid://cl6u4u42jn5ow" path="res://resources/dialogue/groups/game_tutorial_rosette_extra_turn.tres" id="14_qp63w"]
+[ext_resource type="Resource" uid="uid://cx51c3crebqa7" path="res://resources/dialogue/groups/game_tutorial_rosette_extra_turn.tres" id="14_qp63w"]
 [ext_resource type="Resource" uid="uid://gj45b7uqg4hx" path="res://resources/dialogue/groups/game_tutorial_player_gets_captured.tres" id="15_n7lqr"]
 [ext_resource type="Resource" uid="uid://ceiyuaheccrhp" path="res://resources/dialogue/groups/game_tutorial_central_rosette.tres" id="16_04h7n"]
 [ext_resource type="Resource" uid="uid://dsba08jo60k0t" path="res://resources/dialogue/groups/game_tutorial_finish.tres" id="17_ns1ih"]
 [ext_resource type="Resource" uid="uid://cqbqaa2me4isu" path="res://resources/dialogue/groups/game_tutorial_explanation.tres" id="18_jhkgr"]
 [ext_resource type="Resource" uid="uid://bgla8xjveol3f" path="res://resources/dialogue/groups/game_player_win.tres" id="19_radjr"]
 [ext_resource type="Resource" uid="uid://cuwsy7lf7fndj" path="res://resources/dialogue/groups/game_opponent_win.tres" id="20_4k08t"]
-[ext_resource type="Resource" uid="uid://cgu6todksvkan" path="res://resources/dialogue/groups/game_opponent_thinking.tres" id="22_hnutr"]
-[ext_resource type="Resource" uid="uid://bwvv3ckwpl1ws" path="res://resources/dialogue/groups/game_opponent_rolled_0.tres" id="24_2ul7u"]
-[ext_resource type="Resource" uid="uid://bd5dthydsqyr5" path="res://resources/dialogue/groups/game_first_turn_player.tres" id="25_lqn7d"]
-[ext_resource type="Resource" uid="uid://ct4jb5hbaqvm6" path="res://resources/dialogue/groups/game_first_turn_opponent.tres" id="26_age42"]
-[ext_resource type="Resource" uid="uid://300qhag888qt" path="res://resources/dialogue/groups/game_opponent_waiting.tres" id="27_htahf"]
+[ext_resource type="Resource" uid="uid://nu2oemchl0j2" path="res://resources/dialogue/groups/game_opponent_thinking.tres" id="22_hnutr"]
+[ext_resource type="Resource" uid="uid://clw5f00a8fycn" path="res://resources/dialogue/groups/game_opponent_rolled_0.tres" id="24_2ul7u"]
+[ext_resource type="Resource" uid="uid://dk77thgv14vrk" path="res://resources/dialogue/groups/game_first_turn_player.tres" id="25_lqn7d"]
+[ext_resource type="Resource" uid="uid://dr1kf71fk3tp3" path="res://resources/dialogue/groups/game_first_turn_opponent.tres" id="26_age42"]
+[ext_resource type="Resource" uid="uid://db7arhbcdr438" path="res://resources/dialogue/groups/game_opponent_waiting.tres" id="27_htahf"]
 
 [node name="Opponent_Guard_Animated" instance=ExtResource("1_jat7h")]
 script = ExtResource("2_pjd45")
-starting_dialogue_delay = 1.0
 min_time_between_dialogues = 45.0
 max_time_between_dialogues = 90.0
 
@@ -97,3 +96,5 @@ _temp_min_entry_length = 5.0
 [node name="InterruptionSequencePlayer" parent="DialogueSystem" index="3" instance=ExtResource("10_mrnxq")]
 _use_subtitles = true
 _temp_min_entry_length = 5.0
+
+[node name="DialogueCooldownTimer" type="Timer" parent="." index="5"]

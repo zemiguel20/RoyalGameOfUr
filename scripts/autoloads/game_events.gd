@@ -33,17 +33,29 @@ signal drag_move_start
 ## Emited when moving interactively, after player cancels piece selection/drag.
 signal drag_move_stopped
 
+## Emited when the ai move picker selects a move.
+signal npc_selected_move(move: GameMove)
+## Emited when the player hovers over a spot with movable pieces.
+signal move_hovered(move: GameMove)
 
-signal intro_finished
-
-signal first_turn_dice_shake
-signal try_play_tutorial_dialog(category: DialogueSystem.Category)
-signal reaction_piece_captured(move: GameMove)
-signal rolled_by_player(value: int, player: General.Player)
-
+## Emited when the opponent starts doing the introduction animation and dialogue sequence.
+signal intro_sequence_started
+## Emited when the opponent seats down during the intro sequence.
+signal opponent_seated
+## Emited when the opponent finishes the intro sequence.
+signal intro_sequence_finished
+## Emited when the opponent is ready to play.
+signal opponent_ready
+## Emited when the opponent starts thinking before selecting a move.
 signal opponent_thinking
 
+## Emited when either player shakes the dice in the first turn.
+signal first_turn_dice_shake
+
+
+## Emited when the opponent starts doing something that halts other actions.
 signal opponent_action_prevented
+## Emited when the opponent stops doing the thing, and other actions can resume.
 signal opponent_action_resumed
 
 signal subtitle_panel_clicked
