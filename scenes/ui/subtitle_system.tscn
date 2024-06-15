@@ -1,12 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5rqut7t53w0r"]
+[gd_scene load_steps=10 format=3 uid="uid://b5rqut7t53w0r"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_subtitles.gd" id="1_7mgri"]
-[ext_resource type="Script" path="res://test/temp_dialogue_option_3.gd" id="2_jk8d0"]
 [ext_resource type="FontFile" uid="uid://cv85ekph4c2og" path="res://resources/EasyCuneiform.ttf" id="2_tucj2"]
+[ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://sprites/left_mouse_button_light.png" id="5_dyrjp"]
+
+[sub_resource type="Gradient" id="Gradient_jb0yr"]
+offsets = PackedFloat32Array(0, 0.435146, 0.742678, 0.859833, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.784314, 0, 0, 0, 0.46948, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ie3ev"]
+gradient = SubResource("Gradient_jb0yr")
+width = 1343
+height = 194
+fill = 1
+fill_from = Vector2(0.495652, 0.578261)
+fill_to = Vector2(0.494465, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u2qbl"]
+texture = SubResource("GradientTexture2D_ie3ev")
 
 [sub_resource type="LabelSettings" id="LabelSettings_tnjk0"]
 line_spacing = -10.0
-font_size = 38
+font_size = 36
+font_color = Color(0.862745, 0.862745, 0.862745, 1)
 
 [sub_resource type="Theme" id="Theme_vimjm"]
 default_font = ExtResource("2_tucj2")
@@ -16,9 +32,6 @@ default_font_size = 0
 font = ExtResource("2_tucj2")
 font_size = 32
 font_color = Color(0.999999, 0.634527, 0.339289, 0.603922)
-
-[sub_resource type="LabelSettings" id="LabelSettings_vyach"]
-font_size = 40
 
 [node name="Subtitle_System" type="CanvasLayer" node_paths=PackedStringArray("subtitle_label", "skip_icon")]
 script = ExtResource("1_7mgri")
@@ -30,23 +43,24 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 285.0
-offset_top = -196.0
-offset_right = -292.0
-offset_bottom = -2.0
+offset_left = 213.0
+offset_top = -233.0
+offset_right = -220.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_u2qbl")
 
 [node name="Subtitles_Label" type="Label" parent="Background_Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 67.0
-offset_top = 59.0
-offset_right = -67.0
-offset_bottom = -7.0
+offset_left = 223.0
+offset_top = 99.0
+offset_right = -219.0
+offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = 440
@@ -59,15 +73,14 @@ text_overrun_behavior = 2
 
 [node name="Cuneiform_Label" type="Label" parent="Background_Panel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 7.0
-offset_top = 6.0
-offset_right = -7.0
-offset_bottom = -131.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -590.5
+offset_top = 45.0
+offset_right = 590.5
+offset_bottom = 102.0
 grow_horizontal = 2
-grow_vertical = 2
 theme = SubResource("Theme_vimjm")
 theme_type_variation = &"HeaderSmall"
 theme_override_colors/font_color = Color(0.984397, 1, 0.632341, 1)
@@ -78,55 +91,20 @@ vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 2
 
-[node name="Skip_Icon" type="Label" parent="Background_Panel"]
-visible = false
+[node name="Skip_Icon" type="TextureRect" parent="Background_Panel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.229337
-anchor_top = 0.275641
-anchor_right = 0.984363
-anchor_bottom = 0.934859
-offset_left = 1629.0
-offset_top = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "🡫"
-label_settings = SubResource("LabelSettings_vyach")
-horizontal_alignment = 2
-vertical_alignment = 1
-autowrap_mode = 3
-text_overrun_behavior = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Cursor_Subtitles" type="Panel" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -411.0
-offset_right = 389.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_jk8d0")
-
-[node name="CursorSubtitles_Label" type="Label" parent="Cursor_Subtitles"]
-layout_mode = 1
-anchors_preset = 15
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 36.0
-offset_top = 22.0
-offset_right = -36.0
-offset_bottom = -22.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "This is the final option, where a nice subtitle thing is shown"
-label_settings = SubResource("LabelSettings_tnjk0")
-vertical_alignment = 1
-autowrap_mode = 3
-text_overrun_behavior = 2
+offset_left = -60.0
+offset_top = -75.0
+offset_right = -20.0
+offset_bottom = -27.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("5_dyrjp")
+stretch_mode = 5
 
 [connection signal="gui_input" from="Background_Panel" to="." method="_on_subtitle_panel_clicked"]
