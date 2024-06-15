@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 
-var ruleset_list: Array[Ruleset] = [
+const RULESET_LIST: Array[Ruleset] = [
 	General.RULESET_FINKEL,
 	General.RULESET_MASTERS,
 	General.RULESET_BLITZ,
@@ -9,21 +9,27 @@ var ruleset_list: Array[Ruleset] = [
 	General.RULESET_RR,
 ]
 
-var board_list: Array[BoardLayout] = [
+const BOARD_LIST: Array[BoardLayout] = [
 	General.BOARD_FINKEL,
 	General.BOARD_MASTERS,
 	General.BOARD_RR,
 ]
 
-var current_ruleset_index: int = 0
-var current_board_index: int = 0
+@export var skip_intro := false
+@export var fade_duration := 0.5
+@export var pause_duration := 1.0
 
+@onready var splash_screen: Control = $SplashScreen
+@onready var entities_logos: Control = $SplashScreen/EntitiesLogos
+@onready var godot_logo: TextureRect = $SplashScreen/GodotLogo
 
-@export var show_splash_duration: float = 1.0
+@onready var title_screen: Control = $TitleScreen
+@onready var game_title_logo: TextureRect = $TitleScreen/GameTitleLogo
+@onready var press_to_start_label: Label = $TitleScreen/PressToStartLabel
 
 @onready var main_menu: Control = $MainMenu
-@onready var ruleset_menu: Control = $RulesetMenu
 
+@onready var ruleset_menu: Control = $RulesetMenu
 @onready var ruleset_name_label: Label = $RulesetMenu/TabletFrame/RulesetPicker/RulesetNameLabel
 @onready var board_layout_image: TextureRect = $RulesetMenu/TabletFrame/BoardPicker/BoardLayoutImage
 @onready var board_name_label: Label = $RulesetMenu/TabletFrame/BoardPicker/BoardNameLabel
@@ -37,34 +43,97 @@ var current_board_index: int = 0
 @onready var dice_number_slider: HSlider = $RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer2/DiceNumberSlider
 @onready var dice_number_label: Label = $RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer2/DiceNumberLabel
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+var current_ruleset_index: int = 0
+var current_board_index: int = 0
 
 
 func _ready() -> void:
 	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
 	
-	animation_player.play("splash_screen_sequence")
+	splash_screen.visible = false
+	title_screen.visible = false
+	main_menu.visible = false
+	ruleset_menu.visible = false
+	
+	if skip_intro:
+		_show_main_menu()
+	else:
+		_play_splash_screen_sequence()
 
 
-# Pause splash screen sequence for a certain duration, but allow player to skip
-func _splash_screen_pause() -> void:
-	animation_player.pause()
+func _play_splash_screen_sequence() -> void:
+	splash_screen.visible = true
+	splash_screen.modulate.a = 1.0
+	godot_logo.modulate.a = 0.0
+	entities_logos.modulate.a = 0.0
 	
-	var timer = get_tree().create_timer(show_splash_duration)
-	while timer.time_left > 0 and not Input.is_action_pressed("skip_splash_screen"):
-		await Engine.get_main_loop().process_frame
+	# Idle time to load
+	await get_tree().create_timer(0.5).timeout
 	
-	animation_player.play()
+	var animator: Tween
+	
+	# Fade in team and school logos
+	animator = create_tween()
+	animator.tween_property(entities_logos, "modulate:a", 1.0, fade_duration)
+	await animator.finished
+	
+	await _skippable_pause(pause_duration)
+	
+	# Fade out entities and fade in Godot logo
+	animator = create_tween()
+	animator.tween_property(entities_logos, "modulate:a", 0.0, fade_duration)
+	animator.tween_property(godot_logo, "modulate:a", 1.0, fade_duration)
+	await animator.finished
+	
+	await _skippable_pause(pause_duration)
+	
+	# Fade out Godot logo and then background
+	animator = create_tween()
+	animator.tween_property(godot_logo, "modulate:a", 0.0, fade_duration)
+	animator.tween_property(splash_screen, "modulate:a", 0.0, fade_duration)
+	await animator.finished
+	splash_screen.visible = false
+	
+	_show_title_screen()
+
+
+func _show_title_screen() -> void:
+	title_screen.visible = true
+	game_title_logo.modulate.a = 0.0
+	press_to_start_label.modulate.a = 0.0
+	
+	var animator = create_tween()
+	animator.tween_property(game_title_logo, "modulate:a", 1.0, fade_duration)
+	await animator.finished
+	
+	# Bit of idle time just to EXPOSE THE LOGO AND ITS GREATNESS AHAHAHAHAHAHA
+	await get_tree().create_timer(0.5).timeout
+	
+	press_to_start_label.modulate.a = 1.0
+	
+	await _skippable_pause()
+	
+	title_screen.visible = false
+	_show_main_menu()
+
+
+func _skippable_pause(duration := 0.0) -> void:
+	if duration > 0.0:
+		var timer = get_tree().create_timer(duration)
+		while timer.time_left > 0 and not Input.is_action_pressed("skip_splash_screen"):
+			await Engine.get_main_loop().process_frame
+	else:
+		while not Input.is_action_pressed("skip_splash_screen"):
+			await Engine.get_main_loop().process_frame
 
 
 func _on_back_to_main_menu() -> void:
-	_start_menu()
+	_show_main_menu()
 
 
-func _start_menu() -> void:
+func _show_main_menu() -> void:
 	visible = true
 	main_menu.visible = true
-	ruleset_menu.visible = false
 
 
 func _on_singleplayer_button_pressed() -> void:
@@ -91,14 +160,14 @@ func _on_quit_button_pressed() -> void:
 func _on_switch_ruleset_left_button_pressed() -> void:
 	current_ruleset_index -= 1
 	if current_ruleset_index < 0:
-		current_ruleset_index = ruleset_list.size() - 1
+		current_ruleset_index = RULESET_LIST.size() - 1
 	
 	_update_ruleset()
 
 
 func _on_switch_ruleset_right_button_pressed() -> void:
 	current_ruleset_index += 1
-	if current_ruleset_index >= ruleset_list.size():
+	if current_ruleset_index >= RULESET_LIST.size():
 		current_ruleset_index = 0
 	
 	_update_ruleset()
@@ -107,7 +176,7 @@ func _on_switch_ruleset_right_button_pressed() -> void:
 func _on_switch_board_left_button_pressed() -> void:
 	current_board_index -= 1
 	if current_board_index < 0:
-		current_board_index = board_list.size() - 1
+		current_board_index = BOARD_LIST.size() - 1
 	
 	_update_board()
 	ruleset_name_label.text = "Custom"
@@ -115,7 +184,7 @@ func _on_switch_board_left_button_pressed() -> void:
 
 func _on_switch_board_right_button_pressed() -> void:
 	current_board_index += 1
-	if current_board_index >= board_list.size():
+	if current_board_index >= BOARD_LIST.size():
 		current_board_index = 0
 	
 	_update_board()
@@ -160,8 +229,8 @@ func _on_dice_number_slider_value_changed(value: float) -> void:
 
 
 func _update_ruleset() -> void:
-	GameManager.ruleset = ruleset_list[current_ruleset_index].duplicate()
-	current_board_index = board_list.find(GameManager.ruleset.board_layout)
+	GameManager.ruleset = RULESET_LIST[current_ruleset_index].duplicate()
+	current_board_index = BOARD_LIST.find(GameManager.ruleset.board_layout)
 	
 	ruleset_name_label.text = GameManager.ruleset.name
 	board_layout_image.texture = GameManager.ruleset.board_layout.preview
@@ -180,7 +249,7 @@ func _update_ruleset() -> void:
 
 
 func _update_board() -> void:
-	GameManager.ruleset.board_layout = board_list[current_board_index]
+	GameManager.ruleset.board_layout = BOARD_LIST[current_board_index]
 	board_layout_image.texture = GameManager.ruleset.board_layout.preview
 	board_name_label.text = GameManager.ruleset.board_layout.name
 

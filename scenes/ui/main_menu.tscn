@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cuw4r8ubsaba3"]
+[gd_scene load_steps=30 format=3 uid="uid://cuw4r8ubsaba3"]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_435xe"]
 [ext_resource type="Texture2D" uid="uid://4udjj8c0x7ns" path="res://UI/logo_godot.svg" id="2_rxnmm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dun5anqhpljew" path="res://UI/logo_UL.svg" id="5_32xef"]
 [ext_resource type="Texture2D" uid="uid://ylslyt8vdm8y" path="res://UI/Button Left Release.png" id="5_yq6cu"]
 [ext_resource type="Texture2D" uid="uid://cmohjpb6kmjrq" path="res://UI/Button Left.png" id="6_mlxhv"]
+[ext_resource type="Texture2D" uid="uid://d3y642hwbyamx" path="res://UI/logo_game.png" id="6_s6pct"]
 [ext_resource type="Texture2D" uid="uid://dxfismcshmkmb" path="res://UI/Button Right Release.png" id="7_ouvcm"]
 [ext_resource type="Texture2D" uid="uid://d05tsy2jj1xmi" path="res://UI/Button Right.png" id="8_eg2le"]
 [ext_resource type="Texture2D" uid="uid://cc3oo6y6f5tgi" path="res://sprites/layout_finkel.png" id="9_2jkn4"]
@@ -19,6 +20,9 @@ colors = PackedColorArray(0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_81qh5"]
 gradient = SubResource("Gradient_61g0o")
+
+[sub_resource type="LabelSettings" id="LabelSettings_sgwpc"]
+font_size = 50
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xdsbs"]
 
@@ -62,113 +66,11 @@ texture = SubResource("CompressedTexture2D_xiyug")
 [sub_resource type="Theme" id="Theme_28n0u"]
 Panel/styles/panel = SubResource("StyleBoxTexture_v3ets")
 
-[sub_resource type="Animation" id="Animation_tg7l8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpashScreen/EntitiesPanel:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpashScreen/GodotLogo:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SpashScreen/Background:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_od3sh"]
-resource_name = "splash_screen_sequence"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpashScreen/EntitiesPanel:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1, 2),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"_splash_screen_pause"
-}, {
-"args": [],
-"method": &"_splash_screen_pause"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SpashScreen/GodotLogo:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.5, 2, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("SpashScreen/Background:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(2.5, 3.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ucnei"]
-_data = {
-"RESET": SubResource("Animation_tg7l8"),
-"splash_screen_sequence": SubResource("Animation_od3sh")
-}
-
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_435xe")
-show_splash_duration = 2.0
 
-[node name="SpashScreen" type="Control" parent="."]
+[node name="SplashScreen" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -176,7 +78,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="TextureRect" parent="SpashScreen"]
+[node name="Background" type="TextureRect" parent="SplashScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -185,7 +87,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_81qh5")
 
-[node name="GodotLogo" type="TextureRect" parent="SpashScreen"]
+[node name="GodotLogo" type="TextureRect" parent="SplashScreen"]
+modulate = Color(1, 1, 1, 0.6)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -202,7 +105,8 @@ texture = ExtResource("2_rxnmm")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="EntitiesPanel" type="Control" parent="SpashScreen"]
+[node name="EntitiesLogos" type="Control" parent="SplashScreen"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -210,7 +114,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="HBoxContainer" parent="SpashScreen/EntitiesPanel"]
+[node name="Control" type="HBoxContainer" parent="SplashScreen/EntitiesLogos"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -222,19 +126,19 @@ grow_vertical = 0
 alignment = 1
 metadata/_edit_group_ = true
 
-[node name="HKULogo" type="TextureRect" parent="SpashScreen/EntitiesPanel/Control"]
+[node name="HKULogo" type="TextureRect" parent="SplashScreen/EntitiesLogos/Control"]
 layout_mode = 2
 texture = ExtResource("4_m1t3g")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="UniLeidenLogo" type="TextureRect" parent="SpashScreen/EntitiesPanel/Control"]
+[node name="UniLeidenLogo" type="TextureRect" parent="SplashScreen/EntitiesLogos/Control"]
 layout_mode = 2
 texture = ExtResource("5_32xef")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="LlamassuLogo" type="TextureRect" parent="SpashScreen/EntitiesPanel"]
+[node name="LlamassuLogo" type="TextureRect" parent="SplashScreen/EntitiesLogos"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -250,6 +154,49 @@ grow_vertical = 2
 texture = ExtResource("3_40gu7")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="TitleScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameTitleLogo" type="TextureRect" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -585.0
+offset_top = -341.0
+offset_right = 586.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_s6pct")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PressToStartLabel" type="Label" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -459.0
+offset_top = -221.0
+offset_right = 460.0
+offset_bottom = -156.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "PRESS TO START"
+label_settings = SubResource("LabelSettings_sgwpc")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MainMenu" type="Control" parent="."]
 visible = false
@@ -624,11 +571,6 @@ theme = ExtResource("4_xqa0v")
 theme_override_font_sizes/font_size = 35
 text = "Back"
 flat = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ucnei")
-}
 
 [connection signal="pressed" from="MainMenu/SingleplayerButton" to="." method="_on_singleplayer_button_pressed"]
 [connection signal="pressed" from="MainMenu/MultiplayerButton" to="." method="_on_multiplayer_button_pressed"]
