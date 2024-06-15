@@ -2,6 +2,8 @@
 
 [resource]
 line_spacing = -2.0
-font_size = 25
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
+font_size = 23
+outline_size = 1
+shadow_size = 7
+shadow_color = Color(0.139893, 0.0807944, 0.0402176, 1)
+shadow_offset = Vector2(0, 1)

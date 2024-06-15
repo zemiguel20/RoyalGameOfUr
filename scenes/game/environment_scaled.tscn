@@ -136,13 +136,6 @@ visible = false
 [node name="Table" parent="Environment" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27508, -0.0732401, 0.195189)
 
-[node name="StaticBody3D_Table" type="StaticBody3D" parent="Environment/Table" index="0" groups=["Ground"]]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Table/StaticBody3D_Table" groups=["Ground"]]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.871, -0.0423534, 1.379)
-shape = SubResource("BoxShape3D_080q8")
 
 [node name="TablePlank6" parent="Environment/Table" index="4" instance=ExtResource("2_mq51f")]
 transform = Transform3D(-2.18691, -1.85687e-07, -0.662298, -9.21432e-09, -2.53536, 1.97601e-07, 1.28275, -3.34781e-07, -1.12913, 1.03992, 0.0164161, 1.25593)
