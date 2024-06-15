@@ -19,6 +19,7 @@ var roll_timer: Timer
 var rolling: bool = false
 var value: int = 0
 var _sound_played: bool = false
+var _game_aborted_flag: bool
 
 
 func _ready():
@@ -31,6 +32,7 @@ func _ready():
 	roll_timer = get_node(get_meta("timer")) as Timer
 	roll_timer.timeout.connect(_force_movement_stop)
 	
+	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
 	freeze = true
 
 
@@ -39,6 +41,7 @@ func _ready():
 ## and a [param start_rotation].
 func roll(impulse: Vector3, start_position := global_position, start_rotation := rotation) -> void:
 	freeze = false
+	_game_aborted_flag = false
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	
@@ -59,7 +62,9 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 	
 	## Extra security measure ensuring that dice do not stop rolling immediately.
 	await get_tree().create_timer(min_roll_time).timeout
-	if sleeping:
+	if _game_aborted_flag:
+		return
+	elif sleeping:
 		_on_movement_stopped()
 	else:	
 		sleeping_state_changed.connect(_on_movement_stopped)
@@ -76,6 +81,13 @@ func _on_movement_stopped() -> void:
 	
 	value = await _read_roll_value()
 	roll_finished.emit(value)
+	
+
+func _on_back_to_main_menu():
+	_game_aborted_flag = true
+	if sleeping_state_changed.is_connected(_on_movement_stopped):
+		sleeping_state_changed.disconnect(_on_movement_stopped)
+	sleeping = true
 
 
 func _force_movement_stop() -> void:
@@ -102,7 +114,6 @@ func _read_roll_value() -> int:
 	
 	var value = closest_normal.get_meta("value") as int
 	return value
-
 
 
 func _on_collided_with_table(body):

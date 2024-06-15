@@ -119,7 +119,7 @@ func _on_to_selected(selected_move: GameMove) -> void:
 
 
 func _clear_connections(move: GameMove) -> void:
-	if move.from.input == null:
+	if not move.from or not move.to:
 		return
 	
 	if move.from.input.hovered.is_connected(_on_from_hovered.bind(move.from)):
