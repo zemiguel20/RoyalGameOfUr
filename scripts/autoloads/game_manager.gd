@@ -8,7 +8,8 @@ var is_rematch := false
 var is_hotseat := false
 var fast_move_enabled := false
 
-var ruleset: Ruleset
+var ruleset
+var game_aborted_flag
 
 
 func start_new_game() -> void:
@@ -17,10 +18,17 @@ func start_new_game() -> void:
 	if not is_hotseat:
 		await GameEvents.opponent_ready
 	
-	current_player = General.get_random_player()
-	turn_number = 0
-	GameEvents.game_started.emit()
-	GameEvents.new_turn_started.emit()
+	if not game_aborted_flag:
+		current_player = General.get_random_player()
+		turn_number = 0
+		GameEvents.game_started.emit()
+		GameEvents.new_turn_started.emit()
+		game_aborted_flag = false
+	
+	
+func on_back_to_main_menu():
+	game_aborted_flag = true
+	GameEvents.opponent_ready.emit()
 
 
 func _setup_board():
