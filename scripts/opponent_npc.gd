@@ -20,29 +20,16 @@ var explained_everything: bool
 func _ready():
 	visible = false
 	GameEvents.play_pressed.connect(_on_play_pressed)
-	# DialogueSystem should play opponent animations.
-	# NOTE: Actually not, they should stay separate and this script should coordinate
-	# between animations and dialogue, but whatever...
 	_dialogue_system.set_animation_player(animation_player)
 
 
 func _on_play_pressed() -> void:
-	# TODO: Disconnect ALL SIGNALS
-	
-	# Opponent only
 	if GameManager.is_hotseat:
 		visible = false
 		return
 	
 	visible = true
-	
-	GameEvents.rolled.connect(_on_dice_rolled)
-	GameEvents.first_turn_dice_shake.connect(_on_first_turn_dice_shaked)
-	GameEvents.npc_selected_move.connect(_on_npc_selected_move)
-	GameEvents.move_hovered.connect(_on_move_hovered)
-	GameEvents.move_executed.connect(_on_move_executed)
-	GameEvents.opponent_thinking.connect(_try_play_thinking_sound)
-	dialogue_cooldown_timer.timeout.connect(_on_dialogue_cooldown_timer_timeout)
+	_toggle_signals(true)
 	
 	if not GameManager.is_rematch:
 		_play_walk_in_sequence()
@@ -107,6 +94,13 @@ func _play_walk_in_sequence() -> void:
 	dialogue_cooldown_timer.start(dialogue_cd_time)
 
 
+func _on_back_to_main_menu():
+	visible = false
+	animation_player.stop()
+	_dialogue_system.stop()
+	_toggle_signals(false)
+
+
 func _play_random_dialogue():
 	if not explained_everything:
 		## Try again after 10 seconds.
@@ -146,14 +140,44 @@ func _try_play_tutorial_dialog(move: GameMove):
 		explained_securing = true
 		return
 	
-	if has_explained_everything() and not _dialogue_system.is_busy():
+	if _has_explained_everything() and not _dialogue_system.is_busy():
 		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_THATS_ALL)
 		explained_everything = true
 
 
-func has_explained_everything() -> bool:
+func _has_explained_everything() -> bool:
 	return explained_rosettes_extra_roll and explained_capturing \
 	and explained_rosettes_are_safe and explained_securing
+
+
+func _toggle_signals(toggle: bool):
+	if toggle:
+		GameEvents.rolled.connect(_on_dice_rolled)
+		GameEvents.first_turn_dice_shake.connect(_on_first_turn_dice_shaked)
+		GameEvents.npc_selected_move.connect(_on_npc_selected_move)
+		GameEvents.move_hovered.connect(_on_move_hovered)
+		GameEvents.move_executed.connect(_on_move_executed)
+		GameEvents.opponent_thinking.connect(_try_play_thinking_sound)
+		GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
+		dialogue_cooldown_timer.timeout.connect(_on_dialogue_cooldown_timer_timeout)
+	else:
+		if GameEvents.rolled.is_connected(_on_dice_rolled):
+			GameEvents.rolled.disconnect(_on_dice_rolled)
+		if GameEvents.first_turn_dice_shake.is_connected(_on_first_turn_dice_shaked):
+			GameEvents.first_turn_dice_shake.disconnect(_on_first_turn_dice_shaked)
+		if GameEvents.npc_selected_move.is_connected(_on_npc_selected_move):
+			GameEvents.npc_selected_move.disconnect(_on_npc_selected_move)
+		if GameEvents.move_hovered.is_connected(_on_move_hovered):
+			GameEvents.move_hovered.disconnect(_on_move_hovered)
+		if GameEvents.move_executed.is_connected(_on_move_executed):
+			GameEvents.move_executed.disconnect(_on_move_executed)
+		if GameEvents.opponent_thinking.is_connected(_try_play_thinking_sound):
+			GameEvents.opponent_thinking.disconnect(_try_play_thinking_sound)
+		if dialogue_cooldown_timer.timeout.is_connected(_on_dialogue_cooldown_timer_timeout):
+			dialogue_cooldown_timer.timeout.disconnect(_on_dialogue_cooldown_timer_timeout)
+		if GameEvents.back_to_main_menu_pressed.is_connected(_on_back_to_main_menu):
+			GameEvents.back_to_main_menu_pressed.disconnect(_on_back_to_main_menu)
+			
 
 
 func _try_play_thinking_sound():
@@ -161,7 +185,7 @@ func _try_play_thinking_sound():
 
 
 func _try_play_capture_reaction_dialogue(move: GameMove):
-	if not has_explained_everything: return
+	if not _has_explained_everything: return
 	
 	# Play a stronger reaction if the piece was further ahead,
 	# or if the roll was high (i.e. someone got lucky)
