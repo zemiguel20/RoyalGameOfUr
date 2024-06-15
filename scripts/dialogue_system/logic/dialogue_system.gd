@@ -70,6 +70,11 @@ func play(category: Category) -> bool:
 	return false
 	
 	
+func stop():
+	_dialogue_sequence_player.stop()
+	_interruption_sequence_player.stop()
+	
+	
 func set_animation_player(animation_player: AnimationPlayer):
 	_animation_player = animation_player
 	_dialogue_sequence_player.set_animation_player(animation_player)

@@ -8,7 +8,7 @@ var _init_delay: float
 var _status
 
 
-func _init(anim_name: String, wait_until_anim_end: bool = false, custom_blend = 0.2, init_delay = 0):
+func _init(anim_name: String, wait_until_anim_end: bool = false, custom_blend: float  = 0.2, init_delay: float = 0):
 	_anim_name = anim_name
 	_wait_until_anim_end = wait_until_anim_end
 	_custom_blend = custom_blend
