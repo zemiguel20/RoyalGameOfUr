@@ -19,6 +19,8 @@ var current_ruleset_index: int = 0
 var current_board_index: int = 0
 
 
+@export var show_splash_duration: float = 1.0
+
 @onready var main_menu: Control = $MainMenu
 @onready var ruleset_menu: Control = $RulesetMenu
 
@@ -35,11 +37,24 @@ var current_board_index: int = 0
 @onready var dice_number_slider: HSlider = $RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer2/DiceNumberSlider
 @onready var dice_number_label: Label = $RulesetMenu/TabletFrame/VBoxContainer/HBoxContainer2/DiceNumberLabel
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 func _ready() -> void:
-	_start_menu()
-	
 	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
+	
+	animation_player.play("splash_screen_sequence")
+
+
+# Pause splash screen sequence for a certain duration, but allow player to skip
+func _splash_screen_pause() -> void:
+	animation_player.pause()
+	
+	var timer = get_tree().create_timer(show_splash_duration)
+	while timer.time_left > 0 and not Input.is_action_pressed("skip_splash_screen"):
+		await Engine.get_main_loop().process_frame
+	
+	animation_player.play()
 
 
 func _on_back_to_main_menu() -> void:
