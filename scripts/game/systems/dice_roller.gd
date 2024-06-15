@@ -43,8 +43,7 @@ func _on_new_turn_started() -> void:
 	if GameManager.current_player != assigned_player:
 		return
 	
-	if GameManager.is_bot_playing():
-		automatic = true
+	automatic = GameManager.is_bot_playing()
 	
 	_dehighlight_dice()
 	await _place_dice()
