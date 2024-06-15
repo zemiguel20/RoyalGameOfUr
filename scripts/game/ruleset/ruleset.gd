@@ -14,3 +14,20 @@ class_name Ruleset extends Resource
 @export_range(1, 4, 1) var num_dice: int = 4
 
 @export var board_layout: BoardLayout = preload("res://resources/rulesets/board_layouts/layout_finkel.tres")
+
+
+func to_dict() -> Dictionary:
+	var dict = {
+		"name" : name,
+		"rosettes_are_safe" : rosettes_are_safe,
+		"rosettes_give_extra_turn" : rosettes_give_extra_turn,
+		"rosettes_allow_stacking" : rosettes_allow_stacking,
+		"captures_give_extra_turn" : captures_give_extra_turn,
+		"can_move_backwards" : can_move_backwards,
+		"allow_skip_if_only_backwards" : allow_skip_if_only_backwards,
+		"num_pieces" : num_pieces,
+		"num_dice" : num_dice,
+		"board_layout" : board_layout.name
+	}
+	
+	return dict
