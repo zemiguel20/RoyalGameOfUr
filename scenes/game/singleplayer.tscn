@@ -17,13 +17,6 @@
 [sub_resource type="GDScript" id="GDScript_lsuqm"]
 script/source = "extends Node
 
-
-func _ready() -> void:
-	pass
-	# Settings.is_hotseat_mode = true
-	# Settings.ruleset = load(\"res://resources/rulesets/ruleset_russian_rosette.tres\")
-
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.keycode == KEY_R and event.pressed:
