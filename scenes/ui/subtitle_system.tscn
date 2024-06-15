@@ -5,16 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://sprites/left_mouse_button_light.png" id="5_dyrjp"]
 
 [sub_resource type="Gradient" id="Gradient_jb0yr"]
-offsets = PackedFloat32Array(0, 0.435146, 0.742678, 0.859833, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.784314, 0, 0, 0, 0.46948, 0, 0, 0, 0, 0, 0, 0, 0)
+offsets = PackedFloat32Array(0, 0.737877, 0.790301, 0.842726, 0.91481, 1)
+colors = PackedColorArray(0, 0, 0, 0.941176, 0, 0, 0, 0.784314, 0, 0, 0, 0.673542, 0, 0, 0, 0.46948, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ie3ev"]
 gradient = SubResource("Gradient_jb0yr")
 width = 1343
 height = 194
-fill = 1
+fill = 2
 fill_from = Vector2(0.495652, 0.578261)
-fill_to = Vector2(0.494465, 0)
+fill_to = Vector2(0.48893, 0.10218)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u2qbl"]
 texture = SubResource("GradientTexture2D_ie3ev")
@@ -43,9 +43,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 213.0
+offset_left = 334.0
 offset_top = -233.0
-offset_right = -220.0
+offset_right = -341.0
 offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -57,14 +57,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 223.0
+offset_left = 169.0
 offset_top = 99.0
-offset_right = -219.0
+offset_right = -165.0
 offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_spacing = 440
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
 label_settings = SubResource("LabelSettings_tnjk0")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -98,10 +98,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -75.0
-offset_right = -20.0
-offset_bottom = -27.0
+offset_left = -83.0
+offset_top = -76.0
+offset_right = -43.0
+offset_bottom = -28.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("5_dyrjp")
