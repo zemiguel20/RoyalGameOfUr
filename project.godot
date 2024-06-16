@@ -85,6 +85,7 @@ ui_skip_dialogue={
 3d/sleep_threshold_linear=0.01
 3d/sleep_threshold_angular=0.01
 jolt_3d/sleep/velocity_threshold=0.001
+jolt_3d/continuous_cd/max_penetration=5.0
 
 [rendering]
 
