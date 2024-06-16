@@ -39,6 +39,7 @@ func _ready():
 ## Optionally, the die can be repositioned by giving a [param start_position]
 ## and a [param start_rotation].
 func roll(impulse: Vector3, start_position := global_position, start_rotation := rotation) -> void:
+	rolling = true
 	freeze = false
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
@@ -49,7 +50,6 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 	var offset = Vector3(0.0, roll_rotation_speed, 0.0)
 	apply_impulse(impulse * randf_range(0.85, 1.15), offset)
 	
-	rolling = true
 	
 	# Wait for physics wakeup
 	if sleeping:
@@ -99,13 +99,6 @@ func _read_roll_value() -> int:
 		if angle < smallest_angle:
 			closest_normal = normal
 			smallest_angle = angle
-			
-	if smallest_angle > 0.1 * PI:
-		## Apply a correction impulse that scales with the smallest angle
-		print("Correction")
-		var correction_impulse = -closest_normal.global_basis.y * smallest_angle * correction_impulse_strength
-		apply_impulse(correction_impulse, closest_normal.position)
-		await get_tree().create_timer(0.5).timeout
 	
 	var value = closest_normal.get_meta("value") as int
 	return value

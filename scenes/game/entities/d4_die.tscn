@@ -322,6 +322,7 @@ shape = SubResource("SphereShape3D_1v3fx")
 [node name="SelectionInputReader" type="Node" parent="." node_paths=PackedStringArray("input_detection_area")]
 script = ExtResource("8_kxirt")
 input_detection_area = NodePath("../SelectionArea")
+hold_threshold = 0.15
 
 [node name="RollSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("12_uiiy4")
