@@ -15,6 +15,14 @@ metadata/selector_ai = NodePath("AIGameMoveSelector")
 [node name="AIGameMoveSelector" type="Node" parent="." node_paths=PackedStringArray("highlight")]
 script = ExtResource("2_pvxna")
 highlight = NodePath("../GameMoveHighlight")
+_best_move_weight = 9
+_second_move_weight = 1
+capture_base_score = 0.93
+grants_roll_base_score = 0.65
+end_move_base_score = 0.5
+regular_base_score = 0.4
+safety_score_weight = 0.2
+piece_progress_score_weight = 0.15
 
 [node name="InteractiveGameMoveSelector" type="Node" parent="." node_paths=PackedStringArray("highlight")]
 script = ExtResource("3_q8ivv")
