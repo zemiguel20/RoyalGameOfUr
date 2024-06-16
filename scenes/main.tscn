@@ -18,8 +18,11 @@ ruleset_menu = NodePath("RulesetMenu")
 end_screen = NodePath("EndScreen")
 
 [node name="SplashScreen" parent="." instance=ExtResource("2_v07al")]
+fade_duration = 0.8
+pause_duration = 1.5
 
 [node name="TitleScreen" parent="." instance=ExtResource("3_rctig")]
+fade_duration = 1.0
 
 [node name="StartMenu" parent="." instance=ExtResource("4_1cst6")]
 

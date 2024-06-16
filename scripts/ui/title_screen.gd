@@ -20,12 +20,14 @@ func play_title_screen() -> void:
 	await animator.finished
 	
 	# Bit of idle time just to EXPOSE THE LOGO AND ITS GREATNESS AHAHAHAHAHAHA
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(fade_duration / 2).timeout
 	
-	press_to_start_label.modulate.a = 1.0
+	animator = create_tween()
+	animator.tween_property(press_to_start_label, "modulate:a", 1.0, fade_duration / 2)
+	await animator.finished
 	
 	while not Input.is_action_pressed("advance_screen"):
-			await Engine.get_main_loop().process_frame
+		await Engine.get_main_loop().process_frame
 	
 	visible = false
 	
