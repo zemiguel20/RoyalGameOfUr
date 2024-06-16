@@ -183,7 +183,9 @@ func _roll_dice() -> void:
 		var impulse = throw_spot.global_basis.y * impulse_strength / 100
 		die.roll(impulse, start_position, start_rotation)
 	
-	# wait roll finished
+	# Wait a frame to make sure die.rolling = true for all die
+	await Engine.get_main_loop().process_frame
+	# Wait until roll finished
 	for die in dice:
 		if die.rolling:
 			await die.roll_finished
