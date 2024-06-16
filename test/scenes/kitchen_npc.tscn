@@ -8,6 +8,8 @@ script = ExtResource("1_uj0e5")
 _move_speed = 1.1
 _rotation_speed = 0.7
 _start_delay = 10.0
+_min_search_time = 10.0
+_max_search_time = 25.0
 metadata/animation_player = NodePath("Model_BGCharacter2/AnimationPlayer")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
