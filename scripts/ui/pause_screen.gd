@@ -36,7 +36,9 @@ func toggle_pause():
 
 
 func _on_continue_pressed():
-	toggle_pause()
+	## Unless we already press the game pause button at the exact same frame, unpause the menu.
+	if not Input.is_action_just_pressed("game_pause"):
+		toggle_pause()
 
 
 func _on_main_menu_pressed():
