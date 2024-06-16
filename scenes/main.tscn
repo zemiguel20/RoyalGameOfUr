@@ -50,7 +50,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_3d8ko")
 
-[connection signal="sequence_finished" from="SplashScreen" to="StartMenu" method="show_with_fade"]
+[connection signal="sequence_finished" from="SplashScreen" to="TitleScreen" method="play_title_screen"]
 [connection signal="pressed" from="TitleScreen" to="StartMenu" method="show"]
 [connection signal="multiplayer_selected" from="StartMenu" to="RulesetMenu" method="show"]
 [connection signal="back_pressed" from="RulesetMenu" to="StartMenu" method="show"]
