@@ -36,14 +36,12 @@ func _on_no_moves() -> void:
 	current_turn.duration_msec = Time.get_ticks_msec() - turn_start_time_msec
 	current_turn.turn_skipped = true
 	current_game_data.history.append(current_turn)
-	print(current_game_data.to_dict())
 
 
 func _on_move_executed(move: GameMove) -> void:
 	current_turn.duration_msec = Time.get_ticks_msec() - turn_start_time_msec
 	current_turn.executed_move = GameMoveSnapshot.create_from(move)
 	current_game_data.history.append(current_turn)
-	print(current_game_data.to_dict())
 
 
 func _on_game_ended() -> void:
