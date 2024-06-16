@@ -13,6 +13,7 @@ var player: int ## Player making the move.
 
 # From spot info
 var from: Spot ## Spot where the move is coming from.
+var from_track_index: int
 var pieces_in_from: Array[Piece] ## Pieces placed in the [member from] spot (before execution).
 var is_from_shared: bool  ## Whether [member from] is in both player's tracks.
 var is_from_safe: bool ## Whether [member from] is a safe spot.
@@ -20,6 +21,7 @@ var from_track_pos: float ## Position of the [member from] spot in the track, as
 
 # To spot info
 var to: Spot ## Spot where the move is going to.
+var to_track_index: int
 var pieces_in_to: Array[Piece] ## Pieces placed in the [member to] spot (before execution).
 var is_to_shared: bool  ## Whether [member to] is in both player's tracks.
 var is_to_safe: bool ## Whether [member to] is a safe spot.
@@ -51,14 +53,16 @@ func _init(from: Spot, to: Spot, player: int):
 	
 	# Get FROM spot info
 	self.from = from
+	from_track_index = track.find(from)
 	pieces_in_from = from.pieces.duplicate()
 	pieces_in_from.make_read_only()
 	is_from_shared = not _board.is_spot_exclusive(from)
 	is_from_safe = _is_spot_safe(from)
-	from_track_pos = float(track.find(from) + 1) / float(track.size())
+	from_track_pos = float(from_track_index + 1) / float(track.size())
 	
 	# Get TO spot info
 	self.to = to
+	to_track_index = track.find(to)
 	pieces_in_to = to.pieces.duplicate()
 	pieces_in_to.make_read_only()
 	is_to_shared = not _board.is_spot_exclusive(to)
@@ -69,7 +73,7 @@ func _init(from: Spot, to: Spot, player: int):
 	# Path info
 	full_path = _board.get_path_between(from, to, player)
 	full_path.make_read_only()
-	backwards = track.find(from) > track.find(to)
+	backwards = from_track_index > to_track_index
 	
 	valid = _check_valid()
 	
