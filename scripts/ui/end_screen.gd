@@ -38,8 +38,8 @@ func _on_game_ended() -> void:
 
 func _on_rematch_button_pressed() -> void:
 	visible = false
-	GameEvents.play_pressed.emit()
 	GameManager.is_rematch = true
+	GameEvents.play_pressed.emit()
 	GameManager.start_new_game()
 
 

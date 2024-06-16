@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 ## Signal that fires when we can safely return to the menu.
-signal on_can_return_safely
+signal reload_scene
 
 var is_paused := false
 ## Pausing is only allowed during the game, not when other menus are open.
@@ -9,11 +9,11 @@ var can_pause := false
 
 func _ready():
 	visible = false
-	GameEvents.game_started.connect(_on_game_started)
+	GameEvents.play_pressed.connect(_on_play_pressed)
 	GameEvents.game_ended.connect(_on_game_ended)
 	
 	
-func _on_game_started():
+func _on_play_pressed():
 	can_pause = true
 	
 	
@@ -42,7 +42,10 @@ func _on_main_menu_pressed():
 	toggle_pause()
 	_on_game_ended()
 	GameEvents.back_to_main_menu_pressed.emit()
+	## TODO: Remove when this signal is connected.
 	get_tree().reload_current_scene()
+	reload_scene.emit()
+
 
 func _on_quit_pressed():
 	get_tree().quit()

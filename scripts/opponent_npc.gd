@@ -6,12 +6,6 @@ class_name OpponentNPC extends Node3D
 @export var min_time_between_dialogues: float = 5.0
 @export var max_time_between_dialogues: float = 10.0
 
-var explained_rosettes_extra_roll: bool
-var explained_rosettes_are_safe: bool
-var explained_capturing: bool
-var explained_securing: bool
-var explained_everything: bool
-
 @export var _dialogue_system: DialogueSystem
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var dialogue_cooldown_timer: Timer = $DialogueCooldownTimer
@@ -29,23 +23,26 @@ func _on_play_pressed() -> void:
 		return
 	
 	visible = true
-	_toggle_signals(true)
-	
-	if not GameManager.is_rematch:
-		_play_walk_in_sequence()
-		await GameEvents.intro_sequence_finished
+	if GameManager.is_rematch:
+		skip_intro = true
+	else: 
+		skip_intro = false
+		_toggle_signals(true)
+		
+	_play_walk_in_sequence()
+	await GameEvents.intro_sequence_finished
 	
 	GameEvents.opponent_ready.emit()
 
 
 func _on_dice_rolled(value: int) -> void:
-	if explained_everything and value == 0 and GameManager.current_player == General.Player.TWO \
+	if GameManager.opponent_explained_everything and value == 0 and GameManager.current_player == General.Player.TWO \
 	and GameManager.turn_number > 5:
 		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLLED_0)
 
 
 func _on_first_turn_dice_shaked():
-	if not explained_everything: return
+	if not GameManager.opponent_explained_everything: return
 	
 	_dialogue_system.play(DialogueSystem.Category.INTRO_GOOD_LUCK_WISH)
 	if GameManager.is_rematch:
@@ -102,7 +99,7 @@ func _on_back_to_main_menu():
 
 
 func _play_random_dialogue():
-	if not explained_everything:
+	if not GameManager.opponent_explained_everything:
 		## Try again after 10 seconds.
 		dialogue_cooldown_timer.start(10)
 		return
@@ -114,40 +111,40 @@ func _play_random_dialogue():
 
 func _try_play_tutorial_dialog(move: GameMove):
 	#if Settings.check_ruleset(Settings.Ruleset.FINKEL): return
-	if explained_everything: return
+	if GameManager.opponent_explained_everything: return
 		
-	if not explained_capturing and move.is_to_occupied_by_opponent:
+	if not GameManager.opponent_explained_capturing and move.is_to_occupied_by_opponent:
 		if move.player == General.Player.TWO:
 			_dialogue_system.play(DialogueSystem.Category.TUTORIAL_PLAYER_GETS_CAPTURED)
 		else:
 			_dialogue_system.play(DialogueSystem.Category.TUTORIAL_OPPONENT_GETS_CAPTURED)
-		explained_capturing = true
+		GameManager.opponent_explained_capturing = true
 		return
 	
-	if not explained_rosettes_extra_roll and move.gives_extra_turn:
+	if not GameManager.opponent_explained_rosettes_extra_roll and move.gives_extra_turn:
 		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_ROSETTE)
-		explained_rosettes_extra_roll = true
+		GameManager.opponent_explained_rosettes_extra_roll = true
 		return
 	
-	if not explained_rosettes_are_safe and move.is_to_safe and move.is_to_shared:
+	if not GameManager.opponent_explained_rosettes_are_safe and move.is_to_safe and move.is_to_shared:
 		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_CENTRAL_ROSETTE)
-		explained_rosettes_are_safe = true
+		GameManager.opponent_explained_rosettes_are_safe = true
 		return
 	
 	var from_index = EntityManager.get_board().get_track(move.player).find(move.from)
-	if not explained_securing and from_index > 7:
+	if not GameManager.opponent_explained_securing and from_index > 7:
 		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_FINISH)
-		explained_securing = true
+		GameManager.opponent_explained_securing = true
 		return
 	
 	if _has_explained_everything() and not _dialogue_system.is_busy():
 		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_THATS_ALL)
-		explained_everything = true
+		GameManager.opponent_explained_everything = true
 
 
 func _has_explained_everything() -> bool:
-	return explained_rosettes_extra_roll and explained_capturing \
-	and explained_rosettes_are_safe and explained_securing
+	return GameManager.opponent_explained_rosettes_extra_roll and GameManager.opponent_explained_capturing \
+	and GameManager.opponent_explained_rosettes_are_safe and GameManager.opponent_explained_securing
 
 
 func _toggle_signals(toggle: bool):

@@ -23,7 +23,6 @@ var shake_sfx: AudioStreamPlayer3D
 var automatic: bool = false
 
 var no_moves_flag: bool = false
-var game_aborted_flag: bool = false
 
 
 func _ready() -> void:
@@ -39,7 +38,6 @@ func _ready() -> void:
 
 func _on_new_turn_started() -> void:
 	no_moves_flag = false
-	game_aborted_flag = false
 	
 	# Do nothing if not assigned player's turn
 	if GameManager.current_player != assigned_player:
@@ -66,8 +64,6 @@ func _on_no_moves() -> void:
 
 
 func _on_game_ended() -> void:
-	game_aborted_flag = true
-	_stop_shaking()
 	_dehighlight_dice()
 	_disconnect_input_signals()
 
@@ -152,9 +148,6 @@ func _dehighlight_dice() -> void:
 
 
 func _start_shaking() -> void:
-	if game_aborted_flag:
-		return
-	
 	if GameManager.turn_number == 1:
 		GameEvents.first_turn_dice_shake.emit()
 	
@@ -167,15 +160,15 @@ func _start_shaking() -> void:
 func _stop_shaking() -> void:
 	var dice = EntityManager.get_dice()
 	shake_sfx.stop()
+	## Wait 1 frame for dice to be visible, so that they cannot appear while paused.
+	## await Engine.get_main_loop().process_frame does not work here.
+	await get_tree().create_timer(0.01).timeout
 	for die in dice:
 		die.model.visible = true
 	_roll_dice()
 	
 	
 func _roll_dice() -> void:
-	if game_aborted_flag:
-		return
-	
 	var dice = EntityManager.get_dice()
 	_disconnect_input_signals()
 	_dehighlight_dice()
@@ -200,10 +193,9 @@ func _roll_dice() -> void:
 	
 	await get_tree().create_timer(delay_after_roll).timeout
 	
-	if not game_aborted_flag:
-		GameEvents.rolled.emit(value)
+	GameEvents.rolled.emit(value)
+
+	_highlight_dice_result(value)
+	await get_tree().create_timer(show_result_duration).timeout
 	
-		_highlight_dice_result(value)
-		await get_tree().create_timer(show_result_duration).timeout
-		
-		GameEvents.roll_sequence_finished.emit()
+	GameEvents.roll_sequence_finished.emit()
