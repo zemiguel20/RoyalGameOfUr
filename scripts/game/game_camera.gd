@@ -24,11 +24,12 @@ var max_angle_right: float = PI / 6
 
 @export_range(0.0, 10.0, 0.1)
 var looking_sensitivity: float = 1.0
+@export_range(0.0, 1.0, 0.025)
+var hold_threshold := 0.2 # seconds to determine a hold action
 
 var can_look_around := false
 var press_detected := false # Used to start counting hold time
 var press_time := 0.0 # Variable to track the press time
-var hold_threshold := 0.3 # seconds to determine a hold action
 var is_looking_around := false
 var look_around_offset_rotation := Vector2.ZERO
 var look_around_anchor_rotation := Vector3.ZERO

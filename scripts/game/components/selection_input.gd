@@ -9,10 +9,11 @@ signal hold_started
 signal hold_stopped
 
 @export var input_detection_area: Area3D
+@export_range(0.0, 1.0, 0.025)
+var hold_threshold = 0.3 # seconds to determine a hold action
 
 # Variable to track the mouse press time
 var mouse_press_time = 0.0
-var hold_threshold = 0.3 # seconds to determine a hold action
 var is_holding = false
 
 var _area_press_detected = false # Used to start counting hold time
