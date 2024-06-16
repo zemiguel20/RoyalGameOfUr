@@ -16,7 +16,8 @@ func _ready():
 
 
 func _on_game_started() -> void:
-	current_game_data = GameRecord.create_with_empty_history(GameManager.ruleset)
+	current_game_data = \
+		GameRecord.create_with_empty_history(GameManager.ruleset, GameManager.is_hotseat)
 
 
 func _on_new_turn_started() -> void:
@@ -58,11 +59,13 @@ class GameRecord:
 	var uuid: String = StringName(UUID.v4())
 	var game_version: String = ProjectSettings.get_setting("application/config/version")
 	var ruleset: Ruleset
+	var is_hotseat: bool = false
 	var history: Array[Turn] = []
 	
-	static func create_with_empty_history(ruleset: Ruleset) -> GameRecord:
+	static func create_with_empty_history(ruleset: Ruleset, hotseat: bool) -> GameRecord:
 		var record = GameRecord.new()
 		record.ruleset = ruleset.duplicate(true)
+		record.is_hotseat = hotseat
 		return record
 	
 	func to_dict() -> Dictionary:
@@ -70,6 +73,7 @@ class GameRecord:
 			"uuid" : uuid,
 			"game_version" : game_version,
 			"ruleset" : ruleset.to_dict(),
+			"is_hotseat" : is_hotseat,
 			"history" : history.map(func(turn: Turn): return turn.to_dict()),
 		}
 		
