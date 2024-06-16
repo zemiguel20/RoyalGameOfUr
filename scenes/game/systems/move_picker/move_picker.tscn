@@ -30,6 +30,7 @@ highlight = NodePath("../GameMoveHighlight")
 
 [node name="GameMoveHighlight" type="Node" parent="."]
 script = ExtResource("4_32ile")
+color_neutral = Color(0, 0.807843, 0.819608, 1)
 path_highlight_prefab = ExtResource("5_h77ps")
 
 [node name="PieceDragger" type="Node" parent="." node_paths=PackedStringArray("selector")]
