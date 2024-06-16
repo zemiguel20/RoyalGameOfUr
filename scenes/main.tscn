@@ -19,7 +19,6 @@ gradient = SubResource("Gradient_uvjl7")
 
 [node name="Main" type="Node" node_paths=PackedStringArray("splash_screen", "start_menu", "loading_screen")]
 script = ExtResource("1_4sb5f")
-skip_intro = true
 splash_screen = NodePath("SplashScreen")
 start_menu = NodePath("StartMenu")
 loading_screen = NodePath("CanvasLayer/LoadingScreen")
