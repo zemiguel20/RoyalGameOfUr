@@ -1,11 +1,11 @@
 [gd_scene load_steps=17 format=3 uid="uid://cydp4h0m80bfo"]
 
 [ext_resource type="Script" path="res://scripts/ui/ruleset_menu.gd" id="1_by1lh"]
-[ext_resource type="Texture2D" uid="uid://ylslyt8vdm8y" path="res://UI/Button Left Release.png" id="2_yv1ph"]
-[ext_resource type="Texture2D" uid="uid://cmohjpb6kmjrq" path="res://UI/Button Left.png" id="3_30naf"]
-[ext_resource type="Texture2D" uid="uid://dxfismcshmkmb" path="res://UI/Button Right Release.png" id="4_ldtut"]
-[ext_resource type="Texture2D" uid="uid://d05tsy2jj1xmi" path="res://UI/Button Right.png" id="5_d6ggq"]
-[ext_resource type="Texture2D" uid="uid://cc3oo6y6f5tgi" path="res://UI/layout_finkel.png" id="7_kfq2g"]
+[ext_resource type="Texture2D" uid="uid://ylslyt8vdm8y" path="res://ui/theme_sprites/Button Left Release.png" id="2_yv1ph"]
+[ext_resource type="Texture2D" uid="uid://cmohjpb6kmjrq" path="res://ui/theme_sprites/Button Left.png" id="3_30naf"]
+[ext_resource type="Texture2D" uid="uid://dxfismcshmkmb" path="res://ui/theme_sprites/Button Right Release.png" id="4_ldtut"]
+[ext_resource type="Texture2D" uid="uid://d05tsy2jj1xmi" path="res://ui/theme_sprites/Button Right.png" id="5_d6ggq"]
+[ext_resource type="Texture2D" uid="uid://cc3oo6y6f5tgi" path="res://ui/board_layouts/layout_finkel.png" id="7_kfq2g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xdsbs"]
 

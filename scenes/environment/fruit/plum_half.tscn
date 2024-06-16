@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://kmqj2qdc6bot"]
 
-[ext_resource type="PackedScene" uid="uid://jjl01eifgb7f" path="res://models/fruit/plum_half.fbx" id="1_3y1pg"]
+[ext_resource type="PackedScene" uid="uid://jjl01eifgb7f" path="res://models/environment/fruit/plum_half.fbx" id="1_3y1pg"]
 [ext_resource type="Material" uid="uid://byvy4icpen48g" path="res://materials/fruit/plum_half.tres" id="2_gfxnf"]
 
 [node name="HalfPlum" type="Node3D"]

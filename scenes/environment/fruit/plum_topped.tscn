@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dknuwbh6rgh5h"]
 
-[ext_resource type="PackedScene" uid="uid://ccdjsevfyeqky" path="res://models/fruit/plum_topped.fbx" id="1_22mls"]
+[ext_resource type="PackedScene" uid="uid://ccdjsevfyeqky" path="res://models/environment/fruit/plum_topped.fbx" id="1_22mls"]
 [ext_resource type="Material" uid="uid://0glwc2ya0ot1" path="res://materials/fruit/plum_topped.tres" id="2_d5hcj"]
 
 [node name="ToppedPlum" type="Node3D"]

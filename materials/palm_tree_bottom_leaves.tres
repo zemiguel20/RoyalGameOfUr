@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://pw5jot3io54h"]
 
 [ext_resource type="Texture2D" uid="uid://bkgx41lhpwhqn" path="res://textures/palm_tree/PalmLeaf_Low_PalmLeaf_BaseColor_Alpha2.png" id="1_kqtmn"]
-[ext_resource type="Texture2D" uid="uid://bxfa06n27dmk5" path="res://models/palm_tree-2dbe10889dcf3001289d8ea81563d5c9_palmleaf_low_palmleaf_basecolor_alpha2.png" id="2_a2rai"]
+[ext_resource type="Texture2D" uid="uid://bxfa06n27dmk5" path="res://textures/palm_tree/palm_tree-2dbe10889dcf3001289d8ea81563d5c9_palmleaf_low_palmleaf_basecolor_alpha2.png" id="2_a2rai"]
 
 [resource]
 transparency = 2

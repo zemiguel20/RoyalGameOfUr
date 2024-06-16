@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://y4idlfyp1gdh"]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_menus.gd" id="1_5n43d"]
+[ext_resource type="Texture2D" uid="uid://oclm41ujoyav" path="res://ui/input_icons/right_mouse_button_light.png" id="2_r8lhb"]
+
+[sub_resource type="Gradient" id="Gradient_jb0yr"]
+offsets = PackedFloat32Array(0, 0.737877, 0.790301, 0.842726, 0.91481, 1)
+colors = PackedColorArray(0, 0, 0, 0.941176, 0, 0, 0, 0.784314, 0, 0, 0, 0.673542, 0, 0, 0, 0.46948, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ie3ev"]
+gradient = SubResource("Gradient_jb0yr")
+width = 1343
+height = 194
+fill = 2
+fill_from = Vector2(0.495652, 0.578261)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_swk3g"]
+texture = SubResource("GradientTexture2D_ie3ev")
+
+[sub_resource type="LabelSettings" id="LabelSettings_tnjk0"]
+font_size = 38
+
+[node name="Menus_During_Dialogue" type="CanvasLayer"]
+script = ExtResource("1_5n43d")
+
+[node name="LookAroundControls" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 650
+theme_override_constants/margin_top = 475
+theme_override_constants/margin_right = 650
+theme_override_constants/margin_bottom = 475
+
+[node name="Panel" type="Panel" parent="LookAroundControls"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_swk3g")
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="LookAroundControls/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Subtitles_Label" type="Label" parent="LookAroundControls/Panel/CenterContainer"]
+custom_minimum_size = Vector2(455, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Hold        to look around"
+label_settings = SubResource("LabelSettings_tnjk0")
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2
+
+[node name="TextureRect" type="TextureRect" parent="LookAroundControls/Panel/CenterContainer/Subtitles_Label"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+offset_left = 101.0
+offset_top = 25.0
+offset_right = 151.0
+offset_bottom = 75.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_r8lhb")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LookAroundControls/Panel/CenterContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="Subtitles_Label" type="Label" parent="LookAroundControls/Panel/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Hold"
+label_settings = SubResource("LabelSettings_tnjk0")
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2
+
+[node name="Subtitles_Label2" type="Label" parent="LookAroundControls/Panel/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(280, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+text = " to look around"
+label_settings = SubResource("LabelSettings_tnjk0")
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2

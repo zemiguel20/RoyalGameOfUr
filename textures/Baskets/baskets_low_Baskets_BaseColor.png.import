@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bli7tiqhn07dk"
-path.s3tc="res://.godot/imported/baskets_low_Baskets_BaseColor.png-27fbde4e3d15132a2aceced42313d28a.s3tc.ctex"
+path.s3tc="res://.godot/imported/baskets_low_Baskets_BaseColor.png-3486de99b393fe708a0bdcf02b7ac95c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/Baskets/baskets_low_Baskets_BaseColor.png"
-dest_files=["res://.godot/imported/baskets_low_Baskets_BaseColor.png-27fbde4e3d15132a2aceced42313d28a.s3tc.ctex"]
+source_file="res://textures/baskets/baskets_low_Baskets_BaseColor.png"
+dest_files=["res://.godot/imported/baskets_low_Baskets_BaseColor.png-3486de99b393fe708a0bdcf02b7ac95c.s3tc.ctex"]
 
 [params]
 

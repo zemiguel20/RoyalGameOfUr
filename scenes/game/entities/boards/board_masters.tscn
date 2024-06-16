@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dele71qdpa6i1"]
 
 [ext_resource type="Script" path="res://scripts/game/entities/board.gd" id="1_hgud5"]
-[ext_resource type="PackedScene" uid="uid://bimn0tu6hs0nw" path="res://models/board_with_decals.tscn" id="2_akcdt"]
+[ext_resource type="PackedScene" uid="uid://bimn0tu6hs0nw" path="res://models/board_game/board_with_decals.tscn" id="2_akcdt"]
 [ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/entities/spot.tscn" id="3_st803"]
 
 [node name="Board" type="Node3D" node_paths=PackedStringArray("p1_start_spots", "p1_track", "p2_start_spots", "p2_track")]
