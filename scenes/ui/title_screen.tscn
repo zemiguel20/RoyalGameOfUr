@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://s3vv5tktnqbd"]
+
+[ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="1_mgjk5"]
+[ext_resource type="Theme" uid="uid://cnti5slvm4lm3" path="res://UI/theme.tres" id="2_fnhj6"]
+[ext_resource type="Texture2D" uid="uid://d3y642hwbyamx" path="res://UI/logos/logo_game.png" id="3_p1g6l"]
+
+[node name="TitleScreen" type="CanvasLayer" node_paths=PackedStringArray("game_title_logo", "press_to_start_label")]
+script = ExtResource("1_mgjk5")
+game_title_logo = NodePath("Control/GameTitleLogo")
+press_to_start_label = NodePath("Control/PressToStartLabel")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_fnhj6")
+
+[node name="GameTitleLogo" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -585.0
+offset_top = -341.0
+offset_right = 586.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_p1g6l")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PressToStartLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -459.0
+offset_top = -221.0
+offset_right = 460.0
+offset_bottom = -156.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 50
+text = "PRESS TO START"
+horizontal_alignment = 1
+vertical_alignment = 1
