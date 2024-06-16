@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="70.539986mm"
+   height="70.539986mm"
+   viewBox="0 0 70.539986 70.539986"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter33"
+       x="0"
+       y="0"
+       width="1"
+       height="1">
+      <feColorMatrix
+         values="1.067 0 0 0.116889 -0.0335 0 1.067 0 0.116889 -0.0335 0 0 1.067 0.116889 -0.0335 0 0 0 1 0"
+         id="feColorMatrix33" />
+    </filter>
+  </defs>
+  <g
+     id="layer1"
+     transform="rotate(-45,31.218271,45.051723)">
+    <rect
+       style="display:inline;fill:#eac17e;fill-opacity:1;stroke:none;stroke-width:2.24193;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="rect2"
+       width="47.758072"
+       height="47.758072"
+       x="17.120962"
+       y="17.120962" />
+    <rect
+       style="display:inline;fill:none;fill-opacity:1;stroke:#51361d;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect7"
+       width="47.758072"
+       height="47.758072"
+       x="17.120962"
+       y="17.120962" />
+    <g
+       id="g27">
+      <path
+         style="display:inline;fill:#d3a868;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 17.120919,17.120911 41.000079,41.000079 64.879243,17.120911 Z"
+         id="path24" />
+      <path
+         style="display:inline;fill:#b38f58;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 17.120919,64.879243 41.000079,41.000079 17.120919,17.120911 Z"
+         id="path25" />
+      <path
+         style="fill:#d4a969;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 64.879243,64.87924 41.000079,41.000079 17.120919,64.879243 Z"
+         id="path26" />
+      <path
+         style="fill:#e5ba79;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 64.879243,17.120911 41.000079,41.000079 64.87924,64.87924 Z"
+         id="path27" />
+    </g>
+    <rect
+       style="display:inline;fill:#51361d;fill-opacity:1;stroke:none;stroke-width:1.40831;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1"
+       width="30"
+       height="30"
+       x="25.999998"
+       y="25.999998" />
+    <rect
+       style="display:none;fill:#e7c99c;fill-opacity:1;stroke:#efdabc;stroke-width:1.94118;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect27"
+       width="21.961958"
+       height="21.961958"
+       x="30.01902"
+       y="30.01902" />
+    <g
+       id="g31"
+       transform="matrix(0.44417811,0,0,0.44417811,22.788741,22.788741)"
+       style="display:none;filter:url(#filter33)">
+      <path
+         style="display:inline;fill:#d3a868;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 17.120919,17.120911 41.000079,41.000079 64.879243,17.120911 Z"
+         id="path28" />
+      <path
+         style="display:inline;fill:#b38f58;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 17.120919,64.879243 41.000079,41.000079 17.120919,17.120911 Z"
+         id="path29" />
+      <path
+         style="fill:#d4a969;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 64.879243,64.87924 41.000079,41.000079 17.120919,64.879243 Z"
+         id="path30" />
+      <path
+         style="fill:#e5ba79;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="M 64.879243,17.120911 41.000079,41.000079 64.87924,64.87924 Z"
+         id="path31" />
+    </g>
+  </g>
+</svg>

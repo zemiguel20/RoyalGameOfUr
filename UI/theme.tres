@@ -1,0 +1,54 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://cnti5slvm4lm3"]
+
+[ext_resource type="Texture2D" uid="uid://cb6xmjvt6q327" path="res://UI/check_button_checked.svg" id="1_u8vwv"]
+[ext_resource type="Texture2D" uid="uid://erxp3p7fsauv" path="res://UI/check_button_unchecked.svg" id="2_dvdhl"]
+[ext_resource type="Texture2D" uid="uid://bxootp087fdtk" path="res://UI/background 2.0.png" id="3_252tw"]
+[ext_resource type="Texture2D" uid="uid://iqam8eukdv23" path="res://UI/slider_handle.svg" id="3_cbvuu"]
+[ext_resource type="FontFile" uid="uid://c2qd4kfup264a" path="res://UI/IMFeENrm29P.ttf" id="4_hl6lc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jfqmb"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yboda"]
+color = Color(0.972549, 0.917647, 0.839216, 1)
+thickness = 3
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_w6och"]
+color = Color(0.972549, 0.917647, 0.839216, 1)
+thickness = 3
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cvp21"]
+color = Color(0.141176, 0.0823529, 0.0392157, 0.517647)
+thickness = 3
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fakp5"]
+texture = ExtResource("3_252tw")
+
+[resource]
+default_font = ExtResource("4_hl6lc")
+Button/colors/font_color = Color(0.928375, 0.807002, 0.625907, 1)
+Button/colors/font_focus_color = Color(0.972549, 0.917647, 0.839216, 1)
+Button/colors/font_hover_color = Color(0.971607, 0.918142, 0.840398, 1)
+Button/colors/font_hover_pressed_color = Color(0.12549, 0.529412, 0.411765, 1)
+Button/colors/font_outline_color = Color(0.141176, 0.0823529, 0.0392157, 1)
+Button/colors/font_pressed_color = Color(0.125117, 0.529317, 0.413665, 1)
+Button/constants/outline_size = 7
+Button/font_sizes/font_size = 30
+Button/styles/focus = SubResource("StyleBoxEmpty_jfqmb")
+CheckBox/font_sizes/font_size = 25
+CheckBox/icons/checked = ExtResource("1_u8vwv")
+CheckBox/icons/unchecked = ExtResource("2_dvdhl")
+HSlider/icons/grabber = ExtResource("3_cbvuu")
+HSlider/icons/grabber_highlight = ExtResource("3_cbvuu")
+HSlider/styles/grabber_area = SubResource("StyleBoxLine_yboda")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_w6och")
+HSlider/styles/slider = SubResource("StyleBoxLine_cvp21")
+Label/colors/font_color = Color(0.962744, 0.88864, 0.782356, 1)
+Label/colors/font_outline_color = Color(0.972549, 0.917647, 0.839216, 1)
+Label/colors/font_shadow_color = Color(0.141176, 0.0823529, 0.0392157, 1)
+Label/constants/outline_size = 1
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 7
+Label/font_sizes/font_size = 24
+Panel/styles/panel = SubResource("StyleBoxTexture_fakp5")
+VBoxContainer/constants/separation = 10

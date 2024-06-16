@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwdbewrwmqofr"]
+
+[ext_resource type="Script" path="res://scripts/ui/start_menu.gd" id="1_aktau"]
+[ext_resource type="Theme" uid="uid://cnti5slvm4lm3" path="res://UI/theme.tres" id="2_74ne1"]
+[ext_resource type="Texture2D" uid="uid://bcj1j0w025r45" path="res://UI/table_cloth_menu_transparent.png" id="3_2vdvx"]
+[ext_resource type="Texture2D" uid="uid://d3y642hwbyamx" path="res://UI/logos/logo_game.png" id="4_63ra1"]
+
+[node name="StartMenu" type="CanvasLayer" node_paths=PackedStringArray("game_version_label")]
+script = ExtResource("1_aktau")
+game_version_label = NodePath("Control/GameVersionLabel")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_74ne1")
+metadata/_edit_use_anchors_ = true
+
+[node name="MenuBackground" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -629.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("3_2vdvx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GameTitleLogo" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -889.0
+offset_top = 64.0
+offset_right = -74.0
+offset_bottom = 401.0
+grow_horizontal = 0
+texture = ExtResource("4_63ra1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -593.0
+offset_top = -506.0
+offset_right = -102.0
+offset_bottom = -102.0
+grow_horizontal = 0
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="SingleplayerButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Singleplayer"
+flat = true
+alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MultiplayerButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Multiplayer"
+flat = true
+alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="QuitButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Quit"
+flat = true
+alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="GameVersionLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -58.0
+offset_right = 136.0
+offset_bottom = -17.0
+grow_vertical = 0
+text = "Ver 1.0.0"
+
+[connection signal="pressed" from="Control/VBoxContainer/SingleplayerButton" to="." method="_on_singleplayer_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/MultiplayerButton" to="." method="_on_multiplayer_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

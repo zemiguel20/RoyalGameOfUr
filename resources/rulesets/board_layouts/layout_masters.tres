@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BoardLayout" load_steps=4 format=3 uid="uid://i6nacm4r0wwe"]
 
 [ext_resource type="Script" path="res://scripts/game/ruleset/board_layout.gd" id="1_d45rm"]
-[ext_resource type="Texture2D" uid="uid://dfy3qndysh7kq" path="res://sprites/layout_masters.png" id="1_m62x2"]
+[ext_resource type="Texture2D" uid="uid://dfy3qndysh7kq" path="res://UI/layout_masters.png" id="1_m62x2"]
 [ext_resource type="PackedScene" uid="uid://dele71qdpa6i1" path="res://scenes/game/entities/boards/board_masters.tscn" id="2_lnjql"]
 
 [resource]
