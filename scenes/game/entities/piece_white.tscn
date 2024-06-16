@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/game/entities/piece.gd" id="1_0kiv2"]
 [ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="2_qanmy"]
-[ext_resource type="Material" uid="uid://purj1r6adduf" path="res://materials/highlight.tres" id="3_af3ig"]
+[ext_resource type="Material" uid="uid://cspiva85eoo3" path="res://materials/highlight.tres" id="3_af3ig"]
 [ext_resource type="Script" path="res://scripts/game/components/move_animation.gd" id="4_7srpi"]
 [ext_resource type="PackedScene" uid="uid://ctrxgamva8tn6" path="res://models/piece_model.glb" id="5_5j51m"]
-[ext_resource type="Material" uid="uid://c4xcvomvc2exe" path="res://materials/piece_white.tres" id="6_h4ix0"]
+[ext_resource type="Material" path="res://materials/piece_white.tres" id="6_h4ix0"]
 [ext_resource type="AudioStream" uid="uid://d1b4gouwqcaja" path="res://audio/sfx_mastered/piece-placement.mp3" id="7_73j2l"]
 
 [node name="WhitePiece" type="Node3D"]
@@ -24,7 +24,7 @@ target_meshes = [NodePath("../Model/Piece")]
 script = ExtResource("4_7srpi")
 root_parent = NodePath("..")
 arc_height = 0.04
-duration = 0.4
+duration = 0.3
 
 [node name="Model" parent="." instance=ExtResource("5_5j51m")]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.000982706, 0)
