@@ -4,6 +4,7 @@
 
 [node name="EndScreen" type="CanvasLayer" node_paths=PackedStringArray("header_label", "survey_menu", "end_menu", "survey_button")]
 script = ExtResource("1_awi2m")
+survey_link = "https://youtu.be/dQw4w9WgXcQ"
 header_label = NodePath("TabletPanel/HeaderLabel")
 survey_menu = NodePath("TabletPanel/SurveyMenu")
 end_menu = NodePath("TabletPanel/EndMenu")

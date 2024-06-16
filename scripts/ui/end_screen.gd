@@ -37,7 +37,8 @@ func _on_game_ended() -> void:
 	survey_menu.visible = true
 	end_menu.visible = false
 	
-	# TODO: IMPLEMENT SURVEY
+	# TODO: Proper survey link with game id
+	#survey_button.uri = survey_link + GameDataCollector.current_game_data.uuid
 	survey_button.uri = survey_link
 
 
