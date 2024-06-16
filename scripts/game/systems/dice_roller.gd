@@ -193,6 +193,12 @@ func _roll_dice() -> void:
 			await die.roll_finished
 		value += die.value
 	
+	# Small sequence that "counts" the dice that rolled one
+	for die in dice:
+		if die.value == 1:
+			die.highlight.set_active(true).set_color(Color.FLORAL_WHITE)
+		await get_tree().create_timer(0.1).timeout
+	
 	await get_tree().create_timer(delay_after_roll).timeout
 	
 	GameEvents.rolled.emit(value)
