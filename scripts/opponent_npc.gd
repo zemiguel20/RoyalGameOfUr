@@ -92,7 +92,6 @@ func _play_walk_in_sequence() -> void:
 
 
 func _on_back_to_main_menu():
-	visible = false
 	animation_player.stop()
 	_dialogue_system.stop()
 	_toggle_signals(false)
