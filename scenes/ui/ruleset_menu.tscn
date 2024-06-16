@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://cydp4h0m80bfo"]
+[gd_scene load_steps=17 format=3 uid="uid://cydp4h0m80bfo"]
 
 [ext_resource type="Script" path="res://scripts/ui/ruleset_menu.gd" id="1_by1lh"]
-[ext_resource type="Theme" uid="uid://cnti5slvm4lm3" path="res://UI/theme.tres" id="2_uffcg"]
 [ext_resource type="Texture2D" uid="uid://ylslyt8vdm8y" path="res://UI/Button Left Release.png" id="2_yv1ph"]
 [ext_resource type="Texture2D" uid="uid://cmohjpb6kmjrq" path="res://UI/Button Left.png" id="3_30naf"]
 [ext_resource type="Texture2D" uid="uid://dxfismcshmkmb" path="res://UI/Button Right Release.png" id="4_ldtut"]
@@ -70,7 +69,6 @@ offset_right = 960.0
 offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_uffcg")
 
 [node name="TabletFrame" type="Panel" parent="Control"]
 layout_mode = 1

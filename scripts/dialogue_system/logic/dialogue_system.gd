@@ -40,12 +40,17 @@ func _ready():
 	_player_inorder.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
 	_player_random.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
 	GameEvents.subtitle_panel_clicked.connect(continue_dialogue)
+	GameEvents.play_pressed.connect(_on_play_pressed)
 	
 	
 func _input(event):
 	if event.is_action_pressed("skip_dialogue"):
 		continue_dialogue()
-
+	
+		
+func _on_play_pressed():
+	reset()
+	
 
 func continue_dialogue():
 	if _interruption_sequence_player.is_busy():
@@ -68,6 +73,19 @@ func play(category: Category) -> bool:
 			return success
 			
 	return false
+	
+
+func reset():
+	stop()
+	_player_inorder.reset()
+	for group: DialogueGroup in _dialogue_groups:
+		for sequence in group.dialogue_sequences:
+			sequence.was_played = false
+	
+
+func stop():
+	_dialogue_sequence_player.stop()
+	_interruption_sequence_player.stop()
 	
 	
 func set_animation_player(animation_player: AnimationPlayer):

@@ -43,8 +43,7 @@ func _on_new_turn_started() -> void:
 	if GameManager.current_player != assigned_player:
 		return
 	
-	if GameManager.is_bot_playing():
-		automatic = true
+	automatic = GameManager.is_bot_playing()
 	
 	_dehighlight_dice()
 	await _place_dice()
@@ -161,11 +160,14 @@ func _start_shaking() -> void:
 func _stop_shaking() -> void:
 	var dice = EntityManager.get_dice()
 	shake_sfx.stop()
+	## Wait 1 frame for dice to be visible, so that they cannot appear while paused.
+	## await Engine.get_main_loop().process_frame does not work here.
+	await get_tree().create_timer(0.01).timeout
 	for die in dice:
 		die.model.visible = true
 	_roll_dice()
-
-
+	
+	
 func _roll_dice() -> void:
 	var dice = EntityManager.get_dice()
 	_disconnect_input_signals()
@@ -194,7 +196,7 @@ func _roll_dice() -> void:
 	await get_tree().create_timer(delay_after_roll).timeout
 	
 	GameEvents.rolled.emit(value)
-	
+
 	_highlight_dice_result(value)
 	await get_tree().create_timer(show_result_duration).timeout
 	

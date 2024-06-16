@@ -8,19 +8,39 @@ var is_rematch := false
 var is_hotseat := false
 var fast_move_enabled := false
 
-var ruleset: Ruleset
+var ruleset
+var game_aborted_flag
+
+## Opponent dialogue flags
+var opponent_explained_rosettes_extra_roll: bool
+var opponent_explained_rosettes_are_safe: bool
+var opponent_explained_capturing: bool
+var opponent_explained_securing: bool
+var opponent_explained_everything: bool
+
+
+func _ready():
+	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
 
 
 func start_new_game() -> void:
 	_setup_board()
+	game_aborted_flag = false
 	
 	if not is_hotseat:
 		await GameEvents.opponent_ready
 	
-	current_player = General.get_random_player()
-	turn_number = 0
-	GameEvents.game_started.emit()
-	GameEvents.new_turn_started.emit()
+	if not game_aborted_flag:
+		current_player = General.get_random_player()
+		turn_number = 0
+		GameEvents.game_started.emit()
+		GameEvents.new_turn_started.emit()
+	
+	
+func _on_back_to_main_menu():
+	game_aborted_flag = true
+	## Force the await in start_new_game() to stop
+	GameEvents.opponent_ready.emit()
 
 
 func _setup_board():

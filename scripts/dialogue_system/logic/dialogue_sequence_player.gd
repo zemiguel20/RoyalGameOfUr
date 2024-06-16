@@ -112,6 +112,12 @@ func _handle_opponent_action_prevention(entry: DialogueBundle):
 		GameEvents.opponent_action_resumed.emit()
 
 
+func stop():
+	_audio_player.stop()
+	_animation_player.stop()
+	_subtitle_displayer.hide_subtitles() 
+
+
 func handle_interruption():
 	if _use_subtitles:
 		_subtitle_displayer.hide_subtitles()

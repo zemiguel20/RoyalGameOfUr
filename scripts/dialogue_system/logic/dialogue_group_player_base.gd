@@ -42,11 +42,9 @@ func check_priority(new_group: DialogueGroup):
 
 
 func is_busy():
-	## TODO: Double-check
 	return _sequence_player.is_playing
 
 
 ## Virtual method
 func _pick_sequence(group: DialogueGroup) -> DialogueSequence:
 	return null
-

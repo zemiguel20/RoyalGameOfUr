@@ -31,6 +31,7 @@ func _ready():
 	roll_timer = get_node(get_meta("timer")) as Timer
 	roll_timer.timeout.connect(_force_movement_stop)
 	
+	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
 	freeze = true
 
 
@@ -76,6 +77,12 @@ func _on_movement_stopped() -> void:
 	
 	value = await _read_roll_value()
 	roll_finished.emit(value)
+	
+
+func _on_back_to_main_menu():
+	if sleeping_state_changed.is_connected(_on_movement_stopped):
+		sleeping_state_changed.disconnect(_on_movement_stopped)
+	sleeping = true
 
 
 func _force_movement_stop() -> void:
@@ -95,7 +102,6 @@ func _read_roll_value() -> int:
 	
 	var value = closest_normal.get_meta("value") as int
 	return value
-
 
 
 func _on_collided_with_table(body):

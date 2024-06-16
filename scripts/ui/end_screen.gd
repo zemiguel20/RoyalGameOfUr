@@ -1,13 +1,15 @@
 class_name EndScreen extends CanvasLayer
 
 
-signal back_pressed
-
 const WIN_SINGLEPLAYER_TEXT = "You have won!"
 const LOSE_SINGLEPLAYER_TEXT = "You have lost!"
 const HOTSEAT_TEXT = "Player %d won the game"
 
-@export_multiline var survey_link: String = "https://www.universiteitleiden.nl/"
+
+
+@export var test: bool = false
+@export var test_is_hotseat: bool = false
+@export var survey_link: String = "https://www.universiteitleiden.nl/"
 
 
 @export_group("References")
@@ -18,7 +20,12 @@ const HOTSEAT_TEXT = "Player %d won the game"
 
 
 func _ready() -> void:
+	visible = test
 	GameEvents.game_ended.connect(_on_game_ended)
+	
+	if test:
+		GameManager.is_hotseat = test_is_hotseat
+		_on_game_ended()
 
 
 func _on_game_ended() -> void:
@@ -28,14 +35,15 @@ func _on_game_ended() -> void:
 	# Set title
 	if GameManager.is_hotseat:
 		header_label.text = HOTSEAT_TEXT % (winner + 1)
+		survey_menu.hide()
+		end_menu.show()
 	else:
 		if winner == General.Player.ONE:
 			header_label.text = WIN_SINGLEPLAYER_TEXT
 		else:
 			header_label.text = LOSE_SINGLEPLAYER_TEXT
-	
-	survey_menu.visible = true
-	end_menu.visible = false
+		survey_menu.show()
+		end_menu.hide()
 	
 	# TODO: Proper survey link with game id
 	#survey_button.uri = survey_link + GameDataCollector.current_game_data.uuid
@@ -43,13 +51,17 @@ func _on_game_ended() -> void:
 
 
 func _on_rematch_button_pressed() -> void:
-	GameEvents.play_pressed.emit()
+	visible = false
+	
+	if test: return
+	
 	GameManager.is_rematch = true
+	GameEvents.play_pressed.emit()
 	GameManager.start_new_game()
 
 
 func _on_main_menu_button_pressed() -> void:
-	back_pressed.emit()
+	visible = false
 	GameEvents.back_to_main_menu_pressed.emit()
 
 

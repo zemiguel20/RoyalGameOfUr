@@ -119,6 +119,9 @@ func _on_to_selected(selected_move: GameMove) -> void:
 
 
 func _clear_connections(move: GameMove) -> void:
+	if not move.from or not move.to:
+		return
+	
 	if move.from.input.hovered.is_connected(_on_from_hovered.bind(move.from)):
 		move.from.input.hovered.disconnect(_on_from_hovered.bind(move.from))
 	if move.from.input.dehovered.is_connected(_on_from_dehovered.bind(move.from)):

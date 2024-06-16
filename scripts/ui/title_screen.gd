@@ -3,11 +3,20 @@ class_name TitleScreen extends CanvasLayer
 
 signal pressed
 
+@export var test: bool = false
 @export var fade_duration := 0.5
 
 @export_group("References")
 @export var game_title_logo: TextureRect
 @export var press_to_start_label: Label
+
+
+func _ready() -> void:
+	visible = false
+	
+	if test:
+		await Engine.get_main_loop().process_frame
+		play_title_screen()
 
 
 func play_title_screen() -> void:

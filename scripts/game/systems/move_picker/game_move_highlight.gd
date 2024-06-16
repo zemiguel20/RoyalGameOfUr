@@ -66,6 +66,9 @@ func highlight(move: GameMove, base_color := color_neutral) -> void:
 
 
 func clear_highlight(move: GameMove) -> void:
+	if not move.from or not move.to:
+		return
+	
 	move.from.highlight.set_active(false)
 	move.to.highlight.set_active(false)
 	for piece in move.pieces_in_from:

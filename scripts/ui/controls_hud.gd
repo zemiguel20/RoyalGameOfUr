@@ -14,6 +14,7 @@ func _ready():
 	
 	GameEvents.game_started.connect(_on_game_started)
 	GameEvents.game_ended.connect(_on_game_ended)
+	GameEvents.back_to_main_menu_pressed.connect(_on_game_ended)
 	GameEvents.drag_move_start.connect(_on_drag_move_started)
 	GameEvents.drag_move_stopped.connect(_on_drag_move_stopped)
 	GameEvents.new_turn_started.connect(_on_new_turn_started)

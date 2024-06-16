@@ -5,9 +5,6 @@ extends DialogueGroupPlayerBase
 @export var _supports_interruptions: bool
 @export var _temp_interruption: DialogueGroup 
 
-## TODO: IDK
-#@onready var _interruption_player = $InterruptionPlayer as DialogueGroupPlayerBase
-
 var _current_dialogues: Array[DialogueSequence]
 var _current_index = -1
 
@@ -33,22 +30,3 @@ func has_next():
 func reset():
 	_current_index = -1
 	_current_dialogues = []
-	
-	
-## TODO: Idk how to handle interruptions yet.
-#func interrupt():
-	#if not _supports_interruptions:
-		#push_warning("DialogueCollectionPlayer.interrupt(): This dialogue system does not support interruptions")
-	#
-	### TODO: For the prototype this is fine, but we might reconsider this later.
-	### I put a todo just to not forget this part.
-	#if _interruption_player.is_playing:
-		#return
-	#
-	#if _sequence_player.is_playing:
-		#_sequence_player.interrupt()
-		#await _sequence_player.on_interruption_ready
-	#await _interruption_player.play(_temp_interruption)
-	#_sequence_player.continue_dialogue()
-
-

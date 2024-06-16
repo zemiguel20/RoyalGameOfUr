@@ -3,6 +3,7 @@ class_name SplashScreen extends CanvasLayer
 
 signal sequence_finished
 
+@export var test: bool = false
 @export var fade_duration := 0.5
 @export var pause_duration := 1.0
 
@@ -12,14 +13,19 @@ signal sequence_finished
 @export var godot_logo: TextureRect
 
 
+func _ready() -> void:
+	visible = false
+	
+	if test:
+		await Engine.get_main_loop().process_frame
+		play_splash_screen_sequence()
+
+
 func play_splash_screen_sequence() -> void:
 	visible = true
 	background.modulate.a = 1.0
 	godot_logo.modulate.a = 0.0
 	entities_logos.modulate.a = 0.0
-	
-	# Idle time to load
-	await get_tree().create_timer(0.5).timeout
 	
 	var animator: Tween
 	

@@ -19,6 +19,7 @@ func _ready() -> void:
 	GameEvents.rolled.connect(_on_dice_rolled)
 	GameEvents.roll_sequence_finished.connect(_on_roll_sequence_finished)
 	GameEvents.game_ended.connect(_on_game_ended)
+	GameEvents.back_to_main_menu_pressed.connect(_on_game_ended)
 
 
 func _on_dice_rolled(value: int) -> void:

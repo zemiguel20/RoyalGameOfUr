@@ -105,6 +105,9 @@ func _update_look_around(mouse_delta: Vector2) -> void:
 
 
 func _on_play_pressed() -> void:
+	if GameManager.is_rematch:
+		return
+	
 	var target_pov: Node3D
 	if GameManager.is_hotseat:
 		target_pov = pov_hotseat

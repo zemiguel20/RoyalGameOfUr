@@ -2,7 +2,6 @@ class_name RulesetMenu extends CanvasLayer
 
 
 signal back_pressed
-signal confirm_pressed(final_ruleset: Ruleset)
 
 const RULESET_LIST: Array[Ruleset] = [
 	General.RULESET_FINKEL,
@@ -17,6 +16,8 @@ const BOARD_LIST: Array[BoardLayout] = [
 	General.BOARD_MASTERS,
 	General.BOARD_RR,
 ]
+
+@export var test: bool = false
 
 @export_group("References")
 @export var ruleset_name_label: Label
@@ -38,7 +39,10 @@ var ruleset: Ruleset
 
 
 func _ready() -> void:
+	visible = false
 	_update_ruleset()
+	
+	visible = test
 
 
 func _on_switch_ruleset_left_button_pressed() -> void:
@@ -148,10 +152,19 @@ func _update_board() -> void:
 
 
 func _on_confirm_button_pressed() -> void:
-	confirm_pressed.emit(ruleset.duplicate())
+	visible = false
+	
+	if test: return
+	
+	GameManager.ruleset = ruleset.duplicate()
+	GameManager.is_hotseat = true
+	GameManager.is_rematch = false
+	GameEvents.play_pressed.emit()
+	GameManager.start_new_game()
 
 
 func _on_back_button_pressed() -> void:
+	visible = false
 	back_pressed.emit()
 
 

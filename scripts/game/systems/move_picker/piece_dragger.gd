@@ -16,6 +16,7 @@ func _ready() -> void:
 	selector.from_spot_selected.connect(_on_from_spot_selected)
 	selector.selection_canceled.connect(_on_selection_cancel)
 	selector.move_selected.connect(_on_move_selected.unbind(1))
+	GameEvents.back_to_main_menu_pressed.connect(_on_selection_cancel)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
