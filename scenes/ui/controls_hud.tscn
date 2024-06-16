@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bksmfg8gvpyso"]
 
 [ext_resource type="Script" path="res://scripts/ui/controls_hud.gd" id="1_6ffc1"]
-[ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://UI/left_mouse_button_light.png" id="3_pk7ke"]
-[ext_resource type="Texture2D" uid="uid://oclm41ujoyav" path="res://UI/right_mouse_button_light.png" id="4_dlbxj"]
-[ext_resource type="Texture2D" uid="uid://1tku2lwhe5b6" path="res://UI/1_light.png" id="5_5qks6"]
+[ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://ui/input_icons/left_mouse_button_light.png" id="3_pk7ke"]
+[ext_resource type="Texture2D" uid="uid://oclm41ujoyav" path="res://ui/input_icons/right_mouse_button_light.png" id="4_dlbxj"]
+[ext_resource type="Texture2D" uid="uid://1tku2lwhe5b6" path="res://ui/input_icons/1_light.png" id="5_5qks6"]
 
 [node name="ControlsHUD" type="CanvasLayer"]
 script = ExtResource("1_6ffc1")

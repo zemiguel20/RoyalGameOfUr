@@ -12,7 +12,7 @@ class_name Main extends Node
 @export var loading_screen: Control
 
 @onready var level: Node3D = $Level
-@onready var level_scene: PackedScene = preload("res://scenes/game/singleplayer.tscn")
+@onready var level_scene: PackedScene = preload("res://scenes/game.tscn")
 
 
 func _ready() -> void:

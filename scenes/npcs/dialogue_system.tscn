@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_random_player.gd" id="16_hu4yg"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_inorder_player.gd" id="17_b38l2"]
 [ext_resource type="PackedScene" uid="uid://bdfdbhwdv6lnb" path="res://scenes/npcs/dialogue_sequence_player.tscn" id="18_b41tt"]
-[ext_resource type="PackedScene" uid="uid://y4idlfyp1gdh" path="res://dialogue_menus.tscn" id="19_l1o03"]
+[ext_resource type="PackedScene" uid="uid://y4idlfyp1gdh" path="res://scenes/ui/dialogue_menus.tscn" id="19_l1o03"]
 [ext_resource type="PackedScene" uid="uid://b5rqut7t53w0r" path="res://scenes/ui/subtitle_system.tscn" id="20_cuvl8"]
 
 [node name="DialogueSystem" type="Node"]

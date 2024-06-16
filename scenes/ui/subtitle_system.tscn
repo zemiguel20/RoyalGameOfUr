@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://b5rqut7t53w0r"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_subtitles.gd" id="1_7mgri"]
-[ext_resource type="FontFile" uid="uid://cv85ekph4c2og" path="res://UI/EasyCuneiform.ttf" id="2_tucj2"]
-[ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://UI/left_mouse_button_light.png" id="5_dyrjp"]
+[ext_resource type="FontFile" uid="uid://cv85ekph4c2og" path="res://ui/fonts/EasyCuneiform.ttf" id="2_tucj2"]
+[ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://ui/input_icons/left_mouse_button_light.png" id="5_dyrjp"]
 
 [sub_resource type="Gradient" id="Gradient_jb0yr"]
 offsets = PackedFloat32Array(0, 0.737877, 0.790301, 0.842726, 0.91481, 1)

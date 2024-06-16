@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/game/entities/board.gd" id="1_tmmtp"]
 [ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/entities/spot.tscn" id="4_tsucu"]
-[ext_resource type="PackedScene" uid="uid://bimn0tu6hs0nw" path="res://models/board_with_decals.tscn" id="8_h5eyh"]
+[ext_resource type="PackedScene" uid="uid://bimn0tu6hs0nw" path="res://models/board_game/board_with_decals.tscn" id="8_h5eyh"]
 
 [node name="Board" type="Node3D" node_paths=PackedStringArray("p1_start_spots", "p1_track", "p2_start_spots", "p2_track")]
 script = ExtResource("1_tmmtp")

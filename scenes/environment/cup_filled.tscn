@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcg188eah2mg7"]
+
+[ext_resource type="PackedScene" uid="uid://dew1uf5bc6wf3" path="res://models/Cup.fbx" id="1_av6np"]
+[ext_resource type="Material" uid="uid://bd1362pcomonc" path="res://materials/drink.tres" id="2_axevl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ccslu"]
+
+[node name="Cup" instance=ExtResource("1_av6np")]
+
+[node name="Drink" type="MeshInstance3D" parent="RootNode" index="1"]
+transform = Transform3D(0.0155874, 0, 0, 0, 0.00869553, 0, 0, 0, 0.0155874, 0, -0.00477532, 0)
+material_override = ExtResource("2_axevl")
+mesh = SubResource("CylinderMesh_ccslu")

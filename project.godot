@@ -44,7 +44,7 @@ enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
 
 [gui]
 
-theme/custom="res://UI/theme.tres"
+theme/custom="res://ui/theme.tres"
 
 [input]
 

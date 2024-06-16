@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b01ccjwqwqwr1"]
+
+[ext_resource type="PackedScene" uid="uid://q8u4iraloyur" path="res://models/environment/Table_Plank_test_Low.fbx" id="1_k61yq"]
+[ext_resource type="Material" uid="uid://bprkej5dgkxm4" path="res://materials/Plank.tres" id="2_yctyo"]
+
+[node name="Root Scene" instance=ExtResource("1_k61yq")]
+
+[node name="Plank_low" parent="RootNode" index="0"]
+material_override = ExtResource("2_yctyo")

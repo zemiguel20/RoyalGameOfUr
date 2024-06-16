@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bksmfg8gvpyso" path="res://scenes/ui/controls_hud.tscn" id="6_lf4fo"]
 [ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="7_824lo"]
 [ext_resource type="PackedScene" uid="uid://purvwsmsb7e8" path="res://scenes/ui/pause_screen.tscn" id="8_08u04"]
-[ext_resource type="PackedScene" uid="uid://bkjl7wlfjhp01" path="res://scenes/game/singleplayer.tscn" id="8_2662b"]
+[ext_resource type="PackedScene" uid="uid://bkjl7wlfjhp01" path="res://scenes/game.tscn" id="8_2662b"]
 
 [sub_resource type="Gradient" id="Gradient_uvjl7"]
 offsets = PackedFloat32Array(0)
