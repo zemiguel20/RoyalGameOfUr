@@ -88,7 +88,6 @@ func _play_walk_in_sequence() -> void:
 	GameEvents.intro_sequence_finished.emit()
 	
 	var dialogue_cd_time = randf_range(min_time_between_dialogues, max_time_between_dialogues)
-	dialogue_cooldown_timer.start(dialogue_cd_time)
 
 
 func _on_back_to_main_menu():
@@ -97,12 +96,7 @@ func _on_back_to_main_menu():
 	_toggle_signals(false)
 
 
-func _play_random_dialogue():
-	if not GameManager.opponent_explained_everything:
-		## Try again after 10 seconds.
-		dialogue_cooldown_timer.start(10)
-		return
-		
+func _play_random_dialogue():	
 	await _dialogue_system.play(DialogueSystem.Category.RANDOM_CONVERSATION)
 	var dialogue_cd_time = randf_range(min_time_between_dialogues, max_time_between_dialogues)
 	dialogue_cooldown_timer.start(dialogue_cd_time)
@@ -139,6 +133,7 @@ func _try_play_tutorial_dialog(move: GameMove):
 	if _has_explained_everything() and not _dialogue_system.is_busy():
 		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_THATS_ALL)
 		GameManager.opponent_explained_everything = true
+		dialogue_cooldown_timer.start(10)
 
 
 func _has_explained_everything() -> bool:
