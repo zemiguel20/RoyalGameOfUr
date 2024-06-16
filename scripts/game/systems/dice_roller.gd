@@ -199,10 +199,9 @@ func _roll_dice() -> void:
 			if die.value == 1:
 				die.highlight.set_active(true).set_color(Color.FLORAL_WHITE)
 			await get_tree().create_timer(0.1).timeout
-		await get_tree().create_timer(delay_after_roll).timeout
+		await get_tree().create_timer(0.1).timeout
 	
 	GameEvents.rolled.emit(value)
-
 	_highlight_dice_result(value)
 	await get_tree().create_timer(show_result_duration).timeout
 	
