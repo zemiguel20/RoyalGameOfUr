@@ -42,11 +42,11 @@ func _on_dice_rolled(value: int) -> void:
 
 
 func _on_first_turn_dice_shaked():
-	if not GameManager.opponent_explained_everything: return
-	
-	_dialogue_system.play(DialogueSystem.Category.INTRO_GOOD_LUCK_WISH)
 	if GameManager.is_rematch:
-		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLL_FOR_HOPE)
+		if randi_range(0, 1) == 1:
+			_dialogue_system.play(DialogueSystem.Category.INTRO_GOOD_LUCK_WISH)
+		else:
+			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLL_FOR_HOPE)
 
 
 func _on_npc_selected_move(move: GameMove) -> void:
