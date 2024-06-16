@@ -1,48 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://cydp4h0m80bfo"]
+[gd_scene load_steps=6 format=3 uid="uid://cydp4h0m80bfo"]
 
 [ext_resource type="Script" path="res://scripts/ui/ruleset_menu.gd" id="1_by1lh"]
-[ext_resource type="Texture2D" uid="uid://ylslyt8vdm8y" path="res://ui/theme_sprites/Button Left Release.png" id="2_yv1ph"]
-[ext_resource type="Texture2D" uid="uid://cmohjpb6kmjrq" path="res://ui/theme_sprites/Button Left.png" id="3_30naf"]
-[ext_resource type="Texture2D" uid="uid://dxfismcshmkmb" path="res://ui/theme_sprites/Button Right Release.png" id="4_ldtut"]
-[ext_resource type="Texture2D" uid="uid://d05tsy2jj1xmi" path="res://ui/theme_sprites/Button Right.png" id="5_d6ggq"]
+[ext_resource type="Texture2D" uid="uid://d05tsy2jj1xmi" path="res://ui/theme_sprites/arrow_button_normal.png" id="2_yt0yb"]
+[ext_resource type="Texture2D" uid="uid://ch8bgtgnw8wjg" path="res://ui/theme_sprites/arrow_button_pressed.png" id="3_kvu5c"]
+[ext_resource type="Texture2D" uid="uid://dxfismcshmkmb" path="res://ui/theme_sprites/arrow_button_hovered.png" id="4_vetwu"]
 [ext_resource type="Texture2D" uid="uid://cc3oo6y6f5tgi" path="res://ui/board_layouts/layout_finkel.png" id="7_kfq2g"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xdsbs"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_11svl"]
-texture = ExtResource("2_yv1ph")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hne6e"]
-texture = ExtResource("2_yv1ph")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u2dfi"]
-texture = ExtResource("3_30naf")
-
-[sub_resource type="Theme" id="Theme_2vafe"]
-Button/styles/focus = SubResource("StyleBoxEmpty_xdsbs")
-Button/styles/hover = SubResource("StyleBoxTexture_11svl")
-Button/styles/normal = SubResource("StyleBoxTexture_hne6e")
-Button/styles/pressed = SubResource("StyleBoxTexture_u2dfi")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g0k1q"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y0pk2"]
-texture = ExtResource("4_ldtut")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cudxt"]
-texture = ExtResource("4_ldtut")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7xnd5"]
-texture = ExtResource("5_d6ggq")
-
-[sub_resource type="Theme" id="Theme_npdws"]
-Button/styles/focus = SubResource("StyleBoxEmpty_g0k1q")
-Button/styles/hover = SubResource("StyleBoxTexture_y0pk2")
-Button/styles/normal = SubResource("StyleBoxTexture_cudxt")
-Button/styles/pressed = SubResource("StyleBoxTexture_7xnd5")
 
 [node name="RulesetMenu" type="CanvasLayer" node_paths=PackedStringArray("ruleset_name_label", "board_layout_image", "board_name_label", "rule_1_check_box", "rule_2_check_box", "rule_3_check_box", "rule_4_check_box", "rule_5_check_box", "piece_number_slider", "piece_number_label", "dice_number_slider", "dice_number_label")]
 script = ExtResource("1_by1lh")
+test = true
 ruleset_name_label = NodePath("Control/TabletFrame/RulesetPicker/RulesetNameLabel")
 board_layout_image = NodePath("Control/TabletFrame/BoardPicker/BoardLayoutImage")
 board_name_label = NodePath("Control/TabletFrame/BoardPicker/BoardNameLabel")
@@ -96,7 +62,7 @@ offset_bottom = 159.0
 grow_horizontal = 2
 metadata/_edit_group_ = true
 
-[node name="SwitchRulesetLeftButton" type="Button" parent="Control/TabletFrame/RulesetPicker"]
+[node name="SwitchRulesetLeftButton" type="TextureButton" parent="Control/TabletFrame/RulesetPicker"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -107,7 +73,12 @@ offset_bottom = 35.0
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = SubResource("Theme_2vafe")
+texture_normal = ExtResource("2_yt0yb")
+texture_pressed = ExtResource("3_kvu5c")
+texture_hover = ExtResource("4_vetwu")
+ignore_texture_size = true
+stretch_mode = 5
+flip_h = true
 
 [node name="RulesetNameLabel" type="Label" parent="Control/TabletFrame/RulesetPicker"]
 layout_mode = 1
@@ -127,7 +98,7 @@ text = "Rule Set Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SwitchRulesetRightButton" type="Button" parent="Control/TabletFrame/RulesetPicker"]
+[node name="SwitchRulesetRightButton" type="TextureButton" parent="Control/TabletFrame/RulesetPicker"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -139,7 +110,11 @@ offset_top = -35.0
 offset_bottom = 35.0
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_npdws")
+texture_normal = ExtResource("2_yt0yb")
+texture_pressed = ExtResource("3_kvu5c")
+texture_hover = ExtResource("4_vetwu")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="BoardPicker" type="Control" parent="Control/TabletFrame"]
 layout_mode = 1
@@ -156,7 +131,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_group_ = true
 
-[node name="SwitchBoardLeftButton" type="Button" parent="Control/TabletFrame/BoardPicker"]
+[node name="SwitchBoardLeftButton" type="TextureButton" parent="Control/TabletFrame/BoardPicker"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -165,8 +140,12 @@ offset_top = -34.5
 offset_right = 64.0
 offset_bottom = 34.5
 grow_vertical = 2
-scale = Vector2(1.25, 1.25)
-theme = SubResource("Theme_2vafe")
+texture_normal = ExtResource("2_yt0yb")
+texture_pressed = ExtResource("3_kvu5c")
+texture_hover = ExtResource("4_vetwu")
+ignore_texture_size = true
+stretch_mode = 5
+flip_h = true
 
 [node name="BoardLayoutImage" type="TextureRect" parent="Control/TabletFrame/BoardPicker"]
 layout_mode = 1
@@ -185,7 +164,7 @@ texture = ExtResource("7_kfq2g")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="SwitchBoardRightButton" type="Button" parent="Control/TabletFrame/BoardPicker"]
+[node name="SwitchBoardRightButton" type="TextureButton" parent="Control/TabletFrame/BoardPicker"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -197,8 +176,11 @@ offset_top = -34.5
 offset_bottom = 34.5
 grow_horizontal = 0
 grow_vertical = 2
-scale = Vector2(1.25, 1.25)
-theme = SubResource("Theme_npdws")
+texture_normal = ExtResource("2_yt0yb")
+texture_pressed = ExtResource("3_kvu5c")
+texture_hover = ExtResource("4_vetwu")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="BoardNameLabel" type="Label" parent="Control/TabletFrame/BoardPicker"]
 layout_mode = 1
@@ -275,7 +257,6 @@ metadata/_edit_group_ = true
 [node name="PieceNumberSlider" type="HSlider" parent="Control/TabletFrame/Sliders"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-focus_mode = 0
 min_value = 1.0
 max_value = 7.0
 value = 1.0
@@ -302,7 +283,6 @@ vertical_alignment = 1
 [node name="DiceNumberSlider" type="HSlider" parent="Control/TabletFrame/Sliders"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-focus_mode = 0
 min_value = 1.0
 max_value = 5.0
 value = 1.0

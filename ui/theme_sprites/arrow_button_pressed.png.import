@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxfismcshmkmb"
-path="res://.godot/imported/Button Right Release.png-b01234608ac26a4c6333be93260855ac.ctex"
+uid="uid://ch8bgtgnw8wjg"
+path="res://.godot/imported/arrow_button_pressed.png-891aa6ff7c8152e59884afbd23f1ac1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/theme_sprites/Button Right Release.png"
-dest_files=["res://.godot/imported/Button Right Release.png-b01234608ac26a4c6333be93260855ac.ctex"]
+source_file="res://ui/theme_sprites/arrow_button_pressed.png"
+dest_files=["res://.godot/imported/arrow_button_pressed.png-891aa6ff7c8152e59884afbd23f1ac1f.ctex"]
 
 [params]
 
