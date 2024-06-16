@@ -37,20 +37,20 @@ var _animation_player: AnimationPlayer
 
 
 func _ready():
-    _player_inorder.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
-    _player_random.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
-    GameEvents.subtitle_panel_clicked.connect(continue_dialogue)
-    GameEvents.play_pressed.connect(_on_play_pressed)
-    
-    
+	_player_inorder.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
+	_player_random.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
+	GameEvents.subtitle_panel_clicked.connect(continue_dialogue)
+	GameEvents.play_pressed.connect(_on_play_pressed)
+	
+	
 func _input(event):
-    if event.is_action_pressed("skip_dialogue"):
-        continue_dialogue()
-    
-        
+	if event.is_action_pressed("skip_dialogue"):
+		continue_dialogue()
+	
+		
 func _on_play_pressed():
-    reset()
-    
+	reset()
+	
 
 func continue_dialogue():
 	if _interruption_sequence_player.is_busy():
@@ -61,27 +61,27 @@ func continue_dialogue():
 
 ## Tries to play a DialogueSequence in the correct category. Returns whether the operation was successfull.
 func play(category: Category) -> bool:
-    if is_busy() and _interruption_sequence_player.is_busy():
-        return false
-        
-    for group in _dialogue_groups:
-        if group.category == category:
-            var group_player = _player_inorder if group.play_in_order else _player_random
-            _current_dialogue_player = group_player
-            var success = await group_player.play_sequence_from_group(group)
-            _current_dialogue_player = null
-            return success
-            
-    return false
-    
+	if is_busy() and _interruption_sequence_player.is_busy():
+		return false
+		
+	for group in _dialogue_groups:
+		if group.category == category:
+			var group_player = _player_inorder if group.play_in_order else _player_random
+			_current_dialogue_player = group_player
+			var success = await group_player.play_sequence_from_group(group)
+			_current_dialogue_player = null
+			return success
+			
+	return false
+	
 
 func reset():
-    stop()
-    _player_inorder.reset()
-    for group: DialogueGroup in _dialogue_groups:
-        for sequence in group.dialogue_sequences:
-            sequence.was_played = false
-    
+	stop()
+	_player_inorder.reset()
+	for group: DialogueGroup in _dialogue_groups:
+		for sequence in group.dialogue_sequences:
+			sequence.was_played = false
+	
 
 func stop():
 	_dialogue_sequence_player.stop()

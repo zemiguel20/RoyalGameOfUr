@@ -49,7 +49,6 @@ const BASE_SHARED_SPOT_DANGER_SCORE: float = 0.1
 @export_range(0.1, 5.0) var move_highlight_duration: float = 1.0
 
 var _is_busy_talking: bool
-var _game_aborted_flag: bool
 
 
 func _ready():
@@ -137,9 +136,6 @@ func _calculate_base_score(move: GameMove):
 
 #region ScoreModifiers
 func _calculate_safety_modifier(move: GameMove):
-	if _game_aborted_flag:
-		return -1
-	
 	var opponent = General.get_opponent(move.player)
 	var from_danger_score = _calculate_danger_score(move.from, move.is_from_safe, opponent)
 	var to_danger_score = _calculate_danger_score(move.to, move.is_to_safe, opponent)
@@ -170,17 +166,11 @@ func _calculate_danger_score(spot: Spot, spot_safe: bool, opponent: int) -> floa
 
 
 func _calculate_progress_modifier(move: GameMove):
-	if _game_aborted_flag:
-		return -1
-	
 	var progression = move.from_track_pos
 	return piece_progress_score_weight * progression 
 	
 	
 func _calculate_central_rosette_modifier(move: GameMove):
-	if _game_aborted_flag:
-		return -1
-	
 	var is_current_spot_central_rosette = move.is_from_shared and move.is_from_safe
 	var is_landing_spot_central_rosette = move.is_to_shared and move.is_to_safe
 	
@@ -205,9 +195,6 @@ func _calculate_central_rosette_modifier(move: GameMove):
 
 
 func _get_num_opponent_pieces_ahead(move: GameMove) -> int:
-	if _game_aborted_flag:
-		return -1
-	
 	var board = EntityManager.get_board()
 	var from_index = board.get_track(move.player).find(move.from)
 	
