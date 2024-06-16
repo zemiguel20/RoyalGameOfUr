@@ -10,3 +10,4 @@ transition_duration = 1.0
 max_angle_up = 1.0472
 max_angle_left = 1.0472
 max_angle_right = 1.0472
+hold_threshold = 0.15
