@@ -1,13 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=19 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/game/environment_scaled.tscn" id="1_i3yx6"]
 [ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker.tscn" id="5_omrkq"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/game_camera.tscn" id="7_w116q"]
-[ext_resource type="PackedScene" uid="uid://bksmfg8gvpyso" path="res://scenes/ui/controls_hud.tscn" id="8_wjnj8"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
-[ext_resource type="PackedScene" uid="uid://cuw4r8ubsaba3" path="res://scenes/ui/main_menu.tscn" id="10_2dq8v"]
-[ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="11_b3pbs"]
 [ext_resource type="AudioStream" uid="uid://cypkb6b2st6b1" path="res://audio/sfx_mastered/ambience-birds-and-crickets.mp3" id="12_6m1n2"]
 [ext_resource type="Script" path="res://scripts/audio/ambient_audio_player.gd" id="13_056ba"]
 [ext_resource type="AudioStream" uid="uid://bn3jyvfxklhdo" path="res://audio/sfx_mastered/ambience-kitchen-sounds.mp3" id="14_raq75"]
@@ -73,7 +70,7 @@ _data = {
 point_count = 4
 up_vector_enabled = false
 
-[node name="Node" type="Node3D"]
+[node name="Level" type="Node3D"]
 script = SubResource("GDScript_lsuqm")
 
 [node name="Environment" parent="." instance=ExtResource("1_i3yx6")]
@@ -221,15 +218,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_ma8g4")
 
 [node name="StorageToKitchen2_PathFollow3D" type="PathFollow3D" parent="NPC_Paths/KitchenPaths/Storage_To_Kitchen2"]
-transform = Transform3D(-0.00153056, -0.000330129, 0.999992, -1.45518e-11, 1, 0.000330127, -0.999992, 5.05272e-07, -0.00153056, -4.51176, -0.000873566, 3.133)
+transform = Transform3D(-0.00153056, -0.000330129, 0.999991, -1.45518e-11, 1, 0.000330127, -0.999991, 5.05272e-07, -0.00153056, -4.51176, -0.000873566, 3.133)
 use_model_front = true
 loop = false
-
-[node name="ControlsHUD" parent="." instance=ExtResource("8_wjnj8")]
-
-[node name="MainMenu" parent="." instance=ExtResource("10_2dq8v")]
-
-[node name="EndScreen" parent="." instance=ExtResource("11_b3pbs")]
 
 [node name="AmbientAudio" type="Node3D" parent="."]
 

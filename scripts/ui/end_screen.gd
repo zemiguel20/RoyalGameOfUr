@@ -1,20 +1,23 @@
-extends CanvasLayer
+class_name EndScreen extends CanvasLayer
 
 
-const win_singleplayer_text = "You have won!"
-const lose_singleplayer_text = "You have lost!"
-const hotseat_text = "Player %d won the game"
+signal back_pressed
+
+const WIN_SINGLEPLAYER_TEXT = "You have won!"
+const LOSE_SINGLEPLAYER_TEXT = "You have lost!"
+const HOTSEAT_TEXT = "Player %d won the game"
 
 @export_multiline var survey_link: String = "https://www.universiteitleiden.nl/"
 
-@onready var header_label: Label = $TabletPanel/HeaderLabel
-@onready var survey_menu: VBoxContainer = $TabletPanel/SurveyMenu
-@onready var end_menu: VBoxContainer = $TabletPanel/EndMenu
-@onready var survey_button: LinkButton = $TabletPanel/SurveyMenu/HBoxContainer/SurveyButton
+
+@export_group("References")
+@export var header_label: Label
+@export var survey_menu: Control
+@export var end_menu: Control
+@export var survey_button: LinkButton
 
 
 func _ready() -> void:
-	visible = false
 	GameEvents.game_ended.connect(_on_game_ended)
 
 
@@ -24,25 +27,31 @@ func _on_game_ended() -> void:
 	
 	# Set title
 	if GameManager.is_hotseat:
-		header_label.text = hotseat_text % (winner + 1)
+		header_label.text = HOTSEAT_TEXT % (winner + 1)
 	else:
 		if winner == General.Player.ONE:
-			header_label.text = win_singleplayer_text
+			header_label.text = WIN_SINGLEPLAYER_TEXT
 		else:
-			header_label.text = lose_singleplayer_text
+			header_label.text = LOSE_SINGLEPLAYER_TEXT
+	
+	survey_menu.visible = true
+	end_menu.visible = false
 	
 	# TODO: IMPLEMENT SURVEY
-	survey_menu.visible = false
-	end_menu.visible = true
+	survey_button.uri = survey_link
 
 
 func _on_rematch_button_pressed() -> void:
-	visible = false
 	GameEvents.play_pressed.emit()
 	GameManager.is_rematch = true
 	GameManager.start_new_game()
 
 
 func _on_main_menu_button_pressed() -> void:
-	visible = false
+	back_pressed.emit()
 	GameEvents.back_to_main_menu_pressed.emit()
+
+
+func _on_continue_button_pressed() -> void:
+	survey_menu.visible = false
+	end_menu.visible = true

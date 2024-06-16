@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4c1rrqv6ix6t"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_4sb5f"]
+[ext_resource type="PackedScene" uid="uid://dxc0dcmyuxrpp" path="res://scenes/ui/splash_screen.tscn" id="2_v07al"]
+[ext_resource type="PackedScene" uid="uid://s3vv5tktnqbd" path="res://scenes/ui/title_screen.tscn" id="3_rctig"]
+[ext_resource type="PackedScene" uid="uid://bwdbewrwmqofr" path="res://scenes/ui/start_menu.tscn" id="4_1cst6"]
+[ext_resource type="PackedScene" uid="uid://cydp4h0m80bfo" path="res://scenes/ui/ruleset_menu.tscn" id="5_lutpx"]
+[ext_resource type="PackedScene" uid="uid://bksmfg8gvpyso" path="res://scenes/ui/controls_hud.tscn" id="6_lf4fo"]
+[ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="7_824lo"]
+[ext_resource type="PackedScene" uid="uid://bkjl7wlfjhp01" path="res://scenes/game/singleplayer.tscn" id="8_2662b"]
+
+[node name="Main" type="Node" node_paths=PackedStringArray("splash_screen", "title_screen", "start_menu", "ruleset_menu", "end_screen")]
+script = ExtResource("1_4sb5f")
+splash_screen = NodePath("SplashScreen")
+title_screen = NodePath("TitleScreen")
+start_menu = NodePath("StartMenu")
+ruleset_menu = NodePath("RulesetMenu")
+end_screen = NodePath("EndScreen")
+
+[node name="SplashScreen" parent="." instance=ExtResource("2_v07al")]
+
+[node name="TitleScreen" parent="." instance=ExtResource("3_rctig")]
+
+[node name="StartMenu" parent="." instance=ExtResource("4_1cst6")]
+
+[node name="RulesetMenu" parent="." instance=ExtResource("5_lutpx")]
+
+[node name="ControlsHUD" parent="." instance=ExtResource("6_lf4fo")]
+
+[node name="EndScreen" parent="." instance=ExtResource("7_824lo")]
+
+[node name="Level" parent="." instance=ExtResource("8_2662b")]
+
+[connection signal="multiplayer_selected" from="StartMenu" to="." method="_on_start_menu_multiplayer_selected"]
+[connection signal="singleplayer_selected" from="StartMenu" to="." method="_on_start_menu_singleplayer_selected"]
+[connection signal="back_pressed" from="RulesetMenu" to="." method="_on_ruleset_menu_back_pressed"]
+[connection signal="confirm_pressed" from="RulesetMenu" to="." method="_on_ruleset_menu_confirm_pressed"]
