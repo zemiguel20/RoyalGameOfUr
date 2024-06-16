@@ -3,62 +3,71 @@ class_name Main extends Node
 
 @export var skip_intro := false
 
+@export var loading_screen_fade_duration: float = 0.5
+@export var loading_delay: float = 1.0 ## Delay to give time for scene loading
+
 @export_group("References")
 @export var splash_screen: SplashScreen
-@export var title_screen: TitleScreen
 @export var start_menu: StartMenu
-@export var ruleset_menu: RulesetMenu
-@export var end_screen: EndScreen
+@export var loading_screen: Control
+
+@onready var level: Node3D = $Level
+@onready var level_scene: PackedScene = preload("res://scenes/game/singleplayer.tscn")
 
 
 func _ready() -> void:
 	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
 	
-	splash_screen.visible = false
-	title_screen.visible = false
-	start_menu.visible = false
-	ruleset_menu.visible = false
-	end_screen.visible = false
+	loading_screen.show()
+	await get_tree().create_timer(loading_delay).timeout # Delay to allow loading
+	loading_screen.hide()
 	
-	if not skip_intro:
+	if skip_intro:
+		start_menu.show()
+	else:
 		splash_screen.play_splash_screen_sequence()
-		await splash_screen.sequence_finished
-		title_screen.play_title_screen()
-		await title_screen.pressed
-	
-	start_menu.visible = true
 
 
 func _on_back_to_main_menu() -> void:
-	start_menu.visible = true
-	# NOTE: possibly add here reloading logic to reset Level
-
-
-func _on_start_menu_singleplayer_selected() -> void:
-	start_menu.visible = false
+	var volume = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
 	
-	GameManager.is_hotseat = false
-	GameManager.is_rematch = false
-	GameManager.ruleset = General.RULESET_FINKEL
-	GameManager.start_new_game()
-	GameEvents.play_pressed.emit()
-
-
-func _on_start_menu_multiplayer_selected() -> void:
-	start_menu.visible = false
-	ruleset_menu.visible = true
-
-
-func _on_ruleset_menu_back_pressed() -> void:
-	ruleset_menu.visible = false
-	start_menu.visible = true
-
-
-func _on_ruleset_menu_confirm_pressed(final_ruleset: Ruleset) -> void:
-	ruleset_menu.visible = false
+	loading_screen.visible = true
+	loading_screen.modulate.a = 0.0
 	
-	GameManager.ruleset = final_ruleset
-	GameManager.is_hotseat = true
-	GameManager.is_rematch = false
-	GameManager.start_new_game()
-	GameEvents.play_pressed.emit()
+	# Fade in loading screen and fadeout audio
+	var animator = create_tween()
+	animator.tween_property(loading_screen, "modulate:a", 1.0, loading_screen_fade_duration)
+	_fade_audio(-80, loading_screen_fade_duration)
+	await animator.finished
+	
+	# Reload level
+	level.queue_free()
+	await Engine.get_main_loop().process_frame
+	level = level_scene.instantiate()
+	add_child(level)
+	if not level.is_node_ready():
+		await level.ready
+	
+	await get_tree().create_timer(loading_delay).timeout # Delay to allow proper loading
+	
+	# Fade out loading screen and fade in audio
+	animator = create_tween()
+	animator.tween_property(loading_screen, "modulate:a", 0.0, loading_screen_fade_duration)
+	_fade_audio(volume, loading_screen_fade_duration)
+	await animator.finished
+	
+	loading_screen.visible = false
+	
+	start_menu.show_with_fade()
+
+
+# Decrease audio NOTE: Not compatible with tweeners
+func _fade_audio(target_volume: float, duration: float) -> void:
+	var time = 0.0
+	var current_volume = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
+	while time < duration:
+		var new_volume = lerpf(current_volume, target_volume, time / duration)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), new_volume)
+		await Engine.get_main_loop().process_frame
+		time += get_process_delta_time()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), target_volume)

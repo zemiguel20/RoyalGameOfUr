@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4c1rrqv6ix6t"]
+[gd_scene load_steps=12 format=3 uid="uid://b4c1rrqv6ix6t"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_4sb5f"]
 [ext_resource type="PackedScene" uid="uid://dxc0dcmyuxrpp" path="res://scenes/ui/splash_screen.tscn" id="2_v07al"]
@@ -7,22 +7,26 @@
 [ext_resource type="PackedScene" uid="uid://cydp4h0m80bfo" path="res://scenes/ui/ruleset_menu.tscn" id="5_lutpx"]
 [ext_resource type="PackedScene" uid="uid://bksmfg8gvpyso" path="res://scenes/ui/controls_hud.tscn" id="6_lf4fo"]
 [ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="7_824lo"]
+[ext_resource type="PackedScene" uid="uid://purvwsmsb7e8" path="res://scenes/ui/pause_screen.tscn" id="8_08u04"]
 [ext_resource type="PackedScene" uid="uid://bkjl7wlfjhp01" path="res://scenes/game/singleplayer.tscn" id="8_2662b"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("splash_screen", "title_screen", "start_menu", "ruleset_menu", "end_screen")]
+[sub_resource type="Gradient" id="Gradient_uvjl7"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3d8ko"]
+gradient = SubResource("Gradient_uvjl7")
+
+[node name="Main" type="Node" node_paths=PackedStringArray("splash_screen", "start_menu", "loading_screen")]
 script = ExtResource("1_4sb5f")
+skip_intro = true
 splash_screen = NodePath("SplashScreen")
-title_screen = NodePath("TitleScreen")
 start_menu = NodePath("StartMenu")
-ruleset_menu = NodePath("RulesetMenu")
-end_screen = NodePath("EndScreen")
+loading_screen = NodePath("CanvasLayer/LoadingScreen")
 
 [node name="SplashScreen" parent="." instance=ExtResource("2_v07al")]
-fade_duration = 0.8
-pause_duration = 1.5
 
 [node name="TitleScreen" parent="." instance=ExtResource("3_rctig")]
-fade_duration = 1.0
 
 [node name="StartMenu" parent="." instance=ExtResource("4_1cst6")]
 
@@ -31,10 +35,23 @@ fade_duration = 1.0
 [node name="ControlsHUD" parent="." instance=ExtResource("6_lf4fo")]
 
 [node name="EndScreen" parent="." instance=ExtResource("7_824lo")]
+visible = false
+
+[node name="PauseScreen" parent="." instance=ExtResource("8_08u04")]
 
 [node name="Level" parent="." instance=ExtResource("8_2662b")]
 
-[connection signal="multiplayer_selected" from="StartMenu" to="." method="_on_start_menu_multiplayer_selected"]
-[connection signal="singleplayer_selected" from="StartMenu" to="." method="_on_start_menu_singleplayer_selected"]
-[connection signal="back_pressed" from="RulesetMenu" to="." method="_on_ruleset_menu_back_pressed"]
-[connection signal="confirm_pressed" from="RulesetMenu" to="." method="_on_ruleset_menu_confirm_pressed"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LoadingScreen" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_3d8ko")
+
+[connection signal="sequence_finished" from="SplashScreen" to="StartMenu" method="show_with_fade"]
+[connection signal="pressed" from="TitleScreen" to="StartMenu" method="show"]
+[connection signal="multiplayer_selected" from="StartMenu" to="RulesetMenu" method="show"]
+[connection signal="back_pressed" from="RulesetMenu" to="StartMenu" method="show"]

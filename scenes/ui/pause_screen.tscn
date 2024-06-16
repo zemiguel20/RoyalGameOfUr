@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://purvwsmsb7e8"]
+[gd_scene load_steps=2 format=3 uid="uid://purvwsmsb7e8"]
 
 [ext_resource type="Script" path="res://scripts/ui/pause_screen.gd" id="1_uhldg"]
-[ext_resource type="Theme" uid="uid://w7yb2efymxa0" path="res://UI/main_theme.tres" id="2_mw35u"]
 
 [node name="PauseScreen" type="CanvasLayer"]
 script = ExtResource("1_uhldg")
@@ -25,11 +24,10 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -291.0
-offset_top = 40.0
+offset_top = 106.0
 offset_right = 304.0
-offset_bottom = 122.0
+offset_bottom = 188.0
 grow_horizontal = 2
-theme = ExtResource("2_mw35u")
 theme_override_font_sizes/font_size = 64
 text = "Game Paused"
 horizontal_alignment = 1

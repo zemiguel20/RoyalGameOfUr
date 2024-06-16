@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/opponent_guard.tscn" id="7_tegfk"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/game_camera.tscn" id="7_w116q"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="9_m0jtg"]
-[ext_resource type="PackedScene" uid="uid://purvwsmsb7e8" path="res://scenes/ui/pause_screen.tscn" id="10_hrgy1"]
 [ext_resource type="AudioStream" uid="uid://cypkb6b2st6b1" path="res://audio/sfx_mastered/ambience-birds-and-crickets.mp3" id="12_6m1n2"]
 [ext_resource type="Script" path="res://scripts/audio/ambient_audio_player.gd" id="13_056ba"]
 [ext_resource type="AudioStream" uid="uid://bn3jyvfxklhdo" path="res://audio/sfx_mastered/ambience-kitchen-sounds.mp3" id="14_raq75"]
@@ -222,8 +221,6 @@ curve = SubResource("Curve3D_ma8g4")
 transform = Transform3D(-0.00153056, -0.000330129, 0.999991, -1.45518e-11, 1, 0.000330127, -0.999991, 5.05272e-07, -0.00153056, -4.51176, -0.000873566, 3.133)
 use_model_front = true
 loop = false
-
-[node name="PauseScreen" parent="." instance=ExtResource("10_hrgy1")]
 
 [node name="AmbientAudio" type="Node3D" parent="."]
 
