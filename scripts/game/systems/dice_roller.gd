@@ -99,6 +99,8 @@ func _connect_input_signals() -> void:
 			die.input.hold_stopped.connect(_stop_shaking)
 		if not die.input.clicked.is_connected(_roll_dice):
 			die.input.clicked.connect(_roll_dice)
+		
+		die.enable_input_detection()
 
 
 func _disconnect_input_signals() -> void:
@@ -114,6 +116,8 @@ func _disconnect_input_signals() -> void:
 			die.input.hold_stopped.disconnect(_stop_shaking)
 		if die.input.clicked.is_connected(_roll_dice):
 			die.input.clicked.disconnect(_roll_dice)
+		
+		die.disable_input_detection() # Fixes when die overlaps piece and piece cant be selected
 
 
 func _highlight_dice_selectable() -> void:

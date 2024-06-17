@@ -66,6 +66,14 @@ func roll(impulse: Vector3, start_position := global_position, start_rotation :=
 		sleeping_state_changed.connect(_on_movement_stopped)
 
 
+func enable_input_detection() -> void:
+	$SelectionArea.input_ray_pickable = true
+
+
+func disable_input_detection() -> void:
+	$SelectionArea.input_ray_pickable = false
+
+
 func _on_movement_stopped() -> void:
 	freeze = true
 	rolling = false
