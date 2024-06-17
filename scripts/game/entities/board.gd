@@ -55,7 +55,7 @@ func get_occupied_spots_in_shared_path() -> Array[Spot]:
 	var filter = func(spot: Spot):
 		return (spot.is_occupied_by_player(General.Player.ONE) \
 		or spot.is_occupied_by_player(General.Player.TWO)) \
-		and not EntityManager.get_board().is_spot_exclusive(spot)
+		and not is_spot_exclusive(spot)
 	
 	return track.filter(filter)
 
