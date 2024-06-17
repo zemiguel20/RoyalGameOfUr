@@ -36,9 +36,11 @@ func _on_play_pressed() -> void:
 
 
 func _on_dice_rolled(value: int) -> void:
-	if GameManager.opponent_explained_everything and value == 0 and GameManager.current_player == General.Player.TWO \
-	and GameManager.turn_number > 5:
-		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLLED_0)
+	if GameManager.opponent_explained_everything and value == 0 and GameManager.turn_number > 5:
+		if GameManager.current_player == General.Player.TWO:
+			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLLED_0)
+		else:
+			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_MISTAKE)
 
 
 func _on_first_turn_dice_shaked():
@@ -182,15 +184,15 @@ func _try_play_capture_reaction_dialogue(move: GameMove):
 	# or if the roll was high (i.e. someone got lucky)
 	var to_index = EntityManager.get_board().get_track(move.player).find(move.to)
 	var was_piece_far = to_index >= 8
-	var rolled_3_plus = move.full_path.size()-1 >= 3
+	var rolled_not_2 = move.full_path.size()-1 != 2
 	var rolled_4 = move.full_path.size()-1 >= 4
 	if move.player == General.Player.TWO:
-		if (was_piece_far and rolled_3_plus) or move.pieces_in_to.size() > 1:
+		if (was_piece_far and rolled_not_2) or move.pieces_in_to.size() > 1:
 			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
-		elif was_piece_far or rolled_4:
+		elif (was_piece_far or rolled_4) or (rolled_not_2 and randi_range(0, 3) == 1):
 			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_MISTAKE)
 	else:
-		if (was_piece_far and rolled_3_plus) or move.pieces_in_to.size() > 1:
+		if (was_piece_far and rolled_not_2) or move.pieces_in_to.size() > 1:
 			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
-		elif was_piece_far or rolled_4:
+		elif (was_piece_far or rolled_4) or (rolled_not_2 and randi_range(0, 3) == 1):
 			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
