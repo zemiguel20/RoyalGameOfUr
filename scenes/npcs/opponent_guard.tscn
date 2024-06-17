@@ -1,10 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcjpac1cs0xcy"]
+[gd_scene load_steps=26 format=3 uid="uid://bcjpac1cs0xcy"]
 
 [ext_resource type="PackedScene" uid="uid://it24m6uyqxlk" path="res://models/characters/fbx_guard_animated.fbx" id="1_jat7h"]
 [ext_resource type="Material" uid="uid://dq4qt2h6vrkcj" path="res://materials/guard/guard.tres" id="2_nuktw"]
 [ext_resource type="Script" path="res://scripts/opponent/opponent_npc.gd" id="2_pjd45"]
 [ext_resource type="Script" path="res://scripts/opponent/opponent_animation_player.gd" id="4_g1c61"]
-[ext_resource type="PackedScene" uid="uid://bp7n22v23accq" path="res://scenes/npcs/dialogue_system.tscn" id="5_bwyai"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/dialogue_system.tscn" id="5_bwyai"]
+[ext_resource type="Resource" uid="uid://c4s5ljc8dbt6o" path="res://resources/dialogue/groups/intro_story.tres" id="6_hfums"]
+[ext_resource type="Resource" uid="uid://dgfe3vpdsmwyf" path="res://resources/dialogue/groups/intro_game_start.tres" id="7_x48pr"]
+[ext_resource type="Resource" uid="uid://bdjtjqb6rugmh" path="res://resources/dialogue/groups/random_conversation.tres" id="8_d7thj"]
+[ext_resource type="Resource" uid="uid://cm3tybkthodww" path="res://resources/dialogue/groups/game_opponent_gets_captured.tres" id="9_lwlhq"]
+[ext_resource type="Resource" uid="uid://b31u1blrsob06" path="res://resources/dialogue/groups/game_player_gets_captured.tres" id="10_kbchf"]
+[ext_resource type="Resource" uid="uid://c4s7am46wxos2" path="res://resources/dialogue/groups/game_player_mistake.tres" id="11_i5ga6"]
+[ext_resource type="Resource" uid="uid://bn8skq46su8tj" path="res://resources/dialogue/groups/game_opponent_mistake.tres" id="12_nrlke"]
+[ext_resource type="Resource" uid="uid://dqeyo43p0rrqy" path="res://resources/dialogue/groups/game_tutorial_rosette.tres" id="13_rl007"]
+[ext_resource type="Resource" uid="uid://bwb2tdg0bmm0v" path="res://resources/dialogue/groups/game_tutorial_opponent_gets_captured.tres" id="14_4hv8u"]
+[ext_resource type="Resource" uid="uid://gj45b7uqg4hx" path="res://resources/dialogue/groups/game_tutorial_player_gets_captured.tres" id="15_yoydr"]
+[ext_resource type="Resource" uid="uid://ceiyuaheccrhp" path="res://resources/dialogue/groups/game_tutorial_central_rosette.tres" id="16_hopua"]
+[ext_resource type="Resource" uid="uid://dsba08jo60k0t" path="res://resources/dialogue/groups/game_tutorial_finish.tres" id="17_gg4es"]
+[ext_resource type="Resource" uid="uid://cqbqaa2me4isu" path="res://resources/dialogue/groups/game_tutorial_explanation.tres" id="18_ydonp"]
+[ext_resource type="Resource" uid="uid://bgla8xjveol3f" path="res://resources/dialogue/groups/game_player_win.tres" id="19_trqvt"]
+[ext_resource type="Resource" uid="uid://cuwsy7lf7fndj" path="res://resources/dialogue/groups/game_opponent_win.tres" id="20_sdydl"]
+[ext_resource type="Resource" uid="uid://dr1kf71fk3tp3" path="res://resources/dialogue/groups/game_first_turn_opponent.tres" id="21_bel47"]
+[ext_resource type="Resource" uid="uid://dk77thgv14vrk" path="res://resources/dialogue/groups/game_first_turn_player.tres" id="22_cq20p"]
+[ext_resource type="Resource" uid="uid://clw5f00a8fycn" path="res://resources/dialogue/groups/game_opponent_rolled_0.tres" id="23_os4o0"]
+[ext_resource type="Resource" uid="uid://nu2oemchl0j2" path="res://resources/dialogue/groups/game_opponent_thinking.tres" id="24_i8lj7"]
+[ext_resource type="Resource" uid="uid://db7arhbcdr438" path="res://resources/dialogue/groups/game_opponent_waiting.tres" id="25_bybd3"]
 
 [node name="Opponent_Guard_Animated" node_paths=PackedStringArray("_dialogue_system") instance=ExtResource("1_jat7h")]
 script = ExtResource("2_pjd45")
@@ -17,8 +37,9 @@ bones/1/rotation = Quaternion(0.111435, -0.005218, 0.0464822, 0.99267)
 bones/2/rotation = Quaternion(0.119863, -4.06822e-18, -4.75079e-18, 0.99279)
 bones/3/rotation = Quaternion(0.083986, -7.10251e-19, -8.4269e-18, 0.996467)
 bones/4/rotation = Quaternion(0.247252, -0.00127453, -0.0528002, 0.967511)
-bones/5/rotation = Quaternion(-0.108579, 0, -4.1359e-25, 0.994088)
-bones/7/rotation = Quaternion(-0.0168499, -0.0868665, -0.00146945, 0.996076)
+bones/5/rotation = Quaternion(-0.0880796, -4.3944e-25, -3.85364e-25, 0.996114)
+bones/7/rotation = Quaternion(0.133737, -0.0860925, 0.011663, 0.987201)
+bones/9/rotation = Quaternion(0.133756, 0.0844295, -0.0114377, 0.987345)
 bones/11/rotation = Quaternion(0.624381, 0.34, -0.57239, 0.408555)
 bones/13/rotation = Quaternion(-0.0236562, 0.00272034, 0.571281, 0.820409)
 bones/15/rotation = Quaternion(0.121304, 0.0232732, 0.186979, 0.974568)
@@ -51,5 +72,6 @@ surface_material_override/0 = ExtResource("2_nuktw")
 script = ExtResource("4_g1c61")
 
 [node name="DialogueSystem" parent="." index="2" instance=ExtResource("5_bwyai")]
+_dialogue_groups = Array[Resource("res://scripts/dialogue_system/data/dialogue_group.gd")]([ExtResource("6_hfums"), ExtResource("7_x48pr"), ExtResource("8_d7thj"), ExtResource("9_lwlhq"), ExtResource("10_kbchf"), ExtResource("11_i5ga6"), ExtResource("12_nrlke"), ExtResource("13_rl007"), ExtResource("14_4hv8u"), ExtResource("15_yoydr"), ExtResource("16_hopua"), ExtResource("17_gg4es"), ExtResource("18_ydonp"), ExtResource("19_trqvt"), ExtResource("20_sdydl"), ExtResource("21_bel47"), ExtResource("22_cq20p"), ExtResource("23_os4o0"), ExtResource("24_i8lj7"), ExtResource("25_bybd3")])
 
 [node name="DialogueCooldownTimer" type="Timer" parent="." index="3"]

@@ -36,17 +36,19 @@ func _on_play_pressed() -> void:
 
 
 func _on_dice_rolled(value: int) -> void:
-	if GameManager.opponent_explained_everything and value == 0 and GameManager.current_player == General.Player.TWO \
-	and GameManager.turn_number > 5:
-		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLLED_0)
+	if GameManager.opponent_explained_everything and value == 0 and GameManager.turn_number > 5:
+		if GameManager.current_player == General.Player.TWO:
+			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLLED_0)
+		else:
+			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_MISTAKE)
 
 
 func _on_first_turn_dice_shaked():
-	if not GameManager.opponent_explained_everything: return
-	
-	_dialogue_system.play(DialogueSystem.Category.INTRO_GOOD_LUCK_WISH)
 	if GameManager.is_rematch:
-		_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLL_FOR_HOPE)
+		if randi_range(0, 1) == 1:
+			_dialogue_system.play(DialogueSystem.Category.INTRO_GOOD_LUCK_WISH)
+		else:
+			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_ROLL_FOR_HOPE)
 
 
 func _on_npc_selected_move(move: GameMove) -> void:
@@ -88,7 +90,6 @@ func _play_walk_in_sequence() -> void:
 	GameEvents.intro_sequence_finished.emit()
 	
 	var dialogue_cd_time = randf_range(min_time_between_dialogues, max_time_between_dialogues)
-	dialogue_cooldown_timer.start(dialogue_cd_time)
 
 
 func _on_back_to_main_menu():
@@ -97,12 +98,7 @@ func _on_back_to_main_menu():
 	_toggle_signals(false)
 
 
-func _play_random_dialogue():
-	if not GameManager.opponent_explained_everything:
-		## Try again after 10 seconds.
-		dialogue_cooldown_timer.start(10)
-		return
-		
+func _play_random_dialogue():	
 	await _dialogue_system.play(DialogueSystem.Category.RANDOM_CONVERSATION)
 	var dialogue_cd_time = randf_range(min_time_between_dialogues, max_time_between_dialogues)
 	dialogue_cooldown_timer.start(dialogue_cd_time)
@@ -139,6 +135,7 @@ func _try_play_tutorial_dialog(move: GameMove):
 	if _has_explained_everything() and not _dialogue_system.is_busy():
 		_dialogue_system.play(DialogueSystem.Category.TUTORIAL_THATS_ALL)
 		GameManager.opponent_explained_everything = true
+		dialogue_cooldown_timer.start(10)
 
 
 func _has_explained_everything() -> bool:
@@ -187,15 +184,22 @@ func _try_play_capture_reaction_dialogue(move: GameMove):
 	# or if the roll was high (i.e. someone got lucky)
 	var to_index = EntityManager.get_board().get_track(move.player).find(move.to)
 	var was_piece_far = to_index >= 8
-	var rolled_3_plus = move.full_path.size()-1 >= 3
+	var rolled_not_2 = move.full_path.size()-1 != 2
 	var rolled_4 = move.full_path.size()-1 >= 4
+	var captured_stack = move.pieces_in_to.size() > 1
+	var player_almost_wins = _determine_pieces_left(General.Player.ONE) <= 3
+	var opponent_almost_wins = _determine_pieces_left(General.Player.TWO) <= 3
 	if move.player == General.Player.TWO:
-		if (was_piece_far and rolled_3_plus) or move.pieces_in_to.size() > 1:
+		if (was_piece_far and rolled_not_2) or captured_stack or player_almost_wins:
 			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
-		elif was_piece_far or rolled_4:
+		elif (was_piece_far or rolled_4) or randi_range(0, 3) == 1:
 			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_MISTAKE)
 	else:
-		if (was_piece_far and rolled_3_plus) or move.pieces_in_to.size() > 1:
+		if (was_piece_far and rolled_not_2) or captured_stack or opponent_almost_wins or player_almost_wins:
 			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
-		elif was_piece_far or rolled_4:
+		elif (was_piece_far or rolled_4) or randi_range(0, 3) == 1:
 			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
+
+
+func _determine_pieces_left(player: General.Player) -> int:
+	return GameManager.ruleset.num_pieces - EntityManager.get_board().get_track(player).back().pieces.size()
