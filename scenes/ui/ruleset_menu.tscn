@@ -8,7 +8,6 @@
 
 [node name="RulesetMenu" type="CanvasLayer" node_paths=PackedStringArray("ruleset_name_label", "board_layout_image", "board_name_label", "rule_1_check_box", "rule_2_check_box", "rule_3_check_box", "rule_4_check_box", "rule_5_check_box", "piece_number_slider", "piece_number_label", "dice_number_slider", "dice_number_label")]
 script = ExtResource("1_by1lh")
-test = true
 ruleset_name_label = NodePath("Control/TabletFrame/RulesetPicker/RulesetNameLabel")
 board_layout_image = NodePath("Control/TabletFrame/BoardPicker/BoardLayoutImage")
 board_name_label = NodePath("Control/TabletFrame/BoardPicker/BoardNameLabel")
