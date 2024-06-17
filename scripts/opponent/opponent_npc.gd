@@ -186,13 +186,20 @@ func _try_play_capture_reaction_dialogue(move: GameMove):
 	var was_piece_far = to_index >= 8
 	var rolled_not_2 = move.full_path.size()-1 != 2
 	var rolled_4 = move.full_path.size()-1 >= 4
+	var captured_stack = move.pieces_in_to.size() > 1
+	var player_almost_wins = _determine_pieces_left(General.Player.ONE) <= 3
+	var opponent_almost_wins = _determine_pieces_left(General.Player.TWO) <= 3
 	if move.player == General.Player.TWO:
-		if (was_piece_far and rolled_not_2) or move.pieces_in_to.size() > 1:
+		if (was_piece_far and rolled_not_2) or captured_stack or player_almost_wins:
 			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_GETS_CAPTURED)
-		elif (was_piece_far or rolled_4) or (rolled_not_2 and randi_range(0, 3) == 1):
+		elif (was_piece_far or rolled_4) or randi_range(0, 3) == 1:
 			_dialogue_system.play(DialogueSystem.Category.GAME_PLAYER_MISTAKE)
 	else:
-		if (was_piece_far and rolled_not_2) or move.pieces_in_to.size() > 1:
+		if (was_piece_far and rolled_not_2) or captured_stack or opponent_almost_wins or player_almost_wins:
 			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_GETS_CAPTURED)
-		elif (was_piece_far or rolled_4) or (rolled_not_2 and randi_range(0, 3) == 1):
+		elif (was_piece_far or rolled_4) or randi_range(0, 3) == 1:
 			_dialogue_system.play(DialogueSystem.Category.GAME_OPPONENT_MISTAKE)
+
+
+func _determine_pieces_left(player: General.Player) -> int:
+	return GameManager.ruleset.num_pieces - EntityManager.get_board().get_track(player).back().pieces.size()
