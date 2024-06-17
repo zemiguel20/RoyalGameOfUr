@@ -112,10 +112,10 @@ gizmo_extents = 0.01
 [node name="MovePicker" parent="Systems" instance=ExtResource("2_1yp27")]
 
 [node name="DiceRoller" parent="Systems" instance=ExtResource("3_n58rk")]
-transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 4.6143, -0.212933, 6.44044)
+transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 4.59599, -0.212933, 6.40837)
 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("3_n58rk")]
-transform = Transform3D(0.847122, 0, 0.531399, 0, 1, 0, -0.531399, 0, 0.847122, 4.3634, -0.212933, 6.24632)
+transform = Transform3D(0.847122, 0, 0.531399, 0, 1, 0, -0.531399, 0, 0.847122, 4.46688, -0.212933, 6.17377)
 assigned_player = 1
 
 [node name="Opponent_Guard_Animated" parent="." instance=ExtResource("4_0uuko")]
