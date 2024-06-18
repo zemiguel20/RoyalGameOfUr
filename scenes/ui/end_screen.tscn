@@ -38,7 +38,6 @@ text = "Placeholder text"
 horizontal_alignment = 1
 
 [node name="SurveyMenu" type="Control" parent="TabletPanel"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -85,7 +84,6 @@ alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Survey"
-uri = "https://youtu.be/dQw4w9WgXcQ"
 
 [node name="ContinueButton" type="Button" parent="TabletPanel/SurveyMenu/HBoxContainer"]
 layout_mode = 2
@@ -94,6 +92,7 @@ text = "Continue"
 flat = true
 
 [node name="EndMenu" type="Control" parent="TabletPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -6,10 +6,9 @@ const LOSE_SINGLEPLAYER_TEXT = "You have lost!"
 const HOTSEAT_TEXT = "Player %d won the game"
 
 
-
+@export var survey_link: String = "https://www.universiteitleiden.nl/"
 @export var test: bool = false
 @export var test_is_hotseat: bool = false
-@export var survey_link: String = "https://www.universiteitleiden.nl/"
 
 
 @export_group("References")
