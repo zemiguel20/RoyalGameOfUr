@@ -71,3 +71,10 @@ func _fade_audio(target_volume: float, duration: float) -> void:
 		await Engine.get_main_loop().process_frame
 		time += get_process_delta_time()
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), target_volume)
+
+
+# NOTE: ONLY FOR TESTING
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and OS.is_debug_build():
+		if event.pressed and event.keycode == KEY_0:
+			GameEvents.game_ended.emit()
