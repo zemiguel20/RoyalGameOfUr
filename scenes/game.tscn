@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=19 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/environment/environment.tscn" id="1_kqpqp"]
 [ext_resource type="PackedScene" uid="uid://dqreeigpne122" path="res://scenes/game/systems/move_picker/move_picker.tscn" id="2_1yp27"]
+[ext_resource type="PackedScene" uid="uid://s47hmmlcss14" path="res://scenes/game/entities/boards/board_finkel.tscn" id="2_45x2g"]
 [ext_resource type="PackedScene" uid="uid://d4k7dx5sp6itq" path="res://scenes/game/systems/dice_roller/dice_roller.tscn" id="3_n58rk"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/npcs/opponent_guard.tscn" id="4_0uuko"]
 [ext_resource type="PackedScene" uid="uid://c8o1oiumwk2ow" path="res://scenes/game/systems/game_camera.tscn" id="5_jk6gv"]
@@ -104,15 +105,20 @@ transform = Transform3D(0.498594, 0, -0.866836, 0, 1, 0, 0.866836, 0, 0.498594, 
 shape = SubResource("BoxShape3D_8qwsb")
 
 [node name="BoardSpawn" type="Marker3D" parent="." groups=["board_spawn"]]
-transform = Transform3D(0.531783, 0, -0.846881, 0, 1, 0, 0.846881, 0, 0.531783, 4.47124, -0.21066, 6.34732)
+transform = Transform3D(0.518027, 0, -0.855364, 0, 1, 0, 0.855364, 0, 0.518027, 4.47124, -0.21066, 6.34732)
 gizmo_extents = 0.01
+metadata/_edit_group_ = true
+
+[node name="BoardForPerspective" parent="BoardSpawn" instance=ExtResource("2_45x2g")]
+process_mode = 4
+transform = Transform3D(1, 0, -0.000366539, 0, 1, 0, 0.000366539, 0, 1, 0, 0, 0)
 
 [node name="Systems" type="Node" parent="."]
 
 [node name="MovePicker" parent="Systems" instance=ExtResource("2_1yp27")]
 
 [node name="DiceRoller" parent="Systems" instance=ExtResource("3_n58rk")]
-transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 4.59599, -0.212933, 6.40837)
+transform = Transform3D(0.847168, 0, 0.531325, 0, 1, 0, -0.531325, 0, 0.847168, 4.60504, -0.212933, 6.4243)
 
 [node name="DiceRoller2" parent="Systems" instance=ExtResource("3_n58rk")]
 transform = Transform3D(0.847122, 0, 0.531399, 0, 1, 0, -0.531399, 0, 0.847122, 4.46688, -0.212933, 6.17377)
@@ -147,7 +153,7 @@ fov = 65.0
 
 [node name="HotseatPOV" type="Camera3D" parent="CameraPOVS"]
 process_mode = 4
-transform = Transform3D(-0.5, -0.828184, 0.253202, 0, 0.292372, 0.956305, -0.866025, 0.478153, -0.146186, 4.54606, 0.110736, 6.29259)
+transform = Transform3D(-0.513508, -0.825552, 0.234038, 1.49012e-08, 0.272744, 0.962087, -0.858085, 0.494039, -0.140056, 4.55151, 0.083335, 6.29023)
 fov = 65.0
 
 [node name="NPCSystem" parent="." node_paths=PackedStringArray("path_follow_guard_1", "path_follow_guard_2", "path_follow_guard_3", "path_follow_kitchen_1", "path_follow_kitchen_2") instance=ExtResource("6_7r6bu")]
