@@ -1,20 +1,33 @@
-# RoyalGameOfUr
-Godot version: 4.2.2
+# Royal Game of Ur
 
+<p align="center">
+	<img src="repo_banner.png" alt="repository banner">
+</p>
 
-**Opening the project**<br>
-1. Clone the repository.
-2. Open the project in godot, by importing the project.godot file inside of the repository.
-   
-For some of the scenes in the project, The FBX Importer plugin is **required** to open it. <br>
-1. Download the plugin: https://godotengine.org/fbx-import/
-2. Open any project in Godot.
-3. Open the Editor Settings.<br>
-    ![FBX Path](readme_images/editor_settings.png)
-4. Navigate to **Filesystem > Import**.
-5. Link the path of the downloaded plugin.
-    ![FBX Path](readme_images/fbx_importer.png)
-    <br><br>
+(Add nice project description here!)
+
+## Game System Specifications
+
+*OS:* Windows or Linux (other platforms require building the game yourself)
+*Minimum disk space:* 2 GB
+*Input Devices:* Mouse and Keyboard
+
+## Game installation
+
+This game does not have an installer (might be added later), and is distributed in a ZIP package. To install and run the game using the ZIP package, just download and extract wherever you would like, and run the executable.
+
+The lastest version can be downloaded through:
+- Itch.io (TODO: add link or banner to game page)
+- This repository *[Releases](https://github.com/zemiguel20/RoyalGameOfUr/releases)* page.
+
+## Project setup
+
+This project uses Godot 4.2 . C# support is not required, but using the .NET version of the engine will still work just as fine.
+
+The project contains models in FBX format, and thus the Godot Engine's FBX2glTF importer is needed.
+The engine should automatically prompt to install and configure the importer, but if not, then go to `Editor -> Configure FBX Importer...`, which manually opens the corresponding  window.
+
+## Other
 
 **Necessary End Screen Updates:**
 1. Open end_screen.tscn (scenes/ui/end_screen.tscn)<br>
