@@ -8,9 +8,9 @@
 
 ## Game System Specifications
 
-*OS:* Windows or Linux (other platforms require building the game yourself)
-*Minimum disk space:* 2 GB
-*Input Devices:* Mouse and Keyboard
+- *OS:* Windows or Linux (other platforms require building the game yourself)
+- *Minimum disk space:* 2 GB
+- *Input Devices:* Mouse and Keyboard
 
 ## Game installation
 
