@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/ui/end_screen.gd" id="1_awi2m"]
 
-[node name="EndScreen" type="CanvasLayer" node_paths=PackedStringArray("header_label", "survey_menu", "end_menu", "survey_button")]
+[node name="EndScreen" type="CanvasLayer" node_paths=PackedStringArray("header_label", "survey_menu", "end_menu", "survey_button", "send_file_button")]
 script = ExtResource("1_awi2m")
-survey_link = "https://youtu.be/dQw4w9WgXcQ"
 header_label = NodePath("TabletPanel/HeaderLabel")
 survey_menu = NodePath("TabletPanel/SurveyMenu")
 end_menu = NodePath("TabletPanel/EndMenu")
-survey_button = NodePath("TabletPanel/SurveyMenu/HBoxContainer/SurveyButton")
+survey_button = NodePath("TabletPanel/SurveyMenu/Buttons/SurveyButton")
+send_file_button = NodePath("TabletPanel/SurveyMenu/Buttons/SendGameFileButton")
 
 [node name="TabletPanel" type="Panel" parent="."]
 anchors_preset = 8
@@ -50,7 +50,6 @@ offset_right = 196.0
 offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_group_ = true
 
 [node name="TextLabel" type="Label" parent="TabletPanel/SurveyMenu"]
 custom_minimum_size = Vector2(7.79, 0)
@@ -64,29 +63,57 @@ theme_override_font_sizes/font_size = 24
 text = "Thank you so much for playing the beta version of our game about the boardgame known as The Royal Game of Ur! There will be a survey coming soon, but in the meantime you can use the survey button to visit the beautiful website of Leiden University. "
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabletPanel/SurveyMenu"]
+[node name="Buttons" type="Control" parent="TabletPanel/SurveyMenu"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -252.5
-offset_top = 28.0
-offset_right = 252.5
-offset_bottom = 93.0
+offset_left = -185.5
+offset_top = -10.0
+offset_right = 212.5
+offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 120
-alignment = 1
+metadata/_edit_group_ = true
 
-[node name="SurveyButton" type="LinkButton" parent="TabletPanel/SurveyMenu/HBoxContainer"]
-layout_mode = 2
+[node name="SurveyButton" type="LinkButton" parent="TabletPanel/SurveyMenu/Buttons"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_right = 70.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(2.11775e-06, 0.533023, 0.158395, 1)
 theme_override_font_sizes/font_size = 50
 text = "Survey"
 
-[node name="ContinueButton" type="Button" parent="TabletPanel/SurveyMenu/HBoxContainer"]
-layout_mode = 2
+[node name="SendGameFileButton" type="Button" parent="TabletPanel/SurveyMenu/Buttons"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -23.5
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.833287, 0.268438, 1)
+text = "Send game record"
+flat = true
+
+[node name="ContinueButton" type="Button" parent="TabletPanel/SurveyMenu/Buttons"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "Continue"
 flat = true
@@ -156,6 +183,7 @@ theme_override_font_sizes/font_size = 50
 text = "Back to main menu"
 flat = true
 
-[connection signal="pressed" from="TabletPanel/SurveyMenu/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="TabletPanel/SurveyMenu/Buttons/SendGameFileButton" to="." method="_on_send_game_file_button_pressed"]
+[connection signal="pressed" from="TabletPanel/SurveyMenu/Buttons/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="TabletPanel/EndMenu/RematchButton" to="." method="_on_rematch_button_pressed"]
 [connection signal="pressed" from="TabletPanel/EndMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

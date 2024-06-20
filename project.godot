@@ -25,7 +25,7 @@ General="*res://scripts/autoloads/general.gd"
 GameEvents="*res://scripts/autoloads/game_events.gd"
 GameManager="*res://scripts/autoloads/game_manager.gd"
 EntityManager="*res://scripts/autoloads/entity_manager.gd"
-GameDataCollector="*res://data_module/game_data_collector.gd"
+GameDataCollector="*res://scripts/data_module/game_data_collector.gd"
 
 [display]
 
