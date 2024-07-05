@@ -26,23 +26,21 @@ The following list describes the upper level folder of the project, which mainly
 # Other
 
 **Necessary End Screen Updates:**
-1. Open end_screen.tscn (scenes/ui/end_screen.tscn)<br>
-    ![Endscreen File Location](endscreen_location.png)
-    <br><br>
+1. Open end_screen.tscn (scenes/ui/end_screen.tscn)
+	![](images/endscreen_location.png)
 2. Select the EndScreen node. Here you can change the Survey Link variable.
     ![Endscreen Survey Link](endscreen_survey_link.png)
-    <br><br>
-3. Select the TextLabel node inside of SurveyMenu. Here you can change the text displayed in the endscreen.
-    ![Endscreen Survey Text](endscreen_survey_text.png)
-    <br><br>
+    ![](images/endscreen_survey_link.png)
+1. Select the TextLabel node inside of SurveyMenu. Here you can change the text displayed in the endscreen.
+    ![](images/endscreen_survey_text.png)
 
 **To link the session id to the survey:**
 1. Open end_screen.gd (scripts/ui/end_screen.gd)
 2. Navigate to the bottom of the _on_game_ended function.
-    ![Endscreen Code](endscreen_code.png)
-3. Make sure the survey_button.url is set to a link with the session id included, for example: survey_link + GameDataCollector.current_game_data.uuid. This format can vary depending on the format you wish the link to be. <br><br>
+    ![](images/endscreen_code.png)
+3. Make sure the survey_button.url is set to a link with the session id included, for example: survey_link + GameDataCollector.current_game_data.uuid. This format can vary depending on the format you wish the link to be.
 
 
 **Getting familiar with the project** <br>
-If you want to add new features to this game. It might be useful to get a better understanding of how the core of the boardgame is implemented.<br><br><br>
-![Core Diagram](game_ur_core_diagram.svg)
+If you want to add new features to this game. It might be useful to get a better understanding of how the core of the boardgame is implemented.
+![](images/game_ur_core_diagram.svg)

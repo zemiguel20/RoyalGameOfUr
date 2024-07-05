@@ -1,6 +1,6 @@
 # Royal Game of Ur
 
-![[repo_banner.png]]
+![](repo_banner.png)
 
 *The Royal Game of Ur: The Five Thousand Year Game* is a digital immersive experience about the historical board game played in ancient Mesopotamia, developed by *Team Llamassu*. It's a two-player turn-based strategy race game, with elements of both luck and strategy, where the players roll a set of dice to be able to move their pieces across the board to the finish line.
 This game was played by royals and commoners alike, for a period lasting over 2000 years, with the first finding of the game dating back to 2600 B.C.
