@@ -21,4 +21,4 @@ The latest version can be downloaded through the *[Releases](https://github.com/
 
 ## Documentation
 
-The documentation can be found in the `docs` folder of this repository (documentation [[HOME]]).
+The documentation can be found in the `docs` folder of this repository (documentation [HOME](docs/HOME.md)).
