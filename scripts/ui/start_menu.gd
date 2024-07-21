@@ -17,7 +17,7 @@ signal multiplayer_selected
 
 func _ready() -> void:
 	visible = false
-	game_version_label.text = ProjectSettings.get_setting("application/config/version")
+	game_version_label.text = "ver " + ProjectSettings.get_setting("application/config/version")
 	
 	if test:
 		await Engine.get_main_loop().process_frame # loading

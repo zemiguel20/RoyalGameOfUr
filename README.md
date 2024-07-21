@@ -1,39 +1,24 @@
-# RoyalGameOfUr
-Godot version: 4.2.2
+# Royal Game of Ur
 
+![](repo_banner.png)
 
-**Opening the project**<br>
-1. Clone the repository.
-2. Open the project in godot, by importing the project.godot file inside of the repository.
-   
-For some of the scenes in the project, The FBX Importer plugin is **required** to open it. <br>
-1. Download the plugin: https://godotengine.org/fbx-import/
-2. Open any project in Godot.
-3. Open the Editor Settings.<br>
-    ![FBX Path](readme_images/editor_settings.png)
-4. Navigate to **Filesystem > Import**.
-5. Link the path of the downloaded plugin.
-    ![FBX Path](readme_images/fbx_importer.png)
-    <br><br>
+*The Royal Game of Ur: The Five Thousand Year Game* is a digital immersive experience about the historical board game played in ancient Mesopotamia, developed by *Team Llamassu*. It's a two-player turn-based strategy race game, with elements of both luck and strategy, where the players roll a set of dice to be able to move their pieces across the board to the finish line.
+This game was played by royals and commoners alike, for a period lasting over 2000 years, with the first finding of the game dating back to 2600 B.C.
 
-**Necessary End Screen Updates:**
-1. Open end_screen.tscn (scenes/ui/end_screen.tscn)<br>
-    ![Endscreen File Location](readme_images/endscreen_location.png)
-    <br><br>
-2. Select the EndScreen node. Here you can change the Survey Link variable.
-    ![Endscreen Survey Link](readme_images/endscreen_survey_link.png)
-    <br><br>
-3. Select the TextLabel node inside of SurveyMenu. Here you can change the text displayed in the endscreen.
-    ![Endscreen Survey Text](readme_images/endscreen_survey_text.png)
-    <br><br>
+This project was developed in collaboration with *Leiden University*, and aims to be used as a tool for future research, besides entertainment.
 
-**To link the session id to the survey:**
-1. Open end_screen.gd (scripts/ui/end_screen.gd)
-2. Navigate to the bottom of the _on_game_ended function.
-    ![Endscreen Code](readme_images/endscreen_code.png)
-3. Make sure the survey_button.url is set to a link with the session id included, for example: survey_link + GameDataCollector.current_game_data.uuid. This format can vary depending on the format you wish the link to be. <br><br>
+## Game System Specifications
 
+- *OS:* Windows or Linux (other platforms require building the game yourself)
+- *Minimum disk space:* 2 GB
+- *Input Devices:* Mouse and Keyboard
 
-**Getting familiar with the project** <br>
-If you want to add new features to this game. It might be useful to get a better understanding of how the core of the boardgame is implemented.<br><br><br>
-![Core Diagram](game_ur_core_diagram.svg)
+## Game installation
+
+This game does not have an installer (might be added later), and is distributed in a ZIP package. To install and run the game using the ZIP package, just download and extract wherever you would like, and run the executable.
+
+The latest version can be downloaded through the *[Releases](https://github.com/zemiguel20/RoyalGameOfUr/releases)* page.
+
+## Documentation
+
+The documentation can be found in the `docs` folder of this repository (documentation [HOME](docs/HOME.md)).
