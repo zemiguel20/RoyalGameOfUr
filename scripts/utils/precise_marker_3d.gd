@@ -1,5 +1,5 @@
 @tool
-class_name ExtendedMarker3D extends Marker3D
+class_name PreciseMarker3D extends Marker3D
 ## Marker3D with higher precision on the gizmo size.
 
 
