@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/game/entities/piece.gd" id="1_xpia4"]
 [ext_resource type="Script" path="res://scripts/game/entities/components/mesh_highlighter.gd" id="2_4hqs5"]
-[ext_resource type="Material" uid="uid://b2b5jwaxhfnjp" path="res://materials/mat_highlight_overlay.tres" id="3_dgs2u"]
+[ext_resource type="Material" uid="uid://t1vd41m8k1hw" path="res://materials/mat_highlight_overlay_outline.tres" id="3_kulun"]
 [ext_resource type="Script" path="res://scripts/game/entities/components/simple_movement_animation_player.gd" id="4_dum18"]
 [ext_resource type="PackedScene" uid="uid://ctrxgamva8tn6" path="res://models/board_game/piece_model.glb" id="5_74x1o"]
 [ext_resource type="AudioStream" uid="uid://d1b4gouwqcaja" path="res://audio/sfx_mastered/piece-placement.mp3" id="7_msx5j"]
@@ -12,7 +12,7 @@ script = ExtResource("1_xpia4")
 
 [node name="MeshHighlighter" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("2_4hqs5")
-material = ExtResource("3_dgs2u")
+material = ExtResource("3_kulun")
 target = NodePath("../Model/Piece")
 
 [node name="SimpleMovementAnimationPlayer" type="Node" parent="." node_paths=PackedStringArray("root_target")]

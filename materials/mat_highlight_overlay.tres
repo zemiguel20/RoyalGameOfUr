@@ -1,12 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b2b5jwaxhfnjp"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b2b5jwaxhfnjp"]
 
-[ext_resource type="Material" uid="uid://3nm3p8clp3w2" path="res://materials/mat_highlight_outline.tres" id="1_fu8h2"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="2_2cpwe"]
 
 [resource]
 resource_local_to_scene = true
 render_priority = 10
-next_pass = ExtResource("1_fu8h2")
 shader = ExtResource("2_2cpwe")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/alpha = 0.25
