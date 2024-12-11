@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://bw8xtdrj5rh2k"]
+[gd_scene load_steps=6 format=3 uid="uid://cwkl1ryddudah"]
 
-[ext_resource type="PackedScene" uid="uid://dk03upbyn04nu" path="res://scenes/game/entities/piece_white.tscn" id="1_5kctl"]
 [ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="2_1brpp"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_8qpgr"]
 [ext_resource type="Material" uid="uid://bvw0a30k3ge3b" path="res://materials/piece_black.tres" id="4_u02te"]
@@ -20,7 +19,8 @@ shader = ExtResource("3_8qpgr")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/alpha = 0.25
 
-[node name="BlackPiece" instance=ExtResource("1_5kctl")]
+[node name="BlackPiece"]
+player = 1
 
 [node name="Highlight" parent="." index="0"]
 material = SubResource("ShaderMaterial_f000y")

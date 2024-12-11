@@ -5,25 +5,38 @@ class_name Piece extends Node3D
 ## Holds a reference to the spot where it is currently placed.
 
 
-var highlight: MaterialHighlight
-var move_anim: MoveAnimation
-var model: MeshInstance3D
-var sfx_place: AudioStreamPlayer3D
+signal movement_finished
 
-var current_spot: Spot
-var player_owner: int
+@export var player: General.Player
+
+@onready var _mesh_highlighter: MeshHighlighter = $MeshHighlighter
+@onready var _animator: SimpleMovementAnimationPlayer = $SimpleMovementAnimationPlayer
+@onready var _mesh: MeshInstance3D = $Model/Piece
+@onready var _sfx_place: AudioStreamPlayer3D = $SfxPlace
 
 
 func _ready():
-	highlight = get_node(get_meta("highlight")) as MaterialHighlight
-	move_anim = get_node(get_meta("move")) as MoveAnimation
-	model = get_node(get_meta("model")) as MeshInstance3D
-	sfx_place = get_node(get_meta("sfx_place")) as AudioStreamPlayer3D
-	
-	move_anim.movement_finished.connect(sfx_place.play)
+	_animator.movement_finished.connect(_sfx_place.play)
+	_animator.movement_finished.connect(movement_finished.emit)
+
+
+func enable_highlight(color: Color) -> void:
+	_mesh_highlighter.set_active(true).set_material_color(color)
+
+
+func disable_highlight() -> void:
+	_mesh_highlighter.set_active(false)
+
+
+func move_arc(target_pos: Vector3, duration: float, arc_height: float) -> void:
+	_animator.move_arc(target_pos, duration, arc_height)
+
+
+func move_line(target_pos: Vector3, duration: float) -> void:
+	_animator.move_line(target_pos, duration)
 
 
 ## Model height, with global scale applied.
 func get_height_scaled() -> float:
-	var model_bounding_box = model.mesh.get_aabb() as AABB
-	return model_bounding_box.size.y * model.global_basis.get_scale().y
+	var model_bounding_box = _mesh.mesh.get_aabb() as AABB
+	return model_bounding_box.size.y * _mesh.global_basis.get_scale().y
