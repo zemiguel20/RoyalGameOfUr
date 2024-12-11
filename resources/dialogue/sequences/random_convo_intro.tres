@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=20 format=3 uid="uid://bbyki0kkiiva1"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=21 format=3 uid="uid://bbyki0kkiiva1"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_0nns6"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="1_fx4o7"]
 [ext_resource type="AudioStream" uid="uid://dlah5d5pgywmq" path="res://resources/dialogue/intro-1-3-ninos-tushan-2.mp3" id="1_je43s"]
 [ext_resource type="AudioStream" uid="uid://rxmj7fyoce7b" path="res://resources/dialogue/intro-1-3-ninos-tushan.mp3" id="2_tjcri"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="3_6bh1s"]
@@ -70,6 +71,6 @@ prevents_opponent_action = true
 
 [resource]
 script = ExtResource("1_0nns6")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_73wnr"), SubResource("Resource_vtih1"), SubResource("Resource_eg8la"), SubResource("Resource_sv3oo"), SubResource("Resource_wslfo"), SubResource("Resource_an47l")])
+dialogue_entries = Array[ExtResource("1_fx4o7")]([SubResource("Resource_73wnr"), SubResource("Resource_vtih1"), SubResource("Resource_eg8la"), SubResource("Resource_sv3oo"), SubResource("Resource_wslfo"), SubResource("Resource_an47l")])
 requires_click = false
 weight = 5

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=13 format=3 uid="uid://bh10uvg330tej"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=14 format=3 uid="uid://bh10uvg330tej"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_1citi"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="1_ijx7g"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_wwdt7"]
 [ext_resource type="AudioStream" uid="uid://dxki7cmwkw83l" path="res://resources/dialogue/intro-2-2-original.mp3" id="3_kucw0"]
 [ext_resource type="AudioStream" uid="uid://y324n6ui8s5a" path="res://resources/dialogue/intro-2-3-sarrugi-ancient.mp3" id="4_v4303"]
@@ -47,6 +48,6 @@ prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_wwdt7")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_58o8f"), SubResource("Resource_1tkgn"), SubResource("Resource_nm3au"), SubResource("Resource_30xwj")])
+dialogue_entries = Array[ExtResource("1_ijx7g")]([SubResource("Resource_58o8f"), SubResource("Resource_1tkgn"), SubResource("Resource_nm3au"), SubResource("Resource_30xwj")])
 requires_click = true
 weight = 5

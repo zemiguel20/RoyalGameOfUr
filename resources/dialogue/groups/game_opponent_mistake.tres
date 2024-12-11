@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=10 format=3 uid="uid://bn8skq46su8tj"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=11 format=3 uid="uid://bn8skq46su8tj"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_7q7ij"]
 [ext_resource type="AudioStream" uid="uid://br3pnskkiuwlf" path="res://resources/dialogue/reaction-grunt-1.mp3" id="1_hpj2x"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_l2v3u"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_4dm5i"]
 [ext_resource type="AudioStream" uid="uid://btc72sv5a04as" path="res://resources/dialogue/reaction-grunt-2.mp3" id="2_170wp"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="2_xyose"]
 [ext_resource type="AudioStream" uid="uid://dochilddrtqq7" path="res://resources/dialogue/reaction-grunt-3.mp3" id="3_ng0ks"]
 [ext_resource type="AudioStream" uid="uid://cltj4u6ota2h8" path="res://resources/dialogue/reaction-grunt-4.mp3" id="4_pm0pm"]
 
@@ -19,7 +20,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_gdu4m"]
 script = ExtResource("2_4dm5i")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_0y3bl")])
+dialogue_entries = Array[ExtResource("2_xyose")]([SubResource("Resource_0y3bl")])
 requires_click = false
 weight = 5
 

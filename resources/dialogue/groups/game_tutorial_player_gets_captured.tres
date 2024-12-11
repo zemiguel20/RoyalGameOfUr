@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=10 format=3 uid="uid://gj45b7uqg4hx"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=11 format=3 uid="uid://gj45b7uqg4hx"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_0kb3u"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_a76kb"]
 [ext_resource type="AudioStream" uid="uid://38sqdbxi7wgv" path="res://resources/dialogue/explain-capture-yours.mp3" id="1_extvq"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="2_7to4y"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_64vhm"]
 [ext_resource type="AudioStream" uid="uid://bjpe3ii5bj2uk" path="res://resources/dialogue/explain-capture-other-way-1.mp3" id="3_kppna"]
 [ext_resource type="AudioStream" uid="uid://bpumuqhuyvji6" path="res://resources/dialogue/explain-capture-other-way-2.mp3" id="4_a6xp7"]
@@ -27,7 +28,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_g5rth"]
 script = ExtResource("2_64vhm")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_qs37h"), SubResource("Resource_wukhb")])
+dialogue_entries = Array[ExtResource("2_7to4y")]([SubResource("Resource_qs37h"), SubResource("Resource_wukhb")])
 requires_click = false
 weight = 5
 

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=8 format=3 uid="uid://dr1kf71fk3tp3"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://dr1kf71fk3tp3"]
 
 [ext_resource type="AudioStream" uid="uid://bs40ox5uxe0p7" path="res://resources/dialogue/intro-2-7-damrina.mp3" id="1_ia77a"]
 [ext_resource type="AudioStream" uid="uid://chi81eqj44gsj" path="res://resources/dialogue/intro-2-7-damrina-2.mp3" id="2_1r5hb"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="2_jg4a8"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="3_u7lmw"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="4_0ut7x"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="5_g18ry"]
@@ -17,7 +18,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_yb6p4"]
 script = ExtResource("4_0ut7x")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_7bexq")])
+dialogue_entries = Array[ExtResource("2_jg4a8")]([SubResource("Resource_7bexq")])
 requires_click = false
 weight = 5
 

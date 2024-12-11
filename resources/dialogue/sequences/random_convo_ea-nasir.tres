@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://k5n2cqqtnh4a"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=10 format=3 uid="uid://k5n2cqqtnh4a"]
 
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="1_7ry06"]
 [ext_resource type="AudioStream" uid="uid://cgjyn7red2jyo" path="res://resources/dialogue/random-ea-nasir-markets-2.mp3" id="1_eixp7"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_mv4h8"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="2_t8w3d"]
@@ -35,6 +36,6 @@ prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_mv4h8")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_0a3h8"), SubResource("Resource_kel2s"), SubResource("Resource_bwpfk")])
+dialogue_entries = Array[ExtResource("1_7ry06")]([SubResource("Resource_0a3h8"), SubResource("Resource_kel2s"), SubResource("Resource_bwpfk")])
 requires_click = false
 weight = 5
