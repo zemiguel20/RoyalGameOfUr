@@ -40,7 +40,7 @@ func _process(_delta: float) -> void:
 
 
 # Detects button release
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if _is_pressing and event.is_action_released("select"):
 		_is_pressing = false
 		
@@ -49,3 +49,7 @@ func _input(event: InputEvent) -> void:
 			hold_stopped.emit()
 		else:
 			clicked.emit()
+
+
+func set_input_reading(active: bool) -> void:
+	input_ray_pickable = active
