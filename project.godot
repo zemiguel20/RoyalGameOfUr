@@ -39,7 +39,7 @@ project/assembly_name="Royal Game Of Ur"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/csgtomesh/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/csgtomesh/plugin.cfg")
 
 [gui]
 
