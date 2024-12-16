@@ -4,6 +4,18 @@ class_name Board extends Node3D
 ## It provides queries about the spots and layout.
 
 
+
+func init(num_pieces_per_player: int) -> void:
+	# TODO: implement
+	push_error("Function not implemented")
+
+
+#========================================
+# OLD CODE
+#========================================
+
+
+
 @export var p1_start_spots: Array[Spot] = []
 @export var p1_track: Array[Spot] = []
 
