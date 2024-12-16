@@ -1,4 +1,4 @@
-class_name UUID extends Node
+class_name UUID
 # Note: The code might not be as pretty it could be, since it's written
 # in a way that maximizes performance. Methods are inlined and loops are avoided.
 #
