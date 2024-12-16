@@ -2,13 +2,12 @@
 
 [ext_resource type="PhysicsMaterial" uid="uid://cewt4j3gn56bt" path="res://physics_materials/pm_die.tres" id="2_geqe1"]
 [ext_resource type="Script" path="res://scripts/game/entities/die.gd" id="2_yl61n"]
-[ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="3_7uyog"]
+[ext_resource type="Script" path="res://scripts/utils/precise_marker_3d.gd" id="3_7uyog"]
 [ext_resource type="Script" path="res://scripts/game/components/editor/wireframe_meshes/wire_arrow_mesh.gd" id="4_b63wi"]
-[ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="4_nhl43"]
-[ext_resource type="Script" path="res://scripts/game/components/move_animation.gd" id="5_7qqtg"]
+[ext_resource type="Script" path="res://scripts/game/entities/components/mesh_highlighter.gd" id="4_nhl43"]
 [ext_resource type="Script" path="res://scripts/game/components/editor/mesh_marker.gd" id="5_d0inr"]
-[ext_resource type="Material" uid="uid://cspiva85eoo3" path="res://materials/highlight.tres" id="7_cl6p3"]
-[ext_resource type="Script" path="res://scripts/game/components/selection_input.gd" id="8_kxirt"]
+[ext_resource type="Script" path="res://scripts/game/entities/components/selection_input_reader.gd" id="8_kxirt"]
+[ext_resource type="Script" path="res://scripts/game/entities/components/simple_movement_animation_player.gd" id="10_bdh2j"]
 [ext_resource type="PackedScene" uid="uid://bmkdsd8x5va6j" path="res://models/board_game/d4_die.glb" id="12_kusva"]
 [ext_resource type="AudioStream" uid="uid://2yapgc7u1w10" path="res://audio/sfx_mastered/d4-on-table.mp3" id="12_uiiy4"]
 [ext_resource type="Material" uid="uid://lc6rnvl5jhxi" path="res://materials/die/die_black.tres" id="13_bqubf"]
@@ -26,182 +25,209 @@ _surfaces = [{
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
 "index_count": 40,
-"index_data": PackedByteArray("AAABAAAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 13,
-"vertex_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAvwAAAAAAAAA/AAAAPwAAAAAAAAA/AAAAPwAAAAAAAAC/AAAAvwAAAAAAAAC/zczMvQAAAADNzMw9zczMPQAAAADNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+}, {
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+}, {
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
+}, {
+"aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
+"format": 34359742465,
+"index_count": 40,
+"index_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQA="),
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("AAAA/wAAAgAAAAMAAAAEAAEAAgACAAMAAwAEAAQAAQAFAAYABgAHAAcACAAIAAUABQAJAAYACgAHAAsACAAMAAkACgAKAAsACwAMAAwACQDNzMw9zczMPQAAAADNzMy9zczMvQAAAADNzMy9zczMvQAAgL/NzMw9zczMPQAAgL/NzMw9zczMPQAAgL/NzMy9zczMvQAAgL/NzMy9")
 }, {
 "aabb": AABB(-0.5, -1, -0.5, 1, 2.00001, 1),
 "format": 34359742465,
@@ -229,6 +255,9 @@ shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(0, 0.501961, 0.501961, 1)
 
+[sub_resource type="Resource" id="Resource_loagn"]
+metadata/__load_path__ = "res://materials/highlight.tres"
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_1v3fx"]
 
 [node name="Die" type="RigidBody3D"]
@@ -239,11 +268,10 @@ gravity_scale = 0.078
 contact_monitor = true
 max_contacts_reported = 3
 script = ExtResource("2_yl61n")
-roll_rotation_speed = 0.005
 metadata/normals_root_node = NodePath("Normals")
-metadata/highlight = NodePath("Highlight")
-metadata/move_animation = NodePath("MoveAnimation")
-metadata/input_reader = NodePath("SelectionInputReader")
+metadata/highlight = NodePath("MeshHighlighter")
+metadata/move_animation = NodePath("")
+metadata/input_reader = NodePath("")
 metadata/model = NodePath("Model/D4")
 metadata/roll_sfx = NodePath("RollSFX")
 metadata/timer = NodePath("Timer")
@@ -312,27 +340,21 @@ material_override = SubResource("StandardMaterial3D_y0ydb")
 mesh = SubResource("ArrayMesh_pr2ax")
 script = ExtResource("5_d0inr")
 
-[node name="Highlight" type="Node" parent="." node_paths=PackedStringArray("target_meshes")]
+[node name="MeshHighlighter" type="Node" parent="."]
 script = ExtResource("4_nhl43")
-material = ExtResource("7_cl6p3")
-target_meshes = [NodePath("../Model/D4")]
+material = SubResource("Resource_loagn")
 
-[node name="MoveAnimation" type="Node" parent="." node_paths=PackedStringArray("root_parent")]
-script = ExtResource("5_7qqtg")
-root_parent = NodePath("..")
-arc_height = 0.05
-duration = 0.4
+[node name="SimpleMovementAnimationPlayer" type="Node" parent="." node_paths=PackedStringArray("root_target")]
+script = ExtResource("10_bdh2j")
+root_target = NodePath("..")
 
-[node name="SelectionArea" type="Area3D" parent="."]
+[node name="SelectionInputReader" type="Area3D" parent="."]
+script = ExtResource("8_kxirt")
+hold_threshold = 0.15
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionInputReader"]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
 shape = SubResource("SphereShape3D_1v3fx")
-
-[node name="SelectionInputReader" type="Node" parent="." node_paths=PackedStringArray("input_detection_area")]
-script = ExtResource("8_kxirt")
-input_detection_area = NodePath("../SelectionArea")
-hold_threshold = 0.15
 
 [node name="RollSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("12_uiiy4")

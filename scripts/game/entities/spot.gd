@@ -7,16 +7,12 @@ class_name Spot extends Node3D
 
 signal pieces_moved
 
-var highlight: MaterialHighlight
-var input: SelectionInputReader
 var pieces: Array[Piece] = []
 var moving_pieces: bool = false
 
-func _ready() -> void:
-	if has_meta("highlight"):
-		highlight = get_node(get_meta("highlight")) as MaterialHighlight
-	if has_meta("input"):
-		input = get_node(get_meta("input")) as SelectionInputReader
+@onready var outline_highlighter: MeshHighlighter = $OutlineFrameMesh/MeshHighlighter
+@onready var overlay_highlighter: MeshHighlighter = $OverlayFrameMesh/MeshHighlighter
+@onready var input_reader: SelectionInputReader = $SelectionInputReader
 
 
 ## Move the pieces in this spot to the target [param spot].
