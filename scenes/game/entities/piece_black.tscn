@@ -1,29 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwkl1ryddudah"]
+[gd_scene load_steps=7 format=3 uid="uid://dg4hvwjylijw0"]
 
+[ext_resource type="PackedScene" uid="uid://b4eae3v7afpeb" path="res://scenes/game/entities/piece_base.tscn" id="1_4cpqh"]
 [ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="2_1brpp"]
 [ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="3_8qpgr"]
 [ext_resource type="Material" uid="uid://bvw0a30k3ge3b" path="res://materials/piece_black.tres" id="4_u02te"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3eb6p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8n3x3"]
 resource_local_to_scene = true
 render_priority = 10
 shader = ExtResource("2_1brpp")
 shader_parameter/border_width = 0.15
 shader_parameter/color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f000y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_25jk8"]
 resource_local_to_scene = true
 render_priority = 10
-next_pass = SubResource("ShaderMaterial_3eb6p")
+next_pass = SubResource("ShaderMaterial_8n3x3")
 shader = ExtResource("3_8qpgr")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/alpha = 0.25
 
-[node name="BlackPiece"]
-player = 1
+[node name="BlackPiece" instance=ExtResource("1_4cpqh")]
 
-[node name="Highlight" parent="." index="0"]
-material = SubResource("ShaderMaterial_f000y")
+[node name="MeshHighlighter" parent="." index="0"]
+material = SubResource("ShaderMaterial_25jk8")
 
 [node name="Piece" parent="Model" index="0"]
 surface_material_override/0 = ExtResource("4_u02te")
