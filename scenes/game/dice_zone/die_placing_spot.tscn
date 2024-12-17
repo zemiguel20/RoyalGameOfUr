@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5i15mkikj7ia"]
+
+[ext_resource type="Script" path="res://scripts/utils/precise_marker_3d.gd" id="1_k1qke"]
+[ext_resource type="Shader" path="res://shaders/wireframe.gdshader" id="2_kwikc"]
+[ext_resource type="Script" path="res://scripts/utils/self_destroy.gd" id="3_vbocy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o6d23"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hevkh"]
+render_priority = 0
+shader = ExtResource("2_kwikc")
+shader_parameter/modelColor = null
+shader_parameter/wireframeColor = Color(0, 0.8641, 0.838641, 1)
+shader_parameter/width = 2.0
+shader_parameter/modelOpacity = 0.0
+shader_parameter/filtered = true
+
+[node name="DiePlacingSpot" type="Marker3D"]
+gizmo_extents = 0.01
+script = ExtResource("1_k1qke")
+gizmo_extends_override = 0.01
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+mesh = SubResource("BoxMesh_o6d23")
+surface_material_override/0 = SubResource("ShaderMaterial_hevkh")
+script = ExtResource("3_vbocy")

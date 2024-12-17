@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4k7dx5sp6itq"]
 
 [ext_resource type="Script" path="res://scripts/game/systems/dice_roller.gd" id="1_e3w3t"]
-[ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/systems/dice_roller/die_placing_spot.tscn" id="2_yqe8l"]
-[ext_resource type="PackedScene" uid="uid://8v05523r8lek" path="res://scenes/game/systems/dice_roller/die_throw_spot.tscn" id="3_c1oyf"]
+[ext_resource type="PackedScene" uid="uid://c5i15mkikj7ia" path="res://scenes/game/dice_zone/die_placing_spot.tscn" id="2_yqe8l"]
+[ext_resource type="PackedScene" uid="uid://8v05523r8lek" path="res://scenes/game/dice_zone/die_throw_spot.tscn" id="3_c1oyf"]
 [ext_resource type="AudioStream" uid="uid://c6qmd3oyeovu" path="res://audio/sfx_mastered/dice-shaking-loop.mp3" id="4_rcgqi"]
 
 [node name="DiceRoller" type="Node3D"]

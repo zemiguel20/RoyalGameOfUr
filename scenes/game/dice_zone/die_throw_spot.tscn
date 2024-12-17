@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://8v05523r8lek"]
+
+[ext_resource type="Script" path="res://scripts/utils/precise_marker_3d.gd" id="1_nbw42"]
+[ext_resource type="Shader" path="res://shaders/wireframe.gdshader" id="2_731io"]
+[ext_resource type="Script" path="res://scripts/utils/self_destroy.gd" id="3_fx7hd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ows13"]
+render_priority = 0
+shader = ExtResource("2_731io")
+shader_parameter/modelColor = null
+shader_parameter/wireframeColor = Color(0.863353, 0.000212545, 0.760192, 1)
+shader_parameter/width = 2.0
+shader_parameter/modelOpacity = 0.0
+shader_parameter/filtered = false
+
+[node name="DieThrowSpot" type="Marker3D"]
+gizmo_extents = 0.01
+script = ExtResource("1_nbw42")
+gizmo_extends_override = 0.01
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+polygon = PackedVector2Array(0, 0, 0, 2, 1, 0)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+material = SubResource("ShaderMaterial_ows13")
+script = ExtResource("3_fx7hd")
+
+[node name="CSGPolygon3D2" type="CSGBox3D" parent="CSGPolygon3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01408, 0)
+size = Vector3(0.5, 2, 0.5)
+material = SubResource("ShaderMaterial_ows13")
