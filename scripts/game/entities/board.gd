@@ -1,13 +1,26 @@
-class_name Board extends Node3D
-## Entity that represents the physical board. It defines the layout of the spots, having 2 starting
-## zones and 2 tracks, one for each player.
-## It provides queries about the spots and layout.
+class_name Board
+extends Node3D
+## Layout of spots composed of 2 tracks, one for each player. Manages the board state, 
+## allowing queries or executing moves to update it.
 
+
+const WHITE_PIECE_PREFAB: PackedScene = preload("res://scenes/game/entities/piece_white.tscn")
+const BLACK_PIECE_PREFAB: PackedScene = preload("res://scenes/game/entities/piece_black.tscn")
+
+@export var p1_start_spots: Array[Spot] = []
+@export var p1_track: Array[Spot] = []
+
+@export var p2_start_spots: Array[Spot] = []
+@export var p2_track: Array[Spot] = []
 
 
 func init(num_pieces_per_player: int) -> void:
-	# TODO: implement
-	push_error("Function not implemented")
+	for i in num_pieces_per_player:
+		var white_piece = WHITE_PIECE_PREFAB.instantiate()
+		p1_start_spots[i].place(white_piece)
+		
+		var black_piece = BLACK_PIECE_PREFAB.instantiate()
+		p2_start_spots[i].place(black_piece)
 
 
 #========================================
@@ -16,11 +29,6 @@ func init(num_pieces_per_player: int) -> void:
 
 
 
-@export var p1_start_spots: Array[Spot] = []
-@export var p1_track: Array[Spot] = []
-
-@export var p2_start_spots: Array[Spot] = []
-@export var p2_track: Array[Spot] = []
 
 
 ## Returns a copy of the array with all start spots from [param player].

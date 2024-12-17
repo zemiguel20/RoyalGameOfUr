@@ -1,13 +1,33 @@
-class_name Spot extends Node3D
+class_name Spot
+extends Node3D
 ## Entity that represents a spot where the player can place pieces.
-## Holds a list of placed pieces, and can move pieces to another spot.
-## Has an input reading component for player move selection.
-## Has a highlight component for highlight effects during move phase.
+
+
+const STACKING_OFFSET: float = 0.03
+
+@export var is_rosette: bool
+
+var pieces: Array[Piece] = []
+
+
+func place(new_piece: Piece) -> void:
+	add_child(new_piece)
+	
+	var target_position = global_position
+	target_position.y += pieces.size() * STACKING_OFFSET
+	new_piece.global_position = target_position
+	
+	pieces.append(new_piece)
+
+#========================================
+# OLD CODE
+#========================================
+
 
 
 signal pieces_moved
 
-var pieces: Array[Piece] = []
+
 var moving_pieces: bool = false
 
 @onready var outline_highlighter: MeshHighlighter = $OutlineFrameMesh/MeshHighlighter
