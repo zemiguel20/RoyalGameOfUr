@@ -5,7 +5,7 @@ extends Node
 
 const DIE_PREFAB: PackedScene = preload("res://scenes/game/entities/d4_die.tscn")
 
-var dice: Array[Die] = []
+var _dice: Array[Die] = []
 
 
 func init(num_dice: int, spawn: DiceZone) -> void:
@@ -13,4 +13,5 @@ func init(num_dice: int, spawn: DiceZone) -> void:
 	for i in num_dice:
 		var die = DIE_PREFAB.instantiate()
 		add_child(die)
+		_dice.append(die)
 		die.global_position = spawn_points[i]
