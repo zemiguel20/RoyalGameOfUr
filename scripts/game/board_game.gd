@@ -1,5 +1,6 @@
 class_name BoardGame
 extends Node
+## Controls the setup and turn flow of the game.
 
 
 enum Player {
@@ -16,16 +17,18 @@ var config: Config = null
 var board: Board
 var dice: Dice
 
+var _p1_turn: Turn
+var _p2_turn: Turn
+
 
 func setup(new_config: Config) -> void:
 	config = new_config
 	
-	if config.is_rematch:
+	if config.rematch:
 		board.reset()
 	else:
 		if board != null: board.queue_free()
 		if dice != null: dice.queue_free()
-		
 		
 		board = config.ruleset.board_layout.scene.instantiate() as Board
 		add_child(board)
@@ -35,11 +38,25 @@ func setup(new_config: Config) -> void:
 		dice = Dice.new()
 		add_child(dice)
 		dice.init(config.ruleset.num_dice, _pick_random_dice_zone())
+		
+		_p1_turn = NPCTurn.new() if config.p1_npc else PlayerTurn.new() as Turn
+		_p1_turn.init(dice, p1_dice_zone, board)
+		
+		_p2_turn = NPCTurn.new() if config.p2_npc else PlayerTurn.new() as Turn
+		_p2_turn.init(dice, p2_dice_zone, board)
 
 
 func start() -> void:
-	# TODO: implement
 	current_player = _pick_random_player()
+	
+	var result := Turn.Result.NORMAL
+	while(result != Turn.Result.WIN):
+		var turn = _p1_turn if current_player == Player.ONE else _p2_turn as Turn
+		turn.start()
+		result = await turn.finished
+		
+		if result == Turn.Result.NORMAL:
+			_switch_player()
 
 
 # Pick a side to initialize the dice
@@ -54,6 +71,18 @@ func _pick_random_player() -> Player:
 	return randi_range(Player.ONE, Player.TWO) as Player
 
 
+func _switch_player() -> void:
+	current_player = Player.TWO if current_player == Player.ONE else Player.ONE
+
+
 class Config:
 	var ruleset: Ruleset
-	var is_rematch: bool
+	var rematch: bool
+	var p1_npc: bool
+	var p2_npc: bool
+	
+	func _init() -> void:
+		ruleset = preload("res://resources/rulesets/ruleset_finkel.tres")
+		rematch = false
+		p1_npc = false
+		p2_npc = false
