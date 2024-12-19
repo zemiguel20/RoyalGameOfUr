@@ -2,7 +2,7 @@ extends Node
 
 
 var current_game_data: GameRecord
-var current_turn: Turn
+var current_turn: TurnSnapshot
 var turn_start_time_msec: int = 0
 
 var request: HTTPRequest
@@ -30,7 +30,7 @@ func _on_game_started() -> void:
 
 
 func _on_new_turn_started() -> void:
-	current_turn = Turn.new()
+	current_turn = TurnSnapshot.new()
 	current_turn.number = GameManager.turn_number
 	current_turn.player = GameManager.current_player
 	
@@ -98,7 +98,7 @@ class GameRecord:
 	var game_version: String = ProjectSettings.get_setting("application/config/version")
 	var ruleset: Ruleset
 	var is_hotseat: bool = false
-	var history: Array[Turn] = []
+	var history: Array[TurnSnapshot] = []
 	
 	@warning_ignore("shadowed_variable")
 	static func create_with_empty_history(ruleset: Ruleset, hotseat: bool) -> GameRecord:
@@ -113,13 +113,13 @@ class GameRecord:
 			"game_version" : game_version,
 			"ruleset" : ruleset.to_dict(),
 			"is_hotseat" : is_hotseat,
-			"turn_history" : history.map(func(turn: Turn): return turn.to_dict()),
+			"turn_history" : history.map(func(turn: TurnSnapshot): return turn.to_dict()),
 		}
 		
 		return dict
 
 
-class Turn:
+class TurnSnapshot:
 	var number: int = 0
 	var player: int = 0
 	var duration_msec: int = 0
