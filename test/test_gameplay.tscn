@@ -10,10 +10,11 @@ func _ready() -> void:
 	var game = $BoardGame as BoardGame
 	
 	var config: BoardGame.Config = BoardGame.Config.new()
-	config.is_rematch = false
+	config.rematch = false
 	config.ruleset = load(\"res://resources/rulesets/ruleset_finkel.tres\")
 	
 	game.setup(config)
+	game.start()
 "
 
 [node name="TestGameplay" type="Node"]

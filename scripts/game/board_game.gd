@@ -3,6 +3,8 @@ extends Node
 ## Controls the setup and turn flow of the game.
 
 
+signal ended(winner: Player)
+
 enum Player {
 	ONE,
 	TWO
@@ -52,14 +54,17 @@ func start() -> void:
 	var result := Turn.Result.NORMAL
 	while(result != Turn.Result.WIN):
 		var turn = _p1_turn if current_player == Player.ONE else _p2_turn as Turn
+		print("Starting turn player %d" % current_player)
 		turn.start()
 		result = await turn.finished
 		
 		if result == Turn.Result.NORMAL:
 			_switch_player()
+	
+	ended.emit(current_player)
+	print("game finished")
 
 
-# Pick a side to initialize the dice
 func _pick_random_dice_zone() -> DiceZone:
 	if _pick_random_player() == Player.ONE:
 		return p1_dice_zone
