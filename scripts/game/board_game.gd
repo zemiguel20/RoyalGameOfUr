@@ -58,7 +58,7 @@ func start() -> void:
 		turn.start()
 		result = await turn.finished
 		
-		if result == Turn.Result.NORMAL:
+		if result == Turn.Result.NORMAL or result == Turn.Result.NO_MOVES:
 			_switch_player()
 	
 	ended.emit(current_player)

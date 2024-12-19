@@ -6,8 +6,18 @@ extends RigidBody3D
 signal clicked
 signal hold_started
 signal hold_stopped
+signal placed ## Emitted by [method place]
 
 var last_roll_value: int = 0
+
+@onready var _animator: SimpleMovementAnimationPlayer = $SimpleMovementAnimationPlayer
+
+
+## Coroutine that moves the die to the target point in global space. Emits [signal placed].
+func place(point_global: Vector3) -> void:
+	_animator.move_arc(point_global, 0.4, 0.1)
+	await _animator.movement_finished
+	placed.emit()
 
 
 func enable_interaction() -> void:

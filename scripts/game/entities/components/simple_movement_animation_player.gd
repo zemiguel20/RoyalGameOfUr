@@ -1,4 +1,5 @@
-class_name SimpleMovementAnimationPlayer extends Node
+class_name SimpleMovementAnimationPlayer
+extends Node
 ## Provides simple movement animations. It works in global coordinates.
 
 
