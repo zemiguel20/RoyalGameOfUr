@@ -8,9 +8,28 @@ signal hold_started
 signal hold_stopped
 signal placed ## Emitted by [method place]
 
+enum HighlightType {
+	NONE,
+	NEUTRAL,
+	SELECTABLE,
+	HOVERED,
+	RESULT_POSITIVE,
+	RESULT_NEGATIVE,
+}
+
 var last_roll_value: int = 0
 
 @onready var _animator: SimpleMovementAnimationPlayer = $SimpleMovementAnimationPlayer
+@onready var _highlighter: MeshHighlighter = $MeshHighlighter
+@onready var _input_reader: SelectionInputReader = $SelectionInputReader
+
+
+func _ready() -> void:
+	_input_reader.mouse_entered.connect(mouse_entered.emit)
+	_input_reader.mouse_exited.connect(mouse_exited.emit)
+	_input_reader.clicked.connect(clicked.emit)
+	_input_reader.hold_started.connect(hold_started.emit)
+	_input_reader.hold_stopped.connect(hold_stopped.emit)
 
 
 ## Coroutine that moves the die to the target point in global space. Emits [signal placed].
@@ -20,44 +39,28 @@ func place(point_global: Vector3) -> void:
 	placed.emit()
 
 
-func enable_interaction() -> void:
-	# TODO: implement
-	pass
+func set_highlight(type: HighlightType) -> void:
+	if type == HighlightType.NONE:
+		_highlighter.set_active(false)
+		return
+	
+	_highlighter.set_active(true)
+	
+	if type == HighlightType.NEUTRAL:
+		_highlighter.set_material_color(Color.GHOST_WHITE)
+	elif type == HighlightType.SELECTABLE:
+		_highlighter.set_material_color(Color.MEDIUM_AQUAMARINE)
+	elif type == HighlightType.HOVERED:
+		_highlighter.set_material_color(Color.AQUAMARINE)
+	elif type == HighlightType.RESULT_POSITIVE:
+		_highlighter.set_material_color(Color.GREEN)
+	elif type == HighlightType.RESULT_NEGATIVE:
+		_highlighter.set_material_color(Color.RED)
 
 
-func disable_interaction() -> void:
-	# TODO: implement
-	pass
+func set_input_reading(active: bool) -> void:
+	_input_reader.set_input_reading(active)
 
-
-func dehighlight() -> void:
-	# TODO: implement
-	pass
-
-
-func highlight_selectable() -> void:
-	# TODO: implement
-	pass
-
-
-func highlight_hovered() -> void:
-	# TODO: implement
-	pass
-
-
-func highlight_neutral() -> void:
-	# TODO: implement
-	pass
-
-
-func highlight_negative_result() -> void:
-	# TODO: implement
-	pass
-
-
-func highlight_positive_result() -> void:
-	# TODO: implement
-	pass
 
 #signal roll_finished(value: int)
 #

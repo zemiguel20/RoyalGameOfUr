@@ -10,42 +10,40 @@ enum Player {
 	TWO
 }
 
-@export var board_spawn: Node3D
-@export var p1_dice_zone: DiceZone
-@export var p2_dice_zone: DiceZone
-
 var current_player: Player
 var config: Config = null
-var board: Board
-var dice: Dice
 
+
+var _board: Board
 var _p1_turn: Turn
 var _p2_turn: Turn
+
+@onready var _board_spawn: Node3D = $BoardSpawn
+@onready var _p1_dice_zone: DiceZone = $DiceZoneP1
+@onready var _p2_dice_zone: DiceZone = $DiceZoneP2
+@onready var _dice: Dice = $DiceManager
 
 
 func setup(new_config: Config) -> void:
 	config = new_config
 	
 	if config.rematch:
-		board.reset()
+		_board.reset()
 	else:
-		if board != null: board.queue_free()
-		if dice != null: dice.queue_free()
+		if _board != null: _board.queue_free()
 		
-		board = config.ruleset.board_layout.scene.instantiate() as Board
-		add_child(board)
-		board.global_position = board_spawn.global_position
-		board.init(config.ruleset.num_pieces)
+		_board = config.ruleset.board_layout.scene.instantiate() as Board
+		add_child(_board)
+		_board.global_position = _board_spawn.global_position
+		_board.init(config.ruleset.num_pieces)
 		
-		dice = Dice.new()
-		add_child(dice)
-		dice.init(config.ruleset.num_dice, _pick_random_dice_zone())
+		_dice.init(config.ruleset.num_dice, _pick_random_dice_zone())
 		
-		_p1_turn = NPCTurn.new() if config.p1_npc else PlayerTurn.new() as Turn
-		_p1_turn.init(dice, p1_dice_zone, board)
+		_p1_turn = NPCTurn.new() if config.p1_npc else PlayerTurn.new()
+		_p1_turn.init(_dice, _p1_dice_zone, _board)
 		
-		_p2_turn = NPCTurn.new() if config.p2_npc else PlayerTurn.new() as Turn
-		_p2_turn.init(dice, p2_dice_zone, board)
+		_p2_turn = NPCTurn.new() if config.p2_npc else PlayerTurn.new()
+		_p2_turn.init(_dice, _p2_dice_zone, _board)
 
 
 func start() -> void:
@@ -67,9 +65,9 @@ func start() -> void:
 
 func _pick_random_dice_zone() -> DiceZone:
 	if _pick_random_player() == Player.ONE:
-		return p1_dice_zone
+		return _p1_dice_zone
 	else:
-		return p2_dice_zone
+		return _p2_dice_zone
 
 
 func _pick_random_player() -> Player:

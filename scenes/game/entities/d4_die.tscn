@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/game/entities/components/mesh_highlighter.gd" id="4_nhl43"]
 [ext_resource type="Script" path="res://scripts/game/components/editor/mesh_marker.gd" id="5_d0inr"]
 [ext_resource type="Script" path="res://scripts/game/entities/components/selection_input_reader.gd" id="8_kxirt"]
+[ext_resource type="Material" uid="uid://t1vd41m8k1hw" path="res://materials/mat_highlight_overlay_outline.tres" id="9_w20tm"]
 [ext_resource type="Script" path="res://scripts/game/entities/components/simple_movement_animation_player.gd" id="10_bdh2j"]
 [ext_resource type="PackedScene" uid="uid://bmkdsd8x5va6j" path="res://models/board_game/d4_die.glb" id="12_kusva"]
 [ext_resource type="AudioStream" uid="uid://2yapgc7u1w10" path="res://audio/sfx_mastered/d4-on-table.mp3" id="12_uiiy4"]
@@ -255,9 +256,6 @@ shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(0, 0.501961, 0.501961, 1)
 
-[sub_resource type="Resource" id="Resource_loagn"]
-metadata/__load_path__ = "res://materials/highlight.tres"
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_1v3fx"]
 
 [node name="Die" type="RigidBody3D"]
@@ -340,9 +338,10 @@ material_override = SubResource("StandardMaterial3D_y0ydb")
 mesh = SubResource("ArrayMesh_pr2ax")
 script = ExtResource("5_d0inr")
 
-[node name="MeshHighlighter" type="Node" parent="."]
+[node name="MeshHighlighter" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("4_nhl43")
-material = SubResource("Resource_loagn")
+material = ExtResource("9_w20tm")
+target = NodePath("../Model/D4")
 
 [node name="SimpleMovementAnimationPlayer" type="Node" parent="." node_paths=PackedStringArray("root_target")]
 script = ExtResource("10_bdh2j")
@@ -350,7 +349,7 @@ root_target = NodePath("..")
 
 [node name="SelectionInputReader" type="Area3D" parent="."]
 script = ExtResource("8_kxirt")
-hold_threshold = 0.15
+_hold_threshold = 0.15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionInputReader"]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
