@@ -5,10 +5,7 @@ extends Turn
 
 ## Allows the player to roll the dice and pick a move interactively.
 func start() -> void:
-	_dice.place(_dice_zone)
-	await _dice.placed
-	
-	_dice.start_roll_interactive()
+	_dice.start_roll_interactive(_dice_zone)
 	var result = await _dice.rolled
 	
 	var moves: Array[GameMove] = _board.calculate_moves(result)

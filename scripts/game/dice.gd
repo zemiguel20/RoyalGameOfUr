@@ -3,7 +3,6 @@ extends Node
 ## Manages a group of dice.
 
 
-signal placed ## Emitted by [method place].
 signal rolled(value: int) ## Emitted after rolling the dice.
 
 const DIE_PREFAB: PackedScene = preload("res://scenes/game/entities/d4_die.tscn")
@@ -27,24 +26,11 @@ func init(num_dice: int, spawn: DiceZone) -> void:
 		die.global_position = spawn_points[i]
 
 
-## Coroutine that places the dice in the given dice zone. Emits [signal placed].
-func place(dice_zone: DiceZone) -> void:
-	_deactivate_dice_interaction()
-	
-	var placing_points = dice_zone.get_placing_points_global_randomized()
-	
-	for i in _dice.size():
-		var die = _dice[i]
-		var point = placing_points[i]
-		die.place(point)
-	# Dice are moved simultaneously, so only need to await the signal of one of them
-	await (_dice.front() as Die).placed
-	
-	placed.emit()
-
-
 ## Starts the interactive roll procedure. Emits [signal rolled] by the end of the roll.
-func start_roll_interactive() -> void:
+func start_roll_interactive(dice_zone: DiceZone) -> void:
+	_deactivate_dice_interaction()
+	await _place(dice_zone)
+	
 	for die in _dice:
 		die.set_input_reading(true)
 		
@@ -55,6 +41,17 @@ func start_roll_interactive() -> void:
 		die.mouse_exited.connect(_highlight_selectable)
 		
 		die.set_highlight(Die.HighlightType.SELECTABLE)
+
+
+func _place(dice_zone: DiceZone) -> void:
+	var placing_points = dice_zone.get_placing_points_global_randomized()
+	
+	for i in _dice.size():
+		var die = _dice[i]
+		var point = placing_points[i]
+		die.place(point)
+	# Dice are moved simultaneously, so only need to await the signal of one of them
+	await (_dice.front() as Die).placed
 
 
 func _highlight_selectable() -> void:
@@ -86,7 +83,7 @@ func _stop_shaking() -> void:
 func _roll() -> void:
 	_deactivate_dice_interaction()
 	
-	# TODO: implement
+	# TODO: implement rolling
 	push_error("NOT IMPLEMENTED")
 	await get_tree().create_timer(0.1).timeout
 	rolled.emit(randi_range(0, 4))
