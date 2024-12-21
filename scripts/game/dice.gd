@@ -85,9 +85,6 @@ func _start_shaking() -> void:
 
 
 func _stop_shaking() -> void:
-	for die in _dice:
-		die.visible = true
-	
 	_shaking_sfx.stop()
 	
 	_roll()
@@ -101,6 +98,14 @@ func _roll() -> void:
 		var impulse = 0.003 * _throw_points[i].direction
 		var position = _throw_points[i].global_position
 		die.roll(impulse, position)
+	
+	# The actual start of the roll is tied to the physics frame rate.
+	# In case the dice are shaken (turned invisible), they should only be turned visible
+	# again after the roll has been processed, otherwise they can be seen teleporting
+	# from the table to the throwing points.
+	await get_tree().create_timer(0.1).timeout
+	for die in _dice:
+		die.visible = true
 	
 	# This guarantees a slight pause in case the dice settle fast.
 	await get_tree().create_timer(1).timeout

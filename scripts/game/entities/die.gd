@@ -21,7 +21,9 @@ enum HighlightType {
 var last_rolled_value: int = 0
 var is_rolling: bool = false
 
-var _sound_played: bool # Sound is played once die hits the table
+# Sound is played once die hits the table
+# Starting with 'true' prevents it possibly being played outside of rolling
+var _sound_played: bool = true
 
 var _tips: Array[DieTip] = []
 

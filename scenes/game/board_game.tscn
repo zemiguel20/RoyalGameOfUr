@@ -26,7 +26,7 @@ stream = ExtResource("4_18q8b")
 
 [node name="BoardSpawn" parent="." instance=ExtResource("3_pno53")]
 
-[node name="Table" type="StaticBody3D" parent="."]
+[node name="Table" type="StaticBody3D" parent="." groups=["table"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0282786, 0)
