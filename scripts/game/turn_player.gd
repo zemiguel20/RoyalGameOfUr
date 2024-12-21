@@ -10,8 +10,8 @@ func start() -> void:
 	
 	var moves: Array[GameMove] = _board.calculate_moves(result)
 	
-	_dice.highlight_result(moves.is_empty(), result == 0)
-	await _scene_tree.create_timer(0.5).timeout
+	_dice.highlight_result(not moves.is_empty(), result != 0)
+	await _scene_tree.create_timer(1.0).timeout
 	
 	if moves.is_empty():
 		finished.emit(Result.NO_MOVES)

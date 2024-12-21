@@ -13,3 +13,23 @@ func get_placing_points_global_randomized() -> Array[Vector3]:
 	points.assign(spots.map(func(spot: Node3D): return spot.global_position))
 	points.shuffle()
 	return points
+
+
+func get_throw_points_shuffled() -> Array[ThrowPoint]:
+	var spots = _dice_throw_spots.get_children()
+	var points: Array[ThrowPoint] = []
+	points.assign(spots.map(func(spot: Node3D): return ThrowPoint.from(spot)))
+	points.shuffle()
+	return points
+
+
+class ThrowPoint:
+	var global_position: Vector3
+	var direction: Vector3
+	
+	static func from(spot: Node3D) -> ThrowPoint:
+		var point = ThrowPoint.new()
+		point.global_position = spot.global_position
+		# NOTE: Check if throw spots are aligned properly in the scene.
+		point.direction = spot.global_basis.y 
+		return point

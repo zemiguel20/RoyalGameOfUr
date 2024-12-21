@@ -9,6 +9,10 @@ const DIE_PREFAB: PackedScene = preload("res://scenes/game/entities/d4_die.tscn"
 
 var _dice: Array[Die] = []
 
+# This cached reference is for the interactive rolling,
+# to avoid passing it down through the callbacks
+var _throw_points: Array[DiceZone.ThrowPoint]
+
 @onready var _shaking_sfx: AudioStreamPlayer = $ShakingSFX
 
 
@@ -28,17 +32,26 @@ func init(num_dice: int, spawn: DiceZone) -> void:
 
 ## Starts the interactive roll procedure. Emits [signal rolled] by the end of the roll.
 func start_roll_interactive(dice_zone: DiceZone) -> void:
+	# Cached to use later for the roll itself
+	_throw_points = dice_zone.get_throw_points_shuffled()
+	
 	_deactivate_dice_interaction()
 	await _place(dice_zone)
 	
 	for die in _dice:
 		die.set_input_reading(true)
 		
-		die.clicked.connect(_roll)
-		die.hold_started.connect(_start_shaking)
-		die.hold_stopped.connect(_stop_shaking)
-		die.mouse_entered.connect(_highlight_hovered)
-		die.mouse_exited.connect(_highlight_selectable)
+		
+		if not die.clicked.is_connected(_roll):
+			die.clicked.connect(_roll)
+		if not die.hold_started.is_connected(_start_shaking):
+			die.hold_started.connect(_start_shaking)
+		if not die.hold_stopped.is_connected(_stop_shaking):
+			die.hold_stopped.connect(_stop_shaking)
+		if not die.mouse_entered.is_connected(_highlight_hovered):
+			die.mouse_entered.connect(_highlight_hovered)
+		if not die.mouse_exited.is_connected(_highlight_selectable):
+			die.mouse_exited.connect(_highlight_selectable)
 		
 		die.set_highlight(Die.HighlightType.SELECTABLE)
 
@@ -83,21 +96,40 @@ func _stop_shaking() -> void:
 func _roll() -> void:
 	_deactivate_dice_interaction()
 	
-	# TODO: implement rolling
-	push_error("NOT IMPLEMENTED")
-	await get_tree().create_timer(0.1).timeout
-	rolled.emit(randi_range(0, 4))
+	for i in _dice.size():
+		var die = _dice[i]
+		var impulse = 0.003 * _throw_points[i].direction
+		var position = _throw_points[i].global_position
+		die.roll(impulse, position)
+	
+	# This guarantees a slight pause in case the dice settle fast.
+	await get_tree().create_timer(1).timeout
+	
+	var result := 0
+	
+	for die in _dice:
+		if die.is_rolling:
+			result += await die.rolled
+		else:
+			result += die.last_rolled_value
+	
+	rolled.emit(result)
 
 
 func _deactivate_dice_interaction() -> void:
 	for die in _dice:
 		die.set_input_reading(false)
 		
-		die.clicked.disconnect(_roll)
-		die.hold_started.disconnect(_start_shaking)
-		die.hold_stopped.disconnect(_stop_shaking)
-		die.mouse_entered.disconnect(_highlight_hovered)
-		die.mouse_exited.disconnect(_highlight_selectable)
+		if die.clicked.is_connected(_roll):
+			die.clicked.disconnect(_roll)
+		if die.hold_started.is_connected(_start_shaking):
+			die.hold_started.disconnect(_start_shaking)
+		if die.hold_stopped.is_connected(_stop_shaking):
+			die.hold_stopped.disconnect(_stop_shaking)
+		if die.mouse_entered.is_connected(_highlight_hovered):
+			die.mouse_entered.disconnect(_highlight_hovered)
+		if die.mouse_exited.is_connected(_highlight_selectable):
+			die.mouse_exited.disconnect(_highlight_selectable)
 		
 		die.set_highlight(Die.HighlightType.NONE)
 
@@ -106,5 +138,8 @@ func _deactivate_dice_interaction() -> void:
 ## The [param only_ones] flag serves to highlight only the dice with value 1.
 ## Called externally depending on the processing of the result.
 func highlight_result(positive: bool, only_ones: bool) -> void:
-	# TODO: implement
-	push_error("NOT IMPLEMENTED")
+	var type = Die.HighlightType.RESULT_POSITIVE if positive else Die.HighlightType.RESULT_NEGATIVE
+	
+	for die in _dice:
+		if only_ones == false or die.last_rolled_value == 1:
+			die.set_highlight(type)
