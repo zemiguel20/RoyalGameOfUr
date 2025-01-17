@@ -18,9 +18,11 @@ const BLACK_PIECE_PREFAB: PackedScene = preload("res://scenes/game/entities/piec
 func init(num_pieces_per_player: int) -> void:
 	for i in num_pieces_per_player:
 		var white_piece = WHITE_PIECE_PREFAB.instantiate()
+		white_piece.player = BoardGame.Player.ONE
 		_p1_start_spots[i].place(white_piece)
 		
 		var black_piece = BLACK_PIECE_PREFAB.instantiate()
+		black_piece.player = BoardGame.Player.TWO
 		_p2_start_spots[i].place(black_piece)
 
 
@@ -35,7 +37,7 @@ func calculate_moves(steps: int, player: int, ruleset: Ruleset) -> Array[GameMov
 	
 	var occupied_starting_spots = get_player_occupied_start_spots(player)
 	var has_pieces_in_start = not occupied_starting_spots.is_empty()
-	var destination_spot = track[steps]
+	var destination_spot = track[steps - 1]
 	var can_move = _check_move_validity(destination_spot, player, ruleset)
 	if has_pieces_in_start and can_move:
 		for starting_spot in occupied_starting_spots:
