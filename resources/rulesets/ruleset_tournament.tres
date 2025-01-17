@@ -11,7 +11,6 @@ rosettes_give_extra_turn = false
 rosettes_allow_stacking = true
 captures_give_extra_turn = false
 can_move_backwards = true
-allow_skip_if_only_backwards = true
 num_pieces = 5
 num_dice = 4
 board_layout = ExtResource("1_ifxxt")

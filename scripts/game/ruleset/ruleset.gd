@@ -1,4 +1,5 @@
-class_name Ruleset extends Resource
+class_name Ruleset
+extends Resource
 
 
 @export var name: String = "Default"
