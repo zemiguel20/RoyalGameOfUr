@@ -42,7 +42,8 @@ var _board: Board
 
 
 @warning_ignore("shadowed_variable")
-func _init(from: Spot, to: Spot, player: int):
+func _init(from: Spot, to: Spot, player: int, board: Board):
+	# TODO: rework
 	_board = EntityManager.get_board()
 	
 	# Shared variables for initialization

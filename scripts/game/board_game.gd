@@ -11,9 +11,9 @@ enum Player {
 }
 
 var current_player: Player
-var config: Config = null
 
 
+var _config: Config = null
 var _board: Board
 var _p1_turn: Turn
 var _p2_turn: Turn
@@ -25,25 +25,27 @@ var _p2_turn: Turn
 
 
 func setup(new_config: Config) -> void:
-	config = new_config
+	_config = new_config
 	
-	if config.rematch:
+	if _config.rematch:
 		_board.reset()
 	else:
 		if _board != null: _board.queue_free()
 		
-		_board = config.ruleset.board_layout.scene.instantiate() as Board
+		_board = _config.ruleset.board_layout.scene.instantiate() as Board
 		add_child(_board)
 		_board.global_position = _board_spawn.global_position
-		_board.init(config.ruleset.num_pieces)
+		_board.init(_config.ruleset.num_pieces)
 		
-		_dice.init(config.ruleset.num_dice, _pick_random_dice_zone())
+		_dice.init(_config.ruleset.num_dice, _pick_random_dice_zone())
 		
-		_p1_turn = NPCTurn.new() if config.p1_npc else PlayerTurn.new()
-		_p1_turn.init(_dice, _p1_dice_zone, _board)
+		_p1_turn = NPCTurn.new() if _config.p1_npc else PlayerTurn.new()
+		add_child(_p1_turn)
+		_p1_turn.init(Player.ONE, _dice, _p1_dice_zone, _board, _config.ruleset)
 		
-		_p2_turn = NPCTurn.new() if config.p2_npc else PlayerTurn.new()
-		_p2_turn.init(_dice, _p2_dice_zone, _board)
+		_p2_turn = NPCTurn.new() if _config.p2_npc else PlayerTurn.new()
+		add_child(_p2_turn)
+		_p2_turn.init(Player.TWO, _dice, _p2_dice_zone, _board, _config.ruleset)
 
 
 func start() -> void:
@@ -85,7 +87,7 @@ class Config:
 	var p2_npc: bool
 	
 	func _init() -> void:
-		ruleset = preload("res://resources/rulesets/ruleset_finkel.tres")
+		ruleset = load("res://resources/rulesets/ruleset_finkel.tres")
 		rematch = false
 		p1_npc = false
 		p2_npc = false

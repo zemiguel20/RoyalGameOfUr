@@ -10,6 +10,7 @@ const STACKING_OFFSET: float = 0.03
 var pieces: Array[Piece] = []
 
 
+# Places without animation
 func place(new_piece: Piece) -> void:
 	add_child(new_piece)
 	
@@ -18,6 +19,15 @@ func place(new_piece: Piece) -> void:
 	new_piece.global_position = target_position
 	
 	pieces.append(new_piece)
+
+
+func is_occupied_by_player(player: int) -> bool:
+	var filter = func(piece: Piece): return piece.player == player
+	return not pieces.filter(filter).is_empty()
+
+
+func is_free() -> bool:
+	return pieces.is_empty()
 
 #========================================
 # OLD CODE
@@ -65,14 +75,9 @@ func get_placing_position_global() -> Vector3:
 	return Vector3(x, y, z)
 
 
-func is_free() -> bool:
-	return pieces.is_empty()
 
 
-## Returns whether this spot contains at least a piece from the [param player].
-func is_occupied_by_player(player: int) -> bool:
-	var filter = func(piece: Piece): return piece.player_owner == player
-	return not pieces.filter(filter).is_empty()
+
 
 
 func _move_pieces(spots: Array[Spot], anim: General.MoveAnim) -> void:

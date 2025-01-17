@@ -1,4 +1,5 @@
-class_name Piece extends Node3D
+class_name Piece
+extends Node3D
 ## Entity that represents a physical piece that a player moves through the tiles of the board.
 ## It has a highlight component for highlight effects during move phase.
 ## Also it has a move animation component for animating the movement of the piece.
@@ -7,7 +8,7 @@ class_name Piece extends Node3D
 
 signal movement_finished
 
-@export var player: General.Player
+var player: int
 
 @onready var _mesh_highlighter: MeshHighlighter = $MeshHighlighter
 @onready var _animator: SimpleMovementAnimationPlayer = $SimpleMovementAnimationPlayer
