@@ -67,7 +67,7 @@ func _init(p_from: Spot, p_to: Spot, p_player: int, board: Board, ruleset: Rules
 	wins = to_is_end_of_track and pieces_in_to.size() + pieces_in_from.size() == ruleset.num_pieces
 	
 	gives_extra_turn = (ruleset.rosettes_give_extra_turn and to.is_rosette) \
-		or (ruleset.captures_give_extra_turn and knocks_opponent_out)
+		or (ruleset.ko_gives_extra_turn and knocks_opponent_out)
 
 
 ## Updated the board state accordingly, and optionally can play piece movement animations.
