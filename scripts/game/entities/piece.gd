@@ -10,15 +10,12 @@ signal movement_finished
 
 var player: int
 
+var moving: bool = false
+
 @onready var _mesh_highlighter: MeshHighlighter = $MeshHighlighter
 @onready var _animator: SimpleMovementAnimationPlayer = $SimpleMovementAnimationPlayer
 @onready var _mesh: MeshInstance3D = $Model/Piece
 @onready var _sfx_place: AudioStreamPlayer3D = $SfxPlace
-
-
-func _ready():
-	_animator.movement_finished.connect(_sfx_place.play)
-	_animator.movement_finished.connect(movement_finished.emit)
 
 
 func enable_highlight(color: Color) -> void:
@@ -31,13 +28,22 @@ func disable_highlight() -> void:
 
 func move_arc(target_pos: Vector3, duration: float, arc_height: float) -> void:
 	_animator.move_arc(target_pos, duration, arc_height)
+	moving = true
+	await _animator.movement_finished
+	moving = false
+	_sfx_place.play()
+	movement_finished.emit()
 
 
 func move_line(target_pos: Vector3, duration: float) -> void:
 	_animator.move_line(target_pos, duration)
+	moving = true
+	await _animator.movement_finished
+	moving = false
+	_sfx_place.play()
+	movement_finished.emit()
 
 
-## Model height, with global scale applied.
-func get_height_scaled() -> float:
+func get_model_height() -> float:
 	var model_bounding_box = _mesh.mesh.get_aabb() as AABB
 	return model_bounding_box.size.y * _mesh.global_basis.get_scale().y

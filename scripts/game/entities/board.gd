@@ -18,10 +18,12 @@ const BLACK_PIECE_PREFAB: PackedScene = preload("res://scenes/game/entities/piec
 func init(num_pieces_per_player: int) -> void:
 	for i in num_pieces_per_player:
 		var white_piece = WHITE_PIECE_PREFAB.instantiate()
+		add_child(white_piece)
 		white_piece.player = BoardGame.Player.ONE
 		_p1_start_spots[i].place(white_piece)
 		
 		var black_piece = BLACK_PIECE_PREFAB.instantiate()
+		add_child(black_piece)
 		black_piece.player = BoardGame.Player.TWO
 		_p2_start_spots[i].place(black_piece)
 
@@ -41,7 +43,7 @@ func calculate_moves(steps: int, player: int, ruleset: Ruleset) -> Array[GameMov
 	var can_move = _check_move_validity(destination_spot, player, ruleset)
 	if has_pieces_in_start and can_move:
 		for starting_spot in occupied_starting_spots:
-			var move = GameMove.new(starting_spot, destination_spot, player, self)
+			var move = GameMove.new(starting_spot, destination_spot, player, self, ruleset)
 			moves.append(move)
 	
 	var occupied_track_spots = get_player_occupied_track_spots(player)
@@ -54,7 +56,7 @@ func calculate_moves(steps: int, player: int, ruleset: Ruleset) -> Array[GameMov
 				destination_spot = track[index + steps]
 				can_move = _check_move_validity(destination_spot, player, ruleset)
 				if can_move:
-					var move = GameMove.new(starting_spot, destination_spot, player, self)
+					var move = GameMove.new(starting_spot, destination_spot, player, self, ruleset)
 					moves.append(move)
 		
 			if ruleset.can_move_backwards:
@@ -63,7 +65,7 @@ func calculate_moves(steps: int, player: int, ruleset: Ruleset) -> Array[GameMov
 					destination_spot = track[index - steps]
 					can_move = _check_move_validity(destination_spot, player, ruleset)
 					if can_move:
-						var move = GameMove.new(starting_spot, destination_spot, player, self)
+						var move = GameMove.new(starting_spot, destination_spot, player, self, ruleset)
 						moves.append(move)
 	
 	return moves
@@ -89,10 +91,47 @@ func get_player_occupied_start_spots(player: int) -> Array[Spot]:
 	return occupied_spots
 
 
+func get_player_free_start_spots(player: int) -> Array[Spot]:
+	var filter = func(spot: Spot): return spot.is_free()
+	var free_spots = get_player_start_spots(player).filter(filter)
+	return free_spots
+
+
 func get_player_occupied_track_spots(player: int) -> Array[Spot]:
 	var filter = func(spot: Spot): return spot.is_occupied_by_player(player)
 	var occupied_spots = get_player_track(player).filter(filter)
 	return occupied_spots
+
+
+func get_player_free_track_spots(player: int) -> Array[Spot]:
+	var filter = func(spot: Spot): return spot.is_free()
+	var free_spots = get_player_track(player).filter(filter)
+	return free_spots
+
+
+func is_spot_safe(spot: Spot, ruleset: Ruleset) -> bool:
+	var is_start_spot = _p1_start_spots.has(spot) or _p2_start_spots.has(spot)
+	var is_exclusive = (_p1_track.has(spot) and not _p2_track.has(spot)) \
+						or (not _p1_track.has(spot) and _p2_track.has(spot))
+	var is_safe_rosette = spot.is_rosette and ruleset.rosettes_are_safe
+	
+	return is_start_spot or is_exclusive or is_safe_rosette
+
+
+## Returns the section of the path between 2 given indexes (exclusive).
+## If [param from_index] is higher than [param to_index], the returned path is backwards.
+func get_path_between(from_index: int, to_index: int, player: int) -> Array[Spot]:
+	var path: Array[Spot] = []
+	if from_index == to_index:
+		return path
+	
+	var track = get_player_track(player)
+	
+	var step = 1 if from_index <= to_index else -1
+	# Add step to 'begin' to become exlusive instead of inclusive
+	path = track.slice(from_index + step, to_index, step)
+	
+	return path
 
 
 func _check_move_validity(dest_spot: Spot, player: int, ruleset: Ruleset) -> bool:

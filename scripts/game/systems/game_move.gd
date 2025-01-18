@@ -2,181 +2,144 @@ class_name GameMove
 ## Represents an action of moving pieces in one spot to another spot.
 ## Contains specific information, such has if it is a direct winning move.
 ## Can be executed, like the command pattern.
-##
-## If tagged as invalid, cannot be executed. Invalid moves can still be displayed to the
-## player for clarity purposes.
 
 
 signal execution_finished
 
+enum AnimationType {
+	SKIPPING,
+	DIRECT,
+}
+
+const ANIM_DURATION_SEC = 0.4
+const ARC_HEIGHT_M = 0.04
+
 var player: int ## Player making the move.
-
-# From spot info
-var from: Spot ## Spot where the move is coming from.
-var from_track_index: int
-var pieces_in_from: Array[Piece] ## Pieces placed in the [member from] spot (before execution).
-var is_from_shared: bool  ## Whether [member from] is in both player's tracks.
-var is_from_safe: bool ## Whether [member from] is a safe spot.
-var from_track_pos: float ## Position of the [member from] spot in the track, as a value between 0 and 1.
-
-# To spot info
-var to: Spot ## Spot where the move is going to.
-var to_track_index: int
-var pieces_in_to: Array[Piece] ## Pieces placed in the [member to] spot (before execution).
-var is_to_shared: bool  ## Whether [member to] is in both player's tracks.
-var is_to_safe: bool ## Whether [member to] is a safe spot.
-var is_to_end_of_track: bool ## Whether [member to] is the end of the track.
-var is_to_occupied_by_opponent: bool
-
-# Path info
+var from: Spot ## Move's starting spot.
+var to: Spot ## Move's landing spot.
+var from_track_index: int ## [member from] spot index in the track.
+var pieces_in_from: Array[Piece] ## Pieces in [member from] before execution.
+var from_is_safe: bool
+var to_track_index: int ## [member to] spot index in the track.
+var pieces_in_to: Array[Piece] ## Pieces in [member to] before execution.
+var to_is_safe: bool
+var to_is_end_of_track: bool
 var full_path: Array[Spot] ## Full path between [member from] and [member to].
-var backwards: bool ## Whether its moving backwards in the board.
-
-# Move info
-var valid: bool ## Whether this move is valid and can be executed.
-var wins: bool ## Whether move wins the game.
-var gives_extra_turn: bool ## Whether move gives player an extra turn
+var is_backwards: bool ## Whether its moving backwards in the path.
+var knocks_opponent_out: bool
+var wins: bool
+var gives_extra_turn: bool
 
 var _executed: bool = false # Whether move has already been executed
 var _board: Board
 
 
-@warning_ignore("shadowed_variable")
-func _init(from: Spot, to: Spot, player: int, board: Board):
-	# TODO: rework
+func _init(p_from: Spot, p_to: Spot, p_player: int, board: Board, ruleset: Ruleset):
 	_board = board
-	return
+	
+	player = p_player
+	from = p_from
+	to = p_to
+	
 	# Shared variables for initialization
-	var track = _board.get_track(player)
+	var track = _board.get_player_track(player)
 	
-	# Initialize properties
-	self.player = player
-	
-	# Get FROM spot info
-	self.from = from
 	from_track_index = track.find(from)
 	pieces_in_from = from.pieces.duplicate()
 	pieces_in_from.make_read_only()
-	is_from_shared = not _board.is_spot_exclusive(from)
-	is_from_safe = _is_spot_safe(from)
-	from_track_pos = float(from_track_index + 1) / float(track.size())
+	from_is_safe = _board.is_spot_safe(from, ruleset)
 	
-	# Get TO spot info
-	self.to = to
 	to_track_index = track.find(to)
 	pieces_in_to = to.pieces.duplicate()
 	pieces_in_to.make_read_only()
-	is_to_shared = not _board.is_spot_exclusive(to)
-	is_to_safe = _is_spot_safe(to)
-	is_to_end_of_track = to == track.back()
-	is_to_occupied_by_opponent = to.is_occupied_by_player(General.get_opponent(player))
+	to_is_safe = _board.is_spot_safe(to, ruleset)
+	to_is_end_of_track = to == track.back()
 	
-	# Path info
-	full_path = _board.get_path_between(from, to, player)
+	full_path = _board.get_path_between(from_track_index, to_track_index, player)
+	full_path.push_front(from)
+	full_path.push_back(to)
 	full_path.make_read_only()
-	backwards = from_track_index > to_track_index
+	is_backwards = from_track_index > to_track_index
 	
-	valid = _check_valid()
+	var to_is_occupied_by_opponent = not to.is_free() and not to.is_occupied_by_player(player)
+	knocks_opponent_out = to_is_occupied_by_opponent and not to_is_safe
 	
-	wins = is_to_end_of_track and \
-		pieces_in_to.size() + pieces_in_from.size() == GameManager.ruleset.num_pieces
+	wins = to_is_end_of_track and pieces_in_to.size() + pieces_in_from.size() == ruleset.num_pieces
 	
-	if GameManager.ruleset.rosettes_give_extra_turn and to.is_in_group("rosettes"):
-		gives_extra_turn = true
-	elif GameManager.ruleset.captures_give_extra_turn and is_to_occupied_by_opponent:
-		gives_extra_turn = true
-	else:
-		gives_extra_turn = false
+	gives_extra_turn = (ruleset.rosettes_give_extra_turn and to.is_rosette) \
+		or (ruleset.captures_give_extra_turn and knocks_opponent_out)
 
 
 ## Updated the board state accordingly, and optionally can play piece movement animations.
-func execute(animation := General.MoveAnim.NONE, follow_path := false) -> void:
-	if _executed or not valid:
+func execute(animation_type: AnimationType) -> void:
+	if _executed:
 		return
-	
 	_executed = true
 	
-	# If follow_path is true, then this will be the full path.
-	# Otherwise its only the from and to spots.
-	var movement_path: Array[Spot] = []
+	# INFO: this is a confusing procedure. First, the pieces are animated accordingly,
+	# and after that the spot data is updated, that is, from the game's perspective,
+	# the pieces are only placed on the spots after the animations are completed.
+	#
+	# In case of a knockout, for the pieces not to overlap, animating moving to the spot and
+	# animating the knockout happens simultaneously.
+	# For the skipping animation, that means that the pieces are first animated along the path
+	# but only up until before the landing spot.
+	# Then, start the animation to the landing spot, resolve the knockout, and finally
+	# update the spot data.
 	
-	if follow_path:
-		# NOTE: because this is only for animation, to not change the spot data along the path, 
-		# temporary spots are used as in-between path spots.
+	
+	# Remove the pieces from the spot and reparent to the piece at the base,
+	# since this one is animated and all others will follow by consequence.
+	var pieces_to_move = from.remove_pieces()
+	var base_piece = pieces_to_move.front() as Piece
+	for piece: Piece in pieces_to_move.slice(1):
+		piece.reparent(base_piece)
+	
+	
+	# KO pieces are removed early for the animation placing position
+	var pieces_to_ko: Array[Piece] = []
+	if knocks_opponent_out:
+		pieces_to_ko.assign(to.remove_pieces())
+	
+	
+	if animation_type == AnimationType.SKIPPING:
+		# Animate the pieces along the path up until before the landing spot
+		var anim_path = full_path.duplicate()
+		anim_path.pop_front()
+		anim_path.pop_back()
+		for spot: Spot in anim_path:
+			var target_pos = spot.get_placing_position_global()
+			base_piece.move_arc(target_pos, ANIM_DURATION_SEC, ARC_HEIGHT_M)
+			await base_piece.movement_finished
 		
-		# Get between spots (without from and to)
-		var between_spots: Array[Spot] = full_path.duplicate()
-		between_spots.pop_back()
-		between_spots.pop_front()
+		# Start animation to landing spot
+		var target_pos = to.get_placing_position_global()
+		base_piece.move_arc(target_pos, ANIM_DURATION_SEC, ARC_HEIGHT_M)
+	else:
+		# Start direct animation to landing spot
+		var target_pos = to.get_placing_position_global()
+		base_piece.move_line(target_pos, ANIM_DURATION_SEC)
+	
+	if knocks_opponent_out:
+		# Animate knockout pieces to starting zone
+		var opponent = (pieces_to_ko.front() as Piece).player
+		var free_start_spots = _board.get_player_free_start_spots(opponent)
+		free_start_spots.shuffle()
+		for i in pieces_to_ko.size():
+			var piece = pieces_to_ko[i]
+			var spot = free_start_spots[i]
+			piece.move_arc(spot.get_placing_position_global(), ANIM_DURATION_SEC, ARC_HEIGHT_M)
+		await (pieces_to_ko.front() as Piece).movement_finished
 		
-		# Create temporary spots and add them to path
-		for spot in between_spots:
-			var temp_spot = EntityManager.spawn_temporary_spot()
-			temp_spot.global_position = spot.get_placing_position_global()
-			movement_path.append(temp_spot)
+		# Update state
+		for i in pieces_to_ko.size():
+			var piece = pieces_to_ko[i]
+			var spot = free_start_spots[i]
+			spot.place(piece)
 	
-	# Add 'from' and 'to' to the movement path
-	movement_path.push_front(from)
-	movement_path.push_back(to)
-	
-	# Move pieces along the path
-	# NOTE: EXCEPT to the 'to' spot. First we have to deal with pieces being knocked out
-	# and only then do we finish the movement.
-	for i in movement_path.size() - 2:
-		var current_spot = movement_path[i]
-		var next_spot = movement_path[i + 1]
-		current_spot.move_pieces_to_spot(next_spot, animation)
-		await current_spot.pieces_moved
-	
-	# Move knockout pieces to starting zone
-	if is_to_occupied_by_opponent:
-		var opponent_start_spots = _board.get_free_start_spots(General.get_opponent(player))
-		movement_path[-1].move_pieces_split_to_spots(opponent_start_spots, General.MoveAnim.ARC)
-	
-	# Move pieces to last spot
-	movement_path[-2].move_pieces_to_spot(movement_path[-1], animation)
-	# NOTE: the knockout animation and placing animation in last spot run simultaneously
-	# wait for animations to finish
-	await movement_path[-2].pieces_moved
-	
-	# Cleanup temporary spots
-	movement_path.pop_back()
-	movement_path.pop_front()
-	for temp_spot in movement_path:
-		temp_spot.queue_free()
+	# Finalize move
+	if base_piece.moving:
+		await base_piece.movement_finished
+	to.place_stack(pieces_to_move)
 	
 	execution_finished.emit()
-
-
-# Check if any rules are violated, or return true.
-func _check_valid() -> bool:
-	var result = true
-	
-	# Cant knockopponent out of a safe rosette
-	if is_to_safe and is_to_occupied_by_opponent:
-		result = false
-	
-	# Cannot stack in rosettes if setting not enabled
-	if not GameManager.ruleset.rosettes_allow_stacking \
-	and to.is_in_group("rosettes") \
-	and to.is_occupied_by_player(player):
-		result = false
-	
-	# Cannot stack in normal spots
-	if not to.is_in_group("rosettes") and to.is_occupied_by_player(player) and not is_to_end_of_track:
-		result = false
-	
-	# Cannot stack in starting spots
-	if GameManager.ruleset.can_move_backwards and _board.get_occupied_start_spots(player).has(to):
-		result = false
-	
-	# Cannot move pieces already in finish line
-	if GameManager.ruleset.can_move_backwards and from == _board.get_track(player).back():
-		result = false
-	
-	return result
-
-
-func _is_spot_safe(spot: Spot) -> bool:
-	return _board.is_spot_exclusive(spot) or \
-		(spot.is_in_group("rosettes") and GameManager.ruleset.rosettes_are_safe)
