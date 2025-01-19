@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/game/board_game.gd" id="1_t86uf"]
 [ext_resource type="PackedScene" uid="uid://c7r71pseqwlp" path="res://scenes/game/dice_zone/dice_zone.tscn" id="2_dacpm"]
-[ext_resource type="Script" path="res://scripts/game/dice.gd" id="3_cao45"]
+[ext_resource type="Script" path="res://scripts/game/dice_controller/dice.gd" id="3_cao45"]
 [ext_resource type="PackedScene" uid="uid://ckrnexaabuj" path="res://scenes/game/entities/boards/board_preview.tscn" id="3_pno53"]
 [ext_resource type="AudioStream" uid="uid://c6qmd3oyeovu" path="res://audio/sfx_mastered/dice-shaking-loop.mp3" id="4_18q8b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ay6mi"]
 size = Vector3(1, 0.05, 1.5)
 
-[node name="BoardGame" type="Node"]
+[node name="BoardGame" type="Node3D"]
 script = ExtResource("1_t86uf")
 
 [node name="DiceZoneP1" parent="." instance=ExtResource("2_dacpm")]
@@ -27,6 +27,7 @@ stream = ExtResource("4_18q8b")
 [node name="BoardSpawn" parent="." instance=ExtResource("3_pno53")]
 
 [node name="Table" type="StaticBody3D" parent="." groups=["table"]]
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0282786, 0)

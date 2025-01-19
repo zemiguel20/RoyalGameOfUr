@@ -144,7 +144,7 @@ func _get_path_highlighter(move: GameMove) -> ScrollingTexturePath3D:
 	if _move_path_highlighter_dict.has(move):
 		return _move_path_highlighter_dict[move]
 	
-	var path_highlight_prebab = preload("res://scenes/game/systems/move_picker/path_highlight.tscn")
+	var path_highlight_prebab = preload("res://scenes/game/path_highlight.tscn")
 	var path = path_highlight_prebab.instantiate() as ScrollingTexturePath3D
 	
 	path.curve.clear_points()

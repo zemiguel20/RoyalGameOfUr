@@ -22,9 +22,6 @@ config/windows_native_icon="res://icon_rosette.ico"
 [autoload]
 
 GameEvents="*res://scripts/autoloads/game_events.gd"
-GameManager="*res://scripts/autoloads/game_manager.gd"
-EntityManager="*res://scripts/autoloads/entity_manager.gd"
-GameDataCollector="*res://scripts/data_module/game_data_collector.gd"
 Settings="*res://scripts/autoloads/settings.gd"
 
 [display]
