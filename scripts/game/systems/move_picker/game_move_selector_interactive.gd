@@ -1,144 +1,235 @@
-class_name InteractiveGameMoveSelector extends Node
-## Allows player to select a move using input. For the available moves, the player can select
-## a spot where he currently has pieces. Then the player can click a spot to move (corresponding to
-## the available moves from the chosen starting spot). After both spots are picked, the
-## corresponding move gets selected.
-## Additionaly, it controls the highlighting effects during selection.
+class_name InteractiveGameMoveSelector
+extends Node
+## Controls the interaction process for selecting a move.
 
-
-signal from_spot_selected(spot: Spot)
 signal move_selected(move: GameMove)
-signal selection_canceled
-
-@export var highlight: GameMoveHighlight
-
-@export var color_selectable := Color.MEDIUM_AQUAMARINE
-@export var color_hovered := Color.AQUAMARINE
-@export var color_selected := Color.DARK_TURQUOISE
 
 var _moves: Array[GameMove] = []
-
-var is_from_selected: bool = false
+var _from_spots: Array[Spot] = []
+var _to_spots: Array[Spot] = []
+var _move_path_highlighter_dict: Dictionary = {} # Move -> Path Highlighter
+var _from_selected: Spot = null
 
 
 func _input(event):
-	if is_from_selected and event.is_action_pressed("game_selection_cancel"):
-		selection_canceled.emit()
-		_start_from_selection()
+	if _from_selected and event.is_action_pressed("cancel_selection"):
+		_cancel_selection()
 
 
-func start_selection(moves: Array[GameMove]) -> void:
-	_moves = moves.duplicate()
-	_start_from_selection()
-
-
-func stop_selection() -> void:
-	is_from_selected = false
-	for move in _moves:
-		_clear_connections(move)
-		highlight.clear_highlight(move)
-
-
-func _start_from_selection() -> void:
-	stop_selection() # cleanup before starting selection
+func start(moves: Array[GameMove]) -> void:
+	_moves.assign(moves)
 	
 	for move in _moves:
-		if not move.from.input.hovered.is_connected(_on_from_hovered.bind(move.from)):
-			move.from.input.hovered.connect(_on_from_hovered.bind(move.from))
-		if not move.from.input.dehovered.is_connected(_on_from_dehovered.bind(move.from)):
-			move.from.input.dehovered.connect(_on_from_dehovered.bind(move.from))
-		
-		if move.valid:
-			if not move.from.input.clicked.is_connected(_on_from_selected.bind(move.from)):
-				move.from.input.clicked.connect(_on_from_selected.bind(move.from))
-			
-			for piece in move.pieces_in_from:
-				piece.highlight.set_active(true).set_color(color_selectable)
-
-
-func _on_from_hovered(spot: Spot) -> void:
-	var moves_from = _filter_moves_with_from(_moves, spot)
-	# Sort invalid moves first, so valid moves are in a "higher layer" for highlighting
-	# NOTE: this is due to overriding because moves share pieces/spots
-	moves_from.sort_custom(func(a: GameMove, _b: GameMove): return not a.valid)
-	for move in moves_from:
-		GameEvents.move_hovered.emit(move)
-		highlight.highlight(move, color_hovered)
-
-
-func _on_from_dehovered(_spot: Spot) -> void:
-	# Make sure all selectable moves are properly highlighted
-	# NOTE: this is due to overriding because moves share pieces/spots
-	for move in _moves:
-		highlight.clear_highlight(move)
-	for move in _moves:
-		if move.valid:
-			for piece in move.pieces_in_from:
-				piece.highlight.set_active(true).set_color(color_selectable)
-
-
-func _on_from_selected(spot: Spot) -> void:
-	for move in _moves:
-		_clear_connections(move)
-		highlight.clear_highlight(move)
+		if not _from_spots.has(move.from):
+			_from_spots.append(move.from)
+		if not _to_spots.has(move.to):
+			_to_spots.append(move.to)
 	
-	var valid_moves = _filter_valid_moves(_filter_moves_with_from(_moves, spot))
+	for spot in _from_spots:
+		spot.set_input_reading(true)
+		spot.mouse_entered.connect(_on_from_hovered.bind(spot))
+		spot.mouse_exited.connect(_on_from_dehovered.bind(spot))
+		spot.clicked.connect(_on_from_selected.bind(spot))
 	
-	if GameManager.fast_move_enabled:
-		var selected_move = valid_moves.front()
+	for spot in _to_spots:
+		spot.mouse_entered.connect(_on_to_hovered.bind(spot))
+		spot.mouse_exited.connect(_on_to_dehovered.bind(spot))
+		spot.clicked.connect(_on_to_selected.bind(spot))
+	
+	_highlight_moves_selectable()
+
+
+# WARNING: this function cleans up, so it should be called last
+func stop() -> void:
+	for move in _moves:
+		_clear_move_highlight(move)
+	
+	for spot in _from_spots:
+		spot.set_input_reading(false)
+		spot.mouse_entered.disconnect(_on_from_hovered.bind(spot))
+		spot.mouse_exited.disconnect(_on_from_dehovered.bind(spot))
+		spot.clicked.disconnect(_on_from_selected.bind(spot))
+	
+	for spot in _to_spots:
+		spot.set_input_reading(false)
+		spot.mouse_entered.disconnect(_on_to_hovered.bind(spot))
+		spot.mouse_exited.disconnect(_on_to_dehovered.bind(spot))
+		spot.clicked.disconnect(_on_to_selected.bind(spot))
+	
+	_moves.clear()
+	_from_spots.clear()
+	_to_spots.clear()
+	_move_path_highlighter_dict.clear()
+	_from_selected = null
+
+
+func _on_from_hovered(from: Spot) -> void:
+	if _from_selected:
+		return
+	
+	var moves_from = _moves.filter(func(move: GameMove): return move.from == from)
+	for move: GameMove in moves_from:
+		_highlight_move_hovered(move)
+
+
+func _on_from_dehovered(from: Spot) -> void:
+	if _from_selected:
+		return
+	
+	_highlight_moves_selectable()
+
+
+func _on_from_selected(from: Spot) -> void:
+	var moves_from = _moves.filter(func(move: GameMove): return move.from == from)
+	
+	if Settings.fast_mode:
+		stop()
+		var selected_move = moves_from.front()
 		move_selected.emit(selected_move)
 	else:
-		is_from_selected = true
-		from_spot_selected.emit(spot)
-		_start_to_selection(valid_moves)
-
-
-func _start_to_selection(filtered_moves: Array[GameMove]) -> void:
-	for move in filtered_moves:
-		if not move.to.input.hovered.is_connected(_on_to_hovered.bind(move)):
-			move.to.input.hovered.connect(_on_to_hovered.bind(move))
-		if not move.to.input.dehovered.is_connected(_on_to_dehovered.bind(move)):
-			move.to.input.dehovered.connect(_on_to_dehovered.bind(move))
-		if not move.to.input.clicked.is_connected(_on_to_selected.bind(move)):
-			move.to.input.clicked.connect(_on_to_selected.bind(move))
+		_from_selected = from
 		
-		highlight.highlight(move, color_selected)
+		# TODO: Enable floating pieces
+		
+		for move in _moves:
+			_clear_move_highlight(move)
+			move.from.set_input_reading(false)
+			move.to.set_input_reading(false)
+		
+		for move: GameMove in moves_from:
+			_highlight_move_from_selected(move)
+			move.to.set_input_reading(true)
 
 
-func _on_to_hovered(move: GameMove) -> void:
-	move.to.highlight.color = color_hovered
+func _cancel_selection() -> void:
+	_from_selected = null
+	
+	for spot in _to_spots:
+		spot.set_input_reading(false)
+		
+	for spot in _from_spots:
+		spot.set_input_reading(true)
+	_highlight_moves_selectable()
 
 
-func _on_to_dehovered(move: GameMove) -> void:
-	highlight.highlight(move, color_selected)
+func _on_to_hovered(to: Spot) -> void:
+	if not _from_selected:
+		return
+	
+	to.enable_highlight(General.get_highlight_color(General.HighlightType.HOVERED))
 
 
-func _on_to_selected(selected_move: GameMove) -> void:
-	stop_selection()
+func _on_to_dehovered(to: Spot) -> void:
+	if not _from_selected:
+		return
+	
+	to.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
+
+
+func _on_to_selected(to: Spot) -> void:
+	if not _from_selected:
+		return
+	
+	var selected_move = _moves.filter( \
+			func(move: GameMove): return move.from == _from_selected and move.to == to \
+		).front()
+	
+	stop()
 	move_selected.emit(selected_move)
 
 
-func _clear_connections(move: GameMove) -> void:
-	if not move.from or not move.to:
-		return
+# Creates a path highlighter for the given move. If the move already has an associated
+# path highlighter, returns that one instead.
+func _get_path_highlighter(move: GameMove) -> ScrollingTexturePath3D:
+	if _move_path_highlighter_dict.has(move):
+		return _move_path_highlighter_dict[move]
 	
-	if move.from.input.hovered.is_connected(_on_from_hovered.bind(move.from)):
-		move.from.input.hovered.disconnect(_on_from_hovered.bind(move.from))
-	if move.from.input.dehovered.is_connected(_on_from_dehovered.bind(move.from)):
-		move.from.input.dehovered.disconnect(_on_from_dehovered.bind(move.from))
-	if move.from.input.clicked.is_connected(_on_from_selected.bind(move.from)):
-		move.from.input.clicked.disconnect(_on_from_selected.bind(move.from))
-	if move.to.input.hovered.is_connected(_on_to_hovered.bind(move)):
-		move.to.input.hovered.disconnect(_on_to_hovered.bind(move))
-	if move.to.input.dehovered.is_connected(_on_to_dehovered.bind(move)):
-		move.to.input.dehovered.disconnect(_on_to_dehovered.bind(move))
-	if move.to.input.clicked.is_connected(_on_to_selected.bind(move)):
-		move.to.input.clicked.disconnect(_on_to_selected.bind(move))
+	var path_highlight_prebab = preload("res://scenes/game/systems/move_picker/path_highlight.tscn")
+	var path = path_highlight_prebab.instantiate() as ScrollingTexturePath3D
+	
+	path.curve.clear_points()
+	
+	# Add all spots to the curve
+	# Midpoints forming an arch to fix clipping through board
+	for i in move.full_path.size():
+		var spot = move.full_path[i]
+		path.curve.add_point(spot.global_position)
+		
+		if i < move.full_path.size() - 1:
+			var next_spot = move.full_path[i + 1]
+			var midpoint = spot.global_position.lerp(next_spot.global_position, 0.5)
+			midpoint.y = maxf(spot.global_position.y, next_spot.global_position.y) + 0.002
+			path.curve.add_point(midpoint)
+	
+	# Save path
+	_move_path_highlighter_dict[move] = path
+	add_child(path)
+	
+	return path
 
 
-func _filter_moves_with_from(moves: Array[GameMove], spot_from: Spot) -> Array[GameMove]:
-	return moves.filter(func(move: GameMove): return move.from == spot_from)
+func _get_to_spot_color(move: GameMove) -> Color:
+	if move.to_is_end_of_track:
+		return General.get_highlight_color(General.HighlightType.END)
+	elif move.knocks_opponent_out:
+		return General.get_highlight_color(General.HighlightType.KO)
+	elif move.to.is_rosette:
+		return General.get_highlight_color(General.HighlightType.SAFE)
+	else:
+		return General.get_highlight_color(General.HighlightType.NEUTRAL)
 
 
-func _filter_valid_moves(moves: Array[GameMove]) -> Array[GameMove]:
-	return moves.filter(func(move: GameMove): return move.valid)
+func _clear_move_highlight(move: GameMove) -> void:
+	var path_highlight = _get_path_highlighter(move)
+	path_highlight.hide()
+	
+	move.from.disable_highlight()
+	for piece in move.pieces_in_from:
+		piece.disable_highlight()
+	
+	move.to.disable_highlight()
+	for piece in move.pieces_in_to:
+		piece.disable_highlight()
+
+
+func _highlight_moves_selectable() -> void:
+	for move in _moves:
+		_clear_move_highlight(move)
+	for spot in _from_spots:
+		for piece in spot.pieces:
+			piece.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
+
+
+func _highlight_move_hovered(move: GameMove) -> void:
+	var hovered_color = General.get_highlight_color(General.HighlightType.HOVERED)
+	move.from.enable_highlight(hovered_color)
+	for piece in move.pieces_in_from:
+		piece.enable_highlight(hovered_color)
+	
+	var to_color = _get_to_spot_color(move)
+	
+	move.to.enable_highlight(to_color)
+	for piece in move.pieces_in_to:
+		piece.enable_highlight(to_color)
+	
+	var path_highlight = _get_path_highlighter(move)
+	path_highlight.color_modulate = to_color
+	path_highlight.show()
+
+
+func _highlight_move_from_selected(move: GameMove) -> void:
+	var selected_color = General.get_highlight_color(General.HighlightType.SELECTED)
+	move.from.enable_highlight(selected_color)
+	for piece in move.pieces_in_from:
+		piece.enable_highlight(selected_color)
+	
+	move.to.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
+	
+	var to_color = _get_to_spot_color(move)
+	
+	for piece in move.pieces_in_to:
+		piece.enable_highlight(to_color)
+	
+	var path_highlight = _get_path_highlighter(move)
+	path_highlight.color_modulate = to_color
+	path_highlight.show()

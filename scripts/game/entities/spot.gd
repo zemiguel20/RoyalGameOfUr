@@ -3,9 +3,23 @@ extends Node3D
 ## Entity that represents a spot where the player can place pieces.
 
 
+signal mouse_entered
+signal mouse_exited
+signal clicked
+
 @export var is_rosette: bool
 
 var pieces: Array[Piece] = []
+
+@onready var _outline_highlighter: MeshHighlighter = $OutlineFrameMesh/MeshHighlighter
+@onready var _overlay_highlighter: MeshHighlighter = $OverlayFrameMesh/MeshHighlighter
+@onready var _input_reader: SelectionInputReader = $SelectionInputReader
+
+
+func _ready() -> void:
+	_input_reader.mouse_entered.connect(mouse_entered.emit)
+	_input_reader.mouse_exited.connect(mouse_exited.emit)
+	_input_reader.clicked.connect(clicked.emit)
 
 
 # NOTE: Places without animation. Pieces should be animated externally before calling this.
@@ -42,3 +56,17 @@ func is_occupied_by_player(player: int) -> bool:
 
 func is_free() -> bool:
 	return pieces.is_empty()
+
+
+func enable_highlight(color: Color) -> void:
+	_outline_highlighter.set_active(true).set_material_color(color)
+	_overlay_highlighter.set_active(true).set_material_color(color)
+
+
+func disable_highlight() -> void:
+	_outline_highlighter.set_active(false)
+	_overlay_highlighter.set_active(false)
+
+
+func set_input_reading(active: bool) -> void:
+	_input_reader.set_input_reading(active)

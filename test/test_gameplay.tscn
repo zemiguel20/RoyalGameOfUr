@@ -12,7 +12,7 @@ func _ready() -> void:
 	var config: BoardGame.Config = BoardGame.Config.new()
 	config.rematch = false
 	config.ruleset = load(\"res://resources/rulesets/ruleset_finkel.tres\")
-	
+	Settings.fast_mode = false
 	game.setup(config)
 	game.start()
 "

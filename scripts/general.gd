@@ -2,6 +2,42 @@ class_name General
 ## Contains global constants and utility functions.
 
 
+enum HighlightType {
+	NONE,
+	SELECTABLE,
+	HOVERED,
+	SELECTED,
+	POSITIVE,
+	NEGATIVE,
+	SAFE,
+	KO,
+	END,
+	NEUTRAL,
+}
+
+
+const COLOR_MAP: Dictionary = {
+	HighlightType.NONE : Color.TRANSPARENT,
+	HighlightType.SELECTABLE : Color.MEDIUM_AQUAMARINE,
+	HighlightType.HOVERED : Color.AQUAMARINE,
+	HighlightType.SELECTED : Color.DARK_TURQUOISE,
+	HighlightType.POSITIVE : Color.GREEN,
+	HighlightType.NEGATIVE : Color.RED,
+	HighlightType.SAFE : Color.GREEN_YELLOW,
+	HighlightType.KO : Color.ORANGE,
+	HighlightType.END : Color.GOLD,
+	HighlightType.NEUTRAL : Color.GHOST_WHITE,
+}
+
+
+static func get_highlight_color(type: HighlightType) -> Color:
+	return COLOR_MAP[type]
+
+
+
+
+
+
 enum Player {
 	ONE,
 	TWO,
