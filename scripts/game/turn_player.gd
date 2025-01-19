@@ -19,7 +19,7 @@ func start() -> void:
 	var moves: Array[GameMove] = _board.calculate_moves(result, _player, _ruleset)
 	
 	_dice.highlight_result(not moves.is_empty(), result != 0)
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.4).timeout
 	
 	if moves.is_empty():
 		finished.emit(Result.NO_MOVES)

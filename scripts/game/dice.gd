@@ -53,7 +53,7 @@ func start_roll_interactive(dice_zone: DiceZone) -> void:
 		if not die.mouse_exited.is_connected(_highlight_selectable):
 			die.mouse_exited.connect(_highlight_selectable)
 		
-		die.set_highlight(Die.HighlightType.SELECTABLE)
+		die.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
 
 
 func _place(dice_zone: DiceZone) -> void:
@@ -69,12 +69,12 @@ func _place(dice_zone: DiceZone) -> void:
 
 func _highlight_selectable() -> void:
 	for die in _dice:
-		die.set_highlight(Die.HighlightType.SELECTABLE)
+		die.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
 
 
 func _highlight_hovered() -> void:
 	for die in _dice:
-		die.set_highlight(Die.HighlightType.HOVERED)
+		die.enable_highlight(General.get_highlight_color(General.HighlightType.HOVERED))
 
 
 func _start_shaking() -> void:
@@ -118,6 +118,13 @@ func _roll() -> void:
 		else:
 			result += die.last_rolled_value
 	
+	# Visual count
+	if not Settings.fast_mode:
+		for die in _dice:
+			if die.last_rolled_value > 0:
+				die.enable_highlight(General.get_highlight_color(General.HighlightType.NEUTRAL))
+				await get_tree().create_timer(0.2).timeout
+	
 	rolled.emit(result)
 
 
@@ -136,15 +143,15 @@ func _deactivate_dice_interaction() -> void:
 		if die.mouse_exited.is_connected(_highlight_selectable):
 			die.mouse_exited.disconnect(_highlight_selectable)
 		
-		die.set_highlight(Die.HighlightType.NONE)
+		die.disable_highlight()
 
 
 ## Highlights the dice with the appropriate color for a positive or negative result.
 ## The [param only_ones] flag serves to highlight only the dice with value 1.
 ## Called externally depending on the processing of the result.
 func highlight_result(positive: bool, only_ones: bool) -> void:
-	var type = Die.HighlightType.RESULT_POSITIVE if positive else Die.HighlightType.RESULT_NEGATIVE
+	var type = General.HighlightType.POSITIVE if positive else General.HighlightType.NEGATIVE
 	
 	for die in _dice:
 		if only_ones == false or die.last_rolled_value == 1:
-			die.set_highlight(type)
+			die.enable_highlight(General.get_highlight_color(type))

@@ -9,15 +9,6 @@ signal hold_stopped
 signal placed ## Emitted by [method place]
 signal rolled(value: int)
 
-enum HighlightType {
-	NONE,
-	NEUTRAL,
-	SELECTABLE,
-	HOVERED,
-	RESULT_POSITIVE,
-	RESULT_NEGATIVE,
-}
-
 var last_rolled_value: int = 0
 var is_rolling: bool = false
 
@@ -58,23 +49,13 @@ func place(point_global: Vector3) -> void:
 	placed.emit()
 
 
-func set_highlight(type: HighlightType) -> void:
-	if type == HighlightType.NONE:
-		_highlighter.set_active(false)
-		return
-	
+func enable_highlight(color: Color) -> void:
 	_highlighter.set_active(true)
-	
-	if type == HighlightType.NEUTRAL:
-		_highlighter.set_material_color(Color.GHOST_WHITE)
-	elif type == HighlightType.SELECTABLE:
-		_highlighter.set_material_color(Color.MEDIUM_AQUAMARINE)
-	elif type == HighlightType.HOVERED:
-		_highlighter.set_material_color(Color.AQUAMARINE)
-	elif type == HighlightType.RESULT_POSITIVE:
-		_highlighter.set_material_color(Color.GREEN)
-	elif type == HighlightType.RESULT_NEGATIVE:
-		_highlighter.set_material_color(Color.RED)
+	_highlighter.set_material_color(color)
+
+
+func disable_highlight() -> void:
+	_highlighter.set_active(false)
 
 
 func set_input_reading(active: bool) -> void:
