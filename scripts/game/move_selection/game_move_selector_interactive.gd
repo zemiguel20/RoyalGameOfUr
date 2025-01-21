@@ -9,11 +9,12 @@ var _from_spots: Array[Spot] = []
 var _to_spots: Array[Spot] = []
 var _move_path_highlighter_dict: Dictionary = {} # Move -> Path Highlighter
 var _from_selected: Spot = null
+var _piece_dragger: PieceDragger
 
 
-func _input(event):
-	if _from_selected and event.is_action_pressed("cancel_selection"):
-		_cancel_selection()
+func _ready() -> void:
+	_piece_dragger = PieceDragger.new()
+	add_child(_piece_dragger)
 
 
 func start(moves: Array[GameMove]) -> void:
@@ -89,7 +90,7 @@ func _on_from_selected(from: Spot) -> void:
 	else:
 		_from_selected = from
 		
-		# TODO: Enable floating pieces
+		_piece_dragger.start(_from_selected)
 		
 		for move in _moves:
 			_clear_move_highlight(move)
@@ -101,7 +102,13 @@ func _on_from_selected(from: Spot) -> void:
 			move.to.set_input_reading(true)
 
 
+func _input(event):
+	if _from_selected and event.is_action_pressed("cancel_selection"):
+		_cancel_selection()
+
+
 func _cancel_selection() -> void:
+	_piece_dragger.stop()
 	_from_selected = null
 	
 	for spot in _to_spots:

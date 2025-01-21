@@ -1,78 +1,70 @@
-class_name PieceDragger extends Node
-## Makes the pieces follow the cursor during selection.
+class_name PieceDragger
+extends Node
+## Makes the pieces float and follow the cursor.
 
 
-@export var selector: InteractiveGameMoveSelector
-@export var float_height: float = 0.05
-@export var bounds: Vector2
+const FLOAT_HEIGHT: float = 0.05
+const BOUNDS: Vector2 = Vector2(0.2, 0.2)
 
-var is_dragging: bool = false
-var pieces_to_drag: Array[Piece] = []
-var original_positions: Array[Vector3] = []
+var _pieces_to_drag: Array[Piece] = []
+var _original_positions: Array[Vector3] = []
+var _is_dragging: bool = false
+var _table: StaticBody3D # Used as the origin and plane for dragging
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	selector.from_spot_selected.connect(_on_from_spot_selected)
-	selector.selection_canceled.connect(_on_selection_cancel)
-	selector.move_selected.connect(_on_move_selected.unbind(1))
-	GameEvents.back_to_main_menu_pressed.connect(_on_selection_cancel)
+	_table = get_tree().get_nodes_in_group("table").front() as StaticBody3D
+
+
+func start(spot: Spot) -> void:
+	if _is_dragging:
+		return
+	
+	_pieces_to_drag = spot.pieces.duplicate()
+	
+	_original_positions.clear()
+	for piece in _pieces_to_drag:
+		_original_positions.append(piece.global_position)
+	
+	_is_dragging = true
+
+
+func stop() -> void:
+	_reset_pieces_positions()
+	_pieces_to_drag.clear()
+	_is_dragging = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if is_dragging:
+	if _is_dragging:
 		# Get intersection point projection from screen to world
 		var cam = get_viewport().get_camera_3d()
 		var mouse_pos = get_viewport().get_mouse_position()
 		
-		var board = EntityManager.get_board() as Board
-		var board_surface_y = board.global_position.y
+		var board_surface_y = _table.global_position.y
 		
 		var plane = Plane(Vector3.UP, Vector3(0, board_surface_y, 0))
-		var result = plane.intersects_ray(cam.project_ray_origin(mouse_pos), cam.project_ray_normal(mouse_pos))
+		var result = plane.intersects_ray(cam.project_ray_origin(mouse_pos), \
+											cam.project_ray_normal(mouse_pos))
 		
 		if result != null:
 			# Clamp intersection point within bounds around the board
-			var result_local = board.to_local(Vector3(result.x, result.y, result.z))
-			result_local.x = clampf(result_local.x, -bounds.x, bounds.x)
-			result_local.z = clampf(result_local.z, -bounds.y, bounds.y)
-			var clamped_result = board.to_global(result_local)
+			var result_local = _table.to_local(Vector3(result.x, result.y, result.z))
+			result_local.x = clampf(result_local.x, -BOUNDS.x, BOUNDS.x)
+			result_local.z = clampf(result_local.z, -BOUNDS.y, BOUNDS.y)
+			var clamped_result = _table.to_global(result_local)
 			
 			# Update dragged pieces position
-			for i in pieces_to_drag.size():
-				var piece = pieces_to_drag[i]
+			for i in _pieces_to_drag.size():
+				var piece = _pieces_to_drag[i]
 				var target_pos = clamped_result
-				target_pos.y += float_height + (i * piece.get_height_scaled())
+				target_pos.y += FLOAT_HEIGHT + (i * piece.get_model_height())
 				piece.global_position = lerp(piece.global_position, target_pos, 8 * delta)
 
 
-func _on_from_spot_selected(spot: Spot) -> void:
-	pieces_to_drag.assign(spot.pieces)
-	
-	original_positions.clear()
-	for piece in pieces_to_drag:
-		original_positions.append(piece.global_position)
-	
-	is_dragging = true
-	GameEvents.drag_move_start.emit()
-
-
-func _on_selection_cancel() -> void:
-	_reset_pieces_positions()
-	pieces_to_drag.clear()
-	is_dragging = false
-	GameEvents.drag_move_stopped.emit()
-
-
-func _on_move_selected() -> void:
-	pieces_to_drag.clear()
-	is_dragging = false
-	GameEvents.drag_move_stopped.emit()
-
-
 func _reset_pieces_positions() -> void:
-	for i in pieces_to_drag.size():
-		var piece = pieces_to_drag[i]
-		var original_pos = original_positions[i]
-		piece.move_anim.play(original_pos, General.MoveAnim.LINE)
+	for i in _pieces_to_drag.size():
+		var piece = _pieces_to_drag[i]
+		var original_pos = _original_positions[i]
+		piece.move_line(original_pos, 0.4)
