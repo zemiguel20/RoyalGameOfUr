@@ -1,6 +1,8 @@
 class_name General
 ## Contains global constants and utility functions.
 
+# TODO: review
+
 
 enum HighlightType {
 	NONE,

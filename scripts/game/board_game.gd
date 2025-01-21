@@ -23,6 +23,7 @@ var _p2_turn: Turn
 @onready var _p2_dice_zone: DiceZone = $DiceZoneP2
 @onready var _dice: Dice = $DiceManager
 
+# TODO: link setup with menus
 
 func setup(new_config: Config) -> void:
 	_config = new_config
@@ -87,7 +88,7 @@ class Config:
 	var p2_npc: bool
 	
 	func _init() -> void:
-		ruleset = load("res://resources/rulesets/ruleset_finkel.tres")
+		ruleset = General.RULESET_FINKEL
 		rematch = false
 		p1_npc = false
 		p2_npc = false

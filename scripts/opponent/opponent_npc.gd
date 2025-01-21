@@ -1,5 +1,5 @@
 class_name OpponentNPC extends Node3D
-
+# TODO: Review
 
 @export var skip_intro: bool
 @export var starting_dialogue_delay: float = 1.0

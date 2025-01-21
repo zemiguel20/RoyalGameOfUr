@@ -1,6 +1,7 @@
 extends Node
 # Global event bus
 
+# TODO: review
 
 ## Start of game, after initialization.
 signal game_started
