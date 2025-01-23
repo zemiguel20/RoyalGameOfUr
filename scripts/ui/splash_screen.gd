@@ -1,58 +1,52 @@
-class_name SplashScreen extends CanvasLayer
+class_name SplashScreen
+extends CanvasLayer
 
 
-signal sequence_finished
+signal finished
 
-@export var test: bool = false
-@export var fade_duration := 0.5
-@export var pause_duration := 1.0
+@export var _test: bool = false
+@export var _fade_duration := 0.5
+@export var _pause_duration := 1.0
 
-@export_group("References")
-@export var background: Control 
-@export var entities_logos: Control
-@export var godot_logo: TextureRect
+@onready var _godot_logo: TextureRect = $GodotLogo
+@onready var _entities_logos: Control = $EntitiesLogos
 
 
 func _ready() -> void:
 	visible = false
 	
-	if test:
+	if _test:
 		await Engine.get_main_loop().process_frame
-		play_splash_screen_sequence()
+		play()
 
 
-func play_splash_screen_sequence() -> void:
+func play() -> void:
 	visible = true
-	background.modulate.a = 1.0
-	godot_logo.modulate.a = 0.0
-	entities_logos.modulate.a = 0.0
+	_godot_logo.modulate.a = 0.0
+	_entities_logos.modulate.a = 0.0
 	
 	var animator: Tween
 	
-	# Fade in team and school logos
 	animator = create_tween()
-	animator.tween_property(entities_logos, "modulate:a", 1.0, fade_duration)
+	animator.tween_property(_entities_logos, "modulate:a", 1.0, _fade_duration)
 	await animator.finished
 	
-	await _skippable_pause(pause_duration)
+	await _skippable_pause(_pause_duration)
 	
-	# Fade out entities and fade in Godot logo
 	animator = create_tween()
-	animator.tween_property(entities_logos, "modulate:a", 0.0, fade_duration)
-	animator.tween_property(godot_logo, "modulate:a", 1.0, fade_duration)
+	animator.tween_property(_entities_logos, "modulate:a", 0.0, _fade_duration)
+	animator.tween_property(_godot_logo, "modulate:a", 1.0, _fade_duration)
 	await animator.finished
 	
-	await _skippable_pause(pause_duration)
+	await _skippable_pause(_pause_duration)
 	
-	# Fade out Godot logo and then background
 	animator = create_tween()
-	animator.tween_property(godot_logo, "modulate:a", 0.0, fade_duration)
-	animator.tween_property(background, "modulate:a", 0.0, fade_duration)
+	animator.tween_property(_godot_logo, "modulate:a", 0.0, _fade_duration)
 	await animator.finished
 	
 	visible = false
 	
-	sequence_finished.emit()
+	finished.emit()
 
 
 func _skippable_pause(duration := 0.0) -> void:
