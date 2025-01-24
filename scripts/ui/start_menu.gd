@@ -1,67 +1,78 @@
-class_name StartMenu extends CanvasLayer
+class_name StartMenu
+extends CanvasLayer
 
 
-signal multiplayer_selected
+signal play_pressed(config: BoardGame.Config)
 
 @export var test: bool = false
 @export var fade_duration: float = 0.5 ## Duration of fading in for each element
 @export var show_buttons_delay: float = 0.5 ## Delay until fading in buttons
 
-@export_group("References")
-@export var root: Control
-@export var background: Control
-@export var game_logo: Control
-@export var button_list: Control
-@export var game_version_label: Label
+@onready var _main_menu: Control = $MainMenu
+@onready var _menu_background: TextureRect = $MainMenu/MenuBackground
+@onready var _game_title_banner: TextureRect = $MainMenu/GameTitleBanner
+@onready var _button_list: VBoxContainer = $MainMenu/Buttons
+@onready var _singleplayer_button: Button = $MainMenu/Buttons/SingleplayerButton
+@onready var _multiplayer_button: Button = $MainMenu/Buttons/MultiplayerButton
+@onready var _quit_button: Button = $MainMenu/Buttons/QuitButton
+@onready var _game_version_label: Label = $MainMenu/GameVersionLabel
+
+@onready var _ruleset_menu: RulesetMenu = $RulesetMenu
 
 
 func _ready() -> void:
-	visible = false
-	game_version_label.text = "ver " + ProjectSettings.get_setting("application/config/version")
+	_game_version_label.text = "ver " + ProjectSettings.get_setting("application/config/version")
+	
+	_singleplayer_button.pressed.connect(_start_singleplayer_game)
+	_multiplayer_button.pressed.connect(_show_ruleset_menu)
+	_quit_button.pressed.connect(_quit_game)
+	
+	_ruleset_menu.back_pressed.connect(_show_main_menu)
+	_ruleset_menu.play_pressed.connect(play_pressed.emit)
 	
 	if test:
 		await Engine.get_main_loop().process_frame # loading
 		show_with_fade()
+	else:
+		_show_main_menu()
 
 
 func show_with_fade() -> void:
-	visible = true
-	background.modulate.a = 0.0
-	game_logo.modulate.a = 0.0
-	button_list.modulate.a = 0.0
-	button_list.visible = false # this disables buttons
+	_show_main_menu()
+	_menu_background.modulate.a = 0.0
+	_game_title_banner.modulate.a = 0.0
+	_button_list.modulate.a = 0.0
+	_button_list.visible = false # NOTE: this disables buttons
 	
 	var background_animator = create_tween()
-	background_animator.tween_property(background, "modulate:a", 1.0, fade_duration)
+	background_animator.tween_property(_menu_background, "modulate:a", 1.0, fade_duration)
 	await  background_animator.finished
 	
 	var logo_animator = create_tween()
-	logo_animator.tween_property(game_logo, "modulate:a", 1.0, fade_duration)
+	logo_animator.tween_property(_game_title_banner, "modulate:a", 1.0, fade_duration)
 	await logo_animator.finished
 	
 	await get_tree().create_timer(show_buttons_delay).timeout
 	
 	var buttons_animator = create_tween()
-	button_list.visible = true
-	buttons_animator.tween_property(button_list, "modulate:a", 1.0, fade_duration)
+	_button_list.visible = true
+	buttons_animator.tween_property(_button_list, "modulate:a", 1.0, fade_duration)
 
 
-func _on_singleplayer_button_pressed() -> void:
-	visible = false
-	
-	if test: return
-	
-	GameManager.is_hotseat = false
-	GameManager.is_rematch = false
-	GameManager.ruleset = General.RULESET_FINKEL
-	GameEvents.play_pressed.emit()
-	GameManager.start_new_game()
+func _show_main_menu() -> void:
+	_main_menu.show()
+	_ruleset_menu.hide()
 
 
-func _on_multiplayer_button_pressed() -> void:
-	visible = false
-	multiplayer_selected.emit()
+func _start_singleplayer_game() -> void:
+	var config := BoardGame.Config.new() # Default values are for singleplayer
+	play_pressed.emit(config)
 
 
-func _on_quit_button_pressed() -> void:
+func _show_ruleset_menu() -> void:
+	_main_menu.hide()
+	_ruleset_menu.show()
+
+
+func _quit_game() -> void:
 	get_tree().quit()
