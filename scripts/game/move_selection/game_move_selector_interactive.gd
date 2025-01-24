@@ -62,6 +62,7 @@ func stop() -> void:
 	_to_spots.clear()
 	_move_path_highlighter_dict.clear()
 	_from_selected = null
+	_piece_dragger.stop(false)
 
 
 func _on_from_hovered(from: Spot) -> void:

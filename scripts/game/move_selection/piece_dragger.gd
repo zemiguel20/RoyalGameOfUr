@@ -29,8 +29,9 @@ func start(spot: Spot) -> void:
 	_is_dragging = true
 
 
-func stop() -> void:
-	_reset_pieces_positions()
+func stop(reset_positions: bool = true) -> void:
+	if reset_positions:
+		_reset_pieces_positions()
 	_pieces_to_drag.clear()
 	_is_dragging = false
 
