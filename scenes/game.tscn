@@ -60,14 +60,11 @@ transform = Transform3D(0.517071, 0, -0.855942, 0, 1, 0, 0.855942, 0, 0.517071, 
 [node name="Opponent_Guard_Animated" parent="." instance=ExtResource("4_0uuko")]
 transform = Transform3D(0.848048, 0, 0.52992, 0, 1, 0, -0.52992, 0, 0.848048, 4.17257, -0.684179, 5.80273)
 
-[node name="GameCamera" parent="." node_paths=PackedStringArray("pov_start", "pov_intro", "pov_singleplayer", "pov_hotseat") instance=ExtResource("5_jk6gv")]
+[node name="GameCamera" parent="." instance=ExtResource("5_jk6gv")]
 transform = Transform3D(0.848048, 0, 0.529919, 0, 1, 0, -0.529919, 0, 0.848048, 4.677, 0.167, 6.671)
-pov_start = NodePath("../CameraPOVS/StartPOV")
-pov_intro = NodePath("../CameraPOVS/SingleplayerIntroPOV")
-pov_singleplayer = NodePath("../CameraPOVS/SingleplayerGamePOV")
-pov_hotseat = NodePath("../CameraPOVS/HotseatPOV")
 
 [node name="CameraPOVS" type="Node3D" parent="."]
+editor_description = "Collection of disabled cameras that act as preset POVs for the main camera"
 
 [node name="StartPOV" type="Camera3D" parent="CameraPOVS"]
 process_mode = 4
