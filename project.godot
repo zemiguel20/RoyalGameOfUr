@@ -19,6 +19,10 @@ boot_splash/show_image=false
 config/icon="res://icon_rosette.png"
 config/windows_native_icon="res://icon_rosette.ico"
 
+[audio]
+
+buses/default_bus_layout="res://audio/default_bus_layout.tres"
+
 [autoload]
 
 GameEvents="*res://scripts/autoloads/game_events.gd"
