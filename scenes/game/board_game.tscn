@@ -24,7 +24,9 @@ script = ExtResource("3_cao45")
 [node name="ShakingSFX" type="AudioStreamPlayer" parent="DiceManager"]
 stream = ExtResource("4_18q8b")
 
-[node name="BoardSpawn" parent="." instance=ExtResource("3_pno53")]
+[node name="BoardSpawn" type="Node3D" parent="."]
+
+[node name="BoardPreview" parent="BoardSpawn" instance=ExtResource("3_pno53")]
 
 [node name="Table" type="StaticBody3D" parent="." groups=["table"]]
 metadata/_edit_group_ = true
