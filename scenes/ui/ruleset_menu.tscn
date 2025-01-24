@@ -6,20 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dxfismcshmkmb" path="res://ui/theme_sprites/arrow_button_hovered.png" id="4_vetwu"]
 [ext_resource type="Texture2D" uid="uid://cc3oo6y6f5tgi" path="res://ui/board_layouts/layout_finkel.png" id="7_kfq2g"]
 
-[node name="RulesetMenu" type="CanvasLayer" node_paths=PackedStringArray("ruleset_name_label", "board_layout_image", "board_name_label", "rule_1_check_box", "rule_2_check_box", "rule_3_check_box", "rule_4_check_box", "rule_5_check_box", "piece_number_slider", "piece_number_label", "dice_number_slider", "dice_number_label")]
+[node name="RulesetMenu" type="CanvasLayer"]
 script = ExtResource("1_by1lh")
-ruleset_name_label = NodePath("Control/TabletFrame/RulesetPicker/RulesetNameLabel")
-board_layout_image = NodePath("Control/TabletFrame/BoardPicker/BoardLayoutImage")
-board_name_label = NodePath("Control/TabletFrame/BoardPicker/BoardNameLabel")
-rule_1_check_box = NodePath("Control/TabletFrame/RulesList/Rule1CheckBox")
-rule_2_check_box = NodePath("Control/TabletFrame/RulesList/Rule2CheckBox")
-rule_3_check_box = NodePath("Control/TabletFrame/RulesList/Rule3CheckBox")
-rule_4_check_box = NodePath("Control/TabletFrame/RulesList/Rule4CheckBox")
-rule_5_check_box = NodePath("Control/TabletFrame/RulesList/Rule5CheckBox")
-piece_number_slider = NodePath("Control/TabletFrame/Sliders/PieceNumberSlider")
-piece_number_label = NodePath("Control/TabletFrame/Sliders/PieceNumberSlider/PieceNumberLabel")
-dice_number_slider = NodePath("Control/TabletFrame/Sliders/DiceNumberSlider")
-dice_number_label = NodePath("Control/TabletFrame/Sliders/DiceNumberSlider/DiceNumberLabel")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -335,18 +323,3 @@ offset_bottom = 914.0
 theme_override_font_sizes/font_size = 35
 text = "Back"
 flat = true
-
-[connection signal="pressed" from="Control/TabletFrame/RulesetPicker/SwitchRulesetLeftButton" to="." method="_on_switch_ruleset_left_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/RulesetPicker/SwitchRulesetRightButton" to="." method="_on_switch_ruleset_right_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/BoardPicker/SwitchBoardLeftButton" to="." method="_on_switch_board_left_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/BoardPicker/SwitchBoardRightButton" to="." method="_on_switch_board_right_button_pressed"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule1CheckBox" to="." method="_on_rule_1_check_box_toggled"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule2CheckBox" to="." method="_on_rule_2_check_box_toggled"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule3CheckBox" to="." method="_on_rule_3_check_box_toggled"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule4CheckBox" to="." method="_on_rule_4_check_box_toggled"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule5CheckBox" to="." method="_on_rule_5_check_box_toggled"]
-[connection signal="value_changed" from="Control/TabletFrame/Sliders/PieceNumberSlider" to="." method="_on_piece_number_slider_value_changed"]
-[connection signal="value_changed" from="Control/TabletFrame/Sliders/DiceNumberSlider" to="." method="_on_dice_number_slider_value_changed"]
-[connection signal="pressed" from="Control/TabletFrame/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/ConfirmButton" to="." method="_on_confirm_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/BackButton" to="." method="_on_back_button_pressed"]

@@ -86,9 +86,11 @@ class Config:
 	var rematch: bool
 	var p1_npc: bool
 	var p2_npc: bool
+	var hotseat: bool
 	
 	func _init() -> void:
-		ruleset = General.RULESET_FINKEL
+		ruleset = load("res://resources/rulesets/ruleset_finkel.tres")
 		rematch = false
 		p1_npc = false
-		p2_npc = false
+		p2_npc = true
+		hotseat = false
