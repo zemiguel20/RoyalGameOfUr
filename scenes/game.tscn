@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=16 format=3 uid="uid://bkjl7wlfjhp01"]
 
+[ext_resource type="Script" path="res://scripts/level/level.gd" id="1_80kkg"]
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/environment/environment.tscn" id="1_kqpqp"]
 [ext_resource type="PackedScene" uid="uid://b1w6pqli52hw5" path="res://scenes/game/board_game.tscn" id="3_y7fxu"]
 [ext_resource type="PackedScene" uid="uid://bcjpac1cs0xcy" path="res://scenes/npcs/opponent_guard.tscn" id="4_0uuko"]
@@ -51,6 +52,7 @@ point_count = 4
 up_vector_enabled = false
 
 [node name="Level" type="Node3D"]
+script = ExtResource("1_80kkg")
 
 [node name="BoardGame" parent="." instance=ExtResource("3_y7fxu")]
 transform = Transform3D(0.517071, 0, -0.855942, 0, 1, 0, 0.855942, 0, 0.517071, 4.46946, -0.210366, 6.34682)
@@ -144,7 +146,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_ma8g4")
 
 [node name="StorageToKitchen2_PathFollow3D" type="PathFollow3D" parent="NPC_Paths/KitchenPaths/Storage_To_Kitchen2"]
-transform = Transform3D(-0.00153059, -0.000330129, 0.999989, -1.45518e-11, 1, 0.000330126, -0.999989, 5.05282e-07, -0.00153059, -4.51176, -0.000873566, 3.133)
+transform = Transform3D(-0.00153059, -0.000330129, 0.999988, -1.45518e-11, 1, 0.000330126, -0.999988, 5.05282e-07, -0.00153059, -4.51176, -0.000873566, 3.133)
 use_model_front = true
 loop = false
 
