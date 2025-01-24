@@ -8,7 +8,6 @@ signal play_pressed(config: BoardGame.Config)
 @export var fade_duration: float = 0.5 ## Duration of fading in for each element
 @export var show_buttons_delay: float = 0.5 ## Delay until fading in buttons
 
-@onready var _main_menu: Control = $MainMenu
 @onready var _menu_background: TextureRect = $MainMenu/MenuBackground
 @onready var _game_title_banner: TextureRect = $MainMenu/GameTitleBanner
 @onready var _button_list: VBoxContainer = $MainMenu/Buttons
@@ -60,17 +59,18 @@ func show_with_fade() -> void:
 
 
 func _show_main_menu() -> void:
-	_main_menu.show()
+	show()
 	_ruleset_menu.hide()
 
 
 func _start_singleplayer_game() -> void:
+	hide()
 	var config := BoardGame.Config.new() # Default values are for singleplayer
 	play_pressed.emit(config)
 
 
 func _show_ruleset_menu() -> void:
-	_main_menu.hide()
+	hide()
 	_ruleset_menu.show()
 
 

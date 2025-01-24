@@ -154,6 +154,8 @@ func _set_ruleset_name_custom() -> void:
 
 
 func _start_game() -> void:
+	hide()
+	
 	var ruleset = Ruleset.new()
 	ruleset.name = _ruleset_name_label.text
 	ruleset.board_layout = BOARD_LIST[_selected_board_index].duplicate()
