@@ -3,11 +3,9 @@
 [ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="1_mgjk5"]
 [ext_resource type="Texture2D" uid="uid://dgswxb2c7csw8" path="res://ui/logos/logo_game_color.png" id="2_1en36"]
 
-[node name="TitleScreen" type="CanvasLayer" node_paths=PackedStringArray("game_title_logo", "press_to_start_label")]
+[node name="TitleScreen" type="CanvasLayer"]
 script = ExtResource("1_mgjk5")
 fade_duration = 1.0
-game_title_logo = NodePath("Control/GameTitleLogo")
-press_to_start_label = NodePath("Control/PressToStartLabel")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
