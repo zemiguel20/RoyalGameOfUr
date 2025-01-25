@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://bp7n22v23accq"]
+[gd_scene load_steps=22 format=3 uid="uid://bp7n22v23accq"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/logic/dialogue_system.gd" id="1_o8m8u"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="2_803m6"]
 [ext_resource type="Resource" uid="uid://c4s5ljc8dbt6o" path="res://resources/dialogue/groups/intro_story.tres" id="2_mrne0"]
 [ext_resource type="Resource" uid="uid://dgfe3vpdsmwyf" path="res://resources/dialogue/groups/intro_game_start.tres" id="3_14vd1"]
 [ext_resource type="Resource" uid="uid://bdjtjqb6rugmh" path="res://resources/dialogue/groups/random_conversation.tres" id="4_h20pq"]
@@ -23,7 +24,7 @@
 
 [node name="DialogueSystem" type="Node"]
 script = ExtResource("1_o8m8u")
-_dialogue_groups = Array[Resource("res://scripts/dialogue_system/data/dialogue_group.gd")]([ExtResource("2_mrne0"), ExtResource("3_14vd1"), ExtResource("4_h20pq"), ExtResource("5_311ly"), ExtResource("6_6lubb"), ExtResource("7_b66vo"), ExtResource("8_27ik2"), ExtResource("9_xtso7"), ExtResource("10_gwqjh"), ExtResource("11_ab6cb"), ExtResource("12_q437e"), ExtResource("13_ctluc"), ExtResource("14_w1j6k"), ExtResource("15_0l4gu")])
+_dialogue_groups = Array[ExtResource("2_803m6")]([ExtResource("2_mrne0"), ExtResource("3_14vd1"), ExtResource("4_h20pq"), ExtResource("5_311ly"), ExtResource("6_6lubb"), ExtResource("7_b66vo"), ExtResource("8_27ik2"), ExtResource("9_xtso7"), ExtResource("10_gwqjh"), ExtResource("11_ab6cb"), ExtResource("12_q437e"), ExtResource("13_ctluc"), ExtResource("14_w1j6k"), ExtResource("15_0l4gu")])
 
 [node name="DialogueGroupPlayer_Random" type="Node" parent="."]
 script = ExtResource("16_hu4yg")

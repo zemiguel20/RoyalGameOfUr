@@ -4,7 +4,7 @@ extends Node
 
 @onready var _board_game: BoardGame = $BoardGame
 @onready var _game_camera: GameCamera = $GameCamera
-@onready var _opponent_guard_animated: OpponentNPC = $Opponent_Guard_Animated
+@onready var _opponent: OpponentNPC = $Opponent_Guard_Animated
 
 @onready var _start_pov: Camera3D = $CameraPOVS/StartPOV
 @onready var _singleplayer_intro_pov: Camera3D = $CameraPOVS/SingleplayerIntroPOV
@@ -15,6 +15,7 @@ extends Node
 func _ready() -> void:
 	_game_camera.move_to_POV(_start_pov.global_transform)
 	_game_camera.can_look_around = false
+	_opponent.visible = false
 
 
 func start_game(config: BoardGame.Config) -> void:
@@ -22,7 +23,12 @@ func start_game(config: BoardGame.Config) -> void:
 	
 	if config.hotseat:
 		_game_camera.move_to_POV(_hotseat_pov.global_transform)
-		_board_game.start()
 	else:
 		_game_camera.move_to_POV(_singleplayer_intro_pov.global_transform)
-		# TODO: start opponent intro sequence
+		_opponent.visible = true
+		_opponent.play_intro_sequence()
+		await _opponent.intro_opponent_sat_down
+		_game_camera.move_to_POV(_singleplayer_game_pov.global_transform)
+		await _opponent.intro_finished
+	
+	_board_game.start()
