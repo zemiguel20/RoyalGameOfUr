@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c8o1oiumwk2ow"]
 
-[ext_resource type="Script" path="res://scripts/game/systems/game_camera.gd" id="1_ojtcq"]
+[ext_resource type="Script" path="res://scripts/level/game_camera.gd" id="1_ojtcq"]
 
 [node name="GameCamera" type="Camera3D"]
 current = true
