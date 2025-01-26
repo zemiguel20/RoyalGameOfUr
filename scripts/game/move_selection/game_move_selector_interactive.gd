@@ -189,7 +189,7 @@ func _get_to_spot_color(move: GameMove) -> Color:
 		return General.get_highlight_color(General.HighlightType.END)
 	elif move.knocks_opponent_out:
 		return General.get_highlight_color(General.HighlightType.KO)
-	elif move.to.is_rosette:
+	elif move.to.is_rosette and (move.to_is_safe or move.stacks or move.gives_extra_turn):
 		return General.get_highlight_color(General.HighlightType.SAFE)
 	else:
 		return General.get_highlight_color(General.HighlightType.NEUTRAL)

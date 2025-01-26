@@ -33,6 +33,7 @@ var is_backwards: bool ## Whether its moving backwards in the path.
 var knocks_opponent_out: bool
 var wins: bool
 var gives_extra_turn: bool
+var stacks: bool ## If the move creates or increases a stack of pieces.
 
 var _executed: bool = false # Whether move has already been executed
 var _board: Board
@@ -85,6 +86,8 @@ func _init(p_from: Spot, p_to: Spot, p_player: int, board: Board, ruleset: Rules
 	
 	gives_extra_turn = (ruleset.rosettes_give_extra_turn and to.is_rosette) \
 		or (ruleset.ko_gives_extra_turn and knocks_opponent_out)
+	
+	stacks = to.is_occupied_by_player(player) and to.is_rosette and ruleset.rosettes_allow_stacking
 
 
 func _calculate_spot_ko_probability(spot_index: int) -> float:
