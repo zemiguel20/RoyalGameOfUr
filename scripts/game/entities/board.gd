@@ -134,6 +134,12 @@ func get_path_between(from_index: int, to_index: int, player: int) -> Array[Spot
 	return path
 
 
+func get_shared_track_spots() -> Array[Spot]:
+	var shared_track: Array[Spot] = []
+	shared_track.assign(_p1_track.filter(func(spot: Spot): return _p2_track.has(spot)))
+	return shared_track
+
+
 func _check_move_validity(dest_spot: Spot, player: int, ruleset: Ruleset) -> bool:
 	var is_end_spot = get_player_track(player).back() == dest_spot
 	

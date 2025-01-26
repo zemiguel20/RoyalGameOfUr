@@ -1,8 +1,6 @@
 class_name General
 ## Contains global constants and utility functions.
 
-# TODO: review
-
 
 enum HighlightType {
 	NONE,
@@ -36,47 +34,35 @@ static func get_highlight_color(type: HighlightType) -> Color:
 	return COLOR_MAP[type]
 
 
-
-
-
-
-enum Player {
-	ONE,
-	TWO,
-}
-
-## Types of simple movement animations.
-enum MoveAnim {
-	ARC, ## Moves from point A to B in an arc.
-	LINE, ## Moves directly from point A to B.
-	NONE, ## No animation. Movement is instantaneous.
-}
-
-
-static func get_opponent(player : Player) -> Player:
-	return Player.ONE if player == Player.TWO else Player.TWO
-
-static func get_random_player() -> Player:
-	return randi_range(Player.ONE, Player.TWO) as Player
-
-## This is a quick helper function for converting an euler rotation from degrees to radians.
-static func deg_to_rad(vector: Vector3):
-	return Vector3(deg_to_rad(vector.x), deg_to_rad(vector.y), deg_to_rad(vector.z))
-
-
-## Returns the probability of throwing a specific value with a certain number of binary dice, 0-1.
-## Based on coin flip probability formula: (n! / k!(n-k)!) / 2^n .
+## Probability mass function. Variable must follow a binomial distribution (2 possible outcomes).
 ##
-## [param k] is the value to throw, and [param n] is the number of dice.
-static func get_probability_of_value(k: int, n: int = 4) -> float:
-	return factorial(n) / (factorial(k) * factorial(n-k)) / pow(2.0, n)
+## [param k] is the number of successes in [param n] trials, with [param p] being the \
+## chance of success in a trial.
+static func calculate_probability(k: int, n: int, p: float) -> float:
+	if k < 0 or n < 0 or p < 0.0:
+		push_error("Parameters must be positive.")
+		return 0.0
+	if k > n:
+		push_error("K cannot be higher than N.")
+		return 0.0
+	if p > 1.0:
+		push_error("P cannot be higher than 1.0 (=100%).")
+		return 0.0
+	
+	return binom_coef(k, n) * pow(p, k) * pow(1 - p, n - k)
 
 
-static func factorial(n: int):
+## Calculates the binomial coeffient
+static func binom_coef(k: int, n: int) -> float:
+	return factorial(n) / (factorial(k) * factorial(n-k))
+
+
+static func factorial(n: int) -> int:
 	if n < 0:
-		push_error("Invalid Argument: Can not get the factorial for n = ", n)
+		push_error("N must be positive.")
 		return -1
-	elif n == 1 or n == 0:
+	
+	if n == 1 or n == 0:
 		return 1
-		
+	
 	return n * factorial(n - 1)

@@ -103,7 +103,11 @@ func _pick_random_player() -> Player:
 
 
 func _switch_player() -> void:
-	_current_player = Player.TWO if _current_player == Player.ONE else Player.ONE
+	_current_player = get_opponent(_current_player)
+
+
+static func get_opponent(player: Player) -> Player:
+	return Player.TWO if player == Player.ONE else Player.ONE
 
 
 class Config:
