@@ -10,20 +10,17 @@ enum Player {
 	TWO
 }
 
-var current_player: Player
-
-
 var _config: Config = null
+var _current_player: Player
 var _board: Board
-var _p1_turn: Turn
-var _p2_turn: Turn
+var _dice: Array[Die] = []
+var _p1_turn: TurnController
+var _p2_turn: TurnController
 
 @onready var _board_spawn: Node3D = $BoardSpawn
 @onready var _p1_dice_zone: DiceZone = $DiceZoneP1
 @onready var _p2_dice_zone: DiceZone = $DiceZoneP2
-@onready var _dice: Dice = $DiceManager
 
-# TODO: link setup with menus
 
 func setup(new_config: Config) -> void:
 	_config = new_config
@@ -31,46 +28,74 @@ func setup(new_config: Config) -> void:
 	if _config.rematch:
 		_board.reset()
 	else:
-		if _board != null: _board.queue_free()
-		
-		_board = _config.ruleset.board_layout.scene.instantiate() as Board
-		add_child(_board)
-		_board.global_position = _board_spawn.global_position
-		_board.init(_config.ruleset.num_pieces)
-		
-		_dice.init(_config.ruleset.num_dice, _pick_random_dice_zone())
-		
-		_p1_turn = NPCTurn.new() if _config.p1_npc else PlayerTurn.new()
-		add_child(_p1_turn)
-		_p1_turn.init(Player.ONE, _dice, _p1_dice_zone, _board, _config.ruleset)
-		
-		_p2_turn = NPCTurn.new() if _config.p2_npc else PlayerTurn.new()
-		add_child(_p2_turn)
-		_p2_turn.init(Player.TWO, _dice, _p2_dice_zone, _board, _config.ruleset)
+		_despaw_objects()
+		_spawn_board(_config.ruleset.board_layout.scene, _config.ruleset.num_pieces)
+		_spawn_dice(_config.ruleset.num_dice)
+		_p1_turn = _create_player_turn_controller(Player.ONE, _config.p1_npc)
+		_p2_turn = _create_player_turn_controller(Player.TWO, _config.p2_npc)
 
 
 func start() -> void:
-	current_player = _pick_random_player()
+	_current_player = _pick_random_player()
 	
-	var result := Turn.Result.NORMAL
-	while(result != Turn.Result.WIN):
-		var turn = _p1_turn if current_player == Player.ONE else _p2_turn as Turn
-		print("Starting turn player %d" % current_player)
-		turn.start()
-		result = await turn.finished
+	var result := TurnController.Result.NORMAL
+	while(result != TurnController.Result.WIN):
+		var turn = _p1_turn if _current_player == Player.ONE else _p2_turn as TurnController
+		print("Starting turn player %d" % _current_player)
+		turn.start_turn()
+		result = await turn.turn_finished
 		
-		if result == Turn.Result.NORMAL or result == Turn.Result.NO_MOVES:
+		if result == TurnController.Result.NORMAL or result == TurnController.Result.NO_MOVES:
 			_switch_player()
 	
-	ended.emit(current_player)
+	ended.emit(_current_player)
 	print("game finished")
 
 
-func _pick_random_dice_zone() -> DiceZone:
-	if _pick_random_player() == Player.ONE:
-		return _p1_dice_zone
-	else:
-		return _p2_dice_zone
+func _despaw_objects() -> void:
+	if _board != null:
+		_board.queue_free()
+	for die in _dice:
+		die.queue_free()
+	if _p1_turn != null:
+		_p1_turn.queue_free()
+	if _p2_turn != null:
+		_p2_turn.queue_free()
+
+
+func _spawn_board(scene: PackedScene, num_pieces: int) -> void:
+	_board = scene.instantiate() as Board
+	add_child(_board)
+	_board.global_position = _board_spawn.global_position
+	_board.init(num_pieces)
+
+
+func _spawn_dice(num_dice: int) -> void:
+	var spawn_zone = _p1_dice_zone if _pick_random_player() == Player.ONE else _p2_dice_zone
+	_dice = spawn_zone.spawn_dice(num_dice)
+
+
+# NOTE: assumes everything else to be spawned first, to reduce parameter number
+func _create_player_turn_controller(player: Player, npc: bool) -> TurnController:
+	var turn_controller = TurnController.new()
+	turn_controller.name = "TurnControllerP%d" % player
+	add_child(turn_controller)
+	
+	var roll_controller = \
+		AutoRollController.new() if npc else InteractiveRollController.new() as RollController
+	roll_controller.name = "RollControllerP%d" % player
+	turn_controller.add_child(roll_controller)
+	var dice_zone = _p1_dice_zone if player == Player.ONE else _p2_dice_zone
+	roll_controller.init(_dice, dice_zone)
+	
+	var move_selector = \
+		AIGameMoveSelector.new() if npc else InteractiveGameMoveSelector.new() as GameMoveSelector
+	move_selector.name = "MoveSelectorP%d" % player
+	turn_controller.add_child(move_selector)
+	
+	turn_controller.init(player, roll_controller, move_selector, _board, _config.ruleset)
+	
+	return turn_controller
 
 
 func _pick_random_player() -> Player:
@@ -78,7 +103,7 @@ func _pick_random_player() -> Player:
 
 
 func _switch_player() -> void:
-	current_player = Player.TWO if current_player == Player.ONE else Player.ONE
+	_current_player = Player.TWO if _current_player == Player.ONE else Player.ONE
 
 
 class Config:

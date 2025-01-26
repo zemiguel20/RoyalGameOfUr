@@ -1,10 +1,26 @@
 class_name DiceZone
 extends Node3D
 ## Container of points where the dice can be placed and thrown from.
+## Can also be used to spawn the dice in the placing points during game initialization.
 
+
+const DIE_PREFAB: PackedScene = preload("res://scenes/game/entities/d4_die.tscn")
 
 @onready var _dice_placing_spots: Node3D = $DicePlacingSpots
 @onready var _dice_throw_spots: Node3D = $DiceThrowSpots
+
+
+func spawn_dice(num_dice: int) -> Array[Die]:
+	var dice: Array[Die] = []
+	
+	var spawn_points = get_placing_points_global_randomized()
+	for i in num_dice:
+		var die = DIE_PREFAB.instantiate()
+		add_child(die)
+		dice.append(die)
+		die.global_position = spawn_points[i]
+	
+	return dice
 
 
 func get_placing_points_global_randomized() -> Array[Vector3]:

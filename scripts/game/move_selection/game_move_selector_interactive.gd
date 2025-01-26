@@ -1,8 +1,10 @@
 class_name InteractiveGameMoveSelector
-extends Node
-## Controls the interaction process for selecting a move.
+extends GameMoveSelector
+## Allows player to select a move through input. Normally, the player selects the spot
+## with the pieces it wants to move, and the target spot to move to, while dragging the pieces.
+## In fast mode, selecting the spot with the pieces to move will select the move immediately
+## (if moving backwards is also possible, the the move forward is chosen).
 
-signal move_selected(move: GameMove)
 
 var _moves: Array[GameMove] = []
 var _from_spots: Array[Spot] = []
@@ -17,7 +19,7 @@ func _ready() -> void:
 	add_child(_piece_dragger)
 
 
-func start(moves: Array[GameMove]) -> void:
+func start_selection(moves: Array[GameMove]) -> void:
 	_moves.assign(moves)
 	
 	for move in _moves:
@@ -86,7 +88,9 @@ func _on_from_selected(from: Spot) -> void:
 	
 	if Settings.fast_mode:
 		stop()
-		var selected_move = moves_from.front()
+		var selected_move = moves_from.front() as GameMove
+		selected_move.execute(GameMove.AnimationType.SKIPPING)
+		await selected_move.execution_finished
 		move_selected.emit(selected_move)
 	else:
 		_from_selected = from
@@ -138,11 +142,15 @@ func _on_to_selected(to: Spot) -> void:
 	if not _from_selected:
 		return
 	
+	# FIXME: filter returned empty when playing Tournament ruleset??? tried to move a piece to a 
+	# rosette to create a stack
 	var selected_move = _moves.filter( \
 			func(move: GameMove): return move.from == _from_selected and move.to == to \
-		).front()
+		).front() as GameMove
 	
 	stop()
+	selected_move.execute(GameMove.AnimationType.DIRECT)
+	await selected_move.execution_finished
 	move_selected.emit(selected_move)
 
 

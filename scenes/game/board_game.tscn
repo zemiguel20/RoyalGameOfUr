@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1w6pqli52hw5"]
+[gd_scene load_steps=5 format=3 uid="uid://b1w6pqli52hw5"]
 
 [ext_resource type="Script" path="res://scripts/game/board_game.gd" id="1_t86uf"]
 [ext_resource type="PackedScene" uid="uid://c7r71pseqwlp" path="res://scenes/game/dice_zone/dice_zone.tscn" id="2_dacpm"]
-[ext_resource type="Script" path="res://scripts/game/dice_controller/dice.gd" id="3_cao45"]
 [ext_resource type="PackedScene" uid="uid://ckrnexaabuj" path="res://scenes/game/entities/boards/board_preview.tscn" id="3_pno53"]
-[ext_resource type="AudioStream" uid="uid://c6qmd3oyeovu" path="res://audio/sfx_mastered/dice-shaking-loop.mp3" id="4_18q8b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ay6mi"]
 size = Vector3(1, 0.05, 1.5)
@@ -17,12 +15,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.1719
 
 [node name="DiceZoneP2" parent="." instance=ExtResource("2_dacpm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.171973, 0, -0.0912124)
-
-[node name="DiceManager" type="Node" parent="."]
-script = ExtResource("3_cao45")
-
-[node name="ShakingSFX" type="AudioStreamPlayer" parent="DiceManager"]
-stream = ExtResource("4_18q8b")
 
 [node name="BoardSpawn" type="Node3D" parent="."]
 
