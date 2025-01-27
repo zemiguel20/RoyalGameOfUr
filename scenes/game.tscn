@@ -89,64 +89,64 @@ transform = Transform3D(-0.513508, -0.825552, 0.234038, 1.49012e-08, 0.272744, 0
 fov = 65.0
 
 [node name="NPCSystem" parent="." node_paths=PackedStringArray("path_follow_guard_1", "path_follow_guard_2", "path_follow_guard_3", "path_follow_kitchen_1", "path_follow_kitchen_2") instance=ExtResource("6_7r6bu")]
-path_follow_guard_1 = NodePath("../NPC_Paths/GuardPaths/ToStorage/ToStorage_PathFollow3D")
-path_follow_guard_2 = NodePath("../NPC_Paths/GuardPaths/Storage_To_Kitchen/StorageToKitchen_PathFollow3D")
-path_follow_guard_3 = NodePath("../NPC_Paths/GuardPaths/Kitchen_To_Start/KitchenToStart_PathFollow3D")
-path_follow_kitchen_1 = NodePath("../NPC_Paths/KitchenPaths/Kitchen_To_Storage/Kitchen_To_Storage_PathFollow3D")
-path_follow_kitchen_2 = NodePath("../NPC_Paths/KitchenPaths/Storage_To_Kitchen2/StorageToKitchen2_PathFollow3D")
+path_follow_guard_1 = NodePath("NPC_Paths/GuardPaths/ToStorage/ToStorage_PathFollow3D")
+path_follow_guard_2 = NodePath("NPC_Paths/GuardPaths/Storage_To_Kitchen/StorageToKitchen_PathFollow3D")
+path_follow_guard_3 = NodePath("NPC_Paths/GuardPaths/Kitchen_To_Start/KitchenToStart_PathFollow3D")
+path_follow_kitchen_1 = NodePath("NPC_Paths/KitchenPaths/Kitchen_To_Storage/Kitchen_To_Storage_PathFollow3D")
+path_follow_kitchen_2 = NodePath("NPC_Paths/KitchenPaths/Storage_To_Kitchen2/StorageToKitchen2_PathFollow3D")
 
-[node name="NPC_Paths" type="Node3D" parent="."]
+[node name="NPC_Paths" type="Node3D" parent="NPCSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.662207, 0)
 
-[node name="GuardPaths" type="Node3D" parent="NPC_Paths"]
+[node name="GuardPaths" type="Node3D" parent="NPCSystem/NPC_Paths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0, 5.22195)
 
-[node name="ToStorage" type="Path3D" parent="NPC_Paths/GuardPaths"]
+[node name="ToStorage" type="Path3D" parent="NPCSystem/NPC_Paths/GuardPaths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0613985, 0, 0)
 curve = SubResource("Curve3D_gel6c")
 
-[node name="ToStorage_PathFollow3D" type="PathFollow3D" parent="NPC_Paths/GuardPaths/ToStorage"]
+[node name="ToStorage_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/GuardPaths/ToStorage"]
 transform = Transform3D(-0.34528, 0.057269, -0.936741, -3.72526e-09, 0.998133, 0.0610216, 0.93849, 0.0210698, -0.344636, 0.936, 0, 0.496)
 use_model_front = true
 loop = false
 
-[node name="Storage_To_Kitchen" type="Path3D" parent="NPC_Paths/GuardPaths"]
+[node name="Storage_To_Kitchen" type="Path3D" parent="NPCSystem/NPC_Paths/GuardPaths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_utdk4")
 
-[node name="StorageToKitchen_PathFollow3D" type="PathFollow3D" parent="NPC_Paths/GuardPaths/Storage_To_Kitchen"]
+[node name="StorageToKitchen_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/GuardPaths/Storage_To_Kitchen"]
 transform = Transform3D(0.0579448, 0, 0.998319, 0, 1, 0, -0.998319, 0, 0.0579448, -4.264, 0, 3.987)
 use_model_front = true
 loop = false
 
-[node name="Kitchen_To_Start" type="Path3D" parent="NPC_Paths/GuardPaths"]
+[node name="Kitchen_To_Start" type="Path3D" parent="NPCSystem/NPC_Paths/GuardPaths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_w0vht")
 
-[node name="KitchenToStart_PathFollow3D" type="PathFollow3D" parent="NPC_Paths/GuardPaths/Kitchen_To_Start"]
+[node name="KitchenToStart_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/GuardPaths/Kitchen_To_Start"]
 transform = Transform3D(0.992532, 0, -0.12197, 0, 1, 0, 0.12197, 0, 0.992532, -0.203, 0, -0.637)
 use_model_front = true
 loop = false
 
-[node name="KitchenPaths" type="Node3D" parent="NPC_Paths"]
+[node name="KitchenPaths" type="Node3D" parent="NPCSystem/NPC_Paths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1165, 0, 5.22195)
 
-[node name="Kitchen_To_Storage" type="Path3D" parent="NPC_Paths/KitchenPaths"]
+[node name="Kitchen_To_Storage" type="Path3D" parent="NPCSystem/NPC_Paths/KitchenPaths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 visible = false
 curve = SubResource("Curve3D_ag4c4")
 
-[node name="Kitchen_To_Storage_PathFollow3D" type="PathFollow3D" parent="NPC_Paths/KitchenPaths/Kitchen_To_Storage"]
+[node name="Kitchen_To_Storage_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/KitchenPaths/Kitchen_To_Storage"]
 transform = Transform3D(0.999195, -0.000211939, 0.039862, -7.27588e-12, 0.999986, 0.00531663, -0.0398625, -0.00531246, 0.999181, -0.74496, -0.00807405, -0.924744)
 use_model_front = true
 loop = false
 
-[node name="Storage_To_Kitchen2" type="Path3D" parent="NPC_Paths/KitchenPaths"]
+[node name="Storage_To_Kitchen2" type="Path3D" parent="NPCSystem/NPC_Paths/KitchenPaths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_ma8g4")
 
-[node name="StorageToKitchen2_PathFollow3D" type="PathFollow3D" parent="NPC_Paths/KitchenPaths/Storage_To_Kitchen2"]
-transform = Transform3D(-0.00153059, -0.000330129, 0.999988, -1.45518e-11, 1, 0.000330126, -0.999988, 5.05282e-07, -0.00153059, -4.51176, -0.000873566, 3.133)
+[node name="StorageToKitchen2_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/KitchenPaths/Storage_To_Kitchen2"]
+transform = Transform3D(-0.00153058, -0.000330129, 0.999987, -1.45517e-11, 1, 0.000330125, -0.999987, 5.05282e-07, -0.00153058, -4.51176, -0.000873566, 3.133)
 use_model_front = true
 loop = false
 
