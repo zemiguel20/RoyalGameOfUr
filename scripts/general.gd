@@ -54,7 +54,7 @@ static func calculate_probability(k: int, n: int, p: float) -> float:
 
 ## Calculates the binomial coeffient
 static func binom_coef(k: int, n: int) -> float:
-	return factorial(n) / (factorial(k) * factorial(n-k))
+	return float(factorial(n)) / float((factorial(k) * factorial(n-k)))
 
 
 static func factorial(n: int) -> int:
