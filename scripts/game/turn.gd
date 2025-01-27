@@ -40,6 +40,7 @@ func start_turn() -> void:
 	await get_tree().create_timer(0.4).timeout
 	
 	if moves.is_empty():
+		_roll_controller.clear_highlight()
 		turn_finished.emit(Result.NO_MOVES)
 		return
 	
