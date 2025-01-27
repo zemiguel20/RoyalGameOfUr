@@ -12,42 +12,43 @@ enum Result {
 	NO_MOVES,
 }
 
+var roll_controller: RollController
+var move_selector: GameMoveSelector
+
 var _player: int
-var _roll_controller: RollController
-var _move_selector: GameMoveSelector
 var _board: Board
 var _ruleset: Ruleset
 
 
-func init(player: int, roll_controller: RollController, move_selector: GameMoveSelector, \
+func init(player: int, p_roll_controller: RollController, p_move_selector: GameMoveSelector, \
 			board: Board, ruleset: Ruleset) -> void:
 	_player = player
-	_roll_controller = roll_controller
-	_move_selector = move_selector
+	roll_controller = p_roll_controller
+	move_selector = p_move_selector
 	_board = board
 	_ruleset = ruleset
 
 
 func start_turn() -> void:
-	_roll_controller.start_roll()
-	var result = await _roll_controller.rolled
+	roll_controller.start_roll()
+	var result = await roll_controller.rolled
 	
 	var moves: Array[GameMove] = _board.calculate_moves(result, _player, _ruleset)
 	
-	_roll_controller.highlight_result(not moves.is_empty())
+	roll_controller.highlight_result(not moves.is_empty())
 	
 	# Highlight the roll result of a short period before continuing
 	await get_tree().create_timer(0.4).timeout
 	
 	if moves.is_empty():
-		_roll_controller.clear_highlight()
+		roll_controller.clear_highlight()
 		turn_finished.emit(Result.NO_MOVES)
 		return
 	
-	_move_selector.start_selection(moves)
-	var selected_move: GameMove = await _move_selector.move_selected
+	move_selector.start_selection(moves)
+	var selected_move: GameMove = await move_selector.move_selected
 	
-	_roll_controller.clear_highlight()
+	roll_controller.clear_highlight()
 	
 	if selected_move.wins:
 		turn_finished.emit(Result.WIN)

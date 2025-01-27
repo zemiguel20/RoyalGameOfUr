@@ -140,6 +140,11 @@ func get_shared_track_spots() -> Array[Spot]:
 	return shared_track
 
 
+func get_player_number_of_pieces_in_end(player: int) -> int:
+	var end_spot: Spot = get_player_track(player).back() as Spot
+	return end_spot.pieces.size()
+
+
 func _check_move_validity(dest_spot: Spot, player: int, ruleset: Ruleset) -> bool:
 	var is_end_spot = get_player_track(player).back() == dest_spot
 	

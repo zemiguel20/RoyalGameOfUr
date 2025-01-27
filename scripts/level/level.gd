@@ -16,6 +16,7 @@ func _ready() -> void:
 	_game_camera.move_to_POV(_start_pov.global_transform)
 	_game_camera.can_look_around = false
 	_opponent.visible = false
+	_opponent.init(_board_game)
 
 
 func start_game(config: BoardGame.Config) -> void:
@@ -30,5 +31,6 @@ func start_game(config: BoardGame.Config) -> void:
 		await _opponent.intro_opponent_sat_down
 		_game_camera.move_to_POV(_singleplayer_game_pov.global_transform)
 		await _opponent.intro_finished
+		_opponent.enable_reactions()
 	
 	_board_game.start()

@@ -6,6 +6,9 @@ extends GameMoveSelector
 ## (if moving backwards is also possible, the the move forward is chosen).
 
 
+signal from_spot_hovered(moves_from: Array[GameMove])
+
+
 var _moves: Array[GameMove] = []
 var _from_spots: Array[Spot] = []
 var _to_spots: Array[Spot] = []
@@ -72,6 +75,8 @@ func _on_from_hovered(from: Spot) -> void:
 	var moves_from = _moves.filter(func(move: GameMove): return move.from == from)
 	for move: GameMove in moves_from:
 		_highlight_move_hovered(move)
+	
+	from_spot_hovered.emit(moves_from)
 
 
 func _on_from_dehovered(from: Spot) -> void:

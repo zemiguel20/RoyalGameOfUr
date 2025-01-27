@@ -4,6 +4,8 @@ extends GameMoveSelector
 ## Picks the best move.
 
 
+signal extra_thinking_needed
+
 const BASE_THINK_DURATION: float = 0.3
 const MIN_EXTRA_THINK_DURATION: float = 0.5
 const MAX_EXTRA_THINK_DURATION: float = 1.5
@@ -33,6 +35,7 @@ func start_selection(moves: Array[GameMove]) -> void:
 	await get_tree().create_timer(BASE_THINK_DURATION).timeout
 	
 	if _is_shared_path_crowded():
+		extra_thinking_needed.emit()
 		var extra_think_duration = randf_range(MIN_EXTRA_THINK_DURATION, MAX_EXTRA_THINK_DURATION)
 		await get_tree().create_timer(extra_think_duration).timeout
 	

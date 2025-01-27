@@ -5,6 +5,9 @@ extends Node
 
 
 signal rolled(result: int)
+signal shake_started
+signal shake_stopped
+signal dice_tossed
 
 var _dice: Array[Die]
 var _dice_zone: DiceZone
@@ -48,10 +51,12 @@ func _start_shaking() -> void:
 	for die in _dice:
 		die.visible = false
 	_shaking_sfx.play()
+	shake_started.emit()
 
 
 func _stop_shaking() -> void:
 	_shaking_sfx.stop()
+	shake_stopped.emit()
 	_toss_dice()
 	
 	# NOTE: The actual start of the roll is tied to the physics frame rate.
@@ -69,6 +74,8 @@ func _toss_dice() -> void:
 		var impulse = 0.003 * throw_points[i].direction
 		var position = throw_points[i].global_position
 		die.roll(impulse, position)
+	
+	dice_tossed.emit()
 	
 	# This guarantees a slight pause in case the dice settle fast.
 	await get_tree().create_timer(1).timeout
