@@ -82,6 +82,9 @@ func _on_from_dehovered(from: Spot) -> void:
 
 
 func _on_from_selected(from: Spot) -> void:
+	if _from_selected:
+		return
+	
 	var moves_from = _moves.filter(func(move: GameMove): return move.from == from)
 	
 	if Settings.fast_mode:
