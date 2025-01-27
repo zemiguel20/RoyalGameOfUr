@@ -11,10 +11,10 @@ size = Vector3(1, 0.05, 1.5)
 script = ExtResource("1_t86uf")
 
 [node name="DiceZoneP1" parent="." instance=ExtResource("2_dacpm")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.171973, 0, -0.0912124)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.131752, 0, -0.0912124)
 
 [node name="DiceZoneP2" parent="." instance=ExtResource("2_dacpm")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.171973, 0, -0.0912124)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.146374, 0, -0.0912124)
 
 [node name="BoardSpawn" type="Node3D" parent="."]
 

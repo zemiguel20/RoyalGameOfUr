@@ -55,7 +55,7 @@ up_vector_enabled = false
 script = ExtResource("1_80kkg")
 
 [node name="BoardGame" parent="." instance=ExtResource("3_y7fxu")]
-transform = Transform3D(0.517071, 0, -0.855942, 0, 1, 0, 0.855942, 0, 0.517071, 4.46946, -0.210366, 6.34682)
+transform = Transform3D(0.517071, 0, -0.855942, 0, 1, 0, 0.855942, 0, 0.517071, 4.46946, -0.207456, 6.34682)
 
 [node name="Environment" parent="." instance=ExtResource("1_kqpqp")]
 
