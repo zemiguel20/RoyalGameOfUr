@@ -94,25 +94,33 @@ func _calculate_spot_ko_probability(spot_index: int) -> float:
 	var opponent = BoardGame.get_opponent(player)
 	var opponent_track = _board.get_player_track(opponent)
 	
+	# INFO: Calculate cumulative probability for opponents pieces on the
+	# previous spots of rolling the number needed to move to this spot.
+	# Same logic applies if backwards movement is allowed. Also add probabilities for
+	# spots that are in front of this one.
+	
 	var max_steps = _ruleset.num_dice
 	var before_index = clampi(spot_index - max_steps, 0, spot_index)
-	# NOTE: "-1" because this method is exclusive
-	var path = _board.get_path_between(spot_index, before_index - 1, opponent)
+	var path = _board.get_path_between(spot_index, before_index, opponent)
+	# NOTE: get_path_between is exclusive, add spot manually
+	path.append(opponent_track[before_index])
 	var ko_cumulative_probability = 0.0
 	for i in path.size():
 		var spot = path[i]
 		if spot.is_occupied_by_player(opponent):
-			ko_cumulative_probability += General.calculate_probability(i, max_steps, 0.5)
+			ko_cumulative_probability += General.calculate_probability(i + 1, max_steps, 0.5)
 	
 	if _ruleset.can_move_backwards:
-		# NOTE: "-2" instead of "-1" to not count the end spot
+		# NOTE: "-2" instead of "-1" to not count the end spot.
+		# Because pieces cannot move from there
 		var after_index = clampi(spot_index + max_steps, spot_index, opponent_track.size() - 2)
-		# NOTE: "+1" because this method is exclusive
-		path = _board.get_path_between(spot_index, after_index + 1, opponent)
+		path = _board.get_path_between(spot_index, after_index, opponent)
+		# NOTE: get_path_between is exclusive, add spot manually
+		path.append(opponent_track[after_index])
 		for i in path.size():
 			var spot = path[i]
 			if spot.is_occupied_by_player(opponent):
-				ko_cumulative_probability += General.calculate_probability(i, max_steps, 0.5)
+				ko_cumulative_probability += General.calculate_probability(i + 1, max_steps, 0.5)
 	
 	return ko_cumulative_probability
 
