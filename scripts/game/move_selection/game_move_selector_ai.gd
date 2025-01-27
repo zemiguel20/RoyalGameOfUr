@@ -71,6 +71,7 @@ func _determine_next_move(moves: Array[GameMove]) -> GameMove:
 		return moves.pick_random()
 
 
+# TODO: improve score evaluation if move is backwards. Favours going back to first safe spots.
 func _evaluate_move(move: GameMove) -> float:
 	var score: float = 0.0
 	
