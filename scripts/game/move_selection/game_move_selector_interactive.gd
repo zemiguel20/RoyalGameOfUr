@@ -9,7 +9,6 @@ extends GameMoveSelector
 var _moves: Array[GameMove] = []
 var _from_spots: Array[Spot] = []
 var _to_spots: Array[Spot] = []
-var _move_path_highlighter_dict: Dictionary = {} # Move -> Path Highlighter
 var _from_selected: Spot = null
 var _piece_dragger: PieceDragger
 
@@ -62,7 +61,6 @@ func stop() -> void:
 	_moves.clear()
 	_from_spots.clear()
 	_to_spots.clear()
-	_move_path_highlighter_dict.clear()
 	_from_selected = null
 	_piece_dragger.stop(false)
 
@@ -154,60 +152,6 @@ func _on_to_selected(to: Spot) -> void:
 	move_selected.emit(selected_move)
 
 
-# Creates a path highlighter for the given move. If the move already has an associated
-# path highlighter, returns that one instead.
-func _get_path_highlighter(move: GameMove) -> ScrollingTexturePath3D:
-	if _move_path_highlighter_dict.has(move):
-		return _move_path_highlighter_dict[move]
-	
-	var path_highlight_prebab = preload("res://scenes/game/path_highlight.tscn")
-	var path = path_highlight_prebab.instantiate() as ScrollingTexturePath3D
-	
-	path.curve.clear_points()
-	
-	# Add all spots to the curve
-	# Midpoints forming an arch to fix clipping through board
-	for i in move.full_path.size():
-		var spot = move.full_path[i]
-		path.curve.add_point(spot.global_position)
-		
-		if i < move.full_path.size() - 1:
-			var next_spot = move.full_path[i + 1]
-			var midpoint = spot.global_position.lerp(next_spot.global_position, 0.5)
-			midpoint.y = maxf(spot.global_position.y, next_spot.global_position.y) + 0.002
-			path.curve.add_point(midpoint)
-	
-	# Save path
-	_move_path_highlighter_dict[move] = path
-	add_child(path)
-	
-	return path
-
-
-func _get_to_spot_color(move: GameMove) -> Color:
-	if move.to_is_end_of_track:
-		return General.get_highlight_color(General.HighlightType.END)
-	elif move.knocks_opponent_out:
-		return General.get_highlight_color(General.HighlightType.KO)
-	elif move.to.is_rosette and (move.to_is_safe or move.stacks or move.gives_extra_turn):
-		return General.get_highlight_color(General.HighlightType.SAFE)
-	else:
-		return General.get_highlight_color(General.HighlightType.NEUTRAL)
-
-
-func _clear_move_highlight(move: GameMove) -> void:
-	var path_highlight = _get_path_highlighter(move)
-	path_highlight.hide()
-	
-	move.from.disable_highlight()
-	for piece in move.pieces_in_from:
-		piece.disable_highlight()
-	
-	move.to.disable_highlight()
-	for piece in move.pieces_in_to:
-		piece.disable_highlight()
-
-
 func _highlight_moves_selectable() -> void:
 	for move in _moves:
 		_clear_move_highlight(move)
@@ -217,35 +161,20 @@ func _highlight_moves_selectable() -> void:
 
 
 func _highlight_move_hovered(move: GameMove) -> void:
+	_highlight_move(move)
+	
 	var hovered_color = General.get_highlight_color(General.HighlightType.HOVERED)
 	move.from.enable_highlight(hovered_color)
 	for piece in move.pieces_in_from:
 		piece.enable_highlight(hovered_color)
-	
-	var to_color = _get_to_spot_color(move)
-	
-	move.to.enable_highlight(to_color)
-	for piece in move.pieces_in_to:
-		piece.enable_highlight(to_color)
-	
-	var path_highlight = _get_path_highlighter(move)
-	path_highlight.color_modulate = to_color
-	path_highlight.show()
 
 
 func _highlight_move_from_selected(move: GameMove) -> void:
+	_highlight_move(move)
+	
 	var selected_color = General.get_highlight_color(General.HighlightType.SELECTED)
 	move.from.enable_highlight(selected_color)
 	for piece in move.pieces_in_from:
 		piece.enable_highlight(selected_color)
 	
 	move.to.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
-	
-	var to_color = _get_to_spot_color(move)
-	
-	for piece in move.pieces_in_to:
-		piece.enable_highlight(to_color)
-	
-	var path_highlight = _get_path_highlighter(move)
-	path_highlight.color_modulate = to_color
-	path_highlight.show()

@@ -81,15 +81,22 @@ func _create_player_turn_controller(player: Player, npc: bool) -> TurnController
 	turn_controller.name = "TurnControllerP%d" % player
 	add_child(turn_controller)
 	
-	var roll_controller = \
-		AutoRollController.new() if npc else InteractiveRollController.new() as RollController
+	var roll_controller: RollController
+	if npc:
+		roll_controller = AutoRollController.new()
+	else:
+		roll_controller = InteractiveRollController.new()
 	roll_controller.name = "RollControllerP%d" % player
 	turn_controller.add_child(roll_controller)
 	var dice_zone = _p1_dice_zone if player == Player.ONE else _p2_dice_zone
 	roll_controller.init(_dice, dice_zone)
 	
-	var move_selector = \
-		AIGameMoveSelector.new() if npc else InteractiveGameMoveSelector.new() as GameMoveSelector
+	var move_selector: GameMoveSelector
+	if npc:
+		move_selector = AIGameMoveSelector.new()
+		move_selector.init(_board)
+	else:
+		move_selector = InteractiveGameMoveSelector.new()
 	move_selector.name = "MoveSelectorP%d" % player
 	turn_controller.add_child(move_selector)
 	
