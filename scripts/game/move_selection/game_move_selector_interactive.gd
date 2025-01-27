@@ -148,8 +148,6 @@ func _on_to_selected(to: Spot) -> void:
 	if not _from_selected:
 		return
 	
-	# FIXME: filter returned empty when playing Tournament ruleset??? tried to move a piece to a 
-	# rosette to create a stack
 	var selected_move = _moves.filter( \
 			func(move: GameMove): return move.from == _from_selected and move.to == to \
 		).front() as GameMove
