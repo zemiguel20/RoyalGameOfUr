@@ -37,10 +37,9 @@ func _ready() -> void:
 	await _title_screen.pressed
 	
 	_start_menu.show()
-	var game_config = await _start_menu.play_pressed
-	
-	_start_menu.hide()
+	var game_config: BoardGame.Config = await _start_menu.play_pressed
 	_level.start_game(game_config)
+	_level.exited.connect(_on_level_exited)
 
 
 func _load_level_async() -> void:
@@ -50,7 +49,9 @@ func _load_level_async() -> void:
 	var status = ResourceLoader.load_threaded_get_status(LEVEL_SCENE_PATH)
 	while status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
 		await get_tree().create_timer(0.1).timeout
-		status = ResourceLoader.load_threaded_get_status(LEVEL_SCENE_PATH)
+		var progress = []
+		status = ResourceLoader.load_threaded_get_status(LEVEL_SCENE_PATH, progress)
+		print(progress)
 	
 	var level_scene = ResourceLoader.load_threaded_get(LEVEL_SCENE_PATH) as PackedScene
 	_level = level_scene.instantiate()
@@ -63,41 +64,13 @@ func _load_level_async() -> void:
 	_loading_level = false
 
 
-#func _on_back_to_main_menu() -> void:
-	#var volume = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
-	#
-	#loading_screen.visible = true
-	#loading_screen.modulate.a = 0.0
-	#
-	## Fade in loading screen and fadeout audio
-	#var animator = create_tween()
-	#animator.tween_property(loading_screen, "modulate:a", 1.0, loading_screen_fade_duration)
-	#_fade_audio(-80, loading_screen_fade_duration)
-	#await animator.finished
-	#
-	## Reload level
-	#level.queue_free()
-	#await Engine.get_main_loop().process_frame
-	#level = level_scene.instantiate()
-	#add_child(level)
-	#if not level.is_node_ready():
-		#await level.ready
-	#
-	#await get_tree().create_timer(loading_delay).timeout # Delay to allow proper loading
-	#
-	## Fade out loading screen and fade in audio
-	#animator = create_tween()
-	#animator.tween_property(loading_screen, "modulate:a", 0.0, loading_screen_fade_duration)
-	#_fade_audio(volume, loading_screen_fade_duration)
-	#await animator.finished
-	#
-	#loading_screen.visible = false
-	#
-	#start_menu.show_with_fade()
-
-
-# NOTE: ONLY FOR TESTING
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and OS.is_debug_build():
-		if event.pressed and event.keycode == KEY_0:
-			GameEvents.game_ended.emit()
+func _on_level_exited() -> void:
+	await _loading_screen.fade_in()
+	_level.queue_free()
+	await _load_level_async()
+	await _loading_screen.fade_out()
+	
+	await _start_menu.show_with_fade()
+	var game_config: BoardGame.Config = await _start_menu.play_pressed
+	_level.start_game(game_config)
+	_level.exited.connect(_on_level_exited)

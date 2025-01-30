@@ -13,6 +13,9 @@ const BLACK_PIECE_PREFAB: PackedScene = preload("res://scenes/game/entities/piec
 @export var _p2_start_spots: Array[Spot] = []
 @export var _p2_track: Array[Spot] = []
 
+var _p1_pieces: Array[Piece] = []
+var _p2_pieces: Array[Piece] = []
+
 
 ## Spawns a number of pieces for each player on their starting zones.
 func init(num_pieces_per_player: int) -> void:
@@ -21,11 +24,21 @@ func init(num_pieces_per_player: int) -> void:
 		add_child(white_piece)
 		white_piece.player = BoardGame.Player.ONE
 		_p1_start_spots[i].place(white_piece)
+		_p1_pieces.append(white_piece)
 		
 		var black_piece = BLACK_PIECE_PREFAB.instantiate()
 		add_child(black_piece)
 		black_piece.player = BoardGame.Player.TWO
 		_p2_start_spots[i].place(black_piece)
+		_p2_pieces.append(black_piece)
+
+
+func reset() -> void:
+	for spot in _p1_start_spots + _p2_start_spots + _p1_track + _p2_track:
+		spot.remove_pieces()
+	for i in _p1_pieces.size():
+		_p1_start_spots[i].place(_p1_pieces[i])
+		_p2_start_spots[i].place(_p2_pieces[i])
 
 
 ## Returns a list with all moves for a given player in the given number of steps.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=17 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="Script" path="res://scripts/level/level.gd" id="1_80kkg"]
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/environment/environment.tscn" id="1_kqpqp"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bn3jyvfxklhdo" path="res://audio/sfx_mastered/ambience-kitchen-sounds.mp3" id="7_do1ug"]
 [ext_resource type="Script" path="res://scripts/audio/offset_audio_player.gd" id="8_lfpgi"]
 [ext_resource type="AudioStream" uid="uid://cypkb6b2st6b1" path="res://audio/sfx_mastered/ambience-birds-and-crickets.mp3" id="9_0a4og"]
+[ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="11_5dvu1"]
 
 [sub_resource type="Curve3D" id="Curve3D_gel6c"]
 _data = {
@@ -51,7 +52,7 @@ _data = {
 point_count = 4
 up_vector_enabled = false
 
-[node name="Level" type="Node3D"]
+[node name="Level" type="Node"]
 script = ExtResource("1_80kkg")
 
 [node name="BoardGame" parent="." instance=ExtResource("3_y7fxu")]
@@ -182,3 +183,5 @@ autoplay = true
 bus = &"Ambient"
 script = ExtResource("8_lfpgi")
 playback_offset = 68
+
+[node name="EndScreen" parent="." instance=ExtResource("11_5dvu1")]
