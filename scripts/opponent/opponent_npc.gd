@@ -22,6 +22,8 @@ var _explained_finish: bool = false
 
 var _game: BoardGame
 
+var _reacting: bool = false
+
 @onready var _dialogue_system: DialogueSystem = $DialogueSystem
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _dialogue_cooldown_timer: Timer = $DialogueCooldownTimer
@@ -36,6 +38,8 @@ func init(board_game: BoardGame) -> void:
 
 
 func play_intro_sequence() -> void:
+	visible = true
+	
 	if skip_intro:
 		_animation_player.play("clip_walkIn", 0)
 		_animation_player.seek(30)
@@ -54,6 +58,9 @@ func play_intro_sequence() -> void:
 
 
 func enable_reactions() -> void:
+	if _reacting:
+		return
+	
 	var p1_roll_controller: InteractiveRollController = _game.p1_turn_controller.roll_controller
 	var p2_roll_controller: AutoRollController = _game.p2_turn_controller.roll_controller
 	var p1_move_selector: InteractiveGameMoveSelector = _game.p1_turn_controller.move_selector
@@ -73,6 +80,41 @@ func enable_reactions() -> void:
 	p2_move_selector.extra_thinking_needed.connect(_try_play_thinking_sound)
 	
 	_dialogue_cooldown_timer.timeout.connect(_play_random_dialogue)
+	
+	_reacting = true
+
+
+func disable_reactions() -> void:
+	if not _reacting:
+		return
+	
+	var p1_roll_controller: InteractiveRollController = _game.p1_turn_controller.roll_controller
+	var p2_roll_controller: AutoRollController = _game.p2_turn_controller.roll_controller
+	var p1_move_selector: InteractiveGameMoveSelector = _game.p1_turn_controller.move_selector
+	var p2_move_selector: AIGameMoveSelector = _game.p2_turn_controller.move_selector
+	
+	p1_roll_controller.rolled.disconnect(_on_dice_rolled)
+	p2_roll_controller.rolled.disconnect(_on_dice_rolled)
+	
+	p1_roll_controller.shake_started.disconnect(_on_dice_shaked)
+	p2_roll_controller.shake_started.disconnect(_on_dice_shaked)
+	
+	p1_move_selector.from_spot_hovered.disconnect(_on_move_from_hovered)
+	
+	p1_move_selector.move_selected.disconnect(_on_selected_move)
+	p2_move_selector.move_selected.disconnect(_on_selected_move)
+	
+	p2_move_selector.extra_thinking_needed.disconnect(_try_play_thinking_sound)
+	
+	_dialogue_cooldown_timer.timeout.disconnect(_play_random_dialogue)
+	
+	_reacting = false
+
+
+func stop() -> void:
+	_animation_player.stop()
+	_dialogue_system.stop()
+	disable_reactions()
 
 
 func _on_dice_rolled(value: int) -> void:
@@ -173,31 +215,3 @@ func _play_random_dialogue():
 	await _dialogue_system.play(DialogueSystem.Category.RANDOM_CONVERSATION)
 	var dialogue_cd_time = randf_range(min_time_between_dialogues, max_time_between_dialogues)
 	_dialogue_cooldown_timer.start(dialogue_cd_time)
-
-
-#func _on_back_to_main_menu():
-	#animation_player.stop()
-	#_dialogue_system.stop()
-	#_toggle_signals(false)
-
-
-#func _toggle_signals(toggle: bool):
-	#if toggle:
-		#GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
-	#else:
-		#if GameEvents.rolled.is_connected(_on_dice_rolled):
-			#GameEvents.rolled.disconnect(_on_dice_rolled)
-		#if GameEvents.first_turn_dice_shake.is_connected(_on_first_turn_dice_shaked):
-			#GameEvents.first_turn_dice_shake.disconnect(_on_first_turn_dice_shaked)
-		#if GameEvents.npc_selected_move.is_connected(_on_npc_selected_move):
-			#GameEvents.npc_selected_move.disconnect(_on_npc_selected_move)
-		#if GameEvents.move_hovered.is_connected(_on_move_hovered):
-			#GameEvents.move_hovered.disconnect(_on_move_hovered)
-		#if GameEvents.move_executed.is_connected(_on_move_executed):
-			#GameEvents.move_executed.disconnect(_on_move_executed)
-		#if GameEvents.opponent_thinking.is_connected(_try_play_thinking_sound):
-			#GameEvents.opponent_thinking.disconnect(_try_play_thinking_sound)
-		#if dialogue_cooldown_timer.timeout.is_connected(_on_dialogue_cooldown_timer_timeout):
-			#dialogue_cooldown_timer.timeout.disconnect(_on_dialogue_cooldown_timer_timeout)
-		#if GameEvents.back_to_main_menu_pressed.is_connected(_on_back_to_main_menu):
-			#GameEvents.back_to_main_menu_pressed.disconnect(_on_back_to_main_menu)
