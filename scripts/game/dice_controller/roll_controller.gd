@@ -31,6 +31,21 @@ func start_roll() -> void:
 	_start_toss_procedure()
 
 
+## Highlights the dice with the appropriate color for a positive or negative result.
+## To be called externally after the result is processed.
+func highlight_result(positive: bool) -> void:
+	var type = General.HighlightType.POSITIVE if positive else General.HighlightType.NEGATIVE
+	var highlight_only_ones: bool = positive or _last_rolled_value > 0
+	for die in _dice:
+		if highlight_only_ones == false or die.last_rolled_value == 1:
+			die.enable_highlight(General.get_highlight_color(type))
+
+
+func clear_highlight() -> void:
+	for die in _dice:
+		die.disable_highlight()
+
+
 func _place() -> void:
 	var placing_points = _dice_zone.get_placing_points_global_randomized()
 	
@@ -96,18 +111,3 @@ func _toss_dice() -> void:
 				await get_tree().create_timer(0.2).timeout
 	
 	rolled.emit(result)
-
-
-## Highlights the dice with the appropriate color for a positive or negative result.
-## To be called externally after the result is processed.
-func highlight_result(positive: bool) -> void:
-	var type = General.HighlightType.POSITIVE if positive else General.HighlightType.NEGATIVE
-	var highlight_only_ones: bool = positive or _last_rolled_value > 0
-	for die in _dice:
-		if highlight_only_ones == false or die.last_rolled_value == 1:
-			die.enable_highlight(General.get_highlight_color(type))
-
-
-func clear_highlight() -> void:
-	for die in _dice:
-		die.disable_highlight()
