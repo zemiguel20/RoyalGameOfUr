@@ -7,13 +7,14 @@ signal exited
 @onready var _board_game: BoardGame = $BoardGame
 @onready var _game_camera: GameCamera = $GameCamera
 @onready var _opponent: OpponentNPC = $Opponent_Guard_Animated
+@onready var _ambient_audio: AmbientAudioController = $AmbientAudio
+@onready var _end_screen: EndScreen = $EndScreen
 
 @onready var _start_pov: Camera3D = $CameraPOVS/StartPOV
 @onready var _singleplayer_intro_pov: Camera3D = $CameraPOVS/SingleplayerIntroPOV
 @onready var _singleplayer_game_pov: Camera3D = $CameraPOVS/SingleplayerGamePOV
 @onready var _hotseat_pov: Camera3D = $CameraPOVS/HotseatPOV
 
-@onready var _end_screen: EndScreen = $EndScreen
 
 
 func _ready() -> void:
@@ -64,4 +65,5 @@ func _on_exit_requested() -> void:
 	if not _board_game.config.hotseat:
 		_opponent.stop()
 	_game_camera.move_to_POV(_start_pov.global_transform)
+	_ambient_audio.fade_out_audio()
 	exited.emit()

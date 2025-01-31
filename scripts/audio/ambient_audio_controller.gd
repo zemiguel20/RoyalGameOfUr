@@ -1,20 +1,20 @@
+class_name AmbientAudioController
 extends Node
 
-# TODO: add fade out audio when scene exit
 
 const FADE_DURATION: float = 1.0 # seconds
 
 
 func _ready() -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Ambient"), -80)
-	_fade_in_audio()
+	fade_in_audio()
 
 
-func _fade_in_audio() -> void:
+func fade_in_audio() -> void:
 	await _fade_audio(0.0)
 
 
-func _fade_out_audio() -> void:
+func fade_out_audio() -> void:
 	await _fade_audio(-80)
 
 
