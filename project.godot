@@ -25,7 +25,6 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 
 [autoload]
 
-GameEvents="*res://scripts/autoloads/game_events.gd"
 Settings="*res://scripts/autoloads/settings.gd"
 
 [display]
