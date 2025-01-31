@@ -5,11 +5,12 @@ class_name General
 enum HighlightType {
 	NONE,
 	SELECTABLE,
+	SELECTABLE_SPECIAL,
 	HOVERED,
 	SELECTED,
 	POSITIVE,
 	NEGATIVE,
-	SAFE,
+	ROSETTE,
 	KO,
 	END,
 	NEUTRAL,
@@ -19,13 +20,14 @@ enum HighlightType {
 const COLOR_MAP: Dictionary = {
 	HighlightType.NONE : Color.TRANSPARENT,
 	HighlightType.SELECTABLE : Color.MEDIUM_AQUAMARINE,
+	HighlightType.SELECTABLE_SPECIAL: Color.GOLD,
 	HighlightType.HOVERED : Color.AQUAMARINE,
 	HighlightType.SELECTED : Color.DARK_TURQUOISE,
 	HighlightType.POSITIVE : Color.GREEN,
 	HighlightType.NEGATIVE : Color.RED,
-	HighlightType.SAFE : Color.GREEN_YELLOW,
+	HighlightType.ROSETTE : Color.MEDIUM_PURPLE,
 	HighlightType.KO : Color.ORANGE,
-	HighlightType.END : Color.GOLD,
+	HighlightType.END : Color.GREEN_YELLOW,
 	HighlightType.NEUTRAL : Color.GHOST_WHITE,
 }
 

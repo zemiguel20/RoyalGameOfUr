@@ -166,9 +166,23 @@ func _on_to_selected(to: Spot) -> void:
 func _highlight_moves_selectable() -> void:
 	for move in _moves:
 		_clear_move_highlight(move)
+	
 	for spot in _from_spots:
+		var color = _get_selectable_color(spot)
 		for piece in spot.pieces:
-			piece.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
+			piece.enable_highlight(color)
+
+
+func _get_selectable_color(spot: Spot) -> Color:
+	var moves_from = _moves.filter(func(move: GameMove): return move.from == spot)
+	for move in moves_from:
+		var to_color = _get_to_spot_color(move)
+		var neutral_color = General.get_highlight_color(General.HighlightType.NEUTRAL)
+		var has_special_outcome = to_color != neutral_color
+		if has_special_outcome:
+			return General.get_highlight_color(General.HighlightType.SELECTABLE_SPECIAL)
+	
+	return General.get_highlight_color(General.HighlightType.SELECTABLE)
 
 
 func _highlight_move_hovered(move: GameMove) -> void:
@@ -176,8 +190,6 @@ func _highlight_move_hovered(move: GameMove) -> void:
 	
 	var hovered_color = General.get_highlight_color(General.HighlightType.HOVERED)
 	move.from.enable_highlight(hovered_color)
-	for piece in move.pieces_in_from:
-		piece.enable_highlight(hovered_color)
 
 
 func _highlight_move_from_selected(move: GameMove) -> void:
