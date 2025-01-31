@@ -29,7 +29,6 @@
 
 [node name="Opponent_Guard_Animated" instance=ExtResource("1_jat7h")]
 script = ExtResource("2_pjd45")
-skip_intro = null
 starting_dialogue_delay = null
 min_time_between_dialogues = 45.0
 max_time_between_dialogues = 90.0
