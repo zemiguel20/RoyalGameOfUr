@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4cwj2jqnxcd7"
-path="res://.godot/imported/left_mouse_button_dark.png-1a9d7c861e895d85e7c686440b3a7410.ctex"
+uid="uid://gysygxgh43qd"
+path="res://.godot/imported/mouse_right.svg-b2623dac9da9b05c3d1bdbc3c1323207.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/input_icons/left_mouse_button_dark.png"
-dest_files=["res://.godot/imported/left_mouse_button_dark.png-1a9d7c861e895d85e7c686440b3a7410.ctex"]
+source_file="res://ui/input_icons/mouse_right.svg"
+dest_files=["res://.godot/imported/mouse_right.svg-b2623dac9da9b05c3d1bdbc3c1323207.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

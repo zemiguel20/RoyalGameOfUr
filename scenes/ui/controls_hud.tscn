@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bksmfg8gvpyso"]
 
 [ext_resource type="Script" path="res://scripts/ui/controls_hud.gd" id="1_6ffc1"]
-[ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://ui/input_icons/left_mouse_button_light.png" id="3_pk7ke"]
-[ext_resource type="Texture2D" uid="uid://oclm41ujoyav" path="res://ui/input_icons/right_mouse_button_light.png" id="4_dlbxj"]
-[ext_resource type="Texture2D" uid="uid://1tku2lwhe5b6" path="res://ui/input_icons/1_light.png" id="5_5qks6"]
+[ext_resource type="Texture2D" uid="uid://by3xlqovw1ial" path="res://ui/input_icons/mouse_left.svg" id="2_3vjxg"]
+[ext_resource type="Texture2D" uid="uid://gysygxgh43qd" path="res://ui/input_icons/mouse_right.svg" id="3_vmruv"]
+[ext_resource type="Texture2D" uid="uid://wg5mv5nmv3lb" path="res://ui/input_icons/keyboard_f.svg" id="4_ly8b7"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_wi0rc"]
 device = -1
@@ -25,7 +25,7 @@ offset_top = -261.0
 offset_right = 469.0
 offset_bottom = -31.0
 grow_vertical = 0
-theme_override_constants/separation = 15
+theme_override_constants/separation = 5
 alignment = 2
 
 [node name="Roll" type="HBoxContainer" parent="Controls"]
@@ -34,7 +34,7 @@ layout_mode = 2
 [node name="InteractIcon" type="TextureRect" parent="Controls/Roll"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-texture = ExtResource("3_pk7ke")
+texture = ExtResource("2_3vjxg")
 stretch_mode = 5
 
 [node name="InteractLabel" type="Label" parent="Controls/Roll"]
@@ -50,7 +50,7 @@ layout_mode = 2
 [node name="ShakeIcon" type="TextureRect" parent="Controls/ShakeDice"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-texture = ExtResource("3_pk7ke")
+texture = ExtResource("2_3vjxg")
 stretch_mode = 5
 
 [node name="ShakeLabel" type="Label" parent="Controls/ShakeDice"]
@@ -66,7 +66,7 @@ layout_mode = 2
 [node name="InteractIcon" type="TextureRect" parent="Controls/SelectSpot"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-texture = ExtResource("3_pk7ke")
+texture = ExtResource("2_3vjxg")
 stretch_mode = 5
 
 [node name="InteractLabel" type="Label" parent="Controls/SelectSpot"]
@@ -83,7 +83,7 @@ size_flags_horizontal = 0
 [node name="CancelIcon" type="TextureRect" parent="Controls/CancelSelection"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-texture = ExtResource("4_dlbxj")
+texture = ExtResource("3_vmruv")
 stretch_mode = 5
 
 [node name="CancelLabel" type="Label" parent="Controls/CancelSelection"]
@@ -99,7 +99,7 @@ layout_mode = 2
 [node name="LookAroundIcon" type="TextureRect" parent="Controls/LookAround"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-texture = ExtResource("4_dlbxj")
+texture = ExtResource("3_vmruv")
 stretch_mode = 5
 
 [node name="LookAroundLabel" type="Label" parent="Controls/LookAround"]
@@ -116,7 +116,7 @@ size_flags_horizontal = 0
 [node name="FastModeIcon" type="TextureRect" parent="Controls/FastMode"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-texture = ExtResource("5_5qks6")
+texture = ExtResource("4_ly8b7")
 stretch_mode = 5
 
 [node name="FastModeCheckBox" type="CheckBox" parent="Controls/FastMode"]

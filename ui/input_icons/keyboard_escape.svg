@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="64"
+   height="64"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="keyboard_escape.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="8.0000001"
+     inkscape:cx="32.1875"
+     inkscape:cy="10.875"
+     inkscape:window-width="1920"
+     inkscape:window-height="1008"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1"
+     showguides="true">
+    <sodipodi:guide
+       position="32,32"
+       orientation="1,0"
+       id="guide1"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="32,32"
+       orientation="0,-1"
+       id="guide2"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="35.701905,32.792615"
+       orientation="1,0"
+       id="guide4"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="32.210105,34.057209"
+       orientation="0,-1"
+       id="guide5"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="32.210105,35.491682"
+       orientation="0,-1"
+       id="guide6"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="31.379622,24.808659"
+       orientation="0,-1"
+       id="guide7"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="27.736824,27.80972"
+       orientation="1,0"
+       id="guide8"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="31.379622,26.280878"
+       orientation="0,-1"
+       id="guide9"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     id="g1">
+    <path
+       d="m 48,8 c 5.333333,0 8,2.666667 8,8 v 32 c 0,5.333333 -2.666667,8 -8,8 H 16 C 10.666667,56 8,53.333333 8,48 V 16 c 0,-5.333333 2.666667,-8 8,-8 z"
+       id="path1-0"
+       style="fill:#ffffff;stroke:#22293a;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:nodetypes="ssssssscs"
+       inkscape:label="background" />
+    <path
+       d="m 48,52.329411 c 6.268543,0 8,-4.329411 8,-10.75017 C 56,52.329411 53.333333,56 48,56 H 16 C 10.666667,56 8,52.329411 8,41.579241 8,48 9.880603,52.329411 16,52.329411 Z"
+       id="path9"
+       style="display:inline;fill:#b3b3b3;stroke:none;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:nodetypes="scssccs"
+       inkscape:label="shadow" />
+    <path
+       d="m 48,8 c 5.333333,0 8,2.666667 8,8 v 32 c 0,5.333333 -2.666667,8 -8,8 H 16 C 10.666667,56 8,53.333333 8,48 V 16 c 0,-5.333333 2.666667,-8 8,-8 z"
+       id="path12"
+       style="fill:none;stroke:#415059;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:nodetypes="ssssssscs"
+       inkscape:label="outline" />
+    <path
+       style="font-size:18.8746px;line-height:0;font-family:'JetBrainsMonoNL Nerd Font';-inkscape-font-specification:'JetBrainsMonoNL Nerd Font';display:inline;fill:#415059;stroke:#415059;stroke-width:1.5"
+       d="M 16.695176,39.040344 V 25.261887 h 7.927332 v 1.547717 h -6.247492 v 4.265659 h 5.586881 v 1.509968 h -5.586881 v 4.907396 h 6.247492 v 1.547717 z m 14.684446,0.150997 h -2.924048 v -1.472219 h 2.924048 0.830483 c 0.629153,0 1.113601,-0.138414 1.453344,-0.415241 0.352325,-0.276827 0.528488,-0.666902 0.528488,-1.170225 0,-0.893398 -0.40895,-1.396721 -1.226849,-1.509968 l -2.868939,-0.415241 c -0.704651,-0.100665 -1.252015,-0.390075 -1.64209,-0.868232 -0.390075,-0.490739 -0.585112,-1.132476 -0.585112,-1.925209 0,-0.905981 0.308285,-1.616924 0.924855,-2.13283 0.629153,-0.515905 1.491093,-0.773858 2.58582,-0.773858 h 0.830483 2.726175 v 1.434473 c -0.994349,-2.96e-4 -2.21027,-4e-6 -2.726175,-4e-6 h -0.830483 c -0.578821,0 -1.031811,0.132122 -1.358971,0.396367 -0.32716,0.264244 -0.49074,0.622861 -0.49074,1.075852 0,0.729818 0.333451,1.145059 1.000354,1.245724 l 2.680193,0.377492 c 1.761629,0.251661 2.642444,1.283473 2.642444,3.095434 0,0.968896 -0.320868,1.72388 -0.962604,2.264952 -0.629153,0.528489 -1.522551,0.792733 -2.680193,0.792733 z m 11.891005,0.03775 c -1.258307,0 -2.264952,-0.352326 -3.019936,-1.056977 -0.754984,-0.704652 -1.132476,-1.673548 -1.132476,-2.906689 v -2.83119 c 0,-1.23314 0.377492,-2.202036 1.132476,-2.906688 0.754984,-0.704651 1.761629,-1.056977 3.019936,-1.056977 1.195391,0 2.157996,0.320868 2.887814,0.962604 0.742401,0.641737 1.132476,1.51626 1.170225,2.623569 h -1.698714 c -0.03775,-0.666902 -0.264242,-1.176516 -0.679485,-1.528842 -0.415241,-0.364909 -0.975188,-0.547364 -1.67984,-0.547364 -0.742401,0 -1.340096,0.213912 -1.793087,0.641737 -0.440407,0.415241 -0.660611,1.012937 -0.660611,1.793087 v 2.850064 c 0,0.780151 0.220204,1.384138 0.660611,1.811962 0.452991,0.427824 1.050686,0.641736 1.793087,0.641736 0.704652,0 1.264599,-0.182454 1.67984,-0.547363 0.415241,-0.364909 0.641736,-0.874523 0.679485,-1.528843 h 1.698714 c -0.03775,1.10731 -0.427822,1.981833 -1.170225,2.62357 -0.729818,0.641736 -1.692423,0.962604 -2.887814,0.962604 z"
+       id="text1"
+       aria-label="Esc"
+       sodipodi:nodetypes="cccccccccccccsccsscscccscssccssssccscssssssssccccscsscsscccs" />
+  </g>
+</svg>

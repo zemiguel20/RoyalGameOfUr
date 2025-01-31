@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c342ngfkdbsd6"
-path="res://.godot/imported/left_mouse_button_light.png-7302405a5c1a5f20faf5bc6ef0162ce2.ctex"
+uid="uid://cv1jqsygfk3xg"
+path="res://.godot/imported/keyboard_escape.svg-843290aed31634101d3f77845ed69db6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/input_icons/left_mouse_button_light.png"
-dest_files=["res://.godot/imported/left_mouse_button_light.png-7302405a5c1a5f20faf5bc6ef0162ce2.ctex"]
+source_file="res://ui/input_icons/keyboard_escape.svg"
+dest_files=["res://.godot/imported/keyboard_escape.svg-843290aed31634101d3f77845ed69db6.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
