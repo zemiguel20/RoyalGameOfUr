@@ -7,7 +7,7 @@ var _path_follow: PathFollow3D
 var _move_speed: float
 var _rotation_speed: float
 
-var _progression_speed
+
 var _current_progress
 var _target_rotation
 var _progress_ratio_start

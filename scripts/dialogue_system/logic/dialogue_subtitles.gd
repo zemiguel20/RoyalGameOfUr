@@ -2,6 +2,8 @@ class_name DialogueSubtitles
 extends CanvasLayer
 
 
+signal subtitle_panel_clicked
+
 @onready var panel := $Background_Panel as Panel
 @onready var cuneiform_label := $Background_Panel/Cuneiform_Label as Label
 
@@ -35,9 +37,10 @@ func display_subtitle(entry: DialogueBundle, is_skippable: bool):
 func _filter_symbols(text: String) -> String:
 	var result = text.replace(' ', '')
 	var chars_to_filter = ['(', ')', '!', '?', ',', '.', '\'', '´', '’', '\"']
-	for char in chars_to_filter:
-		result = result.replace(char, ' ')
+	for character in chars_to_filter:
+		result = result.replace(character, ' ')
 	
+	@warning_ignore("integer_division")
 	return result.substr(0, result.length() / 3)
 
 
@@ -55,4 +58,4 @@ func _toggle_skip_icon(toggle: bool):
 
 func _on_subtitle_panel_clicked(event):
 	if _is_skippable and event.is_action_pressed("ui_skip_dialogue"):
-		GameEvents.subtitle_panel_clicked.emit()
+		subtitle_panel_clicked.emit()

@@ -31,15 +31,12 @@ script = ExtResource("16_hu4yg")
 
 [node name="DialogueGroupPlayer_InOrder" type="Node" parent="."]
 script = ExtResource("17_b38l2")
-_supports_interruptions = true
 
 [node name="DialogueSequencePlayer" parent="." instance=ExtResource("18_b41tt")]
 _use_subtitles = true
-_temp_min_entry_length = 5.0
 
 [node name="InterruptionSequencePlayer" parent="." instance=ExtResource("18_b41tt")]
 _use_subtitles = true
-_temp_min_entry_length = 5.0
 
 [node name="Menus_During_Dialogue" parent="." instance=ExtResource("19_l1o03")]
 

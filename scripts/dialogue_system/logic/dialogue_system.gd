@@ -31,6 +31,7 @@ enum Category {
 @onready var _player_random = $DialogueGroupPlayer_Random as DialogueGroupPlayerBase
 @onready var _dialogue_sequence_player = $DialogueSequencePlayer as DialogueSequencePlayer
 @onready var _interruption_sequence_player = $InterruptionSequencePlayer as DialogueSequencePlayer
+@onready var _subtitle_system: DialogueSubtitles = $Subtitle_System
 
 var _current_dialogue_player: DialogueGroupPlayerBase
 var _animation_player: AnimationPlayer
@@ -39,17 +40,13 @@ var _animation_player: AnimationPlayer
 func _ready():
 	_player_inorder.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
 	_player_random.assign_sequence_player(_dialogue_sequence_player, _interruption_sequence_player)
-	GameEvents.subtitle_panel_clicked.connect(continue_dialogue)
-	GameEvents.play_pressed.connect(_on_play_pressed)
+	_subtitle_system.subtitle_panel_clicked.connect(continue_dialogue)
 	
 	
 func _input(event):
 	if event.is_action_pressed("skip_dialogue"):
 		continue_dialogue()
 	
-		
-func _on_play_pressed():
-	reset()
 	
 
 func continue_dialogue():

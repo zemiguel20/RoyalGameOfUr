@@ -84,7 +84,7 @@ func _on_from_hovered(from: Spot) -> void:
 	from_spot_hovered.emit(moves_from)
 
 
-func _on_from_dehovered(from: Spot) -> void:
+func _on_from_dehovered(_from: Spot) -> void:
 	if _from_selected:
 		return
 	

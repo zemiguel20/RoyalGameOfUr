@@ -7,8 +7,6 @@ signal on_dialogue_finished
 signal on_interruption_ready
 
 @export var _use_subtitles: bool
-## NOTE: Since we do not have audio for the playtest, we have a constant waiting time.
-@export var _temp_min_entry_length: float = 5.0
 
 @onready var _audio_player = $AudioStreamPlayer3D as AudioStreamPlayer3D
 @onready var _subtitle_displayer = $"../Subtitle_System" as DialogueSubtitles
@@ -96,7 +94,7 @@ func finish_sequence():
 	
 	if _already_prevents_opponent_action:
 		_already_prevents_opponent_action = false
-		GameEvents.opponent_action_resumed.emit()
+		#GameEvents.opponent_action_resumed.emit()
 
 
 func set_animation_player(animation_player: AnimationPlayer):
@@ -106,10 +104,10 @@ func set_animation_player(animation_player: AnimationPlayer):
 func _handle_opponent_action_prevention(entry: DialogueBundle):
 	if entry.prevents_opponent_action and !_already_prevents_opponent_action:
 		_already_prevents_opponent_action = true
-		GameEvents.opponent_action_prevented.emit()
+		#GameEvents.opponent_action_prevented.emit()
 	elif !entry.prevents_opponent_action and _already_prevents_opponent_action:
 		_already_prevents_opponent_action = false
-		GameEvents.opponent_action_resumed.emit()
+		#GameEvents.opponent_action_resumed.emit()
 
 
 func stop():

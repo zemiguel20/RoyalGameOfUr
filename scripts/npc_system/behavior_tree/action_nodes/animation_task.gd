@@ -30,5 +30,5 @@ func on_start():
 	_status = Status.Succeeded
 
 
-func on_process(delta):
+func on_process(_delta):
 	return _status

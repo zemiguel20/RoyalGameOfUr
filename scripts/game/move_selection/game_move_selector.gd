@@ -3,9 +3,11 @@ extends Node
 ## Abstract class for move selectors. Contains some common functions.
 
 
+@warning_ignore("unused_signal")
 signal move_selected(move: GameMove)
 
 
+@warning_ignore("unused_parameter")
 func start_selection(moves: Array[GameMove]) -> void:
 	push_warning("Using abstract method. Implement method in concrete class.")
 
@@ -54,12 +56,13 @@ func _get_to_spot_color(move: GameMove) -> Color:
 func _create_path_highlighter(move: GameMove) -> ScrollingTexturePath3D:
 	var path_highlighter_name: String = "%s%sHighlight" % [move.from.name, move.to.name]
 	
+	var path: ScrollingTexturePath3D
 	if has_node(path_highlighter_name):
-		var path = get_node(path_highlighter_name)
-		return get_node(path_highlighter_name)
+		path = get_node(path_highlighter_name)
+		return path
 	
 	var path_highlight_prebab = preload("res://scenes/game/path_highlight.tscn")
-	var path = path_highlight_prebab.instantiate() as ScrollingTexturePath3D
+	path = path_highlight_prebab.instantiate() as ScrollingTexturePath3D
 	path.name = path_highlighter_name
 	add_child(path)
 	

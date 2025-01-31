@@ -46,5 +46,6 @@ func is_busy():
 
 
 ## Virtual method
+@warning_ignore("unused_parameter")
 func _pick_sequence(group: DialogueGroup) -> DialogueSequence:
 	return null

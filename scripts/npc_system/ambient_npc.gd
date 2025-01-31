@@ -7,7 +7,6 @@ var blackboard: Blackboard
 
 var _animation_player
 var _current_tree: BTNode
-var _material: BaseMaterial3D
 var _npc_manager: NPCSystem
 var _has_started = false
 

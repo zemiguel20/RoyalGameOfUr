@@ -115,6 +115,7 @@ func stop() -> void:
 	_animation_player.stop()
 	_dialogue_system.stop()
 	disable_reactions()
+	_dialogue_system.reset()
 
 
 func _on_dice_rolled(value: int) -> void:

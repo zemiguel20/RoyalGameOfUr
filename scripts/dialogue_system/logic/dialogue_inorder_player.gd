@@ -2,8 +2,6 @@ class_name DialogueGroupPlayerInOrder
 extends DialogueGroupPlayerBase
 
 ## List of all dialogues used by this dialog system.
-@export var _supports_interruptions: bool
-@export var _temp_interruption: DialogueGroup 
 
 var _current_dialogues: Array[DialogueSequence]
 var _current_index = -1
