@@ -1,14 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bksmfg8gvpyso"]
+[gd_scene load_steps=8 format=3 uid="uid://bksmfg8gvpyso"]
 
 [ext_resource type="Script" path="res://scripts/ui/controls_hud.gd" id="1_6ffc1"]
 [ext_resource type="Texture2D" uid="uid://by3xlqovw1ial" path="res://ui/input_icons/mouse_left.svg" id="2_3vjxg"]
 [ext_resource type="Texture2D" uid="uid://gysygxgh43qd" path="res://ui/input_icons/mouse_right.svg" id="3_vmruv"]
 [ext_resource type="Texture2D" uid="uid://wg5mv5nmv3lb" path="res://ui/input_icons/keyboard_f.svg" id="4_ly8b7"]
+[ext_resource type="Texture2D" uid="uid://cv1jqsygfk3xg" path="res://ui/input_icons/keyboard_escape.svg" id="5_6h5bp"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_wi0rc"]
 device = -1
-keycode = 49
-unicode = 49
+keycode = 70
+unicode = 102
 
 [sub_resource type="Shortcut" id="Shortcut_3xc5x"]
 events = [SubResource("InputEventKey_wi0rc")]
@@ -128,5 +129,21 @@ flat = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "Fast Mode"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Pause" type="HBoxContainer" parent="Controls"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Controls/Pause"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("5_6h5bp")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Controls/Pause"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Pause Game"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
