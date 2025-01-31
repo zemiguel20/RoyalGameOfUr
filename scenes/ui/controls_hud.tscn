@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bksmfg8gvpyso"]
+[gd_scene load_steps=7 format=3 uid="uid://bksmfg8gvpyso"]
 
 [ext_resource type="Script" path="res://scripts/ui/controls_hud.gd" id="1_6ffc1"]
 [ext_resource type="Texture2D" uid="uid://c342ngfkdbsd6" path="res://ui/input_icons/left_mouse_button_light.png" id="3_pk7ke"]
 [ext_resource type="Texture2D" uid="uid://oclm41ujoyav" path="res://ui/input_icons/right_mouse_button_light.png" id="4_dlbxj"]
 [ext_resource type="Texture2D" uid="uid://1tku2lwhe5b6" path="res://ui/input_icons/1_light.png" id="5_5qks6"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_wi0rc"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_3xc5x"]
+events = [SubResource("InputEventKey_wi0rc")]
 
 [node name="ControlsHUD" type="CanvasLayer"]
 script = ExtResource("1_6ffc1")
@@ -20,36 +28,68 @@ grow_vertical = 0
 theme_override_constants/separation = 15
 alignment = 2
 
-[node name="Interact" type="HBoxContainer" parent="Controls"]
+[node name="Roll" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
 
-[node name="InteractIcon" type="TextureRect" parent="Controls/Interact"]
+[node name="InteractIcon" type="TextureRect" parent="Controls/Roll"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("3_pk7ke")
 stretch_mode = 5
 
-[node name="InteractLabel" type="Label" parent="Controls/Interact"]
+[node name="InteractLabel" type="Label" parent="Controls/Roll"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
-text = "Interact"
+text = "Roll Dice (Interact)"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Cancel" type="HBoxContainer" parent="Controls"]
+[node name="ShakeDice" type="HBoxContainer" parent="Controls"]
+layout_mode = 2
+
+[node name="ShakeIcon" type="TextureRect" parent="Controls/ShakeDice"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("3_pk7ke")
+stretch_mode = 5
+
+[node name="ShakeLabel" type="Label" parent="Controls/ShakeDice"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "(Hold) Shake Dice"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SelectSpot" type="HBoxContainer" parent="Controls"]
+layout_mode = 2
+
+[node name="InteractIcon" type="TextureRect" parent="Controls/SelectSpot"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("3_pk7ke")
+stretch_mode = 5
+
+[node name="InteractLabel" type="Label" parent="Controls/SelectSpot"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Select Spot (Interact)"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CancelSelection" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="CancelIcon" type="TextureRect" parent="Controls/Cancel"]
+[node name="CancelIcon" type="TextureRect" parent="Controls/CancelSelection"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("4_dlbxj")
 stretch_mode = 5
 
-[node name="CancelLabel" type="Label" parent="Controls/Cancel"]
+[node name="CancelLabel" type="Label" parent="Controls/CancelSelection"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
-text = "Cancel Move"
+text = "Cancel Selection"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -69,23 +109,24 @@ text = "(Hold)  Look Around"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="FastMove" type="HBoxContainer" parent="Controls"]
+[node name="FastMode" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="FastMoveIcon" type="TextureRect" parent="Controls/FastMove"]
+[node name="FastModeIcon" type="TextureRect" parent="Controls/FastMode"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("5_5qks6")
 stretch_mode = 5
 
-[node name="FastMoveCheckBox" type="CheckBox" parent="Controls/FastMove"]
+[node name="FastModeCheckBox" type="CheckBox" parent="Controls/FastMode"]
 layout_mode = 2
+shortcut = SubResource("Shortcut_3xc5x")
 flat = true
 
-[node name="CancelLabel" type="Label" parent="Controls/FastMove"]
+[node name="Label" type="Label" parent="Controls/FastMode"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
-text = "Fast Move Mode"
+text = "Fast Mode"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true

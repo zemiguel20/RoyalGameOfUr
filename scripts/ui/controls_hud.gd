@@ -1,70 +1,70 @@
+class_name ControlsHUD
 extends CanvasLayer
 
 
-@onready var interact: HBoxContainer = $Controls/Interact
-@onready var look_around: HBoxContainer = $Controls/LookAround
-@onready var cancel: HBoxContainer = $Controls/Cancel
-@onready var fast_move: HBoxContainer = $Controls/FastMove
-@onready var fast_move_check_box: CheckBox = $Controls/FastMove/FastMoveCheckBox
+var _game: BoardGame
+
+@onready var _roll: HBoxContainer = $Controls/Roll
+@onready var _shake_dice: HBoxContainer = $Controls/ShakeDice
+@onready var _select_spot: HBoxContainer = $Controls/SelectSpot
+@onready var _cancel_selection: HBoxContainer = $Controls/CancelSelection
+@onready var _look_around: HBoxContainer = $Controls/LookAround
+@onready var _fast_mode_check_box: CheckBox = $Controls/FastMode/FastModeCheckBox
 
 
 func _ready():
-	visible = false
-	fast_move.visible = false
+	_fast_mode_check_box.button_pressed = Settings.fast_mode
+	_fast_mode_check_box.toggled.connect(_on_fast_mode_toggled)
+
+
+func init(board_game: BoardGame) -> void:
+	_game = board_game
 	
-	GameEvents.game_started.connect(_on_game_started)
-	GameEvents.game_ended.connect(_on_game_ended)
-	GameEvents.back_to_main_menu_pressed.connect(_on_game_ended)
-	GameEvents.drag_move_start.connect(_on_drag_move_started)
-	GameEvents.drag_move_stopped.connect(_on_drag_move_stopped)
-	GameEvents.new_turn_started.connect(_on_new_turn_started)
+	_roll.hide()
+	_shake_dice.hide()
+	_select_spot.hide()
+	_cancel_selection.hide()
 	
-	fast_move_check_box.toggled.connect(_on_fast_move_toggled)
-
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.keycode == KEY_1 and event.pressed:
-			fast_move.visible = true
-			fast_move_check_box.button_pressed = not fast_move_check_box.button_pressed
-
-
-func _on_game_started() -> void:
-	visible = true
-	_show_controls_regular()
-
-
-func _on_game_ended() -> void:
-	visible = false
-
-
-func _on_drag_move_started() -> void:
-	_show_controls_in_move()
-
-
-func _on_drag_move_stopped() -> void:
-	_show_controls_regular()
-
-
-func _on_new_turn_started() -> void:
-	# In singleplayer, show fast mode option after some turns
-	if not GameManager.is_hotseat and GameManager.turn_number >= 4:
-		fast_move.visible = true
-
-
-func _show_controls_regular() -> void:
-	interact.visible = true
-	cancel.visible = false
-	look_around.visible = not GameManager.is_hotseat
+	_look_around.visible = not _game.config.hotseat
 	
-	if GameManager.is_hotseat:
-		fast_move.visible = true
+	if not _game.config.p1_npc:
+		var roll_controller = _game.p1_turn_controller.roll_controller as InteractiveRollController
+		roll_controller.interaction_enabled.connect(_show_roll_controls)
+		roll_controller.interaction_disabled.connect(_hide_roll_controls)
+		
+		var move_selector = _game.p1_turn_controller.move_selector as InteractiveGameMoveSelector
+		move_selector.selection_enabled.connect(_show_selection_controls)
+		move_selector.selection_disabled.connect(_hide_selection_controls)
+	
+	if not _game.config.p2_npc:
+		var roll_controller = _game.p2_turn_controller.roll_controller as InteractiveRollController
+		roll_controller.interaction_enabled.connect(_show_roll_controls)
+		roll_controller.interaction_disabled.connect(_hide_roll_controls)
+		
+		var move_selector = _game.p2_turn_controller.move_selector as InteractiveGameMoveSelector
+		move_selector.selection_enabled.connect(_show_selection_controls)
+		move_selector.selection_disabled.connect(_hide_selection_controls)
 
 
-func _show_controls_in_move():
-	interact.visible = false
-	cancel.visible = true
+func _show_roll_controls() -> void:
+	_roll.show()
+	_shake_dice.show()
 
 
-func _on_fast_move_toggled(toggled_on: bool) -> void:
-	GameManager.fast_move_enabled = toggled_on
+func _hide_roll_controls() -> void:
+	_roll.hide()
+	_shake_dice.hide()
+
+
+func _show_selection_controls() -> void:
+	_select_spot.show()
+	_cancel_selection.show()
+
+
+func _hide_selection_controls() -> void:
+	_select_spot.hide()
+	_cancel_selection.hide()
+
+
+func _on_fast_mode_toggled(toggled_on: bool) -> void:
+	Settings.fast_mode = toggled_on

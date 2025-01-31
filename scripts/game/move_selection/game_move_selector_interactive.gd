@@ -6,6 +6,8 @@ extends GameMoveSelector
 ## (if moving backwards is also possible, the the move forward is chosen).
 
 
+signal selection_enabled
+signal selection_disabled
 signal from_spot_hovered(moves_from: Array[GameMove])
 
 
@@ -42,6 +44,7 @@ func start_selection(moves: Array[GameMove]) -> void:
 		spot.clicked.connect(_on_to_selected.bind(spot))
 	
 	_highlight_moves_selectable()
+	selection_enabled.emit()
 
 
 # WARNING: this function cleans up, so it should be called last
@@ -66,6 +69,8 @@ func stop() -> void:
 	_to_spots.clear()
 	_from_selected = null
 	_piece_dragger.stop(false)
+	
+	selection_disabled.emit()
 
 
 func _on_from_hovered(from: Spot) -> void:
