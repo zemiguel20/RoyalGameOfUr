@@ -5,6 +5,14 @@
 [node name="EndScreen" type="CanvasLayer"]
 script = ExtResource("1_awi2m")
 
+[node name="BackgroundShade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
+
 [node name="TabletPanel" type="Panel" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
