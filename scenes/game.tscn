@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bkjl7wlfjhp01"]
+[gd_scene load_steps=19 format=3 uid="uid://bkjl7wlfjhp01"]
 
 [ext_resource type="Script" path="res://scripts/level/level.gd" id="1_80kkg"]
 [ext_resource type="PackedScene" uid="uid://cgkfm7n305bgj" path="res://scenes/environment/environment.tscn" id="1_kqpqp"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cypkb6b2st6b1" path="res://audio/sfx_mastered/ambience-birds-and-crickets.mp3" id="9_0a4og"]
 [ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="11_5dvu1"]
 [ext_resource type="PackedScene" uid="uid://bksmfg8gvpyso" path="res://scenes/ui/controls_hud.tscn" id="12_4wasf"]
+[ext_resource type="PackedScene" uid="uid://purvwsmsb7e8" path="res://scenes/ui/pause_menu.tscn" id="13_fd73s"]
 
 [sub_resource type="Curve3D" id="Curve3D_gel6c"]
 _data = {
@@ -148,7 +149,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1165, 0, -5.22195)
 curve = SubResource("Curve3D_ma8g4")
 
 [node name="StorageToKitchen2_PathFollow3D" type="PathFollow3D" parent="NPCSystem/NPC_Paths/KitchenPaths/Storage_To_Kitchen2"]
-transform = Transform3D(-0.00153058, -0.000330129, 0.999987, -1.45517e-11, 1, 0.000330125, -0.999987, 5.05282e-07, -0.00153058, -4.51176, -0.000873566, 3.133)
+transform = Transform3D(-0.00153058, -0.000330129, 0.999986, -1.45517e-11, 1, 0.000330125, -0.999986, 5.05282e-07, -0.00153058, -4.51176, -0.000873566, 3.133)
 use_model_front = true
 loop = false
 
@@ -188,3 +189,5 @@ playback_offset = 68
 [node name="EndScreen" parent="." instance=ExtResource("11_5dvu1")]
 
 [node name="ControlsHUD" parent="." instance=ExtResource("12_4wasf")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("13_fd73s")]

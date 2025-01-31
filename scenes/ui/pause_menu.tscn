@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" path="res://scripts/ui/pause_screen.gd" id="1_uhldg"]
 
-[node name="PauseScreen" type="CanvasLayer"]
+[node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_uhldg")
+
+[node name="BackgroundShade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
 
 [node name="TabletPanel" type="Panel" parent="."]
 anchors_preset = 8
@@ -43,25 +51,14 @@ theme_override_constants/separation = 50
 alignment = 1
 metadata/_edit_group_ = true
 
-[node name="Continue" type="Button" parent="TabletPanel/Buttons"]
+[node name="ResumeButton" type="Button" parent="TabletPanel/Buttons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Continue"
+text = "Resume"
 flat = true
 
-[node name="MainMenu" type="Button" parent="TabletPanel/Buttons"]
+[node name="MainMenuButton" type="Button" parent="TabletPanel/Buttons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "To Main Menu"
+text = "Back to main menu"
 flat = true
-
-[node name="Quit" type="Button" parent="TabletPanel/Buttons"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Quit
-"
-flat = true
-
-[connection signal="pressed" from="TabletPanel/Buttons/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="TabletPanel/Buttons/MainMenu" to="." method="_on_main_menu_pressed"]
-[connection signal="pressed" from="TabletPanel/Buttons/Quit" to="." method="_on_quit_pressed"]
