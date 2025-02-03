@@ -10,6 +10,7 @@ signal finished
 
 @onready var _godot_logo: TextureRect = $GodotLogo
 @onready var _entities_logos: Control = $EntitiesLogos
+@onready var _background: ColorRect = $Background
 
 
 func _ready() -> void:
@@ -42,6 +43,10 @@ func play() -> void:
 	
 	animator = create_tween()
 	animator.tween_property(_godot_logo, "modulate:a", 0.0, _fade_duration)
+	await animator.finished
+	
+	animator = create_tween()
+	animator.tween_property(_background, "modulate:a", 0.0, _fade_duration)
 	await animator.finished
 	
 	visible = false

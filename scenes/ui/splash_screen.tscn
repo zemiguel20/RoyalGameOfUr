@@ -11,6 +11,14 @@ script = ExtResource("1_ff2lo")
 _fade_duration = 0.8
 _pause_duration = 1.5
 
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="GodotLogo" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
