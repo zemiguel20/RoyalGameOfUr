@@ -2,15 +2,8 @@ class_name TurnController
 extends Node
 ## Controls the actions during a turn.
 
-
-signal turn_finished(result: Result)
-
-enum Result {
-	NORMAL,
-	EXTRA_TURN,
-	WIN,
-	NO_MOVES,
-}
+# TODO: check which objects use this signal
+signal turn_finished(summary: TurnSummary)
 
 var roll_controller: RollController
 var move_selector: GameMoveSelector
@@ -31,9 +24,9 @@ func init(player: int, p_roll_controller: RollController, p_move_selector: GameM
 
 func start_turn() -> void:
 	roll_controller.start_roll()
-	var result = await roll_controller.rolled
+	var rolled_value = await roll_controller.rolled
 	
-	var moves: Array[GameMove] = _board.calculate_moves(result, _player, _ruleset)
+	var moves: Array[GameMove] = _board.calculate_moves(rolled_value, _player, _ruleset)
 	
 	roll_controller.highlight_result(not moves.is_empty())
 	
@@ -42,7 +35,7 @@ func start_turn() -> void:
 	
 	if moves.is_empty():
 		roll_controller.clear_highlight()
-		turn_finished.emit(Result.NO_MOVES)
+		turn_finished.emit(TurnSummary.create_no_moves(_player, rolled_value))
 		return
 	
 	move_selector.start_selection(moves)
@@ -50,9 +43,41 @@ func start_turn() -> void:
 	
 	roll_controller.clear_highlight()
 	
-	if selected_move.wins:
-		turn_finished.emit(Result.WIN)
-	elif selected_move.gives_extra_turn:
-		turn_finished.emit(Result.EXTRA_TURN)
-	else:
-		turn_finished.emit(Result.NORMAL)
+	turn_finished.emit(TurnSummary.create(_player, rolled_value, selected_move))
+
+
+class TurnSummary:
+	enum Result {
+		NORMAL,
+		EXTRA_TURN,
+		WIN,
+		NO_MOVES,
+	}
+	
+	var player: BoardGame.Player = BoardGame.Player.ONE
+	var roll: int = 0
+	var move: GameMove = null # If result is no moves than this is null
+	var result: Result = Result.NORMAL
+	
+	static func create(p_player: int, p_roll: int, p_move: GameMove) -> TurnSummary:
+		var summary = TurnSummary.new()
+		summary.player = p_player
+		summary.roll = p_roll
+		summary.move = p_move
+		
+		if p_move.wins:
+			summary.result = Result.WIN
+		elif p_move.gives_extra_turn:
+			summary.result = Result.EXTRA_TURN
+		else:
+			summary.result = Result.NORMAL
+		
+		return summary
+	
+	static func create_no_moves(p_player: int, p_roll: int) -> TurnSummary:
+		var summary = TurnSummary.new()
+		summary.player = p_player
+		summary.roll = p_roll
+		summary.move = null
+		summary.result = Result.NO_MOVES
+		return summary

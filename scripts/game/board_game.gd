@@ -2,6 +2,8 @@ class_name BoardGame
 extends Node
 ## Controls the setup and turn flow of the game.
 
+# TODO: collect history of turns
+
 
 signal ended(winner: Player)
 
