@@ -2,8 +2,6 @@ class_name BoardGame
 extends Node
 ## Controls the setup and turn flow of the game.
 
-# TODO: collect history of turns
-
 
 signal ended(winner: Player)
 
@@ -19,8 +17,9 @@ var p2_turn_controller: TurnController
 var turn_number: int = 0
 var board: Board
 var dice: Array[Die] = []
+var turn_history: Array[TurnController.TurnSummary] = []
 
-var _running: bool = false
+var _running: bool = false # used for TESTING
 
 @onready var _board_spawn: Node3D = $BoardSpawn
 @onready var _p1_dice_zone: DiceZone = $DiceZoneP1
@@ -40,6 +39,7 @@ func _input(event: InputEvent) -> void:
 
 func setup(new_config: Config) -> void:
 	config = new_config
+	turn_history.clear()
 	
 	if config.rematch:
 		board.reset()
@@ -126,11 +126,14 @@ func _pick_random_player() -> Player:
 	return randi_range(Player.ONE, Player.TWO) as Player
 
 
-func _on_turn_finished(result: TurnController.Result) -> void:
-	if result == TurnController.Result.WIN:
+func _on_turn_finished(summary: TurnController.TurnSummary) -> void:
+	turn_history.append(summary)
+	
+	const Result = TurnController.TurnSummary.Result
+	if summary.result == Result.WIN:
 		_end_game()
 	else:
-		if result != TurnController.Result.EXTRA_TURN:
+		if summary.result != Result.EXTRA_TURN:
 			_switch_player()
 		turn_number += 1
 		_get_turn_controller().start_turn()
