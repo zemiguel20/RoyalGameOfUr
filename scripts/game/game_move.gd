@@ -200,3 +200,14 @@ func execute(animation_type: AnimationType) -> void:
 	to.place_stack(pieces_to_move)
 	
 	execution_finished.emit()
+
+
+func to_json() -> Dictionary:
+	var dict = {
+		"from" : from_track_index + 1,
+		"to" : to_track_index + 1,
+		"pieces_in_from" : pieces_in_from.size(),
+		"pieces_in_to" : pieces_in_to.size(),
+	}
+	
+	return dict

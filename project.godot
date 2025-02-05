@@ -26,6 +26,7 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 [autoload]
 
 Settings="*res://scripts/autoloads/settings.gd"
+GameRecordSaver="*res://scripts/autoloads/game_record_saver.gd"
 
 [display]
 

@@ -10,11 +10,14 @@ const LOSE_SINGLEPLAYER_TEXT = "You have lost!"
 const HOTSEAT_TEXT = "Player %d won the game"
 
 # INFO: must be filled in accordingly
-const SURVEY_LINK: String = "https://www.universiteitleiden.nl/"
+const SURVEY_URL: String = "https://www.universiteitleiden.nl/"
+const FILE_SERVER_URL: String = "insert url"#"https://ingest.lucdh.nl/"
+var _game_record: GameRecord
 
 
 @onready var _header_label: Label = $TabletPanel/HeaderLabel
 @onready var _survey_menu: Control = $TabletPanel/SurveyMenu
+@onready var _survey_button: LinkButton = $TabletPanel/SurveyMenu/Buttons/SurveyButton
 @onready var _send_game_file_button: Button = $TabletPanel/SurveyMenu/Buttons/SendGameFileButton
 @onready var _continue_button: Button = $TabletPanel/SurveyMenu/Buttons/ContinueButton
 @onready var _end_menu: Control = $TabletPanel/EndMenu
@@ -42,12 +45,14 @@ func show_end_menu(winner: BoardGame.Player, hotseat: bool) -> void:
 			_header_label.text = LOSE_SINGLEPLAYER_TEXT
 	
 	if Settings.research_mode:
-		# TODO update
+		var board_game = get_node("../BoardGame") as BoardGame # HACK
+		_game_record = GameRecord.create(board_game)
+		GameRecordSaver.save_game_record_to_file(_game_record)
+		
 		_survey_menu.show()
 		_end_menu.hide()
 		_send_game_file_button.disabled = false
-		# Set survey link with the game ID attached
-		#survey_button.uri = SURVEY_LINK + "?gameid=" + GameDataCollector.current_game_data.uuid
+		_survey_button.uri = SURVEY_URL % _game_record.uuid
 	else:
 		_survey_menu.hide()
 		_end_menu.show()
@@ -69,5 +74,5 @@ func _on_continue_button_pressed() -> void:
 
 
 func _on_send_game_file_button_pressed() -> void:
-	#GameDataCollector.send_game_record_to_server() # TODO
+	GameRecordSaver.send_game_record_to_server(_game_record, FILE_SERVER_URL)
 	_send_game_file_button.disabled = true

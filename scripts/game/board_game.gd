@@ -17,7 +17,7 @@ var p2_turn_controller: TurnController
 var turn_number: int = 0
 var board: Board
 var dice: Array[Die] = []
-var turn_history: Array[TurnController.TurnSummary] = []
+var turn_history: Array[TurnSummary] = []
 
 var _running: bool = false # used for TESTING
 
@@ -57,7 +57,7 @@ func start() -> void:
 	current_player = _pick_random_player()
 	turn_number = 1
 	_running = true
-	_get_turn_controller().start_turn()
+	_get_turn_controller().start_turn(turn_number)
 
 
 func _despaw_objects() -> void:
@@ -126,17 +126,17 @@ func _pick_random_player() -> Player:
 	return randi_range(Player.ONE, Player.TWO) as Player
 
 
-func _on_turn_finished(summary: TurnController.TurnSummary) -> void:
+func _on_turn_finished(summary: TurnSummary) -> void:
 	turn_history.append(summary)
 	
-	const Result = TurnController.TurnSummary.Result
+	const Result = TurnSummary.Result
 	if summary.result == Result.WIN:
 		_end_game()
 	else:
 		if summary.result != Result.EXTRA_TURN:
 			_switch_player()
 		turn_number += 1
-		_get_turn_controller().start_turn()
+		_get_turn_controller().start_turn(turn_number)
 
 
 func _get_turn_controller() -> TurnController:

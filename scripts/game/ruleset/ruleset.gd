@@ -16,7 +16,7 @@ extends Resource
 @export var board_layout: BoardLayout #= preload("res://resources/rulesets/board_layouts/layout_finkel.tres")
 
 
-func to_dict() -> Dictionary:
+func to_json() -> Dictionary:
 	var dict = {
 		"name" : name,
 		"rosettes_are_safe" : rosettes_are_safe,
