@@ -190,6 +190,8 @@ func _highlight_move_hovered(move: GameMove) -> void:
 	
 	var hovered_color = General.get_highlight_color(General.HighlightType.HOVERED)
 	move.from.enable_highlight(hovered_color)
+	for piece in move.pieces_in_from:
+		piece.enable_highlight(hovered_color)
 
 
 func _highlight_move_from_selected(move: GameMove) -> void:
