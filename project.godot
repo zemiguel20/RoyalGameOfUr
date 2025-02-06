@@ -66,7 +66,7 @@ table=""
 
 [gui]
 
-theme/custom="res://ui/theme.tres"
+theme/custom="res://ui/theme/theme.tres"
 
 [input]
 

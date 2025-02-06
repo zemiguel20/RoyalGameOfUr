@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcvyni12lar0o"
-path="res://.godot/imported/arrow_button_hovered.svg-ca32ac35c0cb90717979fb2dd906f4e4.ctex"
+uid="uid://cv5mvlprm8j0j"
+path="res://.godot/imported/arrow_button_pressed_R.svg-81937c95f04c0446606628bd4a025006.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/theme_sprites/arrow_button_hovered.svg"
-dest_files=["res://.godot/imported/arrow_button_hovered.svg-ca32ac35c0cb90717979fb2dd906f4e4.ctex"]
+source_file="res://ui/theme_sprites/arrow_button_pressed_R.svg"
+dest_files=["res://.godot/imported/arrow_button_pressed_R.svg-81937c95f04c0446606628bd4a025006.ctex"]
 
 [params]
 

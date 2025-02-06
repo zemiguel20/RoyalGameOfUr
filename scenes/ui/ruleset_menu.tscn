@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cydp4h0m80bfo"]
+[gd_scene load_steps=9 format=3 uid="uid://cydp4h0m80bfo"]
 
 [ext_resource type="Script" path="res://scripts/ui/ruleset_menu.gd" id="1_by1lh"]
-[ext_resource type="Texture2D" uid="uid://diajubow2iamp" path="res://ui/theme_sprites/arrow_button_base.svg" id="2_8wfwd"]
-[ext_resource type="Texture2D" uid="uid://cv5mvlprm8j0j" path="res://ui/theme_sprites/arrow_button_pressed.svg" id="3_ygpyh"]
-[ext_resource type="Texture2D" uid="uid://bcvyni12lar0o" path="res://ui/theme_sprites/arrow_button_hovered.svg" id="4_7igam"]
+[ext_resource type="Texture2D" uid="uid://diajubow2iamp" path="res://ui/theme_sprites/arrow_button_base_R.svg" id="2_8wfwd"]
+[ext_resource type="Texture2D" uid="uid://j4a6rau0otbm" path="res://ui/theme_sprites/arrow_button_base_L.svg" id="2_vf8po"]
+[ext_resource type="Texture2D" uid="uid://bv73kxtg6cxrx" path="res://ui/theme_sprites/arrow_button_pressed_L.svg" id="3_3op5e"]
+[ext_resource type="Texture2D" uid="uid://cv5mvlprm8j0j" path="res://ui/theme_sprites/arrow_button_pressed_R.svg" id="3_ygpyh"]
+[ext_resource type="Texture2D" uid="uid://bcvyni12lar0o" path="res://ui/theme_sprites/arrow_button_hovered_R.svg" id="4_7igam"]
+[ext_resource type="Texture2D" uid="uid://xrpmokwt787e" path="res://ui/theme_sprites/arrow_button_hovered_L.svg" id="4_54i7o"]
 [ext_resource type="Texture2D" uid="uid://cc3oo6y6f5tgi" path="res://ui/board_layouts/layout_finkel.png" id="7_kfq2g"]
 
 [node name="RulesetMenu" type="CanvasLayer"]
@@ -68,12 +71,11 @@ offset_bottom = 35.0
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("2_8wfwd")
-texture_pressed = ExtResource("3_ygpyh")
-texture_hover = ExtResource("4_7igam")
+texture_normal = ExtResource("2_vf8po")
+texture_pressed = ExtResource("3_3op5e")
+texture_hover = ExtResource("4_54i7o")
 ignore_texture_size = true
 stretch_mode = 5
-flip_h = true
 
 [node name="RulesetNameLabel" type="Label" parent="Control/TabletFrame/RulesetPicker"]
 layout_mode = 1
@@ -135,12 +137,11 @@ offset_top = -34.5
 offset_right = 64.0
 offset_bottom = 34.5
 grow_vertical = 2
-texture_normal = ExtResource("2_8wfwd")
-texture_pressed = ExtResource("3_ygpyh")
-texture_hover = ExtResource("4_7igam")
+texture_normal = ExtResource("2_vf8po")
+texture_pressed = ExtResource("3_3op5e")
+texture_hover = ExtResource("4_54i7o")
 ignore_texture_size = true
 stretch_mode = 5
-flip_h = true
 
 [node name="BoardLayoutImage" type="TextureRect" parent="Control/TabletFrame/BoardPicker"]
 layout_mode = 1

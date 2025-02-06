@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://erxp3p7fsauv"
-path="res://.godot/imported/check_button_unchecked.svg-5cc5094426b4947c19429487a7e1212c.ctex"
+uid="uid://diajubow2iamp"
+path="res://.godot/imported/arrow_button_base_R.svg-46590b85b8893992769a1981e6e335c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/theme_sprites/check_button_unchecked.svg"
-dest_files=["res://.godot/imported/check_button_unchecked.svg-5cc5094426b4947c19429487a7e1212c.ctex"]
+source_file="res://ui/theme_sprites/arrow_button_base_R.svg"
+dest_files=["res://.godot/imported/arrow_button_base_R.svg-46590b85b8893992769a1981e6e335c6.ctex"]
 
 [params]
 
@@ -32,6 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=0.5
+svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false
