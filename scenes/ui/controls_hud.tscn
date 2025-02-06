@@ -26,7 +26,6 @@ offset_top = -261.0
 offset_right = 469.0
 offset_bottom = -31.0
 grow_vertical = 0
-theme_override_constants/separation = 5
 alignment = 2
 
 [node name="Roll" type="HBoxContainer" parent="Controls"]

@@ -19,10 +19,10 @@ enum HighlightType {
 
 const COLOR_MAP: Dictionary = {
 	HighlightType.NONE : Color.TRANSPARENT,
-	HighlightType.SELECTABLE : Color.MEDIUM_AQUAMARINE,
+	HighlightType.SELECTABLE : Color("#00d8bdff"),
 	HighlightType.SELECTABLE_SPECIAL: Color.GOLD,
-	HighlightType.HOVERED : Color.AQUAMARINE,
-	HighlightType.SELECTED : Color.DARK_TURQUOISE,
+	HighlightType.HOVERED : Color("#00ffdfff"),
+	HighlightType.SELECTED : Color("#009f8bff"),
 	HighlightType.POSITIVE : Color.GREEN,
 	HighlightType.NEGATIVE : Color.RED,
 	HighlightType.ROSETTE : Color.MEDIUM_PURPLE,

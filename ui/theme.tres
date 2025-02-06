@@ -8,16 +8,18 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jfqmb"]
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_yboda"]
-color = Color(0.972549, 0.917647, 0.839216, 1)
-thickness = 3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_comqs"]
+bg_color = Color(0, 0.847059, 0.741176, 1)
+shadow_color = Color(0.317647, 0.211765, 0.113725, 1)
+shadow_size = 2
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_w6och"]
-color = Color(0.972549, 0.917647, 0.839216, 1)
-thickness = 3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x3v6"]
+bg_color = Color(0, 1, 0.87451, 1)
+shadow_color = Color(0.317647, 0.211765, 0.113725, 1)
+shadow_size = 2
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_cvp21"]
-color = Color(0.141176, 0.0823529, 0.0392157, 0.517647)
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cv8bf"]
+color = Color(0.960784, 0.890196, 0.784314, 1)
 thickness = 3
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fakp5"]
@@ -28,23 +30,24 @@ default_font = ExtResource("4_hl6lc")
 Button/colors/font_color = Color(0.928375, 0.807002, 0.625907, 1)
 Button/colors/font_focus_color = Color(0.972549, 0.917647, 0.839216, 1)
 Button/colors/font_hover_color = Color(0.971607, 0.918142, 0.840398, 1)
-Button/colors/font_hover_pressed_color = Color(0.262745, 0.709804, 0.74902, 1)
-Button/colors/font_outline_color = Color(0.141176, 0.0823529, 0.0392157, 1)
-Button/colors/font_pressed_color = Color(0.262745, 0.709804, 0.74902, 1)
+Button/colors/font_hover_pressed_color = Color(0, 1, 0.87451, 1)
+Button/colors/font_outline_color = Color(0.317647, 0.211765, 0.113725, 1)
+Button/colors/font_pressed_color = Color(0, 0.847059, 0.741176, 1)
 Button/constants/outline_size = 7
 Button/font_sizes/font_size = 30
 Button/styles/focus = SubResource("StyleBoxEmpty_jfqmb")
 CheckBox/font_sizes/font_size = 25
 CheckBox/icons/checked = ExtResource("1_u8vwv")
 CheckBox/icons/unchecked = ExtResource("2_dvdhl")
+HBoxContainer/constants/separation = 15
 HSlider/icons/grabber = ExtResource("3_cbvuu")
 HSlider/icons/grabber_highlight = ExtResource("3_cbvuu")
-HSlider/styles/grabber_area = SubResource("StyleBoxLine_yboda")
-HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_w6och")
-HSlider/styles/slider = SubResource("StyleBoxLine_cvp21")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_comqs")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_0x3v6")
+HSlider/styles/slider = SubResource("StyleBoxLine_cv8bf")
 Label/colors/font_color = Color(0.962744, 0.88864, 0.782356, 1)
 Label/colors/font_outline_color = Color(0.972549, 0.917647, 0.839216, 1)
-Label/colors/font_shadow_color = Color(0.141176, 0.0823529, 0.0392157, 1)
+Label/colors/font_shadow_color = Color(0.317647, 0.211765, 0.113725, 1)
 Label/constants/outline_size = 1
 Label/constants/shadow_offset_x = 0
 Label/constants/shadow_offset_y = 1
