@@ -8,7 +8,10 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
-   sodipodi:docname="check_box_checked.svg"
+   sodipodi:docname="check_box.svg"
+   inkscape:export-filename="slider_handle_hovered.png"
+   inkscape:export-xdpi="47.569019"
+   inkscape:export-ydpi="47.569019"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,9 +27,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showguides="true"
-     inkscape:zoom="45.254835"
-     inkscape:cx="30.958018"
-     inkscape:cy="43.752231"
+     inkscape:zoom="2.8284272"
+     inkscape:cx="-50.20458"
+     inkscape:cy="76.013977"
      inkscape:window-width="1920"
      inkscape:window-height="1008"
      inkscape:window-x="0"
@@ -36,15 +39,16 @@
   <defs
      id="defs1">
     <filter
-       style="color-interpolation-filters:sRGB"
-       id="filter33"
-       x="0"
-       y="0"
-       width="1"
-       height="1">
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Brilliance"
+       id="filter1"
+       x="-0.015689995"
+       y="-0.015686692"
+       width="1.0313767"
+       height="1.0313769">
       <feColorMatrix
-         values="1.067 0 0 0.116889 -0.0335 0 1.067 0 0.116889 -0.0335 0 0 1.067 0.116889 -0.0335 0 0 0 1 0"
-         id="feColorMatrix33" />
+         values="1.2 -0 -0 0 0 -0 1.2 -0 0 0 -0 -0 1.2 0 0 0 0 0 1 0 "
+         id="feColorMatrix1" />
     </filter>
   </defs>
   <g
@@ -52,7 +56,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="matrix(0.51994152,0.5198684,-0.5198684,0.51994152,8.4660475,-0.33705742)"
-     style="display:inline">
+     style="display:inline;filter:url(#filter1)">
     <rect
        style="display:inline;fill:none;fill-opacity:1;stroke:#51361d;stroke-width:1.49886;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="rect7"
@@ -125,7 +129,7 @@
        inkscape:label="CenterSocket"
        transform="matrix(0.00146005,-0.99999893,0.99999912,-0.00132412,0,0)" />
     <rect
-       style="display:inline;fill:#00d8bd;fill-opacity:1;stroke:none;stroke-width:0.878261;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       style="display:none;fill:#00d8bd;fill-opacity:1;stroke:none;stroke-width:0.878261;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="rect27"
        width="9.9364052"
        height="9.9364071"
@@ -136,22 +140,22 @@
     <g
        id="g31"
        transform="matrix(1.1113962e-5,-0.16351786,0.16351788,1.1113962e-5,1.7619996,15.170422)"
-       style="display:inline;filter:url(#filter33)"
+       style="display:none"
        inkscape:label="CenterPyramid">
       <path
-         style="display:inline;fill:#d3a868;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         style="display:inline;fill:#cca36f;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
          d="M 17.120919,17.120911 41.000079,41.000079 64.879243,17.120911 Z"
          id="path28" />
       <path
-         style="display:inline;fill:#b38f58;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         style="display:inline;fill:#a6845a;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
          d="M 17.120919,64.879243 41.000079,41.000079 17.120919,17.120911 Z"
          id="path29" />
       <path
-         style="display:inline;fill:#d4a969;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         style="display:inline;fill:#cca36f;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
          d="M 64.879243,64.87924 41.000079,41.000079 17.120919,64.879243 Z"
          id="path30" />
       <path
-         style="display:inline;fill:#e5ba79;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         style="display:inline;fill:#e5b67b;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
          d="M 64.879243,17.120911 41.000079,41.000079 64.87924,64.87924 Z"
          id="path31" />
     </g>

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv5mvlprm8j0j"
-path="res://.godot/imported/arrow_button_pressed_R.svg-81937c95f04c0446606628bd4a025006.ctex"
+uid="uid://bkbeojf8pjqpv"
+path="res://.godot/imported/arrow_button_normal_L.png-d8256a2a078138f75f6efd795dcfb418.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/theme_sprites/arrow_button_pressed_R.svg"
-dest_files=["res://.godot/imported/arrow_button_pressed_R.svg-81937c95f04c0446606628bd4a025006.ctex"]
+source_file="res://ui/theme_sprites/arrow_button_normal_L.png"
+dest_files=["res://.godot/imported/arrow_button_normal_L.png-d8256a2a078138f75f6efd795dcfb418.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

@@ -1,9 +1,9 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dmm7yxegcrtij"]
 
-[ext_resource type="Texture2D" uid="uid://bvldt7avwo5no" path="res://ui/theme_sprites/expandable_box.svg" id="1_bgd0u"]
+[ext_resource type="Texture2D" uid="uid://bxw1p6b4s03hc" path="res://ui/theme_sprites/frame.png" id="1_0ov65"]
 
 [resource]
-texture = ExtResource("1_bgd0u")
+texture = ExtResource("1_0ov65")
 texture_margin_left = 10.0
 texture_margin_top = 10.0
 texture_margin_right = 10.0
