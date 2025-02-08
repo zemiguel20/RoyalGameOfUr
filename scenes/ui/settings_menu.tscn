@@ -50,8 +50,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 40.0
-offset_bottom = 93.0
+offset_top = 180.0
+offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 35
@@ -64,9 +64,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 85.0
-offset_top = 215.0
+offset_top = 172.0
 offset_right = -83.0
-offset_bottom = -543.0
+offset_bottom = -337.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
@@ -119,6 +119,21 @@ text = "Render Resolution"
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="VSync" type="HBoxContainer" parent="TabletPanel/VBoxContainer/GraphicsSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabletPanel/VBoxContainer/GraphicsSection/VSync"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "V-Sync"
+
+[node name="VSyncCheckBox" type="CheckBox" parent="TabletPanel/VBoxContainer/GraphicsSection/VSync"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_vxyhm")
+hover_checked = ExtResource("3_7xx30")
+hover_unchecked = ExtResource("4_ypqx1")
+
 [node name="AudioSection" type="VBoxContainer" parent="TabletPanel/VBoxContainer"]
 layout_mode = 2
 
@@ -132,13 +147,12 @@ uppercase = true
 layout_mode = 2
 
 [node name="Label" type="Label" parent="TabletPanel/VBoxContainer/AudioSection/MasterVolume"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(155, 0)
 layout_mode = 2
 text = "Volume"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabletPanel/VBoxContainer/AudioSection/MasterVolume"]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="MinLabel" type="Label" parent="TabletPanel/VBoxContainer/AudioSection/MasterVolume/HBoxContainer"]
 layout_mode = 2
@@ -146,6 +160,7 @@ text = "0%"
 
 [node name="MasterVolumeSlider" type="HSlider" parent="TabletPanel/VBoxContainer/AudioSection/MasterVolume/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0

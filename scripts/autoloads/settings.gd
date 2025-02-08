@@ -45,6 +45,14 @@ var render_resolution: RenderResolution:
 			get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
 			get_viewport().scaling_3d_scale = 1.0
 
+var vsync_enabled: bool:
+	set(value):
+		vsync_enabled = value
+		if vsync_enabled:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		else:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
 var master_volume: float:
 	set(value):
 		master_volume = clampf(value, 0.0, 1.0)
@@ -86,28 +94,26 @@ func _save_settings_file() -> void:
 	config.set_value("Graphics", "windowed", windowed)
 	config.set_value("Graphics", "window_resolution", window_resolution.res)
 	config.set_value("Graphics", "render_resolution", render_resolution)
+	config.set_value("Graphics", "vsync", vsync_enabled)
 	config.set_value("Audio", "master_volume", master_volume)
 	
 	config.save("user://settings.ini")
 
 
 func _load_settings_file() -> void:
-	var default_windowed = false
-	var default_window_resolution = _supported_resolutions.back()
-	var default_render_resolution = 1.0
-	var default_master_volume = 1.0
-	
 	var config = ConfigFile.new()
 	var _err = config.load("user://settings.ini")
 	# If the file didn't load, ignore it.
 	#if err != OK:
 		#return
 	
-	windowed = config.get_value("Graphics", "windowed", default_windowed)
+	windowed = config.get_value("Graphics", "windowed", false)
+	var default_window_resolution = _supported_resolutions.back()
 	var res = config.get_value("Graphics", "window_resolution", default_window_resolution.res)
 	window_resolution = _get_closest_supported_resolution(res)
-	render_resolution = config.get_value("Graphics", "render_resolution", default_render_resolution)
-	master_volume = config.get_value("Audio", "master_volume", default_master_volume)
+	render_resolution = config.get_value("Graphics", "render_resolution", 1.0)
+	vsync_enabled = config.get_value("Graphics", "vsync", true)
+	master_volume = config.get_value("Audio", "master_volume", 1.0)
 
 
 func _get_closest_supported_resolution(res: Vector2i) -> VideoResolution:

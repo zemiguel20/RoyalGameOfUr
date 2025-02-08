@@ -9,7 +9,10 @@ var _resolutions: Array[VideoResolution]
 @onready var _windowed_mode_check_box: HoverIconCheckBox = %WindowedModeCheckBox
 @onready var _resolution_option_button: OptionButton = %ResolutionOptionButton
 @onready var _render_resolution_option_button: OptionButton = %RenderResolutionOptionButton
+@onready var _v_sync_check_box: HoverIconCheckBox = %VSyncCheckBox
+
 @onready var _master_volume_slider: HSlider = %MasterVolumeSlider
+
 @onready var _back_button: Button = %BackButton
 
 
@@ -24,6 +27,7 @@ func _ready() -> void:
 	_windowed_mode_check_box.toggled.connect(_on_windowed_mode_toggled)
 	_resolution_option_button.item_selected.connect(_on_resolution_selected)
 	_render_resolution_option_button.item_selected.connect(_on_render_resolution_selected)
+	_v_sync_check_box.toggled.connect(_on_vsync_toggled)
 	_master_volume_slider.value_changed.connect(_on_master_volume_changed)
 	_back_button.pressed.connect(back_pressed.emit)
 	visibility_changed.connect(_on_visibility_changed)
@@ -37,6 +41,7 @@ func _on_visibility_changed() -> void:
 	_windowed_mode_check_box.set_pressed_no_signal(Settings.windowed)
 	_toggle_resolution_option()
 	_render_resolution_option_button.select(Settings.RenderResolution.values().find(Settings.render_resolution))
+	_v_sync_check_box.set_pressed_no_signal(Settings.vsync_enabled)
 	_master_volume_slider.set_value_no_signal(Settings.master_volume)
 
 
@@ -62,6 +67,10 @@ func _on_resolution_selected(index: int) -> void:
 func _on_render_resolution_selected(index: int) -> void:
 	var key = _render_resolution_option_button.get_item_text(index)
 	Settings.render_resolution = Settings.RenderResolution[key]
+
+
+func _on_vsync_toggled(toggled_on: bool) -> void:
+	Settings.vsync_enabled = toggled_on
 
 
 func _on_master_volume_changed(value: float) -> void:
