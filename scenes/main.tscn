@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4c1rrqv6ix6t"]
+[gd_scene load_steps=7 format=3 uid="uid://b4c1rrqv6ix6t"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_4sb5f"]
 [ext_resource type="PackedScene" uid="uid://dxc0dcmyuxrpp" path="res://scenes/ui/splash_screen.tscn" id="2_v07al"]
 [ext_resource type="PackedScene" uid="uid://s3vv5tktnqbd" path="res://scenes/ui/title_screen.tscn" id="3_rctig"]
 [ext_resource type="PackedScene" uid="uid://bwdbewrwmqofr" path="res://scenes/ui/start_menu.tscn" id="5_mnayd"]
 [ext_resource type="PackedScene" uid="uid://dqodb6ynogur6" path="res://scenes/ui/loading_screen.tscn" id="5_wt4av"]
+[ext_resource type="PackedScene" uid="uid://b5inr7p68d6n2" path="res://scenes/ui/debug/debug_hud.tscn" id="6_1obtx"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_4sb5f")
@@ -17,3 +18,5 @@ layer = 3
 [node name="LoadingScreen" parent="." instance=ExtResource("5_wt4av")]
 
 [node name="StartMenu" parent="." instance=ExtResource("5_mnayd")]
+
+[node name="DebugHud" parent="." instance=ExtResource("6_1obtx")]
