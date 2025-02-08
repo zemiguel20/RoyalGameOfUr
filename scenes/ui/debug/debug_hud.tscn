@@ -11,6 +11,11 @@ script/source = "extends CanvasLayer
 @onready var window_resolution_label: Label = $Control/VBoxContainer/WindowResolutionLabel
 
 
+func _ready() -> void:
+	if not OS.is_debug_build():
+		visible = false
+		process_mode = PROCESS_MODE_DISABLED
+
 func _process(_delta) -> void:
 		fps_couter_label.text = \"FPS: %d\" % int(Engine.get_frames_per_second())
 		
