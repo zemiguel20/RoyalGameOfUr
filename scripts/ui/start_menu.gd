@@ -13,10 +13,12 @@ signal play_pressed(config: BoardGame.Config)
 @onready var _button_list: VBoxContainer = $MainMenu/Buttons
 @onready var _singleplayer_button: Button = $MainMenu/Buttons/SingleplayerButton
 @onready var _multiplayer_button: Button = $MainMenu/Buttons/MultiplayerButton
+@onready var _settings_button: Button = $MainMenu/Buttons/SettingsButton
 @onready var _quit_button: Button = $MainMenu/Buttons/QuitButton
 @onready var _game_version_label: Label = $MainMenu/GameVersionLabel
 
 @onready var _ruleset_menu: RulesetMenu = $RulesetMenu
+@onready var _settings_menu: SettingsMenu = $SettingsMenu
 
 
 func _ready() -> void:
@@ -24,10 +26,12 @@ func _ready() -> void:
 	
 	_singleplayer_button.pressed.connect(_start_singleplayer_game)
 	_multiplayer_button.pressed.connect(_show_ruleset_menu)
+	_settings_button.pressed.connect(_show_settings_menu)
 	_quit_button.pressed.connect(_quit_game)
 	
 	_ruleset_menu.back_pressed.connect(_show_main_menu)
 	_ruleset_menu.play_pressed.connect(play_pressed.emit)
+	_settings_menu.back_pressed.connect(_show_main_menu)
 	
 	if test:
 		await Engine.get_main_loop().process_frame # loading
@@ -61,6 +65,7 @@ func show_with_fade() -> void:
 func _show_main_menu() -> void:
 	show()
 	_ruleset_menu.hide()
+	_settings_menu.hide()
 
 
 func _start_singleplayer_game() -> void:
@@ -72,6 +77,11 @@ func _start_singleplayer_game() -> void:
 func _show_ruleset_menu() -> void:
 	hide()
 	_ruleset_menu.show()
+
+
+func _show_settings_menu() -> void:
+	hide()
+	_settings_menu.show()
 
 
 func _quit_game() -> void:

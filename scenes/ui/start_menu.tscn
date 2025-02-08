@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwdbewrwmqofr"]
+[gd_scene load_steps=6 format=3 uid="uid://bwdbewrwmqofr"]
 
 [ext_resource type="Script" path="res://scripts/ui/start_menu.gd" id="1_aktau"]
 [ext_resource type="Texture2D" uid="uid://dgswxb2c7csw8" path="res://ui/logos/logo_game_color.png" id="3_0v46f"]
 [ext_resource type="Texture2D" uid="uid://bcj1j0w025r45" path="res://ui/logos/table_cloth_menu_transparent.png" id="3_2vdvx"]
 [ext_resource type="PackedScene" uid="uid://cydp4h0m80bfo" path="res://scenes/ui/ruleset_menu.tscn" id="4_du0xo"]
+[ext_resource type="PackedScene" uid="uid://dp825cqkjmarq" path="res://scenes/ui/settings_menu.tscn" id="5_cv172"]
 
 [node name="StartMenu" type="CanvasLayer"]
 script = ExtResource("1_aktau")
@@ -77,6 +78,14 @@ flat = true
 alignment = 2
 metadata/_edit_use_anchors_ = true
 
+[node name="SettingsButton" type="Button" parent="MainMenu/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Settings"
+flat = true
+alignment = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="QuitButton" type="Button" parent="MainMenu/Buttons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
@@ -98,3 +107,5 @@ grow_vertical = 0
 text = "Ver 1.0.0"
 
 [node name="RulesetMenu" parent="." instance=ExtResource("4_du0xo")]
+
+[node name="SettingsMenu" parent="." instance=ExtResource("5_cv172")]
