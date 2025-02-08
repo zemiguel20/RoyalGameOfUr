@@ -15,22 +15,26 @@ var _resolutions: Array[VideoResolution]
 
 
 func _ready() -> void:
-	_windowed_mode_check_box.set_pressed_no_signal(Settings.windowed)
-	_resolution_option_button.disabled = not Settings.windowed
-	
 	_resolutions = Settings.get_resolutions()
 	for resolution in _resolutions:
 		_resolution_option_button.add_item(str(resolution))
 	
-	_resolution_option_button.select(_resolutions.find(Settings.resolution))
-	
-	_master_volume_slider.set_value_no_signal(Settings.master_volume)
-	
 	_windowed_mode_check_box.toggled.connect(_on_windowed_mode_toggled)
 	_resolution_option_button.item_selected.connect(_on_resolution_selected)
 	_master_volume_slider.value_changed.connect(_on_master_volume_changed)
-	
 	_back_button.pressed.connect(back_pressed.emit)
+	visibility_changed.connect(_on_visibility_changed)
+
+
+# NOTE: Guarantees menu is updated if settings changed elsewhere
+func _on_visibility_changed() -> void:
+	if not visible:
+		return
+	
+	_windowed_mode_check_box.set_pressed_no_signal(Settings.windowed)
+	_resolution_option_button.disabled = not Settings.windowed
+	_resolution_option_button.select(_resolutions.find(Settings.resolution))
+	_master_volume_slider.set_value_no_signal(Settings.master_volume)
 
 
 func _on_windowed_mode_toggled(toggled_on: bool) -> void:
