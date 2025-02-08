@@ -12,13 +12,18 @@ var windowed: bool:
 		windowed = value
 		if windowed:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			if window_resolution != null:
+				get_window().size = window_resolution.res
 		else:
+			# NOTE: fullscreen forces screen resolution.
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
-var resolution: VideoResolution:
+## Resolution when in windowed mode
+var window_resolution: VideoResolution:
 	set(value):
-		resolution = value
-		get_window().size = resolution.res
+		window_resolution = value
+		if windowed and window_resolution != null:
+			get_window().size = window_resolution.res
 
 var master_volume: float:
 	set(value):
@@ -42,6 +47,10 @@ func get_resolutions() -> Array[VideoResolution]:
 	return _supported_resolutions.duplicate()
 
 
+func get_fullscreen_resolution() -> VideoResolution:
+	return _supported_resolutions.back()
+
+
 func _load_supported_resolutions() -> void:
 	var screen_index = DisplayServer.get_primary_screen()
 	var screen_size = DisplayServer.screen_get_size(screen_index)
@@ -55,7 +64,7 @@ func _save_settings_file() -> void:
 	var config = ConfigFile.new()
 	
 	config.set_value("Graphics", "windowed", windowed)
-	config.set_value("Graphics", "resolution", resolution.res)
+	config.set_value("Graphics", "window_resolution", window_resolution.res)
 	config.set_value("Audio", "master_volume", master_volume)
 	
 	config.save("user://settings.ini")
@@ -63,7 +72,7 @@ func _save_settings_file() -> void:
 
 func _load_settings_file() -> void:
 	var default_windowed = false
-	var default_resolution = _supported_resolutions.back()
+	var default_window_resolution = _supported_resolutions.back()
 	var default_master_volume = 1.0
 	
 	var config = ConfigFile.new()
@@ -73,8 +82,8 @@ func _load_settings_file() -> void:
 		#return
 	
 	windowed = config.get_value("Graphics", "windowed", default_windowed)
-	var res = config.get_value("Graphics", "resolution", default_resolution.res)
-	resolution = _get_closest_supported_resolution(res)
+	var res = config.get_value("Graphics", "window_resolution", default_window_resolution.res)
+	window_resolution = _get_closest_supported_resolution(res)
 	master_volume = config.get_value("Audio", "master_volume", default_master_volume)
 
 
