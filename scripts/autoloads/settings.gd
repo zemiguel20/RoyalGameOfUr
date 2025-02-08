@@ -2,6 +2,13 @@ extends Node
 ## Autoload with all game settings
 
 
+enum RenderResolution {
+	LOW,
+	MEDIUM,
+	HIGH,
+}
+
+
 var fast_mode: bool = false
 
 # NOTE: this flag enables the extra features for the research purposes of this game.
@@ -24,6 +31,19 @@ var window_resolution: VideoResolution:
 		window_resolution = value
 		if windowed and window_resolution != null:
 			get_window().size = window_resolution.res
+
+var render_resolution: RenderResolution:
+	set(value):
+		render_resolution = value
+		if render_resolution == RenderResolution.LOW:
+			get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR2
+			get_viewport().scaling_3d_scale = 0.59
+		elif render_resolution == RenderResolution.MEDIUM:
+			get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR2
+			get_viewport().scaling_3d_scale = 0.77
+		else:
+			get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+			get_viewport().scaling_3d_scale = 1.0
 
 var master_volume: float:
 	set(value):
@@ -65,6 +85,7 @@ func _save_settings_file() -> void:
 	
 	config.set_value("Graphics", "windowed", windowed)
 	config.set_value("Graphics", "window_resolution", window_resolution.res)
+	config.set_value("Graphics", "render_resolution", render_resolution)
 	config.set_value("Audio", "master_volume", master_volume)
 	
 	config.save("user://settings.ini")
@@ -73,6 +94,7 @@ func _save_settings_file() -> void:
 func _load_settings_file() -> void:
 	var default_windowed = false
 	var default_window_resolution = _supported_resolutions.back()
+	var default_render_resolution = 1.0
 	var default_master_volume = 1.0
 	
 	var config = ConfigFile.new()
@@ -84,6 +106,7 @@ func _load_settings_file() -> void:
 	windowed = config.get_value("Graphics", "windowed", default_windowed)
 	var res = config.get_value("Graphics", "window_resolution", default_window_resolution.res)
 	window_resolution = _get_closest_supported_resolution(res)
+	render_resolution = config.get_value("Graphics", "render_resolution", default_render_resolution)
 	master_volume = config.get_value("Audio", "master_volume", default_master_volume)
 
 

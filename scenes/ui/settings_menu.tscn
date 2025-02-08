@@ -95,15 +95,27 @@ script = ExtResource("2_vxyhm")
 hover_checked = ExtResource("3_7xx30")
 hover_unchecked = ExtResource("4_ypqx1")
 
-[node name="Resolution" type="HBoxContainer" parent="TabletPanel/VBoxContainer/GraphicsSection"]
+[node name="WindowResolution" type="HBoxContainer" parent="TabletPanel/VBoxContainer/GraphicsSection"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabletPanel/VBoxContainer/GraphicsSection/Resolution"]
+[node name="Label" type="Label" parent="TabletPanel/VBoxContainer/GraphicsSection/WindowResolution"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "Resolution"
+text = "Window Resolution"
 
-[node name="ResolutionOptionButton" type="OptionButton" parent="TabletPanel/VBoxContainer/GraphicsSection/Resolution"]
+[node name="ResolutionOptionButton" type="OptionButton" parent="TabletPanel/VBoxContainer/GraphicsSection/WindowResolution"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RenderResolution" type="HBoxContainer" parent="TabletPanel/VBoxContainer/GraphicsSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabletPanel/VBoxContainer/GraphicsSection/RenderResolution"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Render Resolution"
+
+[node name="RenderResolutionOptionButton" type="OptionButton" parent="TabletPanel/VBoxContainer/GraphicsSection/RenderResolution"]
 unique_name_in_owner = true
 layout_mode = 2
 
