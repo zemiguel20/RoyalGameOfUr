@@ -29,12 +29,12 @@ func _enable_dice_interaction() -> void:
 
 func _highlight_selectable() -> void:
 	for die in _dice:
-		die.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
+		die.enable_highlight(Highlight.get_color(Highlight.Type.SELECTABLE))
 
 
 func _highlight_hovered() -> void:
 	for die in _dice:
-		die.enable_highlight(General.get_highlight_color(General.HighlightType.HOVERED))
+		die.enable_highlight(Highlight.get_color(Highlight.Type.HOVERED))
 
 
 func _deactivate_dice_interaction() -> void:

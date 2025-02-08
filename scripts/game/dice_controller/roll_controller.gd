@@ -34,11 +34,11 @@ func start_roll() -> void:
 ## Highlights the dice with the appropriate color for a positive or negative result.
 ## To be called externally after the result is processed.
 func highlight_result(positive: bool) -> void:
-	var type = General.HighlightType.POSITIVE if positive else General.HighlightType.NEGATIVE
+	var type = Highlight.Type.POSITIVE if positive else Highlight.Type.NEGATIVE
 	var highlight_only_ones: bool = positive or _last_rolled_value > 0
 	for die in _dice:
 		if highlight_only_ones == false or die.last_rolled_value == 1:
-			die.enable_highlight(General.get_highlight_color(type))
+			die.enable_highlight(Highlight.get_color(type))
 
 
 func clear_highlight() -> void:
@@ -107,7 +107,7 @@ func _toss_dice() -> void:
 	if not Settings.fast_mode:
 		for die in _dice:
 			if die.last_rolled_value > 0:
-				die.enable_highlight(General.get_highlight_color(General.HighlightType.NEUTRAL))
+				die.enable_highlight(Highlight.get_color(Highlight.Type.NEUTRAL))
 				await get_tree().create_timer(0.2).timeout
 	
 	rolled.emit(result)

@@ -2,40 +2,6 @@ class_name General
 ## Contains global constants and utility functions.
 
 
-enum HighlightType {
-	NONE,
-	SELECTABLE,
-	SELECTABLE_SPECIAL,
-	HOVERED,
-	SELECTED,
-	POSITIVE,
-	NEGATIVE,
-	ROSETTE,
-	KO,
-	END,
-	NEUTRAL,
-}
-
-
-const COLOR_MAP: Dictionary = {
-	HighlightType.NONE : Color.TRANSPARENT,
-	HighlightType.SELECTABLE : Color("#00d8bdff"),
-	HighlightType.SELECTABLE_SPECIAL: Color.GOLD,
-	HighlightType.HOVERED : Color("#00ffdfff"),
-	HighlightType.SELECTED : Color("#009f8bff"),
-	HighlightType.POSITIVE : Color.GREEN,
-	HighlightType.NEGATIVE : Color.RED,
-	HighlightType.ROSETTE : Color.MEDIUM_PURPLE,
-	HighlightType.KO : Color.ORANGE,
-	HighlightType.END : Color.GREEN_YELLOW,
-	HighlightType.NEUTRAL : Color.GHOST_WHITE,
-}
-
-
-static func get_highlight_color(type: HighlightType) -> Color:
-	return COLOR_MAP[type]
-
-
 ## Probability mass function. Variable must follow a binomial distribution (2 possible outcomes).
 ##
 ## [param k] is the number of successes in [param n] trials, with [param p] being the \

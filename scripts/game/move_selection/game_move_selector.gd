@@ -13,7 +13,7 @@ func start_selection(moves: Array[GameMove]) -> void:
 
 
 func _highlight_move(move: GameMove) -> void:
-	var base_color = General.get_highlight_color(General.HighlightType.NEUTRAL)
+	var base_color = Highlight.get_color(Highlight.Type.NEUTRAL)
 	move.from.enable_highlight(base_color)
 	for piece in move.pieces_in_from:
 		piece.enable_highlight(base_color)
@@ -42,13 +42,13 @@ func _clear_move_highlight(move: GameMove) -> void:
 
 func _get_to_spot_color(move: GameMove) -> Color:
 	if move.to_is_end_of_track:
-		return General.get_highlight_color(General.HighlightType.END)
+		return Highlight.get_color(Highlight.Type.END)
 	elif move.knocks_opponent_out:
-		return General.get_highlight_color(General.HighlightType.KO)
+		return Highlight.get_color(Highlight.Type.KO)
 	elif move.to.is_rosette and (move.to_is_safe or move.stacks or move.gives_extra_turn):
-		return General.get_highlight_color(General.HighlightType.ROSETTE)
+		return Highlight.get_color(Highlight.Type.ROSETTE)
 	else:
-		return General.get_highlight_color(General.HighlightType.NEUTRAL)
+		return Highlight.get_color(Highlight.Type.NEUTRAL)
 
 
 # Creates a path highlighter for the given move. If the move already has an associated

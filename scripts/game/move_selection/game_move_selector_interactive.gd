@@ -139,14 +139,14 @@ func _on_to_hovered(to: Spot) -> void:
 	if not _from_selected:
 		return
 	
-	to.enable_highlight(General.get_highlight_color(General.HighlightType.HOVERED))
+	to.enable_highlight(Highlight.get_color(Highlight.Type.HOVERED))
 
 
 func _on_to_dehovered(to: Spot) -> void:
 	if not _from_selected:
 		return
 	
-	to.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
+	to.enable_highlight(Highlight.get_color(Highlight.Type.SELECTABLE))
 
 
 func _on_to_selected(to: Spot) -> void:
@@ -177,18 +177,18 @@ func _get_selectable_color(spot: Spot) -> Color:
 	var moves_from = _moves.filter(func(move: GameMove): return move.from == spot)
 	for move in moves_from:
 		var to_color = _get_to_spot_color(move)
-		var neutral_color = General.get_highlight_color(General.HighlightType.NEUTRAL)
+		var neutral_color = Highlight.get_color(Highlight.Type.NEUTRAL)
 		var has_special_outcome = to_color != neutral_color
 		if has_special_outcome:
-			return General.get_highlight_color(General.HighlightType.SELECTABLE_SPECIAL)
+			return Highlight.get_color(Highlight.Type.SELECTABLE_SPECIAL)
 	
-	return General.get_highlight_color(General.HighlightType.SELECTABLE)
+	return Highlight.get_color(Highlight.Type.SELECTABLE)
 
 
 func _highlight_move_hovered(move: GameMove) -> void:
 	_highlight_move(move)
 	
-	var hovered_color = General.get_highlight_color(General.HighlightType.HOVERED)
+	var hovered_color = Highlight.get_color(Highlight.Type.HOVERED)
 	move.from.enable_highlight(hovered_color)
 	for piece in move.pieces_in_from:
 		piece.enable_highlight(hovered_color)
@@ -197,9 +197,9 @@ func _highlight_move_hovered(move: GameMove) -> void:
 func _highlight_move_from_selected(move: GameMove) -> void:
 	_highlight_move(move)
 	
-	var selected_color = General.get_highlight_color(General.HighlightType.SELECTED)
+	var selected_color = Highlight.get_color(Highlight.Type.SELECTED)
 	move.from.enable_highlight(selected_color)
 	for piece in move.pieces_in_from:
 		piece.enable_highlight(selected_color)
 	
-	move.to.enable_highlight(General.get_highlight_color(General.HighlightType.SELECTABLE))
+	move.to.enable_highlight(Highlight.get_color(Highlight.Type.SELECTABLE))
