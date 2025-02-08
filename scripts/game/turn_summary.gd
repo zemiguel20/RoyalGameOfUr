@@ -42,31 +42,13 @@ static func create_no_moves(p_turn_number: int, p_player: int, p_roll: int) -> T
 	return summary
 
 
-static func result_to_string(result: Result) -> StringName:
-	if result == Result.NORMAL:
-		return "Normal"
-	elif result == Result.EXTRA_TURN:
-		return "Extra_Turn"
-	elif result == Result.WIN:
-		return "Win"
-	else:
-		return "No_Moves"
-
-
-static func player_to_string(player: BoardGame.Player) -> StringName:
-	if player == BoardGame.Player.ONE:
-		return "One"
-	else:
-		return "Two"
-
-
 func to_json() -> Dictionary:
 	var dict = {
 		"turn_number" : turn_number,
-		"player" : player_to_string(player),
+		"player" : BoardGame.Player.find_key(player),
 		"roll" : roll,
 		"move" : {} if result == Result.NO_MOVES else move.to_json(),
-		"result" : result_to_string(result)
+		"result" : Result.find_key(result)
 	}
 	
 	return dict
