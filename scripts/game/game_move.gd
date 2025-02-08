@@ -108,7 +108,7 @@ func _calculate_spot_ko_probability(spot_index: int) -> float:
 	for i in path.size():
 		var spot = path[i]
 		if spot.is_occupied_by_player(opponent):
-			ko_cumulative_probability += General.calculate_probability(i + 1, max_steps, 0.5)
+			ko_cumulative_probability += Maths.calculate_probability(i + 1, max_steps, 0.5)
 	
 	if _ruleset.can_move_backwards:
 		# NOTE: "-2" instead of "-1" to not count the end spot.
@@ -120,7 +120,7 @@ func _calculate_spot_ko_probability(spot_index: int) -> float:
 		for i in path.size():
 			var spot = path[i]
 			if spot.is_occupied_by_player(opponent):
-				ko_cumulative_probability += General.calculate_probability(i + 1, max_steps, 0.5)
+				ko_cumulative_probability += Maths.calculate_probability(i + 1, max_steps, 0.5)
 	
 	return ko_cumulative_probability
 

@@ -1,5 +1,5 @@
-class_name General
-## Contains global constants and utility functions.
+class_name Maths
+## Contains global math constants and functions that are not present as built-in.
 
 
 ## Probability mass function. Variable must follow a binomial distribution (2 possible outcomes).
