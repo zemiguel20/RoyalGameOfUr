@@ -32,29 +32,32 @@ const BOARD_LIST: Array[BoardLayout] = [
 var _selected_ruleset_index: int = 0
 var _selected_board_index: int = 0
 
-@onready var _switch_ruleset_left_button: TextureButton = $Control/TabletFrame/RulesetPicker/SwitchRulesetLeftButton
-@onready var _ruleset_name_label: Label = $Control/TabletFrame/RulesetPicker/RulesetNameLabel
-@onready var _switch_ruleset_right_button: TextureButton = $Control/TabletFrame/RulesetPicker/SwitchRulesetRightButton
+@onready var _switch_ruleset_left_button: TextureButton = %SwitchRulesetLeftButton
+@onready var _ruleset_name_label: Label = %RulesetNameLabel
+@onready var _switch_ruleset_right_button: TextureButton = %SwitchRulesetRightButton
 
-@onready var _switch_board_left_button: TextureButton = $Control/TabletFrame/BoardPicker/SwitchBoardLeftButton
-@onready var _board_layout_image: TextureRect = $Control/TabletFrame/BoardPicker/BoardLayoutImage
-@onready var _switch_board_right_button: TextureButton = $Control/TabletFrame/BoardPicker/SwitchBoardRightButton
-@onready var _board_name_label: Label = $Control/TabletFrame/BoardPicker/BoardNameLabel
+@onready var _switch_board_left_button: TextureButton = %SwitchBoardLeftButton
+@onready var _board_layout_image: TextureRect = %BoardLayoutImage
+@onready var _switch_board_right_button: TextureButton = %SwitchBoardRightButton
+@onready var _board_name_label: Label = %BoardNameLabel
 
-@onready var _rule_1_check_box: CheckBox = $Control/TabletFrame/RulesList/Rule1CheckBox
-@onready var _rule_2_check_box: CheckBox = $Control/TabletFrame/RulesList/Rule2CheckBox
-@onready var _rule_3_check_box: CheckBox = $Control/TabletFrame/RulesList/Rule3CheckBox
-@onready var _rule_4_check_box: CheckBox = $Control/TabletFrame/RulesList/Rule4CheckBox
-@onready var _rule_5_check_box: CheckBox = $Control/TabletFrame/RulesList/Rule5CheckBox
+@onready var _rule_1_check_box: CheckBox = %Rule1CheckBox
+@onready var _rule_2_check_box: CheckBox = %Rule2CheckBox
+@onready var _rule_3_check_box: CheckBox = %Rule3CheckBox
+@onready var _rule_4_check_box: CheckBox = %Rule4CheckBox
+@onready var _rule_5_check_box: CheckBox = %Rule5CheckBox
 
-@onready var _piece_number_slider: HSlider = $Control/TabletFrame/Sliders/PieceNumberSlider
-@onready var _piece_number_label: Label = $Control/TabletFrame/Sliders/PieceNumberSlider/PieceNumberLabel
-@onready var _dice_number_slider: HSlider = $Control/TabletFrame/Sliders/DiceNumberSlider
-@onready var _dice_number_label: Label = $Control/TabletFrame/Sliders/DiceNumberSlider/DiceNumberLabel
+@onready var _piece_number_slider: HSlider = %PieceNumberSlider
+@onready var _piece_number_label: Label = %PieceNumberLabel
+@onready var _dice_number_slider: HSlider = %DiceNumberSlider
+@onready var _dice_number_label: Label = %DiceNumberLabel
 
-@onready var _reset_button: Button = $Control/TabletFrame/ResetButton
-@onready var _confirm_button: Button = $Control/TabletFrame/ConfirmButton
-@onready var _back_button: Button = $Control/TabletFrame/BackButton
+@onready var _p_1_npc: CheckBox = %P1NPC
+@onready var _p_2_npc: CheckBox = %P2NPC
+
+@onready var _reset_button: Button = %ResetButton
+@onready var _confirm_button: Button = %ConfirmButton
+@onready var _back_button: Button = %BackButton
 
 
 func _ready() -> void:
@@ -142,11 +145,11 @@ func _update_board_menu() -> void:
 
 
 func _update_piece_slider_label(value: float) -> void:
-	_piece_number_label.text = "%d Total pieces" % _piece_number_slider.value
+	_piece_number_label.text = "%d pieces" % _piece_number_slider.value
 
 
 func _update_dice_slider_label(value: float) -> void:
-	_dice_number_label.text = "%d Total dice" % _dice_number_slider.value
+	_dice_number_label.text = "%d dice" % _dice_number_slider.value
 
 
 func _set_ruleset_name_custom() -> void:
@@ -170,6 +173,7 @@ func _start_game() -> void:
 	var config := BoardGame.Config.new()
 	config.ruleset = ruleset
 	config.hotseat = true
-	config.p2_npc = false
+	config.p1_npc = _p_1_npc.button_pressed
+	config.p2_npc = _p_2_npc.button_pressed
 	
 	play_pressed.emit(config)
