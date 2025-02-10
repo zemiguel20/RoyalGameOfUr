@@ -32,9 +32,7 @@ func on_start():
 	
 func on_process(delta) -> Status:
 	# Update Position
-	var prev_y_pos = _owner.global_position.y
 	_owner.global_position = _path_follow.global_position
-	_owner.global_position.y = prev_y_pos
 	
 	# Update Rotation: Smoothly follow the rotation of the followpath, but don't copy it.
 	_target_rotation = _path_follow.global_rotation
