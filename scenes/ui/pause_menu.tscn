@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://purvwsmsb7e8"]
+[gd_scene load_steps=3 format=3 uid="uid://purvwsmsb7e8"]
 
 [ext_resource type="Script" path="res://scripts/ui/pause_screen.gd" id="1_uhldg"]
+[ext_resource type="PackedScene" uid="uid://dp825cqkjmarq" path="res://scenes/ui/settings_menu.tscn" id="2_nq0bc"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_uhldg")
@@ -57,8 +58,16 @@ theme_override_font_sizes/font_size = 50
 text = "Resume"
 flat = true
 
+[node name="SettingsButton" type="Button" parent="TabletPanel/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+flat = true
+
 [node name="MainMenuButton" type="Button" parent="TabletPanel/Buttons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Back to main menu"
 flat = true
+
+[node name="SettingsMenu" parent="." instance=ExtResource("2_nq0bc")]
