@@ -35,6 +35,9 @@ func _process(_delta) -> void:
 "
 
 [sub_resource type="FontFile" id="FontFile_jm10w"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -45,6 +48,9 @@ cache/0/16/0/scale = 1.0
 font = SubResource("FontFile_jm10w")
 
 [sub_resource type="FontFile" id="FontFile_8edu0"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
