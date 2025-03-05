@@ -53,3 +53,30 @@ The `hold_threshold` property defines the time threshold in seconds.
 
 This node provides a set of animations to move the object to a target point in global space. The animations are ran using a `Tween`. Currently it supports two animations: the `move_line` function moves in a straight line with an ease-out function; and the `move_arc` function moves in an arc with a specified height.
 The `movement_finished` signal is emitted once the animation finishes.
+
+## Systems
+
+The `board_game.tscn` scene contains the main parts of the core game. At the root there is a `BoardGame` node which is the main controller of the game. The entities are spawned dynamically according to the game settings.
+It has a `Node3D` that acts as the spawn point for the board, and two `DiceZone` instances, one for each player. It also has a `StaticBody3D` that acts as the floor/table for the dice to roll on.
+
+### `DiceZone`
+
+The `DiceZone` is a node that is essentially a container of 2 sets of `Node3D` points. One set represents the placing points, used when the dice are passed between players when the turns change. The other set represents throwing points, used when tossing the dice.
+
+The `DiceZone` is also used to spawn the dice. The placing spots are used as spawning points.
+
+### `Ruleset`
+
+The `Ruleset` is a resource that contains the properties of a ruleset, such as number of dice and pieces per player, and the effects of a rosette tile. It also contains the used board, represented as a `BoardLayout` resource. The `BoardLayout` is simply a metadata wrapper for each different `Board` scene, having a name, preview image, and the reference to the respective `Board` scene.
+
+For each different ruleset there is a `Ruleset` resource instance.
+
+### Game setup
+
+The `BoardGame` node provides a `setup(Config)` function that sets up the game and board by spawning all the necessary objects.
+The `Config` struct contains the game configuration and setting, including the `Ruleset` and if player 1 and/or 2 are NPCs or not.
+
+The `BoardGame` uses one of the `DiceZone` instances to spawn the dice, spawns the board in the board spawn point, and then uses this `Board` instance to spawn the player pieces.
+
+For each player it will create a `TurnController` instance and configure it according to whether they are a player or NPC.
+
