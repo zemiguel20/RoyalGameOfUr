@@ -80,3 +80,12 @@ The `BoardGame` uses one of the `DiceZone` instances to spawn the dice, spawns t
 
 For each player it will create a `TurnController` instance and configure it according to whether they are a player or NPC.
 
+### Turn flow
+The `TurnController` controls the turn sequence of a player. It has a `start` method that initiates the turn sequence and when the turn ends it emits the `turn_finished(TurnSummary)` signal. The `TurnSummary` is a data object that contains the important data that summarizes a turn, including the outcome (e.g. win, extra turn).
+The `BoardGame` will delegate the turn order depending on the given outcome of a turn. Once a turn finished with the result being that player winning the game, the `BoardGame` emits the `ended(player_winner)` signal.
+
+To control the rolling phase and the move selection phase of a turn, the `TurnController` has 2 subcontroller instances: the `RollController` which controlls the process of rolling the dice; and the `GameMoveSelector` which controller the process of selecting a move.
+Both of these classes will have sub-classes that implement certain behavior specific to the player or to the AI. The `RollController` has the `InteractiveRollController` for the player and the `AutoRollController` for the AI. The `GameMoveSelector` has the `InteractiveGameMoveSelector` for the player, and the `AIGameMoveSelector` for the AI.
+Which one to use is decided during the setup, depending on the game settings.
+
+These sub-controllers interact with the entities and their components to implement their behavior.
