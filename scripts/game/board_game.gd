@@ -44,7 +44,7 @@ func setup(new_config: Config) -> void:
 	if config.rematch:
 		board.reset()
 	else:
-		_despaw_objects()
+		_despawn_objects()
 		_spawn_board(config.ruleset.board_layout.scene, config.ruleset.num_pieces)
 		_spawn_dice()
 	
@@ -60,7 +60,7 @@ func start() -> void:
 	_get_turn_controller().start_turn(turn_number)
 
 
-func _despaw_objects() -> void:
+func _despawn_objects() -> void:
 	if board != null:
 		board.queue_free()
 	for die in dice:
