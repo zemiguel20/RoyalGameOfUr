@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://qf6gyjt7j251"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=10 format=3 uid="uid://qf6gyjt7j251"]
 
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="1_6g1u6"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_136wl"]
 [ext_resource type="AudioStream" uid="uid://chkxk7vexxl1v" path="res://resources/dialogue/intro-1-1-ah-thats-better.mp3" id="1_n4wmi"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_k243e"]
@@ -35,6 +36,6 @@ prevents_opponent_action = false
 
 [resource]
 script = ExtResource("2_k243e")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_7k2gv"), SubResource("Resource_eyp5x"), SubResource("Resource_ha7mv")])
+dialogue_entries = Array[ExtResource("1_6g1u6")]([SubResource("Resource_7k2gv"), SubResource("Resource_eyp5x"), SubResource("Resource_ha7mv")])
 requires_click = true
 weight = 5

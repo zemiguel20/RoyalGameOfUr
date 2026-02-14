@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://3nm3p8clp3w2"]
+
+[ext_resource type="Shader" path="res://shaders/outline_mesh.gdshader" id="1_s8ptv"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 10
+shader = ExtResource("1_s8ptv")
+shader_parameter/border_width = 0.15
+shader_parameter/color = Color(1, 1, 1, 1)

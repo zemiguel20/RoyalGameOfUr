@@ -23,13 +23,13 @@ var _path2: PathFollow3D
 var _path3: PathFollow3D
 var _original_position: Vector3
 
-func on_ready(_npc_manager):
+func on_ready(manager):
 	_original_position = global_position
-	_path1 = _npc_manager.path_follow_guard_1
-	_path2 = _npc_manager.path_follow_guard_2
-	_path3 = _npc_manager.path_follow_guard_3
+	_path1 = manager.path_follow_guard_1
+	_path2 = manager.path_follow_guard_2
+	_path3 = manager.path_follow_guard_3
 	
-	super.on_ready(_npc_manager)
+	super.on_ready(manager)
 	
 
 func _initialize_blackboard():

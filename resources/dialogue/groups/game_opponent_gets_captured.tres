@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=20 format=3 uid="uid://cm3tybkthodww"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=21 format=3 uid="uid://cm3tybkthodww"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_2sxg3"]
 [ext_resource type="AudioStream" uid="uid://cebe7ny7j2gvs" path="res://resources/dialogue/gameplay-reaction-aaah-lucky-bastard.mp3" id="1_ooied"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_tbyis"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="2_0irb2"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_gckjy"]
 [ext_resource type="AudioStream" uid="uid://djstwlkwcnyi2" path="res://resources/dialogue/gameplay-reaction-aaah-so-close.mp3" id="4_dohi3"]
 [ext_resource type="AudioStream" uid="uid://bttfdn8rxou3y" path="res://resources/dialogue/gameplay-reaction-so-close-1.mp3" id="5_63c1u"]
@@ -23,7 +24,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_cpsie"]
 script = ExtResource("2_gckjy")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_ibr8n")])
+dialogue_entries = Array[ExtResource("2_0irb2")]([SubResource("Resource_ibr8n")])
 requires_click = false
 weight = 5
 
@@ -38,7 +39,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_2r6f2"]
 script = ExtResource("2_gckjy")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_su0mh")])
+dialogue_entries = Array[ExtResource("2_0irb2")]([SubResource("Resource_su0mh")])
 requires_click = false
 weight = 5
 
@@ -53,7 +54,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_djy16"]
 script = ExtResource("2_gckjy")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_lsn2f")])
+dialogue_entries = Array[ExtResource("2_0irb2")]([SubResource("Resource_lsn2f")])
 requires_click = false
 weight = 5
 
@@ -68,7 +69,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_fc7kb"]
 script = ExtResource("2_gckjy")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_3s7n4")])
+dialogue_entries = Array[ExtResource("2_0irb2")]([SubResource("Resource_3s7n4")])
 requires_click = false
 weight = 5
 

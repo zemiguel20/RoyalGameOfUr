@@ -1,18 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://drllx28djyai7"]
 
 [ext_resource type="Script" path="res://scripts/npc_system/npc_system.gd" id="1_3oufk"]
-[ext_resource type="PackedScene" uid="uid://4goheq1kyhy1" path="res://test/scenes/guard_npc.tscn" id="2_6rgek"]
-[ext_resource type="PackedScene" uid="uid://c2osilgwlxj1y" path="res://test/scenes/kitchen_npc.tscn" id="3_lqpm5"]
+[ext_resource type="PackedScene" uid="uid://d1l4ef265ffb7" path="res://scenes/npcs/background_npc_1.tscn" id="2_awp52"]
+[ext_resource type="PackedScene" uid="uid://buom26q6bfgpq" path="res://scenes/npcs/background_npc_2.tscn" id="3_abcvh"]
 
 [node name="NPCSystem" type="Node3D"]
 script = ExtResource("1_3oufk")
 
 [node name="NPCs" type="Node3D" parent="."]
 
-[node name="Guard_NPC" parent="NPCs" instance=ExtResource("2_6rgek")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5644, 0.106368, 5.32111)
-visible = false
+[node name="Guard_NPC" parent="NPCs" instance=ExtResource("2_awp52")]
 
-[node name="Kitchen_NPC" parent="NPCs" instance=ExtResource("3_lqpm5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.681957, 0.127295, -2.3396)
-visible = false
+[node name="Kitchen_NPC" parent="NPCs" instance=ExtResource("3_abcvh")]

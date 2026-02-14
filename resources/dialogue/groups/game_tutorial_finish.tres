@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=11 format=3 uid="uid://dsba08jo60k0t"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=12 format=3 uid="uid://dsba08jo60k0t"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_ngoas"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_stmch"]
 [ext_resource type="AudioStream" uid="uid://cykbmre5ru5r4" path="res://resources/dialogue/explain-secure-a-piece-1.mp3" id="1_vidqm"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_hti26"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="2_pvv1h"]
 [ext_resource type="AudioStream" uid="uid://bfym8i2aucoe3" path="res://resources/dialogue/explain-secure-a-piece-2.mp3" id="2_rr3md"]
 [ext_resource type="AudioStream" uid="uid://ckkd4eydcl143" path="res://resources/dialogue/explain-secure-a-piece-3.mp3" id="3_q1xj7"]
 [ext_resource type="AudioStream" uid="uid://dnhsjys2ekt2o" path="res://resources/dialogue/explain-win-condition.mp3" id="5_rnke2"]
@@ -28,7 +29,7 @@ prevents_opponent_action = true
 
 [sub_resource type="Resource" id="Resource_i6ft5"]
 script = ExtResource("2_hti26")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_0ve0n"), SubResource("Resource_4svvn")])
+dialogue_entries = Array[ExtResource("2_pvv1h")]([SubResource("Resource_0ve0n"), SubResource("Resource_4svvn")])
 requires_click = false
 weight = 5
 

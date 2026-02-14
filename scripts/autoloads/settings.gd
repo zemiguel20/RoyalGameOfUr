@@ -1,0 +1,129 @@
+extends Node
+## Autoload with all game settings
+
+
+enum RenderResolution {
+	LOW,
+	MEDIUM,
+	HIGH,
+}
+
+
+var fast_mode: bool = false
+
+# NOTE: this flag enables the extra features for the research purposes of this game.
+var research_mode: bool = true
+
+var windowed: bool:
+	set(value):
+		windowed = value
+		if windowed:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			if window_resolution != null:
+				get_window().size = window_resolution.res
+		else:
+			# NOTE: fullscreen forces screen resolution.
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+## Resolution when in windowed mode
+var window_resolution: VideoResolution:
+	set(value):
+		window_resolution = value
+		if windowed and window_resolution != null:
+			get_window().size = window_resolution.res
+
+var render_resolution: RenderResolution:
+	set(value):
+		render_resolution = value
+		if render_resolution == RenderResolution.LOW:
+			get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR2
+			get_viewport().scaling_3d_scale = 0.59
+		elif render_resolution == RenderResolution.MEDIUM:
+			get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR2
+			get_viewport().scaling_3d_scale = 0.77
+		else:
+			get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+			get_viewport().scaling_3d_scale = 1.0
+
+var vsync_enabled: bool:
+	set(value):
+		vsync_enabled = value
+		if vsync_enabled:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		else:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+var master_volume: float:
+	set(value):
+		master_volume = clampf(value, 0.0, 1.0)
+		var bus_index = AudioServer.get_bus_index("Master")
+		AudioServer.set_bus_volume_db(bus_index, linear_to_db(master_volume))
+
+var _supported_resolutions: Array[VideoResolution] = []
+
+
+func _ready() -> void:
+	_load_supported_resolutions()
+	_load_settings_file()
+
+
+func _exit_tree() -> void:
+	_save_settings_file()
+
+
+func get_resolutions() -> Array[VideoResolution]:
+	return _supported_resolutions.duplicate()
+
+
+func get_fullscreen_resolution() -> VideoResolution:
+	return _supported_resolutions.back()
+
+
+func _load_supported_resolutions() -> void:
+	var screen_index = DisplayServer.get_primary_screen()
+	var screen_size = DisplayServer.screen_get_size(screen_index)
+	_supported_resolutions.assign(VideoResolution.get_ordered_list().filter(
+		func(res: VideoResolution):
+			return res.res.x <= screen_size.x and res.res.y <= screen_size.y))
+	print(_supported_resolutions)
+
+
+func _save_settings_file() -> void:
+	var config = ConfigFile.new()
+	
+	config.set_value("Graphics", "windowed", windowed)
+	config.set_value("Graphics", "window_resolution", window_resolution.res)
+	config.set_value("Graphics", "render_resolution", render_resolution)
+	config.set_value("Graphics", "vsync", vsync_enabled)
+	config.set_value("Audio", "master_volume", master_volume)
+	
+	config.save("user://settings.ini")
+
+
+func _load_settings_file() -> void:
+	var config = ConfigFile.new()
+	var _err = config.load("user://settings.ini")
+	# If the file didn't load, ignore it.
+	#if err != OK:
+		#return
+	
+	windowed = config.get_value("Graphics", "windowed", false)
+	var default_window_resolution = _supported_resolutions.back()
+	var res = config.get_value("Graphics", "window_resolution", default_window_resolution.res)
+	window_resolution = _get_closest_supported_resolution(res)
+	render_resolution = config.get_value("Graphics", "render_resolution", 1.0)
+	vsync_enabled = config.get_value("Graphics", "vsync", true)
+	master_volume = config.get_value("Audio", "master_volume", 1.0)
+
+
+func _get_closest_supported_resolution(res: Vector2i) -> VideoResolution:
+	var closest_resolution = _supported_resolutions.front() as VideoResolution
+	var smallest_distance = closest_resolution.res - res
+	
+	for i_res in _supported_resolutions:
+		var distance = i_res.res - res
+		if distance < smallest_distance:
+			smallest_distance = distance
+			closest_resolution = i_res
+	
+	return closest_resolution

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://y4idlfyp1gdh"]
 
 [ext_resource type="Script" path="res://scripts/ui/dialogue_menus.gd" id="1_5n43d"]
-[ext_resource type="Texture2D" uid="uid://oclm41ujoyav" path="res://ui/input_icons/right_mouse_button_light.png" id="2_r8lhb"]
+[ext_resource type="Texture2D" uid="uid://gysygxgh43qd" path="res://ui/input_icons/mouse_right.svg" id="2_lcmsd"]
 
 [sub_resource type="Gradient" id="Gradient_jb0yr"]
 offsets = PackedFloat32Array(0, 0.737877, 0.790301, 0.842726, 0.91481, 1)
@@ -69,7 +69,7 @@ offset_right = 151.0
 offset_bottom = 75.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_r8lhb")
+texture = ExtResource("2_lcmsd")
 expand_mode = 1
 stretch_mode = 4
 

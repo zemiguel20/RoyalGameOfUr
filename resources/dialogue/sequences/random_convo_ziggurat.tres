@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=9 format=3 uid="uid://bkpo10nmw865j"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=10 format=3 uid="uid://bkpo10nmw865j"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_0hgud"]
 [ext_resource type="AudioStream" uid="uid://0cjtroofnp1b" path="res://resources/dialogue/random-ziggurat-1-full.mp3" id="1_8tvaa"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="1_cxnr4"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="2_m61vf"]
 [ext_resource type="AudioStream" uid="uid://bonbtmn3dwcff" path="res://resources/dialogue/random-ziggurat-ishtar-2.mp3" id="3_go7qh"]
 [ext_resource type="AudioStream" uid="uid://do83ovofoth6" path="res://resources/dialogue/random-ziggurat-ishtar-3.mp3" id="4_0l8dy"]
@@ -27,6 +28,6 @@ prevents_opponent_action = true
 
 [resource]
 script = ExtResource("1_0hgud")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_d136f"), SubResource("Resource_6ejn3")])
+dialogue_entries = Array[ExtResource("1_cxnr4")]([SubResource("Resource_d136f"), SubResource("Resource_6ejn3")])
 requires_click = false
 weight = 5

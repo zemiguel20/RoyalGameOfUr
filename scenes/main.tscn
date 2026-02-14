@@ -1,56 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4c1rrqv6ix6t"]
+[gd_scene load_steps=7 format=3 uid="uid://b4c1rrqv6ix6t"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_4sb5f"]
 [ext_resource type="PackedScene" uid="uid://dxc0dcmyuxrpp" path="res://scenes/ui/splash_screen.tscn" id="2_v07al"]
 [ext_resource type="PackedScene" uid="uid://s3vv5tktnqbd" path="res://scenes/ui/title_screen.tscn" id="3_rctig"]
-[ext_resource type="PackedScene" uid="uid://bwdbewrwmqofr" path="res://scenes/ui/start_menu.tscn" id="4_1cst6"]
-[ext_resource type="PackedScene" uid="uid://cydp4h0m80bfo" path="res://scenes/ui/ruleset_menu.tscn" id="5_lutpx"]
-[ext_resource type="PackedScene" uid="uid://bksmfg8gvpyso" path="res://scenes/ui/controls_hud.tscn" id="6_lf4fo"]
-[ext_resource type="PackedScene" uid="uid://dwnjc775ngbs4" path="res://scenes/ui/end_screen.tscn" id="7_824lo"]
-[ext_resource type="PackedScene" uid="uid://purvwsmsb7e8" path="res://scenes/ui/pause_screen.tscn" id="8_08u04"]
-[ext_resource type="PackedScene" uid="uid://bkjl7wlfjhp01" path="res://scenes/game.tscn" id="8_2662b"]
+[ext_resource type="PackedScene" uid="uid://bwdbewrwmqofr" path="res://scenes/ui/start_menu.tscn" id="5_mnayd"]
+[ext_resource type="PackedScene" uid="uid://dqodb6ynogur6" path="res://scenes/ui/loading_screen.tscn" id="5_wt4av"]
+[ext_resource type="PackedScene" uid="uid://b5inr7p68d6n2" path="res://scenes/ui/debug/debug_hud.tscn" id="6_1obtx"]
 
-[sub_resource type="Gradient" id="Gradient_uvjl7"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_3d8ko"]
-gradient = SubResource("Gradient_uvjl7")
-
-[node name="Main" type="Node" node_paths=PackedStringArray("splash_screen", "start_menu", "loading_screen")]
+[node name="Main" type="Node"]
 script = ExtResource("1_4sb5f")
-splash_screen = NodePath("SplashScreen")
-start_menu = NodePath("StartMenu")
-loading_screen = NodePath("CanvasLayer/LoadingScreen")
 
 [node name="SplashScreen" parent="." instance=ExtResource("2_v07al")]
+layer = 3
 
 [node name="TitleScreen" parent="." instance=ExtResource("3_rctig")]
 
-[node name="StartMenu" parent="." instance=ExtResource("4_1cst6")]
+[node name="LoadingScreen" parent="." instance=ExtResource("5_wt4av")]
 
-[node name="RulesetMenu" parent="." instance=ExtResource("5_lutpx")]
+[node name="StartMenu" parent="." instance=ExtResource("5_mnayd")]
 
-[node name="ControlsHUD" parent="." instance=ExtResource("6_lf4fo")]
-
-[node name="EndScreen" parent="." instance=ExtResource("7_824lo")]
-visible = false
-
-[node name="PauseScreen" parent="." instance=ExtResource("8_08u04")]
-
-[node name="Level" parent="." instance=ExtResource("8_2662b")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="LoadingScreen" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_3d8ko")
-
-[connection signal="sequence_finished" from="SplashScreen" to="TitleScreen" method="play_title_screen"]
-[connection signal="pressed" from="TitleScreen" to="StartMenu" method="show"]
-[connection signal="multiplayer_selected" from="StartMenu" to="RulesetMenu" method="show"]
-[connection signal="back_pressed" from="RulesetMenu" to="StartMenu" method="show"]
+[node name="DebugHud" parent="." instance=ExtResource("6_1obtx")]

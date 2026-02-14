@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=14 format=3 uid="uid://b1mcaftl0frsa"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=15 format=3 uid="uid://b1mcaftl0frsa"]
 
 [ext_resource type="AudioStream" uid="uid://0gerfc3yrjh2" path="res://resources/dialogue/random-joke-1-1-wanna-hear.mp3" id="1_4wc80"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="1_dostf"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_f1x1r"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_yfia4"]
 [ext_resource type="AudioStream" uid="uid://bvc8gh12pu2iw" path="res://resources/dialogue/random-joke-1-2-dog-walks-in.mp3" id="3_fs5es"]
@@ -64,6 +65,6 @@ prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_yfia4")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_l004w"), SubResource("Resource_hyjxb"), SubResource("Resource_mrw1n"), SubResource("Resource_m5sdh"), SubResource("Resource_leien"), SubResource("Resource_wy7fm")])
+dialogue_entries = Array[ExtResource("1_dostf")]([SubResource("Resource_l004w"), SubResource("Resource_hyjxb"), SubResource("Resource_mrw1n"), SubResource("Resource_m5sdh"), SubResource("Resource_leien"), SubResource("Resource_wy7fm")])
 requires_click = false
 weight = 5

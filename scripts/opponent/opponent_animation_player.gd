@@ -32,11 +32,12 @@ var knockout_animations: Array
 var idle_animations: Array
 
 
-func _process(delta):
+func _process(_delta):
 	if not is_playing():
 		play_default_animation()	
 	
 	
+@warning_ignore("unused_parameter")
 func play_animation(anim_name: Anim_Name, return_to_idle: bool = true, custom_blend = 0.5):
 	var clip_name = _animation_names[anim_name]
 	if clip_name == current_animation:

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=20 format=3 uid="uid://b31u1blrsob06"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=21 format=3 uid="uid://b31u1blrsob06"]
 
 [ext_resource type="AudioStream" uid="uid://cbj471vqp4f08" path="res://resources/dialogue/gameplay-reaction-got-you.mp3" id="1_1iqo7"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_5inn7"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_group.gd" id="1_a6wi3"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="2_cy317"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="2_dcdrm"]
 [ext_resource type="AudioStream" uid="uid://dxbqh5o5jjwnx" path="res://resources/dialogue/gameplay-reaction-no-food-for-your-nest.mp3" id="3_wq3hb"]
 [ext_resource type="AudioStream" uid="uid://tman65g0snom" path="res://resources/dialogue/gameplay-reaction-pure-skill.mp3" id="4_5u50b"]
 [ext_resource type="AudioStream" uid="uid://ccksmdmx7mc6f" path="res://resources/dialogue/gameplay-reaction-not-so-fast-1.mp3" id="4_nw1rn"]
@@ -21,7 +22,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_51nnl"]
 script = ExtResource("2_cy317")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_c7dik")])
+dialogue_entries = Array[ExtResource("2_dcdrm")]([SubResource("Resource_c7dik")])
 requires_click = false
 weight = 5
 
@@ -36,7 +37,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_xpd7x"]
 script = ExtResource("2_cy317")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_bbg53")])
+dialogue_entries = Array[ExtResource("2_dcdrm")]([SubResource("Resource_bbg53")])
 requires_click = false
 weight = 5
 
@@ -51,7 +52,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_vu8km"]
 script = ExtResource("2_cy317")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_hrqkt")])
+dialogue_entries = Array[ExtResource("2_dcdrm")]([SubResource("Resource_hrqkt")])
 requires_click = false
 weight = 5
 
@@ -66,7 +67,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_khqq6"]
 script = ExtResource("2_cy317")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_phv4q")])
+dialogue_entries = Array[ExtResource("2_dcdrm")]([SubResource("Resource_phv4q")])
 requires_click = false
 weight = 5
 
@@ -81,7 +82,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_ek7yj"]
 script = ExtResource("2_cy317")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_wy8lj")])
+dialogue_entries = Array[ExtResource("2_dcdrm")]([SubResource("Resource_wy8lj")])
 requires_click = false
 weight = 5
 

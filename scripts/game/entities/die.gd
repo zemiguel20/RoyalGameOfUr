@@ -1,118 +1,137 @@
-class_name Die extends RigidBody3D
+class_name Die
+extends RigidBody3D
 ## Entity that represents a rollable binary die. Uses physics for rolling.
 
 
-signal roll_finished(value: int)
+signal clicked
+signal hold_started
+signal hold_stopped
+signal placed ## Emitted by [method place]
+signal rolled(value: int)
 
-@export var roll_rotation_speed: float = 1.0
-@export var min_roll_time: float = 0.7
-@export var correction_impulse_strength: float = 3
+var last_rolled_value: int = 0
+var is_rolling: bool = false
 
-var highlight: MaterialHighlight
-var move_anim: MoveAnimation
-var input: SelectionInputReader
-var model: MeshInstance3D
-var normals: Array[Node3D] = [] ## Normals for each face/tip
-var roll_sfx: AudioStreamPlayer3D
-var roll_timer: Timer
+# Sound is played once die hits the table
+# Starting with 'true' prevents it possibly being played outside of rolling
+var _sound_played: bool = true
 
-var rolling: bool = false
-var value: int = 0
-var _sound_played: bool = false
+var _tips: Array[DieTip] = []
+
+# Cached values for _integrate_forces function.
+var _roll_requested = false
+var _impulse: Vector3
+var _throw_position: Vector3
+
+@onready var _animator: SimpleMovementAnimationPlayer = $SimpleMovementAnimationPlayer
+@onready var _highlighter: MeshHighlighter = $MeshHighlighter
+@onready var _input_reader: SelectionInputReader = $SelectionInputReader
+@onready var _roll_force_stop_timer: Timer = $RollForceStopTimer
+@onready var _roll_sfx: AudioStreamPlayer3D = $RollSFX
 
 
-func _ready():
-	highlight = get_node(get_meta("highlight")) as MaterialHighlight
-	move_anim = get_node(get_meta("move_animation")) as MoveAnimation
-	input = get_node(get_meta("input_reader")) as SelectionInputReader
-	model = get_node(get_meta("model")) as MeshInstance3D
-	normals.assign(get_node(get_meta("normals_root_node")).get_children())
-	roll_sfx = get_node(get_meta("roll_sfx")) as AudioStreamPlayer3D
-	roll_timer = get_node(get_meta("timer")) as Timer
-	roll_timer.timeout.connect(_force_movement_stop)
+func _ready() -> void:
+	_tips.assign($Tips.get_children())
 	
-	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
-	freeze = true
+	_input_reader.mouse_entered.connect(mouse_entered.emit)
+	_input_reader.mouse_exited.connect(mouse_exited.emit)
+	_input_reader.clicked.connect(clicked.emit)
+	_input_reader.hold_started.connect(hold_started.emit)
+	_input_reader.hold_stopped.connect(hold_stopped.emit)
+	
+	body_entered.connect(_on_collision)
 
 
-## Makes the die start rolling by applying an [param impulse].
-## Optionally, the die can be repositioned by giving a [param start_position]
-## and a [param start_rotation].
-func roll(impulse: Vector3, start_position := global_position, start_rotation := rotation) -> void:
-	rolling = true
-	freeze = false
-	linear_velocity = Vector3.ZERO
-	angular_velocity = Vector3.ZERO
+## Coroutine that moves the die to the target point in global space. Emits [signal placed].
+func place(point_global: Vector3) -> void:
+	_animator.move_arc(point_global, 0.4, 0.1)
+	await _animator.movement_finished
+	placed.emit()
+
+
+func enable_highlight(color: Color) -> void:
+	_highlighter.set_active(true)
+	_highlighter.set_material_color(color)
+
+
+func disable_highlight() -> void:
+	_highlighter.set_active(false)
+
+
+func set_input_reading(active: bool) -> void:
+	_input_reader.set_input_reading(active)
+
+
+## Rolls the die from a given point by applying an impulse.
+## Emits [signal rolled] when rolling finishes.
+func roll(impulse: Vector3, throw_position_global: Vector3) -> void:
+	is_rolling = true
+	_sound_played = false
 	
-	global_position = start_position
-	rotation = start_rotation
+	# Due to how Rigidbodies work, changing the physics properties and position
+	# should be done in the _integrate_forces function.
+	# Thus these values are cached for this physics callback to use
+	_impulse = impulse
+	_throw_position = throw_position_global
+	_roll_requested = true
+	sleeping = false # awakes body so that _integrate_forces can be called
 	
-	var offset = Vector3(0.0, roll_rotation_speed, 0.0)
-	apply_impulse(impulse * randf_range(0.85, 1.15), offset)
+	# Wait until _integrate forces processes the roll request
+	while(_roll_requested == true):
+		await get_tree().physics_frame
 	
-	
-	# Wait for physics wakeup
+	# Wait for physics wakeup, because the next part depends on the sleeping state.
 	if sleeping:
 		await sleeping_state_changed
 	
-	roll_timer.start()
-	_sound_played = false
+	_roll_force_stop_timer.start() # Used as fallback
+	while(not sleeping and not _roll_force_stop_timer.is_stopped()):
+		await get_tree().create_timer(0.1).timeout
 	
-	## Extra security measure ensuring that dice do not stop rolling immediately.
-	await get_tree().create_timer(min_roll_time).timeout
-	if sleeping:
-		_on_movement_stopped()
-	else:	
-		sleeping_state_changed.connect(_on_movement_stopped)
-
-
-func enable_input_detection() -> void:
-	$SelectionArea.input_ray_pickable = true
-
-
-func disable_input_detection() -> void:
-	$SelectionArea.input_ray_pickable = false
-
-
-func _on_movement_stopped() -> void:
-	freeze = true
-	rolling = false
-	roll_sfx.stop()
-	roll_timer.stop()
+	last_rolled_value = _read_roll_value()
+	rolled.emit(last_rolled_value)
 	
-	if sleeping_state_changed.is_connected(_on_movement_stopped):
-		sleeping_state_changed.disconnect(_on_movement_stopped)
-	
-	value = await _read_roll_value()
-	roll_finished.emit(value)
-	
-
-func _on_back_to_main_menu():
-	if sleeping_state_changed.is_connected(_on_movement_stopped):
-		sleeping_state_changed.disconnect(_on_movement_stopped)
-	sleeping = true
+	is_rolling = false
 
 
-func _force_movement_stop() -> void:
-	if rolling:
-		_on_movement_stopped()
+# Die throw logic is done here, as it is recommended for Rigidbodies
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if _roll_requested:
+		_roll_requested = false
+		
+		state.linear_velocity = Vector3.ZERO
+		state.angular_velocity = Vector3.ZERO
+		
+		state.transform.origin = _throw_position
+		state.transform.basis = Basis.from_euler(_get_random_rotation())
+		
+		# Offseting the impulse contact point generates torque
+		var roll_speed = 0.005
+		var offset = Vector3(0.0, roll_speed, 0.0)
+		state.apply_impulse(_impulse * randf_range(0.85, 1.15), offset)
+
+
+func _get_random_rotation() -> Vector3:
+	var angle_x = randf_range(-PI, PI)
+	var angle_y = randf_range(-PI, PI)
+	var angle_z = randf_range(-PI, PI)
+	return Vector3(angle_x, angle_y, angle_z)
 
 
 func _read_roll_value() -> int:
-	# Check which normal is closest (smallest angle) to the UP vector.
-	var closest_normal = normals.front() as Node3D
-	var smallest_angle = closest_normal.global_basis.y.angle_to(Vector3.UP)
-	for normal: Node3D in normals.slice(1):
-		var angle = normal.global_basis.y.angle_to(Vector3.UP)
+	# Check which tip is closest to closest to pointing up.
+	var chosen_tip: DieTip = _tips[0]
+	var smallest_angle = chosen_tip.angle_to_up()
+	for tip: DieTip in _tips.slice(1):
+		var angle = tip.angle_to_up()
 		if angle < smallest_angle:
-			closest_normal = normal
+			chosen_tip = tip
 			smallest_angle = angle
 	
-	var value = closest_normal.get_meta("value") as int
-	return value
+	return chosen_tip.value
 
 
-func _on_collided_with_table(body):
+func _on_collision(body: Node):
 	if not _sound_played and body.is_in_group("table"):
-		roll_sfx.play()
+		_roll_sfx.play()
 		_sound_played = true

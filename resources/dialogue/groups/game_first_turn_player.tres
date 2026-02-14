@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="DialogueGroup" load_steps=9 format=3 uid="uid://dk77thgv14vrk"]
+[gd_resource type="Resource" script_class="DialogueGroup" load_steps=10 format=3 uid="uid://dk77thgv14vrk"]
 
 [ext_resource type="AudioStream" uid="uid://djslhup8tw57c" path="res://resources/dialogue/intro-2-6-good-luck.mp3" id="1_3vx0s"]
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="2_fpvjb"]
 [ext_resource type="AudioStream" uid="uid://467y2wr7l7ty" path="res://resources/dialogue/intro-2-6-good-luck-2.mp3" id="2_w7fcj"]
 [ext_resource type="AudioStream" uid="uid://cik4oe4lnxojh" path="res://resources/dialogue/intro-2-6-good-luck-3.mp3" id="3_mpgwn"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="4_57jvu"]
@@ -18,7 +19,7 @@ prevents_opponent_action = false
 
 [sub_resource type="Resource" id="Resource_akvjd"]
 script = ExtResource("5_n53fr")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_ede7p")])
+dialogue_entries = Array[ExtResource("2_fpvjb")]([SubResource("Resource_ede7p")])
 requires_click = false
 weight = 5
 

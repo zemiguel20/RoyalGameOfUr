@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="DialogueSequence" load_steps=10 format=3 uid="uid://bxhte73s8k1w2"]
+[gd_resource type="Resource" script_class="DialogueSequence" load_steps=11 format=3 uid="uid://bxhte73s8k1w2"]
 
+[ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_entry.gd" id="1_ucvnh"]
 [ext_resource type="AudioStream" uid="uid://d12t5ni1cl4uq" path="res://resources/dialogue/random-ishtar-1.mp3" id="1_vtiaf"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_bundle.gd" id="1_xgdgq"]
 [ext_resource type="Script" path="res://scripts/dialogue_system/data/dialogue_sequence.gd" id="1_ycmlp"]
@@ -28,6 +29,6 @@ prevents_opponent_action = false
 
 [resource]
 script = ExtResource("1_ycmlp")
-dialogue_entries = Array[Resource("res://scripts/dialogue_system/data/dialogue_entry.gd")]([SubResource("Resource_lho8x"), SubResource("Resource_eoeho")])
+dialogue_entries = Array[ExtResource("1_ucvnh")]([SubResource("Resource_lho8x"), SubResource("Resource_eoeho")])
 requires_click = false
 weight = 5

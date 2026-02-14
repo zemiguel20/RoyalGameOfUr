@@ -4,12 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://cjv3ocjvay3hx" path="res://scenes/game/entities/spot.tscn" id="4_tsucu"]
 [ext_resource type="PackedScene" uid="uid://bimn0tu6hs0nw" path="res://models/board_game/board_with_decals.tscn" id="8_h5eyh"]
 
-[node name="Board" type="Node3D" node_paths=PackedStringArray("p1_start_spots", "p1_track", "p2_start_spots", "p2_track")]
+[node name="Board" type="Node3D" node_paths=PackedStringArray("_p1_start_spots", "_p1_track", "_p2_start_spots", "_p2_track")]
 script = ExtResource("1_tmmtp")
-p1_start_spots = [NodePath("P1StartSpots/P1StartSpot1"), NodePath("P1StartSpots/P1StartSpot2"), NodePath("P1StartSpots/P1StartSpot3"), NodePath("P1StartSpots/P1StartSpot4"), NodePath("P1StartSpots/P1StartSpot5"), NodePath("P1StartSpots/P1StartSpot6"), NodePath("P1StartSpots/P1StartSpot7")]
-p1_track = [NodePath("Tiles/P1Tile1"), NodePath("Tiles/P1Tile2"), NodePath("Tiles/P1Tile3"), NodePath("Tiles/P1Tile4Rosette"), NodePath("Tiles/Tile5"), NodePath("Tiles/Tile6"), NodePath("Tiles/Tile7"), NodePath("Tiles/Tile8Rosette"), NodePath("Tiles/Tile9"), NodePath("Tiles/Tile10"), NodePath("Tiles/Tile11"), NodePath("Tiles/Tile12"), NodePath("Tiles/P1Tile13"), NodePath("Tiles/P1Tile14Rosette"), NodePath("P1EndSpot")]
-p2_start_spots = [NodePath("P2StartSpots/P2StartSpot1"), NodePath("P2StartSpots/P2StartSpot2"), NodePath("P2StartSpots/P2StartSpot3"), NodePath("P2StartSpots/P2StartSpot4"), NodePath("P2StartSpots/P2StartSpot5"), NodePath("P2StartSpots/P2StartSpot6"), NodePath("P2StartSpots/P2StartSpot7")]
-p2_track = [NodePath("Tiles/P2Tile1"), NodePath("Tiles/P2Tile2"), NodePath("Tiles/P2Tile3"), NodePath("Tiles/P2Tile4Rosette"), NodePath("Tiles/Tile5"), NodePath("Tiles/Tile6"), NodePath("Tiles/Tile7"), NodePath("Tiles/Tile8Rosette"), NodePath("Tiles/Tile9"), NodePath("Tiles/Tile10"), NodePath("Tiles/Tile11"), NodePath("Tiles/Tile12"), NodePath("Tiles/P2Tile13"), NodePath("Tiles/P2Tile14Rosette"), NodePath("P2EndSpot")]
+_p1_start_spots = [NodePath("P1StartSpots/P1StartSpot1"), NodePath("P1StartSpots/P1StartSpot2"), NodePath("P1StartSpots/P1StartSpot3"), NodePath("P1StartSpots/P1StartSpot4"), NodePath("P1StartSpots/P1StartSpot5"), NodePath("P1StartSpots/P1StartSpot6"), NodePath("P1StartSpots/P1StartSpot7")]
+_p1_track = [NodePath("Tiles/P1Tile1"), NodePath("Tiles/P1Tile2"), NodePath("Tiles/P1Tile3"), NodePath("Tiles/P1Tile4Rosette"), NodePath("Tiles/Tile5"), NodePath("Tiles/Tile6"), NodePath("Tiles/Tile7"), NodePath("Tiles/Tile8Rosette"), NodePath("Tiles/Tile9"), NodePath("Tiles/Tile10"), NodePath("Tiles/Tile11"), NodePath("Tiles/Tile12"), NodePath("Tiles/P1Tile13"), NodePath("Tiles/P1Tile14Rosette"), NodePath("P1EndSpot")]
+_p2_start_spots = [NodePath("P2StartSpots/P2StartSpot1"), NodePath("P2StartSpots/P2StartSpot2"), NodePath("P2StartSpots/P2StartSpot3"), NodePath("P2StartSpots/P2StartSpot4"), NodePath("P2StartSpots/P2StartSpot5"), NodePath("P2StartSpots/P2StartSpot6"), NodePath("P2StartSpots/P2StartSpot7")]
+_p2_track = [NodePath("Tiles/P2Tile1"), NodePath("Tiles/P2Tile2"), NodePath("Tiles/P2Tile3"), NodePath("Tiles/P2Tile4Rosette"), NodePath("Tiles/Tile5"), NodePath("Tiles/Tile6"), NodePath("Tiles/Tile7"), NodePath("Tiles/Tile8Rosette"), NodePath("Tiles/Tile9"), NodePath("Tiles/Tile10"), NodePath("Tiles/Tile11"), NodePath("Tiles/Tile12"), NodePath("Tiles/P2Tile13"), NodePath("Tiles/P2Tile14Rosette"), NodePath("P2EndSpot")]
 
 [node name="BoardModel" parent="." instance=ExtResource("8_h5eyh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108967, 0)
@@ -26,8 +26,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0361051, 0, 0.0544835)
 [node name="P1Tile3" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036327, 0, 0.0897661)
 
-[node name="P1Tile4Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("4_tsucu")]
+[node name="P1Tile4Rosette" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036327, 0, 0.127712)
+is_rosette = true
 
 [node name="P2Tile1" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351095, 0, 0.018745)
@@ -38,8 +39,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0353683, 0, 0.0552398)
 [node name="P2Tile3" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0351095, 0, 0.0896638)
 
-[node name="P2Tile4Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("4_tsucu")]
+[node name="P2Tile4Rosette" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0348507, 0, 0.12797)
+is_rosette = true
 
 [node name="Tile5" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000867553, 0, 0.127194)
@@ -50,8 +52,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0891462)
 [node name="Tile7" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0552398)
 
-[node name="Tile8Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("4_tsucu")]
+[node name="Tile8Rosette" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00060872, 0, 0.0187451)
+is_rosette = true
 
 [node name="Tile9" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00319701, 0, -0.0182673)
@@ -68,14 +71,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00120305, 0, -0.128787)
 [node name="P1Tile13" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0342563, 0, -0.128787)
 
-[node name="P1Tile14Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("4_tsucu")]
+[node name="P1Tile14Rosette" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0337387, 0, -0.0935862)
+is_rosette = true
 
 [node name="P2Tile13" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0379566, 0, -0.129046)
 
-[node name="P2Tile14Rosette" parent="Tiles" groups=["rosettes"] instance=ExtResource("4_tsucu")]
+[node name="P2Tile14Rosette" parent="Tiles" instance=ExtResource("4_tsucu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0384742, 0, -0.0935862)
+is_rosette = true
 
 [node name="P1StartSpots" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00221904, 0)

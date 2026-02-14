@@ -1,83 +1,78 @@
-[gd_scene load_steps=13 format=3 uid="uid://cjv3ocjvay3hx"]
+[gd_scene load_steps=12 format=4 uid="uid://cjv3ocjvay3hx"]
 
 [ext_resource type="Script" path="res://scripts/game/entities/spot.gd" id="1_8cupv"]
-[ext_resource type="Script" path="res://scripts/game/components/material_highlight.gd" id="2_7basv"]
-[ext_resource type="Material" uid="uid://c6p7a2gj4s6bg" path="res://materials/highlight.tres" id="3_om2m3"]
-[ext_resource type="Script" path="res://scripts/game/components/selection_input.gd" id="4_e4p30"]
-[ext_resource type="Script" path="res://scripts/game/components/editor/extended_marker_3d.gd" id="5_kd6q8"]
-[ext_resource type="Script" path="res://scripts/game/components/editor/wireframe_meshes/wire_cube_mesh.gd" id="6_2lcmo"]
-[ext_resource type="Script" path="res://scripts/game/components/editor/mesh_marker.gd" id="7_1vm33"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_0xytr"]
-size = Vector2(0.03, 0.03)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s762x"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0)
+[ext_resource type="Script" path="res://scripts/game/entities/components/mesh_highlighter.gd" id="2_7basv"]
+[ext_resource type="Script" path="res://scripts/game/entities/components/selection_input_reader.gd" id="4_e4p30"]
+[ext_resource type="Script" path="res://scripts/utils/precise_marker_3d.gd" id="5_kd6q8"]
+[ext_resource type="Shader" path="res://shaders/overlay_mesh.gdshader" id="8_8d3pb"]
+[ext_resource type="Material" uid="uid://3nm3p8clp3w2" path="res://materials/mat_highlight_outline.tres" id="8_ts4nf"]
+[ext_resource type="Material" uid="uid://b2b5jwaxhfnjp" path="res://materials/mat_highlight_overlay.tres" id="10_vvcqs"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q5ogc"]
 data = PackedVector3Array(0.015, 0, 0.015, -0.015, 0, 0.015, 0.015, 0, -0.015, -0.015, 0, 0.015, -0.015, 0, -0.015, 0.015, 0, -0.015)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqxd1"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.292175, 0.801917, 0, 1)
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_o67xw"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_5k8o2"]
 _surfaces = [{
-"aabb": AABB(-1, -1, -1, 2, 2, 2),
-"format": 34359742465,
-"index_count": 24,
-"index_data": PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0),
-"primitive": 1,
+"aabb": AABB(-0.015, -0.001, -0.015, 0.03, 0.002, 0.03),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAAACwqqo9sKqqPQAAAAAAAAAAAAAAAAAAgD+uqqo92hP2PgAAgD8AAIA/qaqqPauqaj8U9gQ/q6pqP6uqaj+rqmo/AACAPwAAAACrqmo/oqqqPdgT9j6iqqo9qaqqPamqqj2sqmo/FPYEP6yqaj+sqmo/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAIA/AACAPwAAgD+rqmo/q6pqPxX2BD+qqmo/AAAAAAAAAAC5qqo9rKpqP6Cqqj2gqqo9r6qqPdYT9j6qqmo/qqpqPwAAgD8AAAAAqaqqPamqqj3WE/Y+qKqqPaqqaj8T9gQ/qqpqP5+qqj0AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAABj0BT8Y9AU/GPQFPwAAgD/SF/Q+0hf0PtAX9D4AAIA/0Bf0PgAAAADQF/Q+0Bf0Phj0BT8AAAAAGPQFPxj0BT8AAAAAGPQFPwAAAADQF/Q+0hf0PtIX9D4AAIA/GPQFP9AX9D7QF/Q+AACAP9AX9D4Y9AU/GPQFPxj0BT8AAIA/0hf0PtIX9D7QF/Q+AACAP9AX9D4AAAAA0Bf0PtAX9D4Y9AU/AAAAAAAAAADRF/Q+GPQFPxj0BT8AAAAAGPQFP9EX9D7RF/Q+0Bf0PtAX9D4AAIA/0Bf0PgAAgD8Y9AU/F/QFPxf0BT8="),
+"format": 34359742487,
+"index_count": 144,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABAAGAAcABgAIAAkABwAGAAkACgAIAAsACQAIAAoACAAMAA0ADAAFAA0ADgAFAA8AEAARAAgACAANABAADQAFAA4AEgATABQAFAAVABIAFgAXABgAGAAZABYAGgAbABwAGgAcAB0AHgAaAB8AGgAdAB8AIAAeACEAHgAfACEAIgAbACMAIwAeACQAIwAkACUAJgAiACMAIwAnACYAIwAlACcAKAApACoAKgArACgALAAtAC4ALgAtAC8AMAAsADEALAAwADIAMwA0ADUAMwA1ADYANwA4ADkANwAzADgAOgA7ADwAPAA7AD0APgA6AD8AOgA+AEAAQQBCAEMAQQBEAEIARQBGAEcARQBHAEgA"),
+"primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63)
-}, {
-"aabb": AABB(-1, -1, -1, 2, 2, 2),
-"format": 34359742465,
-"index_count": 24,
-"index_data": PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0),
-"primitive": 1,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63)
+"vertex_count": 73,
+"vertex_data": PackedByteArray("j8J1PG8SgzqPwnU8j8J1PG8SgzqPwnW8j8J1PG8Sg7qPwnW8j8J1PG8Sg7qPwnU8zcxMPG8SgzrNzEw8j8J1PG8SgzqPwnU8j8J1vG8SgzqPwnU80GgYOm8SgzrNzEw8j8J1vG8SgzqPwnW8zcxMvG8SgzrNzEw8zcxMvG8SgzrQaBi6zcxMvG8SgzrNzEy8j8J1PG8SgzqPwnW8zcxMPG8SgzrNzEy8zcxMPG8SgzrQaBg6zcxMPG8SgzrNzEw80GgYum8SgzrNzEy8zcxMvG8SgzrNzEy8j8J1PG8SgzqPwnU8j8J1PG8Sg7qPwnU8j8J1vG8Sg7qPwnU8j8J1vG8SgzqPwnU8j8J1vG8SgzqPwnW8j8J1vG8SgzqPwnU8j8J1vG8Sg7qPwnU8j8J1vG8Sg7qPwnW8j8J1PG8Sg7qPwnU8j8J1PG8Sg7qPwnW8zcxMPG8Sg7rNzEy8zcxMPG8Sg7rQaBi6j8J1vG8Sg7qPwnU8zcxMPG8Sg7rNzEw8zcxMvG8Sg7rNzEw80GgYum8Sg7rNzEw8zcxMPG8Sg7rNzEy8j8J1vG8Sg7qPwnW8zcxMvG8Sg7rNzEw8zcxMvG8Sg7rQaBg60GgYOm8Sg7rNzEy8zcxMvG8Sg7rNzEy8j8J1PG8Sg7qPwnW8j8J1PG8SgzqPwnW8j8J1vG8SgzqPwnW8j8J1vG8Sg7qPwnW8zcxMPG8Sg7rQaBi6zcxMPG8Sg7rNzEy8zcxMPG8SgzrQaBg6zcxMPG8SgzrNzEy8zcxMPG8SgzrNzEw8zcxMPG8SgzrQaBg6zcxMPG8Sg7rNzEw80GgYum8Sg7rNzEw8zcxMPG8Sg7rNzEw8zcxMPG8SgzrNzEw80GgYOm8SgzrNzEw8zcxMvG8Sg7rNzEw80GgYOm8SgzrNzEw8zcxMvG8SgzrNzEw8zcxMvG8Sg7rQaBg6zcxMvG8Sg7rNzEw8zcxMvG8SgzrQaBi6zcxMvG8SgzrNzEw8zcxMvG8SgzrNzEy8zcxMvG8SgzrQaBi6zcxMvG8Sg7rNzEy8zcxMPG8Sg7rNzEy80GgYum8SgzrNzEy8zcxMPG8SgzrNzEy80GgYOm8Sg7rNzEy80GgYOm8Sg7rNzEy8zcxMvG8Sg7rNzEy8zcxMvG8SgzrNzEy80GgYum8SgzrNzEy8//8AgP9//n///wCA/3/+f///AID/f/5///8AgP9//n8AgP////8AAACA/////wAAAID/////AAAAgP////8AAACA/////wAAAID/////AAAAgP////8AAACA/////wAAAID/////AAAAgP////8AAACA/////wAAAID/////AAAAgP////8AAACA/////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z8AAACA/3/+fwAAAID/f/5/AAAAgP9//n8AAACA/3/+fwCAAAD//wAAAIAAAP//AAAAgAAA//8AAACAAAD//wAAAIAAAP//AAAAgAAA//8AAACAAAD//wAAAIAAAP//AAAAgAAA//8AAACAAAD//wAAAIAAAP//AAAAgAAA//8AAACAAAD//wAAAIAAAP//AAD/////AAD/P/////8AAP8//////wAA/z//////AAD/PwAAAID/fwCAAAAAgP9/AIAAAACA/38AgAAAAID/fwCAAAAAgP9/AIAAAACA/38AgAAAAID/fwCA/////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7///wCA/38AgP//AID/fwCA//8AgP9/AID//wCA/38AgP//AID/fwCA//8AgP9/AID//wCA/38AgP9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/78=")
 }]
-script = ExtResource("6_2lcmo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sdbky"]
+render_priority = 0
+shader = ExtResource("8_8d3pb")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iylsa"]
+_surfaces = [{
+"aabb": AABB(-0.0135, -0.0005, -0.0135, 0.027, 0.001, 0.027),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD8AAAAA"),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("Gy9dPG8SAzobL108Gy9dPG8SAzobL128Gy9dPG8SA7obL128Gy9dPG8SA7obL108Gy9dPG8SAzobL108Gy9dvG8SAzobL108Gy9dvG8SAzobL128Gy9dPG8SAzobL128Gy9dPG8SAzobL108Gy9dPG8SA7obL108Gy9dvG8SA7obL108Gy9dvG8SAzobL108Gy9dvG8SAzobL128Gy9dvG8SAzobL108Gy9dvG8SA7obL108Gy9dvG8SA7obL128Gy9dvG8SA7obL108Gy9dPG8SA7obL108Gy9dPG8SA7obL128Gy9dvG8SA7obL128Gy9dPG8SA7obL128Gy9dPG8SAzobL128Gy9dvG8SAzobL128Gy9dvG8SA7obL128//8AgP9//n///wCA/3/+f///AID/f/5///8AgP9//n8AgP////8AAACA/////wAAAID/////AAAAgP////8AAP9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8/AAAAgP9//n8AAACA/3/+fwAAAID/f/5/AAAAgP9//n8AgAAA//8AAACAAAD//wAAAIAAAP//AAAAgAAA//8AAP////8AAP8//////wAA/z//////AAD/P/////8AAP8/")
+}]
 
 [node name="Spot" type="Node3D"]
 script = ExtResource("1_8cupv")
-metadata/highlight = NodePath("Highlight")
-metadata/input = NodePath("SelectionInputReader")
 
-[node name="Highlight" type="Node" parent="." node_paths=PackedStringArray("target_meshes")]
-script = ExtResource("2_7basv")
-material = ExtResource("3_om2m3")
-target_meshes = [NodePath("../HighlightMesh")]
-
-[node name="HighlightMesh" type="MeshInstance3D" parent="."]
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_0xytr")
-surface_material_override/0 = SubResource("StandardMaterial3D_s762x")
-
-[node name="SelectionInputReader" type="Node" parent="." node_paths=PackedStringArray("input_detection_area")]
+[node name="SelectionInputReader" type="Area3D" parent="."]
 script = ExtResource("4_e4p30")
-input_detection_area = NodePath("../SelectionArea")
 
-[node name="SelectionArea" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionInputReader"]
 shape = SubResource("ConcavePolygonShape3D_q5ogc")
 
-[node name="EditorVisualizer" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+[node name="OutlineFrameMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.85, 0, 0, 0, 0.2, 0, 0, 0, 0.85, 0, 0, 0)
+mesh = SubResource("ArrayMesh_5k8o2")
+surface_material_override/0 = SubResource("ShaderMaterial_sdbky")
+
+[node name="MeshHighlighter" type="Node" parent="OutlineFrameMesh" node_paths=PackedStringArray("target")]
+script = ExtResource("2_7basv")
+material = ExtResource("8_ts4nf")
+target = NodePath("..")
+
+[node name="OverlayFrameMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.91, 0, 0, 0, 0.2, 0, 0, 0, 0.91, 0, 0, 0)
+mesh = SubResource("ArrayMesh_iylsa")
+surface_material_override/0 = SubResource("ShaderMaterial_sdbky")
+
+[node name="MeshHighlighter" type="Node" parent="OverlayFrameMesh" node_paths=PackedStringArray("target")]
+script = ExtResource("2_7basv")
+material = ExtResource("10_vvcqs")
+target = NodePath("..")
+
+[node name="Marker3D" type="Marker3D" parent="."]
 gizmo_extents = 0.015
 script = ExtResource("5_kd6q8")
 gizmo_extends_override = 0.015
-
-[node name="MeshMarkerAddon" type="MeshInstance3D" parent="EditorVisualizer"]
-transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_bqxd1")
-mesh = SubResource("ArrayMesh_o67xw")
-script = ExtResource("7_1vm33")
-color = Color(0.292175, 0.801917, 0, 1)

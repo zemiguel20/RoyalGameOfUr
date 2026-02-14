@@ -1,25 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://cydp4h0m80bfo"]
+[gd_scene load_steps=9 format=3 uid="uid://cydp4h0m80bfo"]
 
 [ext_resource type="Script" path="res://scripts/ui/ruleset_menu.gd" id="1_by1lh"]
-[ext_resource type="Texture2D" uid="uid://d05tsy2jj1xmi" path="res://ui/theme_sprites/arrow_button_normal.png" id="2_yt0yb"]
-[ext_resource type="Texture2D" uid="uid://ch8bgtgnw8wjg" path="res://ui/theme_sprites/arrow_button_pressed.png" id="3_kvu5c"]
-[ext_resource type="Texture2D" uid="uid://dxfismcshmkmb" path="res://ui/theme_sprites/arrow_button_hovered.png" id="4_vetwu"]
+[ext_resource type="Texture2D" uid="uid://bkbeojf8pjqpv" path="res://ui/theme_sprites/arrow_button_normal_L.png" id="2_qjyks"]
+[ext_resource type="Texture2D" uid="uid://dxljsqkjs65oc" path="res://ui/theme_sprites/arrow_button_pressed_L.png" id="3_noc4x"]
+[ext_resource type="Texture2D" uid="uid://k1khpv0po4jj" path="res://ui/theme_sprites/arrow_button_hovered_L.png" id="4_22lh0"]
+[ext_resource type="Texture2D" uid="uid://cdhdd2qgtnhwi" path="res://ui/theme_sprites/arrow_button_normal_R.png" id="5_bc5ui"]
+[ext_resource type="Texture2D" uid="uid://cdw0fhsman628" path="res://ui/theme_sprites/arrow_button_pressed_R.png" id="6_gqq5f"]
 [ext_resource type="Texture2D" uid="uid://cc3oo6y6f5tgi" path="res://ui/board_layouts/layout_finkel.png" id="7_kfq2g"]
+[ext_resource type="Texture2D" uid="uid://cbvh02hujg2k8" path="res://ui/theme_sprites/arrow_button_hovered_R.png" id="7_y4s7v"]
 
-[node name="RulesetMenu" type="CanvasLayer" node_paths=PackedStringArray("ruleset_name_label", "board_layout_image", "board_name_label", "rule_1_check_box", "rule_2_check_box", "rule_3_check_box", "rule_4_check_box", "rule_5_check_box", "piece_number_slider", "piece_number_label", "dice_number_slider", "dice_number_label")]
+[node name="RulesetMenu" type="CanvasLayer"]
 script = ExtResource("1_by1lh")
-ruleset_name_label = NodePath("Control/TabletFrame/RulesetPicker/RulesetNameLabel")
-board_layout_image = NodePath("Control/TabletFrame/BoardPicker/BoardLayoutImage")
-board_name_label = NodePath("Control/TabletFrame/BoardPicker/BoardNameLabel")
-rule_1_check_box = NodePath("Control/TabletFrame/RulesList/Rule1CheckBox")
-rule_2_check_box = NodePath("Control/TabletFrame/RulesList/Rule2CheckBox")
-rule_3_check_box = NodePath("Control/TabletFrame/RulesList/Rule3CheckBox")
-rule_4_check_box = NodePath("Control/TabletFrame/RulesList/Rule4CheckBox")
-rule_5_check_box = NodePath("Control/TabletFrame/RulesList/Rule5CheckBox")
-piece_number_slider = NodePath("Control/TabletFrame/Sliders/PieceNumberSlider")
-piece_number_label = NodePath("Control/TabletFrame/Sliders/PieceNumberSlider/PieceNumberLabel")
-dice_number_slider = NodePath("Control/TabletFrame/Sliders/DiceNumberSlider")
-dice_number_label = NodePath("Control/TabletFrame/Sliders/DiceNumberSlider/DiceNumberLabel")
+
+[node name="BackgroundShade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -49,211 +48,194 @@ offset_bottom = 500.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RulesetPicker" type="Control" parent="Control/TabletFrame"]
+[node name="ResetButton" type="Button" parent="Control/TabletFrame"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 516.0
+offset_top = 723.0
+offset_right = 590.0
+offset_bottom = 768.0
+theme_override_font_sizes/font_size = 28
+text = "Reset"
+flat = true
+
+[node name="ConfirmButton" type="Button" parent="Control/TabletFrame"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 465.0
+offset_top = 862.0
+offset_right = 641.0
+offset_bottom = 932.0
+theme_override_font_sizes/font_size = 48
+text = "Confirm"
+flat = true
+
+[node name="BackButton" type="Button" parent="Control/TabletFrame"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 514.0
+offset_top = 791.0
+offset_right = 594.0
+offset_bottom = 844.0
+theme_override_font_sizes/font_size = 35
+text = "Back"
+flat = true
+
+[node name="RulesetPicker" type="HBoxContainer" parent="Control/TabletFrame"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -265.0
-offset_top = 77.0
-offset_right = 289.0
-offset_bottom = 159.0
+offset_left = -277.0
+offset_top = 62.0
+offset_right = 277.0
+offset_bottom = 144.0
 grow_horizontal = 2
 metadata/_edit_group_ = true
 
 [node name="SwitchRulesetLeftButton" type="TextureButton" parent="Control/TabletFrame/RulesetPicker"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -35.0
-offset_right = 70.0
-offset_bottom = 35.0
-grow_vertical = 2
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("2_yt0yb")
-texture_pressed = ExtResource("3_kvu5c")
-texture_hover = ExtResource("4_vetwu")
+texture_normal = ExtResource("2_qjyks")
+texture_pressed = ExtResource("3_noc4x")
+texture_hover = ExtResource("4_22lh0")
 ignore_texture_size = true
 stretch_mode = 5
-flip_h = true
 
 [node name="RulesetNameLabel" type="Label" parent="Control/TabletFrame/RulesetPicker"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -199.0
-offset_top = -41.0
-offset_right = 199.0
-offset_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 55
 text = "Rule Set Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SwitchRulesetRightButton" type="TextureButton" parent="Control/TabletFrame/RulesetPicker"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -35.0
-offset_bottom = 35.0
-grow_horizontal = 0
-grow_vertical = 2
-texture_normal = ExtResource("2_yt0yb")
-texture_pressed = ExtResource("3_kvu5c")
-texture_hover = ExtResource("4_vetwu")
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("5_bc5ui")
+texture_pressed = ExtResource("6_gqq5f")
+texture_hover = ExtResource("7_y4s7v")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="BoardPicker" type="Control" parent="Control/TabletFrame"]
+[node name="BoardPicker" type="VBoxContainer" parent="Control/TabletFrame"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -291.0
-offset_top = -344.0
-offset_right = 292.0
-offset_bottom = -88.0
+offset_left = -264.0
+offset_top = 191.0
+offset_right = 265.0
+offset_bottom = 378.0
 grow_horizontal = 2
-grow_vertical = 2
 metadata/_edit_group_ = true
 
-[node name="SwitchBoardLeftButton" type="TextureButton" parent="Control/TabletFrame/BoardPicker"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -34.5
-offset_right = 64.0
-offset_bottom = 34.5
-grow_vertical = 2
-texture_normal = ExtResource("2_yt0yb")
-texture_pressed = ExtResource("3_kvu5c")
-texture_hover = ExtResource("4_vetwu")
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/TabletFrame/BoardPicker"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SwitchBoardLeftButton" type="TextureButton" parent="Control/TabletFrame/BoardPicker/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("2_qjyks")
+texture_pressed = ExtResource("3_noc4x")
+texture_hover = ExtResource("4_22lh0")
 ignore_texture_size = true
 stretch_mode = 5
-flip_h = true
 
-[node name="BoardLayoutImage" type="TextureRect" parent="Control/TabletFrame/BoardPicker"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -197.5
-offset_top = -90.0
-offset_right = 197.5
-offset_bottom = 90.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BoardLayoutImage" type="TextureRect" parent="Control/TabletFrame/BoardPicker/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 3
 texture = ExtResource("7_kfq2g")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="SwitchBoardRightButton" type="TextureButton" parent="Control/TabletFrame/BoardPicker"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -34.5
-offset_bottom = 34.5
-grow_horizontal = 0
-grow_vertical = 2
-texture_normal = ExtResource("2_yt0yb")
-texture_pressed = ExtResource("3_kvu5c")
-texture_hover = ExtResource("4_vetwu")
+[node name="SwitchBoardRightButton" type="TextureButton" parent="Control/TabletFrame/BoardPicker/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("5_bc5ui")
+texture_pressed = ExtResource("6_gqq5f")
+texture_hover = ExtResource("7_y4s7v")
 ignore_texture_size = true
 stretch_mode = 5
 
 [node name="BoardNameLabel" type="Label" parent="Control/TabletFrame/BoardPicker"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -74.0
-offset_top = -41.0
-offset_right = 74.0
-grow_horizontal = 2
-grow_vertical = 0
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Map Name"
 horizontal_alignment = 1
 
 [node name="RulesList" type="VBoxContainer" parent="Control/TabletFrame"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -291.0
-offset_top = -62.0
-offset_right = 2.0
-offset_bottom = 159.0
+offset_left = -253.0
+offset_top = 404.0
+offset_right = 238.0
+offset_bottom = 649.0
 grow_horizontal = 2
-grow_vertical = 2
 metadata/_edit_group_ = true
 
 [node name="Rule1CheckBox" type="CheckBox" parent="Control/TabletFrame/RulesList"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 text = "Rosettes are safe
 "
 
 [node name="Rule2CheckBox" type="CheckBox" parent="Control/TabletFrame/RulesList"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 text = "Rosettes grant extra roll"
 
 [node name="Rule3CheckBox" type="CheckBox" parent="Control/TabletFrame/RulesList"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 text = "Rosettes allow stacking"
 
 [node name="Rule4CheckBox" type="CheckBox" parent="Control/TabletFrame/RulesList"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 text = "Capture grants an extra roll"
 
 [node name="Rule5CheckBox" type="CheckBox" parent="Control/TabletFrame/RulesList"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 text = "Pieces can move backwards"
 
 [node name="Sliders" type="VBoxContainer" parent="Control/TabletFrame"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -297.0
-offset_top = 190.0
-offset_right = 5.0
-offset_bottom = 276.0
+offset_left = -248.0
+offset_top = 686.0
+offset_right = 92.0
+offset_bottom = 760.0
 grow_horizontal = 2
-grow_vertical = 2
 metadata/_edit_group_ = true
 
-[node name="PieceNumberSlider" type="HSlider" parent="Control/TabletFrame/Sliders"]
+[node name="PieceNumber" type="HBoxContainer" parent="Control/TabletFrame/Sliders"]
+layout_mode = 2
+
+[node name="PieceNumberSlider" type="HSlider" parent="Control/TabletFrame/Sliders/PieceNumber"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 min_value = 1.0
@@ -263,23 +245,17 @@ rounded = true
 tick_count = 7
 ticks_on_borders = true
 
-[node name="PieceNumberLabel" type="Label" parent="Control/TabletFrame/Sliders/PieceNumberSlider"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 17.0
-offset_top = -20.0
-offset_right = 180.0
-offset_bottom = 21.0
-grow_horizontal = 0
-grow_vertical = 2
-text = "1 Total pices"
+[node name="PieceNumberLabel" type="Label" parent="Control/TabletFrame/Sliders/PieceNumber"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1 Pieces"
 vertical_alignment = 1
 
-[node name="DiceNumberSlider" type="HSlider" parent="Control/TabletFrame/Sliders"]
+[node name="DiceNumber" type="HBoxContainer" parent="Control/TabletFrame/Sliders"]
+layout_mode = 2
+
+[node name="DiceNumberSlider" type="HSlider" parent="Control/TabletFrame/Sliders/DiceNumber"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 min_value = 1.0
@@ -289,64 +265,31 @@ rounded = true
 tick_count = 5
 ticks_on_borders = true
 
-[node name="DiceNumberLabel" type="Label" parent="Control/TabletFrame/Sliders/DiceNumberSlider"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 17.0
-offset_top = -20.0
-offset_right = 170.0
-offset_bottom = 21.0
-grow_horizontal = 0
-grow_vertical = 2
-text = "1 Total dice
+[node name="DiceNumberLabel" type="Label" parent="Control/TabletFrame/Sliders/DiceNumber"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1 Dice
 "
 vertical_alignment = 1
 
-[node name="ResetButton" type="Button" parent="Control/TabletFrame"]
-layout_mode = 0
-offset_left = 74.0
-offset_top = 790.0
-offset_right = 150.0
-offset_bottom = 841.0
-theme_override_font_sizes/font_size = 28
-text = "Reset"
-flat = true
+[node name="PlayerNPC" type="HBoxContainer" parent="Control/TabletFrame"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 792.0
+offset_right = 20.0
+offset_bottom = 833.0
+grow_horizontal = 2
+metadata/_edit_group_ = true
 
-[node name="ConfirmButton" type="Button" parent="Control/TabletFrame"]
-layout_mode = 0
-offset_left = 411.0
-offset_top = 844.0
-offset_right = 635.0
-offset_bottom = 936.0
-theme_override_font_sizes/font_size = 48
-text = "Confirm"
-flat = true
+[node name="P1NPC" type="CheckBox" parent="Control/TabletFrame/PlayerNPC"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "P1 NPC"
 
-[node name="BackButton" type="Button" parent="Control/TabletFrame"]
-layout_mode = 0
-offset_left = 294.0
-offset_top = 859.0
-offset_right = 403.0
-offset_bottom = 914.0
-theme_override_font_sizes/font_size = 35
-text = "Back"
-flat = true
-
-[connection signal="pressed" from="Control/TabletFrame/RulesetPicker/SwitchRulesetLeftButton" to="." method="_on_switch_ruleset_left_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/RulesetPicker/SwitchRulesetRightButton" to="." method="_on_switch_ruleset_right_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/BoardPicker/SwitchBoardLeftButton" to="." method="_on_switch_board_left_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/BoardPicker/SwitchBoardRightButton" to="." method="_on_switch_board_right_button_pressed"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule1CheckBox" to="." method="_on_rule_1_check_box_toggled"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule2CheckBox" to="." method="_on_rule_2_check_box_toggled"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule3CheckBox" to="." method="_on_rule_3_check_box_toggled"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule4CheckBox" to="." method="_on_rule_4_check_box_toggled"]
-[connection signal="toggled" from="Control/TabletFrame/RulesList/Rule5CheckBox" to="." method="_on_rule_5_check_box_toggled"]
-[connection signal="value_changed" from="Control/TabletFrame/Sliders/PieceNumberSlider" to="." method="_on_piece_number_slider_value_changed"]
-[connection signal="value_changed" from="Control/TabletFrame/Sliders/DiceNumberSlider" to="." method="_on_dice_number_slider_value_changed"]
-[connection signal="pressed" from="Control/TabletFrame/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/ConfirmButton" to="." method="_on_confirm_button_pressed"]
-[connection signal="pressed" from="Control/TabletFrame/BackButton" to="." method="_on_back_button_pressed"]
+[node name="P2NPC" type="CheckBox" parent="Control/TabletFrame/PlayerNPC"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "P2 NPC"

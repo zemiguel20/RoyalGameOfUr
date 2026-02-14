@@ -1,80 +1,71 @@
-class_name Main extends Node
+extends Node
 
 
-@export var skip_intro := false
+signal level_loaded
 
-@export var loading_screen_fade_duration: float = 0.5
-@export var loading_delay: float = 1.0 ## Delay to give time for scene loading
+@export var _skip_intro := false
 
-@export_group("References")
-@export var splash_screen: SplashScreen
-@export var start_menu: StartMenu
-@export var loading_screen: Control
+var _level: Level
+var _loading_thread: Thread
+var _loading_level: bool = false
 
-@onready var level: Node3D = $Level
-@onready var level_scene: PackedScene = preload("res://scenes/game.tscn")
+@onready var _splash_screen: SplashScreen = $SplashScreen
+@onready var _title_screen: TitleScreen = $TitleScreen
+@onready var _loading_screen: LoadingScreen = $LoadingScreen
+@onready var _start_menu: StartMenu = $StartMenu
 
 
 func _ready() -> void:
-	GameEvents.back_to_main_menu_pressed.connect(_on_back_to_main_menu)
+	# INFO: The level is loading during the splash screen
+	_loading_thread = Thread.new()
 	
-	loading_screen.show()
-	await get_tree().create_timer(loading_delay).timeout # Delay to allow loading
-	loading_screen.hide()
+	_start_menu.hide()
 	
-	if skip_intro:
-		start_menu.show()
-	else:
-		splash_screen.play_splash_screen_sequence()
+	_load_level_async()
+	
+	if not _skip_intro:
+		_splash_screen.play()
+		await _splash_screen.finished
+	
+	if _loading_level:
+		await level_loaded
+	
+	_title_screen.play()
+	await _title_screen.pressed
+	
+	_start_menu.show()
 
 
-func _on_back_to_main_menu() -> void:
-	var volume = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
+func _load_level_async() -> void:
+	_loading_level = false
 	
-	loading_screen.visible = true
-	loading_screen.modulate.a = 0.0
+	await _loading_screen.fade_in()
 	
-	# Fade in loading screen and fadeout audio
-	var animator = create_tween()
-	animator.tween_property(loading_screen, "modulate:a", 1.0, loading_screen_fade_duration)
-	_fade_audio(-80, loading_screen_fade_duration)
-	await animator.finished
+	if _level != null:
+		_level.queue_free()
 	
-	# Reload level
-	level.queue_free()
-	await Engine.get_main_loop().process_frame
-	level = level_scene.instantiate()
-	add_child(level)
-	if not level.is_node_ready():
-		await level.ready
+	_loading_thread.start(_instantiate_level)
+	while _loading_thread.is_alive():
+		await get_tree().create_timer(0.1).timeout
+	_level = _loading_thread.wait_to_finish() as Level
 	
-	await get_tree().create_timer(loading_delay).timeout # Delay to allow proper loading
+	add_child(_level)
+	await get_tree().create_timer(1.0).timeout # Guaratees some extra time to load lighting and stuff
 	
-	# Fade out loading screen and fade in audio
-	animator = create_tween()
-	animator.tween_property(loading_screen, "modulate:a", 0.0, loading_screen_fade_duration)
-	_fade_audio(volume, loading_screen_fade_duration)
-	await animator.finished
+	_start_menu.play_pressed.connect(_level.start_game)
+	_level.exited.connect(_on_level_exited)
 	
-	loading_screen.visible = false
-	
-	start_menu.show_with_fade()
+	await _loading_screen.fade_out()
+	level_loaded.emit()
+	_loading_level = false
 
 
-# Decrease audio NOTE: Not compatible with tweeners
-func _fade_audio(target_volume: float, duration: float) -> void:
-	var time = 0.0
-	var current_volume = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
-	while time < duration:
-		var new_volume = lerpf(current_volume, target_volume, time / duration)
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), new_volume)
-		await Engine.get_main_loop().process_frame
-		time += get_process_delta_time()
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), target_volume)
+func _instantiate_level() -> Level:
+	var level_scene = preload("res://scenes/game.tscn") as PackedScene
+	var level = level_scene.instantiate() as Level
+	return level
 
 
-# NOTE: ONLY FOR TESTING
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and OS.is_debug_build():
-		if event.pressed and event.keycode == KEY_0:
-			GameEvents.game_ended.emit()
+func _on_level_exited() -> void:
+	await _load_level_async()
+	await _start_menu.show_with_fade()

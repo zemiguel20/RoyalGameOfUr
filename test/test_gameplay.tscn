@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://0v7ad46axp5n"]
+
+[ext_resource type="PackedScene" uid="uid://b1w6pqli52hw5" path="res://scenes/game/board_game.tscn" id="1_wctqk"]
+
+[sub_resource type="GDScript" id="GDScript_n3fjv"]
+script/source = "extends Node
+
+
+func _ready() -> void:
+	var game = $BoardGame as BoardGame
+	
+	var config: BoardGame.Config = BoardGame.Config.new()
+	config.rematch = false
+	config.ruleset = load(\"res://resources/rulesets/ruleset_finkel.tres\")
+	Settings.fast_mode = false
+	game.setup(config)
+	game.start()
+"
+
+[node name="TestGameplay" type="Node"]
+script = SubResource("GDScript_n3fjv")
+
+[node name="BoardGame" parent="." instance=ExtResource("1_wctqk")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.0261773, -0.78234, 0.622301, 0, 0.622515, 0.782608, -0.999657, 0.0204866, -0.0162958, 0.268701, 0.337919, -0.00703628)

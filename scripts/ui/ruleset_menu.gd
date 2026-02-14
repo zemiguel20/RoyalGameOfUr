@@ -1,172 +1,179 @@
-class_name RulesetMenu extends CanvasLayer
+class_name RulesetMenu
+extends CanvasLayer
 
 
+signal play_pressed(config: BoardGame.Config)
 signal back_pressed
 
+const RULESET_FINKEL = preload("res://resources/rulesets/ruleset_finkel.tres")
+const RULESET_MASTERS = preload("res://resources/rulesets/ruleset_masters.tres")
+const RULESET_BLITZ = preload("res://resources/rulesets/ruleset_blitz.tres")
+const RULESET_TOURNAMENT = preload("res://resources/rulesets/ruleset_tournament.tres")
+const RULESET_RR = preload("res://resources/rulesets/ruleset_russian_rosette.tres")
+
+const BOARD_FINKEL = preload("res://resources/rulesets/board_layouts/layout_finkel.tres")
+const BOARD_MASTERS = preload("res://resources/rulesets/board_layouts/layout_masters.tres")
+const BOARD_RR = preload("res://resources/rulesets/board_layouts/layout_russian_rosette.tres")
+
 const RULESET_LIST: Array[Ruleset] = [
-	General.RULESET_FINKEL,
-	General.RULESET_MASTERS,
-	General.RULESET_BLITZ,
-	General.RULESET_TOURNAMENT,
-	General.RULESET_RR,
+	RULESET_FINKEL,
+	RULESET_MASTERS,
+	RULESET_BLITZ,
+	RULESET_TOURNAMENT,
+	RULESET_RR,
 ]
 
 const BOARD_LIST: Array[BoardLayout] = [
-	General.BOARD_FINKEL,
-	General.BOARD_MASTERS,
-	General.BOARD_RR,
+	BOARD_FINKEL,
+	BOARD_MASTERS,
+	BOARD_RR,
 ]
 
-@export var test: bool = false
+var _selected_ruleset_index: int = 0
+var _selected_board_index: int = 0
 
-@export_group("References")
-@export var ruleset_name_label: Label
-@export var board_layout_image: TextureRect
-@export var board_name_label: Label
-@export var rule_1_check_box: CheckBox
-@export var rule_2_check_box: CheckBox
-@export var rule_3_check_box: CheckBox
-@export var rule_4_check_box: CheckBox
-@export var rule_5_check_box: CheckBox
-@export var piece_number_slider: HSlider
-@export var piece_number_label: Label
-@export var dice_number_slider: HSlider
-@export var dice_number_label: Label
+@onready var _switch_ruleset_left_button: TextureButton = %SwitchRulesetLeftButton
+@onready var _ruleset_name_label: Label = %RulesetNameLabel
+@onready var _switch_ruleset_right_button: TextureButton = %SwitchRulesetRightButton
 
-var current_ruleset_index: int = 0
-var current_board_index: int = 0
-var ruleset: Ruleset
+@onready var _switch_board_left_button: TextureButton = %SwitchBoardLeftButton
+@onready var _board_layout_image: TextureRect = %BoardLayoutImage
+@onready var _switch_board_right_button: TextureButton = %SwitchBoardRightButton
+@onready var _board_name_label: Label = %BoardNameLabel
+
+@onready var _rule_1_check_box: CheckBox = %Rule1CheckBox
+@onready var _rule_2_check_box: CheckBox = %Rule2CheckBox
+@onready var _rule_3_check_box: CheckBox = %Rule3CheckBox
+@onready var _rule_4_check_box: CheckBox = %Rule4CheckBox
+@onready var _rule_5_check_box: CheckBox = %Rule5CheckBox
+
+@onready var _piece_number_slider: HSlider = %PieceNumberSlider
+@onready var _piece_number_label: Label = %PieceNumberLabel
+@onready var _dice_number_slider: HSlider = %DiceNumberSlider
+@onready var _dice_number_label: Label = %DiceNumberLabel
+
+@onready var _p_1_npc: CheckBox = %P1NPC
+@onready var _p_2_npc: CheckBox = %P2NPC
+
+@onready var _reset_button: Button = %ResetButton
+@onready var _confirm_button: Button = %ConfirmButton
+@onready var _back_button: Button = %BackButton
 
 
 func _ready() -> void:
-	visible = false
-	_update_ruleset()
+	_switch_ruleset_left_button.pressed.connect(_switch_ruleset_previous)
+	_switch_ruleset_right_button.pressed.connect(_switch_ruleset_next)
 	
-	visible = test
-
-
-func _on_switch_ruleset_left_button_pressed() -> void:
-	current_ruleset_index -= 1
-	if current_ruleset_index < 0:
-		current_ruleset_index = RULESET_LIST.size() - 1
+	_switch_board_left_button.pressed.connect(_switch_board_previous)
+	_switch_board_left_button.pressed.connect(_set_ruleset_name_custom)
+	_switch_board_right_button.pressed.connect(_switch_board_next)
+	_switch_board_right_button.pressed.connect(_set_ruleset_name_custom)
 	
-	_update_ruleset()
-
-
-func _on_switch_ruleset_right_button_pressed() -> void:
-	current_ruleset_index += 1
-	if current_ruleset_index >= RULESET_LIST.size():
-		current_ruleset_index = 0
+	_rule_1_check_box.pressed.connect(_set_ruleset_name_custom)
+	_rule_2_check_box.pressed.connect(_set_ruleset_name_custom)
+	_rule_3_check_box.pressed.connect(_set_ruleset_name_custom)
+	_rule_4_check_box.pressed.connect(_set_ruleset_name_custom)
+	_rule_5_check_box.pressed.connect(_set_ruleset_name_custom)
 	
-	_update_ruleset()
-
-
-func _on_switch_board_left_button_pressed() -> void:
-	current_board_index -= 1
-	if current_board_index < 0:
-		current_board_index = BOARD_LIST.size() - 1
+	_piece_number_slider.value_changed.connect(_update_piece_slider_label)
+	_piece_number_slider.drag_started.connect(_set_ruleset_name_custom)
+	_dice_number_slider.value_changed.connect(_update_dice_slider_label)
+	_dice_number_slider.drag_started.connect(_set_ruleset_name_custom)
 	
-	_update_board()
-	ruleset.name = "Custom"
-	ruleset_name_label.text = "Custom"
-
-
-func _on_switch_board_right_button_pressed() -> void:
-	current_board_index += 1
-	if current_board_index >= BOARD_LIST.size():
-		current_board_index = 0
+	_reset_button.pressed.connect(_update_ruleset_menu)
+	_back_button.pressed.connect(back_pressed.emit)
+	_confirm_button.pressed.connect(_start_game)
 	
-	_update_board()
-	ruleset.name = "Custom"
-	ruleset_name_label.text = "Custom"
+	_update_ruleset_menu()
 
 
-func _on_rule_1_check_box_toggled(toggled_on: bool) -> void:
-	ruleset.rosettes_are_safe = toggled_on
-	ruleset.name = "Custom"
-	ruleset_name_label.text = "Custom"
-
-
-func _on_rule_2_check_box_toggled(toggled_on: bool) -> void:
-	ruleset.rosettes_give_extra_turn = toggled_on
-	ruleset.name = "Custom"
-	ruleset_name_label.text = "Custom"
-
-
-func _on_rule_3_check_box_toggled(toggled_on: bool) -> void:
-	ruleset.rosettes_allow_stacking = toggled_on
-	ruleset.name = "Custom"
-	ruleset_name_label.text = "Custom"
-
-
-func _on_rule_4_check_box_toggled(toggled_on: bool) -> void:
-	ruleset.captures_give_extra_turn = toggled_on
-	ruleset.name = "Custom"
-	ruleset_name_label.text = "Custom"
-
-
-func _on_rule_5_check_box_toggled(toggled_on: bool) -> void:
-	ruleset.can_move_backwards = toggled_on
-	ruleset.name = "Custom"
-	ruleset_name_label.text = "Custom"
-
-
-func _on_piece_number_slider_value_changed(value: float) -> void:
-	ruleset.num_pieces = int(value)
-	piece_number_label.text = "%d Total pieces" % piece_number_slider.value
-	ruleset.name = "Custom"
-	ruleset_name_label.text = "Custom"
-
-
-func _on_dice_number_slider_value_changed(value: float) -> void:
-	ruleset.num_dice = int(value)
-	dice_number_label.text = "%d Total dice" % dice_number_slider.value
-	ruleset.name = "Custom"
-	ruleset_name_label.text = "Custom"
-
-
-func _update_ruleset() -> void:
-	ruleset = RULESET_LIST[current_ruleset_index].duplicate()
-	current_board_index = BOARD_LIST.find(ruleset.board_layout)
+func _switch_ruleset_previous() -> void:
+	_selected_ruleset_index -= 1
+	if _selected_ruleset_index < 0:
+		_selected_ruleset_index = RULESET_LIST.size() - 1
 	
-	ruleset_name_label.text = ruleset.name
-	board_layout_image.texture = ruleset.board_layout.preview
-	board_name_label.text = ruleset.board_layout.name
+	_update_ruleset_menu()
+
+
+func _switch_ruleset_next() -> void:
+	_selected_ruleset_index += 1
+	if _selected_ruleset_index >= RULESET_LIST.size():
+		_selected_ruleset_index = 0
 	
-	rule_1_check_box.set_pressed_no_signal(ruleset.rosettes_are_safe)
-	rule_2_check_box.set_pressed_no_signal(ruleset.rosettes_give_extra_turn)
-	rule_3_check_box.set_pressed_no_signal(ruleset.rosettes_allow_stacking)
-	rule_4_check_box.set_pressed_no_signal(ruleset.captures_give_extra_turn)
-	rule_5_check_box.set_pressed_no_signal(ruleset.can_move_backwards)
+	_update_ruleset_menu()
+
+
+func _update_ruleset_menu() -> void:
+	var ruleset = RULESET_LIST[_selected_ruleset_index].duplicate()
+	_ruleset_name_label.text = ruleset.name
 	
-	piece_number_slider.set_value_no_signal(ruleset.num_pieces)
-	piece_number_label.text = "%d Total pieces" % piece_number_slider.value
-	dice_number_slider.set_value_no_signal(ruleset.num_dice)
-	dice_number_label.text = "%d Total dice" % dice_number_slider.value
-
-
-func _update_board() -> void:
-	ruleset.board_layout = BOARD_LIST[current_board_index]
-	board_layout_image.texture = ruleset.board_layout.preview
-	board_name_label.text = ruleset.board_layout.name
-
-
-func _on_confirm_button_pressed() -> void:
-	visible = false
+	_selected_board_index = BOARD_LIST.find(ruleset.board_layout)
+	_update_board_menu()
 	
-	if test: return
+	_rule_1_check_box.set_pressed_no_signal(ruleset.rosettes_are_safe)
+	_rule_2_check_box.set_pressed_no_signal(ruleset.rosettes_give_extra_turn)
+	_rule_3_check_box.set_pressed_no_signal(ruleset.rosettes_allow_stacking)
+	_rule_4_check_box.set_pressed_no_signal(ruleset.ko_gives_extra_turn)
+	_rule_5_check_box.set_pressed_no_signal(ruleset.can_move_backwards)
 	
-	GameManager.ruleset = ruleset.duplicate()
-	GameManager.is_hotseat = true
-	GameManager.is_rematch = false
-	GameEvents.play_pressed.emit()
-	GameManager.start_new_game()
+	_piece_number_slider.set_value_no_signal(ruleset.num_pieces)
+	_update_piece_slider_label(ruleset.num_pieces)
+	_dice_number_slider.set_value_no_signal(ruleset.num_dice)
+	_update_dice_slider_label(ruleset.num_dice)
 
 
-func _on_back_button_pressed() -> void:
-	visible = false
-	back_pressed.emit()
+func _switch_board_previous() -> void:
+	_selected_board_index -= 1
+	if _selected_board_index < 0:
+		_selected_board_index = BOARD_LIST.size() - 1
+	
+	_update_board_menu()
 
 
-func _on_reset_button_pressed() -> void:
-	_update_ruleset()
+func _switch_board_next() -> void:
+	_selected_board_index += 1
+	if _selected_board_index >= BOARD_LIST.size():
+		_selected_board_index = 0
+	
+	_update_board_menu()
+
+
+func _update_board_menu() -> void:
+	var layout = BOARD_LIST[_selected_board_index]
+	_board_layout_image.texture = layout.preview
+	_board_name_label.text = layout.name
+
+
+func _update_piece_slider_label(value: float) -> void:
+	_piece_number_label.text = "%d pieces" % _piece_number_slider.value
+
+
+func _update_dice_slider_label(value: float) -> void:
+	_dice_number_label.text = "%d dice" % _dice_number_slider.value
+
+
+func _set_ruleset_name_custom() -> void:
+	_ruleset_name_label.text = "Custom"
+
+
+func _start_game() -> void:
+	hide()
+	
+	var ruleset = Ruleset.new()
+	ruleset.name = _ruleset_name_label.text
+	ruleset.board_layout = BOARD_LIST[_selected_board_index].duplicate()
+	ruleset.rosettes_are_safe = _rule_1_check_box.button_pressed
+	ruleset.rosettes_give_extra_turn = _rule_2_check_box.button_pressed
+	ruleset.rosettes_allow_stacking = _rule_3_check_box.button_pressed
+	ruleset.ko_gives_extra_turn = _rule_4_check_box.button_pressed
+	ruleset.can_move_backwards = _rule_5_check_box.button_pressed
+	ruleset.num_dice = _dice_number_slider.value
+	ruleset.num_pieces = _piece_number_slider.value
+	
+	var config := BoardGame.Config.new()
+	config.ruleset = ruleset
+	config.hotseat = true
+	config.p1_npc = _p_1_npc.button_pressed
+	config.p2_npc = _p_2_npc.button_pressed
+	
+	play_pressed.emit(config)

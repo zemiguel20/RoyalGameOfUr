@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3 uid="uid://purvwsmsb7e8"]
+
+[ext_resource type="Script" path="res://scripts/ui/pause_screen.gd" id="1_uhldg"]
+[ext_resource type="PackedScene" uid="uid://dp825cqkjmarq" path="res://scenes/ui/settings_menu.tscn" id="2_nq0bc"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_uhldg")
+
+[node name="BackgroundShade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
+
+[node name="TabletPanel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -500.0
+offset_right = 350.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeaderLabel" type="Label" parent="TabletPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -291.0
+offset_top = 106.0
+offset_right = 304.0
+offset_bottom = 188.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="TabletPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="ResumeButton" type="Button" parent="TabletPanel/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Resume"
+flat = true
+
+[node name="SettingsButton" type="Button" parent="TabletPanel/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+flat = true
+
+[node name="MainMenuButton" type="Button" parent="TabletPanel/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Back to main menu"
+flat = true
+
+[node name="SettingsMenu" parent="." instance=ExtResource("2_nq0bc")]
